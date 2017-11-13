@@ -11,7 +11,7 @@ type Props = {
 
 class DirectTransitionEditor extends Component<Props> {
   render() {
-    let currentValue = null;
+    let currentValue = "";
     if (this.props.transition) {
       currentValue = this.props.transition.to;
     }
@@ -19,7 +19,7 @@ class DirectTransitionEditor extends Component<Props> {
       <label>
         Transition To:
         <select value={currentValue} onChange={this.props.onChange}>
-          <option value={null}>–none–</option>
+          <option value=""></option>
           {this.props.options.map((s) => {
             return <option key={s.name} value={s.name}>{s.name}</option>
           })}

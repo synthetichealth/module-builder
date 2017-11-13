@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import _ from 'lodash';
+
 import './App.css';
 
 import StateEditor from './components/editor/State';
@@ -23,9 +24,9 @@ class App extends Component<Props, AppState> {
 
   onChangeBuilder = (index:number) => {
     return (value: any) => {
-      return (e) => {
+      return (e:any) => {
         let states = this.state.states
-        states[index][value] = e.target.value
+        _.set(states[index], value, e.target.value)
         this.setState({states})
       }
     }

@@ -9,7 +9,7 @@ import DirectTransitionEditor from './DirectTransition';
 type Props = {
   state: State,
   otherStates: State[],
-  onChangeBuilder: func
+  onChangeBuilder: any
 }
 
 class StateEditor extends Component<Props> {
@@ -21,7 +21,7 @@ class StateEditor extends Component<Props> {
           <DirectTransitionEditor
             options={this.props.otherStates}
             transition={this.props.state.transition}
-            onChange={this.props.onChangeBuilder('transition')} />
+            onChange={this.props.onChangeBuilder('transition.to')} />
         </div>
     )
   }
