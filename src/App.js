@@ -23,10 +23,10 @@ class App extends Component<Props, AppState> {
   }
 
   onChangeBuilder = (index:number) => {
-    return (value: any) => {
+    return (path: any) => {
       return (e:any) => {
         let states = this.state.states
-        _.set(states[index], value, e.target.value)
+        _.set(states[index], path, e.target.value)
         this.setState({states})
       }
     }
