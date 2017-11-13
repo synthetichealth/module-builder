@@ -5,6 +5,7 @@ import _ from 'lodash';
 import './App.css';
 
 import StateEditor from './components/editor/State';
+import ModuleGraph from './components/graph/Module';
 import type { State } from './types/State';
 
 type Props = {};
@@ -41,17 +42,20 @@ class App extends Component<Props, AppState> {
   render() {
     return (
       <div className="App">
-        {this.state.states.map((s,i) => {
-          return (
-            <div key={i} style={{margin: '50px'}}>
-            <StateEditor
-              state={s}
-              otherStates={this.state.states}
-              onChangeBuilder={this.onChangeBuilder(i)}/>
-            </div>
-          )
-        })}
+        <div>
         <button onClick={this.addState}> Add State </button>
+          {this.state.states.map((s,i) => {
+            return (
+              <div key={i} style={{margin: '50px'}}>
+              <StateEditor
+                state={s}
+                otherStates={this.state.states}
+                onChangeBuilder={this.onChangeBuilder(i)}/>
+              </div>
+            )
+          })}
+        </div>
+        <ModuleGraph states={this.state.states} steps={100} />
       </div>
     );
   }
