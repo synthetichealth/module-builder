@@ -1,0 +1,7 @@
+.conditional_transition {
+  stroke-dasharray: 1;
+}
+
+.distributed_transition {
+  stroke-dasharray: 4;
+}

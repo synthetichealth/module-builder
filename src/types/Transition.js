@@ -15,3 +15,14 @@ export type DistributedTransition = {
       }
     ]
 };
+
+export type ConditionalTransition = {
+  type: 'Conditional',
+  transitions: [
+    {
+      // TODO condition needs a typespec
+      condition?: any,
+      transition: string
+    }
+  ]
+}
