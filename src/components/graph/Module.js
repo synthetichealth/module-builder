@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { forceSimulation, forceLink, forceCenter, forceManyBody } from 'd3-force';
+import { forceSimulation, forceLink, forceCenter, forceManyBody, forceCollide } from 'd3-force';
 import { extent } from 'd3-array';
 
 import type { State } from '../../types/State';
@@ -32,7 +32,8 @@ class ModuleGraph extends Component<Props> {
     }).filter((l) => l);
     this.links = links;
     this.simulation.force("links", forceLink(links))
-      .force("charge", forceManyBody())
+      .force("collider", forceCollide((n) => 20).iterations(5))
+      .force("charge", forceManyBody().strength(2))
       .force("center", forceCenter(500,500));
   }
 
@@ -51,12 +52,13 @@ class ModuleGraph extends Component<Props> {
     let y  = extent (nodes, (n) => n.y);
     return (
         <svg viewBox= {`${x[0] * .8} ${y[0] * .8} ${x[1] * 1.2} ${y[1] * 1.2}`} height="100%" width="100%">
+
           <g transform="translate(0,0)">
             {this.simulation.nodes().map((n) => {
               return <circle key={n.index} cx={n.x} cy={n.y} r={10} />
             })}
             {this.links.map((l) => {
-              return <line x1={l.source.x} x2={l.target.x} y1={l.source.y} y2={l.target.y} stroke="black" strokeWidth="1px"/>
+              return <line key={l.index} x1={l.source.x} x2={l.target.x} y1={l.source.y} y2={l.target.y} stroke="black" strokeWidth="1px"/>
             })}
           </g>
         </svg>
