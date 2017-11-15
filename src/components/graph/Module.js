@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { forceSimulation, forceLink, forceCenter, forceManyBody, forceCollide } from 'd3-force';
 import { extent } from 'd3-array';
 
+import ReactAnimationFrame from 'react-animation-frame';
+
 import type { State } from '../../types/State';
 
 import './Module.css';
@@ -56,20 +58,9 @@ class ModuleGraph extends Component<Props> {
     nodes.map((s) => {
       links = [].concat(links,this.generateTransition(s))
     });
-      // if(s.transition && s.transition.to){
-      //   let toIndex = nodes.find((n) => n.name === s.transition.to);
-      //   if(toIndex) {
-      //     return {
-      //       source: s.index,
-      //       target: toIndex.index
-      //     }
-      //   }
-      // }
-    //
-    // });
     this.links = links;
     this.simulation.force("links", forceLink(links).id((d) => d.name))
-      .force("collider", forceCollide((n) => 20).iterations(5))
+      .force("collider", forceCollide((n) => 40).iterations(5))
       .force("charge", forceManyBody().strength(2))
       .force("center", forceCenter(500,500));
   }
@@ -81,6 +72,11 @@ class ModuleGraph extends Component<Props> {
       this.simulation.tick();
     }
   }
+
+  // onAnimationFrame() {
+  //   this.simulation.tick();
+  //   this.forceUpdate()
+  // }
 
   render() {
     this.generateGraphData();
@@ -96,10 +92,15 @@ class ModuleGraph extends Component<Props> {
           </defs>
           <g transform="translate(0,0)">
             {this.links.map((l,i) => {
-              return <line markerEnd="url(#arrow)" className={`${l.type.toLowerCase()}_transition`} key={i} x1={l.source.x} x2={l.target.x} y1={l.source.y} y2={l.target.y} stroke="black" strokeWidth="1px"/>
+              return <line markerEnd="url(#arrow)" className={`transition ${l.type.toLowerCase()}_transition`} key={i} x1={l.source.x} x2={l.target.x} y1={l.source.y} y2={l.target.y} stroke="black" strokeWidth="1px"/>
             })}
             {this.simulation.nodes().map((n) => {
-              return <circle key={n.index} cx={n.x} cy={n.y} r={10} />
+              return (
+                <g key={n.index} className='node' transform={`translate(${n.x},${n.y})`}>
+                  <circle  r={10} />
+                  <text>{n.name}</text>
+                </g>
+              )
             })}
           </g>
         </svg>
