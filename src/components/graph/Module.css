@@ -1,5 +1,6 @@
 .transition {
   stroke: grey;
+  stroke-width: 1px;
 }
 
 .marker {

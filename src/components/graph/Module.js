@@ -25,6 +25,14 @@ class ModuleGraph extends Component<Props> {
 
   simulation: null
   links: []
+  steps = 0;
+
+  constructor(props) {
+    super(props);
+    this.simulation = forceSimulation();
+    this.simulation.stop();
+    this.generateGraphData(props.states);
+  }
 
   generateTransition(node: State): GraphTransition[] {
     let transitions = [];
@@ -40,11 +48,11 @@ class ModuleGraph extends Component<Props> {
           return {source: node.name, target: t.to, type:node.transition.type};
         })
         break;
-        case 'Conditional':
-          transitions = node.transition.transitions.map((t) => {
-            return {source: node.name, target: t.to, type:node.transition.type};
-          })
-          break;
+      case 'Conditional':
+        transitions = node.transition.transitions.map((t) => {
+          return {source: node.name, target: t.to, type:node.transition.type};
+        })
+        break;
       default:
 
     }
@@ -52,6 +60,7 @@ class ModuleGraph extends Component<Props> {
   }
 
   generateTransitions() {
+    console.log("Updating transitions");
     if(!this.simulation) {return}
     let nodes = this.simulation.nodes() || [];
     let links = []
@@ -61,30 +70,42 @@ class ModuleGraph extends Component<Props> {
     this.links = links;
     this.simulation.force("links", forceLink(links).id((d) => d.name))
       .force("collider", forceCollide((n) => 40).iterations(5))
-      .force("charge", forceManyBody().strength(2))
+      .force("charge", forceManyBody().strength(5))
       .force("center", forceCenter(500,500));
   }
 
-  generateGraphData() {
-    this.simulation = forceSimulation(this.props.states);
+  generateGraphData(states) {
+    this.props.endAnimation()
+    this.simulation.nodes(states);
     this.generateTransitions();
-    for (var i = 0; i < this.props.steps; i++) {
-      this.simulation.tick();
-    }
+    this.props.startAnimation();
+    // for (var i = 0; i < this.props.steps; i++) {
+    //   this.simulation.tick();
+    // }
   }
 
-  // onAnimationFrame() {
-  //   this.simulation.tick();
-  //   this.forceUpdate()
-  // }
+  onAnimationFrame() {
+    if(this.steps > this.props.steps){
+      this.props.endAnimation();
+    }
+    this.simulation.tick();
+    this.forceUpdate()
+    this.steps++;
+  }
+
+  componentWillReceiveProps(nextProps: Props){
+    console.log("Generating new graph");
+    this.generateGraphData(nextProps.states);
+    this.simulation.alpha(.3);
+    this.steps = 0;
+  }
 
   render() {
-    this.generateGraphData();
     let nodes = this.simulation.nodes();
     let x = extent (nodes, (n) => n.x);
     let y  = extent (nodes, (n) => n.y);
     return (
-        <svg viewBox= {`${x[0] * .8} ${y[0] * .8} ${x[1] * 1.2} ${y[1] * 1.2}`} height="100%" width="100%">
+        <svg viewBox= "0 0 1000 1000" height="100%" width="100%">
           <defs>
             <marker id="arrow" markerWidth="10" markerHeight="10" refX="18" refY="3" orient="auto" markerUnits="strokeWidth">
               <path className="marker" d="M0,0 L0,6 L9,3 z"/>
@@ -92,7 +113,7 @@ class ModuleGraph extends Component<Props> {
           </defs>
           <g transform="translate(0,0)">
             {this.links.map((l,i) => {
-              return <line markerEnd="url(#arrow)" className={`transition ${l.type.toLowerCase()}_transition`} key={i} x1={l.source.x} x2={l.target.x} y1={l.source.y} y2={l.target.y} stroke="black" strokeWidth="1px"/>
+              return <line markerEnd="url(#arrow)" className={`transition ${l.type.toLowerCase()}_transition`} key={i} x1={l.source.x} x2={l.target.x} y1={l.source.y} y2={l.target.y}/>
             })}
             {this.simulation.nodes().map((n) => {
               return (
@@ -108,4 +129,4 @@ class ModuleGraph extends Component<Props> {
   }
 }
 
-export default ModuleGraph;
+export default ReactAnimationFrame(ModuleGraph);

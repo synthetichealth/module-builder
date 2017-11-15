@@ -3,7 +3,7 @@ import uuid from 'uuid-js';
 
 import type { Module } from '../types/Module';
 import type { State } from '../types/State';
-import type { DirectTransition, DistributedTransition, ConditionalTransition } from '../types/Transition';
+import type { DirectTransition, DistributedTransition, ConditionalTransition, ComplexTransition, Transition } from '../types/Transition';
 
 export function extractModule(data: any): Module {
   let name = extractName(data);
@@ -27,7 +27,7 @@ export function extractState(name: string, state: any): State {
   return {name, transition, id, type};
 }
 
-export function extractTransition(state: any): (DirectTransition | DistributedTransition | ConditionalTransition) {
+export function extractTransition(state: any): ?Transition {
   if(state.direct_transition) {
     return extractDirectTransition(state.direct_transition);
   }
@@ -56,6 +56,10 @@ export function extractConditionalTransition(data: any): ConditionalTransition {
     return {condition: d.condition, to: d.transition};
   });
   return {type: 'Conditional', transitions};
+}
+
+export function extractComplexTransition(data: any): ComplexTransition {
+  
 }
 
 
