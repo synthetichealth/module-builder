@@ -6,7 +6,7 @@ import type { State } from '../../types/State';
 type Props = {
   options: State[],
   transition?: DirectTransition,
-  onChange?: any
+  onChange: any
 }
 
 class DirectTransitionEditor extends Component<Props> {
@@ -18,7 +18,7 @@ class DirectTransitionEditor extends Component<Props> {
     return (
       <label>
         Transition To:
-        <select value={currentValue} onChange={this.props.onChange}>
+        <select value={currentValue} onChange={this.props.onChange('transition.to')}>
           <option value=""></option>
           {this.props.options.map((s) => {
             return <option key={s.name} value={s.name}>{s.name}</option>

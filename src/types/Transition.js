@@ -9,7 +9,7 @@ export type DirectTransition = {
 
 export type DistributedTransition = {
   type: 'Distributed',
-  transitions: [
+  transition: [
       {
         distibution: number,
         to: string
@@ -19,7 +19,7 @@ export type DistributedTransition = {
 
 export type ConditionalTransition = {
   type: 'Conditional',
-  transitions: [
+  transition: [
     {
       condition?: Conditional,
       transition: string
@@ -29,7 +29,7 @@ export type ConditionalTransition = {
 
 export type ComplexTransition = {
   type: 'Complex',
-  transitions: [{
+  transition: [{
     condition ?: Conditional,
     distributions ?: DistributedTransition,
     transition ?: DirectTransition

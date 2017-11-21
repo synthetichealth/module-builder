@@ -45,21 +45,21 @@ export function extractDirectTransition(data: any): DirectTransition {
 }
 
 export function extractDistributedTransition(data: any): DistributedTransition {
-  let transitions = data.map((d) => {
+  let transition = data.map((d) => {
     return {distribution: d.distribution, to: d.transition};
   });
-  return {type: 'Distributed', transitions};
+  return {type: 'Distributed', transition};
 }
 
 export function extractConditionalTransition(data: any): ConditionalTransition {
-  let transitions = data.map((d) => {
+  let transition = data.map((d) => {
     return {condition: d.condition, to: d.transition};
   });
-  return {type: 'Conditional', transitions};
+  return {type: 'Conditional', transition};
 }
 
 export function extractComplexTransition(data: any): ComplexTransition {
-  
+
 }
 
 

@@ -44,12 +44,12 @@ class ModuleGraph extends Component<Props> {
         transitions = [{source: node.name, target: node.transition.to, type:node.transition.type}];
         break;
       case 'Distributed':
-        transitions = node.transition.transitions.map((t) => {
+        transitions = node.transition.transition.map((t) => {
           return {source: node.name, target: t.to, type:node.transition.type};
         })
         break;
       case 'Conditional':
-        transitions = node.transition.transitions.map((t) => {
+        transitions = node.transition.transition.map((t) => {
           return {source: node.name, target: t.to, type:node.transition.type};
         })
         break;

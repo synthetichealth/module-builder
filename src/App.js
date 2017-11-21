@@ -28,7 +28,11 @@ class App extends Component<Props, AppState> {
     return (path: any) => {
       return (e:any) => {
         let states = this.state.states
-        _.set(states[index], path, e.target.value)
+        let value = e.target.value;
+        if(typeof _.get(states[index], path) === "number" && value * 1){
+          value = value * 1;
+        }
+        _.set(states[index], path, value)
         this.setState({states})
       }
     }

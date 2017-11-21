@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import type { State } from '../../types/State';
 
 import StringEditor from './String';
-import DirectTransitionEditor from './DirectTransition';
+import Transition from './Transition';
 
 type Props = {
   state: State,
@@ -18,10 +18,10 @@ class StateEditor extends Component<Props> {
         <div>
           <StringEditor label={'Name'} value={this.props.state.name} onChange={this.props.onChangeBuilder('name')} />
           <br />
-          <DirectTransitionEditor
+          <Transition
             options={this.props.otherStates}
             transition={this.props.state.transition}
-            onChange={this.props.onChangeBuilder('transition.to')} />
+            onChange={this.props.onChangeBuilder} />
         </div>
     )
   }
