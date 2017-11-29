@@ -1,11 +1,11 @@
 // @flow
 import React, { Component } from 'react';
-import type { DistributedTransition as Transition } from '../../types/Transition';
+import type { DistributedTransition as DistributedTransitionType } from '../../types/Transition';
 import type { State } from '../../types/State';
 
 type Props = {
   options: State[],
-  transition?: Transition,
+  transition?: DistributedTransitionType,
   onChange: any
 }
 
@@ -22,7 +22,6 @@ class DistributedTransition extends Component<Props> {
       <label>
         Distributed Transition To:
         {currentValue.map((t, i) => {
-          console.log(t);
           return <div>
             <label>To:
               <select value={t.to} onChange={this.props.onChange(`transition.transition[${i}].to`)}>
@@ -33,7 +32,7 @@ class DistributedTransition extends Component<Props> {
               </select>
             </label>
             <label> Weight:
-              <input value={t.distribution} onChange={this.props.onChange(`transition.transition[${i}].distribution`)} />
+              <input value={t.distribution} type="number" onChange={this.props.onChange(`transition.transition[${i}].distribution`)} />
             </label>
 
           </div>
