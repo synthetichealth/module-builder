@@ -14,6 +14,9 @@ type Props = {
 
 class StateEditor extends Component<Props> {
   render() {
+    if(!this.props.state) {
+      return null;
+    }
     return (
         <div>
           <StringEditor label={'Name'} value={this.props.state.name} onChange={this.props.onChangeBuilder('name')} />

@@ -4,6 +4,7 @@ import type { Transition as TransitionType } from '../../types/Transition';
 import type { State } from '../../types/State';
 import DirectTransition from './DirectTransition';
 import DistributedTransition from './DistributedTransition';
+import ConditionalTransition from './ConditionalTransition';
 
 type Props = {
   options: State[],
@@ -19,6 +20,8 @@ class Transition extends Component<Props> {
           return <DirectTransition {...this.props} />
         case "Distributed":
           return <DistributedTransition {...this.props} />
+        case "Conditional":
+          return <ConditionalTransition {...this.props} />
         default:
           return <div> Unknown Transition </div>
       }

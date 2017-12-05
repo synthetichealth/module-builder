@@ -14,7 +14,7 @@ import moduleJSON from './mocks/module';
 
 
 type Props = {};
-type AppState = {states: State[]}
+type AppState = {states: State[], selectedState?: State, selectedStateIndex?: number}
 
 class App extends Component<Props, AppState> {
 
@@ -38,6 +38,12 @@ class App extends Component<Props, AppState> {
     }
   }
 
+  onSelectNode = (id:string) => {
+    let selectedState = this.state.states.find((s) => s.id == id);
+    let selectedStateIndex = this.state.states.findIndex((s) => s.id == id);
+    this.setState({selectedState, selectedStateIndex});
+  }
+
   addState = () => {
     let states = this.state.states;
     states.push({name: `NewState_${states.length}`, type: 'Simple', transition: {to: states[0].name}})
@@ -47,19 +53,15 @@ class App extends Component<Props, AppState> {
   render() {
     return (
       <div className="App">
-        <ModuleGraph states={this.state.states} steps={300} />
+        <ModuleGraph states={this.state.states} steps={300} onClick={this.onSelectNode} />
         <div>
         <button onClick={this.addState}> Add State </button>
-          {this.state.states.map((s,i) => {
-            return (
-              <div key={i} style={{margin: '50px'}}>
-              <StateEditor
-                state={s}
-                otherStates={this.state.states}
-                onChangeBuilder={this.onChangeBuilder(i)}/>
-              </div>
-            )
-          })}
+        <div style={{margin: '50px'}}>
+        <StateEditor
+          state={this.state.selectedState}
+          otherStates={this.state.states}
+          onChangeBuilder={this.onChangeBuilder(this.state.selectedStateIndex)}/>
+        </div>
         </div>
       </div>
     );

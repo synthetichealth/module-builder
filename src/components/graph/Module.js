@@ -12,7 +12,8 @@ import './Module.css';
 
 type Props = {
   states: State[],
-  steps: number
+  steps: number,
+  onClick: (id:string) => mixed
 }
 
 type GraphTransition = {
@@ -60,7 +61,7 @@ class ModuleGraph extends Component<Props> {
   }
 
   generateTransitions() {
-    console.log("Updating transitions");
+    console.debug("Updating transitions");
     if(!this.simulation) {return}
     let nodes = this.simulation.nodes() || [];
     let links = []
@@ -94,7 +95,7 @@ class ModuleGraph extends Component<Props> {
   }
 
   componentWillReceiveProps(nextProps: Props){
-    console.log("Generating new graph");
+    console.debug("Generating new graph");
     this.generateGraphData(nextProps.states);
     this.simulation.alpha(.3);
     this.steps = 0;
@@ -117,7 +118,7 @@ class ModuleGraph extends Component<Props> {
             })}
             {this.simulation.nodes().map((n) => {
               return (
-                <g key={n.index} className='node' transform={`translate(${n.x},${n.y})`}>
+                <g key={n.index} className='node' transform={`translate(${n.x},${n.y})`} onClick={() => this.props.onClick(n.id)}>
                   <circle  r={10} />
                   <text>{n.name}</text>
                 </g>

@@ -9,6 +9,7 @@
 
 .conditional_transition {
   stroke-dasharray: 1;
+  stroke: red;
 }
 
 .distributed_transition {
