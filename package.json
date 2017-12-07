@@ -7,9 +7,11 @@
     "d3-force": "^1.1.0",
     "lodash": "^4.17.4",
     "react": "^16.1.0",
+    "react-animation-frame": "^1.0.1",
     "react-dom": "^16.1.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "uuid-js": "^0.7.5"
   },
   "scripts": {
     "start": "react-scripts start",

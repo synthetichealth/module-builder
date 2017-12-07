@@ -1,5 +1,6 @@
 // @flow
 import type { State } from './State';
+import type { Conditional } from './Conditional';
 
 export type DirectTransition = {
   to: string,
@@ -8,10 +9,31 @@ export type DirectTransition = {
 
 export type DistributedTransition = {
   type: 'Distributed',
-  transitions: [
+  transition: [
       {
         distibution: number,
         to: string
       }
     ]
 };
+
+export type ConditionalTransition = {
+  type: 'Conditional',
+  transition: [
+    {
+      condition?: Conditional,
+      transition: string
+    }
+  ]
+}
+
+export type ComplexTransition = {
+  type: 'Complex',
+  transition: [{
+    condition ?: Conditional,
+    distributions ?: DistributedTransition,
+    transition ?: DirectTransition
+  }]
+}
+
+export type Transition = DirectTransition | DistributedTransition | ConditionalTransition | ComplexTransition;

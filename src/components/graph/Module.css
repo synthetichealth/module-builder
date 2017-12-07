@@ -1,0 +1,28 @@
+.transition {
+  stroke: grey;
+  stroke-width: 1px;
+}
+
+.marker {
+  fill: grey;
+}
+
+.conditional_transition {
+  stroke-dasharray: 1;
+  stroke: red;
+}
+
+.distributed_transition {
+  stroke-dasharray: 4;
+}
+
+.node {
+  fill: white;
+}
+
+.node text {
+  font-size: 8px;
+  /*display: none;*/
+  fill: black;
+  text-anchor: middle;
+}
