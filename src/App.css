@@ -1,7 +1,7 @@
 .App {
   padding: 10px;
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: 10px;
   min-height: 100vh;
 }
