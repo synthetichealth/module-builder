@@ -1,5 +1,7 @@
 // @flow
 import React, { Component } from 'react';
+import { RIESelect } from 'riek';
+
 import type { DirectTransition } from '../../types/Transition';
 import type { State } from '../../types/State';
 
@@ -12,18 +14,15 @@ type Props = {
 class DirectTransitionEditor extends Component<Props> {
   render() {
     let currentValue = "";
+    let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
+
     if (this.props.transition) {
       currentValue = this.props.transition.to;
     }
     return (
       <label>
         Transition To:
-        <select value={currentValue} onChange={this.props.onChange('transition.to')}>
-          <option value=""></option>
-          {this.props.options.map((s) => {
-            return <option key={s.name} value={s.name}>{s.name}</option>
-          })}
-        </select>
+        <RIESelect propName='to' value={{id:this.props.transition.to, text:this.props.transition.to}} change={this.props.onChange('transition.to')} options={options} />
       </label>
     );
   }

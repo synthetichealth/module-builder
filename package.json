@@ -22,6 +22,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
-    "flow-bin": "^0.59.0"
+    "flow-bin": "^0.59.0",
+    "riek": "^1.1.0"
   }
 }

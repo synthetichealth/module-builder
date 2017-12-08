@@ -1,5 +1,7 @@
 // @flow
 import React, { Component } from 'react';
+import { RIEInput } from 'riek';
+
 
 import type { State } from '../../types/State';
 
@@ -19,7 +21,7 @@ class StateEditor extends Component<Props> {
     }
     return (
         <div>
-          <StringEditor label={'Name'} value={this.props.state.name} onChange={this.props.onChangeBuilder('name')} />
+          <RIEInput propName={'Name'} value={this.props.state.name} change={this.props.onChangeBuilder('name')} />
           <br />
           <Transition
             options={this.props.otherStates}

@@ -22,7 +22,7 @@ export type ConditionalTransition = {
   transition: [
     {
       condition?: Conditional,
-      transition: string
+      to: string
     }
   ]
 }
