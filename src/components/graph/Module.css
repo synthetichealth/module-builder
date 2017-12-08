@@ -26,3 +26,8 @@
   fill: black;
   text-anchor: middle;
 }
+
+.Graph {
+  overflow: hidden;
+
+}
