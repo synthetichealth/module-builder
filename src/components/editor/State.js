@@ -11,22 +11,23 @@ import Transition from './Transition';
 type Props = {
   state: State,
   otherStates: State[],
-  onChangeBuilder: any
+  onChange: any
 }
 
 class StateEditor extends Component<Props> {
   render() {
+
     if(!this.props.state) {
       return null;
     }
     return (
         <div>
-          <RIEInput propName={'Name'} value={this.props.state.name} change={this.props.onChangeBuilder('name')} />
+          <RIEInput propName={'Name'} value={this.props.state.name} change={this.props.onChange} />
           <br />
           <Transition
             options={this.props.otherStates}
             transition={this.props.state.transition}
-            onChange={this.props.onChangeBuilder} />
+            onChange={this.props.onChange} />
         </div>
     )
   }

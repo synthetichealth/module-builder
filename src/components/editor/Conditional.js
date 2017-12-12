@@ -45,18 +45,14 @@ class Gender extends Component<Props> {
 
 class Attribute extends Component<Props> {
 
-  update = (attr) => {
-    console.log(this.props);
-  }
-
   render() {
     let conditional = (this.props.conditional: AttributeConditional)
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
     return (
       <label>
-        <RIEInput value={conditional.attribute} propName="attribute" change={this.update} />
-        <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.update} options={options} />
-        <RIENumber value={conditional.value} propName='value' change={this.update} />
+        <RIEInput value={conditional.attribute} propName="attribute" change={this.props.onChange} />
+        <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange} options={options} />
+        <RIENumber value={conditional.value} propName='value' change={this.props.onChange} />
       </label>
     );
   }

@@ -32,7 +32,7 @@ class DistributedTransition extends Component<Props> {
               </select>
             </label>
             <label> Weight:
-              <input value={t.distribution} type="number" onChange={this.props.onChange(`transition.transition[${i}].distribution`)} />
+              <input value={t.distribution} type="number" onChange={this.props.onChange} />
             </label>
 
           </div>

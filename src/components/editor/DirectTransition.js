@@ -22,7 +22,7 @@ class DirectTransitionEditor extends Component<Props> {
     return (
       <label>
         Transition To:
-        <RIESelect propName='to' value={{id:this.props.transition.to, text:this.props.transition.to}} change={this.props.onChange('transition.to')} options={options} />
+        <RIESelect propName='to' value={{id:this.props.transition.to, text:this.props.transition.to}} change={this.props.onChange} options={options} />
       </label>
     );
   }

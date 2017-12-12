@@ -30,7 +30,7 @@ class ConditionalTransition extends Component<Props> {
           return <div>
             <label>If: <ConditionalEditor conditional={t.condition} onChange={this.props.onChange}/></label>
             <label>Transition To:
-              <RIESelect propName='to' value={{id:t.to, text:t.to}} change={() => {}} options={options} />
+              <RIESelect propName='to' value={{id:t.to, text:t.to}} change={this.props.onChange} options={options} />
 
             </label>
 
