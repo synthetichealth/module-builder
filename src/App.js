@@ -1,6 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { Provider } from 'react-redux'
+
+
+import store from './store';
 
 import './App.css';
 
@@ -52,6 +56,7 @@ class App extends Component<Props, AppState> {
 
   render() {
     return (
+      <Provider store={store}>
       <div className="App">
         <ModuleGraph states={this.state.states} steps={300} onClick={this.onSelectNode} />
         <div>
@@ -64,6 +69,7 @@ class App extends Component<Props, AppState> {
         </div>
         </div>
       </div>
+      </Provider>
     );
   }
 }
