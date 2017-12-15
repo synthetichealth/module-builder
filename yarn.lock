@@ -5966,6 +5966,10 @@ supports-color@^4.0.0, supports-color@^4.2.1, supports-color@^4.4.0:
   dependencies:
     has-flag "^2.0.0"
 
+svg-pan-zoom@^3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/svg-pan-zoom/-/svg-pan-zoom-3.5.3.tgz#e6b52a1b349716c78e7b5f92d0ed1cc1b860f5d8"
+
 svgo@^0.7.0:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-0.7.2.tgz#9f5772413952135c6fefbf40afe6a4faa88b4bb5"
@@ -6355,6 +6359,10 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+viz.js@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/viz.js/-/viz.js-1.8.0.tgz#e0cb5ad241368e35b1a6e960691eba454c24951f"
 
 vm-browserify@0.0.4:
   version "0.0.4"
