@@ -27,15 +27,15 @@ class Editor extends Component {
   render() {
     return (
       <div className="App">
-        <ModuleGraph states={this.props.states} steps={300} onClick={this.props.selectNode} />
-        <div>
-        <button onClick={() => this.props.addNode('test')}> Add State </button>
-        <div style={{margin: '50px'}}>
-        <StateEditor
-          state={this.props.selectedState}
-          otherStates={this.props.states}
-          onChange={this.onChange(this.props.selectedModuleIndex)} />
-        </div>
+        <ModuleGraph module={this.props.module} onClick={this.props.selectNode} />
+        <div className="App-edit-panel">
+            <button onClick={() => this.props.addNode('test')}> Add State </button>
+            <div style={{margin: '50px'}}>
+            <StateEditor
+              state={this.props.selectedState}
+              otherStates={this.props.states}
+              onChange={this.onChange(this.props.selectedModuleIndex)} />
+            </div>
         </div>
       </div>
     )
@@ -43,10 +43,10 @@ class Editor extends Component {
 }
 
 const mapStateToProps = state => {
-    let selectedModule = extractStates(state.modules[state.editor.currentModuleIndex]);
-    let selectedNode = selectedModule.find((s) => s.name == state.editor.currentNode)
+    let selectedModule = state.modules[state.editor.currentModuleIndex];
+    let selectedNode = extractStates(selectedModule).find((s) => s.name == state.editor.currentNode)
     return {
-      states: selectedModule,
+      module: selectedModule,
       selectedState: selectedNode,
       selectedModuleIndex: state.editor.currentModuleIndex
     }

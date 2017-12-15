@@ -10,7 +10,6 @@ export default (state = initialState, action) => {
       let value = Object.values(action.data.update).map((v) => v.id)[0]
       let newState = {...state};
       _.set(newState, path, value);
-      debugger
       return {...newState}
     default:
       return state;
