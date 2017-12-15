@@ -4,15 +4,24 @@ import { connect } from 'react-redux'
 
 import StateEditor from '../components/editor/State';
 import ModuleGraph from '../components/graph/Module';
+import { extractStates } from '../transforms/Module';
+
 
 import {selectNode, addNode, editNode} from '../actions/editor';
 
 class Editor extends Component {
 
-  onChange = (moduleIndex, node) => {
-    return (update) => {
-      this.props.editNode(moduleIndex, node, update)
+
+  /*
+    This is a recursive function to track the path that an edit action took through the Inspector
+    It was written this way because there's multiple ways that one could get to, say, a Conditional Editor
+    By keeping track of where it's been it means that the action can just look into the modules along the path 
+  */
+  onChange  = (update, path=[]) => {
+    if(typeof update != 'object') {
+      return (val) => this.onChange(val, [].concat(path, [update]))
     }
+    this.props.editNode(update, path)
   }
 
   render() {
@@ -25,7 +34,7 @@ class Editor extends Component {
         <StateEditor
           state={this.props.selectedState}
           otherStates={this.props.states}
-          onChange={this.onChange(this.props.selectedModuleIndex, this.props.selectedState)} />
+          onChange={this.onChange(this.props.selectedModuleIndex)} />
         </div>
         </div>
       </div>
@@ -34,10 +43,8 @@ class Editor extends Component {
 }
 
 const mapStateToProps = state => {
-  // TODO Implement this
-    let selectedModule = state.modules[state.editor.currentModuleIndex];
-    let selectedNode = selectedModule.find((s) => s.id == state.editor.currentNode)
-    // selectedNode = selectedNode <  ? null : selectedNode;
+    let selectedModule = extractStates(state.modules[state.editor.currentModuleIndex]);
+    let selectedNode = selectedModule.find((s) => s.name == state.editor.currentNode)
     return {
       states: selectedModule,
       selectedState: selectedNode,

@@ -22,12 +22,12 @@ class StateEditor extends Component<Props> {
     }
     return (
         <div>
-          <RIEInput propName={'Name'} value={this.props.state.name} change={this.props.onChange} />
+          <RIEInput propName={'name'} value={this.props.state.name} change={this.props.onChange('name')} />
           <br />
           <Transition
             options={this.props.otherStates}
             transition={this.props.state.transition}
-            onChange={this.props.onChange} />
+            onChange={this.props.onChange(`states.${this.props.state.name}`)} />
         </div>
     )
   }

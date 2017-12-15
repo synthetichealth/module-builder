@@ -28,9 +28,9 @@ class ConditionalTransition extends Component<Props> {
           console.log(t.to);
           let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
           return <div>
-            <label>If: <ConditionalEditor conditional={t.condition} onChange={this.props.onChange}/></label>
+            <label>If: <ConditionalEditor conditional={t.condition} onChange={this.props.onChange(`${i}.condition`)}/></label>
             <label>Transition To:
-              <RIESelect propName='to' value={{id:t.to, text:t.to}} change={this.props.onChange} options={options} />
+              <RIESelect propName='to' value={{id:t.to, text:t.to}} change={this.props.onChange(i)} options={options} />
 
             </label>
 

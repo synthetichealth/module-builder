@@ -12,14 +12,12 @@ export const addNode = (currentModuleIndex) => {
   })
 }
 
-export const editNode = (currentModuleIndex, node, update) => {
-  debugger
+export const editNode = (update, path) => {
   return ({
     type: 'EDIT_NODE',
     data: {
-      currentModuleIndex,
-      node,
-      update
+      update,
+      path
     }
   })
 }
