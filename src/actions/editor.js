@@ -21,3 +21,14 @@ export const editNode = (update, path) => {
     }
   })
 }
+
+export const renameNode = (targetModuleIndex, targetNode, newName) => {
+  return ({
+    type: 'RENAME_NODE',
+    data:{
+      targetModuleIndex,
+      targetNode,
+      newName
+    }
+  })
+}

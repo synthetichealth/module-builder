@@ -11,7 +11,8 @@ import Transition from './Transition';
 type Props = {
   state: State,
   otherStates: State[],
-  onChange: any
+  onChange: any,
+  renameNode: any
 }
 
 class StateEditor extends Component<Props> {
@@ -22,7 +23,7 @@ class StateEditor extends Component<Props> {
     }
     return (
         <div>
-          <RIEInput propName={'name'} value={this.props.state.name} change={this.props.onChange('name')} />
+          <RIEInput propName={'name'} value={this.props.state.name} change={this.props.renameNode} />
           <br />
           <Transition
             options={this.props.otherStates}

@@ -23,7 +23,7 @@ class Transition extends Component<Props> {
         case "Conditional":
           return <ConditionalTransition {...this.props} onChange={this.props.onChange('conditional_transition')} />
         default:
-          return <div> Unknown Transition </div>
+          return <div> {this.props.transition.type} Transition is not supported at this time </div>
       }
     }
     return <div> No Transition </div>
