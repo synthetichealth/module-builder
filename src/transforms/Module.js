@@ -37,6 +37,9 @@ export function extractTransition(state: any): ?Transition {
   if(state.conditional_transition) {
     return extractConditionalTransition(state.conditional_transition);
   }
+  if(state.complex_transition) {
+    return extractComplexTransition(state.complex_transition);
+  }
   return null;
 }
 
@@ -59,7 +62,7 @@ export function extractConditionalTransition(data: any): ConditionalTransition {
 }
 
 export function extractComplexTransition(data: any): ComplexTransition {
-
+  return {type: 'Complex',};
 }
 
 
