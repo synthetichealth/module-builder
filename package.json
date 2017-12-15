@@ -9,8 +9,10 @@
     "react": "^16.1.0",
     "react-animation-frame": "^1.0.1",
     "react-dom": "^16.1.0",
+    "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
     "uuid-js": "^0.7.5"
   },
   "scripts": {
@@ -22,6 +24,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
-    "flow-bin": "^0.59.0"
+    "flow-bin": "^0.59.0",
+    "riek": "^1.1.0"
   }
 }

@@ -118,7 +118,7 @@ class ModuleGraph extends Component<Props> {
             })}
             {this.simulation.nodes().map((n) => {
               return (
-                <g key={n.index} className='node' transform={`translate(${n.x},${n.y})`} onClick={() => this.props.onClick(n.id)}>
+                <g key={n.index} className='node' transform={`translate(${n.x},${n.y})`} onClick={() => this.props.onClick(n.name)}>
                   <circle  r={10} />
                   <text>{n.name}</text>
                 </g>

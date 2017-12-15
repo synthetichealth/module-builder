@@ -1,8 +1,10 @@
 // @flow
 import React, { Component } from 'react';
+import { RIESelect } from 'riek';
 import type { ConditionalTransition as ConditionalTransitionType } from '../../types/Transition';
 import ConditionalEditor from './Conditional';
 import type { State } from '../../types/State';
+
 
 type Props = {
   options: State[],
@@ -23,15 +25,13 @@ class ConditionalTransition extends Component<Props> {
       <label>
         Conditional Transition To:
         {currentValue.map((t, i) => {
+          console.log(t.to);
+          let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
           return <div>
-            <label>If: <ConditionalEditor conditional={t.condition} /></label>
+            <label>If: <ConditionalEditor conditional={t.condition} onChange={this.props.onChange(`${i}.condition`)}/></label>
             <label>Transition To:
-              <select value={t.to} onChange={this.props.onChange(`transition.transition[${i}].to`)}>
-                <option value=""></option>
-                {this.props.options.map((s) => {
-                  return <option key={s.name} value={s.name}>{s.name}</option>
-                })}
-              </select>
+              <RIESelect propName='to' value={{id:t.to, text:t.to}} change={this.props.onChange(i)} options={options} />
+
             </label>
 
 

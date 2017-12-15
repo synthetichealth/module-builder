@@ -1,17 +1,19 @@
 // @flow
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { Provider } from 'react-redux'
+
+
+import store from './store';
 
 import './App.css';
 
-import StateEditor from './components/editor/State';
-import ModuleGraph from './components/graph/Module';
-import type { State } from './types/State';
+import Editor from './containers/Editor';
 
+import type { State } from './types/State';
 import { extractStates } from './transforms/Module';
 
 import moduleJSON from './mocks/module';
-
 
 type Props = {};
 type AppState = {states: State[], selectedState?: State, selectedStateIndex?: number}
@@ -52,18 +54,9 @@ class App extends Component<Props, AppState> {
 
   render() {
     return (
-      <div className="App">
-        <ModuleGraph states={this.state.states} steps={300} onClick={this.onSelectNode} />
-        <div>
-        <button onClick={this.addState}> Add State </button>
-        <div style={{margin: '50px'}}>
-        <StateEditor
-          state={this.state.selectedState}
-          otherStates={this.state.states}
-          onChangeBuilder={this.onChangeBuilder(this.state.selectedStateIndex)}/>
-        </div>
-        </div>
-      </div>
+      <Provider store={store}>
+        <Editor/>
+      </Provider>
     );
   }
 }
