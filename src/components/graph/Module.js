@@ -34,12 +34,38 @@ class ModuleGraph extends Component<Props> {
       document.getElementById(`node_${s}`).addEventListener('click', () => this.props.onClick(s));
     })
 
+    let appPanelWidth = document.getElementsByClassName('App-edit-panel')[0].offsetWidth
+
+    if(!appPanelWidth){
+      appPanelWidth=400;
+      console.log('WARNING: NO PANEL WIDTH AS EXPECTED');
+    }
+
+    let availableWidth = document.getElementsByClassName('App')[0].offsetWidth - appPanelWidth
+    let graphWidth = this.mount.children[0].clientWidth;
+
+    let offset = 0;
+
+    if(graphWidth > availableWidth){
+      offset = graphWidth - availableWidth
+    }
+
+    this.mount.style.marginLeft = `-${offset}px`
+
+    if(graphWidth > 500){
+      document.getElementById('svg-pan-zoom-controls').attributes.transform.value = `translate(${offset}, 0) scale(0.75)`
+    } else {
+      document.getElementById('svg-pan-zoom-controls').style.visibility = 'hidden'
+
+    }
+
+
   }
 
   render() {
     
     return (
-        <div ref={mount => this.mount = mount } className="Graph"></div>
+        <div ref={mount => this.mount = mount } className="Module"></div>
     )
   }
 
