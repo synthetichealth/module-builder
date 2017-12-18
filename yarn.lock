@@ -1053,6 +1053,10 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
+bootstrap@4.0.0-beta.2:
+  version "4.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0-beta.2.tgz#4d67d2aa2219f062cd90bc1247e6747b9e8fd051"
+
 boxen@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-0.6.0.tgz#8364d4248ac34ff0ef1b2f2bf49a6c60ce0d81b6"
@@ -1720,35 +1724,6 @@ currently-unhandled@^0.4.1:
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
   dependencies:
     array-find-index "^1.0.1"
-
-d3-array@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/d3-array/-/d3-array-1.2.1.tgz#d1ca33de2f6ac31efadb8e050a021d7e2396d5dc"
-
-d3-collection@1:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/d3-collection/-/d3-collection-1.0.4.tgz#342dfd12837c90974f33f1cc0a785aea570dcdc2"
-
-d3-dispatch@1:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/d3-dispatch/-/d3-dispatch-1.0.3.tgz#46e1491eaa9b58c358fce5be4e8bed626e7871f8"
-
-d3-force@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/d3-force/-/d3-force-1.1.0.tgz#cebf3c694f1078fcc3d4daf8e567b2fbd70d4ea3"
-  dependencies:
-    d3-collection "1"
-    d3-dispatch "1"
-    d3-quadtree "1"
-    d3-timer "1"
-
-d3-quadtree@1:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/d3-quadtree/-/d3-quadtree-1.0.3.tgz#ac7987e3e23fe805a990f28e1b50d38fcb822438"
-
-d3-timer@1:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/d3-timer/-/d3-timer-1.0.7.tgz#df9650ca587f6c96607ff4e60cc38229e8dd8531"
 
 d@1:
   version "1.0.0"
@@ -5110,12 +5085,6 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-animation-frame@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-animation-frame/-/react-animation-frame-1.0.1.tgz#577d43acbb2bcc60b4b55e7178cf68b46ba23a3f"
-  dependencies:
-    react "~16 || ~15"
-
 react-dev-utils@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-4.2.1.tgz#9f2763e7bafa1a1b9c52254d2a479deec280f111"
@@ -5232,15 +5201,6 @@ react-scripts@1.0.17:
 react@^16.1.0:
   version "16.1.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.1.0.tgz#1c2bdac3c17fe7ee9282fa35aca6cc36387903e1"
-  dependencies:
-    fbjs "^0.8.16"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.0"
-
-"react@~16 || ~15":
-  version "16.1.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.1.1.tgz#d5c4ef795507e3012282dd51261ff9c0e824fe1f"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"

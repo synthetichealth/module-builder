@@ -33,17 +33,30 @@ class Editor extends Component {
 
   render() {
     return (
-      <div className="App">
-        <ModuleGraph module={this.props.module} onClick={this.props.selectNode} />
-        <div className="App-edit-panel">
-            <button onClick={() => this.props.addNode('test')}> Add State </button>
-            <div style={{margin: '50px'}}>
+      <div className="App container-fluid">
+        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+          <a className="navbar-brand" href="#">Synthea Module Builder</a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav">
+              <a className="nav-item nav-link" href="#">New Module</a>
+              <a className="nav-item nav-link" href="#">Load Module</a>
+              <a className="nav-item nav-link" href="#">Save Module</a>
+            </div>
+          </div>
+        </nav>
+        <div className="App-body">
+          <button className='btn btn-primary' onClick={() => this.props.addNode('test')}> Add State </button>
+          <ModuleGraph module={this.props.module} onClick={this.props.selectNode} />
+          <div className="App-edit-panel">
             <StateEditor
               renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
               state={this.props.selectedState}
               otherStates={this.props.states}
               onChange={this.onChange(this.props.selectedModuleIndex)} />
-            </div>
+          </div>
         </div>
       </div>
     )
