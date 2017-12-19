@@ -31,7 +31,7 @@ class ModuleGraph extends Component<Props> {
     svgPanZoom(this.mount.children[0]).enableControlIcons();
 
     Object.keys(module.states).forEach( s => {
-      document.getElementById(`node_${s}`).addEventListener('click', () => this.props.onClick(s));
+      document.getElementById(`node_${s.replace('?','')}`).addEventListener('click', () => this.props.onClick(s));
     })
 
     let appPanelWidth = document.getElementsByClassName('App-edit-panel')[0].offsetWidth
@@ -91,7 +91,7 @@ class ModuleGraph extends Component<Props> {
       }
       let details = this.state_description(state)
 
-      node['label'] = (name === state['type']) ? state['name'] : `{ ${name} | ${state['type']} }`
+      node['label'] = (name === state['type']) ? state['name'].replace('?','') : `{ ${name.replace('?','')} | ${state['type']} }`
       //TODO: ALMOST DONE WITH DETAILS, BUT SMALL BUG IN RENDERING... maybe from \l?
       // if(details.length === 0){
       //   node['label'] = (name === state['type']) ? state['name'] : `{ ${name} | ${state['type']} }`
@@ -101,7 +101,7 @@ class ModuleGraph extends Component<Props> {
 
       nodeMap[name] = state
 
-      return `${name} [id = "node_${name}", shape = "${node['shape']}", style = "${node['style']}", label = "${node['label']}", fontcolor = "${node['fontcolor']};"]` 
+      return `${name.replace('?','')} [id = "node_${name.replace('?','')}", shape = "${node['shape']}", style = "${node['style']}", label = "${node['label']}", fontcolor = "${node['fontcolor']};"]` 
 
     }).join("\n");
 
@@ -110,7 +110,7 @@ class ModuleGraph extends Component<Props> {
 
       if(state.direct_transition !== undefined){
         if(nodeMap[state.direct_transition]){
-          return `  ${name} -> ${nodeMap[state.direct_transition].name}\n`
+          return `  ${name.replace('?','')} -> ${nodeMap[state.direct_transition].name.replace('?','')}\n`
         } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${state.direct_transition}`);
         }
@@ -129,7 +129,7 @@ class ModuleGraph extends Component<Props> {
             distLabel = `${pct}%`
           }
           if(nodeMap[t.transition]){
-            out_transitions += `  ${name} -> ${nodeMap[t.transition].name} [label = "${distLabel}"];\n`
+            out_transitions += `  ${name.replace('?','')} -> ${nodeMap[t.transition].name.replace('?','')} [label = "${distLabel}"];\n`
           } else {
             console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}`);
           }
@@ -140,7 +140,7 @@ class ModuleGraph extends Component<Props> {
         state.conditional_transition.forEach( (t, i ) => {
           let cnd = t.condition !== undefined ? this.logicDetails(t.condition) : 'else';
           if(nodeMap[t.transition]){
-            out_transitions += `  ${name} -> ${nodeMap[t.transition].name} [label = "${i}. ${cnd}"];\n`
+            out_transitions += `  ${name.replace('?','')} -> ${nodeMap[t.transition].name.replace('?','')} [label = "${i}. ${cnd}"];\n`
           } else {
             console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}`);
           }
@@ -153,7 +153,7 @@ class ModuleGraph extends Component<Props> {
           let cnd = t.condition !== undefined ? this.logicDetails(t['condition']) : 'else'
           if(t.transition !== undefined){
             if(nodeMap[t.transition]){
-              let nodes = `  ${name} -> ${t.transition}`
+              let nodes = `  ${name.replace('?','')} -> ${t.transition}`
               if(transitions[nodes] === undefined){
                 transitions[nodes] = [];
               }
@@ -165,7 +165,7 @@ class ModuleGraph extends Component<Props> {
             t.distributions.forEach( dist => {
               if(nodeMap[dist.transition]){
                 let pct = dist.distribution * 100
-                let nodes = `  ${name} -> ${dist.transition}`
+                let nodes = `  ${name.replace('?','')} -> ${dist.transition}`
                 if(transitions[nodes] === undefined){
                   transitions[nodes] = [];
                 }

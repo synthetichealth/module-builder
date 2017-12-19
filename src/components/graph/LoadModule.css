@@ -1,0 +1,9 @@
+.LoadModule-body {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.LoadModule-body ul {
+  list-style: none;
+  padding: 0
+}
