@@ -16,7 +16,6 @@ export default (state = initialState, action) => {
       _.set(newState, path, value);
       return {...newState}
     case 'ADD_NODE':
-      debugger
       newState[action.data.currentModuleIndex].states = {...newState[action.data.currentModuleIndex].states, ...{'NEW_STATE': {}}};
       return [...newState]
     case 'RENAME_NODE':

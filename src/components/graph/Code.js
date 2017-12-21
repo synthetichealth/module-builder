@@ -15,7 +15,9 @@ class Code extends Component {
        type: "text/plain;charset=utf-8"
     });
 
-    FileSaver.saveAs(blob, 'synthea_module.json');
+    let filename = this.props.module.name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+    FileSaver.saveAs(blob, `${filename}.json`);
   }
 
   render() {
@@ -39,7 +41,7 @@ class Code extends Component {
                 </button>
               </div>
               <div className="modal-body Code-body">
-              <textarea ref="codeInput" defaultValue={JSON.stringify(this.props.code,null, 2)} />
+              <textarea ref="codeInput" defaultValue={JSON.stringify(this.props.module,null, 2)} />
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onDownload}>Download</button>

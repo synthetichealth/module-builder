@@ -37,7 +37,7 @@ class Editor extends Component {
       <div>
         <Menu onNewModuleClick={this.props.newModule} moduleCount={this.props.moduleCount} onLoadModuleClick={this.props.showLoadModule} onShowCodeClick={this.props.showCode}/>
         <LoadModule modules={this.props.modules} visible={this.props.loadModuleVisible} onHide={this.props.hideLoadModule} onSelectModule={this.props.selectModule}/>
-        <Code code={this.props.module} visible={this.props.codeVisible} onHide={this.props.hideCode}/>
+        <Code module={this.props.module} visible={this.props.codeVisible} onHide={this.props.hideCode}/>
 
         <div className="App container-fluid">
           <div className="App-body">
