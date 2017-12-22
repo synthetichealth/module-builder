@@ -14,6 +14,8 @@ class ConditionalEditor extends Component<Props> {
     switch (this.props.conditional.condition_type) {
       case "Attribute":
         return <Attribute {...this.props} />
+      case "Socioeconomic Status":
+        return <SocioeconomicStatus {...this.props} />
       default:
         return this.props.conditional.condition_type
 
@@ -55,6 +57,22 @@ class Attribute extends Component<Props> {
         <RIENumber value={conditional.value} propName='value' change={this.props.onChange('value')} />
       </label>
     );
+  }
+}
+
+class SocioeconomicStatus extends Component<Props> {
+  render() {
+    //TODO:  Typecast to SocioeconomicStatusConditional type
+    let options = [
+      {id: 'Low', text: 'Low'},
+      {id: 'Middle', text: 'Middle'},
+      {id: 'High', text: 'High'}
+    ];
+    return (
+      <label>
+        <RIESelect value={{id: conditional.category, text: conditional.category}} propName="category" change={this.props.onChange('category')} options={options} />
+      </label>
+    )
   }
 }
 
