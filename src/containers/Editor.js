@@ -4,13 +4,14 @@ import { connect } from 'react-redux'
 
 import StateEditor from '../components/editor/State';
 import ModuleGraph from '../components/graph/Module';
+import Menu from '../components/graph/Menu';
+import LoadModule from '../components/graph/LoadModule';
+import Code from '../components/graph/Code';
 import { extractStates } from '../transforms/Module';
 
-
-import {selectNode, addNode, editNode, renameNode} from '../actions/editor';
+import {selectNode, addNode, editNode, renameNode, newModule, showLoadModule, hideLoadModule, selectModule, showCode, hideCode} from '../actions/editor';
 
 class Editor extends Component {
-
 
   /*
     This is a recursive function to track the path that an edit action took through the Inspector
@@ -33,29 +34,22 @@ class Editor extends Component {
 
   render() {
     return (
-      <div className="App container-fluid">
-        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="#">Synthea Module Builder</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <a className="nav-item nav-link" href="#">New Module</a>
-              <a className="nav-item nav-link" href="#">Load Module</a>
-              <a className="nav-item nav-link" href="#">Save Module</a>
+      <div>
+        <Menu onNewModuleClick={this.props.newModule} moduleCount={this.props.moduleCount} onLoadModuleClick={this.props.showLoadModule} onShowCodeClick={this.props.showCode}/>
+        <LoadModule modules={this.props.modules} visible={this.props.loadModuleVisible} onHide={this.props.hideLoadModule} onSelectModule={this.props.selectModule}/>
+        <Code module={this.props.module} visible={this.props.codeVisible} onHide={this.props.hideCode}/>
+
+        <div className="App container-fluid">
+          <div className="App-body">
+            <button className='btn btn-primary' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
+            <ModuleGraph module={this.props.module} onClick={this.props.selectNode}/>
+            <div className="App-edit-panel">
+              <StateEditor
+                renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
+                state={this.props.selectedState}
+                otherStates={this.props.states}
+                onChange={this.onChange(this.props.selectedModuleIndex)} />
             </div>
-          </div>
-        </nav>
-        <div className="App-body">
-          <button className='btn btn-primary' onClick={() => this.props.addNode('test')}> Add State </button>
-          <ModuleGraph module={this.props.module} onClick={this.props.selectNode} />
-          <div className="App-edit-panel">
-            <StateEditor
-              renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
-              state={this.props.selectedState}
-              otherStates={this.props.states}
-              onChange={this.onChange(this.props.selectedModuleIndex)} />
           </div>
         </div>
       </div>
@@ -64,22 +58,32 @@ class Editor extends Component {
 }
 
 const mapStateToProps = state => {
-    let selectedModule = state.modules[state.editor.currentModuleIndex];
-    let states = extractStates(selectedModule)
-    let selectedNode = states.find((s) => s.name == state.editor.currentNode)
-    return {
-      module: selectedModule,
-      selectedState: selectedNode,
-      states,
-      selectedModuleIndex: state.editor.currentModuleIndex
-    }
+  let selectedModule = state.modules[state.editor.currentModuleIndex];
+  let states = extractStates(selectedModule)
+  let selectedNode = states.find((s) => s.name == state.editor.currentNode)
+  return {
+    module: selectedModule,
+    modules: state.modules,
+    selectedState: selectedNode,
+    states,
+    selectedModuleIndex: state.editor.currentModuleIndex,
+    moduleCount: state.modules.length,
+    loadModuleVisible: state.editor.loadModuleVisible,
+    codeVisible: state.editor.codeVisible
+  }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   selectNode,
   addNode,
   editNode,
-  renameNode
+  renameNode,
+  newModule,
+  showLoadModule,
+  hideLoadModule,
+  selectModule,
+  showCode,
+  hideCode
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);

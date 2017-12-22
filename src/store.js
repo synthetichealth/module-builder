@@ -3,11 +3,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './reducers';
 
 
-import moduleJSON from './mocks/module';
+import modulesJSON from './mocks/modules';
 
-
-
-const initialState = {modules: [moduleJSON]};
+const initialState = {modules: modulesJSON};
 const enhancers = [];
 const middleware = [];
 

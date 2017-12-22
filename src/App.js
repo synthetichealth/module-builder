@@ -13,7 +13,7 @@ import Editor from './containers/Editor';
 import type { State } from './types/State';
 import { extractStates } from './transforms/Module';
 
-import moduleJSON from './mocks/module';
+import modulesJSON from './mocks/modules';
 
 type Props = {};
 type AppState = {states: State[], selectedState?: State, selectedStateIndex?: number}
@@ -22,7 +22,7 @@ class App extends Component<Props, AppState> {
 
   constructor() {
     super();
-    let states = extractStates(moduleJSON);
+    let states = extractStates(modulesJSON[19]);
     this.state = {states};
   }
 
