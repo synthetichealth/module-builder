@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { Conditional, GenderConditional, AttributeConditional } from '../../types/Conditional';
+import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
 
 type Props = {
@@ -83,8 +83,13 @@ class Age extends Component<Props> {
 
   render() {
     let conditional = (this.props.conditional: AgeConditional)
+    let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
+
     return (
       <label> Age:
+      <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
+      <RIENumber value={conditional.quantity} propName='quantity' change={this.props.onChange('quantity')} />
+      <RIEInput value={conditional.unit} propName="unit" change={this.props.onChange('unit')} />
       </label>
     );
   }
@@ -95,8 +100,11 @@ class Date extends Component<Props> {
 
   render() {
     let conditional = (this.props.conditional: DateConditional)
+    let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
     return (
       <label> Date:
+      <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
+      <RIENumber value={conditional.year} propName='year' change={this.props.onChange('year')} />
       </label>
     );
   }
@@ -113,7 +121,7 @@ class SocioeconomicStatus extends Component<Props> {
       {id: 'High', text: 'High'}
     ];
     return (
-      <label>
+      <label> Socioeconomic Status:
         <RIESelect value={{id: conditional.category, text: conditional.category}} propName="category" change={this.props.onChange('category')} options={options} />
       </label>
     )
@@ -125,8 +133,17 @@ class Race extends Component<Props> {
 
   render() {
     let conditional = (this.props.conditional: RaceConditional)
+    let options = [
+      {id: "White", text: "White"},
+      {id: "Native", text: "Native"},
+      {id: "Hispanic", text: "Hispanic"},
+      {id: "Black", text: "Black"},
+      {id: "Asian", text: "Asian"},
+      {id: "Other", text: "Other"}
+    ];
     return (
       <label> Race:
+        <RIESelect value={{id: conditional.race, text: conditional.race}} propName="race" change={this.props.onChange('race')} options={options} />
       </label>
     );
   }
@@ -137,8 +154,14 @@ class Symptom extends Component<Props> {
 
   render() {
     let conditional = (this.props.conditional: SymptomConditional)
+    let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
+
     return (
       <label> Symptom:
+      <RIEInput value={conditional.symptom} propName="symptom" change={this.props.onChange('symptom')} />
+      <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
+      <RIENumber value={conditional.value} propName='value' change={this.props.onChange('value')} />
+
       </label>
     );
   }
@@ -161,8 +184,14 @@ class VitalSign extends Component<Props> {
 
   render() {
     let conditional = (this.props.conditional: VitalSignConditional)
+    let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
+
     return (
-      <label> VitalSign:
+      <label> Vital Sign:
+      <RIEInput value={conditional.vital_sign} propName="vital_sign" change={this.props.onChange('vital_sign')} />
+      <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
+      <RIENumber value={conditional.value} propName='value' change={this.props.onChange('value')} />
+
       </label>
     );
   }
