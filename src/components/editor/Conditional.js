@@ -69,7 +69,7 @@ class ConditionalEditor extends Component<Props> {
 class Gender extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: GenderConditional)
+    let conditional = ((this.props.conditional: any): GenderConditional);
     return (
       <label> Gender:
         <RIESelect value={conditional.gender} onChange={this.props.onChange} options={[{id:'M', text: 'male'}, {id:'F', text: 'female'}]} />
@@ -82,7 +82,7 @@ class Gender extends Component<Props> {
 class Age extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: AgeConditional)
+    let conditional = ((this.props.conditional: any): AgeConditional);
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
 
     return (
@@ -99,7 +99,7 @@ class Age extends Component<Props> {
 class Date extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: DateConditional)
+    let conditional = ((this.props.conditional: any): DateConditional);
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
     return (
       <label> Date:
@@ -114,7 +114,7 @@ class Date extends Component<Props> {
 class SocioeconomicStatus extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: SocioeconomicStatusConditional)
+    let conditional = ((this.props.conditional: any): SocioeconomicStatusConditional);
     let options = [
       {id: 'Low', text: 'Low'},
       {id: 'Middle', text: 'Middle'},
@@ -132,7 +132,7 @@ class SocioeconomicStatus extends Component<Props> {
 class Race extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: RaceConditional)
+    let conditional = ((this.props.conditional: any): RaceConditional);
     let options = [
       {id: "White", text: "White"},
       {id: "Native", text: "Native"},
@@ -153,7 +153,7 @@ class Race extends Component<Props> {
 class Symptom extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: SymptomConditional)
+    let conditional = ((this.props.conditional: any): SymptomConditional);
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
 
     return (
@@ -171,7 +171,7 @@ class Symptom extends Component<Props> {
 class Observation extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: ObservationConditional)
+    let conditional = ((this.props.conditional: any): ObservationConditional);
     return (
       <label> Observation:
       </label>
@@ -183,7 +183,7 @@ class Observation extends Component<Props> {
 class VitalSign extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: VitalSignConditional)
+    let conditional = ((this.props.conditional: any): VitalSignConditional);
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
 
     return (
@@ -201,7 +201,7 @@ class VitalSign extends Component<Props> {
 class ActiveCondition extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: ActiveConditionConditional)
+    let conditional = ((this.props.conditional: any): ActiveConditionConditional);
     return (
       <label> ActiveCondition:
       </label>
@@ -213,7 +213,7 @@ class ActiveCondition extends Component<Props> {
 class ActiveMedication extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: ActiveMedicationConditional)
+    let conditional = ((this.props.conditional: any): ActiveMedicationConditional);
     return (
       <label> ActiveMedication:
       </label>
@@ -225,7 +225,7 @@ class ActiveMedication extends Component<Props> {
 class ActiveCarePlan extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: ActiveCarePlanConditional)
+    let conditional = ((this.props.conditional: any): ActiveCarePlanConditional);
     return (
       <label> ActiveCarePlan:
       </label>
@@ -237,7 +237,7 @@ class ActiveCarePlan extends Component<Props> {
 class PriorState extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: PriorStateConditional)
+    let conditional = ((this.props.conditional: any): PriorStateConditional);
     return (
       <label> PriorState:
       </label>
@@ -249,7 +249,7 @@ class PriorState extends Component<Props> {
 class Attribute extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: AttributeConditional)
+    let conditional = ((this.props.conditional: any): AttributeConditional);
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
     return (
       <label>
@@ -265,7 +265,7 @@ class Attribute extends Component<Props> {
 class And extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: AndConditional)
+    let conditional = ((this.props.conditional: any): AndConditional);
     return (
       <label> And:
       </label>
@@ -277,7 +277,7 @@ class And extends Component<Props> {
 class Or extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: OrConditional)
+    let conditional = ((this.props.conditional: any): OrConditional);
     return (
       <label> Or:
       </label>
@@ -289,7 +289,7 @@ class Or extends Component<Props> {
 class AtLeast extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: AtLeastConditional)
+    let conditional = ((this.props.conditional: any): AtLeastConditional);
     return (
       <label> AtLeast:
       </label>
@@ -301,7 +301,7 @@ class AtLeast extends Component<Props> {
 class AtMost extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: AtMostConditional)
+    let conditional = ((this.props.conditional: any): AtMostConditional);
     return (
       <label> AtMost:
       </label>
@@ -313,7 +313,7 @@ class AtMost extends Component<Props> {
 class Not extends Component<Props> {
 
   render() {
-    let conditional = (this.props.conditional: NotConditional)
+    let conditional = ((this.props.conditional: any): NotConditional);
     return (
       <label> Not:
       </label>
