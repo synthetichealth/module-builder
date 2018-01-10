@@ -14,7 +14,6 @@ export class Code extends Component<Props> {
   render() {
     let code = this.props.code;
     let codeTypeOptions = ["SNOMED-CT", "RxNorm", "LOINC"].map((c) => {return {id: c, text: c}});
-
     return (
       <label> Code:
       <RIESelect value={{id: code.system, text: code.system}} propName="system" change={this.props.onChange('system')} options={codeTypeOptions} />
@@ -32,6 +31,7 @@ type CodesProps = {
 }
 export class Codes extends Component<CodesProps> {
   render() {
+
     return (
       <div>
         {this.props.codes.map((code, i) => {
