@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
+import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
+import { Codes } from './Code';
 
 type Props = {
   conditional: Conditional,
@@ -172,8 +173,13 @@ class Observation extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): ObservationConditional);
+    let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}, {id: "is nil", text: "is nil"}, {id: "is not nil", text: "is not nil"}];
+
     return (
       <label> Observation:
+        <Codes codes={conditional.codes} onChange={this.props.onChange('codes')} />
+        <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
+        <RIENumber value={conditional.value} propName='value' change={this.props.onChange('value')} />
       </label>
     );
   }
@@ -202,8 +208,10 @@ class ActiveCondition extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): ActiveConditionConditional);
+
     return (
-      <label> ActiveCondition:
+      <label> Active Condition:
+        <Codes codes={conditional.codes} onChange={this.props.onChange('codes')} />
       </label>
     );
   }
@@ -216,6 +224,7 @@ class ActiveMedication extends Component<Props> {
     let conditional = ((this.props.conditional: any): ActiveMedicationConditional);
     return (
       <label> ActiveMedication:
+      <Codes codes={conditional.codes} onChange={this.props.onChange('codes')} />
       </label>
     );
   }
@@ -228,6 +237,7 @@ class ActiveCarePlan extends Component<Props> {
     let conditional = ((this.props.conditional: any): ActiveCarePlanConditional);
     return (
       <label> ActiveCarePlan:
+      <Codes codes={conditional.codes} onChange={this.props.onChange('codes')} />
       </label>
     );
   }

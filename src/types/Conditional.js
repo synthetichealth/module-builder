@@ -1,4 +1,7 @@
 // @flow
+
+import type { Code } from './Code';
+
 export type GenderConditional = {
   condition_type: 'Gender',
   gender: 'M' | 'F'
@@ -36,8 +39,7 @@ export type SymptomConditional = {
 
 export type ObservationConditional = {
   condition_type: "Observation",
-  // TODO This should be a code type
-  codes: object[] | string,
+  codes: Code[] | string,
   operator: '==' | '!=' | "<" | "<=" | ">" | ">=" | "is nil" | "is not nil",
   value: number
 }
@@ -51,21 +53,18 @@ export type VitalSignConditional = {
 
 export type ActiveConditionConditional = {
   condition_type: 'Active Condition',
-  // TODO should be a code type
-  codes: object[] | string,
+  codes: Code[] | string,
 }
 
 
 export type ActiveMedicationConditional = {
   condition_type: 'Active Medication',
-  // TODO should be a code type
-  codes: object[] | string,
+  codes: Code[] | string,
 }
 
 export type ActiveCarePlanConditional = {
   condition_type: 'Active CarePlan',
-  // TODO should be a code type
-  codes: object[] | string,
+  codes: Code[] | string,
 }
 
 export type PriorStateConditional = {
