@@ -8,7 +8,7 @@ export type BaseState = BaseState & {
 }
 
 export type InitialState = BaseState & {
-  type: 'Initial',
+  type: 'Initial'
 }
 
 export type TerminalState = BaseState & {
