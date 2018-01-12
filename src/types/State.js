@@ -1,30 +1,35 @@
 // @flow
-import type { DirectTransition, DistributedTransition, ConditionalTransition, ComplexTransition } from './Transition';
+import type { Transition } from './Transition';
 import type { Conditional } from './Conditional';
 import type { Code } from './Code';
 
-export type BaseState = BaseState & {
-  transition?: DirectTransition | DistributedTransition | ConditionalTransition | ComplexTransition
+export type InitialState = {
+  name: string,
+  type: 'Initial',
+  transition?: Transition
 }
 
-export type InitialState = BaseState & {
-  type: 'Initial'
+export type TerminalState = {
+  name: string,
+  type: 'Terminal',
+  transition?: Transition
 }
 
-export type TerminalState = BaseState & {
-  type: 'Terminal'
+export type SimpleState = {
+  name: string,
+  type: 'Simple',
+  transition?: Transition
 }
 
-export type SimpleState = BaseState & {
-  type: 'Simple'
-}
-
-export type GuardState = BaseState & {
+export type GuardState = {
+  name: string,
   type: 'Guard',
-  allow: Conditional
+  allow: Conditional,
+  transition?: Transition
 }
 
-export type DelayState = BaseState & {
+export type DelayState = {
+  name: string,
   type: 'Delay',
   exact?: {
     quantity: number,
@@ -34,68 +39,88 @@ export type DelayState = BaseState & {
     low: number,
     high: number,
     unit: string
-  }
+  },
+  transition?: Transition
 }
 
-export type SetAttributeState = BaseState & {
+export type SetAttributeState = {
+  name: string,
   type: 'SetAttribute',
   attribute: string,
-  value?: number | boolean | string
+  value?: number | boolean | string,
+  transition?: Transition
 }
 
-export type CounterState = BaseState & {
+export type CounterState = {
+  name: string,
   type: 'Counter',
   attribute: string,
-  action: 'increment' | 'decrement'
+  action: 'increment' | 'decrement',
+  transition?: Transition
 }
 
-export type CallSubmoduleState = BaseState & {
+export type CallSubmoduleState = {
+  name: string,
   type: 'CallSubmodule',
-  submodule: string
+  submodule: string,
+  transition?: Transition
 }
 
-export type EncounterState = BaseState & {
+export type EncounterState = {
+  name: string,
   type: 'Encounter',
   wellness?: boolean,
   encounter_class: 'emergency' | 'inpatient' | 'ambulatory',
   reason?: string,
-  codes: Code[]
+  codes: Code[],
+  transition?: Transition
 }
 
-export type EncounterEndState = BaseState & {
+export type EncounterEndState = {
+  name: string,
   type: 'EncounterEnd',
-  discharge_disposition?: Code
+  discharge_disposition?: Code,
+  transition?: Transition
 }
 
-export type ConditionOnsetState = BaseState & {
+export type ConditionOnsetState = {
+  name: string,
   type: 'ConditionOnset',
   target_encounter: string,
   assign_to_attribute?: string,
-  codes: Code[]
+  codes: Code[],
+  transition?: Transition
 }
 
-export type ConditionEndState = BaseState & {
+export type ConditionEndState = {
+  name: string,
   type: 'ConditionEnd',
   condition_onset?: string,
   referenced_by_attribute?: string,
-  codes?: Code[]
+  codes?: Code[],
+  transition?: Transition
 }
 
-export type AllergyOnsetState = BaseState & {
+export type AllergyOnsetState = {
+  name: string,
   type: 'AllergyOnset',
   target_encounter: string,
   assign_to_attribute?: string,
-  codes: Code[]
+  codes: Code[],
+  transition?: Transition
 }
 
-export type AllergyEndState = BaseState & {
+export type AllergyEndState = {
+  name: string,
   type: 'AllergyEnd',
   allergy_onset?: string,
   referenced_by_attribute?: string,
-  codes?: Code[]
+  codes?: Code[],
+  transition?: Transition
 }
 
-export type MedicationOrderState = BaseState & {
+export type MedicationOrderState = {
+  name: string,
   type: 'MedicationOrder',
   assign_to_attribute?: string,
   reason?: string,
@@ -114,17 +139,21 @@ export type MedicationOrderState = BaseState & {
       unit: string
     },
     instructions?: Code[]
-  }
+  },
+  transition?: Transition
 }
 
-export type MedicationEndState = BaseState & {
+export type MedicationEndState = {
+  name: string,
   type: 'MedicationEnd',
   medication_order?: string,
   referenced_by_attribute?: string,
-  codes?: Code[]
+  codes?: Code[],
+  transition?: Transition
 }
 
-export type CarePlanStartState = BaseState & {
+export type CarePlanStartState = {
+  name: string,
   type: 'CarePlanStart',
   assign_to_attribute?: string,
   reason?: string,
@@ -138,17 +167,21 @@ export type CarePlanStartState = BaseState & {
     },
     text?: string,
     addresses: string[]
-  }
+  },
+  transition?: Transition
 }
 
-export type CarePlanEndState = BaseState & {
+export type CarePlanEndState = {
+  name: string,
   type: 'CarePlanEnd',
   careplan?: string,
   referenced_by_attribute?: string,
-  codes?: Code[]
+  codes?: Code[],
+  transition?: Transition
 }
 
-export type ProcedureState = BaseState & {
+export type ProcedureState = {
+  name: string,
   type: 'Procedure',
   reason?: string,
   codes: Code[],
@@ -156,10 +189,12 @@ export type ProcedureState = BaseState & {
     low: number,
     high: number,
     unit: string
-  }
+  },
+  transition?: Transition
 }
 
-export type VitalSignState = BaseState & {
+export type VitalSignState = {
+  name: string,
   type: 'VitalSign',
   vital_sign: string,
   unit: string,
@@ -169,10 +204,12 @@ export type VitalSignState = BaseState & {
   range?: {
     low: number,
     high: number
-  }
+  },
+  transition?: Transition
 }
 
-export type ObservationState = BaseState & {
+export type ObservationState = {
+  name: string,
   type: 'Observation',
   category: string,
   unit: string,
@@ -185,23 +222,29 @@ export type ObservationState = BaseState & {
     high: number
   },
   attribute?: string,
-  vital_sign?: string
+  vital_sign?: string,
+  transition?: Transition
 }
 
-export type MultiObservationState = BaseState & {
+export type MultiObservationState = {
+  name: string,
   type: 'MultiObservation',
   category: string,
   number_of_observations: number,
-  codes: Code[]
+  codes: Code[],
+  transition?: Transition
 }
 
-export type DiagnosticReportState = BaseState & {
+export type DiagnosticReportState = {
+  name: string,
   type: 'DiagnosticReport',
   number_of_observations: number,
-  codes: Code[]
+  codes: Code[],
+  transition?: Transition
 }
 
-export type SymptomState = BaseState & {
+export type SymptomState = {
+  name: string,
   type: 'Symptom',
   symptom: string,
   cause: string,
@@ -211,10 +254,12 @@ export type SymptomState = BaseState & {
   range?: {
     low: number,
     high: number
-  }
+  },
+  transition?: Transition
 }
 
-export type DeathState = BaseState & {
+export type DeathState = {
+  name: string,
   type: 'Death',
   exact?: {
     quantity: number,
@@ -227,7 +272,8 @@ export type DeathState = BaseState & {
   },
   codes?: Code[],
   condition_onset?: string,
-  referenced_by_attribute?: string
+  referenced_by_attribute?: string,
+  transition?: Transition
 }
 
 export type State = InitialState | TerminalState | SimpleState | GuardState | DelayState | SetAttributeState | CounterState | CallSubmoduleState | EncounterState | EncounterEndState | ConditionOnsetState | ConditionEndState | AllergyOnsetState | AllergyEndState | MedicationOrderState | MedicationEndState | CarePlanStartState | CarePlanEndState | ProcedureState | VitalSignState | ObservationState | MultiObservationState | DiagnosticReportState | SymptomState | DeathState;
