@@ -32,7 +32,6 @@ export default function generateDOT(module: Module, selectedState: State) {
          '}'
          ].join('\n');
 
-  console.log(output);
   return output;
 
 }
@@ -68,7 +67,7 @@ const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) 
       node['color'] = MUTED_COLOR
     }
 
-    // node['label'] = (name === state['type']) ? state['name'].replace('?','') : `{ ${name.replace('?','')} | ${state['type']} }`
+    // node['label'] = (name === state['type']) ? state['name'].replace('?','') : `{ ${name} | ${state['type']} }`
 
     //TODO: ALMOST DONE WITH DETAILS, BUT SMALL BUG IN RENDERING... maybe from \l?
     let details = stateDescription(state)
@@ -80,7 +79,7 @@ const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) 
 
     let params = Object.keys(node).map((key) => `${key} = "${node[key]}"`).join(", ");
 
-    return `${name.replace('?','')} [${params};]`
+    return `"${name}" [${params};]`
     
   }).join("\n");
 
@@ -111,7 +110,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
         fontcolor = STANDARD_COLOR;
       }
       if(module.states[state.direct_transition]){
-        return `  ${name.replace('?','')} -> ${module.states[state.direct_transition].name.replace('?','')} [color = "${color}", fontcolor= "${fontcolor}"];\n`
+        return `  "${name}" -> "${module.states[state.direct_transition].name}" [color = "${color}", fontcolor= "${fontcolor}"];\n`
       } else {
         console.log(`NO SUCH NODE TO TRANSITION TO: ${state.direct_transition}`);
       }
@@ -138,7 +137,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
             color = STANDARD_COLOR;
             fontcolor = STANDARD_COLOR;
           }
-          out_transitions += `  ${name.replace('?','')} -> ${module.states[t.transition].name.replace('?','')} [label = "${distLabel}", color = "${color}", fontcolor= "${fontcolor}"];\n`
+          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${distLabel}", color = "${color}", fontcolor= "${fontcolor}"];\n`
         } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}`);
         }
@@ -153,7 +152,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
             color = STANDARD_COLOR;
             fontcolor = STANDARD_COLOR;
           }
-          out_transitions += `  ${name.replace('?','')} -> ${module.states[t.transition].name.replace('?','')} [label = "${i}. ${cnd}", color = "${color}", fontcolor= "${fontcolor}"];\n`
+          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${i}. ${cnd}", color = "${color}", fontcolor= "${fontcolor}"];\n`
         } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}\n`);
         }
@@ -167,7 +166,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
         let cnd = t.condition !== undefined ? logicDetails(t['condition']) : 'else'
         if(t.transition !== undefined){
           if(module.states[t.transition]){
-            let nodes = `  ${name.replace('?','')} -> ${t.transition}`
+            let nodes = `  "${name}" -> "${t.transition}"`
             if(selectedState && t.transition === selectedState.name){
               nodeHighlighted[nodes] = 'standard'
             }
@@ -185,7 +184,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
           t.distributions.forEach( dist => {
             if(module.states[dist.transition]){
               let pct = dist.distribution * 100
-              let nodes = `  ${name.replace('?','')} -> ${dist.transition}`
+              let nodes = `  "${name}" -> "${dist.transition}"`
               if(selectedState && dist.transition === selectedState.name){
                 nodeHighlighted[nodes] = 'standard'
               }
@@ -396,7 +395,7 @@ const logicDetails = logic => {
         if(c['condition_type'] === 'and' || c['condition_type'] === 'or'){
           return "(\\l" + logicDetails(c) + ")\\l"
         } else {
-          return this.logicDetails(c)
+          return logicDetails(c)
         }
       })
       return subsWhen.join(logic['condition_type'].toLowerCase() + ' ')
@@ -405,9 +404,9 @@ const logicDetails = logic => {
       let threshold = logic['minimum'] || logic['maximum']
       let subsOr = logic['conditions'].map( c => {
         if(c['condition_type'] === 'and' || c['condition_type'] === 'or'){
-          return "(\\l" + this.logicDetails(c) + ")\\l"
+          return "(\\l" + logicDetails(c) + ")\\l"
         } else {
-          return this.logicDetails(c)
+          return logicDetails(c)
         }
       });
       return `${logic['condition_type']} ${threshold} of:\\l- ${subsOr.join('- ')}`
