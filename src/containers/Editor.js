@@ -42,7 +42,7 @@ class Editor extends Component {
         <div className="App container-fluid">
           <div className="App-body">
             <button className='btn btn-primary' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
-            <ModuleGraph module={this.props.module} onClick={this.props.selectNode}/>
+            <ModuleGraph module={this.props.module} onClick={this.props.selectNode} selectedState={this.props.selectedState}/>
             <div className="App-edit-panel">
               <StateEditor
                 renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
