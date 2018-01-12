@@ -21,13 +21,5 @@
 }
 
 .node {
-  fill: white;
   cursor: pointer;
-}
-
-.node text {
-  font-size: 8px;
-  /*display: none;*/
-  fill: black;
-  text-anchor: middle;
 }
