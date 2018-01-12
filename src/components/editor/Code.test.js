@@ -16,5 +16,5 @@ it('renders without crashing', () => {
 })
 
 it('renders multiple codes without crashing', () => {
-  console.log(renderComponent(Codes, {codes, onChange}));
+  renderComponent(Codes, {codes, onChange});
 })
