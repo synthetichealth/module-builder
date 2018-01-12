@@ -12,14 +12,14 @@ export default (state = initialState, action) => {
     case 'EDIT_NODE':
       let path = action.data.path.join('.');
       let value = Object.values(action.data.update).map((v) => v.id)[0]
-      newState = {...state};
+      newState = [...state];
       _.set(newState, path, value);
-      return {...newState}
+      return [...newState]
     case 'ADD_NODE':
       newState[action.data.currentModuleIndex].states = {...newState[action.data.currentModuleIndex].states, ...{'NEW_STATE': {}}};
       return [...newState]
     case 'RENAME_NODE':
-      newState = {...state};
+      newState = [...state];
       let oldModule = newState[action.data.targetModuleIndex].states[action.data.targetNode.name];
       newState[action.data.targetModuleIndex].states[action.data.newName.name] = oldModule;
       delete newState[action.data.targetModuleIndex].states[action.data.targetNode.name];
