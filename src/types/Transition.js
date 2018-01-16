@@ -1,5 +1,4 @@
 // @flow
-import type { State } from './State';
 import type { Conditional } from './Conditional';
 
 export type DirectTransition = {

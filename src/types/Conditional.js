@@ -21,8 +21,8 @@ export type DateConditional = {
 }
 
 export type SocioeconomicStatusConditional = {
-  "condition_type": "Socioeconomic Status",
-  "category": "Low" | "Middle" | "High"
+  condition_type: "Socioeconomic Status",
+  category: "Low" | "Middle" | "High"
 }
 
 export type RaceConditional = {
