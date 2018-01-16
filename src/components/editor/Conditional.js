@@ -278,6 +278,9 @@ class And extends Component<Props> {
     let conditional = ((this.props.conditional: any): AndConditional);
     return (
       <label> And:
+        {conditional.conditions.map((cond, i) => {
+          return <ConditionalEditor key={i} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+        })}
       </label>
     );
   }
@@ -290,6 +293,9 @@ class Or extends Component<Props> {
     let conditional = ((this.props.conditional: any): OrConditional);
     return (
       <label> Or:
+        {conditional.conditions.map((cond, i) => {
+          return <ConditionalEditor key={i} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+        })}
       </label>
     );
   }
@@ -326,6 +332,7 @@ class Not extends Component<Props> {
     let conditional = ((this.props.conditional: any): NotConditional);
     return (
       <label> Not:
+        <ConditionalEditor conditional={this.condition} onChange={this.props.onChange('conditional')} />
       </label>
     );
   }
