@@ -11,7 +11,11 @@ export default (state = initialState, action) => {
       return [...newState, {name: 'New Module', remarks: 'New Remarks', states: {Initial: {type: 'Initial'}}}]
     case 'EDIT_NODE':
       let path = action.data.path.join('.');
-      let value = Object.values(action.data.update).map((v) => v.id)[0]
+
+      let value = Object.values(action.data.update)[0]
+      if(typeof value === 'object') {
+        value = value.id;
+      }
       newState = [...state];
       _.set(newState, path, value);
       return [...newState]
