@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import { RIEInput } from 'riek';
-
+import { RIESelect, RIEInput, RIENumber } from 'riek';
 
 import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, SymptomState, DeathState } from '../../types/State';
 
+import ConditionalEditor from './Conditional';
 import StringEditor from './String';
 import Transition from './Transition';
 
@@ -131,20 +131,21 @@ class Simple extends Component<Props> {
 
 }
 
-class Guard extends Component<Props> {
+class Guard extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): GuardState);
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <ConditionalEditor conditional={state.allow} onChange={this.props.onChange('allow')} />
       </div>
     );
   }
 
 }
 
-class Delay extends Component<Props> {
+class Delay extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): DelayState);
@@ -157,7 +158,7 @@ class Delay extends Component<Props> {
 
 }
 
-class SetAttribute extends Component<Props> {
+class SetAttribute extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): SetAttributeState);
@@ -171,7 +172,7 @@ class SetAttribute extends Component<Props> {
 
 }
 
-class Counter extends Component<Props> {
+class Counter extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): CounterState);
@@ -184,7 +185,7 @@ class Counter extends Component<Props> {
 
 }
 
-class CallSubmodule extends Component<Props> {
+class CallSubmodule extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): CallSubmoduleState);
@@ -197,7 +198,7 @@ class CallSubmodule extends Component<Props> {
 
 }
 
-class Encounter extends Component<Props> {
+class Encounter extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): EncounterState);
@@ -210,7 +211,7 @@ class Encounter extends Component<Props> {
 
 }
 
-class EncounterEnd extends Component<Props> {
+class EncounterEnd extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): EncounterEndState);
@@ -223,7 +224,7 @@ class EncounterEnd extends Component<Props> {
 
 }
 
-class ConditionOnset extends Component<Props> {
+class ConditionOnset extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): ConditionOnsetState);
@@ -236,7 +237,7 @@ class ConditionOnset extends Component<Props> {
 
 }
 
-class ConditionEnd extends Component<Props> {
+class ConditionEnd extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): ConditionEndState);
@@ -249,7 +250,7 @@ class ConditionEnd extends Component<Props> {
 
 }
 
-class AllergyOnset extends Component<Props> {
+class AllergyOnset extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): AllergyOnsetState);
@@ -262,7 +263,7 @@ class AllergyOnset extends Component<Props> {
 
 }
 
-class AllergyEnd extends Component<Props> {
+class AllergyEnd extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): AllergyEndState);
@@ -275,7 +276,7 @@ class AllergyEnd extends Component<Props> {
 
 }
 
-class MedicationOrder extends Component<Props> {
+class MedicationOrder extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): MedicationOrderState);
@@ -288,7 +289,7 @@ class MedicationOrder extends Component<Props> {
 
 }
 
-class MedicationEnd extends Component<Props> {
+class MedicationEnd extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): MedicationEndState);
@@ -301,7 +302,7 @@ class MedicationEnd extends Component<Props> {
 
 }
 
-class CarePlanStart extends Component<Props> {
+class CarePlanStart extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): CarePlanStartState);
@@ -314,7 +315,7 @@ class CarePlanStart extends Component<Props> {
 
 }
 
-class CarePlanEnd extends Component<Props> {
+class CarePlanEnd extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): CarePlanEndState);
@@ -327,7 +328,7 @@ class CarePlanEnd extends Component<Props> {
 
 }
 
-class Procedure extends Component<Props> {
+class Procedure extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): ProcedureState);
@@ -340,7 +341,7 @@ class Procedure extends Component<Props> {
 
 }
 
-class VitalSign extends Component<Props> {
+class VitalSign extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): VitalSignState);
@@ -353,7 +354,7 @@ class VitalSign extends Component<Props> {
 
 }
 
-class Observation extends Component<Props> {
+class Observation extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): ObservationState);
@@ -366,7 +367,7 @@ class Observation extends Component<Props> {
 
 }
 
-class MultiObservation extends Component<Props> {
+class MultiObservation extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): MultiObservationState);
@@ -379,7 +380,7 @@ class MultiObservation extends Component<Props> {
 
 }
 
-class DiagnosticReport extends Component<Props> {
+class DiagnosticReport extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): DiagnosticReportState);
@@ -392,7 +393,7 @@ class DiagnosticReport extends Component<Props> {
 
 }
 
-class Symptom extends Component<Props> {
+class Symptom extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): SymptomState);
@@ -405,7 +406,7 @@ class Symptom extends Component<Props> {
 
 }
 
-class Death extends Component<Props> {
+class Death extends Component<Props> { // TODO
 
   render() {
     let state = ((this.props.state: any): DeathState);
