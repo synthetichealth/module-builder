@@ -81,6 +81,11 @@ class StateEditor extends Component<Props> {
     return (
         <div>
           {this.renderStateType()}
+          <br />
+          <Transition
+            options={this.props.otherStates}
+            transition={this.props.state.transition}
+            onChange={this.props.onChange(`states.${this.props.state.name}`)} />
         </div>
     )
   }
@@ -94,11 +99,6 @@ class Initial extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -112,11 +112,6 @@ class Terminal extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -130,11 +125,6 @@ class Simple extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -148,11 +138,6 @@ class Guard extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -166,11 +151,6 @@ class Delay extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -185,10 +165,6 @@ class SetAttribute extends Component<Props> {
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
         <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -202,11 +178,6 @@ class Counter extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -220,11 +191,6 @@ class CallSubmodule extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -238,11 +204,6 @@ class Encounter extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -256,11 +217,6 @@ class EncounterEnd extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -274,11 +230,6 @@ class ConditionOnset extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -292,11 +243,6 @@ class ConditionEnd extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -310,11 +256,6 @@ class AllergyOnset extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -328,11 +269,6 @@ class AllergyEnd extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -346,11 +282,6 @@ class MedicationOrder extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -364,11 +295,6 @@ class MedicationEnd extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -382,11 +308,6 @@ class CarePlanStart extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -400,11 +321,6 @@ class CarePlanEnd extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -418,11 +334,6 @@ class Procedure extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -436,11 +347,6 @@ class VitalSign extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -454,11 +360,6 @@ class Observation extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -472,11 +373,6 @@ class MultiObservation extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -490,11 +386,6 @@ class DiagnosticReport extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -508,11 +399,6 @@ class Symptom extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
@@ -526,11 +412,6 @@ class Death extends Component<Props> {
     return (
       <div>
         <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        <Transition
-          options={this.props.otherStates}
-          transition={this.props.state.transition}
-          onChange={this.props.onChange(`states.${state.name}`)} />
       </div>
     );
   }
