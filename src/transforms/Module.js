@@ -24,7 +24,7 @@ export function extractState(name: string, state: any): State {
   let transition = extractTransition(state);
   let id = uuid.create().toString();
   let type = state.type;
-  return {name, transition, id, type};
+  return {name, transition, id, type, ...state};
 }
 
 export function extractTransition(state: any): ?Transition {

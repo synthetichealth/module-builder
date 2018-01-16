@@ -18,57 +18,59 @@ type Props = {
 class StateEditor extends Component<Props> {
 
   renderStateType() {
+    let props = {...this.props};
+    props.onChange = this.props.onChange(`states.${this.props.state.name}`);
     switch (this.props.state.type) {
       case "Initial":
-        return <Initial {...this.props} />
+        return <Initial {...props} />
       case "Terminal":
-        return <Terminal {...this.props} />
+        return <Terminal {...props} />
       case "Simple":
-        return <Simple {...this.props} />
+        return <Simple {...props} />
       case "Guard":
-        return <Guard {...this.props} />
+        return <Guard {...props} />
       case "Delay":
-        return <Delay {...this.props} />
+        return <Delay {...props} />
       case "SetAttribute":
-        return <SetAttribute {...this.props} />
+        return <SetAttribute {...props} />
       case "Counter":
-        return <Counter {...this.props} />
+        return <Counter {...props} />
       case "CallSubmodule":
-        return <CallSubmodule {...this.props} />
+        return <CallSubmodule {...props} />
       case "Encounter":
-        return <Encounter {...this.props} />
+        return <Encounter {...props} />
       case "EncounterEnd":
-        return <EncounterEnd {...this.props} />
+        return <EncounterEnd {...props} />
       case "ConditionOnset":
-        return <ConditionOnset {...this.props} />
+        return <ConditionOnset {...props} />
       case "ConditionEnd":
-        return <ConditionEnd {...this.props} />
+        return <ConditionEnd {...props} />
       case "AllergyOnset":
-        return <AllergyOnset {...this.props} />
+        return <AllergyOnset {...props} />
       case "AllergyEnd":
-        return <AllergyEnd {...this.props} />
+        return <AllergyEnd {...props} />
       case "MedicationOrder":
-        return <MedicationOrder {...this.props} />
+        return <MedicationOrder {...props} />
       case "MedicationEnd":
-        return <MedicationEnd {...this.props} />
+        return <MedicationEnd {...props} />
       case "CarePlanStart":
-        return <CarePlanStart {...this.props} />
+        return <CarePlanStart {...props} />
       case "CarePlanEnd":
-        return <CarePlanEnd {...this.props} />
+        return <CarePlanEnd {...props} />
       case "Procedure":
-        return <Procedure {...this.props} />
+        return <Procedure {...props} />
       case "VitalSign":
-        return <VitalSign {...this.props} />
+        return <VitalSign {...props} />
       case "Observation":
-        return <Observation {...this.props} />
+        return <Observation {...props} />
       case "MultiObservation":
-        return <MultiObservation {...this.props} />
+        return <MultiObservation {...props} />
       case "DiagnosticReport":
-        return <DiagnosticReport {...this.props} />
+        return <DiagnosticReport {...props} />
       case "Symptom":
-        return <Symptom {...this.props} />
+        return <Symptom {...props} />
       case "Death":
-        return <Death {...this.props} />
+        return <Death {...props} />
       default:
         return this.props.state.type
     }
