@@ -15,11 +15,13 @@ export class Code extends Component<Props> {
     let code = this.props.code;
     let codeTypeOptions = ["SNOMED-CT", "RxNorm", "LOINC"].map((c) => {return {id: c, text: c}});
     return (
-      <label> Code:
-      <RIESelect value={{id: code.system, text: code.system}} propName="system" change={this.props.onChange('system')} options={codeTypeOptions} />
-      <RIEInput value={code.display} propName="display" change={this.props.onChange('display')} />
-      (<RIEInput value={code.code} propName="code" change={this.props.onChange('code')} />)
-      </label>
+      <div>
+        System: <RIESelect value={{id: code.system, text: code.system}} propName="system" change={this.props.onChange('system')} options={codeTypeOptions} />
+        <br />
+        Display: <RIEInput value={code.display} propName="display" change={this.props.onChange('display')} />
+        <br />
+        Code: <RIEInput value={code.code} propName="code" change={this.props.onChange('code')} />
+      </div>
     );
   }
 
