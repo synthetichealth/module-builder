@@ -37,13 +37,20 @@ class Information extends Component<Props> {
   }
 
   render() {
+    let remarks = "No remarks." 
+    if(Array.isArray(this.props.module.remarks)){ 
+      remarks = this.props.module.remarks.join(" ");
+    }
+
+    // NOTE: WHAT IF REMARKS SET TO BLANK?
+
     return (
       <div className='Information-container'>
         <div className='Information-name'>
           <RIEInput value={this.props.module.name} propName="name" change={(newval) => this.onNameChange(newval.name)} />
         </div>
         <div className='Information-remarks'>
-          <RIETextArea value={this.props.module.remarks.join()} propName="remarks" change={(newval) => this.onRemarksChange(newval.remarks)} />
+          <RIETextArea value={remarks} propName="remarks" change={(newval) => this.onRemarksChange(newval.remarks)} />
         </div>
         <div className='Information-header'>States</div>
         <div className='Information-states'>
