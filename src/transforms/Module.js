@@ -73,3 +73,18 @@ export function extractRemarks(data: any):string[] {
 export function extractName(data: any): string {
   return (data.name: string);
 }
+
+export function extractAttributes(module: Module): string[] {
+  let attributes = Object.keys(module.states).filter((key) => {
+    return module.states[key].type === 'SetAttribute' || module.states[key].type === 'Counter';
+  }).map(key => (module.states[key].attribute))
+  let fount = false
+
+  attributes = attributes.concat(Object.keys(module.states).filter((key) => {
+    return !!module.states[key].assign_to_attribute
+  }).map(key => (module.states[key].assign_to_attribute)))
+  
+
+  return [... new Set(attributes)]
+
+}

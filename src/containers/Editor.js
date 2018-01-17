@@ -6,10 +6,11 @@ import StateEditor from '../components/editor/State';
 import ModuleGraph from '../components/graph/Module';
 import Menu from '../components/graph/Menu';
 import LoadModule from '../components/graph/LoadModule';
+import Information from '../components/graph/Information';
 import Code from '../components/graph/Code';
-import { extractStates } from '../transforms/Module';
+import { extractStates, extractAttributes } from '../transforms/Module';
 
-import {selectNode, addNode, editNode, renameNode, newModule, showLoadModule, hideLoadModule, selectModule, showCode, hideCode} from '../actions/editor';
+import {selectNode, addNode, editNode, renameNode, newModule, showLoadModule, hideLoadModule, selectModule, showCode, hideCode, editModuleName, editModuleRemarks} from '../actions/editor';
 
 class Editor extends Component {
 
@@ -35,9 +36,28 @@ class Editor extends Component {
   render() {
     return (
       <div>
-        <Menu onNewModuleClick={this.props.newModule} moduleCount={this.props.moduleCount} onLoadModuleClick={this.props.showLoadModule} onShowCodeClick={this.props.showCode}/>
-        <LoadModule modules={this.props.modules} visible={this.props.loadModuleVisible} onHide={this.props.hideLoadModule} onSelectModule={this.props.selectModule}/>
-        <Code module={this.props.module} visible={this.props.codeVisible} onHide={this.props.hideCode}/>
+
+        <Menu onNewModuleClick={this.props.newModule} 
+          moduleCount={this.props.moduleCount} 
+          onLoadModuleClick={this.props.showLoadModule} 
+          onShowCodeClick={this.props.showCode}/>
+
+        <LoadModule modules={this.props.modules} 
+          visible={this.props.loadModuleVisible} 
+          onHide={this.props.hideLoadModule} 
+          onSelectModule={this.props.selectModule}/>
+
+        <Code module={this.props.module} 
+          visible={this.props.codeVisible} 
+          onHide={this.props.hideCode}/>
+
+        <Information 
+          module={this.props.module} 
+          onStateClick={this.props.selectNode} 
+          selectedState={this.props.selectedState} 
+          attributes={this.props.attributes} 
+          onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleIndex, name)}
+          onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleIndex, remarks)}/>
 
         <div className="App container-fluid">
           <div className="App-body">
@@ -69,7 +89,8 @@ const mapStateToProps = state => {
     selectedModuleIndex: state.editor.currentModuleIndex,
     moduleCount: state.modules.length,
     loadModuleVisible: state.editor.loadModuleVisible,
-    codeVisible: state.editor.codeVisible
+    codeVisible: state.editor.codeVisible,
+    attributes: extractAttributes(selectedModule)
   }
 }
 
@@ -83,7 +104,10 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   hideLoadModule,
   selectModule,
   showCode,
-  hideCode
+  hideCode,
+  editModuleName,
+  editModuleRemarks
+  
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);

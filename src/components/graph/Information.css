@@ -1,0 +1,57 @@
+.Information-container {
+  position:absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 400px;
+  z-index: 100;
+  background-color: #dadada;
+  padding: 60px 10px;
+}
+
+.Information-container input {
+  width: 100%;
+}
+
+.Information-container textarea {
+  width: 100%;
+  height: 200px;
+}
+
+.Information-container ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+.Information-container li {
+  padding: 0px;
+  list-style: none;
+}
+
+.Information-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1.2em;
+}
+
+.Information-header {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.Information-states {
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.Information-states ul {
+  cursor: pointer;
+}
+
+.Information-states li:hover {
+  background-color: #ccc
+}
+
+.Information-states li.selected {
+  background-color: #bbb
+}

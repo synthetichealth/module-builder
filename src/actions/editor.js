@@ -70,3 +70,23 @@ export const hideCode = () => {
     type: 'HIDE_CODE',
   })
 }
+
+export const editModuleName = (targetModuleIndex, newName) => {
+  return ({
+    type: 'EDIT_MODULE_NAME',
+    data: { 
+      newName, 
+      targetModuleIndex
+    }
+  })
+}
+
+export const editModuleRemarks = (targetModuleIndex, newRemarks) => {
+  return ({
+    type: 'EDIT_MODULE_REMARKS',
+    data: { 
+      newRemarks, 
+      targetModuleIndex
+    }
+  })
+}

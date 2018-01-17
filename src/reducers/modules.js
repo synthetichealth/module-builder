@@ -28,6 +28,14 @@ export default (state = initialState, action) => {
       newState[action.data.targetModuleIndex].states[action.data.newName.name] = oldModule;
       delete newState[action.data.targetModuleIndex].states[action.data.targetNode.name];
       return newState;
+    case 'EDIT_MODULE_NAME':
+      newState = [...state];
+      newState[action.data.targetModuleIndex].name = action.data.newName;
+      return newState;
+    case 'EDIT_MODULE_REMARKS':
+      newState = [...state];
+      newState[action.data.targetModuleIndex].remarks = [action.data.newRemarks]; // Need to split into rows for readability
+      return newState;
     default:
       return state;
   }
