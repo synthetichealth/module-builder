@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber } from 'riek';
+import { RIESelect, RIEInput, RIENumber, RIEToggle } from 'riek';
 
 import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, SymptomState, DeathState } from '../../types/State';
 
+import { Code, Codes } from './Code';
 import ConditionalEditor from './Conditional';
 import StringEditor from './String';
 import Transition from './Transition';
@@ -100,7 +101,7 @@ class Initial extends Component<Props> {
     let state = ((this.props.state: any): InitialState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -113,7 +114,7 @@ class Terminal extends Component<Props> {
     let state = ((this.props.state: any): TerminalState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -126,20 +127,21 @@ class Simple extends Component<Props> {
     let state = ((this.props.state: any): SimpleState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
 
 }
 
-class Guard extends Component<Props> { // TODO
+class Guard extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): GuardState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br />
         <ConditionalEditor conditional={state.allow} onChange={this.props.onChange('allow')} />
       </div>
     );
@@ -147,14 +149,50 @@ class Guard extends Component<Props> { // TODO
 
 }
 
-class Delay extends Component<Props> { // TODO
+class Delay extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): DelayState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br />
+        {this.renderExact()}
+        <br />
+        {this.renderRange()}
       </div>
+    );
+  }
+
+  renderExact() {
+    let state = ((this.props.state: any): DelayState);
+    if (!state.exact) {
+      return null;
+    }
+    return (
+      <label>
+        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('quantity')} />
+        <br />
+        Exact Unit: <RIEInput value={state.exact.unit} propName='unit' change={this.props.onChange('unit')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderRange() {
+    let state = ((this.props.state: any): DelayState);
+    if (!state.range) {
+      return null;
+    }
+    return (
+      <label>
+        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('low')} />
+        <br />
+        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('high')} />
+        <br />
+        Range Unit: <RIEInput value={state.range.unit} propName='unit' change={this.props.onChange('unit')} />
+        <br />
+      </label>
     );
   }
 
@@ -166,8 +204,7 @@ class SetAttribute extends Component<Props> { // TODO
     let state = ((this.props.state: any): SetAttributeState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -180,7 +217,7 @@ class Counter extends Component<Props> { // TODO
     let state = ((this.props.state: any): CounterState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -193,47 +230,117 @@ class CallSubmodule extends Component<Props> { // TODO
     let state = ((this.props.state: any): CallSubmoduleState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
 
 }
 
-class Encounter extends Component<Props> { // TODO
+class Encounter extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): EncounterState);
+    let options = [
+      {id: 'emergency', text: 'emergency'},
+      {id: 'inpatient', text: 'inpatient'},
+      {id: 'ambulatory', text: 'ambulatory'}
+    ];
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br />
+        {this.renderWellness()}
+        Encounter Class: <RIESelect value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
+        <br />
+        {this.renderReason()}
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
       </div>
+    );
+  }
+
+  renderWellness() {
+    let state = ((this.props.state: any): EncounterState);
+    if (!state.wellness) {
+      return null;
+    }
+    return (
+      <label>
+        Wellness: <RIEToggle value={state.wellness} propName={'wellness'}  change={this.props.onChange('wellness')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderReason() {
+    let state = ((this.props.state: any): EncounterState);
+    if (!state.reason) {
+      return null;
+    }
+    return (
+      <label>
+        Reason: <RIEInput value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        <br />
+      </label>
     );
   }
 
 }
 
-class EncounterEnd extends Component<Props> { // TODO
+class EncounterEnd extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): EncounterEndState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br />
+        {this.renderDischargeDisposition()}
       </div>
+    );
+  }
+
+  renderDischargeDisposition() {
+    let state = ((this.props.state: any): EncounterEndState);
+    if (!state.discharge_disposition) {
+      return null;
+    }
+    return (
+      <label>
+        <Code code={state.discharge_disposition} onChange={this.props.onChange('discharge_disposition')} />
+        <br />
+      </label>
     );
   }
 
 }
 
-class ConditionOnset extends Component<Props> { // TODO
+class ConditionOnset extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): ConditionOnsetState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br />
+        Target Encounter: <RIEInput value={state.target_encounter} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
+        <br />
+        {this.renderAssignToAttribute()}
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
       </div>
+    );
+  }
+
+  renderAssignToAttribute() {
+    let state = ((this.props.state: any): ConditionOnsetState);
+    if (!state.assign_to_attribute) {
+      return null;
+    }
+    return (
+      <label>
+        Assign to Attribute: <RIEInput value={state.assign_to_attribute} propName={'assign_to_attribute'} change={this.props.onChange('assign_to_attribute')} />
+        <br />
+      </label>
     );
   }
 
@@ -245,7 +352,7 @@ class ConditionEnd extends Component<Props> { // TODO
     let state = ((this.props.state: any): ConditionEndState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -258,7 +365,7 @@ class AllergyOnset extends Component<Props> { // TODO
     let state = ((this.props.state: any): AllergyOnsetState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -271,21 +378,142 @@ class AllergyEnd extends Component<Props> { // TODO
     let state = ((this.props.state: any): AllergyEndState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
 
 }
 
-class MedicationOrder extends Component<Props> { // TODO
+class MedicationOrder extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): MedicationOrderState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br />
+        {this.renderAssignToAttribute()}
+        {this.renderReason()}
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br />
+        {this.renderPrescription()}
       </div>
+    );
+  }
+
+  renderAssignToAttribute() {
+    let state = ((this.props.state: any): ConditionOnsetState);
+    if (!state.assign_to_attribute) {
+      return null;
+    }
+    return (
+      <label>
+        Assign to Attribute: <RIEInput value={state.assign_to_attribute} propName={'assign_to_attribute'} change={this.props.onChange('assign_to_attribute')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderReason() {
+    let state = ((this.props.state: any): MedicationOrderState);
+    if (!state.reason) {
+      return null;
+    }
+    return (
+      <label>
+        Reason: <RIEInput value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderPrescription() {
+    let state = ((this.props.state: any): MedicationOrderState);
+    if (!state.prescription) {
+      return null;
+    }
+    return (
+      <label>
+        {this.renderRefills()}
+        {this.renderAsNeeded()}
+        {this.renderDosage()}
+        {this.renderDuration()}
+        {this.renderInstructions()}
+      </label>
+    );
+  }
+
+  renderRefills() {
+    let state = ((this.props.state: any): MedicationOrderState);
+    if (!state.prescription.refills) {
+      return null;
+    }
+    return (
+      <label>
+        Prescription Refills: <RIENumber value={state.prescription.refills} propName={'refills'}  change={this.props.onChange('refills')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderAsNeeded() {
+    let state = ((this.props.state: any): MedicationOrderState);
+    if (!state.prescription.as_needed) {
+      return null;
+    }
+    return (
+      <label>
+        Prescription As Needed: <RIEToggle value={state.prescription.as_needed} propName={'as_needed'}  change={this.props.onChange('as_needed')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderDosage() {
+    let state = ((this.props.state: any): MedicationOrderState);
+    if (!state.prescription.dosage) {
+      return null;
+    }
+    return (
+      <label>
+        Dosage Amount: <RIENumber value={state.prescription.dosage.amount} propName={'amount'}  change={this.props.onChange('amount')} />
+        <br />
+        Dosage Frequency: <RIENumber value={state.prescription.dosage.frequency} propName={'frequency'}  change={this.props.onChange('frequency')} />
+        <br />
+        Dosage Period: <RIENumber value={state.prescription.dosage.period} propName={'period'}  change={this.props.onChange('period')} />
+        <br />
+        Dosage Unit: <RIEInput value={state.prescription.dosage.unit} propName={'unit'}  change={this.props.onChange('unit')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderDuration() {
+    let state = ((this.props.state: any): MedicationOrderState);
+    if (!state.prescription.duration) {
+      return null;
+    }
+    return (
+      <label>
+        Duration Quantity: <RIENumber value={state.prescription.duration.quantity} propName={'quantity'}  change={this.props.onChange('quantity')} />
+        <br />
+        Duration Unit: <RIEInput value={state.prescription.duration.unit} propName={'unit'}  change={this.props.onChange('unit')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderInstructions() {
+    let state = ((this.props.state: any): MedicationOrderState);
+    if (!state.prescription.instructions) {
+      return null;
+    }
+    return (
+      <label>
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br />
+      </label>
     );
   }
 
@@ -297,7 +525,7 @@ class MedicationEnd extends Component<Props> { // TODO
     let state = ((this.props.state: any): MedicationEndState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -310,7 +538,7 @@ class CarePlanStart extends Component<Props> { // TODO
     let state = ((this.props.state: any): CarePlanStartState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -323,21 +551,56 @@ class CarePlanEnd extends Component<Props> { // TODO
     let state = ((this.props.state: any): CarePlanEndState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
 
 }
 
-class Procedure extends Component<Props> { // TODO
+class Procedure extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): ProcedureState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br />
+        {this.renderReason()}
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br />
+        {this.renderDuration()}
       </div>
+    );
+  }
+
+  renderReason() {
+    let state = ((this.props.state: any): ProcedureState);
+    if (!state.reason) {
+      return null;
+    }
+    return (
+      <label>
+        Reason: <RIEInput value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderDuration() {
+    let state = ((this.props.state: any): ProcedureState);
+    if (!state.duration) {
+      return null;
+    }
+    return (
+      <label>
+        Duration Low: <RIENumber value={state.duration.low} propName={'low'}  change={this.props.onChange('low')} />
+        <br />
+        Duration High: <RIENumber value={state.duration.high} propName={'high'}  change={this.props.onChange('high')} />
+        <br />
+        Duration Unit: <RIEInput value={state.duration.unit} propName={'unit'}  change={this.props.onChange('unit')} />
+        <br />
+      </label>
     );
   }
 
@@ -349,7 +612,7 @@ class VitalSign extends Component<Props> { // TODO
     let state = ((this.props.state: any): VitalSignState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -362,7 +625,7 @@ class Observation extends Component<Props> { // TODO
     let state = ((this.props.state: any): ObservationState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -375,7 +638,7 @@ class MultiObservation extends Component<Props> { // TODO
     let state = ((this.props.state: any): MultiObservationState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -388,7 +651,7 @@ class DiagnosticReport extends Component<Props> { // TODO
     let state = ((this.props.state: any): DiagnosticReportState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
@@ -401,21 +664,98 @@ class Symptom extends Component<Props> { // TODO
     let state = ((this.props.state: any): SymptomState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
       </div>
     );
   }
 
 }
 
-class Death extends Component<Props> { // TODO
+class Death extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): DeathState);
     return (
       <div>
-        <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br />
+        {this.renderExact()}
+        {this.renderRange()}
+        {this.renderCodes()}
+        {this.renderConditionOnset()}
+        {this.renderReferencedByAttribute()}
       </div>
+    );
+  }
+
+  renderExact() {
+    let state = ((this.props.state: any): DeathState);
+    if (!state.exact) {
+      return null;
+    }
+    return (
+      <label>
+        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('quantity')} />
+        <br />
+        Exact Unit: <RIEInput value={state.exact.unit} propName='unit' change={this.props.onChange('unit')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderRange() {
+    let state = ((this.props.state: any): DeathState);
+    if (!state.range) {
+      return null;
+    }
+    return (
+      <label>
+        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('low')} />
+        <br />
+        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('high')} />
+        <br />
+        Range Unit: <RIEInput value={state.range.unit} propName='unit' change={this.props.onChange('unit')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderCodes() {
+    let state = ((this.props.state: any): DeathState);
+    if (!state.codes) {
+      return null;
+    }
+    return (
+      <label>
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderConditionOnset() {
+    let state = ((this.props.state: any): DeathState);
+    if (!state.condition_onset) {
+      return null;
+    }
+    return (
+      <label>
+        Condition Onset: <RIEInput value={state.condition_onset} propName={'condition_onset'} change={this.props.onChange('condition_onset')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderReferencedByAttribute() {
+    let state = ((this.props.state: any): DeathState);
+    if (!state.referenced_by_attribute) {
+      return null;
+    }
+    return (
+      <label>
+        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        <br />
+      </label>
     );
   }
 
