@@ -451,7 +451,7 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        Prescription Refills: <RIENumber value={state.prescription.refills} propName={'refills'}  change={this.props.onChange('refills')} />
+        Prescription Refills: <RIENumber value={state.prescription.refills} propName={'refills'}  change={this.props.onChange('prescription.refills')} />
         <br />
       </label>
     );
@@ -464,7 +464,7 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        Prescription As Needed: <RIEToggle value={state.prescription.as_needed} propName={'as_needed'}  change={this.props.onChange('as_needed')} />
+        Prescription As Needed: <RIEToggle value={state.prescription.as_needed} propName={'as_needed'}  change={this.props.onChange('prescription.as_needed')} />
         <br />
       </label>
     );
@@ -477,13 +477,13 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        Dosage Amount: <RIENumber value={state.prescription.dosage.amount} propName={'amount'}  change={this.props.onChange('amount')} />
+        Dosage Amount: <RIENumber value={state.prescription.dosage.amount} propName={'amount'}  change={this.props.onChange('prescription.dosage.amount')} />
         <br />
-        Dosage Frequency: <RIENumber value={state.prescription.dosage.frequency} propName={'frequency'}  change={this.props.onChange('frequency')} />
+        Dosage Frequency: <RIENumber value={state.prescription.dosage.frequency} propName={'frequency'}  change={this.props.onChange('prescription.dosage.frequency')} />
         <br />
-        Dosage Period: <RIENumber value={state.prescription.dosage.period} propName={'period'}  change={this.props.onChange('period')} />
+        Dosage Period: <RIENumber value={state.prescription.dosage.period} propName={'period'}  change={this.props.onChange('prescription.dosage.period')} />
         <br />
-        Dosage Unit: <RIEInput value={state.prescription.dosage.unit} propName={'unit'}  change={this.props.onChange('unit')} />
+        Dosage Unit: <RIEInput value={state.prescription.dosage.unit} propName={'unit'}  change={this.props.onChange('prescription.dosage.unit')} />
         <br />
       </label>
     );
@@ -496,9 +496,9 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        Duration Quantity: <RIENumber value={state.prescription.duration.quantity} propName={'quantity'}  change={this.props.onChange('quantity')} />
+        Duration Quantity: <RIENumber value={state.prescription.duration.quantity} propName={'quantity'}  change={this.props.onChange('prescription.duration.quantity')} />
         <br />
-        Duration Unit: <RIEInput value={state.prescription.duration.unit} propName={'unit'}  change={this.props.onChange('unit')} />
+        Duration Unit: <RIEInput value={state.prescription.duration.unit} propName={'unit'}  change={this.props.onChange('prescription.duration.unit')} />
         <br />
       </label>
     );
@@ -511,7 +511,7 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.prescription.instructions} onChange={this.props.onChange('prescription.instructions')} />
         <br />
       </label>
     );
@@ -594,11 +594,11 @@ class Procedure extends Component<Props> {
     }
     return (
       <label>
-        Duration Low: <RIENumber value={state.duration.low} propName={'low'}  change={this.props.onChange('low')} />
+        Duration Low: <RIENumber value={state.duration.low} propName={'low'}  change={this.props.onChange('duration.low')} />
         <br />
-        Duration High: <RIENumber value={state.duration.high} propName={'high'}  change={this.props.onChange('high')} />
+        Duration High: <RIENumber value={state.duration.high} propName={'high'}  change={this.props.onChange('duration.high')} />
         <br />
-        Duration Unit: <RIEInput value={state.duration.unit} propName={'unit'}  change={this.props.onChange('unit')} />
+        Duration Unit: <RIEInput value={state.duration.unit} propName={'unit'}  change={this.props.onChange('duration.unit')} />
         <br />
       </label>
     );
@@ -695,9 +695,9 @@ class Death extends Component<Props> {
     }
     return (
       <label>
-        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('quantity')} />
+        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
         <br />
-        Exact Unit: <RIEInput value={state.exact.unit} propName='unit' change={this.props.onChange('unit')} />
+        Exact Unit: <RIEInput value={state.exact.unit} propName='unit' change={this.props.onChange('exact.unit')} />
         <br />
       </label>
     );
@@ -710,11 +710,11 @@ class Death extends Component<Props> {
     }
     return (
       <label>
-        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('low')} />
+        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
         <br />
-        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('high')} />
+        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
         <br />
-        Range Unit: <RIEInput value={state.range.unit} propName='unit' change={this.props.onChange('unit')} />
+        Range Unit: <RIEInput value={state.range.unit} propName='unit' change={this.props.onChange('range.unit')} />
         <br />
       </label>
     );
