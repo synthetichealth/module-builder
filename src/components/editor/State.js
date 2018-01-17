@@ -171,9 +171,9 @@ class Delay extends Component<Props> {
     }
     return (
       <label>
-        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('quantity')} />
+        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
         <br />
-        Exact Unit: <RIEInput value={state.exact.unit} propName='unit' change={this.props.onChange('unit')} />
+        Exact Unit: <RIEInput value={state.exact.unit} propName='unit' change={this.props.onChange('exact.unit')} />
         <br />
       </label>
     );
@@ -186,11 +186,11 @@ class Delay extends Component<Props> {
     }
     return (
       <label>
-        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('low')} />
+        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
         <br />
-        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('high')} />
+        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
         <br />
-        Range Unit: <RIEInput value={state.range.unit} propName='unit' change={this.props.onChange('unit')} />
+        Range Unit: <RIEInput value={state.range.unit} propName='unit' change={this.props.onChange('range.unit')} />
         <br />
       </label>
     );
