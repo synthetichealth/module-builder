@@ -9,7 +9,7 @@ import LoadModule from '../components/graph/LoadModule';
 import Code from '../components/graph/Code';
 import { extractStates } from '../transforms/Module';
 
-import {selectNode, addNode, editNode, renameNode, newModule, showLoadModule, hideLoadModule, selectModule, showCode, hideCode} from '../actions/editor';
+import {selectNode, addNode, editNode, renameNode, newModule, showLoadModule, hideLoadModule, selectModule, showCode, hideCode, changeStateType} from '../actions/editor';
 
 class Editor extends Component {
 
@@ -29,7 +29,12 @@ class Editor extends Component {
     return (newName) => {
         this.props.renameNode(targetModuleIndex, targetNode, newName);
     }
+  }
 
+  changeStateType = (targetModuleIndex, targetNode) => {
+    return (newType) => {
+      this.props.changeStateType(targetModuleIndex, targetNode, newType);
+    }
   }
 
   render() {
@@ -46,6 +51,7 @@ class Editor extends Component {
             <div className="App-edit-panel">
               <StateEditor
                 renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
+                changeType={this.changeStateType(this.props.selectedModuleIndex, this.props.selectedState)}
                 state={this.props.selectedState}
                 otherStates={this.props.states}
                 onChange={this.onChange(this.props.selectedModuleIndex)} />
@@ -78,6 +84,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addNode,
   editNode,
   renameNode,
+  changeStateType,
   newModule,
   showLoadModule,
   hideLoadModule,

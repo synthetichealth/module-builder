@@ -70,3 +70,15 @@ export const hideCode = () => {
     type: 'HIDE_CODE',
   })
 }
+
+
+export const changeStateType = (targetModuleIndex, targetNode, newType) => {
+  return ({
+    type: 'CHANGE_STATE_TYPE',
+    data:{
+      targetModuleIndex,
+      targetNode,
+      newType
+    }
+  })
+}

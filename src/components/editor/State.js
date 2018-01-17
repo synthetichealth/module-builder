@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber, RIEToggle } from 'riek';
+import { RIESelect, RIEInput, RIENumber, RIEToggle, RIESelect } from 'riek';
 
 import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, SymptomState, DeathState } from '../../types/State';
 
@@ -13,7 +13,8 @@ type Props = {
   state: State,
   otherStates: State[],
   onChange: any,
-  renameNode: any
+  renameNode: any,
+  changeType: any
 }
 
 class StateEditor extends Component<Props> {
@@ -81,8 +82,38 @@ class StateEditor extends Component<Props> {
     if(!this.props.state) {
       return null;
     }
+
+    let typeOptions = [
+      {id: 'Initial', text: 'Initial'},
+      {id: 'Terminal', text: 'Terminal'},
+      {id: 'Simple', text: 'Simple'},
+      {id: 'Guard', text: 'Guard'},
+      {id: 'Delay', text: 'Delay'},
+      {id: 'SetAttribute', text: 'SetAttribute'},
+      {id: 'Counter', text: 'Counter'},
+      {id: 'CallSubmodule', text: 'CallSubmodule'},
+      {id: 'Encounter', text: 'Encounter'},
+      {id: 'EncounterEnd', text: 'EncounterEnd'},
+      {id: 'ConditionOnset', text: 'ConditionOnset'},
+      {id: 'ConditionEnd', text: 'ConditionEnd'},
+      {id: 'AllergyOnset', text: 'AllergyOnset'},
+      {id: 'AllergyEnd', text: 'AllergyEnd'},
+      {id: 'MedicationOrder', text: 'MedicationOrder'},
+      {id: 'MedicationEnd', text: 'MedicationEnd'},
+      {id: 'CarePlanStart', text: 'CarePlanStart'},
+      {id: 'CarePlanEnd', text: 'CarePlanEnd'},
+      {id: 'Procedure', text: 'Procedure'},
+      {id: 'VitalSign', text: 'VitalSign'},
+      {id: 'Observation', text: 'Observation'},
+      {id: 'MultiObservation', text: 'MultiObservation'},
+      {id: 'DiagnosticReport', text: 'DiagnosticReport'},
+      {id: 'Symptom', text: 'Symptom'},
+      {id: 'Death', text: 'Death'}
+    ]
+
     return (
         <div>
+          <RIESelect value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
           {this.renderStateType()}
           <br />
           <Transition

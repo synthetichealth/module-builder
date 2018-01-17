@@ -4,11 +4,11 @@ const initialState = [];
 
 
 export default (state = initialState, action) => {
-  let newState = state;
+  let newState = null;
 
   switch (action.type) {
     case 'NEW_MODULE':
-      return [...newState, {name: 'New Module', remarks: 'New Remarks', states: {Initial: {type: 'Initial'}}}]
+      return [...state, {name: 'New Module', remarks: 'New Remarks', states: {Initial: {type: 'Initial'}}}]
     case 'EDIT_NODE':
       let path = action.data.path.join('.');
 
@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
       _.set(newState, path, value);
       return [...newState]
     case 'ADD_NODE':
+      newState = [...state];
       newState[action.data.currentModuleIndex].states = {...newState[action.data.currentModuleIndex].states, ...{'NEW_STATE': {}}};
       return [...newState]
     case 'RENAME_NODE':
@@ -28,6 +29,10 @@ export default (state = initialState, action) => {
       newState[action.data.targetModuleIndex].states[action.data.newName.name] = oldModule;
       delete newState[action.data.targetModuleIndex].states[action.data.targetNode.name];
       return newState;
+    case 'CHANGE_STATE_TYPE':
+      newState = [...state];
+      newState[action.data.targetModuleIndex].states[action.data.targetNode.name].type = action.data.newType.type.id;
+      return newState
     default:
       return state;
   }
