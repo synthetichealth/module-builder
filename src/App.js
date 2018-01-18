@@ -22,7 +22,7 @@ class App extends Component<Props, AppState> {
 
   constructor() {
     super();
-    let states = extractStates(modulesJSON[19]);
+    let states = extractStates(modulesJSON[0]);
     this.state = {states};
   }
 

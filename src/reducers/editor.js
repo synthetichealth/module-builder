@@ -1,5 +1,5 @@
 
-const initialState = {currentNode: null, currentModuleIndex: 19, loadModuleVisible: false, codeVisible: false};
+const initialState = {currentNode: null, currentModuleIndex: 0, loadModuleVisible: false, codeVisible: false};
 
 export default (state = initialState, action) => {
   switch (action.type) {
