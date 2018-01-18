@@ -1,4 +1,178 @@
-export default [{
+export default [
+    {
+    "name": "Examplitis",
+    "remarks": [
+      "Examplitis is a painful condition that affects only males. Most patients ",
+      "can be cured with Examplitol or an Examplotomy but some never recover."
+    ],
+    "states": {
+
+      "Initial": {
+        "type": "Initial",
+        "conditional_transition": [
+          {
+            "condition": {
+              "condition_type": "Gender",
+              "gender": "M"
+            },
+            "transition": "Age_Guard"
+          },
+          {
+            "transition": "Terminal"
+          }
+        ]
+      },
+
+      "Age_Guard": {
+        "type": "Guard",
+        "allow": {
+          "condition_type": "Age",
+          "operator": ">",
+          "quantity": 40,
+          "unit": "years"
+        },
+        "distributed_transition": [
+          {
+            "distribution": 0.10,
+            "transition": "Pre_Examplitis"
+          },
+          {
+            "distribution": 0.90,
+            "transition": "Terminal"
+          }
+        ]
+      },
+
+      "Pre_Examplitis": {
+        "type": "Delay",
+        "range": {
+          "low": 0,
+          "high": 10,
+          "unit": "years"
+        },
+        "direct_transition": "Examplitis"
+      },
+
+      "Examplitis": {
+        "type": "ConditionOnset",
+        "target_encounter": "Wellness_Encounter",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": "123",
+            "display": "Examplitis"
+          }
+        ],
+        "direct_transition": "Wellness_Encounter"
+      },
+
+      "Wellness_Encounter": {
+        "type": "Encounter",
+        "wellness": true,
+        "direct_transition": "Examplitol"
+      },
+
+      "Examplitol": {
+        "type": "MedicationOrder",
+        "reason": "Examplitis",
+        "codes": [
+          {
+            "system": "RxNorm",
+            "code": "456",
+            "display": "Examplitol"
+          }
+        ],
+        "distributed_transition": [
+          {
+            "distribution": 0.2,
+            "transition": "Pre_Examplotomy"
+          },
+          {
+            "distribution": 0.1,
+            "transition": "Last_Days"
+          },
+          {
+            "distribution": 0.7,
+            "transition": "Terminal"
+          }
+        ]
+      },
+
+      "Pre_Examplotomy": {
+        "type": "Delay",
+        "range": {
+          "low": 18,
+          "high": 36,
+          "unit": "months"
+        },
+        "direct_transition": "Examplotomy_Encounter"
+      },
+
+      "Examplotomy_Encounter": {
+        "type": "Encounter",
+        "encounter_class": "ambulatory",
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": "ABC",
+            "display": "Examplotomy Encounter"
+          }
+        ],
+        "direct_transition": "Examplotomy"
+      },
+
+      "Examplotomy": {
+        "type": "Procedure",
+        "duration": {
+          "low": 2,
+          "high": 3,
+          "unit": "hours"
+        },
+        "codes": [
+          {
+            "system": "SNOMED-CT",
+            "code": "789",
+            "display": "Examplotomy"
+          }
+        ],
+        "reason": "Examplitis",
+        "direct_transition": "End_Examplotomy_Encounter"
+      },
+
+      "End_Examplotomy_Encounter": {
+      	"type": "EncounterEnd",
+      	"distributed_transition": [
+          {
+            "distribution": 0.1,
+            "transition": "Death"
+          },
+          {
+            "distribution": 0.9,
+            "transition": "Terminal"
+          }
+        ]
+      },
+
+      "Last_Days": {
+        "type": "Delay",
+        "range": {
+            "low": 8,
+            "high": 20,
+            "unit": "years"
+        },
+        "direct_transition": "Death"
+      },
+
+      "Death": {
+        "type": "Death"
+      },
+
+      "Terminal": {
+        "type": "Terminal"
+      }
+    }
+  },
+  {
   "name": "Allergic Rhinitis",
   "remarks": [
     "Better known as 'hay fever' or 'seasonal allergies'.",
@@ -792,7 +966,7 @@ export default [{
       },
       "direct_transition" : "Terminal"
     },
-    
+
     "Terminal": {
       "type": "Terminal"
     }
@@ -1893,7 +2067,7 @@ export default [{
       "direct_transition" : "Age_Guard"
     },
 
-    "End_Diagnosis_Encounter_with_BT" : 
+    "End_Diagnosis_Encounter_with_BT" :
     {
       "type" : "EncounterEnd",
       "direct_transition" : "Behavior_Therapy"
@@ -1939,7 +2113,7 @@ export default [{
       "referenced_by_attribute": "adhd_medication",
       "direct_transition": "Terminal"
     },
-    
+
     "Terminal": {
       "type": "Terminal"
     }
@@ -4920,7 +5094,7 @@ export default [{
         "and distributes the babies more evenly across the female population"
       ]
     },
-    
+
     "Reset_Contraceptive_Use": {
       "type": "CallSubmodule",
       "remarks": [
@@ -5954,7 +6128,7 @@ export default [{
       "referenced_by_attribute": "copd_variant",
       "direct_transition": "Terminal"
     },
-    
+
     "Terminal": {
       "type": "Terminal"
     }
@@ -6560,7 +6734,7 @@ export default [{
       "type" : "EncounterEnd",
       "direct_transition": "SevereDecline"
     },
-    
+
     "SevereDecline": {
       "type": "Delay",
       "range": {
@@ -6615,7 +6789,7 @@ export default [{
       "type" : "EncounterEnd",
       "direct_transition": "VerySevereDecline"
     },
-    
+
 
     "VerySevereDecline": {
       "type": "Delay",
@@ -8770,7 +8944,7 @@ export default [{
       "referenced_by_attribute": "fibromyalgia_prescription",
       "direct_transition": "Delay_Until_Fibromyalgia_Episode"
     },
-    
+
     "Terminal": {
       "type": "Terminal"
     }
@@ -9385,7 +9559,7 @@ export default [{
           "remarks" : "people who have ever been homeless have the highest risk of becoming homeless again",
           "distributions" : [
             { "distribution" : 0.99, "transition" : "Potential_Homelessness" },
-            { "distribution" : 0.01, "transition" : "Begin_Homelessness" } 
+            { "distribution" : 0.01, "transition" : "Begin_Homelessness" }
           ]
         },
         {
@@ -9395,13 +9569,13 @@ export default [{
           },
           "distributions" : [
             { "distribution" : 0.009975, "transition" : "Potential_Homelessness" },
-            { "distribution" : 0.990025, "transition" : "Begin_Homelessness" } 
+            { "distribution" : 0.990025, "transition" : "Begin_Homelessness" }
           ]
         },
         {
           "distributions" : [
             { "distribution" : 0.999, "transition" : "Potential_Homelessness" },
-            { "distribution" : 0.001, "transition" : "Begin_Homelessness" } 
+            { "distribution" : 0.001, "transition" : "Begin_Homelessness" }
           ]
         }
       ]
@@ -9561,7 +9735,7 @@ export default [{
     },
 
     "Question_2_Positive" : {
-      "type" : "Observation",      
+      "type" : "Observation",
       "category" : "social-history",
       "codes" : [{
         "system" : "LOINC",
@@ -9592,7 +9766,7 @@ export default [{
       "distributed_transition" : [
         { "distribution" : 0.26, "transition" : "Question_3_Abuser" },
         { "distribution" : 0.74, "transition" : "Question_3_Nonabuser" }
-      ]    
+      ]
     },
 
     "Question_3_Abuser" : {
@@ -9643,7 +9817,7 @@ export default [{
       "distributed_transition" : [
         { "distribution" : 0.25, "transition" : "Question_5_Yes" },
         { "distribution" : 0.75, "transition" : "Question_5_No" }
-      ]      
+      ]
     },
 
     "Question_5_Yes" : {
@@ -13379,7 +13553,7 @@ export default [{
       ],
       "direct_transition": "NSCLC Treatment Path"
     },
-    
+
     "Terminal": {
       "type": "Terminal"
     }
@@ -13665,7 +13839,7 @@ export default [{
       "medication_order": "Immune_Suppressant",
       "direct_transition": "Wait_For_Lupus_Flareup"
     },
-    
+
     "Terminal": {
       "type": "Terminal"
     }
@@ -13702,7 +13876,7 @@ export default [{
         }
       ]
     },
-    
+
     "Med_Rec": {
       "type": "Procedure",
       "target_encounter": "Wellness_Encounter",
@@ -17432,7 +17606,7 @@ export default [{
       "type" : "EncounterEnd",
       "direct_transition" : "Terminal"
     },
-    
+
     "Terminal": {
       "type": "Terminal"
     }
@@ -19315,7 +19489,7 @@ export default [{
       "medication_order": "RA_Nonopioid_Pain_Medication",
       "direct_transition": "Terminal"
     },
-    
+
     "Terminal": {
       "type": "Terminal"
     }
@@ -20937,7 +21111,7 @@ export default [{
         }
       ]
     },
-    
+
     "Chronic_Sinusisitis_Ends": {
       "type": "ConditionEnd",
       "condition_onset": "Diagnose_Chronic_Sinusitis",
@@ -21462,7 +21636,7 @@ export default [{
         }
       ]
     },
-    
+
     "End_Antibiotics": {
       "type": "MedicationEnd",
       "referenced_by_attribute": "Sore Throat Antibiotic",
@@ -22064,7 +22238,7 @@ export default [{
       },
       "direct_transition": "Urinary_Tract_Infection"
     },
-    
+
     "Terminal": {
       "type": "Terminal"
     }

@@ -73,7 +73,12 @@ class Gender extends Component<Props> {
     let conditional = ((this.props.conditional: any): GenderConditional);
     return (
       <label> Gender:
-        <RIESelect value={conditional.gender} onChange={this.props.onChange} options={[{id:'M', text: 'male'}, {id:'F', text: 'female'}]} />
+        <RIESelect
+          propName='gender'
+          value={{id: conditional.gender, text: conditional.gender}}
+          change={this.props.onChange('gender')}
+          options={[{id:'M', text: 'M'}, {id:'F', text: 'F'}]}
+        />
       </label>
     );
   }
