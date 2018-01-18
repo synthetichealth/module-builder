@@ -10,6 +10,8 @@ import Information from '../components/graph/Information';
 import Code from '../components/graph/Code';
 import { extractStates, extractAttributes } from '../transforms/Module';
 
+import './Editor.css';
+
 import {selectNode, addNode, editNode, renameNode, newModule, showLoadModule, hideLoadModule, selectModule, showCode, hideCode, editModuleName, editModuleRemarks} from '../actions/editor';
 
 class Editor extends Component {
@@ -35,13 +37,14 @@ class Editor extends Component {
 
   render() {
     return (
-      <div>
+      <div className='Editor'>
 
         <Menu onNewModuleClick={this.props.newModule} 
           moduleCount={this.props.moduleCount} 
           onLoadModuleClick={this.props.showLoadModule} 
           onShowCodeClick={this.props.showCode}/>
 
+        /* REFACTOR THESE MODALS */
         <LoadModule modules={this.props.modules} 
           visible={this.props.loadModuleVisible} 
           onHide={this.props.hideLoadModule} 
@@ -51,28 +54,47 @@ class Editor extends Component {
           visible={this.props.codeVisible} 
           onHide={this.props.hideCode}/>
 
-        <Information 
-          module={this.props.module} 
-          onStateClick={this.props.selectNode} 
-          selectedState={this.props.selectedState} 
-          attributes={this.props.attributes} 
-          onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleIndex, name)}
-          onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleIndex, remarks)}/>
+        <div className='Editor-main'>
 
-        <div className="App container-fluid">
-          <div className="App-body">
-            <button className='btn btn-primary' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
-            <ModuleGraph module={this.props.module} onClick={this.props.selectNode} selectedState={this.props.selectedState}/>
-            <div className="App-edit-panel">
-              <StateEditor
-                renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
-                state={this.props.selectedState}
-                otherStates={this.props.states}
-                onChange={this.onChange(this.props.selectedModuleIndex)} />
-            </div>
-          </div>
+          <Information 
+            module={this.props.module} 
+            onStateClick={this.props.selectNode} 
+            selectedState={this.props.selectedState} 
+            attributes={this.props.attributes} 
+            onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleIndex, name)}
+            onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleIndex, remarks)}/>
+
+          <ModuleGraph 
+            module={this.props.module} 
+            onClick={this.props.selectNode} 
+            selectedState={this.props.selectedState}/>
+
+          <button className='btn btn-primary' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
+
+          <StateEditor
+            renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
+            state={this.props.selectedState}
+            otherStates={this.props.states}
+            onChange={this.onChange(this.props.selectedModuleIndex)} />
+
         </div>
       </div>
+
+
+      //   <div className="App container-fluid">
+      //     <div className="App-body">
+      //       <button className='btn btn-primary' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
+      //       <ModuleGraph module={this.props.module} onClick={this.props.selectNode} selectedState={this.props.selectedState}/>
+      //       <div className="App-edit-panel">
+      //         <StateEditor
+      //           renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
+      //           state={this.props.selectedState}
+      //           otherStates={this.props.states}
+      //           onChange={this.onChange(this.props.selectedModuleIndex)} />
+      //       </div>
+      //     </div>
+      //   </div>
+      // </div>
     )
   }
 }

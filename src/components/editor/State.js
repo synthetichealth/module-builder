@@ -9,6 +9,8 @@ import ConditionalEditor from './Conditional';
 import StringEditor from './String';
 import Transition from './Transition';
 
+import './State.css';
+
 type Props = {
   state: State,
   otherStates: State[],
@@ -82,7 +84,7 @@ class StateEditor extends Component<Props> {
       return null;
     }
     return (
-        <div>
+        <div className="State">
           {this.renderStateType()}
           <br />
           <Transition

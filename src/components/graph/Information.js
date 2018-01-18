@@ -45,7 +45,7 @@ class Information extends Component<Props> {
     // NOTE: WHAT IF REMARKS SET TO BLANK?
 
     return (
-      <div className='Information-container'>
+      <div className='Information'>
         <div className='Information-name'>
           <RIEInput value={this.props.module.name} propName="name" change={(newval) => this.onNameChange(newval.name)} />
         </div>

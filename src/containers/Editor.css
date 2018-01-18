@@ -1,0 +1,9 @@
+.Editor-main {
+}
+
+.Editor-main button {
+  position:fixed;
+  right: 420px;
+  top: 60px;
+  z-index: 10;
+}

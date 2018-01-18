@@ -1,5 +1,5 @@
-.Information-container {
-  position:absolute;
+.Information {
+  position:fixed;
   height: 100%;
   top: 0;
   left: 0;
@@ -9,21 +9,25 @@
   padding: 60px 10px;
 }
 
-.Information-container input {
+.Editor.hide-info .Information {
+  left: -400px;
+}
+
+.Information input {
   width: 100%;
 }
 
-.Information-container textarea {
+.Information textarea {
   width: 100%;
-  height: 200px;
+  height: 100%;
 }
 
-.Information-container ul {
+.Information ul {
   padding: 0px;
   margin: 0px;
 }
 
-.Information-container li {
+.Information li {
   padding: 0px;
   list-style: none;
 }
@@ -39,8 +43,18 @@
   margin-top: 10px;
 }
 
+.Information-remarks {
+  max-height: 40%;
+  overflow: scroll;
+}
+
 .Information-states {
-  max-height: 300px;
+  max-height: 40%;
+  overflow: scroll;
+}
+
+.Information-attributes {
+  max-height: 20%;
   overflow: scroll;
 }
 

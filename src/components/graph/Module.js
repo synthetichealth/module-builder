@@ -24,23 +24,27 @@ class ModuleGraph extends Component<Props> {
     this.onPanZoom = this.onPanZoom.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
+    this.bold = false;
   }
 
   componentDidMount(){
     this.writeSVG(this.props.module)
-    // this.svgPanZoom.zoom(.8);
     this.mount.addEventListener('mouseup', this.onMouseUp);
     this.mount.addEventListener('mousedown', this.onMouseDown);
   }
 
   componentWillReceiveProps(nextProps: Props){
 
+    if(nextProps.module.name !== this.props.module.name){
+      this.panZoomSettings = null
+    }
+
     this.writeSVG(nextProps.module, nextProps.selectedState);
 
-    if(nextProps.module.name === this.props.module.name && this.panZoomSettings){
+    if(this.panZoomSettings){
       this.blockPanZoomEvent = true
-      this.svgPanZoom.zoom(this.panZoomSettings.zoom);
-      this.svgPanZoom.pan(this.panZoomSettings.pan);
+      this.svgPanZoom.zoom(this.panZoomSettings.zoom, true);
+      this.svgPanZoom.pan(this.panZoomSettings.pan, true);
       this.blockPanZoomEvent = false
     }
 
@@ -65,55 +69,74 @@ class ModuleGraph extends Component<Props> {
 
     this.fireClickOnMouseUp = false;
     this.panZoomSettings = {pan: this.svgPanZoom.getPan(), zoom: this.svgPanZoom.getZoom()};
+
+    let linesShouldBold = Math.max(this.originalWidth, this.originalHeight) / this.svgPanZoom.getZoom() > 1500
+
+    if(linesShouldBold && !this.bold){
+      this.bold = true
+      this.mount.className = 'Module bold-lines'
+    } else if(!linesShouldBold && this.bold){
+      this.bold = false
+      this.mount.className = 'Module'
+    }
+
   }
 
   writeSVG(module: Module, selectedState: State){
 
+    /* write SVG */
     this.mount.innerHTML= Viz(generateDOT(module, selectedState));
+
+    let svg = this.mount.children[0]
+
+    /* add event handlers */
+    Object.keys(module.states).forEach( s => {
+      let el = document.getElementById(`node_${s.replace('?','')}`)
+ ;     if(el){
+        el.addEventListener('mouseup', (e) => {e.stopPropagation(); this.props.onClick(s)});
+      }
+    })
+
+    /* add pan/zoom if available */
     if(typeof svgPanZoom === "function"){
+
+      this.originalWidth = svg.attributes.width.value.match(/\d+/g).map(Number)[0];
+      this.originalHeight = svg.attributes.height.value.match(/\d+/g).map(Number)[0];
+
+      let offsetLeft = this.mount.getBoundingClientRect().x
+      let offsetTop = this.mount.getBoundingClientRect().y
+      let visibleWidth = this.mount.getBoundingClientRect().width - offsetLeft;
+      let visibleHeight = this.mount.getBoundingClientRect().width - offsetTop;
+
+
+      this.mount.children[0].setAttribute('width', '100%')
+      this.mount.children[0].setAttribute('height', '100%')
+
+      let zoomFactor = 1
+
+      if(this.originalWidth / this.originalHeight > visibleWidth / visibleHeight){
+        //width constrained
+        zoomFactor = visibleWidth / this.originalWidth;
+      } else {
+        //height constrained
+        zoomFactor = visibleHeight / this.originalHeight;
+      }
+
       this.svgPanZoom = svgPanZoom(this.mount.children[0],{
           controlIconsEnabled: true, 
           minZoom: .1,
           onPan: this.onPanZoom,
           onZoom: this.onPanZoom,
         });
+
+      if(!this.panZoomSettings){
+        /* first time load of module */
+        this.svgPanZoom.pan({x: this.svgPanZoom.getPan().x - offsetLeft/2 , y: 0}, true)
+        this.svgPanZoom.zoom(Math.pow(.8,zoomFactor), true);
+      }
+
     }
 
-    Object.keys(module.states).forEach( s => {
-      let el = document.getElementById(`node_${s.replace('?','')}`)
-      if(el){
-        el.addEventListener('mouseup', (e) => {e.stopPropagation(); this.props.onClick(s)});
-      }
-    })
-
-    /* TODO: REDO GRAPH CENTERING */
-    /* ALSO, KEEP SELF CONTAINED FOR TESTING PURPOSES */
-    
-    if(document.getElementsByClassName('App-edit-panel')[0]){
-      let appPanelWidth = document.getElementsByClassName('App-edit-panel')[0].offsetWidth
-
-      if(!appPanelWidth){
-        appPanelWidth=400;
-        console.log('WARNING: NO PANEL WIDTH AS EXPECTED');
-      }
-
-      let availableWidth = document.getElementsByClassName('App')[0].offsetWidth - appPanelWidth
-      let graphWidth = this.mount.children[0].clientWidth;
-
-      let offset = 0;
-
-      if(graphWidth > availableWidth){
-        offset = graphWidth - availableWidth
-      }
-
-      this.mount.style.marginLeft = `-${offset}px`
-
-      if(graphWidth > 500){
-        document.getElementById('svg-pan-zoom-controls').attributes.transform.value = `translate(${offset}, 0) scale(0.75)`
-      } else {
-        document.getElementById('svg-pan-zoom-controls').style.visibility = 'hidden'
-      }
-    }
   }
 }
 
