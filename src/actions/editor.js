@@ -12,6 +12,13 @@ export const addNode = (currentModuleIndex) => {
   })
 }
 
+export const addStructure = (currentModuleIndex, structureName) => {
+  return ({
+    type: 'ADD_STRUCTURE',
+    data: {currentModuleIndex, structureName}
+  });
+}
+
 export const editNode = (update, path) => {
   return ({
     type: 'EDIT_NODE',

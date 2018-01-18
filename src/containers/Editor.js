@@ -9,7 +9,7 @@ import LoadModule from '../components/graph/LoadModule';
 import Code from '../components/graph/Code';
 import { extractStates } from '../transforms/Module';
 
-import {selectNode, addNode, editNode, renameNode, newModule, showLoadModule, hideLoadModule, selectModule, showCode, hideCode, changeStateType} from '../actions/editor';
+import {selectNode, addNode, addStructure, editNode, renameNode, newModule, showLoadModule, hideLoadModule, selectModule, showCode, hideCode, changeStateType} from '../actions/editor';
 
 class Editor extends Component {
 
@@ -46,7 +46,11 @@ class Editor extends Component {
 
         <div className="App container-fluid">
           <div className="App-body">
-            <button className='btn btn-primary' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
+            <div className='button_holder'>
+              <button className='btn btn-primary' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
+              <br/>
+              <button className='btn btn-secondary' onClick={() => this.props.addStructure(this.props.selectedModuleIndex, 'CheckYearly')}> Add Structure </button>
+            </div>
             <ModuleGraph module={this.props.module} onClick={this.props.selectNode} selectedState={this.props.selectedState}/>
             <div className="App-edit-panel">
               <StateEditor
@@ -82,6 +86,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => bindActionCreators({
   selectNode,
   addNode,
+  addStructure,
   editNode,
   renameNode,
   changeStateType,

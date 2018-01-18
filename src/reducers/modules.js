@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { StateTemplates, TypeTemplates, TransitionTemplates, ModuleTemplates } from '../templates/Templates';
+import { StateTemplates, TypeTemplates, TransitionTemplates, ModuleTemplates, StructureTemplates } from '../templates/Templates';
 
 const initialState = [];
 
@@ -24,6 +24,11 @@ export default (state = initialState, action) => {
       _.set(newState, path, value);
       return [...newState]
 
+    case 'ADD_STRUCTURE':
+      newState = [...state];
+      newState[action.data.currentModuleIndex].states = {...newState[action.data.currentModuleIndex].states, ...StructureTemplates[action.data.structureName]};
+      return newState
+      
     case 'ADD_NODE':
       newState = [...state];
       const stateIndex = Object.keys(newState[action.data.currentModuleIndex].states).length;

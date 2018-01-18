@@ -6,7 +6,7 @@
   margin-top: 50px;
 }
 
-.App-body button {
+.App-body .button_holder {
   position:fixed;
   right: 420px;
   top: 60px;
@@ -28,6 +28,3 @@
 .App-edit-panel div {
   padding-bottom: 10px;
 }
-
-
-
