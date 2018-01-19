@@ -8,12 +8,15 @@ import { Code, Codes } from './Code';
 import ConditionalEditor from './Conditional';
 import StringEditor from './String';
 import Transition from './Transition';
+import {StateTemplates} from '../../templates/Templates';
+
 
 type Props = {
   state: State,
   otherStates: State[],
   onChange: any,
-  renameNode: any
+  renameNode: any,
+  changeType: any
 }
 
 class StateEditor extends Component<Props> {
@@ -81,8 +84,41 @@ class StateEditor extends Component<Props> {
     if(!this.props.state) {
       return null;
     }
+
+    // let typeOptions = [
+    //   {id: 'Initial', text: 'Initial'},
+    //   {id: 'Terminal', text: 'Terminal'},
+    //   {id: 'Simple', text: 'Simple'},
+    //   {id: 'Guard', text: 'Guard'},
+    //   {id: 'Delay', text: 'Delay'},
+    //   {id: 'SetAttribute', text: 'SetAttribute'},
+    //   {id: 'Counter', text: 'Counter'},
+    //   {id: 'CallSubmodule', text: 'CallSubmodule'},
+    //   {id: 'Encounter', text: 'Encounter'},
+    //   {id: 'EncounterEnd', text: 'EncounterEnd'},
+    //   {id: 'ConditionOnset', text: 'ConditionOnset'},
+    //   {id: 'ConditionEnd', text: 'ConditionEnd'},
+    //   {id: 'AllergyOnset', text: 'AllergyOnset'},
+    //   {id: 'AllergyEnd', text: 'AllergyEnd'},
+    //   {id: 'MedicationOrder', text: 'MedicationOrder'},
+    //   {id: 'MedicationEnd', text: 'MedicationEnd'},
+    //   {id: 'CarePlanStart', text: 'CarePlanStart'},
+    //   {id: 'CarePlanEnd', text: 'CarePlanEnd'},
+    //   {id: 'Procedure', text: 'Procedure'},
+    //   {id: 'VitalSign', text: 'VitalSign'},
+    //   {id: 'Observation', text: 'Observation'},
+    //   {id: 'MultiObservation', text: 'MultiObservation'},
+    //   {id: 'DiagnosticReport', text: 'DiagnosticReport'},
+    //   {id: 'Symptom', text: 'Symptom'},
+    //   {id: 'Death', text: 'Death'}
+    // ]
+
+    let typeOptions = Object.keys(StateTemplates).sort().map((k) => {return {id: k, text: k}});
+
     return (
         <div>
+          State Type: <RIESelect value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
+          <br/>
           {this.renderStateType()}
           <br />
           <Transition

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
 import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
 import { Codes } from './Code';
+import {TypeTemplates} from '../../templates/Templates';
 
 type Props = {
   conditional: Conditional,
@@ -59,8 +60,11 @@ class ConditionalEditor extends Component<Props> {
     if (!this.props.conditional) {
       return null;
     }
+    let options = Object.keys(TypeTemplates.Condition).sort().map((k) => {return {id: k, text: k}});
     return (
       <div>
+        Condition Type: <RIESelect propName='condition' value={{id: this.props.conditional.condition_type, text: this.props.conditional.condition_type}} change={(val) => this.props.onChange({condition:{id: TypeTemplates.Condition[val.condition.id]}})} options={options} />
+        <br/>
         {this.renderConditionalType()}
       </div>
     );
@@ -270,7 +274,7 @@ class Attribute extends Component<Props> {
       <label>
         <RIEInput value={conditional.attribute} propName="attribute" change={this.props.onChange('attribute')} />
         <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
-        <RIENumber value={conditional.value} propName='value' change={this.props.onChange('value')} />
+        <RIENumber value={conditional.value||NaN} propName='value' change={this.props.onChange('value')} />
       </label>
     );
   }
