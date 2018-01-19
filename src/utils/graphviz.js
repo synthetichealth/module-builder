@@ -3,8 +3,8 @@ import type { Module } from './types/Module';
 import type { State } from './types/State';
 
 const STANDARD_COLOR = 'Black';
-const HIGHLIGHT_COLOR = 'Red';
-const MUTED_COLOR = '#DDDDDD'
+const HIGHLIGHT_COLOR = '#007bff';
+const MUTED_COLOR = '#CCCCCC'
 
 export default function generateDOT(module: Module, selectedState: State) {
 
@@ -55,16 +55,13 @@ const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) 
         node['fillcolor'] = 'Grey'
         node['style'] = 'rounded,filled'
         node['fontcolor'] = 'White'
-        node['color'] = STANDARD_COLOR
     }
 
     if(selectedState && state.name === selectedState.name){
       node['fillcolor'] = 'White'
-      node['fontcolor'] = HIGHLIGHT_COLOR
-      node['color'] = HIGHLIGHT_COLOR
+      node['class'] = 'node-highlighted'
     } else if (selectedState && !relatedStates[state.name]){
-      node['fontcolor'] = MUTED_COLOR
-      node['color'] = MUTED_COLOR
+      node['class'] = 'node-muted'
     }
 
     // node['label'] = (name === state['type']) ? state['name'].replace('?','') : `{ ${name} | ${state['type']} }`
@@ -91,33 +88,28 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
 
     let state = module.states[name]
 
-    let color = MUTED_COLOR;
-    let fontcolor = MUTED_COLOR;
+    let className='';
 
-    if(!selectedState){
-      color = STANDARD_COLOR;
-      fontcolor = STANDARD_COLOR;
+    if(!!selectedState){
+      className = 'transition-muted'
     }
 
     if(selectedState && selectedState.name === name){
-      color = HIGHLIGHT_COLOR;
-      fontcolor = HIGHLIGHT_COLOR;
+      className='transition-highlighted'
     }
 
     if(state.direct_transition !== undefined){
       if(selectedState && state.direct_transition === selectedState.name){
-        color = STANDARD_COLOR;
-        fontcolor = STANDARD_COLOR;
+        className='';
       }
       if(module.states[state.direct_transition]){
-        return `  "${name}" -> "${module.states[state.direct_transition].name}" [color = "${color}", fontcolor= "${fontcolor}"];\n`
+        return `  "${name}" -> "${module.states[state.direct_transition].name}" [class = "transition ${className}"];\n`
       } else {
         console.log(`NO SUCH NODE TO TRANSITION TO: ${state.direct_transition}`);
       }
     } else if(state.distributed_transition !== undefined){
       if(selectedState && state.distributed_transition === selectedState.name){
-        color = STANDARD_COLOR;
-        fontcolor = STANDARD_COLOR;
+        className = ''
       }
       let out_transitions = ''
       state.distributed_transition.forEach( t => {
@@ -134,10 +126,9 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
         }
         if(module.states[t.transition]){
           if(selectedState && t.transition === selectedState.name){
-            color = STANDARD_COLOR;
-            fontcolor = STANDARD_COLOR;
+            className = '';
           }
-          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${distLabel}", color = "${color}", fontcolor= "${fontcolor}"];\n`
+          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${distLabel}", class = "transition ${className}"];\n`
         } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}`);
         }
@@ -149,10 +140,9 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
         let cnd = t.condition !== undefined ? logicDetails(t.condition) : 'else';
         if(module.states[t.transition]){
           if(selectedState && t.transition === selectedState.name){
-            color = STANDARD_COLOR;
-            fontcolor = STANDARD_COLOR;
+            className = ''
           }
-          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${i}. ${cnd}", color = "${color}", fontcolor= "${fontcolor}"];\n`
+          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${i}. ${cnd}", class = "transition ${className}"];\n`
         } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}\n`);
         }
@@ -205,14 +195,12 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
       let out_transitions = ''
       Object.keys(transitions).forEach( trans => {
         if(nodeHighlighted[trans] === 'standard'){
-          color = STANDARD_COLOR;
-          fontcolor = STANDARD_COLOR;
+          className = ''
         }
         if(nodeHighlighted[trans] === 'highlighted'){
-          color = HIGHLIGHT_COLOR;
-          fontcolor = HIGHLIGHT_COLOR;
+          className='transition-highlighted'
         }
-        out_transitions += `${trans} [label = "${transitions[trans].join(',\\n')}", color = "${color}", fontcolor= "${fontcolor}"]\n`
+        out_transitions += `${trans} [label = "${transitions[trans].join(',\\n')}", class = "transition ${className}"]\n`
       })
 
       return out_transitions;

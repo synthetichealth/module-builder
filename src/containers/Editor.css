@@ -1,7 +1,7 @@
 .Editor-main {
 }
 
-.Editor-main button {
+.Editor-main .button-holder {
   position:fixed;
   right: 420px;
   top: 60px;

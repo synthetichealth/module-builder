@@ -10,28 +10,76 @@
   left: 0;
 }
 
-.transition {
-  stroke: grey;
-  stroke-width: 1px;
-}
-
-.marker {
-  fill: grey;
-}
-
-.conditional_transition {
-  stroke-dasharray: 1;
-  stroke: red;
-}
-
-.distributed_transition {
-  stroke-dasharray: 4;
-}
-
 .node {
   cursor: pointer;
 }
 
-.Module.bold-lines path{
-  stroke-width: 5;
+.node.node-highlighted text{
+  fill: #336699;
+  font-weight: bold;
 }
+
+.node.node-highlighted path{
+  stroke: #336699;
+  stroke-width: 2px;
+}
+
+.node.node-highlighted polyline{
+  stroke: #336699;
+  stroke-width: 2px;
+}
+
+.node.node-muted text{
+  fill: #CCC;
+}
+
+.node.node-muted path{
+  stroke: #CCC;
+}
+
+.node.node-muted polyline{
+  stroke: #CCC;
+}
+
+.transition.transition-highlighted path {
+  stroke: #336699;
+  stroke-width: 3px;
+}
+.transition.transition-highlighted polygon {
+  fill: #336699;
+  stroke: #336699;
+}
+
+.transition.transition-highlighted text {
+  fill: #336699;
+  font-weight: bold;
+}
+
+.transition.transition-muted path {
+  stroke: #CCC;
+}
+.transition.transition-muted polygon {
+  fill: #CCC;
+  stroke: #CCC;
+}
+
+.transition.transition-muted text {
+  fill: #CCC;
+}
+
+.Module.bold-lines path{
+  stroke-width: 3;
+}
+
+.Module.bold-lines polyline{
+  stroke-width: 3;
+}
+
+.Module.bold-lines .node.node-highlighted path{
+  stroke-width: 5px;
+}
+
+.Module.bold-lines .node.node-highlighted polyline{
+  stroke-width: 5px;
+}
+
