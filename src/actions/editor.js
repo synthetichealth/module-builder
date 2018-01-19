@@ -66,18 +66,37 @@ export const selectModule = (moduleIndex) => {
   })
 }
 
-export const showCode = () => {
+export const showDownload = () => {
   return ({
-    type: 'SHOW_CODE'
+    type: 'SHOW_DOWNLOAD'
   })
 }
 
-export const hideCode = () => {
+export const hideDownload = () => {
   return ({
-    type: 'HIDE_CODE',
+    type: 'HIDE_DOWNLOAD',
   })
 }
 
+export const editModuleName = (targetModuleIndex, newName) => {
+  return ({
+    type: 'EDIT_MODULE_NAME',
+    data: { 
+      newName, 
+      targetModuleIndex
+    }
+  })
+}
+
+export const editModuleRemarks = (targetModuleIndex, newRemarks) => {
+  return ({
+    type: 'EDIT_MODULE_REMARKS',
+    data: { 
+      newRemarks, 
+      targetModuleIndex
+    }
+  })
+}
 
 export const changeStateType = (targetModuleIndex, targetNode, newType) => {
   return ({

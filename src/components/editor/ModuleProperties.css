@@ -1,0 +1,29 @@
+.Editor.hide-info .ModuleProperties {
+  left: -400px;
+}
+
+.ModuleProperties {
+  padding-bottom: 10px;
+
+}
+
+.ModuleProperties input {
+  width: 100%;
+}
+
+.ModuleProperties textarea {
+  height: 200px;
+  width: 100%;
+}
+
+.ModuleProperties-name {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.ModuleProperties-remarks {
+  font-size: .8em;
+  max-height: 200px;
+  overflow-y: auto;
+}

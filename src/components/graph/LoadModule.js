@@ -27,7 +27,7 @@ class LoadModule extends Component {
               <ul>
                 { this.props.modules.map( (module, index) => {
                     return (
-                       <li><button className='btn btn-link' onClick={this.props.onSelectModule.bind(this, index)}>{module.name}</button></li>
+                       <li key={module.name}><button className='btn btn-link' onClick={this.props.onSelectModule.bind(this, index)}>{module.name}</button></li>
                     )
                   })
                 }

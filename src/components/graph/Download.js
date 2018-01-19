@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import FileSaver from 'file-saver';
 
-import './Code.css';
+import './Download.css';
 
-class Code extends Component {
+class Download extends Component {
 
   constructor(props){
     super(props)
@@ -30,18 +30,18 @@ class Code extends Component {
     }
 
     return (
-      <div className='Code'>
+      <div className='Download'>
         <div className={`modal ${classDetails}`} style={style}>
           <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Module Code</h5>
+                <h5 className="modal-title">Download Module</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.props.onHide}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div className="modal-body Code-body">
-              <textarea ref="codeInput" defaultValue={JSON.stringify(this.props.module,null, 2)} />
+              <div className="modal-body Download-body">
+              <textarea ref="codeInput" disabled value={JSON.stringify(this.props.module,null, 2)} />
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onDownload}>Download</button>
@@ -56,4 +56,4 @@ class Code extends Component {
   }
 }
 
-export default Code;
+export default Download;

@@ -11,6 +11,8 @@ import Transition from './Transition';
 import {StateTemplates} from '../../templates/Templates';
 
 
+import './State.css';
+
 type Props = {
   state: State,
   otherStates: State[],
@@ -116,7 +118,7 @@ class StateEditor extends Component<Props> {
     let typeOptions = Object.keys(StateTemplates).sort().map((k) => {return {id: k, text: k}});
 
     return (
-        <div>
+        <div className="State">
           State Type: <RIESelect value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
           <br/>
           {this.renderStateType()}
