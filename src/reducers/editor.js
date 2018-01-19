@@ -1,5 +1,5 @@
 
-const initialState = {currentNode: null, currentModuleIndex: 0, loadModuleVisible: false, codeVisible: false};
+const initialState = {currentNode: null, currentModuleIndex: 0, loadModuleVisible: false, downloadVisible: false};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -17,11 +17,11 @@ export default (state = initialState, action) => {
     case 'HIDE_LOAD_MODULE':
       return { ...state, loadModuleVisible: false};
       break;
-    case 'SHOW_CODE':
-      return { ...state, codeVisible: true};
+    case 'SHOW_DOWNLOAD':
+      return { ...state, downloadVisible: true};
       break;
-    case 'HIDE_CODE':
-      return { ...state, codeVisible: false};
+    case 'HIDE_DOWNLOAD':
+      return { ...state, downloadVisible: false};
       break;
     default:
       return state;

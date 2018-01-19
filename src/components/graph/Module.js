@@ -106,8 +106,7 @@ class ModuleGraph extends Component<Props> {
       let offsetLeft = this.mount.getBoundingClientRect().x
       let offsetTop = this.mount.getBoundingClientRect().y
       let visibleWidth = this.mount.getBoundingClientRect().width - offsetLeft;
-      let visibleHeight = this.mount.getBoundingClientRect().width - offsetTop;
-
+      let visibleHeight = this.mount.getBoundingClientRect().height - offsetTop;
 
       this.mount.children[0].setAttribute('width', '100%')
       this.mount.children[0].setAttribute('height', '100%')
@@ -123,11 +122,25 @@ class ModuleGraph extends Component<Props> {
       }
 
       this.svgPanZoom = svgPanZoom(this.mount.children[0],{
-          controlIconsEnabled: true, 
+          controlIconsEnabled: false, // BUGGY BECAUSE OF EVENT HANDLERS 
           minZoom: .1,
           onPan: this.onPanZoom,
           onZoom: this.onPanZoom,
         });
+
+      let panZoomControlsElement = document.getElementById('svg-pan-zoom-controls');
+
+      if(panZoomControlsElement){
+        /* DISABLED BECAUSE BUGGY WITH OTHER EVENT HANDLERS */
+        panZoomControlsElement.setAttribute("transform", `translate(${visibleWidth-100} ${visibleHeight-150}) scale(.75)`)
+        document.getElementById('svg-pan-zoom-zoom-in').addEventListener('mouseup', (e) => {this.svgPanZoom.zoomIn()});
+        document.getElementById('svg-pan-zoom-zoom-out').addEventListener('mouseup', (e) => {this.svgPanZoom.zoomOut()});
+        document.getElementById('svg-pan-zoom-reset-pan-zoom').addEventListener('mouseup', (e) => {
+          e.stopPropagation();
+          this.svgPanZoom.pan({x: this.svgPanZoom.getPan().x - offsetLeft/2 , y: 0}, true)
+          this.svgPanZoom.zoom(Math.pow(.8,zoomFactor), true);
+        });
+      }
 
       if(!this.panZoomSettings){
         /* first time load of module */

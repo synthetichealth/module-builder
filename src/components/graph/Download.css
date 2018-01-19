@@ -1,8 +1,8 @@
-.Code-body {
+.Download {
   overflow-y: scroll;
 }
 
-.Code-body textarea {
+.Download textarea {
   width: 100%;
   height: 500px;
   font-size: .8em;

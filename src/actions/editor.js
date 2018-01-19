@@ -66,15 +66,15 @@ export const selectModule = (moduleIndex) => {
   })
 }
 
-export const showCode = () => {
+export const showDownload = () => {
   return ({
-    type: 'SHOW_CODE'
+    type: 'SHOW_DOWNLOAD'
   })
 }
 
-export const hideCode = () => {
+export const hideDownload = () => {
   return ({
-    type: 'HIDE_CODE',
+    type: 'HIDE_DOWNLOAD',
   })
 }
 

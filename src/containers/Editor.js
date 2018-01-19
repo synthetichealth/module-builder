@@ -3,11 +3,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import StateEditor from '../components/editor/State';
+import ModulePropertiesEditor from '../components/editor/ModuleProperties';
 import ModuleGraph from '../components/graph/Module';
-import Menu from '../components/graph/Menu';
 import LoadModule from '../components/graph/LoadModule';
-import Information from '../components/graph/Information';
-import Code from '../components/graph/Code';
+import Download from '../components/graph/Download';
 import { extractStates, extractAttributes } from '../transforms/Module';
 
 import './Editor.css';
@@ -21,8 +20,8 @@ import {selectNode,
         showLoadModule, 
         hideLoadModule, 
         selectModule, 
-        showCode, 
-        hideCode, 
+        showDownload, 
+        hideDownload, 
         changeStateType, 
         editModuleName, 
         editModuleRemarks} from '../actions/editor';
@@ -57,10 +56,21 @@ class Editor extends Component {
     return (
       <div className='Editor'>
 
-        <Menu onNewModuleClick={this.props.newModule} 
-          moduleCount={this.props.moduleCount} 
-          onLoadModuleClick={this.props.showLoadModule} 
-          onShowCodeClick={this.props.showCode}/>
+        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+          <a className="navbar-brand" href="#">Synthea Module Builder</a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav">
+              <button className="btn btn-link nav-item nav-link" onClick={this.props.newModule.bind(this, this.props.moduleCount)}>New Module</button>
+              <button className="btn btn-link nav-item nav-link" onClick={this.props.showLoadModule}>Load Module</button>
+              <button className="btn btn-link nav-item nav-link" onClick={this.props.showDownload}>Download</button>
+              <button className='btn btn-secondary nav-action-button' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
+              <button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleIndex, 'CheckYearly')}> Add Structure </button>
+            </div>
+          </div>
+        </nav>
 
         /* REFACTOR THESE MODALS */
         <LoadModule modules={this.props.modules} 
@@ -68,37 +78,33 @@ class Editor extends Component {
           onHide={this.props.hideLoadModule} 
           onSelectModule={this.props.selectModule}/>
 
-        <Code module={this.props.module} 
-          visible={this.props.codeVisible} 
-          onHide={this.props.hideCode}/>
+        <Download module={this.props.module} 
+          visible={this.props.downloadVisible} 
+          onHide={this.props.hideDownload}/>
 
         <div className='Editor-main'>
+          
 
-          <Information 
-            module={this.props.module} 
-            onStateClick={this.props.selectNode} 
-            selectedState={this.props.selectedState} 
-            attributes={this.props.attributes} 
-            onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleIndex, name)}
-            onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleIndex, remarks)}/>
+          <div className='Editor-panel'>
+
+            <ModulePropertiesEditor
+              module={this.props.module} 
+              onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleIndex, name)}
+              onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleIndex, remarks)}/>
+
+            <StateEditor
+              renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
+              changeType={this.changeStateType(this.props.selectedModuleIndex, this.props.selectedState)}
+              state={this.props.selectedState}
+              otherStates={this.props.states}
+              onChange={this.onChange(this.props.selectedModuleIndex)} />
+
+           </div>
 
           <ModuleGraph 
             module={this.props.module} 
             onClick={this.props.selectNode} 
             selectedState={this.props.selectedState}/>
-
-          <div className='button-holder'>
-            <button className='btn btn-primary' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
-            <br/>
-            <button className='btn btn-secondary' onClick={() => this.props.addStructure(this.props.selectedModuleIndex, 'CheckYearly')}> Add Structure </button>
-          </div>
-
-          <StateEditor
-            renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
-            changeType={this.changeStateType(this.props.selectedModuleIndex, this.props.selectedState)}
-            state={this.props.selectedState}
-            otherStates={this.props.states}
-            onChange={this.onChange(this.props.selectedModuleIndex)} />
 
         </div>
       </div>
@@ -118,7 +124,7 @@ const mapStateToProps = state => {
     selectedModuleIndex: state.editor.currentModuleIndex,
     moduleCount: state.modules.length,
     loadModuleVisible: state.editor.loadModuleVisible,
-    codeVisible: state.editor.codeVisible,
+    downloadVisible: state.editor.downloadVisible,
     attributes: extractAttributes(selectedModule)
   }
 }
@@ -134,8 +140,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   showLoadModule,
   hideLoadModule,
   selectModule,
-  showCode,
-  hideCode,
+  showDownload,
+  hideDownload,
   editModuleName,
   editModuleRemarks
   

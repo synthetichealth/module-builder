@@ -1,9 +1,20 @@
 .Editor-main {
 }
 
-.Editor-main .button-holder {
+.Editor-panel {
   position:fixed;
-  right: 420px;
-  top: 60px;
-  z-index: 10;
+  height: 90%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 500px;
+  z-index: 100;
+  margin: 70px 20px 200px 10px;
+  padding: 15px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.nav-action-button {
+  margin-left: 10px;
 }
