@@ -2,10 +2,25 @@
   padding: 10px;
 }
 
-/* .App-body { */
-/*   margin-top: 50px; */
-/* } */
+.App-body .button_holder {
+  position:fixed;
+  right: 420px;
+  top: 60px;
+  z-index: 10;
+}
 
+.App-edit-panel {
+  position:fixed;
+  right: 10px;
+  top: 60px;
+  height: 100%;
+  width: 400px;
+  background-color: #efefef;
+  border: 1px solid #ddd;
+  padding: 10px;
+  z-index: 10;
+}
 
-
-
+.App-edit-panel div {
+  padding-bottom: 10px;
+}

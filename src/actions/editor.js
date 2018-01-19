@@ -12,6 +12,13 @@ export const addNode = (currentModuleIndex) => {
   })
 }
 
+export const addStructure = (currentModuleIndex, structureName) => {
+  return ({
+    type: 'ADD_STRUCTURE',
+    data: {currentModuleIndex, structureName}
+  });
+}
+
 export const editNode = (update, path) => {
   return ({
     type: 'EDIT_NODE',
@@ -87,6 +94,17 @@ export const editModuleRemarks = (targetModuleIndex, newRemarks) => {
     data: { 
       newRemarks, 
       targetModuleIndex
+    }
+  })
+}
+
+export const changeStateType = (targetModuleIndex, targetNode, newType) => {
+  return ({
+    type: 'CHANGE_STATE_TYPE',
+    data:{
+      targetModuleIndex,
+      targetNode,
+      newType
     }
   })
 }

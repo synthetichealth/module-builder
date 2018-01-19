@@ -12,7 +12,20 @@ import { extractStates, extractAttributes } from '../transforms/Module';
 
 import './Editor.css';
 
-import {selectNode, addNode, editNode, renameNode, newModule, showLoadModule, hideLoadModule, selectModule, showCode, hideCode, editModuleName, editModuleRemarks} from '../actions/editor';
+import {selectNode, 
+        addNode, 
+        addStructure, 
+        editNode, 
+        renameNode, 
+        newModule, 
+        showLoadModule, 
+        hideLoadModule, 
+        selectModule, 
+        showCode, 
+        hideCode, 
+        changeStateType, 
+        editModuleName, 
+        editModuleRemarks} from '../actions/editor';
 
 class Editor extends Component {
 
@@ -32,11 +45,17 @@ class Editor extends Component {
     return (newName) => {
         this.props.renameNode(targetModuleIndex, targetNode, newName);
     }
+  }
 
+  changeStateType = (targetModuleIndex, targetNode) => {
+    return (newType) => {
+      this.props.changeStateType(targetModuleIndex, targetNode, newType);
+    }
   }
 
   render() {
     return (
+<<<<<<< HEAD
       <div className='Editor'>
 
         <Menu onNewModuleClick={this.props.newModule} 
@@ -77,6 +96,30 @@ class Editor extends Component {
             otherStates={this.props.states}
             onChange={this.onChange(this.props.selectedModuleIndex)} />
 
+=======
+      <div>
+        <Menu onNewModuleClick={this.props.newModule} moduleCount={this.props.moduleCount} onLoadModuleClick={this.props.showLoadModule} onShowCodeClick={this.props.showCode}/>
+        <LoadModule modules={this.props.modules} visible={this.props.loadModuleVisible} onHide={this.props.hideLoadModule} onSelectModule={this.props.selectModule}/>
+        <Code module={this.props.module} visible={this.props.codeVisible} onHide={this.props.hideCode}/>
+
+        <div className="App container-fluid">
+          <div className="App-body">
+            <div className='button_holder'>
+              <button className='btn btn-primary' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
+              <br/>
+              <button className='btn btn-secondary' onClick={() => this.props.addStructure(this.props.selectedModuleIndex, 'CheckYearly')}> Add Structure </button>
+            </div>
+            <ModuleGraph module={this.props.module} onClick={this.props.selectNode} selectedState={this.props.selectedState}/>
+            <div className="App-edit-panel">
+              <StateEditor
+                renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
+                changeType={this.changeStateType(this.props.selectedModuleIndex, this.props.selectedState)}
+                state={this.props.selectedState}
+                otherStates={this.props.states}
+                onChange={this.onChange(this.props.selectedModuleIndex)} />
+            </div>
+          </div>
+>>>>>>> master
         </div>
       </div>
 
@@ -119,8 +162,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => bindActionCreators({
   selectNode,
   addNode,
+  addStructure,
   editNode,
   renameNode,
+  changeStateType,
   newModule,
   showLoadModule,
   hideLoadModule,
