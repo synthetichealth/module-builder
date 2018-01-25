@@ -25,8 +25,8 @@ class StateEditor extends Component<Props> {
 
   renderStateType() {
     let props = {...this.props};
-    props.state.name |= 'Unnamed Node';
-    props.onChange = this.props.onChange(`states.${this.props.state.name}`);
+    props.state.name = props.state.name || 'Unnamed_State';
+    props.onChange = this.props.onChange(`states.${props.state.name}`);
     switch (this.props.state.type) {
       case "Initial":
         return <Initial {...props} />
