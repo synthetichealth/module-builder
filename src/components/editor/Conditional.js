@@ -274,7 +274,7 @@ class Attribute extends Component<Props> {
       <label>
         <RIEInput value={conditional.attribute} propName="attribute" change={this.props.onChange('attribute')} />
         <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
-        <RIENumber value={conditional.value||NaN} propName='value' change={this.props.onChange('value')} />
+        <RIENumber value={conditional.value||0} propName='value' change={this.props.onChange('value')} />
       </label>
     );
   }
