@@ -34,6 +34,9 @@ type CodesProps = {
 export class Codes extends Component<CodesProps> {
   render() {
 
+    if(!this.props.codes){
+      return null;
+    }
     return (
       <div>
         {this.props.codes.map((code, i) => {

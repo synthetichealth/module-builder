@@ -25,7 +25,8 @@ class StateEditor extends Component<Props> {
 
   renderStateType() {
     let props = {...this.props};
-    props.onChange = this.props.onChange(`states.${this.props.state.name}`);
+    props.state.name = props.state.name || 'Unnamed_State';
+    props.onChange = this.props.onChange(`states.${props.state.name}`);
     switch (this.props.state.type) {
       case "Initial":
         return <Initial {...props} />
@@ -361,7 +362,7 @@ class ConditionOnset extends Component<Props> {
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
         <br />
-        Target Encounter: <RIEInput value={state.target_encounter} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
+        Target Encounter: <RIEInput value={state.target_encounter || ''} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
         <br />
         {this.renderAssignToAttribute()}
         <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
