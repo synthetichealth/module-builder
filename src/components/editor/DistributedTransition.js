@@ -39,7 +39,8 @@ class DistributedTransition extends Component<Props> {
             <RIENumber value={t.distribution} propName='distribution' change={this.props.onChange(`[${i}].distribution`)} />
 
             </label>
-
+            <br/>
+            <a onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
           </div>
         })}
         <a onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: _.cloneDeep(TransitionTemplates.Distributed[0])}})}>+</a>

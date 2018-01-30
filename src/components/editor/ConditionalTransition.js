@@ -36,7 +36,8 @@ class ConditionalTransition extends Component<Props> {
               <RIESelect propName='to' value={{id:t.to, text:t.to}} change={this.props.onChange(`${i}.transition`)} options={options} />
 
             </label>
-
+            <br/>
+            <a onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
 
           </div>
         })}

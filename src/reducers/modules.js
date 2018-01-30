@@ -21,8 +21,13 @@ export default (state = initialState, action) => {
         value = value.id;
       }
       newState = [...state];
-      debugger
-      _.set(newState, path, value);
+      if(value) {
+        _.set(newState, path, value);
+      }
+      else{
+        _.unset(newState, path);
+      }
+
       return [...newState]
 
     case 'ADD_STRUCTURE':

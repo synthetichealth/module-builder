@@ -18,7 +18,8 @@ type Props = {
   otherStates: State[],
   onChange: any,
   renameNode: any,
-  changeType: any
+  changeType: any,
+  addTransition: any
 }
 
 const unitOfTimeOptions = [

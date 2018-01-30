@@ -2,7 +2,10 @@
 
 import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
+import _ from 'lodash';
+
 import type { Code as CodeType } from '../../types/Code';
+import { TypeTemplates } from '../../templates/Templates';
 
 type Props = {
   code: CodeType,
@@ -40,8 +43,13 @@ export class Codes extends Component<CodesProps> {
     return (
       <div>
         {this.props.codes.map((code, i) => {
-          return <Code key={i} onChange={this.props.onChange(i)} code={code} />
+          return <div>
+              <a onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>x</a>
+              <Code key={i} onChange={this.props.onChange(i)} code={code} />
+            </div>
         })}
+        <a onClick={() => this.props.onChange(`[${this.props.codes.length}]`)({val: {id: _.cloneDeep(TypeTemplates.Code)}})}>+</a>
+
       </div>
     );
   }
