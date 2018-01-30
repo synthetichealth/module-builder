@@ -11,19 +11,20 @@ import { extractStates, extractAttributes } from '../transforms/Module';
 
 import './Editor.css';
 
-import {selectNode, 
-        addNode, 
-        addStructure, 
-        editNode, 
-        renameNode, 
-        newModule, 
-        showLoadModule, 
-        hideLoadModule, 
-        selectModule, 
-        showDownload, 
-        hideDownload, 
-        changeStateType, 
-        editModuleName, 
+import {selectNode,
+        addNode,
+        addStructure,
+        addTransition,
+        editNode,
+        renameNode,
+        newModule,
+        showLoadModule,
+        hideLoadModule,
+        selectModule,
+        showDownload,
+        hideDownload,
+        changeStateType,
+        editModuleName,
         editModuleRemarks} from '../actions/editor';
 
 class Editor extends Component {
@@ -52,6 +53,12 @@ class Editor extends Component {
     }
   }
 
+  addTransition = (targetModuleIndex, targetNode) => {
+    return (transitionType) => {
+      this.props.addTransition(targetModuleIndex, targetNode, transitionType)
+    }
+  }
+
   render() {
     return (
       <div className='Editor'>
@@ -73,37 +80,38 @@ class Editor extends Component {
         </nav>
 
         /* REFACTOR THESE MODALS */
-        <LoadModule modules={this.props.modules} 
-          visible={this.props.loadModuleVisible} 
-          onHide={this.props.hideLoadModule} 
+        <LoadModule modules={this.props.modules}
+          visible={this.props.loadModuleVisible}
+          onHide={this.props.hideLoadModule}
           onSelectModule={this.props.selectModule}/>
 
-        <Download module={this.props.module} 
-          visible={this.props.downloadVisible} 
+        <Download module={this.props.module}
+          visible={this.props.downloadVisible}
           onHide={this.props.hideDownload}/>
 
         <div className='Editor-main'>
-          
+
 
           <div className='Editor-panel'>
 
             <ModulePropertiesEditor
-              module={this.props.module} 
+              module={this.props.module}
               onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleIndex, name)}
               onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleIndex, remarks)}/>
 
             <StateEditor
               renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
               changeType={this.changeStateType(this.props.selectedModuleIndex, this.props.selectedState)}
+              addTransition={this.addTransition(this.props.selectedModuleIndex, this.props.selectedState)}
               state={this.props.selectedState}
               otherStates={this.props.states}
               onChange={this.onChange(this.props.selectedModuleIndex)} />
 
            </div>
 
-          <ModuleGraph 
-            module={this.props.module} 
-            onClick={this.props.selectNode} 
+          <ModuleGraph
+            module={this.props.module}
+            onClick={this.props.selectNode}
             selectedState={this.props.selectedState}/>
 
         </div>
@@ -133,6 +141,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   selectNode,
   addNode,
   addStructure,
+  addTransition,
   editNode,
   renameNode,
   changeStateType,
@@ -144,7 +153,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   hideDownload,
   editModuleName,
   editModuleRemarks
-  
+
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);
