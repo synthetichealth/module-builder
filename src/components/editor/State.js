@@ -109,14 +109,16 @@ class StateEditor extends Component<Props> {
           {this.renderStateType()}
           <br />
           <div>
-            <button onClick={() => this.props.addTransition('Direct')}>Direct</button>
-            <button onClick={() => this.props.addTransition('Conditional')}>Cond</button>
-            <button onClick={() => this.props.addTransition('Distributed')}>Dist</button>
+            <a onClick={() => this.props.addTransition('Direct')}>Direct</a>|
+            <a onClick={() => this.props.addTransition('Conditional')}>Conditional</a>|
+            <a onClick={() => this.props.addTransition('Distributed')}>Distributed</a>
           </div>
           <Transition
             options={this.props.otherStates}
             transition={this.props.state.transition}
             onChange={this.props.onChange(`states.${this.props.state.name}`)} />
+            <br/>
+            <button className="btn btn-error" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Delete State</button>
         </div>
     )
   }
