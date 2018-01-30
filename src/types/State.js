@@ -2,6 +2,7 @@
 import type { Transition } from './Transition';
 import type { Conditional } from './Conditional';
 import type { Code } from './Code';
+import type { UnitOfTime } from './Units';
 
 export type InitialState = {
   name: string,
@@ -33,12 +34,12 @@ export type DelayState = {
   type: 'Delay',
   exact?: {
     quantity: number,
-    unit: string
+    unit: UnitOfTime
   },
   range?: {
     low: number,
     high: number,
-    unit: string
+    unit: UnitOfTime
   },
   transition?: Transition
 }
@@ -132,11 +133,11 @@ export type MedicationOrderState = {
       amount: number,
       frequency: number,
       period: number,
-      unit: string
+      unit: UnitOfTime
     },
     duration: {
       quantity: number,
-      unit: string
+      unit: UnitOfTime
     },
     instructions?: Code[]
   },
@@ -188,7 +189,7 @@ export type ProcedureState = {
   duration: {
     low: number,
     high: number,
-    unit: string
+    unit: UnitOfTime
   },
   transition?: Transition
 }
@@ -263,12 +264,12 @@ export type DeathState = {
   type: 'Death',
   exact?: {
     quantity: number,
-    unit: string
+    unit: UnitOfTime
   },
   range?: {
     low: number,
     high: number,
-    unit: string
+    unit: UnitOfTime
   },
   codes?: Code[],
   condition_onset?: string,

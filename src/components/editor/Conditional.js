@@ -10,6 +10,16 @@ type Props = {
   onChange: any
 }
 
+const unitOfAgeOptions = [
+  {id: 'years', text: 'years'},
+  {id: 'months', text: 'months'},
+  {id: 'weeks', text: 'weeks'},
+  {id: 'days', text: 'days'},
+  {id: 'hours', text: 'hours'},
+  {id: 'minutes', text: 'minutes'},
+  {id: 'seconds', text: 'seconds'}
+];
+
 class ConditionalEditor extends Component<Props> {
 
   renderConditionalType() {
@@ -94,12 +104,11 @@ class Age extends Component<Props> {
   render() {
     let conditional = ((this.props.conditional: any): AgeConditional);
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
-
     return (
       <label> Age:
       <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
       <RIENumber value={conditional.quantity} propName='quantity' change={this.props.onChange('quantity')} />
-      <RIEInput value={conditional.unit} propName="unit" change={this.props.onChange('unit')} />
+      <RIESelect value={{id: conditional.unit, text: conditional.unit}} propName="unit" change={this.props.onChange('unit')} options={unitOfAgeOptions} />
       </label>
     );
   }

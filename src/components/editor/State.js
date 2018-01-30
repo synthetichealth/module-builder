@@ -21,6 +21,16 @@ type Props = {
   changeType: any
 }
 
+const unitOfTimeOptions = [
+  {id: 'years', text: 'years'},
+  {id: 'months', text: 'months'},
+  {id: 'weeks', text: 'weeks'},
+  {id: 'days', text: 'days'},
+  {id: 'hours', text: 'hours'},
+  {id: 'minutes', text: 'minutes'},
+  {id: 'seconds', text: 'seconds'}
+];
+
 class StateEditor extends Component<Props> {
 
   renderStateType() {
@@ -212,7 +222,7 @@ class Delay extends Component<Props> {
       <label>
         Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
         <br />
-        Exact Unit: <RIEInput value={state.exact.unit} propName='unit' change={this.props.onChange('exact.unit')} />
+        Exact Unit: <RIESelect value={{id: state.exact.unit, text: state.exact.unit}} propName="unit" change={this.props.onChange('exact.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -229,7 +239,7 @@ class Delay extends Component<Props> {
         <br />
         Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
         <br />
-        Range Unit: <RIEInput value={state.range.unit} propName='unit' change={this.props.onChange('range.unit')} />
+        Range Unit: <RIESelect value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -522,7 +532,7 @@ class MedicationOrder extends Component<Props> {
         <br />
         Dosage Period: <RIENumber value={state.prescription.dosage.period} propName={'period'}  change={this.props.onChange('prescription.dosage.period')} />
         <br />
-        Dosage Unit: <RIEInput value={state.prescription.dosage.unit} propName={'unit'}  change={this.props.onChange('prescription.dosage.unit')} />
+        Dosage Unit: <RIESelect value={{id: state.prescription.dosage.unit, text: state.prescription.dosage.unit}} propName="unit" change={this.props.onChange('prescription.dosage.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -537,7 +547,7 @@ class MedicationOrder extends Component<Props> {
       <label>
         Duration Quantity: <RIENumber value={state.prescription.duration.quantity} propName={'quantity'}  change={this.props.onChange('prescription.duration.quantity')} />
         <br />
-        Duration Unit: <RIEInput value={state.prescription.duration.unit} propName={'unit'}  change={this.props.onChange('prescription.duration.unit')} />
+        Duration Unit: <RIESelect value={{id: state.prescription.duration.unit, text: state.prescription.duration.unit}} propName="unit" change={this.props.onChange('prescription.duration.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -637,7 +647,7 @@ class Procedure extends Component<Props> {
         <br />
         Duration High: <RIENumber value={state.duration.high} propName={'high'}  change={this.props.onChange('duration.high')} />
         <br />
-        Duration Unit: <RIEInput value={state.duration.unit} propName={'unit'}  change={this.props.onChange('duration.unit')} />
+        Duration Unit: <RIESelect value={{id: state.duration.unit, text: state.duration.unit}} propName="unit" change={this.props.onChange('duration.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -736,7 +746,7 @@ class Death extends Component<Props> {
       <label>
         Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
         <br />
-        Exact Unit: <RIEInput value={state.exact.unit} propName='unit' change={this.props.onChange('exact.unit')} />
+        Exact Unit: <RIESelect value={{id: state.exact.unit, text: state.exact.unit}} propName="unit" change={this.props.onChange('exact.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -753,7 +763,7 @@ class Death extends Component<Props> {
         <br />
         Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
         <br />
-        Range Unit: <RIEInput value={state.range.unit} propName='unit' change={this.props.onChange('range.unit')} />
+        Range Unit: <RIESelect value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );

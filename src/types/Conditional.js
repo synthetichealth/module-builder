@@ -1,6 +1,7 @@
 // @flow
 
 import type { Code } from './Code';
+import type { UnitOfAge } from './Units';
 
 export type GenderConditional = {
   condition_type: 'Gender',
@@ -11,7 +12,7 @@ export type AgeConditional = {
   condition_type: 'Age',
   operator: '==' | '!=' | "<" | "<=" | ">" | ">=",
   quantity: number,
-  unit: string
+  unit: UnitOfAge
 }
 
 export type DateConditional = {
