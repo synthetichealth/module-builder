@@ -23,6 +23,11 @@ export const TypeTemplates = {
       quantity: 0,
       unit: "years"
     },
+    Date: {
+      condition_type: 'Date',
+      operator: ">",
+      year: 2000,
+    },
     ActiveCondition: {
       condition_type: 'Active Condition',
       codes: [{
@@ -78,6 +83,23 @@ export const StateTemplates = {
     type: "Encounter",
     encounter_class: "ambulatory",
     reason: "",
+    codes: [{...TypeTemplates.Code}]
+  },
+
+  MedicationOrder: {
+    type: "MedicationOrder",
+    codes: [{...TypeTemplates.Code}]
+  },
+
+  Procedure: {
+    type: "Procedure",
+    codes: [{...TypeTemplates.Code}]
+  },
+
+  Observation: {
+    type: "Observation",
+    category: "vital-signs",
+    unit: "",
     codes: [{...TypeTemplates.Code}]
   },
 
