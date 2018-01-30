@@ -93,13 +93,21 @@ class Age extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): AgeConditional);
-    let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
-
+    let operatorOptions = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
+    let unitOptions = [
+      {id: 'years', text: 'years'},
+      {id: 'months', text: 'months'},
+      {id: 'weeks', text: 'weeks'},
+      {id: 'days', text: 'days'},
+      {id: 'hours', text: 'hours'},
+      {id: 'minutes', text: 'minutes'},
+      {id: 'seconds', text: 'seconds'}
+    ];
     return (
       <label> Age:
-      <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
+      <RIESelect value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={operatorOptions} />
       <RIENumber value={conditional.quantity} propName='quantity' change={this.props.onChange('quantity')} />
-      <RIEInput value={conditional.unit} propName="unit" change={this.props.onChange('unit')} />
+      <RIESelect value={{id: conditional.unit, text: conditional.unit}} propName="unit" change={this.props.onChange('unit')} options={unitOptions} />
       </label>
     );
   }

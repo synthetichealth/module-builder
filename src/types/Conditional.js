@@ -11,7 +11,7 @@ export type AgeConditional = {
   condition_type: 'Age',
   operator: '==' | '!=' | "<" | "<=" | ">" | ">=",
   quantity: number,
-  unit: string
+  unit: 'years' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds'
 }
 
 export type DateConditional = {

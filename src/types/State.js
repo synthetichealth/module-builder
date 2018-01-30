@@ -33,12 +33,12 @@ export type DelayState = {
   type: 'Delay',
   exact?: {
     quantity: number,
-    unit: string
+    unit: 'years' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds'
   },
   range?: {
     low: number,
     high: number,
-    unit: string
+    unit: 'years' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds'
   },
   transition?: Transition
 }
@@ -132,11 +132,11 @@ export type MedicationOrderState = {
       amount: number,
       frequency: number,
       period: number,
-      unit: string
+      unit: 'years' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds'
     },
     duration: {
       quantity: number,
-      unit: string
+      unit: 'years' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds'
     },
     instructions?: Code[]
   },
@@ -188,7 +188,7 @@ export type ProcedureState = {
   duration: {
     low: number,
     high: number,
-    unit: string
+    unit: 'years' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds'
   },
   transition?: Transition
 }
@@ -263,12 +263,12 @@ export type DeathState = {
   type: 'Death',
   exact?: {
     quantity: number,
-    unit: string
+    unit: 'years' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds'
   },
   range?: {
     low: number,
     high: number,
-    unit: string
+    unit: 'years' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds'
   },
   codes?: Code[],
   condition_onset?: string,
