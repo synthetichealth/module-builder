@@ -21,14 +21,37 @@ export default (state = initialState, action) => {
         value = value.id;
       }
       newState = [...state];
-      _.set(newState, path, value);
+      if(value) {
+        _.set(newState, path, value);
+      }
+      else{
+        _.unset(newState, path);
+      }
+
       return [...newState]
 
     case 'ADD_STRUCTURE':
       newState = [...state];
       newState[action.data.currentModuleIndex].states = {...newState[action.data.currentModuleIndex].states, ...StructureTemplates[action.data.structureName]};
       return newState
-      
+
+    case 'ADD_TRANSITION':
+      newState = [...state];
+
+      let transitionMapping = {
+        Conditional: 'conditional_transition',
+        Distributed: 'distributed_transition',
+        Direct: 'direct_transition',
+        Complex: 'complex_transition',
+      };
+      let transitionName = transitionMapping[action.data.transitionType] || 'direct_transition';
+      let paths = Object.values(transitionMapping);
+      for (var pathIndex in paths) {
+        delete newState[action.data.currentModuleIndex].states[action.data.nodeName.name][paths[pathIndex]];
+      }
+      newState[action.data.currentModuleIndex].states[action.data.nodeName.name][transitionName] = _.clone(TransitionTemplates[action.data.transitionType]);
+      return newState
+
     case 'ADD_NODE':
       newState = [...state];
       const stateIndex = Object.keys(newState[action.data.currentModuleIndex].states).length;

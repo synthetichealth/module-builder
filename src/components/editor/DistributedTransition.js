@@ -1,9 +1,11 @@
 // @flow
 import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
+import _ from 'lodash';
 
 
 import type { DistributedTransition as DistributedTransitionType } from '../../types/Transition';
+import { TransitionTemplates } from '../../templates/Templates';
 import type { State } from '../../types/State';
 
 type Props = {
@@ -25,19 +27,23 @@ class DistributedTransition extends Component<Props> {
 
     return (
       <label>
-        Distributed Transition To:
+
+        Distributed Transition:
         {currentValue.map((t, i) => {
           return <div>
             <label>To:
               <RIESelect propName='transition' value={{id:t.to, text:t.to}} change={this.props.onChange(`[${i}].transition`)} options={options} />
             </label>
+            <br/>
             <label> Weight:
             <RIENumber value={t.distribution} propName='distribution' change={this.props.onChange(`[${i}].distribution`)} />
 
             </label>
-
+            <br/>
+            <a onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
           </div>
         })}
+        <a onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: _.cloneDeep(TransitionTemplates.Distributed[0])}})}>+</a>
       </label>
     );
   }

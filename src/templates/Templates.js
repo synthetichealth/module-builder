@@ -40,8 +40,9 @@ export const TypeTemplates = {
 }
 
 export const TransitionTemplates = {
-  Direct: '',
-  Conditional: [{transition: '', condition: {...TypeTemplates.Condition.Age}}]
+  Direct: 'Initial',
+  Conditional: [{transition: 'Initial', condition: {...TypeTemplates.Condition.Age}}],
+  Distributed: [{transition: 'Initial', distribution: 0.0}]
 }
 
 export const StateTemplates = {
@@ -185,7 +186,6 @@ export const StructureTemplates = {
     Join: {...StateTemplates.Simple, direct_transition: 'Terminal'}
   }
 }
-
 
 export const ModuleTemplates = {
   Blank: {

@@ -18,7 +18,8 @@ type Props = {
   otherStates: State[],
   onChange: any,
   renameNode: any,
-  changeType: any
+  changeType: any,
+  addTransition: any
 }
 
 const unitOfTimeOptions = [
@@ -98,33 +99,6 @@ class StateEditor extends Component<Props> {
       return null;
     }
 
-    // let typeOptions = [
-    //   {id: 'Initial', text: 'Initial'},
-    //   {id: 'Terminal', text: 'Terminal'},
-    //   {id: 'Simple', text: 'Simple'},
-    //   {id: 'Guard', text: 'Guard'},
-    //   {id: 'Delay', text: 'Delay'},
-    //   {id: 'SetAttribute', text: 'SetAttribute'},
-    //   {id: 'Counter', text: 'Counter'},
-    //   {id: 'CallSubmodule', text: 'CallSubmodule'},
-    //   {id: 'Encounter', text: 'Encounter'},
-    //   {id: 'EncounterEnd', text: 'EncounterEnd'},
-    //   {id: 'ConditionOnset', text: 'ConditionOnset'},
-    //   {id: 'ConditionEnd', text: 'ConditionEnd'},
-    //   {id: 'AllergyOnset', text: 'AllergyOnset'},
-    //   {id: 'AllergyEnd', text: 'AllergyEnd'},
-    //   {id: 'MedicationOrder', text: 'MedicationOrder'},
-    //   {id: 'MedicationEnd', text: 'MedicationEnd'},
-    //   {id: 'CarePlanStart', text: 'CarePlanStart'},
-    //   {id: 'CarePlanEnd', text: 'CarePlanEnd'},
-    //   {id: 'Procedure', text: 'Procedure'},
-    //   {id: 'VitalSign', text: 'VitalSign'},
-    //   {id: 'Observation', text: 'Observation'},
-    //   {id: 'MultiObservation', text: 'MultiObservation'},
-    //   {id: 'DiagnosticReport', text: 'DiagnosticReport'},
-    //   {id: 'Symptom', text: 'Symptom'},
-    //   {id: 'Death', text: 'Death'}
-    // ]
 
     let typeOptions = Object.keys(StateTemplates).sort().map((k) => {return {id: k, text: k}});
 
@@ -134,10 +108,17 @@ class StateEditor extends Component<Props> {
           <br/>
           {this.renderStateType()}
           <br />
+          <div>
+            <a onClick={() => this.props.addTransition('Direct')}>Direct</a>|
+            <a onClick={() => this.props.addTransition('Conditional')}>Conditional</a>|
+            <a onClick={() => this.props.addTransition('Distributed')}>Distributed</a>
+          </div>
           <Transition
             options={this.props.otherStates}
             transition={this.props.state.transition}
             onChange={this.props.onChange(`states.${this.props.state.name}`)} />
+            <br/>
+            <button className="btn btn-error" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Delete State</button>
         </div>
     )
   }

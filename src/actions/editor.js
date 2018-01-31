@@ -19,6 +19,13 @@ export const addStructure = (currentModuleIndex, structureName) => {
   });
 }
 
+export const addTransition = (currentModuleIndex, nodeName, transitionType) => {
+  return ({
+    type: 'ADD_TRANSITION',
+    data: {currentModuleIndex, nodeName, transitionType}
+  });
+}
+
 export const editNode = (update, path) => {
   return ({
     type: 'EDIT_NODE',
@@ -81,8 +88,8 @@ export const hideDownload = () => {
 export const editModuleName = (targetModuleIndex, newName) => {
   return ({
     type: 'EDIT_MODULE_NAME',
-    data: { 
-      newName, 
+    data: {
+      newName,
       targetModuleIndex
     }
   })
@@ -91,8 +98,8 @@ export const editModuleName = (targetModuleIndex, newName) => {
 export const editModuleRemarks = (targetModuleIndex, newRemarks) => {
   return ({
     type: 'EDIT_MODULE_REMARKS',
-    data: { 
-      newRemarks, 
+    data: {
+      newRemarks,
       targetModuleIndex
     }
   })
