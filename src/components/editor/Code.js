@@ -43,10 +43,12 @@ export class Codes extends Component<CodesProps> {
     return (
       <div>
         {this.props.codes.map((code, i) => {
-          return <div>
+          return (
+            <div key={i}>
               <a onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>x</a>
-              <Code key={i} onChange={this.props.onChange(i)} code={code} />
+              <Code onChange={this.props.onChange(i)} code={code} />
             </div>
+          )
         })}
         <a onClick={() => this.props.onChange(`[${this.props.codes.length}]`)({val: {id: _.cloneDeep(TypeTemplates.Code)}})}>+</a>
 
