@@ -35,33 +35,35 @@ class LoadModule extends Component {
     switch(this.state.selectedOption){
       case 'core':
         return (
-          <ul class='LoadModule-list'>
+          <ul className='LoadModule-list'>
             { Object.keys(this.props.modules).filter(n => (n.indexOf('/') === -1)).map( (key, index) => {
               let module = this.props.modules[key]
               return (
-                <li key={module.name}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name}</button></li>
+                <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name}</button></li>
               )
             })}
           </ul>
         )
-        break;
+
       case 'submodules':
         return (
-          <ul class='LoadModule-list'>
+          <ul className='LoadModule-list'>
             { Object.keys(this.props.modules).filter(n => (n.indexOf('/') > -1)).map( (key, index) => {
               let module = this.props.modules[key]
               return (
-                <li key={module.name}><button className='btn btn-link' onClick={this.onClick(key)}>{key.split('/')[0] + ': ' + module.name}</button></li>
+                <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{key.split('/')[0] + ': ' + module.name}</button></li>
               )
             })}
           </ul>
         )
-        break;
+
       case 'json':
         return (
           <textarea id='loadJSON' value={this.state.json} onChange={this.updateJson}></textarea>
         )
-        break;
+      default:
+        return;
+
     }
   }
 
@@ -89,7 +91,7 @@ class LoadModule extends Component {
                 <div className='container'>
                   <div className='row'>
                     <div className='col-3 nopadding'>
-                      <ul class='LoadModule-options'>
+                      <ul className='LoadModule-options'>
                          <li className={(this.state.selectedOption === 'core') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('core')}>Core Modules</button></li>
                          <li className={(this.state.selectedOption === 'submodules') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('submodules')}>Submodules</button></li>
                          <li className={(this.state.selectedOption === 'json') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('json')}>Paste JSON</button></li>

@@ -1,6 +1,8 @@
 
 export function findAvailableKey(root, keys){
+  // eslint-disable-next-line no-sequences
   let keys_index = keys.reduce((r, i) => (r[i] = true, r), {})
+
   let next = root;
   let index = 1;
   while(keys_index[next]){

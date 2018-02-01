@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { StateTemplates, TypeTemplates, TransitionTemplates, ModuleTemplates, StructureTemplates } from '../templates/Templates';
+import { StateTemplates, TransitionTemplates, StructureTemplates } from '../templates/Templates';
 
 const initialState = {};
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ConnectedRouter, push } from 'react-router-redux'
+import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -22,7 +22,6 @@ import {selectNode,
         editNode,
         renameNode,
         newModule,
-        jsonLoad,
         showLoadModule,
         hideLoadModule,
         showDownload,
@@ -39,7 +38,7 @@ class Editor extends Component {
     By keeping track of where it's been it means that the action can just look into the modules along the path
   */
   onChange  = (update, path=[]) => {
-    if(typeof update != 'object') {
+    if(typeof update !== 'object') {
       return (val) => this.onChange(val, [].concat(path, [update]))
     }
     this.props.editNode(update, path)
@@ -130,7 +129,6 @@ class Editor extends Component {
           onHide={this.props.hideDownload}/>
 
         <div className='Editor-main'>
-
 
           <div className='Editor-panel'>
 

@@ -3,8 +3,10 @@ import type { Module } from './types/Module';
 import type { State } from './types/State';
 
 const STANDARD_COLOR = 'Black';
+/*
 const HIGHLIGHT_COLOR = '#007bff';
 const MUTED_COLOR = '#CCCCCC'
+*/
 
 export default function generateDOT(module: Module, selectedState: State) {
 
@@ -245,7 +247,7 @@ const stateDescription = (state) =>{
       details = 'End the current encounter'
       if(state['discharge_disposition']){
        let code = state['discharge_disposition']
-       details += `\l  + Discharge Disposition: [${code['code']}] ${code['display']}`
+       details += `\\lDischarge Disposition: [${code['code']}] ${code['display']}`
       }
       break;
     case 'SetAttribute':
@@ -296,6 +298,8 @@ const stateDescription = (state) =>{
     case 'DiagnosticReport':
       details = `Group the last ${state['number_of_observations']} Observations\\l`
       break;
+    default:
+      break;
 
   }
 
@@ -315,6 +319,8 @@ const stateDescription = (state) =>{
         break;
       case 'MedicationOrder':
         verb = 'Prescribe'
+        break;
+      default:
         break;
     }
 
