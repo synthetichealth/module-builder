@@ -1,16 +1,41 @@
 
-const initialState = {currentNode: null, currentModuleIndex: 0, loadModuleVisible: false, downloadVisible: false};
+const initialState = {
+    selectedStateKey: null, 
+    selectedModuleKey: 'examplitis', 
+    loadModuleVisible: false, 
+    downloadVisible: false
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'SELECT_NODE':
-      return { ...state, currentNode: action.data};
+      return { ...state, selectedStateKey: action.data};
       break;
+
+    case 'ADD_NODE':
+      let newState = {...state}
+      newState.selectedStateKey = action.data.stateKey;
+      return { ...newState }
+      break;
+
+    case '@@router/LOCATION_CHANGE':
+      let selectedModuleKey = state.selectedModuleKey;
+
+      if(action.payload.hash.startsWith('#')){
+        selectedModuleKey = action.payload.hash.substr(1)
+      }
+      
+      return { ...state, selectedModuleKey, selectedStateKey: null, loadModuleVisible: false};
+      break;
+
     case 'NEW_MODULE':
-      return {...state, currentModuleIndex: action.data}
-    case 'SELECT_MODULE':
-      return { ...state, currentModuleIndex: action.data, loadModuleVisible: false};
+      return { ...state, selectedStateKey: null};
       break;
+
+    case 'LOAD_JSON':
+      return { ...state, selectedModuleKey: action.data.selectedModuleKey};
+      break;
+
     case 'SHOW_LOAD_MODULE':
       return { ...state, loadModuleVisible: true};
       break;

@@ -12,7 +12,7 @@ let renameNode = () => null;
 let changeType = () => null;
 
 it(`renders state editor for all states in all modules propertly without errors`, () => {
-  modulesJSON.forEach( module => {
+  Object.keys(modulesJSON).map(k => (modulesJSON[k])).forEach( module => {
     // array of states in module
     Object.keys(module.states).map(s => (module.states[s]._key = s, module.states[s])).forEach( state => {
       // other states are all states with a different key than the one we are on

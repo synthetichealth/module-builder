@@ -9,7 +9,7 @@ import ModuleGraph from './Module';
 
 const onClick = () => null;
 
-modulesJSON.forEach( module => {
+Object.keys(modulesJSON).map(k => (modulesJSON[k])).forEach( module => {
   it(`renders ${module.name} module without crashing`, () => {
       renderComponent(ModuleGraph, { module, onClick })
   });

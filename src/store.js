@@ -1,7 +1,7 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
 
-import rootReducer from './reducers';
-
+import reducers from './reducers';
 
 import modulesJSON from './mocks/modules';
 
@@ -17,15 +17,20 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-const composedEnhancers = compose(
-  applyMiddleware(...middleware),
-  ...enhancers
-)
+const createAppStore = (history) => {
+  middleware.push(routerMiddleware(history))
+  const composedEnhancers = compose(
+    applyMiddleware(...middleware),
+    ...enhancers
+  )
 
-const store = createStore(
-  rootReducer,
-  initialState,
-  composedEnhancers
-)
+  const store = createStore(
+    reducers,
+    initialState,
+    composedEnhancers
+  )
 
-export default store;
+  return store;
+}
+
+export default createAppStore;

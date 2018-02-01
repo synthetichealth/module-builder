@@ -1,28 +1,28 @@
-export const selectNode = (name) => {
+export const selectNode = (key) => {
   return ({
     type: 'SELECT_NODE',
-    data: name
+    data: key
   })
 }
 
-export const addNode = (currentModuleIndex) => {
+export const addNode = (currentModuleKey, stateKey, state) => {
   return ({
     type: 'ADD_NODE',
-    data: {currentModuleIndex}
+    data: {currentModuleKey, stateKey, state}
   })
 }
 
-export const addStructure = (currentModuleIndex, structureName) => {
+export const addStructure = (currentModuleKey, structureName) => {
   return ({
     type: 'ADD_STRUCTURE',
-    data: {currentModuleIndex, structureName}
+    data: {currentModuleKey, structureName}
   });
 }
 
-export const addTransition = (currentModuleIndex, nodeName, transitionType) => {
+export const addTransition = (currentModuleKey, nodeName, transitionType) => {
   return ({
     type: 'ADD_TRANSITION',
-    data: {currentModuleIndex, nodeName, transitionType}
+    data: {currentModuleKey, nodeName, transitionType}
   });
 }
 
@@ -36,21 +36,28 @@ export const editNode = (update, path) => {
   })
 }
 
-export const renameNode = (targetModuleIndex, targetNode, newName) => {
+export const renameNode = (targetModuleKey, targetNode, newName) => {
   return ({
     type: 'RENAME_NODE',
     data:{
-      targetModuleIndex,
+      targetModuleKey,
       targetNode,
       newName
     }
   })
 }
 
-export const newModule = (nextModuleIndex) => {
+export const jsonLoad = (key, module) => {
+  return ({
+    type: 'JSON_LOAD',
+    data: {key, module}
+  })
+}
+
+export const newModule = (key, module) => {
   return ({
     type: 'NEW_MODULE',
-    data: nextModuleIndex
+    data: {key, module}
   })
 }
 
@@ -66,13 +73,6 @@ export const hideLoadModule = () => {
   })
 }
 
-export const selectModule = (moduleIndex) => {
-  return ({
-    type: 'SELECT_MODULE',
-    data: moduleIndex
-  })
-}
-
 export const showDownload = () => {
   return ({
     type: 'SHOW_DOWNLOAD'
@@ -85,31 +85,31 @@ export const hideDownload = () => {
   })
 }
 
-export const editModuleName = (targetModuleIndex, newName) => {
+export const editModuleName = (targetModuleKey, newName) => {
   return ({
     type: 'EDIT_MODULE_NAME',
     data: {
       newName,
-      targetModuleIndex
+      targetModuleKey
     }
   })
 }
 
-export const editModuleRemarks = (targetModuleIndex, newRemarks) => {
+export const editModuleRemarks = (targetModuleKey, newRemarks) => {
   return ({
     type: 'EDIT_MODULE_REMARKS',
     data: {
       newRemarks,
-      targetModuleIndex
+      targetModuleKey
     }
   })
 }
 
-export const changeStateType = (targetModuleIndex, targetNode, newType) => {
+export const changeStateType = (targetModuleKey, targetNode, newType) => {
   return ({
     type: 'CHANGE_STATE_TYPE',
     data:{
-      targetModuleIndex,
+      targetModuleKey,
       targetNode,
       newType
     }
