@@ -228,39 +228,66 @@ class Delay extends Component<Props> {
 
 }
 
-class SetAttribute extends Component<Props> { // TODO
+class SetAttribute extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): SetAttributeState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        Attribute: <RIEInput value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
+        <br/>
+        {this.renderValue()}
       </div>
+    );
+  }
+
+  renderValue() {
+    let state = ((this.props.state: any): SetAttributeState);
+    if (!state.value) {
+      return null;
+    }
+    return (
+      <label>
+        Exact Quantity: <RIEInput value={state.value} propName='value' change={this.props.onChange('value')} />
+        <br />
+      </label>
     );
   }
 
 }
 
-class Counter extends Component<Props> { // TODO
+class Counter extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): CounterState);
+    let options = [
+      {id: 'increment', text: 'increment'},
+      {id: 'decrement', text: 'decrement'}
+    ];
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        Attribute: <RIEInput value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
+        <br/>
+        Action: <RIESelect value={{id: state.action, text: state.action}} propName="action" change={this.props.onChange('action')} options={options} />
       </div>
     );
   }
 
 }
 
-class CallSubmodule extends Component<Props> { // TODO
+class CallSubmodule extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): CallSubmoduleState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        Submodule: <RIEInput value={state.submodule} propName={'submodule'} change={this.props.onChange('submodule')} />
       </div>
     );
   }
@@ -376,40 +403,144 @@ class ConditionOnset extends Component<Props> {
 
 }
 
-class ConditionEnd extends Component<Props> { // TODO
+class ConditionEnd extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): ConditionEndState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        {this.renderConditionOnset()}
+        {this.renderReferencedByAttribute()}
+        {this.renderCodes()}
       </div>
+    );
+  }
+
+  renderConditionOnset() {
+    let state = ((this.props.state: any): ConditionEndState);
+    if (!state.condition_onset) {
+      return null;
+    }
+    return (
+      <label>
+        Condition Onset: <RIEInput value={state.condition_onset} propName={'condition_onset'} change={this.props.onChange('condition_onset')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderReferencedByAttribute() {
+    let state = ((this.props.state: any): ConditionEndState);
+    if (!state.referenced_by_attribute) {
+      return null;
+    }
+    return (
+      <label>
+        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderCodes() {
+    let state = ((this.props.state: any): ConditionEndState);
+    if (!state.codes) {
+      return null;
+    }
+    return (
+      <label>
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br />
+      </label>
     );
   }
 
 }
 
-class AllergyOnset extends Component<Props> { // TODO
+class AllergyOnset extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): AllergyOnsetState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        Target Encounter: <RIEInput value={state.target_encounter} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
+        <br />
+        {this.renderAssignToAttribute()}
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
       </div>
+    );
+  }
+
+  renderAssignToAttribute() {
+    let state = ((this.props.state: any): AllergyOnsetState);
+    if (!state.referenced_by_attribute) {
+      return null;
+    }
+    return (
+      <label>
+        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        <br />
+      </label>
     );
   }
 
 }
 
-class AllergyEnd extends Component<Props> { // TODO
+class AllergyEnd extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): AllergyEndState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        {this.renderAllergyOnset()}
+        {this.renderReferencedByAttribute()}
+        {this.renderCodes()}
       </div>
+    );
+  }
+
+  renderAllergyOnset() {
+    let state = ((this.props.state: any): AllergyEndState);
+    if (!state.allergy_onset) {
+      return null;
+    }
+    return (
+      <label>
+        Allergy Onset: <RIEInput value={state.allergy_onset} propName={'allergy_onset'} change={this.props.onChange('allergy_onset')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderReferencedByAttribute() {
+    let state = ((this.props.state: any): AllergyEndState);
+    if (!state.referenced_by_attribute) {
+      return null;
+    }
+    return (
+      <label>
+        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderCodes() {
+    let state = ((this.props.state: any): AllergyEndState);
+    if (!state.codes) {
+      return null;
+    }
+    return (
+      <label>
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br />
+      </label>
     );
   }
 
@@ -549,40 +680,239 @@ class MedicationOrder extends Component<Props> {
 
 }
 
-class MedicationEnd extends Component<Props> { // TODO
+class MedicationEnd extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): MedicationEndState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        {this.renderMedicationOrder()}
+        {this.renderReferencedByAttribute()}
+        {this.renderCodes()}
       </div>
+    );
+  }
+
+  renderMedicationOrder() {
+    let state = ((this.props.state: any): MedicationEndState);
+    if (!state.medication_order) {
+      return null;
+    }
+    return (
+      <label>
+        Medication Order: <RIEInput value={state.medication_order} propName={'medication_order'} change={this.props.onChange('medication_order')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderReferencedByAttribute() {
+    let state = ((this.props.state: any): MedicationEndState);
+    if (!state.referenced_by_attribute) {
+      return null;
+    }
+    return (
+      <label>
+        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderCodes() {
+    let state = ((this.props.state: any): MedicationEndState);
+    if (!state.codes) {
+      return null;
+    }
+    return (
+      <label>
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br />
+      </label>
     );
   }
 
 }
 
-class CarePlanStart extends Component<Props> { // TODO
+class CarePlanStart extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): CarePlanStartState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        {this.renderAssignToAttribute()}
+        {this.renderReason()}
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br/>
+        {this.renderActivities()}
+        {this.renderGoals()}
       </div>
+    );
+  }
+
+  renderAssignToAttribute() {
+    let state = ((this.props.state: any): CarePlanStartState);
+    if (!state.assign_to_attribute) {
+      return null;
+    }
+    return (
+      <label>
+        Assign to Attribute: <RIEInput value={state.assign_to_attribute} propName={'assign_to_attribute'} change={this.props.onChange('assign_to_attribute')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderReason() {
+    let state = ((this.props.state: any): CarePlanStartState);
+    if (!state.reason) {
+      return null;
+    }
+    return (
+      <label>
+        Reason: <RIEInput value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderActivities() {
+    let state = ((this.props.state: any): CarePlanStartState);
+    if (!state.activities) {
+      return null;
+    }
+    return (
+      <label>
+        <Codes codes={state.activities} onChange={this.props.onChange('activities')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderGoals() {
+    let state = ((this.props.state: any): CarePlanStartState);
+    if (!state.goals) {
+      return null;
+    }
+    return (
+      <label>
+        {this.renderObservation()}
+        {this.renderText()}
+        {this.renderAddresses()}
+      </label>
+    );
+  }
+
+  renderObservation() {
+    let state = ((this.props.state: any): CarePlanStartState);
+    let options = [
+      {id: '==' , text: '==' },
+      {id: '!=' , text: '!=' },
+      {id: "<" , text: "<" },
+      {id: "<=" , text: "<=" },
+      {id: ">" , text: ">" },
+      {id: ">=", text: ">="},
+      {id: "is nil", text: "is nil"},
+      {id: "is not nil", text: "is not nil"}
+    ];
+    if (!state.goals.observation) {
+      return null;
+    }
+    return (
+      <label>
+        <Codes codes={state.goals.observation.codes} onChange={this.props.onChange('goals.observation.codes')} />
+        <br />
+        Goal Observation Operator: <RIESelect value={{id: state.goals.observation.operator, text: state.goals.observation.operator}} propName="operator" change={this.props.onChange('goals.observation.operator')} options={options} />
+        <br/>
+        Goal Observation Value: <RIENumber value={state.goals.observation.value} propName={'value'}  change={this.props.onChange('goals.observation.value')} />
+        <br/>
+      </label>
+    );
+  }
+
+  renderText() {
+    let state = ((this.props.state: any): CarePlanStartState);
+    if (!state.goals.text) {
+      return null;
+    }
+    return (
+      <label>
+        Goal Text: <RIEInput value={state.goals.text} propName={'text'}  change={this.props.onChange('goals.text')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderAddresses() {
+    let state = ((this.props.state: any): CarePlanStartState);
+    if (!state.goals.addresses) {
+      return null;
+    }
+    return (
+      <label>
+        Goal Addresses: <RIEInput value={state.goals.addresses} propName={'addresses'}  change={this.props.onChange('goals.addresses')} />
+        <br />
+      </label>
     );
   }
 
 }
 
-class CarePlanEnd extends Component<Props> { // TODO
+class CarePlanEnd extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): CarePlanEndState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        {this.renderCarePlan()}
+        {this.renderReferencedByAttribute()}
+        {this.renderCodes()}
       </div>
+    );
+  }
+
+  renderCarePlan() {
+    let state = ((this.props.state: any): CarePlanEndState);
+    if (!state.careplan) {
+      return null;
+    }
+    return (
+      <label>
+        Care Plan: <RIEInput value={state.careplan} propName={'careplan'} change={this.props.onChange('careplan')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderReferencedByAttribute() {
+    let state = ((this.props.state: any): CarePlanEndState);
+    if (!state.referenced_by_attribute) {
+      return null;
+    }
+    return (
+      <label>
+        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderCodes() {
+    let state = ((this.props.state: any): CarePlanEndState);
+    if (!state.codes) {
+      return null;
+    }
+    return (
+      <label>
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br />
+      </label>
     );
   }
 
@@ -636,66 +966,244 @@ class Procedure extends Component<Props> {
 
 }
 
-class VitalSign extends Component<Props> { // TODO
+class VitalSign extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): VitalSignState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        Vital Sign: <RIEInput value={state.vital_sign} propName={'vital_sign'} change={this.props.onChange('vital_sign')} />
+        <br/>
+        Unit: <RIEInput value={state.unit} propName={'unit'} change={this.props.onChange('unit')} />
+        <br/>
+        {this.renderExact()}
+        {this.renderRange()}
       </div>
+    );
+  }
+
+  renderExact() {
+    let state = ((this.props.state: any): VitalSignState);
+    if (!state.exact) {
+      return null;
+    }
+    return (
+      <label>
+        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderRange() {
+    let state = ((this.props.state: any): VitalSignState);
+    if (!state.range) {
+      return null;
+    }
+    return (
+      <label>
+        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
+        <br />
+        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
+        <br />
+      </label>
     );
   }
 
 }
 
-class Observation extends Component<Props> { // TODO
+class Observation extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): ObservationState);
+    let options = [
+      {id: 'social-history', text: 'social-history'},
+      {id: 'vital-signs', text: 'vital-signs'},
+      {id: 'imaging', text: 'imaging'},
+      {id: 'laboratory', text: 'laboratory'},
+      {id: 'procedure', text: 'procedure'},
+      {id: 'survey', text: 'survey'},
+      {id: 'exam', text: 'exam'},
+      {id: 'therapy', text: 'therapy'}
+    ];
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        Category: <RIESelect value={{id: state.category, text: state.category}} propName="category" change={this.props.onChange('category')} options={options} />
+        <br/>
+        Unit: <RIEInput value={state.unit} propName={'unit'} change={this.props.onChange('unit')} />
+        <br/>
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br/>
+        {this.renderExact()}
+        {this.renderRange()}
+        {this.renderAttribute()}
+        {this.renderVitalSign()}
       </div>
+    );
+  }
+
+  renderExact() {
+    let state = ((this.props.state: any): ObservationState);
+    if (!state.exact) {
+      return null;
+    }
+    return (
+      <label>
+        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderRange() {
+    let state = ((this.props.state: any): ObservationState);
+    if (!state.range) {
+      return null;
+    }
+    return (
+      <label>
+        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
+        <br />
+        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderAttribute() {
+    let state = ((this.props.state: any): ObservationState);
+    if (!state.attribute) {
+      return null;
+    }
+    return (
+      <label>
+        Attribute: <RIEInput value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
+        <br/>
+      </label>
+    );
+  }
+
+  renderVitalSign() {
+    let state = ((this.props.state: any): ObservationState);
+    if (!state.vital_sign) {
+      return null;
+    }
+    return (
+      <label>
+        Vital Sign: <RIEInput value={state.vital_sign} propName={'vital_sign'} change={this.props.onChange('vital_sign')} />
+        <br/>
+      </label>
     );
   }
 
 }
 
-class MultiObservation extends Component<Props> { // TODO
+class MultiObservation extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): MultiObservationState);
+    let options = [
+      {id: 'social-history', text: 'social-history'},
+      {id: 'vital-signs', text: 'vital-signs'},
+      {id: 'imaging', text: 'imaging'},
+      {id: 'laboratory', text: 'laboratory'},
+      {id: 'procedure', text: 'procedure'},
+      {id: 'survey', text: 'survey'},
+      {id: 'exam', text: 'exam'},
+      {id: 'therapy', text: 'therapy'}
+    ];
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        Category: <RIESelect value={{id: state.category, text: state.category}} propName="category" change={this.props.onChange('category')} options={options} />
+        <br/>
+        Number of Observations: <RIENumber value={state.number_of_observations} propName='number_of_observations' change={this.props.onChange('number_of_observations')} />
+        <br/>
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <br/>
       </div>
     );
   }
 
 }
 
-class DiagnosticReport extends Component<Props> { // TODO
+class DiagnosticReport extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): DiagnosticReportState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        Number of Observations: <RIENumber value={state.number_of_observations} propName='number_of_observations' change={this.props.onChange('number_of_observations')} />
+        <br/>
+        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
       </div>
     );
   }
 
 }
 
-class Symptom extends Component<Props> { // TODO
+class Symptom extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): SymptomState);
     return (
       <div>
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        <br/>
+        Symptom: <RIEInput value={state.symptom} propName={'symptom'} change={this.props.onChange('symptom')} />
+        <br/>
+        {this.renderCause()}
+        {this.renderExact()}
+        {this.renderRange()}
       </div>
+    );
+  }
+
+  renderCause() {
+    let state = ((this.props.state: any): SymptomState);
+    if (!state.cause) {
+      return null;
+    }
+    return (
+      <label>
+        Cause: <RIEInput value={state.cause} propName={'cause'} change={this.props.onChange('cause')} />
+        <br/>
+      </label>
+    );
+  }
+
+  renderExact() {
+    let state = ((this.props.state: any): SymptomState);
+    if (!state.exact) {
+      return null;
+    }
+    return (
+      <label>
+        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
+        <br />
+      </label>
+    );
+  }
+
+  renderRange() {
+    let state = ((this.props.state: any): SymptomState);
+    if (!state.range) {
+      return null;
+    }
+    return (
+      <label>
+        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
+        <br />
+        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
+        <br />
+      </label>
     );
   }
 

@@ -248,7 +248,7 @@ export type SymptomState = {
   name: string,
   type: 'Symptom',
   symptom: string,
-  cause: string,
+  cause: string, // TODO implement setting equal to module name if missing
   exact?: {
     quantity: number
   },
