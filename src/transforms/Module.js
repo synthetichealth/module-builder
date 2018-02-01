@@ -13,7 +13,6 @@ export function extractModule(data: any): Module {
 }
 
 export function extractStates(data: any): State[] {
-  let states = [];
   let stateNames = Object.keys(data.states);
   return stateNames.map((name) => {
     return extractState(name, data.states[name]);
@@ -78,13 +77,12 @@ export function extractAttributes(module: Module): string[] {
   let attributes = Object.keys(module.states).filter((key) => {
     return module.states[key].type === 'SetAttribute' || module.states[key].type === 'Counter';
   }).map(key => (module.states[key].attribute))
-  let fount = false
 
   attributes = attributes.concat(Object.keys(module.states).filter((key) => {
     return !!module.states[key].assign_to_attribute
   }).map(key => (module.states[key].assign_to_attribute)))
   
 
-  return [... new Set(attributes)]
+  return [...new Set(attributes)]
 
 }

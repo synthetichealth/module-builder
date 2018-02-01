@@ -14,7 +14,7 @@ import type { State } from './types/State';
 type Props = {
   module: Module,
   onClick: (id:string) => mixed,
-  selectedNode: State
+  selectedState: State
 }
 
 class ModuleGraph extends Component<Props> {

@@ -30,7 +30,7 @@ class DistributedTransition extends Component<Props> {
 
         Distributed Transition:
         {currentValue.map((t, i) => {
-          return <div>
+          return <div key={i}>
             <label>To:
               <RIESelect propName='transition' value={{id:t.to, text:t.to}} change={this.props.onChange(`[${i}].transition`)} options={options} />
             </label>

@@ -28,7 +28,6 @@ class ConditionalTransition extends Component<Props> {
       <label>
         Conditional Transition To:
         {currentValue.map((t, i) => {
-          console.log(t.to);
           let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
           return <div key={i}>
             <label>If: <ConditionalEditor conditional={t.condition} onChange={this.props.onChange(`${i}.condition`)}/></label>

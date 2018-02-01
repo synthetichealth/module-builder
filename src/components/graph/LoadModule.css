@@ -1,9 +1,56 @@
-.LoadModule-body {
-  height: 300px;
-  overflow-y: scroll;
+.nopadding {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .LoadModule-body ul {
   list-style: none;
-  padding: 0
+}
+
+.LoadModule-body button{
+  display: block;
+  width:100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.LoadModule-list {
+  height: 300px;
+  overflow-y: scroll;
+  list-style: none;
+  padding: 0;
+  background-color: #eee;
+  border-top-right-radius: 5px;
+  border-bottom-righ-radius: 5px;
+
+}
+.LoadModule-body textarea{
+  height: 300px;
+  width: 100%;
+  background-color: #eee;
+  border: 1px solid #fff;
+}
+
+
+.LoadModule-list button:hover{
+  display: block;
+  width:100%;
+  text-align: left;
+  cursor: pointer;
+  background-color: #ddd;
+}
+
+
+.LoadModule-options {
+  border-top-left-radius: 5px;
+  padding: 0;
+  background-color: #fff;
+}
+
+.LoadModule-options li {
+  padding: 10px;
+}
+
+.LoadModule-options .selected{
+  background-color: #eee;
 }

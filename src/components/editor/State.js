@@ -99,7 +99,6 @@ class StateEditor extends Component<Props> {
       return null;
     }
 
-
     let typeOptions = Object.keys(StateTemplates).sort().map((k) => {return {id: k, text: k}});
 
     return (
@@ -288,6 +287,9 @@ class CallSubmodule extends Component<Props> {
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
         <br/>
         Submodule: <RIEInput value={state.submodule} propName={'submodule'} change={this.props.onChange('submodule')} />
+        <br/>
+        <a href={'#' + state.submodule} target="_blank">View Submodule</a>
+
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -7,7 +8,10 @@ import ModulePropertiesEditor from '../components/editor/ModuleProperties';
 import ModuleGraph from '../components/graph/Module';
 import LoadModule from '../components/graph/LoadModule';
 import Download from '../components/graph/Download';
-import { extractStates, extractAttributes } from '../transforms/Module';
+import { extractStates } from '../transforms/Module';
+
+import { findAvailableKey, createSafeKeyFromName } from '../utils/keys';
+import { StateTemplates, ModuleTemplates } from '../templates/Templates';
 
 import './Editor.css';
 
@@ -20,7 +24,6 @@ import {selectNode,
         newModule,
         showLoadModule,
         hideLoadModule,
-        selectModule,
         showDownload,
         hideDownload,
         changeStateType,
@@ -35,27 +38,61 @@ class Editor extends Component {
     By keeping track of where it's been it means that the action can just look into the modules along the path
   */
   onChange  = (update, path=[]) => {
-    if(typeof update != 'object') {
+    if(typeof update !== 'object') {
       return (val) => this.onChange(val, [].concat(path, [update]))
     }
     this.props.editNode(update, path)
   }
 
-  renameNode = (targetModuleIndex, targetNode) => {
+  renameNode = (targetModuleKey, targetNode) => {
     return (newName) => {
-        this.props.renameNode(targetModuleIndex, targetNode, newName);
+      this.props.renameNode(targetModuleKey, targetNode, newName);
     }
   }
 
-  changeStateType = (targetModuleIndex, targetNode) => {
+  changeStateType = (targetModuleKey, targetNode) => {
     return (newType) => {
-      this.props.changeStateType(targetModuleIndex, targetNode, newType);
+      this.props.changeStateType(targetModuleKey, targetNode, newType);
     }
   }
 
-  addTransition = (targetModuleIndex, targetNode) => {
+  addTransition = (targetModuleKey, targetNode) => {
     return (transitionType) => {
-      this.props.addTransition(targetModuleIndex, targetNode, transitionType)
+      this.props.addTransition(targetModuleKey, targetNode, transitionType)
+    }
+  }
+
+  newModule = (takenKeys) => {
+    let key = findAvailableKey(createSafeKeyFromName(ModuleTemplates.Blank.name), takenKeys);
+    return () => {
+      this.props.newModule(key, ModuleTemplates.Blank);
+      this.props.push('#' + key)
+    }
+  }
+
+  addNode = (selectedModuleKey, takenKeys) => {
+    return () => {
+      let key = findAvailableKey(createSafeKeyFromName('New State'), takenKeys);
+      let newState = {...StateTemplates.Simple, direct_transition: key };
+      this.props.addNode(selectedModuleKey, key, newState);
+    }
+  }
+
+  jsonLoad = (takenKeys) => {
+    
+    return (json) => {
+      let module = {};
+      try{
+        module = JSON.parse(json)
+
+        let key = findAvailableKey(createSafeKeyFromName(module.name), takenKeys);
+        this.props.newModule(key, module);
+        this.props.push('#' + key)
+
+      } catch (ex){
+        alert('Invalid module ' + ex.message);
+        return
+      }
     }
   }
 
@@ -70,11 +107,11 @@ class Editor extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <button className="btn btn-link nav-item nav-link" onClick={this.props.newModule.bind(this, this.props.moduleCount)}>New Module</button>
+              <button className="btn btn-link nav-item nav-link" onClick={this.newModule(Object.keys(this.props.modules))}>New Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showLoadModule}>Load Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showDownload}>Download</button>
-              <button className='btn btn-secondary nav-action-button' onClick={() => this.props.addNode(this.props.selectedModuleIndex)}> Add State </button>
-              <button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleIndex, 'CheckYearly')}> Add Structure </button>
+              <button className='btn btn-secondary nav-action-button' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
+              <button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button>
             </div>
           </div>
         </nav>
@@ -83,7 +120,9 @@ class Editor extends Component {
         <LoadModule modules={this.props.modules}
           visible={this.props.loadModuleVisible}
           onHide={this.props.hideLoadModule}
-          onSelectModule={this.props.selectModule}/>
+          push={this.props.push}
+          onLoadJSON={this.jsonLoad(Object.keys(this.props.modules))}
+          />
 
         <Download module={this.props.module}
           visible={this.props.downloadVisible}
@@ -91,28 +130,27 @@ class Editor extends Component {
 
         <div className='Editor-main'>
 
-
           <div className='Editor-panel'>
 
             <ModulePropertiesEditor
               module={this.props.module}
-              onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleIndex, name)}
-              onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleIndex, remarks)}/>
+              onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleKey, name)}
+              onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleKey, remarks)}/>
 
             <StateEditor
-              renameNode={this.renameNode(this.props.selectedModuleIndex, this.props.selectedState)}
-              changeType={this.changeStateType(this.props.selectedModuleIndex, this.props.selectedState)}
-              addTransition={this.addTransition(this.props.selectedModuleIndex, this.props.selectedState)}
-              state={this.props.selectedState}
-              otherStates={this.props.states}
-              onChange={this.onChange(this.props.selectedModuleIndex)} />
+              renameNode={this.renameNode(this.props.selectedModuleKey, this.props.moduleState)}
+              changeType={this.changeStateType(this.props.selectedModuleKey, this.props.moduleState)}
+              addTransition={this.addTransition(this.props.selectedModuleKey, this.props.moduleState)}
+              state={this.props.moduleState}
+              otherStates={this.props.moduleStates}
+              onChange={this.onChange(this.props.selectedModuleKey)} />
 
            </div>
 
           <ModuleGraph
             module={this.props.module}
             onClick={this.props.selectNode}
-            selectedState={this.props.selectedState}/>
+            selectedState={this.props.moduleState}/>
 
         </div>
       </div>
@@ -121,19 +159,26 @@ class Editor extends Component {
 }
 
 const mapStateToProps = state => {
-  let selectedModule = state.modules[state.editor.currentModuleIndex];
-  let states = extractStates(selectedModule)
-  let selectedNode = states.find((s) => s.name == state.editor.currentNode)
+
+  let selectedModuleKey = state.editor.selectedModuleKey;
+  
+  if(!state.modules[selectedModuleKey]){
+    selectedModuleKey = Object.keys(state.modules)[0];
+  }
+
+  let module = state.modules[selectedModuleKey];
+  let moduleStates = extractStates(module);
+  let moduleState =  moduleStates.find(s => (s.name === state.editor.selectedStateKey))
+    
   return {
-    module: selectedModule,
+    module,
     modules: state.modules,
-    selectedState: selectedNode,
-    states,
-    selectedModuleIndex: state.editor.currentModuleIndex,
-    moduleCount: state.modules.length,
+    selectedModuleKey,
+    moduleState,
+    moduleStates,
+    selectedStateKey: state.editor.selectedStateKey,
     loadModuleVisible: state.editor.loadModuleVisible,
     downloadVisible: state.editor.downloadVisible,
-    attributes: extractAttributes(selectedModule)
   }
 }
 
@@ -148,12 +193,11 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   newModule,
   showLoadModule,
   hideLoadModule,
-  selectModule,
   showDownload,
   hideDownload,
   editModuleName,
-  editModuleRemarks
-
+  editModuleRemarks,
+  push
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);
