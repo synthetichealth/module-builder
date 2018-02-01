@@ -44,21 +44,21 @@ class Editor extends Component {
     this.props.editNode(update, path)
   }
 
-  renameNode = (targetModule, targetNode) => {
+  renameNode = (targetModuleKey, targetNode) => {
     return (newName) => {
-      this.props.renameNode(targetModule, targetNode, newName);
+      this.props.renameNode(targetModuleKey, targetNode, newName);
     }
   }
 
-  changeStateType = (targetModule, targetNode) => {
+  changeStateType = (targetModuleKey, targetNode) => {
     return (newType) => {
-      this.props.changeStateType(targetModule, targetNode, newType);
+      this.props.changeStateType(targetModuleKey, targetNode, newType);
     }
   }
 
-  addTransition = (targetModule, targetNode) => {
+  addTransition = (targetModuleKey, targetNode) => {
     return (transitionType) => {
-      this.props.addTransition(targetModule, targetNode, transitionType)
+      this.props.addTransition(targetModuleKey, targetNode, transitionType)
     }
   }
 
