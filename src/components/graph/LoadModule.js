@@ -9,7 +9,7 @@ class LoadModule extends Component {
   }
 
   onClick = (key) => {
-    return () => (this.props.push('/#' + key));
+    return () => (this.props.push('#' + key));
   }
 
   onOptionClick = (key) =>{
