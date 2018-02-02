@@ -288,7 +288,7 @@ class CallSubmodule extends Component<Props> {
         <br/>
         Submodule: <RIEInput value={state.submodule} propName={'submodule'} change={this.props.onChange('submodule')} />
         <br/>
-        <a href={'#' + state.submodule} target="_blank">View Submodule</a>
+        <a href={`${window.location.origin}/#${state.submodule}`} target="_blank">View Submodule</a>
 
       </div>
     );
