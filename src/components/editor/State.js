@@ -244,9 +244,6 @@ class SetAttribute extends Component<Props> {
 
   renderValue() {
     let state = ((this.props.state: any): SetAttributeState);
-    if (!state.value) {
-      return null;
-    }
     return (
       <label>
         Exact Quantity: <RIEInput value={state.value} propName='value' change={this.props.onChange('value')} />
@@ -320,9 +317,6 @@ class Encounter extends Component<Props> {
 
   renderWellness() {
     let state = ((this.props.state: any): EncounterState);
-    if (!state.wellness) {
-      return null;
-    }
     return (
       <label>
         Wellness: <RIEToggle value={state.wellness} propName={'wellness'}  change={this.props.onChange('wellness')} />
@@ -622,9 +616,6 @@ class MedicationOrder extends Component<Props> {
 
   renderAsNeeded() {
     let state = ((this.props.state: any): MedicationOrderState);
-    if (!state.prescription.as_needed) {
-      return null;
-    }
     return (
       <label>
         Prescription As Needed: <RIEToggle value={state.prescription.as_needed} propName={'as_needed'}  change={this.props.onChange('prescription.as_needed')} />
