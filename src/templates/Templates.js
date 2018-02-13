@@ -1,15 +1,35 @@
 export const TypeTemplates = {
   Range: {
     Exact: {
+      quantity: 0
+    },
+    ExactWithUnit: {
       quantity: 0,
       unit: "days"
     }
   },
 
   Code: {
-    system: "SNOMED-CT",
-    code: "1234",
-    display: "SNOMED Code"
+    Snomed: {
+      system: "SNOMED-CT",
+      code: "1234",
+      display: "SNOMED Code"
+    },
+    Loinc: {
+      system: "LOINC",
+      code: "1234",
+      display: "LOINC Code"
+    },
+    RxNorm: {
+      system: "RxNorm",
+      code: "1234",
+      display: "RxNorm Code"
+    },
+    Nubc: {
+      system: "NUBC",
+      code: "1234",
+      display: "NUBC Code"
+    }
   },
 
   Condition: {
@@ -46,37 +66,42 @@ export const TransitionTemplates = {
 }
 
 export const StateTemplates = {
-  Simple: {
-    type: "Simple",
-    name: "Simple_Template",
-  },
-
   Initial: {
     type: "Initial",
-    name: "Initial_Template",
   },
 
   Terminal: {
     type: "Terminal",
-    name: "Terminal_Template",
   },
 
-  Death: {
-    type: "Death",
-    name: "Death_Template",
+  Simple: {
+    type: "Simple",
+  },
+
+  Guard: {
+    type: "Guard",
+    allow: {...TypeTemplates.Condition.Age}
   },
 
   Delay: {
     type: "Delay",
-    name: "Delay_Template",
-    exact: {...TypeTemplates.Range.Exact}
+    exact: {...TypeTemplates.Range.ExactWithUnit}
   },
 
-  ConditionOnset: {
-    type: "ConditionOnset",
-    assign_to_attribute: "",
-    target_encounter: "",
-    codes: [{...TypeTemplates.Code}]
+  SetAttribute: {
+    type: "SetAttribute",
+    attribute: ""
+  },
+
+  Counter: {
+    type: "Counter",
+    attribute: "",
+    action: "increment"
+  },
+
+  CallSubmodule: {
+    type: "CallSubmodule",
+    submodule: ""
   },
 
   Encounter: {
@@ -86,26 +111,92 @@ export const StateTemplates = {
     codes: [{...TypeTemplates.Code}]
   },
 
+  EncounterEnd: {
+    type: "EncounterEnd"
+  },
+
+  ConditionOnset: {
+    type: "ConditionOnset",
+    assign_to_attribute: "",
+    target_encounter: "",
+    codes: [{...TypeTemplates.Code.Snomed}]
+  },
+
+  ConditionEnd: {
+    type: "ConditionEnd"
+  },
+
+  AllergyOnset: {
+    type: "AllergyOnset",
+    target_encounter: "",
+    codes: [{...TypeTemplates.Code.Snomed}]
+  },
+
+  AllergyEnd: {
+    type: "AllergyEnd"
+  },
+
   MedicationOrder: {
     type: "MedicationOrder",
-    codes: [{...TypeTemplates.Code}]
+    codes: [{...TypeTemplates.Code.RxNorm}]
+  },
+
+  MedicationEnd: {
+    type: "MedicationEnd"
+  },
+
+  CarePlanStart: {
+    type: "CarePlanStart",
+    codes: [{...TypeTemplates.Code.Snomed}]
+  },
+
+  CarePlanEnd: {
+    type: "CarePlanEnd"
   },
 
   Procedure: {
     type: "Procedure",
-    codes: [{...TypeTemplates.Code}]
+    codes: [{...TypeTemplates.Code.Snomed}]
+  },
+
+  VitalSign: {
+    type: "VitalSign",
+    vital_sign: "",
+    unit: "",
+    exact: {...TypeTemplates.Range.Exact}
   },
 
   Observation: {
     type: "Observation",
     category: "vital-signs",
     unit: "",
-    codes: [{...TypeTemplates.Code}]
+    codes: [{...TypeTemplates.Code.Loinc}],
+    exact: {...TypeTemplates.Range.Exact}
   },
 
-  Guard: {
-    type: "Guard",
-    allow: {...TypeTemplates.Condition.Age}
+  MultiObservation: {
+    type: "MultiObservation",
+    category: "vital-signs",
+    number_of_observations: 0,
+    codes: [{...TypeTemplates.Code.Loinc}]
+  },
+
+  DiagnosticReport: {
+    type: "DiagnosticReport",
+    number_of_observations: 0,
+    codes: [{...TypeTemplates.Code.Loinc}]
+  },
+
+  Symptom: {
+    type: "Symptom",
+    symptom: "",
+    cause: "",
+    exact: {...TypeTemplates.Range.Exact}
+  },
+
+  Death: {
+    type: "Death",
+    exact: {...TypeTemplates.Range.ExactWithUnit}
   }
 }
 
