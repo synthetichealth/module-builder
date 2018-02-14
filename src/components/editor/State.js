@@ -310,7 +310,7 @@ class Encounter extends Component<Props> {
         Encounter Class: <RIESelect value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
         <br />
         {this.renderReason()}
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
       </div>
     );
   }
@@ -360,7 +360,7 @@ class EncounterEnd extends Component<Props> {
     }
     return (
       <label>
-        <Code code={state.discharge_disposition} onChange={this.props.onChange('discharge_disposition')} />
+        <Code code={state.discharge_disposition} system={"NUBC"} onChange={this.props.onChange('discharge_disposition')} />
         <br />
       </label>
     );
@@ -379,7 +379,7 @@ class ConditionOnset extends Component<Props> {
         Target Encounter: <RIEInput value={state.target_encounter || ''} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
         <br />
         {this.renderAssignToAttribute()}
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
       </div>
     );
   }
@@ -447,7 +447,7 @@ class ConditionEnd extends Component<Props> {
     }
     return (
       <label>
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
         <br />
       </label>
     );
@@ -466,7 +466,7 @@ class AllergyOnset extends Component<Props> {
         Target Encounter: <RIEInput value={state.target_encounter} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
         <br />
         {this.renderAssignToAttribute()}
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
       </div>
     );
   }
@@ -534,7 +534,7 @@ class AllergyEnd extends Component<Props> {
     }
     return (
       <label>
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
         <br />
       </label>
     );
@@ -552,7 +552,7 @@ class MedicationOrder extends Component<Props> {
         <br />
         {this.renderAssignToAttribute()}
         {this.renderReason()}
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"RxNorm"} onChange={this.props.onChange('codes')} />
         <br />
         {this.renderPrescription()}
       </div>
@@ -665,7 +665,7 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        <Codes codes={state.prescription.instructions} onChange={this.props.onChange('prescription.instructions')} />
+        <Codes codes={state.prescription.instructions} system={"SNOMED-CT"} onChange={this.props.onChange('prescription.instructions')} />
         <br />
       </label>
     );
@@ -721,7 +721,7 @@ class MedicationEnd extends Component<Props> {
     }
     return (
       <label>
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"RxNorm"} onChange={this.props.onChange('codes')} />
         <br />
       </label>
     );
@@ -739,7 +739,7 @@ class CarePlanStart extends Component<Props> {
         <br/>
         {this.renderAssignToAttribute()}
         {this.renderReason()}
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
         <br/>
         {this.renderActivities()}
         {this.renderGoals()}
@@ -780,7 +780,7 @@ class CarePlanStart extends Component<Props> {
     }
     return (
       <label>
-        <Codes codes={state.activities} onChange={this.props.onChange('activities')} />
+        <Codes codes={state.activities} system={"SNOMED-CT"} onChange={this.props.onChange('activities')} />
         <br />
       </label>
     );
@@ -817,7 +817,7 @@ class CarePlanStart extends Component<Props> {
     }
     return (
       <label>
-        <Codes codes={state.goals.observation.codes} onChange={this.props.onChange('goals.observation.codes')} />
+        <Codes codes={state.goals.observation.codes} system={"SNOMED-CT"} onChange={this.props.onChange('goals.observation.codes')} />
         <br />
         Goal Observation Operator: <RIESelect value={{id: state.goals.observation.operator, text: state.goals.observation.operator}} propName="operator" change={this.props.onChange('goals.observation.operator')} options={options} />
         <br/>
@@ -903,7 +903,7 @@ class CarePlanEnd extends Component<Props> {
     }
     return (
       <label>
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
         <br />
       </label>
     );
@@ -920,7 +920,7 @@ class Procedure extends Component<Props> {
         Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
         <br />
         {this.renderReason()}
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
         <br />
         {this.renderDuration()}
       </div>
@@ -1029,7 +1029,7 @@ class Observation extends Component<Props> {
         <br/>
         Unit: <RIEInput value={state.unit} propName={'unit'} change={this.props.onChange('unit')} />
         <br/>
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
         <br/>
         {this.renderExact()}
         {this.renderRange()}
@@ -1117,7 +1117,7 @@ class MultiObservation extends Component<Props> {
         <br/>
         Number of Observations: <RIENumber value={state.number_of_observations} propName='number_of_observations' change={this.props.onChange('number_of_observations')} />
         <br/>
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
         <br/>
       </div>
     );
@@ -1135,7 +1135,7 @@ class DiagnosticReport extends Component<Props> {
         <br/>
         Number of Observations: <RIENumber value={state.number_of_observations} propName='number_of_observations' change={this.props.onChange('number_of_observations')} />
         <br/>
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
       </div>
     );
   }
@@ -1258,7 +1258,7 @@ class Death extends Component<Props> {
     }
     return (
       <label>
-        <Codes codes={state.codes} onChange={this.props.onChange('codes')} />
+        <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
         <br />
       </label>
     );
