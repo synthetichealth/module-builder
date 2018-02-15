@@ -16,12 +16,11 @@ let changeType = () => null;
 
 describe(`renders state editor for all states in all modules propertly without errors`, () => {
   Object.keys(modulesJSON).map(k => (modulesJSON[k])).forEach( module => {
-    it(`renders ${module.name}`, () => {
       let moduleStates = extractStates(module);
         moduleStates.forEach(state => {
-          renderComponent(StateEditor, { state, otherStates: moduleStates, onChange, renameNode, changeType })
+          it(`renders ${module.name}:${state.name}`, () => {
+            renderComponent(StateEditor, { state, otherStates: moduleStates, onChange, renameNode, changeType })
+          });
         });
-    })
-
   });
 });

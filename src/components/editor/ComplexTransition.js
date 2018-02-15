@@ -31,7 +31,6 @@ class ComplexTransition extends Component<Props> {
     }
     const states = this.props.options;
     const options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
-    console.log(currentValue);
     return (
       <label>
         Complex Transition:
