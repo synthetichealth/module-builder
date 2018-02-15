@@ -107,6 +107,7 @@ class StateEditor extends Component<Props> {
       {id:"Complex" ,text:"Complex"},
     ]
 
+    const transitionType = (this.props.state.transition||{}).type;
     return (
         <div className="State">
           <h3><RIEInput className='editable-text' className='editable-text' propName={'name'} value={this.props.state.name} change={this.props.renameNode} /></h3>
@@ -119,7 +120,7 @@ class StateEditor extends Component<Props> {
           <hr />
           <div>
             <label>Transition Type:
-              <RIESelect className='editable-text' className='editable-text' value={{id: this.props.state.transition.type, text: this.props.state.transition.type}} propName='transition'change={(e) => this.props.addTransition(e.transition.id)} options={transitionOptions}/>
+              <RIESelect className='editable-text' className='editable-text' value={{id: transitionType, text: transitionType}} propName='transition'change={(e) => this.props.addTransition(e.transition.id)} options={transitionOptions}/>
             </label>
           </div>
           <div className="Transition">

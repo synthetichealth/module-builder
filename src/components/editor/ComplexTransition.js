@@ -31,15 +31,15 @@ class ComplexTransition extends Component<Props> {
     }
     const states = this.props.options;
     const options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
+    console.log(currentValue);
     return (
       <label>
         Complex Transition:
         {currentValue.map((t, i) => {
           return <div className='transition-option' key={i}>
             <label>If: <ConditionalEditor conditional={t.condition} onChange={this.props.onChange(`[${i}].condition`)}/></label>
-            <label>Transition To:
+            <label>
               <DistributedTransitionEditor transition={{transition: t.distributions}} options={states} onChange={this.props.onChange(`[${i}].distributions`)} />
-              <DirectTransitionEditor transition={{transition: t.transition}} options={states} onChange={this.props.onChange(`${i}.transition`)} />
             </label>
             <br/>
             <a className='delete-button' onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
