@@ -109,7 +109,7 @@ export const StateTemplates = {
     type: "Encounter",
     encounter_class: "ambulatory",
     reason: "",
-    codes: [{...TypeTemplates.Code}]
+    codes: [{...TypeTemplates.Code.Snomed}]
   },
 
   EncounterEnd: {
