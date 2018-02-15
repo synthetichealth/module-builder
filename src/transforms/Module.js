@@ -61,7 +61,14 @@ export function extractConditionalTransition(data: any): ConditionalTransition {
 }
 
 export function extractComplexTransition(data: any): ComplexTransition {
-  return {type: 'Complex',};
+  let transition = data.map((c) => {
+    return {
+      condition: c.condition,
+      distributions: extractDistributedTransition(c.distributions||[]).transition,
+      transition: extractDirectTransition(c.transition)
+    }
+  })
+  return {type: 'Complex', transition};
 }
 
 
@@ -81,7 +88,7 @@ export function extractAttributes(module: Module): string[] {
   attributes = attributes.concat(Object.keys(module.states).filter((key) => {
     return !!module.states[key].assign_to_attribute
   }).map(key => (module.states[key].assign_to_attribute)))
-  
+
 
   return [...new Set(attributes)]
 

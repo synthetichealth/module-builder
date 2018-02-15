@@ -62,7 +62,8 @@ export const TypeTemplates = {
 export const TransitionTemplates = {
   Direct: 'Initial',
   Conditional: [{transition: 'Initial', condition: {...TypeTemplates.Condition.Age}}],
-  Distributed: [{transition: 'Initial', distribution: 0.0}]
+  Distributed: [{transition: 'Initial', distribution: 0.0}],
+  Complex: [{condition: {...TypeTemplates.Condition.Age}, distributions: [], to: 'Initial'}]
 }
 
 export const StateTemplates = {
@@ -108,7 +109,7 @@ export const StateTemplates = {
     type: "Encounter",
     encounter_class: "ambulatory",
     reason: "",
-    codes: [{...TypeTemplates.Code}]
+    codes: [{...TypeTemplates.Code.Snomed}]
   },
 
   EncounterEnd: {

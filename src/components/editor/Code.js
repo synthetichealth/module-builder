@@ -6,6 +6,8 @@ import _ from 'lodash';
 
 import type { Code as CodeType } from '../../types/Code';
 import { TypeTemplates } from '../../templates/Templates';
+import './Transition.css';
+
 
 type Props = {
   code: CodeType,
@@ -21,9 +23,9 @@ export class Code extends Component<Props> {
       <div>
         System: {system}
         <br />
-        Code: <RIEInput value={code.code} propName="code" change={this.props.onChange('code')} />
+        Code: <RIEInput className='editable-text' value={code.code} propName="code" change={this.props.onChange('code')} />
         <br />
-        Display: <RIEInput value={code.display} propName="display" change={this.props.onChange('display')} />
+        Display: <RIEInput className='editable-text' value={code.display} propName="display" change={this.props.onChange('display')} />
       </div>
     );
   }
@@ -51,9 +53,9 @@ export class Codes extends Component<CodesProps> {
       <div>
         {this.props.codes.map((code, i) => {
           return (
-            <div key={i}>
-              <a onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>x</a>
-              <Code onChange={this.props.onChange(i)} code={code} system={system} />
+            <div className='transition-option' key={i}>
+              <a className='delete-button' onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
+              <Code onChange={this.props.onChange(i)} code={code} system={system}/>
             </div>
           )
         })}

@@ -15,6 +15,7 @@ class DirectTransitionEditor extends Component<Props> {
   render() {
     let currentValue = "";
     let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
+    // options.push({id: '', text: "-" });
 
     if (this.props.transition) {
       currentValue = this.props.transition.to;
@@ -22,7 +23,7 @@ class DirectTransitionEditor extends Component<Props> {
     return (
       <label>
         Transition To:
-        <RIESelect propName='to' value={{id:this.props.transition.to, text:this.props.transition.to}} change={this.props.onChange} options={options} />
+        <RIESelect className='editable-text' propName='to' value={{id:this.props.transition.to, text:this.props.transition.to}} change={this.props.onChange} options={options} />
       </label>
     );
   }

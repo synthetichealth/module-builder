@@ -7,6 +7,8 @@ import type { ConditionalTransition as ConditionalTransitionType } from '../../t
 import { TransitionTemplates } from '../../templates/Templates';
 import ConditionalEditor from './Conditional';
 import type { State } from '../../types/State';
+import './Transition.css';
+
 
 
 type Props = {
@@ -29,18 +31,18 @@ class ConditionalTransition extends Component<Props> {
         Conditional Transition To:
         {currentValue.map((t, i) => {
           let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
-          return <div key={i}>
+          return <div key={i} className='transition-option'>
             <label>If: <ConditionalEditor conditional={t.condition} onChange={this.props.onChange(`${i}.condition`)}/></label>
             <label>Transition To:
-              <RIESelect propName='to' value={{id:t.to, text:t.to}} change={this.props.onChange(`${i}.transition`)} options={options} />
+              <RIESelect className='editable-text' propName='to' value={{id:t.to, text:t.to}} change={this.props.onChange(`${i}.transition`)} options={options} />
 
             </label>
             <br/>
-            <a onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
+            <a className="delete-button" onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
 
           </div>
         })}
-        <a onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: _.cloneDeep(TransitionTemplates.Conditional[0])}})}>+</a>
+        <a className='add-button'onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: _.cloneDeep(TransitionTemplates.Conditional[0])}})}>+</a>
 
       </label>
     );

@@ -100,24 +100,37 @@ class StateEditor extends Component<Props> {
     }
 
     let typeOptions = Object.keys(StateTemplates).sort().map((k) => {return {id: k, text: k}});
+    const transitionOptions = [
+      {id:"Direct" ,text:"Direct"},
+      {id:"Distributed" ,text:"Distributed"},
+      {id:"Conditional" ,text:"Conditional"},
+      {id:"Complex" ,text:"Complex"},
+    ]
 
+    const transitionType = (this.props.state.transition||{}).type;
     return (
         <div className="State">
-          State Type: <RIESelect value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
+          <h3><RIEInput className='editable-text' className='editable-text' propName={'name'} value={this.props.state.name} change={this.props.renameNode} /></h3>
+          State Type: <RIESelect className='editable-text' className='editable-text' value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
           <br/>
-          {this.renderStateType()}
-          <br />
-          <div>
-            <a onClick={() => this.props.addTransition('Direct')}>Direct</a>|
-            <a onClick={() => this.props.addTransition('Conditional')}>Conditional</a>|
-            <a onClick={() => this.props.addTransition('Distributed')}>Distributed</a>
+          <div className="State-Editor">
+            {this.renderStateType()}
           </div>
-          <Transition
-            options={this.props.otherStates}
-            transition={this.props.state.transition}
-            onChange={this.props.onChange(`states.${this.props.state.name}`)} />
+          <br />
+          <hr />
+          <div>
+            <label>Transition Type:
+              <RIESelect className='editable-text' className='editable-text' value={{id: transitionType, text: transitionType}} propName='transition'change={(e) => this.props.addTransition(e.transition.id)} options={transitionOptions}/>
+            </label>
+          </div>
+          <div className="Transition">
+            <Transition
+              options={this.props.otherStates.sort((a,b) => a.name > b.name? 1 : -1)}
+              transition={this.props.state.transition}
+              onChange={this.props.onChange(`states.${this.props.state.name}`)} />
+          </div>
             <br/>
-            <button className="btn btn-error" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Delete State</button>
+            <a className="delete-button" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Remove State</a>
         </div>
     )
   }
@@ -129,9 +142,7 @@ class Initial extends Component<Props> {
   render() {
     let state = ((this.props.state: any): InitialState);
     return (
-      <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-      </div>
+      null
     );
   }
 
@@ -142,9 +153,7 @@ class Terminal extends Component<Props> {
   render() {
     let state = ((this.props.state: any): TerminalState);
     return (
-      <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-      </div>
+      null
     );
   }
 
@@ -155,9 +164,7 @@ class Simple extends Component<Props> {
   render() {
     let state = ((this.props.state: any): SimpleState);
     return (
-      <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-      </div>
+      null
     );
   }
 
@@ -169,8 +176,6 @@ class Guard extends Component<Props> {
     let state = ((this.props.state: any): GuardState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
         <ConditionalEditor conditional={state.allow} onChange={this.props.onChange('allow')} />
       </div>
     );
@@ -184,8 +189,6 @@ class Delay extends Component<Props> {
     let state = ((this.props.state: any): DelayState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
         {this.renderExact()}
         <br />
         {this.renderRange()}
@@ -200,9 +203,9 @@ class Delay extends Component<Props> {
     }
     return (
       <label>
-        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
+        Exact Quantity: <RIENumber className='editable-text' value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
         <br />
-        Exact Unit: <RIESelect value={{id: state.exact.unit, text: state.exact.unit}} propName="unit" change={this.props.onChange('exact.unit')} options={unitOfTimeOptions} />
+        Exact Unit: <RIESelect className='editable-text' value={{id: state.exact.unit, text: state.exact.unit}} propName="unit" change={this.props.onChange('exact.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -215,11 +218,11 @@ class Delay extends Component<Props> {
     }
     return (
       <label>
-        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
+        Range Low: <RIENumber className='editable-text' value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
         <br />
-        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
+        Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
         <br />
-        Range Unit: <RIESelect value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
+        Range Unit: <RIESelect className='editable-text' value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -233,9 +236,7 @@ class SetAttribute extends Component<Props> {
     let state = ((this.props.state: any): SetAttributeState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br/>
-        Attribute: <RIEInput value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
+        Attribute: <RIEInput className='editable-text' value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
         <br/>
         {this.renderValue()}
       </div>
@@ -246,7 +247,7 @@ class SetAttribute extends Component<Props> {
     let state = ((this.props.state: any): SetAttributeState);
     return (
       <label>
-        Exact Quantity: <RIEInput value={state.value || false} propName='value' change={this.props.onChange('value')} />
+        Exact Quantity: <RIEInput className='editable-text' value={state.value || false} propName='value' change={this.props.onChange('value')} />
         <br />
       </label>
     );
@@ -264,11 +265,9 @@ class Counter extends Component<Props> {
     ];
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Attribute: <RIEInput className='editable-text' value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
         <br/>
-        Attribute: <RIEInput value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
-        <br/>
-        Action: <RIESelect value={{id: state.action, text: state.action}} propName="action" change={this.props.onChange('action')} options={options} />
+        Action: <RIESelect className='editable-text' value={{id: state.action, text: state.action}} propName="action" change={this.props.onChange('action')} options={options} />
       </div>
     );
   }
@@ -281,9 +280,7 @@ class CallSubmodule extends Component<Props> {
     let state = ((this.props.state: any): CallSubmoduleState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br/>
-        Submodule: <RIEInput value={state.submodule} propName={'submodule'} change={this.props.onChange('submodule')} />
+        Submodule: <RIEInput className='editable-text' value={state.submodule} propName={'submodule'} change={this.props.onChange('submodule')} />
         <br/>
         <a href={`${window.location.href.replace(window.location.hash,"")}#${state.submodule}`} target="_blank">View Submodule</a>
 
@@ -304,10 +301,8 @@ class Encounter extends Component<Props> {
     ];
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
         {this.renderWellness()}
-        Encounter Class: <RIESelect value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
+        Encounter Class: <RIESelect className='editable-text' value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
         <br />
         {this.renderReason()}
         <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
@@ -319,7 +314,7 @@ class Encounter extends Component<Props> {
     let state = ((this.props.state: any): EncounterState);
     return (
       <label>
-        Wellness: <RIEToggle value={state.wellness || false} propName={'wellness'}  change={this.props.onChange('wellness')} />
+        Wellness: <RIEToggle className='editable-text' value={state.wellness || false} propName={'wellness'}  change={this.props.onChange('wellness')} />
         <br />
       </label>
     );
@@ -332,7 +327,7 @@ class Encounter extends Component<Props> {
     }
     return (
       <label>
-        Reason: <RIEInput value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
         <br />
       </label>
     );
@@ -346,8 +341,6 @@ class EncounterEnd extends Component<Props> {
     let state = ((this.props.state: any): EncounterEndState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
         {this.renderDischargeDisposition()}
       </div>
     );
@@ -374,9 +367,7 @@ class ConditionOnset extends Component<Props> {
     let state = ((this.props.state: any): ConditionOnsetState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
-        Target Encounter: <RIEInput value={state.target_encounter || ''} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
+        Target Encounter: <RIEInput className='editable-text' value={state.target_encounter || ''} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
         <br />
         {this.renderAssignToAttribute()}
         <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
@@ -391,7 +382,7 @@ class ConditionOnset extends Component<Props> {
     }
     return (
       <label>
-        Assign to Attribute: <RIEInput value={state.assign_to_attribute} propName={'assign_to_attribute'} change={this.props.onChange('assign_to_attribute')} />
+        Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'} change={this.props.onChange('assign_to_attribute')} />
         <br />
       </label>
     );
@@ -405,8 +396,6 @@ class ConditionEnd extends Component<Props> {
     let state = ((this.props.state: any): ConditionEndState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br/>
         {this.renderConditionOnset()}
         {this.renderReferencedByAttribute()}
         {this.renderCodes()}
@@ -421,7 +410,7 @@ class ConditionEnd extends Component<Props> {
     }
     return (
       <label>
-        Condition Onset: <RIEInput value={state.condition_onset} propName={'condition_onset'} change={this.props.onChange('condition_onset')} />
+        Condition Onset: <RIEInput className='editable-text' value={state.condition_onset} propName={'condition_onset'} change={this.props.onChange('condition_onset')} />
         <br />
       </label>
     );
@@ -434,7 +423,7 @@ class ConditionEnd extends Component<Props> {
     }
     return (
       <label>
-        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
         <br />
       </label>
     );
@@ -461,9 +450,7 @@ class AllergyOnset extends Component<Props> {
     let state = ((this.props.state: any): AllergyOnsetState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br/>
-        Target Encounter: <RIEInput value={state.target_encounter} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
+        Target Encounter: <RIEInput className='editable-text' value={state.target_encounter} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
         <br />
         {this.renderAssignToAttribute()}
         <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
@@ -478,7 +465,7 @@ class AllergyOnset extends Component<Props> {
     }
     return (
       <label>
-        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
         <br />
       </label>
     );
@@ -492,8 +479,6 @@ class AllergyEnd extends Component<Props> {
     let state = ((this.props.state: any): AllergyEndState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br/>
         {this.renderAllergyOnset()}
         {this.renderReferencedByAttribute()}
         {this.renderCodes()}
@@ -508,7 +493,7 @@ class AllergyEnd extends Component<Props> {
     }
     return (
       <label>
-        Allergy Onset: <RIEInput value={state.allergy_onset} propName={'allergy_onset'} change={this.props.onChange('allergy_onset')} />
+        Allergy Onset: <RIEInput className='editable-text' value={state.allergy_onset} propName={'allergy_onset'} change={this.props.onChange('allergy_onset')} />
         <br />
       </label>
     );
@@ -521,7 +506,7 @@ class AllergyEnd extends Component<Props> {
     }
     return (
       <label>
-        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
         <br />
       </label>
     );
@@ -548,8 +533,6 @@ class MedicationOrder extends Component<Props> {
     let state = ((this.props.state: any): MedicationOrderState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
         {this.renderAssignToAttribute()}
         {this.renderReason()}
         <Codes codes={state.codes} system={"RxNorm"} onChange={this.props.onChange('codes')} />
@@ -566,7 +549,7 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        Assign to Attribute: <RIEInput value={state.assign_to_attribute} propName={'assign_to_attribute'} change={this.props.onChange('assign_to_attribute')} />
+        Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'} change={this.props.onChange('assign_to_attribute')} />
         <br />
       </label>
     );
@@ -579,7 +562,7 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        Reason: <RIEInput value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
         <br />
       </label>
     );
@@ -608,7 +591,7 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        Prescription Refills: <RIENumber value={state.prescription.refills} propName={'refills'}  change={this.props.onChange('prescription.refills')} />
+        Prescription Refills: <RIENumber className='editable-text' value={state.prescription.refills} propName={'refills'}  change={this.props.onChange('prescription.refills')} />
         <br />
       </label>
     );
@@ -618,7 +601,7 @@ class MedicationOrder extends Component<Props> {
     let state = ((this.props.state: any): MedicationOrderState);
     return (
       <label>
-        Prescription As Needed: <RIEToggle value={state.prescription.as_needed || false} propName={'as_needed'}  change={this.props.onChange('prescription.as_needed')} />
+        Prescription As Needed: <RIEToggle className='editable-text' value={state.prescription.as_needed || false} propName={'as_needed'}  change={this.props.onChange('prescription.as_needed')} />
         <br />
       </label>
     );
@@ -631,13 +614,13 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        Dosage Amount: <RIENumber value={state.prescription.dosage.amount} propName={'amount'}  change={this.props.onChange('prescription.dosage.amount')} />
+        Dosage Amount: <RIENumber className='editable-text' value={state.prescription.dosage.amount} propName={'amount'}  change={this.props.onChange('prescription.dosage.amount')} />
         <br />
-        Dosage Frequency: <RIENumber value={state.prescription.dosage.frequency} propName={'frequency'}  change={this.props.onChange('prescription.dosage.frequency')} />
+        Dosage Frequency: <RIENumber className='editable-text' value={state.prescription.dosage.frequency} propName={'frequency'}  change={this.props.onChange('prescription.dosage.frequency')} />
         <br />
-        Dosage Period: <RIENumber value={state.prescription.dosage.period} propName={'period'}  change={this.props.onChange('prescription.dosage.period')} />
+        Dosage Period: <RIENumber className='editable-text' value={state.prescription.dosage.period} propName={'period'}  change={this.props.onChange('prescription.dosage.period')} />
         <br />
-        Dosage Unit: <RIESelect value={{id: state.prescription.dosage.unit, text: state.prescription.dosage.unit}} propName="unit" change={this.props.onChange('prescription.dosage.unit')} options={unitOfTimeOptions} />
+        Dosage Unit: <RIESelect className='editable-text' value={{id: state.prescription.dosage.unit, text: state.prescription.dosage.unit}} propName="unit" change={this.props.onChange('prescription.dosage.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -650,9 +633,9 @@ class MedicationOrder extends Component<Props> {
     }
     return (
       <label>
-        Duration Quantity: <RIENumber value={state.prescription.duration.quantity} propName={'quantity'}  change={this.props.onChange('prescription.duration.quantity')} />
+        Duration Quantity: <RIENumber className='editable-text' value={state.prescription.duration.quantity} propName={'quantity'}  change={this.props.onChange('prescription.duration.quantity')} />
         <br />
-        Duration Unit: <RIESelect value={{id: state.prescription.duration.unit, text: state.prescription.duration.unit}} propName="unit" change={this.props.onChange('prescription.duration.unit')} options={unitOfTimeOptions} />
+        Duration Unit: <RIESelect className='editable-text' value={{id: state.prescription.duration.unit, text: state.prescription.duration.unit}} propName="unit" change={this.props.onChange('prescription.duration.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -679,8 +662,6 @@ class MedicationEnd extends Component<Props> {
     let state = ((this.props.state: any): MedicationEndState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br/>
         {this.renderMedicationOrder()}
         {this.renderReferencedByAttribute()}
         {this.renderCodes()}
@@ -695,7 +676,7 @@ class MedicationEnd extends Component<Props> {
     }
     return (
       <label>
-        Medication Order: <RIEInput value={state.medication_order} propName={'medication_order'} change={this.props.onChange('medication_order')} />
+        Medication Order: <RIEInput className='editable-text' value={state.medication_order} propName={'medication_order'} change={this.props.onChange('medication_order')} />
         <br />
       </label>
     );
@@ -708,7 +689,7 @@ class MedicationEnd extends Component<Props> {
     }
     return (
       <label>
-        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
         <br />
       </label>
     );
@@ -735,8 +716,6 @@ class CarePlanStart extends Component<Props> {
     let state = ((this.props.state: any): CarePlanStartState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br/>
         {this.renderAssignToAttribute()}
         {this.renderReason()}
         <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
@@ -754,7 +733,7 @@ class CarePlanStart extends Component<Props> {
     }
     return (
       <label>
-        Assign to Attribute: <RIEInput value={state.assign_to_attribute} propName={'assign_to_attribute'} change={this.props.onChange('assign_to_attribute')} />
+        Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'} change={this.props.onChange('assign_to_attribute')} />
         <br />
       </label>
     );
@@ -767,7 +746,7 @@ class CarePlanStart extends Component<Props> {
     }
     return (
       <label>
-        Reason: <RIEInput value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
         <br />
       </label>
     );
@@ -819,9 +798,9 @@ class CarePlanStart extends Component<Props> {
       <label>
         <Codes codes={state.goals.observation.codes} system={"SNOMED-CT"} onChange={this.props.onChange('goals.observation.codes')} />
         <br />
-        Goal Observation Operator: <RIESelect value={{id: state.goals.observation.operator, text: state.goals.observation.operator}} propName="operator" change={this.props.onChange('goals.observation.operator')} options={options} />
+        Goal Observation Operator: <RIESelect className='editable-text' value={{id: state.goals.observation.operator, text: state.goals.observation.operator}} propName="operator" change={this.props.onChange('goals.observation.operator')} options={options} />
         <br/>
-        Goal Observation Value: <RIENumber value={state.goals.observation.value} propName={'value'}  change={this.props.onChange('goals.observation.value')} />
+        Goal Observation Value: <RIENumber className='editable-text' value={state.goals.observation.value} propName={'value'}  change={this.props.onChange('goals.observation.value')} />
         <br/>
       </label>
     );
@@ -834,7 +813,7 @@ class CarePlanStart extends Component<Props> {
     }
     return (
       <label>
-        Goal Text: <RIEInput value={state.goals.text} propName={'text'}  change={this.props.onChange('goals.text')} />
+        Goal Text: <RIEInput className='editable-text' value={state.goals.text} propName={'text'}  change={this.props.onChange('goals.text')} />
         <br />
       </label>
     );
@@ -847,7 +826,7 @@ class CarePlanStart extends Component<Props> {
     }
     return (
       <label>
-        Goal Addresses: <RIEInput value={state.goals.addresses} propName={'addresses'}  change={this.props.onChange('goals.addresses')} />
+        Goal Addresses: <RIEInput className='editable-text' value={state.goals.addresses} propName={'addresses'}  change={this.props.onChange('goals.addresses')} />
         <br />
       </label>
     );
@@ -861,8 +840,6 @@ class CarePlanEnd extends Component<Props> {
     let state = ((this.props.state: any): CarePlanEndState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br/>
         {this.renderCarePlan()}
         {this.renderReferencedByAttribute()}
         {this.renderCodes()}
@@ -877,7 +854,7 @@ class CarePlanEnd extends Component<Props> {
     }
     return (
       <label>
-        Care Plan: <RIEInput value={state.careplan} propName={'careplan'} change={this.props.onChange('careplan')} />
+        Care Plan: <RIEInput className='editable-text' value={state.careplan} propName={'careplan'} change={this.props.onChange('careplan')} />
         <br />
       </label>
     );
@@ -890,7 +867,7 @@ class CarePlanEnd extends Component<Props> {
     }
     return (
       <label>
-        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
         <br />
       </label>
     );
@@ -917,8 +894,6 @@ class Procedure extends Component<Props> {
     let state = ((this.props.state: any): ProcedureState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
         {this.renderReason()}
         <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
         <br />
@@ -934,7 +909,7 @@ class Procedure extends Component<Props> {
     }
     return (
       <label>
-        Reason: <RIEInput value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
         <br />
       </label>
     );
@@ -947,11 +922,11 @@ class Procedure extends Component<Props> {
     }
     return (
       <label>
-        Duration Low: <RIENumber value={state.duration.low} propName={'low'}  change={this.props.onChange('duration.low')} />
+        Duration Low: <RIENumber className='editable-text' value={state.duration.low} propName={'low'}  change={this.props.onChange('duration.low')} />
         <br />
-        Duration High: <RIENumber value={state.duration.high} propName={'high'}  change={this.props.onChange('duration.high')} />
+        Duration High: <RIENumber className='editable-text' value={state.duration.high} propName={'high'}  change={this.props.onChange('duration.high')} />
         <br />
-        Duration Unit: <RIESelect value={{id: state.duration.unit, text: state.duration.unit}} propName="unit" change={this.props.onChange('duration.unit')} options={unitOfTimeOptions} />
+        Duration Unit: <RIESelect className='editable-text' value={{id: state.duration.unit, text: state.duration.unit}} propName="unit" change={this.props.onChange('duration.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -965,11 +940,9 @@ class VitalSign extends Component<Props> {
     let state = ((this.props.state: any): VitalSignState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Vital Sign: <RIEInput className='editable-text' value={state.vital_sign} propName={'vital_sign'} change={this.props.onChange('vital_sign')} />
         <br/>
-        Vital Sign: <RIEInput value={state.vital_sign} propName={'vital_sign'} change={this.props.onChange('vital_sign')} />
-        <br/>
-        Unit: <RIEInput value={state.unit} propName={'unit'} change={this.props.onChange('unit')} />
+        Unit: <RIEInput className='editable-text' value={state.unit} propName={'unit'} change={this.props.onChange('unit')} />
         <br/>
         {this.renderExact()}
         {this.renderRange()}
@@ -984,7 +957,7 @@ class VitalSign extends Component<Props> {
     }
     return (
       <label>
-        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
+        Exact Quantity: <RIENumber className='editable-text' value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
         <br />
       </label>
     );
@@ -997,9 +970,9 @@ class VitalSign extends Component<Props> {
     }
     return (
       <label>
-        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
+        Range Low: <RIENumber className='editable-text' value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
         <br />
-        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
+        Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
         <br />
       </label>
     );
@@ -1023,11 +996,9 @@ class Observation extends Component<Props> {
     ];
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Category: <RIESelect className='editable-text' value={{id: state.category, text: state.category}} propName="category" change={this.props.onChange('category')} options={options} />
         <br/>
-        Category: <RIESelect value={{id: state.category, text: state.category}} propName="category" change={this.props.onChange('category')} options={options} />
-        <br/>
-        Unit: <RIEInput value={state.unit} propName={'unit'} change={this.props.onChange('unit')} />
+        Unit: <RIEInput className='editable-text' value={state.unit} propName={'unit'} change={this.props.onChange('unit')} />
         <br/>
         <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
         <br/>
@@ -1046,7 +1017,7 @@ class Observation extends Component<Props> {
     }
     return (
       <label>
-        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
+        Exact Quantity: <RIENumber className='editable-text' value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
         <br />
       </label>
     );
@@ -1059,9 +1030,9 @@ class Observation extends Component<Props> {
     }
     return (
       <label>
-        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
+        Range Low: <RIENumber className='editable-text' value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
         <br />
-        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
+        Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
         <br />
       </label>
     );
@@ -1074,7 +1045,7 @@ class Observation extends Component<Props> {
     }
     return (
       <label>
-        Attribute: <RIEInput value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
+        Attribute: <RIEInput className='editable-text' value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
         <br/>
       </label>
     );
@@ -1087,7 +1058,7 @@ class Observation extends Component<Props> {
     }
     return (
       <label>
-        Vital Sign: <RIEInput value={state.vital_sign} propName={'vital_sign'} change={this.props.onChange('vital_sign')} />
+        Vital Sign: <RIEInput className='editable-text' value={state.vital_sign} propName={'vital_sign'} change={this.props.onChange('vital_sign')} />
         <br/>
       </label>
     );
@@ -1111,11 +1082,9 @@ class MultiObservation extends Component<Props> {
     ];
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
+        Category: <RIESelect className='editable-text' value={{id: state.category, text: state.category}} propName="category" change={this.props.onChange('category')} options={options} />
         <br/>
-        Category: <RIESelect value={{id: state.category, text: state.category}} propName="category" change={this.props.onChange('category')} options={options} />
-        <br/>
-        Number of Observations: <RIENumber value={state.number_of_observations} propName='number_of_observations' change={this.props.onChange('number_of_observations')} />
+        Number of Observations: <RIENumber className='editable-text' value={state.number_of_observations} propName='number_of_observations' change={this.props.onChange('number_of_observations')} />
         <br/>
         <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
         <br/>
@@ -1131,9 +1100,7 @@ class DiagnosticReport extends Component<Props> {
     let state = ((this.props.state: any): DiagnosticReportState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br/>
-        Number of Observations: <RIENumber value={state.number_of_observations} propName='number_of_observations' change={this.props.onChange('number_of_observations')} />
+        Number of Observations: <RIENumber className='editable-text' value={state.number_of_observations} propName='number_of_observations' change={this.props.onChange('number_of_observations')} />
         <br/>
         <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
       </div>
@@ -1148,9 +1115,7 @@ class Symptom extends Component<Props> {
     let state = ((this.props.state: any): SymptomState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br/>
-        Symptom: <RIEInput value={state.symptom} propName={'symptom'} change={this.props.onChange('symptom')} />
+        Symptom: <RIEInput className='editable-text' value={state.symptom} propName={'symptom'} change={this.props.onChange('symptom')} />
         <br/>
         {this.renderCause()}
         {this.renderExact()}
@@ -1166,7 +1131,7 @@ class Symptom extends Component<Props> {
     }
     return (
       <label>
-        Cause: <RIEInput value={state.cause} propName={'cause'} change={this.props.onChange('cause')} />
+        Cause: <RIEInput className='editable-text' value={state.cause} propName={'cause'} change={this.props.onChange('cause')} />
         <br/>
       </label>
     );
@@ -1179,7 +1144,7 @@ class Symptom extends Component<Props> {
     }
     return (
       <label>
-        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
+        Exact Quantity: <RIENumber className='editable-text' value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
         <br />
       </label>
     );
@@ -1192,9 +1157,9 @@ class Symptom extends Component<Props> {
     }
     return (
       <label>
-        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
+        Range Low: <RIENumber className='editable-text' value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
         <br />
-        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
+        Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
         <br />
       </label>
     );
@@ -1208,8 +1173,6 @@ class Death extends Component<Props> {
     let state = ((this.props.state: any): DeathState);
     return (
       <div>
-        Name: <RIEInput propName={'name'} value={state.name} change={this.props.renameNode} />
-        <br />
         {this.renderExact()}
         {this.renderRange()}
         {this.renderCodes()}
@@ -1226,9 +1189,9 @@ class Death extends Component<Props> {
     }
     return (
       <label>
-        Exact Quantity: <RIENumber value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
+        Exact Quantity: <RIENumber className='editable-text' value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
         <br />
-        Exact Unit: <RIESelect value={{id: state.exact.unit, text: state.exact.unit}} propName="unit" change={this.props.onChange('exact.unit')} options={unitOfTimeOptions} />
+        Exact Unit: <RIESelect className='editable-text' value={{id: state.exact.unit, text: state.exact.unit}} propName="unit" change={this.props.onChange('exact.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -1241,11 +1204,11 @@ class Death extends Component<Props> {
     }
     return (
       <label>
-        Range Low: <RIENumber value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
+        Range Low: <RIENumber className='editable-text' value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
         <br />
-        Range High: <RIENumber value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
+        Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
         <br />
-        Range Unit: <RIESelect value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
+        Range Unit: <RIESelect className='editable-text' value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
         <br />
       </label>
     );
@@ -1271,7 +1234,7 @@ class Death extends Component<Props> {
     }
     return (
       <label>
-        Condition Onset: <RIEInput value={state.condition_onset} propName={'condition_onset'} change={this.props.onChange('condition_onset')} />
+        Condition Onset: <RIEInput className='editable-text' value={state.condition_onset} propName={'condition_onset'} change={this.props.onChange('condition_onset')} />
         <br />
       </label>
     );
@@ -1284,7 +1247,7 @@ class Death extends Component<Props> {
     }
     return (
       <label>
-        Referenced by Attribute: <RIEInput value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
+        Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'} change={this.props.onChange('referenced_by_attribute')} />
         <br />
       </label>
     );

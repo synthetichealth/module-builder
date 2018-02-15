@@ -4,3 +4,43 @@
   border-top: 1px solid #aaa;
 
 }
+
+.State-Editor {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.Transition {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  width: 100%
+}
+
+.editable-text {
+  font-style: italic;
+  text-decoration: underline;
+  cursor: text;
+  color: #336699;
+  padding-left: .2em;
+  padding-right: .2em;
+}
+
+.add-button {
+  color: inherit;
+  cursor:pointer;
+}
+
+.delete-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.0rem 1rem;
+  color: inherit;
+  cursor:pointer;
+}
