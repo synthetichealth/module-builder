@@ -58,8 +58,8 @@ export default (state = initialState, action) => {
 
     case 'RENAME_NODE':
       newState = {...state};
-      let oldModule = newState[action.data.targetModuleKey].states[action.data.targetNode.name];
-      newState[action.data.targetModuleKey].states[action.data.newName.name] = oldModule;
+      let oldState = newState[action.data.targetModuleKey].states[action.data.targetNode.name];
+      newState[action.data.targetModuleKey].states[action.data.newName.name] = {...oldState, name: action.data.newName.name};
       delete newState[action.data.targetModuleKey].states[action.data.targetNode.name];
       return newState;
     case 'EDIT_MODULE_NAME':

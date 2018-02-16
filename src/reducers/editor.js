@@ -11,6 +11,9 @@ export default (state = initialState, action) => {
     case 'SELECT_NODE':
       return { ...state, selectedStateKey: action.data};
 
+    case 'RENAME_NODE':
+      return { ...state, selectedStateKey: action.data.newName.name};
+
     case 'ADD_NODE':
       let newState = {...state}
       newState.selectedStateKey = action.data.stateKey;
