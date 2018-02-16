@@ -195,7 +195,7 @@ class Observation extends Component<Props> {
 
     return (
       <label> Observation:
-        <Codes codes={conditional.codes} onChange={this.props.onChange('codes')} />
+        <Codes system={TypeTemplates.Code.Loinc.system} codes={conditional.codes} onChange={this.props.onChange('codes')} />
         <RIESelect className='editable-text' value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
         <RIENumber className='editable-text' value={conditional.value} propName='value' change={this.props.onChange('value')} />
       </label>
@@ -229,7 +229,7 @@ class ActiveCondition extends Component<Props> {
 
     return (
       <label> Active Condition:
-        <Codes codes={conditional.codes} onChange={this.props.onChange('codes')} />
+        <Codes system={TypeTemplates.Code.Snomed.system} codes={conditional.codes} onChange={this.props.onChange('codes')} />
       </label>
     );
   }
@@ -242,7 +242,7 @@ class ActiveMedication extends Component<Props> {
     let conditional = ((this.props.conditional: any): ActiveMedicationConditional);
     return (
       <label> ActiveMedication:
-      <Codes codes={conditional.codes} onChange={this.props.onChange('codes')} />
+      <Codes system={TypeTemplates.Code.RxNorm.system} codes={conditional.codes} onChange={this.props.onChange('codes')} />
       </label>
     );
   }
@@ -255,7 +255,7 @@ class ActiveCarePlan extends Component<Props> {
     let conditional = ((this.props.conditional: any): ActiveCarePlanConditional);
     return (
       <label> ActiveCarePlan:
-      <Codes codes={conditional.codes} onChange={this.props.onChange('codes')} />
+      <Codes system={TypeTemplates.Code.Snomed.system} codes={conditional.codes} onChange={this.props.onChange('codes')} />
       </label>
     );
   }
