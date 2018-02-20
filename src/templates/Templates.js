@@ -282,7 +282,7 @@ export const StructureTemplates = {
 export const ModuleTemplates = {
   Blank: {
     name: "My Module",
-    remarks: "A blank module",
+    remarks: ["A blank module"],
     states: {
       Initial: {...StateTemplates.Initial, direct_transition: 'Terminal'},
       Terminal: {...StateTemplates.Terminal}
@@ -291,7 +291,7 @@ export const ModuleTemplates = {
 
   Yearly: {
     name: "Yearly Check for Condition",
-    remarks: "Check yearly for patient to have a condition",
+    remarks: ["Check yearly for patient to have a condition"],
     states: {
       ...StructureTemplates.CheckYearly,
       Initial: {...StateTemplates.Initial, direct_transition: 'CheckYearly'},
@@ -301,7 +301,7 @@ export const ModuleTemplates = {
 
   DeadAt40: {
     name: "Dead At 40",
-    remarks: "This module is an example of writing a template",
+    remarks: ["This module is an example of writing a template"],
     states: {
       Initial: {...StateTemplates.Initial, direct_transition: 'DelayUntil40'},
       DelayUntil40: {...StateTemplates.Delay, exact: {...TypeTemplates.exact, quantity: 40, unit: 'years'}, direct_transition: 'Death'},

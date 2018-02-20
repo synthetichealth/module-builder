@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './LoadModule.css';
+import generateDOT from '../../utils/graphviz';
 
 class LoadModule extends Component {
 
@@ -9,8 +10,35 @@ class LoadModule extends Component {
   }
 
   onClick = (key) => {
-    return () => (this.props.push('#' + key));
+    return () => {
+      this.setState({...this.state, json: '', selectedOption: 'core'})
+      this.props.push('#' + key);   
+    }
   }
+
+  onLoadJSON = () => {
+    const json = ''
+    try {
+      let module = JSON.parse(this.state.json)
+
+      if(module.name === undefined){
+        throw new Error('Module must have a name.')
+      }
+
+      if(module.states === undefined || Object.keys(module.states).length === 0){
+        throw new Error('Module must have at least one state.')
+      }
+
+      // this will throw an error if the module is incomprehensible
+      let dot = generateDOT(module);
+
+      this.props.newModule(module)
+      this.setState({...this.state, json: '', selectedOption: 'core'})
+
+    } catch (ex) {
+      alert('Error creating module: ' + ex.message);
+    }
+  };
 
   onOptionClick = (key) =>{
     return () => {
@@ -25,7 +53,7 @@ class LoadModule extends Component {
   renderLoadButton = () => {
     if(this.state.selectedOption === 'json'){
       return (
-        <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.props.onLoadJSON.bind(this, this.state.json)}>Load</button>
+        <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onLoadJSON}>Load</button>
       )
     }
   }
