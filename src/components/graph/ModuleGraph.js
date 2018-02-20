@@ -6,7 +6,7 @@ import svgPanZoom from  'svg-pan-zoom';
 import Viz from 'viz.js';
 import generateDOT from '../../utils/graphviz';
 
-import './Module.css';
+import './ModuleGraph.css';
 
 import type { Module } from './types/Module';
 import type { State } from './types/State';

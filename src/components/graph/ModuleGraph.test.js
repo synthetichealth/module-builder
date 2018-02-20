@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { renderComponent , expect } from '../../helpers/test_helper';
 
 import modulesJSON from '../../mocks/modules';
-import ModuleGraph from './Module';
+import ModuleGraph from './ModuleGraph';
 
 const onClick = () => null;
 

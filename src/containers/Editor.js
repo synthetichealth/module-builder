@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 
 import StateEditor from '../components/editor/State';
 import ModulePropertiesEditor from '../components/editor/ModuleProperties';
-import ModuleGraph from '../components/graph/Module';
-import LoadModule from '../components/graph/LoadModule';
-import Download from '../components/graph/Download';
+import ModuleGraph from '../components/graph/ModuleGraph';
+import LoadModule from '../components/menu/LoadModule';
+import Download from '../components/menu/Download';
 import { extractStates } from '../transforms/Module';
 
 import { findAvailableKey, createSafeKeyFromName } from '../utils/keys';
@@ -63,9 +63,9 @@ class Editor extends Component {
   }
 
   newModule = (takenKeys) => {
-    let key = findAvailableKey(createSafeKeyFromName(ModuleTemplates.Blank.name), takenKeys);
-    return () => {
-      this.props.newModule(key, ModuleTemplates.Blank);
+    return (module = ModuleTemplates.Blank) => {
+      let key = findAvailableKey(createSafeKeyFromName(module.name), takenKeys);
+      this.props.newModule(key, module);
       this.props.push('#' + key)
     }
   }
@@ -75,24 +75,6 @@ class Editor extends Component {
       let key = findAvailableKey(createSafeKeyFromName('New State'), takenKeys);
       let newState = {...StateTemplates.Simple, direct_transition: key };
       this.props.addNode(selectedModuleKey, key, newState);
-    }
-  }
-
-  jsonLoad = (takenKeys) => {
-    
-    return (json) => {
-      let module = {};
-      try{
-        module = JSON.parse(json)
-
-        let key = findAvailableKey(createSafeKeyFromName(module.name), takenKeys);
-        this.props.newModule(key, module);
-        this.props.push('#' + key)
-
-      } catch (ex){
-        alert('Invalid module ' + ex.message);
-        return
-      }
     }
   }
 
@@ -107,7 +89,7 @@ class Editor extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <button className="btn btn-link nav-item nav-link" onClick={this.newModule(Object.keys(this.props.modules))}>New Module</button>
+              <button className="btn btn-link nav-item nav-link" onClick={this.newModule(Object.keys(this.props.modules)).bind(this, undefined)}>New Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showLoadModule}>Load Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showDownload}>Download</button>
               <button className='btn btn-secondary nav-action-button' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
@@ -121,7 +103,7 @@ class Editor extends Component {
           visible={this.props.loadModuleVisible}
           onHide={this.props.hideLoadModule}
           push={this.props.push}
-          onLoadJSON={this.jsonLoad(Object.keys(this.props.modules))}
+          newModule={this.newModule(Object.keys(this.props.modules))}
           />
 
         <Download module={this.props.module}
