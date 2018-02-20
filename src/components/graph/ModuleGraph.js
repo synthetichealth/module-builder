@@ -85,7 +85,12 @@ class ModuleGraph extends Component<Props> {
   writeSVG(module: Module, selectedState: State){
 
     /* write SVG */
-    this.mount.innerHTML= Viz(generateDOT(module, selectedState));
+    try {
+      this.mount.innerHTML= Viz(generateDOT(module, selectedState));
+    } catch (ex) {
+      alert('Invalid module: ' + ex.message)
+      this.mount.innerHTML = '<svg width="10px" height="10px"/>';
+    }
 
     let svg = this.mount.children[0]
 

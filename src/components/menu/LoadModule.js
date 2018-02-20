@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './LoadModule.css';
+import generateDOT from '../../utils/graphviz';
 
 class LoadModule extends Component {
 
@@ -27,6 +28,9 @@ class LoadModule extends Component {
       if(module.states === undefined || Object.keys(module.states).length === 0){
         throw new Error('Module must have at least one state.')
       }
+
+      // this will throw an error if the module is incomprehensible
+      let dot = generateDOT(module);
 
       this.props.newModule(module)
       this.setState({...this.state, json: '', selectedOption: 'core'})
