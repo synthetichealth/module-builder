@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import _ from 'lodash';
 
 import StateEditor from '../components/editor/State';
 import ModulePropertiesEditor from '../components/editor/ModuleProperties';
@@ -63,7 +64,7 @@ class Editor extends Component {
   }
 
   newModule = (takenKeys) => {
-    return (module = ModuleTemplates.Blank) => {
+    return (module = _.cloneDeep(ModuleTemplates.Blank)) => {
       let key = findAvailableKey(createSafeKeyFromName(module.name), takenKeys);
       this.props.newModule(key, module);
       this.props.push('#' + key)
