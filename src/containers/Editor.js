@@ -3,6 +3,8 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import _ from 'lodash';
+import Joyride from 'react-joyride';
+
 
 import StateEditor from '../components/editor/State';
 import ModulePropertiesEditor from '../components/editor/ModuleProperties';
@@ -13,8 +15,10 @@ import { extractStates } from '../transforms/Module';
 
 import { findAvailableKey, createSafeKeyFromName } from '../utils/keys';
 import { StateTemplates, ModuleTemplates } from '../templates/Templates';
+import { BasicTutorial, EditTutorial } from '../templates/Tutorial';
 
 import './Editor.css';
+import './Joyride.scss';
 
 import {selectNode,
         addNode,
@@ -32,6 +36,17 @@ import {selectNode,
         editModuleRemarks} from '../actions/editor';
 
 class Editor extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      joyride: {
+        run: false,
+        steps: BasicTutorial,
+        stepIndex: 0
+      }
+    }
+  }
 
   /*
     This is a recursive function to track the path that an edit action took through the Inspector
@@ -79,10 +94,38 @@ class Editor extends Component {
     }
   }
 
+  jsonLoad = (takenKeys) => {
+
+    return (json) => {
+      let module = {};
+      try{
+        module = JSON.parse(json)
+
+        let key = findAvailableKey(createSafeKeyFromName(module.name), takenKeys);
+        this.props.newModule(key, module);
+        this.props.push('#' + key)
+
+      } catch (ex){
+        alert('Invalid module ' + ex.message);
+        return
+      }
+    }
+  }
+
+  joyrideCallback = (data) => {
+
+  }
+
+  startTutorial = (steps) => {
+    return () => {
+      this.joyride.reset(true);
+      this.setState({joyride: {run: true, steps}})
+    }
+  }
+
   render() {
     return (
       <div className='Editor'>
-
         <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" href="#">Synthea Module Builder</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,11 +138,11 @@ class Editor extends Component {
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showDownload}>Download</button>
               <button className='btn btn-secondary nav-action-button' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
               <button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button>
+              <button className='btn btn-secondary nav-action-button' onClick={this.startTutorial(BasicTutorial)}> Help </button>
             </div>
           </div>
         </nav>
 
-        /* REFACTOR THESE MODALS */
         <LoadModule modules={this.props.modules}
           visible={this.props.loadModuleVisible}
           onHide={this.props.hideLoadModule}
@@ -122,6 +165,7 @@ class Editor extends Component {
 
             <StateEditor
               moduleName={this.props.module.name}
+              helpFunction={this.startTutorial}
               renameNode={this.renameNode(this.props.selectedModuleKey, this.props.moduleState)}
               changeType={this.changeStateType(this.props.selectedModuleKey, this.props.moduleState)}
               addTransition={this.addTransition(this.props.selectedModuleKey, this.props.moduleState)}
@@ -137,6 +181,20 @@ class Editor extends Component {
             selectedState={this.props.moduleState}/>
 
         </div>
+        <Joyride
+          ref={c => (this.joyride = c)}
+          showOverlay={true}
+          showSkipButton={true}
+          showStepsProgress={false}
+          type={'continuous'}
+          steps={this.state.joyride.steps}
+          run={this.state.joyride.run}
+          autoStart={true}
+          debug={false}
+          allowClicksThruHole={false}
+          keyboardNavigation={true}
+        />
+
       </div>
     )
   }

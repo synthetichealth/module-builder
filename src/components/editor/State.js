@@ -9,7 +9,15 @@ import { Code, Codes } from './Code';
 import { Goals } from './Goal';
 import ConditionalEditor from './Conditional';
 import Transition from './Transition';
+<<<<<<< HEAD
 import { AttributeTemplates, TypeTemplates, StateTemplates } from '../../templates/Templates';
+=======
+import {StateTemplates} from '../../templates/Templates';
+
+import { BasicTutorial, EditTutorial } from '../../templates/Tutorial';
+
+
+>>>>>>> added joyride tutorials
 
 import './State.css';
 
@@ -20,7 +28,8 @@ type Props = {
   onChange: any,
   renameNode: any,
   changeType: any,
-  addTransition: any
+  addTransition: any,
+  helpFunction: any
 }
 
 const unitOfTimeOptions = [
@@ -132,6 +141,8 @@ class StateEditor extends Component<Props> {
           </div>
             <br/>
             <a className="editable-text delete-button" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Remove State</a>
+            <a onClick={this.props.helpFunction(EditTutorial)}>Help</a>
+
         </div>
     )
   }
