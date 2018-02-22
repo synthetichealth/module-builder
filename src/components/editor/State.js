@@ -6,15 +6,15 @@ import _ from 'lodash';
 import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, SymptomState, DeathState } from '../../types/State';
 
 import { Code, Codes } from './Code';
-import { Goal, Goals } from './Goal';
+import { Goals } from './Goal';
 import ConditionalEditor from './Conditional';
-import StringEditor from './String';
 import Transition from './Transition';
 import { AttributeTemplates, TypeTemplates, StateTemplates } from '../../templates/Templates';
 
 import './State.css';
 
 type Props = {
+  moduleName: string,
   state: State,
   otherStates: State[],
   onChange: any,
@@ -131,7 +131,7 @@ class StateEditor extends Component<Props> {
               onChange={this.props.onChange(`states.${this.props.state.name}`)} />
           </div>
             <br/>
-            <a className="delete-button" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Remove State</a>
+            <a className="editable-text delete-button" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Remove State</a>
         </div>
     )
   }
@@ -253,7 +253,7 @@ class SetAttribute extends Component<Props> {
       return (
         <div>
           Value: <RIEInput className='editable-text' value={state.value} propName={'value'} change={this.props.onChange('value')} />
-          <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: null}})}>(remove)</a>
           <br />
         </div>
       );
@@ -312,7 +312,11 @@ class Encounter extends Component<Props> {
         Encounter Class: <RIESelect className='editable-text' value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
         <br />
         {this.renderReason()}
-        <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
+        <div className='section'>
+          Codes
+          <br />
+          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
+        </div>
       </div>
     );
   }
@@ -330,7 +334,7 @@ class Encounter extends Component<Props> {
       return (
         <div>
           Wellness
-          <a className='editable-text' onClick={() => this.props.onChange('wellness')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('wellness')({val: {id: null}})}>(remove)</a>
           <br />
         </div>
       );
@@ -351,7 +355,7 @@ class Encounter extends Component<Props> {
       return (
         <div>
           Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -424,7 +428,7 @@ class ConditionOnset extends Component<Props> {
       return (
         <div>
           Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'}  change={this.props.onChange('assign_to_attribute')} />
-          <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -459,7 +463,7 @@ class ConditionEnd extends Component<Props> {
       return (
         <div>
           Condition Onset: <RIEInput className='editable-text' value={state.condition_onset} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} />
-          <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -479,7 +483,7 @@ class ConditionEnd extends Component<Props> {
       return (
         <div>
           Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'}  change={this.props.onChange('referenced_by_attribute')} />
-          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -541,7 +545,7 @@ class AllergyOnset extends Component<Props> {
       return (
         <div>
           Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'}  change={this.props.onChange('assign_to_attribute')} />
-          <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -576,7 +580,7 @@ class AllergyEnd extends Component<Props> {
       return (
         <div>
           Allergy Onset: <RIEInput className='editable-text' value={state.allergy_onset} propName={'allergy_onset'}  change={this.props.onChange('allergy_onset')} />
-          <a className='editable-text' onClick={() => this.props.onChange('allergy_onset')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('allergy_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -596,7 +600,7 @@ class AllergyEnd extends Component<Props> {
       return (
         <div>
           Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'}  change={this.props.onChange('referenced_by_attribute')} />
-          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -659,7 +663,7 @@ class MedicationOrder extends Component<Props> {
       return (
         <div>
           Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'}  change={this.props.onChange('assign_to_attribute')} />
-          <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -679,7 +683,7 @@ class MedicationOrder extends Component<Props> {
       return (
         <div>
           Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -723,7 +727,7 @@ class MedicationOrder extends Component<Props> {
       return (
         <div>
           Prescription Refills: <RIENumber className='editable-text' value={state.prescription.refills} propName={'refills'}  change={this.props.onChange('prescription.refills')} />
-          <a className='editable-text' onClick={() => this.props.onChange('prescription.refills')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('prescription.refills')({val: {id: null}})}>(remove)</a>
           <br />
         </div>
       );
@@ -743,7 +747,7 @@ class MedicationOrder extends Component<Props> {
       return (
         <div>
           Prescription As Needed
-          <a className='editable-text' onClick={() => this.props.onChange('prescription.as_needed')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('prescription.as_needed')({val: {id: null}})}>(remove)</a>
           <br />
         </div>
       );
@@ -834,7 +838,7 @@ class MedicationEnd extends Component<Props> {
       return (
         <div>
           Medication Order: <RIEInput className='editable-text' value={state.medication_order} propName={'medication_order'}  change={this.props.onChange('medication_order')} />
-          <a className='editable-text' onClick={() => this.props.onChange('medication_order')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('medication_order')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -854,7 +858,7 @@ class MedicationEnd extends Component<Props> {
       return (
         <div>
           Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'}  change={this.props.onChange('referenced_by_attribute')} />
-          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -918,7 +922,7 @@ class CarePlanStart extends Component<Props> {
       return (
         <div>
           Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'}  change={this.props.onChange('assign_to_attribute')} />
-          <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -938,7 +942,7 @@ class CarePlanStart extends Component<Props> {
       return (
         <div>
           Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -1017,7 +1021,7 @@ class CarePlanEnd extends Component<Props> {
       return (
         <div>
           Care Plan: <RIEInput className='editable-text' value={state.careplan} propName={'careplan'}  change={this.props.onChange('careplan')} />
-          <a className='editable-text' onClick={() => this.props.onChange('careplan')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('careplan')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -1037,7 +1041,7 @@ class CarePlanEnd extends Component<Props> {
       return (
         <div>
           Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'}  change={this.props.onChange('referenced_by_attribute')} />
-          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -1099,7 +1103,7 @@ class Procedure extends Component<Props> {
       return (
         <div>
           Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -1325,18 +1329,23 @@ class Symptom extends Component<Props> {
     );
   }
 
-  // TODO
   renderCause() {
     let state = ((this.props.state: any): SymptomState);
     if (!state.cause) {
-      return null;
+      return (
+        <div>
+          Cause: <RIEInput className='editable-text' value={this.props.moduleName} propName={'cause'} change={this.props.onChange('cause')} />
+          <br/>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          Cause: <RIEInput className='editable-text' value={state.cause} propName={'cause'} change={this.props.onChange('cause')} />
+          <br/>
+        </div>
+      );
     }
-    return (
-      <div>
-        Cause: <RIEInput className='editable-text' value={state.cause} propName={'cause'} change={this.props.onChange('cause')} />
-        <br/>
-      </div>
-    );
   }
 
   renderExactOrRange() {
@@ -1457,7 +1466,7 @@ class Death extends Component<Props> {
       return (
         <div>
           Condition Onset: <RIEInput className='editable-text' value={state.condition_onset} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} />
-          <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
@@ -1477,7 +1486,7 @@ class Death extends Component<Props> {
       return (
         <div>
           Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'}  change={this.props.onChange('referenced_by_attribute')} />
-          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}> (remove)</a>
+          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );

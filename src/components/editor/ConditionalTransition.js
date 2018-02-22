@@ -38,11 +38,11 @@ class ConditionalTransition extends Component<Props> {
 
             </label>
             <br/>
-            <a className="delete-button" onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
+            <a className="editable-text delete-button" onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
 
           </div>
         })}
-        <a className='add-button'onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: _.cloneDeep(TransitionTemplates.Conditional[0])}})}>+</a>
+        <a className='editable-text add-button'onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: _.cloneDeep(TransitionTemplates.Conditional[0])}})}>+</a>
 
       </label>
     );
