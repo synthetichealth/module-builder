@@ -5,7 +5,7 @@ import { StateTemplates, TransitionTemplates, StructureTemplates } from '../temp
 const initialState = {};
 
 export default (state = initialState, action) => {
-  let newState = null; 
+  let newState = null;
   switch (action.type) {
     case 'NEW_MODULE':
       newState = {...state}
@@ -25,6 +25,12 @@ export default (state = initialState, action) => {
       }
       else{
         _.unset(newState, path);
+        // debugger
+        let parent = [...action.data.path].splice(0, action.data.path.length -1).join(".");
+        let newVal = _.get(newState, parent).filter(x => x);
+        if(Array.isArray(newVal)) {
+          _.set(newState, parent, newVal);
+        }
       }
 
       return {...newState}
