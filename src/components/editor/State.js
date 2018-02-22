@@ -9,15 +9,9 @@ import { Code, Codes } from './Code';
 import { Goals } from './Goal';
 import ConditionalEditor from './Conditional';
 import Transition from './Transition';
-<<<<<<< HEAD
 import { AttributeTemplates, TypeTemplates, StateTemplates } from '../../templates/Templates';
-=======
-import {StateTemplates} from '../../templates/Templates';
-
 import { BasicTutorial, EditTutorial } from '../../templates/Tutorial';
 
-
->>>>>>> added joyride tutorials
 
 import './State.css';
 
@@ -129,7 +123,7 @@ class StateEditor extends Component<Props> {
           <br />
           <hr />
           <div>
-            <div>Transition Type:
+            <div className="Transition-Type">Transition Type:
               <RIESelect className='editable-text' className='editable-text' value={{id: transitionType, text: transitionType}} propName='transition'change={(e) => this.props.addTransition(e.transition.id)} options={transitionOptions}/>
             </div>
           </div>
