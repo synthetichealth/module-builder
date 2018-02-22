@@ -23,15 +23,18 @@
 
 .editable-text {
   font-style: italic;
-  text-decoration: underline;
+  text-decoration: underline !important;
   cursor: text;
-  color: #336699;
+  color: #336699 !important;
   padding-left: .2em;
   padding-right: .2em;
 }
 
-.editable-text:empty:after {
-  color: #999999;
+span.editable-text:empty {
+  color: #ff3300 !important;
+}
+
+span.editable-text:empty:after {
   content: 'Enter value';
 }
 

@@ -121,6 +121,7 @@ class Editor extends Component {
               onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleKey, remarks)}/>
 
             <StateEditor
+              moduleName={this.props.module.name}
               renameNode={this.renameNode(this.props.selectedModuleKey, this.props.moduleState)}
               changeType={this.changeStateType(this.props.selectedModuleKey, this.props.moduleState)}
               addTransition={this.addTransition(this.props.selectedModuleKey, this.props.moduleState)}
@@ -144,7 +145,7 @@ class Editor extends Component {
 const mapStateToProps = state => {
 
   let selectedModuleKey = state.editor.selectedModuleKey;
-  
+
   if(!state.modules[selectedModuleKey]){
     selectedModuleKey = Object.keys(state.modules)[0];
   }
@@ -152,7 +153,7 @@ const mapStateToProps = state => {
   let module = state.modules[selectedModuleKey];
   let moduleStates = extractStates(module);
   let moduleState =  moduleStates.find(s => (s.name === state.editor.selectedStateKey))
-    
+
   return {
     module,
     modules: state.modules,
