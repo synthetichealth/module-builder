@@ -6,11 +6,10 @@ import _ from 'lodash';
 
 import type { Code as CodeType } from '../../types/Code';
 import { TypeTemplates } from '../../templates/Templates';
-import './Transition.css';
-
 
 type Props = {
   code: CodeType,
+  system: string,
   onChange: any
 }
 
@@ -34,6 +33,7 @@ export class Code extends Component<Props> {
 
 type CodesProps = {
   codes: CodeType[],
+  system: string,
   onChange: any
 }
 export class Codes extends Component<CodesProps> {
@@ -53,14 +53,13 @@ export class Codes extends Component<CodesProps> {
       <div>
         {this.props.codes.map((code, i) => {
           return (
-            <div className='transition-option' key={i}>
-              <a className='delete-button' onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
+            <div className='section' key={i}>
+              <a className='editable-text delete-button' onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
               <Code onChange={this.props.onChange(i)} code={code} system={system}/>
             </div>
           )
         })}
-        <a onClick={() => this.props.onChange(`[${this.props.codes.length}]`)({val: {id: _.cloneDeep(templates[system])}})}>+</a>
-
+        <a className='editable-text' onClick={() => this.props.onChange(`[${this.props.codes.length}]`)({val: {id: _.cloneDeep(templates[system])}})}>+</a>
       </div>
     );
   }

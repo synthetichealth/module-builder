@@ -19,7 +19,7 @@ describe(`renders state editor for all states in all modules propertly without e
       let moduleStates = extractStates(module);
         moduleStates.forEach(state => {
           it(`renders ${module.name}:${state.name}`, () => {
-            renderComponent(StateEditor, { state, otherStates: moduleStates, onChange, renameNode, changeType })
+            renderComponent(StateEditor, { moduleName: module.name, state, otherStates: moduleStates, onChange, renameNode, changeType })
           });
         });
   });

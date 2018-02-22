@@ -1,14 +1,4 @@
 export const TypeTemplates = {
-  Range: {
-    Exact: {
-      quantity: 0
-    },
-    ExactWithUnit: {
-      quantity: 0,
-      unit: "days"
-    }
-  },
-
   Code: {
     Snomed: {
       system: "SNOMED-CT",
@@ -59,6 +49,47 @@ export const TypeTemplates = {
   }
 }
 
+export const AttributeTemplates = {
+  Exact: {
+    quantity: 1
+  },
+  ExactWithUnit: {
+    quantity: 1,
+    unit: "days"
+  },
+  Range: {
+    low: 1,
+    high: 2,
+    unit: "days"
+  },
+  RangeWithUnit: {
+    low: 1,
+    high: 2,
+    unit: "days"
+  },
+  Prescription: {
+    dosage: {
+      amount: 1,
+      frequency: 1,
+      period: 1,
+      unit: "days"
+    },
+    duration: {
+      quantity: 1,
+      unit: "days"
+    }
+  },
+  Goal: {
+    addresses: ["text"]
+  },
+  Observation: {
+    codes: [{...TypeTemplates.Code.Loinc}],
+    operator: "==",
+    value: 1
+  }
+}
+
+
 export const TransitionTemplates = {
   Direct: 'Initial',
   Conditional: [{transition: 'Initial', condition: {...TypeTemplates.Condition.Age}}],
@@ -86,7 +117,7 @@ export const StateTemplates = {
 
   Delay: {
     type: "Delay",
-    exact: {...TypeTemplates.Range.ExactWithUnit}
+    exact: {...AttributeTemplates.ExactWithUnit}
   },
 
   SetAttribute: {
@@ -164,7 +195,7 @@ export const StateTemplates = {
     type: "VitalSign",
     vital_sign: "",
     unit: "",
-    exact: {...TypeTemplates.Range.Exact}
+    exact: {...AttributeTemplates.Exact}
   },
 
   Observation: {
@@ -172,7 +203,7 @@ export const StateTemplates = {
     category: "vital-signs",
     unit: "",
     codes: [{...TypeTemplates.Code.Loinc}],
-    exact: {...TypeTemplates.Range.Exact}
+    exact: {...AttributeTemplates.Exact}
   },
 
   MultiObservation: {
@@ -192,12 +223,12 @@ export const StateTemplates = {
     type: "Symptom",
     symptom: "",
     cause: "",
-    exact: {...TypeTemplates.Range.Exact}
+    exact: {...AttributeTemplates.Exact}
   },
 
   Death: {
     type: "Death",
-    exact: {...TypeTemplates.Range.ExactWithUnit}
+    exact: {...AttributeTemplates.ExactWithUnit}
   }
 }
 

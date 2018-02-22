@@ -2,7 +2,6 @@
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid #aaa;
-
 }
 
 .State-Editor {
@@ -24,11 +23,30 @@
 
 .editable-text {
   font-style: italic;
-  text-decoration: underline;
+  text-decoration: underline !important;
   cursor: text;
-  color: #336699;
+  color: #336699 !important;
   padding-left: .2em;
   padding-right: .2em;
+}
+
+span.editable-text:empty {
+  color: #ff3300 !important;
+}
+
+span.editable-text:empty:after {
+  content: 'Enter value';
+}
+
+.section {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 .add-button {
