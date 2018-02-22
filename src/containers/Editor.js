@@ -18,7 +18,7 @@ import { StateTemplates, ModuleTemplates } from '../templates/Templates';
 import { BasicTutorial, EditTutorial } from '../templates/Tutorial';
 
 import './Editor.css';
-import './Joyride.scss';
+import '../../node_modules/react-joyride/lib/react-joyride-compiled.css'
 
 import {selectNode,
         addNode,
@@ -110,10 +110,6 @@ class Editor extends Component {
         return
       }
     }
-  }
-
-  joyrideCallback = (data) => {
-
   }
 
   startTutorial = (steps) => {
