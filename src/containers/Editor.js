@@ -94,24 +94,6 @@ class Editor extends Component {
     }
   }
 
-  jsonLoad = (takenKeys) => {
-
-    return (json) => {
-      let module = {};
-      try{
-        module = JSON.parse(json)
-
-        let key = findAvailableKey(createSafeKeyFromName(module.name), takenKeys);
-        this.props.newModule(key, module);
-        this.props.push('#' + key)
-
-      } catch (ex){
-        alert('Invalid module ' + ex.message);
-        return
-      }
-    }
-  }
-
   startTutorial = (steps) => {
     return () => {
       this.joyride.reset(true);
