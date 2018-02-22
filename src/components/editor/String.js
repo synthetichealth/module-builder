@@ -13,7 +13,7 @@ export class StringEditor extends Component<Props> {
     let value = this.props.value;
     return (
       <div>
-        {this.props.label}: <RIEInput className='editable-text' value={value} propName="value" change={this.props.onChange('value')} />
+        {this.props.label}: <RIEInput className='editable-text' value={value} propName="value" change={this.props.onChange} />
         <br />
       </div>
     );
