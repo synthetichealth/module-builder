@@ -2,7 +2,6 @@
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid #aaa;
-
 }
 
 .State-Editor {
@@ -29,6 +28,22 @@
   color: #336699;
   padding-left: .2em;
   padding-right: .2em;
+}
+
+.editable-text:empty:after {
+  color: #999999;
+  content: 'Enter value';
+}
+
+.section {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 .add-button {
