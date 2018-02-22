@@ -60,7 +60,6 @@ export class Codes extends Component<CodesProps> {
           )
         })}
         <a onClick={() => this.props.onChange(`[${this.props.codes.length}]`)({val: {id: _.cloneDeep(templates[system])}})}>+</a>
-
       </div>
     );
   }

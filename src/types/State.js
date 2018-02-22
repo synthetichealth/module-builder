@@ -2,6 +2,7 @@
 import type { Transition } from './Transition';
 import type { Conditional } from './Conditional';
 import type { Code } from './Code';
+import type { Goal } from './Goal';
 import type { UnitOfTime } from './Units';
 
 export type InitialState = {
@@ -160,15 +161,7 @@ export type CarePlanStartState = {
   reason?: string,
   codes: Code[],
   activities?: Code[],
-  goals?: {
-    observation?: {
-      codes: Code[],
-      operator: '==' | '!=' | "<" | "<=" | ">" | ">=" | "is nil" | "is not nil",
-      value: number
-    },
-    text?: string,
-    addresses: string[]
-  },
+  goals?: Goal[],
   transition?: Transition
 }
 
