@@ -10,6 +10,8 @@ import { Goals } from './Goal';
 import ConditionalEditor from './Conditional';
 import Transition from './Transition';
 import { AttributeTemplates, TypeTemplates, StateTemplates } from '../../templates/Templates';
+import { BasicTutorial, EditTutorial } from '../../templates/Tutorial';
+
 
 import './State.css';
 
@@ -20,7 +22,8 @@ type Props = {
   onChange: any,
   renameNode: any,
   changeType: any,
-  addTransition: any
+  addTransition: any,
+  helpFunction: any
 }
 
 const unitOfTimeOptions = [
@@ -120,7 +123,7 @@ class StateEditor extends Component<Props> {
           <br />
           <hr />
           <div>
-            <div>Transition Type:
+            <div className="Transition-Type">Transition Type:
               <RIESelect className='editable-text' className='editable-text' value={{id: transitionType, text: transitionType}} propName='transition'change={(e) => this.props.addTransition(e.transition.id)} options={transitionOptions}/>
             </div>
           </div>
@@ -132,6 +135,8 @@ class StateEditor extends Component<Props> {
           </div>
             <br/>
             <a className="editable-text delete-button" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Remove State</a>
+            <a onClick={this.props.helpFunction(EditTutorial)}>Help</a>
+
         </div>
     )
   }
