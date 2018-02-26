@@ -38,13 +38,170 @@ export const TypeTemplates = {
       operator: ">",
       year: 2000,
     },
-    ActiveCondition: {
+    "Active Condition": {
       condition_type: 'Active Condition',
       codes: [{
         system: "SNOMED-CT",
         code: "1234",
         display: "SNOMED Code"
       }],
+    },
+    "Socioeconomic Status": {
+        "condition_type": "Socioeconomic Status",
+        "category": "Middle"
+    },
+    Race: {
+      "condition_type": "Race",
+      "race": "Hispanic"
+    },
+    Symptom: {
+      "condition_type": "Symptom",
+      "symptom" : "Chest Pain",
+      "operator": ">=",
+      "value": 50
+    },
+    Observation: {
+      "condition_type": "Observation",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72107-6",
+          "display": "Mini Mental State Examination"
+        }
+      ],
+      "operator": ">",
+      "value": 0
+    },
+    "Vital Sign": {
+        "condition_type" : "Vital Sign",
+        "vital_sign" : "Systolic Blood Pressure",
+        "operator" : ">",
+        "value" : 120
+    },
+    "Active Medication": {
+      "condition_type": "Active Medication",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "849727",
+          "display": "Naproxen sodium 220 MG [Aleve]"
+        }
+      ]
+    },
+    "Active CarePlan": {
+      "condition_type": "Active CarePlan",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "698360004",
+          "display": "Diabetes self management plan"
+        }
+      ]
+    },
+    "Prior State": {
+      "condition_type": "Prior State",
+      "name": " "
+    },
+    Attribute: {
+      "condition_type": "Attribute",
+      "attribute": "opiod_prescription",
+      "operator": "==",
+      "value": "Vicodin"
+    },
+    And: {
+      "condition_type": "And",
+      "conditions": [
+        {
+          "condition_type": "Gender",
+          "gender": "M"
+        },
+        {
+          "condition_type": "Age",
+          "operator": ">=",
+          "quantity": 40,
+          "unit": "years"
+        }
+      ]
+    },
+    Or: {
+      "condition_type": "Or",
+      "conditions": [
+        {
+          "condition_type": "Gender",
+          "gender": "M"
+        },
+        {
+          "condition_type": "Age",
+          "operator": ">=",
+          "quantity": 40,
+          "unit": "years"
+        }
+      ]
+    },
+    "At Least" : {
+      "condition_type": "At Least",
+      "minimum": 2,
+      "conditions": [
+        {
+          "condition_type": "Gender",
+          "gender": "M"
+        },
+        {
+          "condition_type": "Age",
+          "operator": ">=",
+          "quantity": 40,
+          "unit": "years"
+        },
+        {
+          "condition_type" : "Active CarePlan",
+          "codes": [
+            {
+              "system": "SNOMED-CT",
+              "code": "698360004",
+              "display": "Diabetes self management plan"
+            }
+          ]
+        }
+      ]
+    },
+    "At Most": {
+      "condition_type": "At Most",
+      "maximum" : 2,
+      "conditions": [
+        {
+          "condition_type": "Gender",
+          "gender": "M"
+        },
+        {
+          "condition_type": "Age",
+          "operator": ">=",
+          "quantity": 40,
+          "unit": "years"
+        },
+        {
+          "condition_type": "Active CarePlan",
+          "codes": [
+            {
+              "system": "SNOMED-CT",
+              "code": "698360004",
+              "display": "Diabetes self management plan"
+            }
+          ]
+        }
+      ]
+    },
+    Not: {
+      "condition_type": "Not",
+      "condition": {
+        "condition_type": "Gender",
+        "gender": "M"
+      }
+    },
+    "True": {
+      condition_type: "True"
+    },
+    "False": {
+      condition_type: "False"
     }
   }
 }

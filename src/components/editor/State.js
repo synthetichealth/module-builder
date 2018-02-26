@@ -182,7 +182,7 @@ class Guard extends Component<Props> {
     let state = ((this.props.state: any): GuardState);
     return (
       <div>
-        <ConditionalEditor conditional={state.allow} onChange={this.props.onChange('allow')} />
+        <ConditionalEditor {...this.props} conditional={state.allow} onChange={this.props.onChange('allow')} />
       </div>
     );
   }
