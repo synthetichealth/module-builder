@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import _ from 'lodash';
-import Joyride from 'react-joyride';
-
+import _ from 'lodash'
+import Joyride from 'react-joyride'
+import ReactTooltip from 'react-tooltip'
 
 import StateEditor from '../components/editor/State';
 import ModulePropertiesEditor from '../components/editor/ModuleProperties';
@@ -115,7 +115,8 @@ class Editor extends Component {
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showLoadModule}>Load Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showDownload}>Download</button>
               <button className='btn btn-secondary nav-action-button' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
-              <button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button>
+              {/*<button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button> */}
+              <button className='btn btn-secondary nav-action-button disabled' data-tip='Structures are not yet implemented' onClick={() => null}> Add Structure </button>
               <button className='btn btn-secondary nav-action-button' onClick={this.startTutorial(BasicTutorial)}> Help </button>
             </div>
           </div>
@@ -159,6 +160,7 @@ class Editor extends Component {
             selectedState={this.props.moduleState}/>
 
         </div>
+
         <Joyride
           ref={c => (this.joyride = c)}
           showOverlay={true}
@@ -172,6 +174,11 @@ class Editor extends Component {
           allowClicksThruHole={false}
           keyboardNavigation={true}
         />
+
+        <ReactTooltip
+          className='react-tooltip-customized'
+          effect='solid'
+          />
 
       </div>
     )

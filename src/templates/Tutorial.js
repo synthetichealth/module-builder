@@ -5,7 +5,7 @@ export const BasicTutorial = [
   {title: "Edit Node", selector: "#node_Initial", text: "To edit a node you can click on it in the graph"},
   {title: "Module Remarks", selector: ".ModuleProperties-remarks", text: "This is a place to put any remarks or citations for this module."},
   {title: "Adding a State", selector: ".navbar-nav :nth-child(4)", text: "This will add a new state to the module, it can then be edited like any other state."},
-  {title: "Adding a Structure", selector: ".navbar-nav :nth-child(5)", text: "We have a few commonly used structures, this will allow you to add them to your module."},
+  {title: "Adding a Structure", selector: ".navbar-nav :nth-child(5)", text: "We have a few commonly used structures, this will allow you to add them to your module. This feature is not yet available."},
 ]
 
 export const EditTutorial = [
