@@ -19,3 +19,8 @@
 .nav-action-button {
   margin-left: 10px;
 }
+
+.__react_component_tooltip.react-tooltip-customized {
+  z-index: 10000 /* so it is over the navbar */
+
+}
