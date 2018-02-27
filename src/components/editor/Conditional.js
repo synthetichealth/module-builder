@@ -303,7 +303,7 @@ class And extends Component<Props> {
         {conditional.conditions.map((cond, i) => {
           return (
             <div className="section"  key={i}>
-              <ConditionalEditor conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+              <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
             </div>
           )
         })}
@@ -322,7 +322,7 @@ class Or extends Component<Props> {
         {conditional.conditions.map((cond, i) => {
           return (
               <div className="section" key={i}>
-                <ConditionalEditor conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+                <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
               </div>
           )
         })}
@@ -342,7 +342,7 @@ class AtLeast extends Component<Props> {
         {conditional.conditions.map((cond, i) => {
           return (
             <div className="section" key={i}>
-              <ConditionalEditor conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+              <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
             </div>
           )
         })}
@@ -363,7 +363,7 @@ class AtMost extends Component<Props> {
         {conditional.conditions.map((cond, i) => {
           return (
             <div className="section" key={i}>
-              <ConditionalEditor conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+              <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
             </div>
           )
         })}
@@ -380,7 +380,7 @@ class Not extends Component<Props> {
     return (
       <label> Not:
         <div className="section">
-          <ConditionalEditor conditional={this.condition} onChange={this.props.onChange('conditional')} />
+          <ConditionalEditor {...this.props} conditional={conditional.condition} onChange={this.props.onChange('condition')} />
         </div>
       </label>
     );
