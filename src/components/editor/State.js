@@ -99,7 +99,8 @@ class StateEditor extends Component<Props> {
   }
 
   updateRemarks = (el:any) => {
-    this.props.onChange(`states.${this.props.state.name}.remarks`)({remarks:{id:el.remarks.split("\n")}});
+    const remarks = el.remarks? el.remarks.split("\n") : null;
+    this.props.onChange(`states.${this.props.state.name}.remarks`)({remarks:{id:remarks}});
   }
 
   render() {
@@ -115,6 +116,9 @@ class StateEditor extends Component<Props> {
       {id:"Complex" ,text:"Complex"},
     ]
 
+    let remarks = this.props.state.remarks||'(no remarks)';
+    remarks = typeof remarks === 'string'? remarks: remarks.join("\n");
+
     const transitionType = (this.props.state.transition||{}).type;
     return (
         <div className="State">
@@ -122,7 +126,7 @@ class StateEditor extends Component<Props> {
           State Type: <RIESelect className='editable-text' className='editable-text' value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
           <br/>
           <hr/>
-          <RIETextArea value={this.props.state.remarks.join("\n")} propName="remarks" change={this.updateRemarks} />
+          <RIETextArea className='editable-text' value={remarks} propName="remarks" change={this.updateRemarks} />
           <br/>
           <hr/>
           <div className="State-Editor">
