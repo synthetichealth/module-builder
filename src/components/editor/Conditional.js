@@ -266,8 +266,12 @@ class PriorState extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): PriorStateConditional);
+
+    let options = this.props.otherStates.map((s) => {return {id: s.name, text: s.name}});
+    let name = conditional.name === " "? "(none)" : conditional.name;
     return (
       <label> PriorState:
+        <RIESelect className='editable-text' value={{id: name , text: name}} propName="name" change={this.props.onChange('name')} options={options} />
       </label>
     );
   }
@@ -297,7 +301,11 @@ class And extends Component<Props> {
     return (
       <label> And:
         {conditional.conditions.map((cond, i) => {
-          return <ConditionalEditor key={i} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+          return (
+            <div className="section"  key={i}>
+              <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+            </div>
+          )
         })}
       </label>
     );
@@ -312,7 +320,11 @@ class Or extends Component<Props> {
     return (
       <label> Or:
         {conditional.conditions.map((cond, i) => {
-          return <ConditionalEditor key={i} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+          return (
+              <div className="section" key={i}>
+                <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+              </div>
+          )
         })}
       </label>
     );
@@ -325,7 +337,15 @@ class AtLeast extends Component<Props> {
   render() {
     let conditional = ((this.props.conditional: any): AtLeastConditional);
     return (
-      <label> AtLeast:
+      <label> At Least
+        <RIENumber className='editable-text' value={conditional.minimum||0} propName='minimum' change={this.props.onChange('minimum')} />:
+        {conditional.conditions.map((cond, i) => {
+          return (
+            <div className="section" key={i}>
+              <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+            </div>
+          )
+        })}
       </label>
     );
   }
@@ -337,7 +357,16 @@ class AtMost extends Component<Props> {
   render() {
     let conditional = ((this.props.conditional: any): AtMostConditional);
     return (
-      <label> AtMost:
+      <label> At Most
+        <RIENumber className='editable-text' value={conditional.maximum||0} propName='maximum' change={this.props.onChange('maximum')} />:
+
+        {conditional.conditions.map((cond, i) => {
+          return (
+            <div className="section" key={i}>
+              <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+            </div>
+          )
+        })}
       </label>
     );
   }
@@ -350,7 +379,9 @@ class Not extends Component<Props> {
     let conditional = ((this.props.conditional: any): NotConditional);
     return (
       <label> Not:
-        <ConditionalEditor conditional={this.condition} onChange={this.props.onChange('conditional')} />
+        <div className="section">
+          <ConditionalEditor {...this.props} conditional={conditional.condition} onChange={this.props.onChange('condition')} />
+        </div>
       </label>
     );
   }

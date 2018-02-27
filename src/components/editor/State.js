@@ -105,10 +105,11 @@ class StateEditor extends Component<Props> {
 
     let typeOptions = Object.keys(StateTemplates).sort().map((k) => {return {id: k, text: k}});
     const transitionOptions = [
+      {id:"None" ,text:"None"},
       {id:"Direct" ,text:"Direct"},
       {id:"Distributed" ,text:"Distributed"},
       {id:"Conditional" ,text:"Conditional"},
-      {id:"Complex" ,text:"Complex"},
+      {id:"Complex" ,text:"Complex"}
     ]
 
     const transitionType = (this.props.state.transition||{}).type;
@@ -182,7 +183,7 @@ class Guard extends Component<Props> {
     let state = ((this.props.state: any): GuardState);
     return (
       <div>
-        <ConditionalEditor conditional={state.allow} onChange={this.props.onChange('allow')} />
+        <ConditionalEditor {...this.props} conditional={state.allow} onChange={this.props.onChange('allow')} />
       </div>
     );
   }
