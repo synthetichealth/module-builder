@@ -267,7 +267,7 @@ class PriorState extends Component<Props> {
   render() {
     let conditional = ((this.props.conditional: any): PriorStateConditional);
 
-    let options = this.props.otherStates.map((s) => {return {id: s.name, text: s.name}}).concat([{id: " ", text: "(none)"}]);
+    let options = this.props.otherStates.map((s) => {return {id: s.name, text: s.name}});
     let name = conditional.name === " "? "(none)" : conditional.name;
     return (
       <label> PriorState:
@@ -302,8 +302,8 @@ class And extends Component<Props> {
       <label> And:
         {conditional.conditions.map((cond, i) => {
           return (
-            <div className="section">
-              <ConditionalEditor key={i} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+            <div className="section"  key={i}>
+              <ConditionalEditor conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
             </div>
           )
         })}

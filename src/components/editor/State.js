@@ -105,10 +105,11 @@ class StateEditor extends Component<Props> {
 
     let typeOptions = Object.keys(StateTemplates).sort().map((k) => {return {id: k, text: k}});
     const transitionOptions = [
+      {id:"None" ,text:"None"},
       {id:"Direct" ,text:"Direct"},
       {id:"Distributed" ,text:"Distributed"},
       {id:"Conditional" ,text:"Conditional"},
-      {id:"Complex" ,text:"Complex"},
+      {id:"Complex" ,text:"Complex"}
     ]
 
     const transitionType = (this.props.state.transition||{}).type;

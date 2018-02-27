@@ -24,7 +24,6 @@ export default (state = initialState, action) => {
         _.set(newState, path, value);
       }
       else{
-        debugger
         _.unset(newState, path);
         // debugger
         let parent = [...action.data.path].splice(0, action.data.path.length -1).join(".");
