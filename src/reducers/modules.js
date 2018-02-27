@@ -14,7 +14,6 @@ export default (state = initialState, action) => {
 
     case 'EDIT_NODE':
       let path = action.data.path.join('.');
-
       let value = Object.values(action.data.update)[0]
       if(typeof value === 'object') {
         value = value.id;

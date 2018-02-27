@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber, RIEToggle } from 'riek';
+import { RIESelect, RIEInput, RIENumber, RIEToggle, RIETextArea } from 'riek';
 import _ from 'lodash';
 
 import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, SymptomState, DeathState } from '../../types/State';
@@ -98,6 +98,10 @@ class StateEditor extends Component<Props> {
     }
   }
 
+  updateRemarks = (el:any) => {
+    this.props.onChange(`states.${this.props.state.name}.remarks`)({remarks:{id:el.remarks.split("\n")}});
+  }
+
   render() {
     if(!this.props.state) {
       return null;
@@ -117,6 +121,10 @@ class StateEditor extends Component<Props> {
           <h3><RIEInput className='editable-text' className='editable-text' propName={'name'} value={this.props.state.name} change={this.props.renameNode} /></h3>
           State Type: <RIESelect className='editable-text' className='editable-text' value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
           <br/>
+          <hr/>
+          <RIETextArea value={this.props.state.remarks.join("\n")} propName="remarks" change={this.updateRemarks} />
+          <br/>
+          <hr/>
           <div className="State-Editor">
             {this.renderStateType()}
           </div>
