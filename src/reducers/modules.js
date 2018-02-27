@@ -83,7 +83,7 @@ export default (state = initialState, action) => {
       // TODO figure out how to remove unused fields
       newState[action.data.targetModuleKey].states[action.data.targetNode.name] =
         { ...StateTemplates[newType],
-          ...newState[action.data.targetModuleKey].states[action.data.targetNode.name],
+          ..._.pick(newState[action.data.targetModuleKey].states[action.data.targetNode.name], ['direct_transition', 'conditional_transition', 'distributed_transition', 'complex_transition', 'remarks']),
           type: StateTemplates[newType].type
         };
       return newState
