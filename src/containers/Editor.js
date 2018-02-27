@@ -114,7 +114,7 @@ class Editor extends Component {
               <button className="btn btn-link nav-item nav-link" onClick={this.newModule(Object.keys(this.props.modules)).bind(this, undefined)}>New Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showLoadModule}>Load Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showDownload}>Download</button>
-              <button className='btn btn-secondary nav-action-button' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
+              <button className='btn btn-secondary nav-action-button' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
               {/*<button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button> */}
               <button className='btn btn-secondary nav-action-button disabled' data-tip='Structures are not yet available' onClick={() => null}> Add Structure </button>
               <button className='btn btn-secondary nav-action-button' onClick={this.startTutorial(BasicTutorial)}> Help </button>
