@@ -66,9 +66,6 @@ const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) 
       node['class'] = 'node-muted'
     }
 
-    // node['label'] = (name === state['type']) ? state['name'].replace('?','') : `{ ${name} | ${state['type']} }`
-
-    //TODO: ALMOST DONE WITH DETAILS, BUT SMALL BUG IN RENDERING... maybe from \l?
     let details = stateDescription(state)
     if(details.length === 0){
       node['label'] = (name === state['type']) ? state['name'] : `{ ${name} | ${state['type']} }`
@@ -144,7 +141,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
           if(selectedState && t.transition === selectedState.name){
             className = ''
           }
-          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${i}. ${cnd}", class = "transition ${className}"];\n`
+          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${i+1}. ${cnd}", class = "transition ${className}"];\n`
         } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}\n`);
         }
