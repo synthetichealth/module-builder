@@ -21,6 +21,11 @@
   width: 100%
 }
 
+textarea {
+  height: 200px;
+  width: 100%;
+}
+
 .editable-text {
   font-style: italic;
   text-decoration: underline !important;
@@ -35,6 +40,10 @@ span.editable-text:empty {
 }
 
 span.editable-text:empty:after {
+  content: 'Enter value';
+}
+
+span.editable-text > :empty:after {
   content: 'Enter value';
 }
 

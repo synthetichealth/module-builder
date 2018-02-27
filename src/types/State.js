@@ -7,24 +7,28 @@ import type { UnitOfTime } from './Units';
 
 export type InitialState = {
   name: string,
+  remarks: string[],
   type: 'Initial',
   transition?: Transition
 }
 
 export type TerminalState = {
   name: string,
+  remarks: string[],
   type: 'Terminal',
   transition?: Transition
 }
 
 export type SimpleState = {
   name: string,
+  remarks: string[],
   type: 'Simple',
   transition?: Transition
 }
 
 export type GuardState = {
   name: string,
+  remarks: string[],
   type: 'Guard',
   allow: Conditional,
   transition?: Transition
@@ -32,6 +36,7 @@ export type GuardState = {
 
 export type DelayState = {
   name: string,
+  remarks: string[],
   type: 'Delay',
   exact?: {
     quantity: number,
@@ -47,6 +52,7 @@ export type DelayState = {
 
 export type SetAttributeState = {
   name: string,
+  remarks: string[],
   type: 'SetAttribute',
   attribute: string,
   value?: number | boolean | string,
@@ -55,6 +61,7 @@ export type SetAttributeState = {
 
 export type CounterState = {
   name: string,
+  remarks: string[],
   type: 'Counter',
   attribute: string,
   action: 'increment' | 'decrement',
@@ -63,6 +70,7 @@ export type CounterState = {
 
 export type CallSubmoduleState = {
   name: string,
+  remarks: string[],
   type: 'CallSubmodule',
   submodule: string,
   transition?: Transition
@@ -70,6 +78,7 @@ export type CallSubmoduleState = {
 
 export type EncounterState = {
   name: string,
+  remarks: string[],
   type: 'Encounter',
   wellness?: boolean,
   encounter_class: 'emergency' | 'inpatient' | 'ambulatory',
@@ -80,6 +89,7 @@ export type EncounterState = {
 
 export type EncounterEndState = {
   name: string,
+  remarks: string[],
   type: 'EncounterEnd',
   discharge_disposition?: Code,
   transition?: Transition
@@ -87,6 +97,7 @@ export type EncounterEndState = {
 
 export type ConditionOnsetState = {
   name: string,
+  remarks: string[],
   type: 'ConditionOnset',
   target_encounter: string,
   assign_to_attribute?: string,
@@ -96,6 +107,7 @@ export type ConditionOnsetState = {
 
 export type ConditionEndState = {
   name: string,
+  remarks: string[],
   type: 'ConditionEnd',
   condition_onset?: string,
   referenced_by_attribute?: string,
@@ -105,6 +117,7 @@ export type ConditionEndState = {
 
 export type AllergyOnsetState = {
   name: string,
+  remarks: string[],
   type: 'AllergyOnset',
   target_encounter: string,
   assign_to_attribute?: string,
@@ -114,6 +127,7 @@ export type AllergyOnsetState = {
 
 export type AllergyEndState = {
   name: string,
+  remarks: string[],
   type: 'AllergyEnd',
   allergy_onset?: string,
   referenced_by_attribute?: string,
@@ -123,6 +137,7 @@ export type AllergyEndState = {
 
 export type MedicationOrderState = {
   name: string,
+  remarks: string[],
   type: 'MedicationOrder',
   assign_to_attribute?: string,
   reason?: string,
@@ -147,6 +162,7 @@ export type MedicationOrderState = {
 
 export type MedicationEndState = {
   name: string,
+  remarks: string[],
   type: 'MedicationEnd',
   medication_order?: string,
   referenced_by_attribute?: string,
@@ -156,6 +172,7 @@ export type MedicationEndState = {
 
 export type CarePlanStartState = {
   name: string,
+  remarks: string[],
   type: 'CarePlanStart',
   assign_to_attribute?: string,
   reason?: string,
@@ -167,6 +184,7 @@ export type CarePlanStartState = {
 
 export type CarePlanEndState = {
   name: string,
+  remarks: string[],
   type: 'CarePlanEnd',
   careplan?: string,
   referenced_by_attribute?: string,
@@ -176,6 +194,7 @@ export type CarePlanEndState = {
 
 export type ProcedureState = {
   name: string,
+  remarks: string[],
   type: 'Procedure',
   reason?: string,
   codes: Code[],
@@ -189,6 +208,7 @@ export type ProcedureState = {
 
 export type VitalSignState = {
   name: string,
+  remarks: string[],
   type: 'VitalSign',
   vital_sign: string,
   unit: string,
@@ -204,6 +224,7 @@ export type VitalSignState = {
 
 export type ObservationState = {
   name: string,
+  remarks: string[],
   type: 'Observation',
   category: string,
   unit: string,
@@ -222,6 +243,7 @@ export type ObservationState = {
 
 export type MultiObservationState = {
   name: string,
+  remarks: string[],
   type: 'MultiObservation',
   category: string,
   number_of_observations: number,
@@ -231,6 +253,7 @@ export type MultiObservationState = {
 
 export type DiagnosticReportState = {
   name: string,
+  remarks: string[],
   type: 'DiagnosticReport',
   number_of_observations: number,
   codes: Code[],
@@ -239,6 +262,7 @@ export type DiagnosticReportState = {
 
 export type SymptomState = {
   name: string,
+  remarks: string[],
   type: 'Symptom',
   symptom: string,
   cause: string,
@@ -254,6 +278,7 @@ export type SymptomState = {
 
 export type DeathState = {
   name: string,
+  remarks: string[],
   type: 'Death',
   exact?: {
     quantity: number,
