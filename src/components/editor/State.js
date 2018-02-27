@@ -99,7 +99,7 @@ class StateEditor extends Component<Props> {
   }
 
   updateRemarks = (el:any) => {
-    const remarks = el.remarks? el.remarks.split("\n") : null;
+    const remarks = el.remarks? el.remarks.split("\n") : " ";
     this.props.onChange(`states.${this.props.state.name}.remarks`)({remarks:{id:remarks}});
   }
 
@@ -116,8 +116,8 @@ class StateEditor extends Component<Props> {
       {id:"Complex" ,text:"Complex"},
     ]
 
-    let remarks = this.props.state.remarks||'(no remarks)';
-    remarks = typeof remarks === 'string'? remarks: remarks.join("\n");
+    let remarks = this.props.state.remarks ||"";
+    remarks = Array.isArray(remarks)? remarks.join("\n"): remarks;
 
     const transitionType = (this.props.state.transition||{}).type;
     return (

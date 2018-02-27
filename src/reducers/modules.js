@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
       }
       newState = {...state};
       if(value) {
+        value = typeof value === 'string'? value.trim():value;
         _.set(newState, path, value);
       }
       else{
