@@ -71,3 +71,7 @@ span.editable-text > :empty:after {
   color: inherit;
   cursor:pointer;
 }
+
+.warning {
+  color: #ff3300;
+}
