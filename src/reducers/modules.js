@@ -27,9 +27,9 @@ export default (state = initialState, action) => {
         _.unset(newState, path);
         // debugger
         let parent = [...action.data.path].splice(0, action.data.path.length -1).join(".");
-        let newVal = _.get(newState, parent).filter(x => x);
+        let newVal = _.get(newState, parent);
         if(Array.isArray(newVal)) {
-          _.set(newState, parent, newVal);
+          _.set(newState, parent, newVal.filter(x => x));
         }
       }
 
