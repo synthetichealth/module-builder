@@ -10,7 +10,10 @@ export type DistributedTransition = {
   type: 'Distributed',
   transition: [
     {
-      distribution: number,
+      distribution: {
+        attribute: string,
+        default: number
+      } | number,
       to: string
     }
   ]
