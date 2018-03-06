@@ -1,8 +1,8 @@
 {
-  "name": "caremap",
+  "name": "module-builder",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://synthetichealth.github.io/caremaps-react",
+  "homepage": "https://synthetichealth.github.io/module-builder",
   "dependencies": {
     "bootstrap": "4.0.0-beta.2",
     "chai": "^4.1.2",

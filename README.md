@@ -7,7 +7,7 @@ Currently supports:
   - Direct Transitions
   - Distributed Transitions
 
-Demo application is available at https://synthetichealth.github.io/caremaps-react/
+Demo application is available at https://synthetichealth.github.io/module-builder/
 
 # License
 
