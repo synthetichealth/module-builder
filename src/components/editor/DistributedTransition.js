@@ -75,7 +75,7 @@ class DistributedTransition extends Component<Props> {
       return null;
     }
     // TODO remove Number calls when it can be ensured the values are numbers
-    let warn = (this.props.transition.transition.reduce((acc, val) => Number(acc) + Number(typeof val.distribution === 'object' ? val.distribution.default : val.distribution), 0) !== 1);
+    let warn = (this.props.transition.transition.reduce((acc, val) => acc + (typeof val.distribution === 'object' ? val.distribution.default : val.distribution), 0) !== 1);
     if (warn) {
       return (
         <label className='warning'>Weights do not add up to 100%.</label>
