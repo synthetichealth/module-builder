@@ -74,7 +74,6 @@ class DistributedTransition extends Component<Props> {
     if(!this.props.transition) {
       return null;
     }
-    // TODO remove Number calls when it can be ensured the values are numbers
     let warn = (this.props.transition.transition.reduce((acc, val) => acc + (typeof val.distribution === 'object' ? val.distribution.default : val.distribution), 0) !== 1);
     if (warn) {
       return (
