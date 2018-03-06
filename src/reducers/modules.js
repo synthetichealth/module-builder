@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
       newState = {...state};
       if(value) {
         value = typeof value === 'string'? value.trim():value;
-        if(/^[0-9]+$/.test(value) && parseFloat(value)){
+        if(/^[0-9.\-(e-)]+$/.test(value) && parseFloat(value)){
           value = parseFloat(value);
         }
         _.set(newState, path, value);
