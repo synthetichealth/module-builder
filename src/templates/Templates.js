@@ -243,14 +243,20 @@ export const AttributeTemplates = {
     codes: [{...TypeTemplates.Code.Loinc}],
     operator: "==",
     value: 1
+  },
+  UnnamedDistribution: 1.0,
+  NamedDistribution: {
+    attribute: "attribute",
+    default: 1.0
   }
+
 }
 
 
 export const TransitionTemplates = {
   Direct: 'Initial',
   Conditional: [{transition: 'Initial', condition: {...TypeTemplates.Condition.Age}}],
-  Distributed: [{transition: 'Initial', distribution: 0.0}],
+  Distributed: [{transition: 'Initial', distribution: 1.0}],
   Complex: [{condition: {...TypeTemplates.Condition.Age}, distributions: [], to: 'Initial'}]
 }
 

@@ -4,16 +4,19 @@ import type { Conditional } from './Conditional';
 export type DirectTransition = {
   to: string,
   type: 'Direct'
-}
+};
 
 export type DistributedTransition = {
   type: 'Distributed',
   transition: [
-      {
-        distibution: number,
-        to: string
-      }
-    ]
+    {
+      distribution: {
+        attribute: string,
+        default: number
+      } | number,
+      to: string
+    }
+  ]
 };
 
 export type ConditionalTransition = {
@@ -24,7 +27,7 @@ export type ConditionalTransition = {
       to: string
     }
   ]
-}
+};
 
 export type ComplexTransition = {
   type: 'Complex',
@@ -33,6 +36,6 @@ export type ComplexTransition = {
     distributions ?: DistributedTransition,
     transition ?: DirectTransition
   }]
-}
+};
 
 export type Transition = DirectTransition | DistributedTransition | ConditionalTransition | ComplexTransition;
