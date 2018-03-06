@@ -98,7 +98,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
     }
 
     if(state.direct_transition !== undefined){
-      if(selectedState && state.direct_transition === selectedState.name){
+      if(selectedState && state.direct_transition === selectedState.name && selectedState.name !== name){
         className='';
       }
       if(module.states[state.direct_transition]){
@@ -122,7 +122,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
           distLabel = `${pct}%`
         }
         if(module.states[t.transition]){
-          if(selectedState && t.transition === selectedState.name){
+          if(selectedState && t.transition === selectedState.name && selectedState.name !== name){
             transitionClassName = '';
           }
           out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${distLabel}", class = "transition ${transitionClassName}"];\n`
@@ -195,8 +195,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
         let transitionClassName = className
         if(nodeHighlighted[trans] === 'standard'){
           transitionClassName = ''
-        }
-        if(nodeHighlighted[trans] === 'highlighted'){
+        } else if(nodeHighlighted[trans] === 'highlighted'){
           transitionClassName='transition-highlighted'
         }
         out_transitions += `${trans} [label = "${transitions[trans].join(',\\n')}", class = "transition ${transitionClassName}"]\n`
