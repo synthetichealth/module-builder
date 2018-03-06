@@ -21,11 +21,13 @@ export default (state = initialState, action) => {
       newState = {...state};
       if(value) {
         value = typeof value === 'string'? value.trim():value;
+        if(parseFloat(value)){
+          value = parseFloat(value);
+        }
         _.set(newState, path, value);
       }
       else{
         _.unset(newState, path);
-        // debugger
         let parent = [...action.data.path].splice(0, action.data.path.length -1).join(".");
         let newVal = _.get(newState, parent);
         if(Array.isArray(newVal)) {
