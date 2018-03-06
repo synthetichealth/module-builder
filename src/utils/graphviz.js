@@ -98,7 +98,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
     }
 
     if(state.direct_transition !== undefined){
-      if(selectedState && state.direct_transition === selectedState.name){
+      if(selectedState && state.direct_transition === selectedState.name && selectedState.name !== name){
         className='';
       }
       if(module.states[state.direct_transition]){
@@ -107,11 +107,9 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
         console.log(`NO SUCH NODE TO TRANSITION TO: ${state.direct_transition}`);
       }
     } else if(state.distributed_transition !== undefined){
-      if(selectedState && state.distributed_transition === selectedState.name){
-        className = ''
-      }
       let out_transitions = ''
       state.distributed_transition.forEach( t => {
+        let transitionClassName = className
         let distLabel = ''
         if(typeof t.distribution === 'object'){
           distLabel = `p(${t.distribution.attribute})`
@@ -124,10 +122,10 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
           distLabel = `${pct}%`
         }
         if(module.states[t.transition]){
-          if(selectedState && t.transition === selectedState.name){
-            className = '';
+          if(selectedState && t.transition === selectedState.name && selectedState.name !== name){
+            transitionClassName = '';
           }
-          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${distLabel}", class = "transition ${className}"];\n`
+          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${distLabel}", class = "transition ${transitionClassName}"];\n`
         } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}`);
         }
@@ -136,12 +134,13 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
     } else if (state.conditional_transition !== undefined){
       let out_transitions = ''
       state.conditional_transition.forEach( (t, i ) => {
+        let transitionClassName = className
         let cnd = t.condition !== undefined ? logicDetails(t.condition) : 'else';
         if(module.states[t.transition]){
           if(selectedState && t.transition === selectedState.name){
-            className = ''
+            transitionClassName = ''
           }
-          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${i+1}. ${cnd}", class = "transition ${className}"];\n`
+          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${i+1}. ${cnd}", class = "transition ${transitionClassName}"];\n`
         } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}\n`);
         }
@@ -193,13 +192,13 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
 
       let out_transitions = ''
       Object.keys(transitions).forEach( trans => {
+        let transitionClassName = className
         if(nodeHighlighted[trans] === 'standard'){
-          className = ''
+          transitionClassName = ''
+        } else if(nodeHighlighted[trans] === 'highlighted'){
+          transitionClassName='transition-highlighted'
         }
-        if(nodeHighlighted[trans] === 'highlighted'){
-          className='transition-highlighted'
-        }
-        out_transitions += `${trans} [label = "${transitions[trans].join(',\\n')}", class = "transition ${className}"]\n`
+        out_transitions += `${trans} [label = "${transitions[trans].join(',\\n')}", class = "transition ${transitionClassName}"]\n`
       })
 
       return out_transitions;
