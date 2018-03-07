@@ -282,7 +282,7 @@ class Attribute extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): AttributeConditional);
-    let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
+    let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}, {id: "is nil", text: "is nil"}, {id: "is not nil", text: "is not nil"}];
     return (
       <label>
         <RIEInput className='editable-text' value={conditional.attribute} propName="attribute" change={this.props.onChange('attribute')} />
