@@ -102,6 +102,18 @@ class ModuleGraph extends Component<Props> {
       }
     })
 
+    document.querySelectorAll('.edge.transition').forEach( group => {
+      let originator = group.querySelector('title').innerHTML.split('-&gt;')[0]
+      let hitLine = group.querySelector('path').cloneNode(true)
+      hitLine.setAttribute('stroke-width', 20)
+      hitLine.setAttribute('opacity', 0)
+      group.appendChild(hitLine)
+
+      group.querySelectorAll('path,text').forEach( path => {
+        path.addEventListener('mouseup', (e) => {e.stopPropagation(); this.props.onClick(originator)});
+      })
+    })
+
     /* add pan/zoom if available */
     if(typeof svgPanZoom === "function"){
 
