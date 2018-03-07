@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FileSaver from 'file-saver';
+import _ from 'lodash'
 
 import './Download.css';
 
@@ -18,6 +19,21 @@ class Download extends Component {
     let filename = this.props.module.name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
 
     FileSaver.saveAs(blob, `${filename}.json`);
+  }
+
+  prepareJSON(){
+    let module = _.cloneDeep(this.props.module);
+
+    // We currently save name in the state for convenience
+    // In lieu of a better solution, we will just remove it here
+    Object.keys(module.states).map(k => module.states[k]).forEach( s => {
+      if(s['name'] !== undefined){
+        delete s.name;
+      }
+    })
+
+    return JSON.stringify(module, null, 2)
+
   }
 
   render() {
@@ -41,7 +57,7 @@ class Download extends Component {
                 </button>
               </div>
               <div className="modal-body Download-body">
-              <textarea ref="codeInput" disabled value={JSON.stringify(this.props.module,null, 2)} />
+              <textarea ref="codeInput" disabled value={this.prepareJSON()} />
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onDownload}>Download</button>
