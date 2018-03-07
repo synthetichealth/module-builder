@@ -38,18 +38,18 @@ export default function generateDOT(module: Module, selectedState: State) {
 
 }
 
-const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) => { 
+const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) => {
 
   return Object.keys(module.states).map( name => {
-  
+
     let state = module.states[name]
     state['name'] = name
 
     let node = {
       id: 'node_' + name.replace('?', ''),
-      shape: 'record', 
-      style: 'rounded,filled', 
-      fillcolor: 'White', 
+      shape: 'record',
+      style: 'rounded,filled',
+      fillcolor: 'White',
       fontcolor: STANDARD_COLOR
     }
 
@@ -76,12 +76,12 @@ const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) 
     let params = Object.keys(node).map((key) => `${key} = "${node[key]}"`).join(", ");
 
     return `"${name}" [${params};]`
-    
+
   }).join("\n");
 
 }
 
-const transitionsAsDOT = (module: Module, selectedState: State) => { 
+const transitionsAsDOT = (module: Module, selectedState: State) => {
 
   return Object.keys(module.states).map( name => {
 
@@ -379,7 +379,7 @@ const stateDescription = (state) =>{
 const logicDetails = logic => {
 
   switch(logic['condition_type']){
-    case 'When':
+    case 'And':
     case 'Or':
       let subsWhen =logic['conditions'].map( c => {
         if(c['condition_type'] === 'and' || c['condition_type'] === 'or'){
@@ -400,7 +400,10 @@ const logicDetails = logic => {
         }
       });
       return `${logic['condition_type']} ${threshold} of:\\l- ${subsOr.join('- ')}`
-    case 'Gender': 
+    case 'Not':
+      let condition = logicDetails(logic['condition'])
+      return `not ${condition}`
+    case 'Gender':
       return `gender is '${logic['gender']}'\\l`
     case 'Age':
       return `age \\${logic['operator']} ${logic['quantity']} ${logic['unit']}\\l`
