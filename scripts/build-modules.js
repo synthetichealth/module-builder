@@ -69,6 +69,13 @@ for(var i = 0; i< files.length; i++){
     count++
 
     var filename = files[i].replace(directory + '/','').replace('.json','')
+    filename = filename.replace('./src/data/','') // for examplitis
+
+
+    if(filename.split('/').length > 2){
+      console.log('\n\nERROR: THERE SHOULD NOT BE MORE THAN ONE / IN THIS FILENAME.  YOU ARE TOO HIGH IN THE DIRECTORY TREE: ' + filename) 
+      process.exit()
+    }
 
     output += '"' + filename + '":' + JSON.stringify(json,undefined,2)
 
