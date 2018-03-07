@@ -104,7 +104,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
       if(module.states[state.direct_transition]){
         return `  "${name}" -> "${module.states[state.direct_transition].name}" [class = "transition ${className}"];\n`
       } else {
-        console.log(`NO SUCH NODE TO TRANSITION TO: ${state.direct_transition}`);
+        console.log(`NO SUCH NODE TO TRANSITION TO: ${state.direct_transition} FROM ${name}`);
       }
     } else if(state.distributed_transition !== undefined){
       let out_transitions = ''
@@ -127,7 +127,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
           }
           out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${distLabel}", class = "transition ${transitionClassName}"];\n`
         } else {
-          console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}`);
+          console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition} FROM ${name}`);
         }
       })
       return out_transitions
@@ -142,7 +142,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
           }
           out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${i+1}. ${cnd}", class = "transition ${transitionClassName}"];\n`
         } else {
-          console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}\n`);
+          console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition} FROM ${name}\n`);
         }
       })
      return out_transitions
@@ -166,7 +166,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
             }
             transitions[nodes].push(cnd)
           } else {
-            console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition}`);
+            console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition} FROM ${name}`);
           }
         } else {
           t.distributions.forEach( dist => {
@@ -184,7 +184,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
               }
               transitions[nodes].push(`${cnd}: ${pct}%`)
             } else {
-              console.log(`NO SUCH NODE TO TRANSITION TO: ${dist.transition}`);
+              console.log(`NO SUCH NODE TO TRANSITION TO: ${dist.transition} FROM ${name}`);
             }
           })
         }

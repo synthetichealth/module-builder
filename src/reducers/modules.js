@@ -2,6 +2,64 @@ import _ from 'lodash';
 
 import { StateTemplates, TransitionTemplates, StructureTemplates } from '../templates/Templates';
 
+// returns a full copy of the module with state renamed and all transitions renamed
+const renameModuleState = (module, stateName, newName) => {
+  let newModule = _.cloneDeep(module)
+
+  let moduleState = newModule.states[stateName]
+
+  if(moduleState === undefined){
+    // if we can't find it, then it might be a blank state (Unnamed state)
+    // Check in the blank key
+    moduleState = newModule.states[""]
+    stateName = ""
+  }
+
+  if(moduleState === undefined){
+    // If we still can't find the state, let's just hop out of here.
+    return newModule
+  }
+
+  delete newModule.states[stateName];
+
+  moduleState.name = newName
+  newModule.states[newName] = moduleState
+
+  Object.keys(newModule.states).map(s => newModule.states[s]).forEach( state => {
+
+    if(state.direct_transition === stateName){
+      state.direct_transition = newName
+    } else if (state.distributed_transition){
+      state.distributed_transition.forEach( transition => {
+        if(transition.transition === stateName){
+          transition.transition = newName
+        }
+      })
+    } else if (state.conditional_transition){
+      state.conditional_transition.forEach( transition => {
+        if(transition.transition === stateName){
+          transition.transition = newName
+        }
+      })
+    } else if (state.complex_transition){
+      state.complex_transition.forEach( transition => {
+        if(transition.transition === stateName){
+          transition.transition = newName
+        }
+        if(transition.distributions){
+          transition.distributions.forEach( distribution => {
+            if(distribution.transition === stateName){
+              distribution.transition = newName
+            }
+          })
+        }
+      })
+    }
+  });
+  return newModule
+}
+
+
 const initialState = {};
 
 export default (state = initialState, action) => {
@@ -66,10 +124,8 @@ export default (state = initialState, action) => {
 
     case 'RENAME_NODE':
       newState = {...state};
-      let oldState = newState[action.data.targetModuleKey].states[action.data.targetNode.name];
-      newState[action.data.targetModuleKey].states[action.data.newName.name] = {...oldState, name: action.data.newName.name};
-      delete newState[action.data.targetModuleKey].states[action.data.targetNode.name];
-      return newState;
+      newState[action.data.targetModuleKey] = renameModuleState(state[action.data.targetModuleKey], action.data.targetNode.name, action.data.newName.name);
+      return newState
     case 'EDIT_MODULE_NAME':
       newState = {...state};
       newState[action.data.targetModuleKey].name = action.data.newName;
