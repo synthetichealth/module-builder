@@ -41,6 +41,14 @@
   stroke: #CCC;
 }
 
+.transition path{
+  cursor: pointer;
+}
+
+.transition text{
+  cursor: pointer;
+}
+
 .transition.transition-highlighted path {
   stroke: #336699;
   stroke-width: 3px;
