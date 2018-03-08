@@ -9,7 +9,7 @@ import { AttributeTemplates, TypeTemplates } from '../../templates/Templates';
 
 type Props = {
   conditional: Conditional,
-  otherStates: State[],
+  options: State[],
   onChange: any
 }
 
@@ -279,7 +279,7 @@ class PriorState extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): PriorStateConditional);
-    let options = this.props.otherStates.map((s) => {return {id: s.name, text: s.name}});
+    let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
     let name = conditional.name;
     return (
       <label>
@@ -301,7 +301,7 @@ class PriorState extends Component<Props> {
         </label>
       );
     } else {
-      let options = this.props.otherStates.map((s) => {return {id: s.name, text: s.name}});
+      let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
       let since = conditional.since;
       return (
         <label>
@@ -327,7 +327,8 @@ class PriorState extends Component<Props> {
           Prior State Within Quantity: <RIENumber className='editable-text' value={conditional.within.quantity} propName="quantity" change={this.props.onChange('within.quantity')} />
           <br />
           Prior State Within Unit: <RIESelect className='editable-text' value={{id: conditional.within.unit, text: conditional.within.unit}} propName="unit" change={this.props.onChange('within.unit')} options={unitOfTimeOptions} />
-          <a className='editable-text' onClick={() => this.props.onChange('within')({val: {id: null}})}> (remove)</a>
+          <br />
+          <a className='editable-text' onClick={() => this.props.onChange('within')({val: {id: null}})}>Remove Within</a>
         </label>
       );
     }
