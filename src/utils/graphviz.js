@@ -413,7 +413,6 @@ const logicDetails = logic => {
     case 'Symptom':
       return `Symptom: '${logic['symptom']}' \\${logic['operator']} ${logic['value']}\\l`
     case 'PriorState':
-      let within_logic = null;
       let prior_description = `state '${logic['name']}' has been processed`
       if(logic.since !== undefined){
         prior_description = `${prior_description} since ${logic.since}`
