@@ -3,7 +3,7 @@ import { routerMiddleware } from 'react-router-redux';
 
 import reducers from './reducers';
 
-import modulesJSON from './mocks/modules';
+import modulesJSON from './data/modules';
 
 const initialState = {modules: modulesJSON};
 const enhancers = [];
