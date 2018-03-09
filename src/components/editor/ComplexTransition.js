@@ -36,7 +36,9 @@ class ComplexTransition extends Component<Props> {
         Complex Transition:
         {currentValue.map((t, i) => {
           return <div className='transition-option' key={i}>
-            <label>If: <ConditionalEditor conditional={t.condition} onChange={this.props.onChange(`[${i}].condition`)}/></label>
+            <label>
+              If: <ConditionalEditor {...this.props} conditional={t.condition} onChange={this.props.onChange(`${i}.condition`)}/>
+            </label>
             <label>
               <DistributedTransitionEditor transition={{transition: t.distributions}} options={states} onChange={this.props.onChange(`[${i}].distributions`)} />
             </label>

@@ -1,7 +1,7 @@
 // @flow
 
 import type { Code } from './Code';
-import type { UnitOfAge } from './Units';
+import type { UnitOfTime, UnitOfAge } from './Units';
 
 export type GenderConditional = {
   condition_type: 'Gender',
@@ -69,9 +69,13 @@ export type ActiveCarePlanConditional = {
 }
 
 export type PriorStateConditional = {
-  condition_type: 'Prior State',
+  condition_type: 'PriorState',
   name: string,
-  since: string
+  since?: string,
+  within?: {
+    quantity: number,
+    unit: UnitOfTime
+  }
 }
 
 export type AttributeConditional = {

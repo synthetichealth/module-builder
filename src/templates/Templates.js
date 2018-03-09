@@ -98,9 +98,9 @@ export const TypeTemplates = {
         }
       ]
     },
-    "Prior State": {
-      "condition_type": "Prior State",
-      "name": " "
+    PriorState: {
+      "condition_type": "PriorState",
+      "name": ""
     },
     Attribute: {
       "condition_type": "Attribute",
@@ -243,6 +243,11 @@ export const AttributeTemplates = {
     codes: [{...TypeTemplates.Code.Loinc}],
     operator: "==",
     value: 1
+  },
+  Since: " ",
+  Within: {
+    quantity: 1,
+    unit: "days"
   },
   UnnamedDistribution: 1.0,
   NamedDistribution: {
