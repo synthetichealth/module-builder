@@ -2,64 +2,75 @@ import _ from 'lodash';
 
 import { StateTemplates, TransitionTemplates, StructureTemplates } from '../templates/Templates';
 
-// returns a full copy of the module with state renamed and all transitions renamed
-const renameModuleState = (module, stateName, newName) => {
-  let newModule = _.cloneDeep(module)
+// updates the module in-place with fixed state refences
+// if newName is null, then delete all references instead
 
-  let moduleState = newModule.states[stateName]
+const fixStateReferences = (module, stateName, newName) => {
 
-  if(moduleState === undefined){
-    // if we can't find it, then it might be a blank state (Unnamed state)
-    // Check in the blank key
-    moduleState = newModule.states[""]
-    stateName = ""
-  }
-
-  if(moduleState === undefined){
-    // If we still can't find the state, let's just hop out of here.
-    return newModule
-  }
-
-  delete newModule.states[stateName];
-
-  moduleState.name = newName
-  newModule.states[newName] = moduleState
-
-  Object.keys(newModule.states).map(s => newModule.states[s]).forEach( state => {
+  Object.keys(module.states).map(s => module.states[s]).forEach( state => {
 
     if(state.direct_transition === stateName){
-      state.direct_transition = newName
+      if(newName === null){
+        delete state.direct_transition
+      } else {
+        state.direct_transition = newName
+      }
+
     } else if (state.distributed_transition){
       state.distributed_transition.forEach( transition => {
         if(transition.transition === stateName){
-          transition.transition = newName
+          if(newName === null){
+            delete transition.transition
+          } else {
+            transition.transition = newName
+          }
         }
       })
     } else if (state.conditional_transition){
       state.conditional_transition.forEach( transition => {
         if(transition.transition === stateName){
-          transition.transition = newName
+          if(newName === null){
+            delete transition.transition
+          } else {
+            transition.transition = newName
+          }
         }
         if(transition.condition){
           if(transition.condition.condition_type === 'PriorState' && transition.condition.name === stateName){
-            transition.condition.name = newName
+            if(newName === null){
+              delete transition.condition.name
+            } else {
+              transition.condition.name = newName
+            }
           }
         }
       })
     } else if (state.complex_transition){
       state.complex_transition.forEach( transition => {
         if(transition.transition === stateName){
-          transition.transition = newName
+          if(newName === null){
+            delete transition.transition
+          } else {
+            transition.transition = newName
+          }
         }
         if(transition.condition){
           if(transition.condition.condition_type === 'PriorState' && transition.condition.name === stateName){
-            transition.condition.name = newName
+            if(newName === null) {
+              delete transition.condition.name
+            } else {
+              transition.condition.name = newName
+            }
           }
         }
         if(transition.distributions){
           transition.distributions.forEach( distribution => {
             if(distribution.transition === stateName){
-              distribution.transition = newName
+              if(newName === null){
+                delete distribution.transition
+              } else {
+                distribution.transition = newName
+              }
             }
           })
         }
@@ -71,40 +82,62 @@ const renameModuleState = (module, stateName, newName) => {
       case 'CarePlanStart':
       case 'Procedure':
         if(state.reason === stateName){
-          state.reason = newName;
+          if(newName === null){
+            delete state.reason
+          } else {
+            state.reason = newName;
+          }
         }
         break;
       case 'ConditionOnset':
       case 'AllergyOnset':
         if(state.target_encounter === stateName){
-          state.target_encounter = newName;
+          if(newName === null){
+            state.target_encounter = newName;
+          } else {
+            delete state.target_encounter
+          }
         }
         break;
       case 'Death':
       case 'ConditionEnd':
         if(state.condition_onset === stateName){
-          state.condition_onset = newName;
+          if(newName === null){
+            delete state.condition_onset
+          } else {
+            state.condition_onset = newName;
+          }
         }
         break;
       case 'MedicationEnd':
         if(state.medication_order === stateName){
-          state.medication_order = newName;
+          if(newName === null){
+            delete state.medication_order
+          } else {
+            state.medication_order = newName;
+          }
         }
         break;
       case 'CarePlanEnd':
         if(state.careplan === stateName){
-          state.careplan = newName;
+          if(newName === null){
+            delete state.careplan;
+          } else {
+            state.careplan = newName;
+          }
         }
         break;
       case 'Guard':
         if(state.allow && state.allow.condition_type === 'PriorState' && state.allow.name === stateName){
-          state.allow.name = newName;
+          if(newName === null){
+            delete state.allow.name
+          } else {
+            state.allow.name = newName;
+          }
         }
         break;
     }
   });
-
-  return newModule
 }
 
 
@@ -139,6 +172,19 @@ export default (state = initialState, action) => {
         if(Array.isArray(newVal)) {
           _.set(newState, parent, newVal.filter(x => x));
         }
+
+        // check to see if it is a node deletion, in which case we need to references
+        let splitPath = []
+        if(Array.isArray(path)){
+          splitPath = path.join('.').split('.')
+        } else {
+          splitPath = path.split('.')
+        }
+
+        if(splitPath.length === 3 && splitPath[1] === 'states'){
+          let stateName = splitPath[2]
+          fixStateReferences(newState[splitPath[0]], stateName, null)
+        }
       }
 
       return {...newState}
@@ -172,7 +218,30 @@ export default (state = initialState, action) => {
 
     case 'RENAME_NODE':
       newState = {...state};
-      newState[action.data.targetModuleKey] = renameModuleState(state[action.data.targetModuleKey], action.data.targetNode.name, action.data.newName.name);
+      let stateName = action.data.targetNode.name;
+      let newName = action.data.newName.name;
+      let newModule = _.cloneDeep(state[action.data.targetModuleKey])
+      let moduleState = newModule.states[stateName]
+
+      if(moduleState === undefined){
+        // if we can't find it, then it might be a blank state (Unnamed state)
+        // Check in the blank key
+        moduleState = newModule.states[""]
+        stateName = ""
+      }
+
+      if(moduleState === undefined){
+        // If we still can't find the state, let's just hop out of here.
+        return newState;
+      }
+
+      delete newModule.states[stateName];
+
+      moduleState.name = newName
+      newModule.states[newName] = moduleState
+
+      fixStateReferences(newModule, stateName, newName);
+      newState[action.data.targetModuleKey] = newModule
       return newState
     case 'EDIT_MODULE_NAME':
       newState = {...state};

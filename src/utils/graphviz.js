@@ -236,7 +236,7 @@ const stateDescription = (state) =>{
       break;
     case 'Encounter':
       if(state['wellness']){
-        details = 'Wait for regularly scheduled wellness encounter'
+        details = 'Wait for regularly scheduled wellness encounter\\n'
       }
       break;
     case 'EncounterEnd':
