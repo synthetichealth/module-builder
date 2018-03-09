@@ -76,66 +76,54 @@ const fixStateReferences = (module, stateName, newName) => {
         }
       })
     }
-    switch(state['type']){
-      case 'Encounter':
-      case 'MedicationOrder':
-      case 'CarePlanStart':
-      case 'Procedure':
-        if(state.reason === stateName){
-          if(newName === null){
-            delete state.reason
-          } else {
-            state.reason = newName;
-          }
-        }
-        break;
-      case 'ConditionOnset':
-      case 'AllergyOnset':
-        if(state.target_encounter === stateName){
-          if(newName === null){
-            state.target_encounter = newName;
-          } else {
-            delete state.target_encounter
-          }
-        }
-        break;
-      case 'Death':
-      case 'ConditionEnd':
-        if(state.condition_onset === stateName){
-          if(newName === null){
-            delete state.condition_onset
-          } else {
-            state.condition_onset = newName;
-          }
-        }
-        break;
-      case 'MedicationEnd':
-        if(state.medication_order === stateName){
-          if(newName === null){
-            delete state.medication_order
-          } else {
-            state.medication_order = newName;
-          }
-        }
-        break;
-      case 'CarePlanEnd':
-        if(state.careplan === stateName){
-          if(newName === null){
-            delete state.careplan;
-          } else {
-            state.careplan = newName;
-          }
-        }
-        break;
-      case 'Guard':
-        if(state.allow && state.allow.condition_type === 'PriorState' && state.allow.name === stateName){
-          if(newName === null){
-            delete state.allow.name
-          } else {
-            state.allow.name = newName;
-          }
-        }
-        break;
+    if(state.reason === stateName){
+      if(newName === null){
+        delete state.reason
+      } else {
+        state.reason = newName;
+      }
+    }
+    if(state.target_encounter === stateName){
+      if(newName === null){
+        state.target_encounter = "" // this is a requried field
+      } else {
+        state.target_encounter = newName;
+      }
+    }
+    if(state.condition_onset === stateName){
+      if(newName === null){
+        delete state.condition_onset
+      } else {
+        state.condition_onset = newName;
+      }
+    }
+    if(state.allergy_onset === stateName){
+      if(newName === null){
+        delete state.allergy_onset
+      } else {
+        state.allergy_onset = newName;
+      }
+    }
+    if(state.medication_order === stateName){
+      if(newName === null){
+        delete state.medication_order
+      } else {
+        state.medication_order = newName;
+      }
+    }
+    if(state.careplan === stateName){
+      if(newName === null){
+        delete state.careplan;
+      } else {
+        state.careplan = newName;
+      }
+    }
+    if(state.allow && state.allow.condition_type === 'PriorState' && state.allow.name === stateName){
+      if(newName === null){
+        delete state.allow.name
+      } else {
+        state.allow.name = newName;
+      }
     }
   });
 }
