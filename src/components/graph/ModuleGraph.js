@@ -94,7 +94,7 @@ class ModuleGraph extends Component<Props> {
 
     let svg = this.mount.children[0]
 
-    /* add event handlers */
+    /* Add event handlers for states */
     Object.keys(module.states).forEach( s => {
       let el = document.getElementById(`node_${s.replace('?','')}`)
  ;     if(el){
@@ -102,6 +102,7 @@ class ModuleGraph extends Component<Props> {
       }
     })
 
+    /* Add event handlers for transitions, and increase their 'hit box' size */
     document.querySelectorAll('.edge.transition').forEach( group => {
       let originator = group.querySelector('title').innerHTML.split('-&gt;')[0]
       let hitLine = group.querySelector('path').cloneNode(true)
@@ -113,6 +114,9 @@ class ModuleGraph extends Component<Props> {
         path.addEventListener('mouseup', (e) => {e.stopPropagation(); this.props.onClick(originator)});
       })
     })
+
+    /* Bump the transition labels to the right because it is too crowded */
+    document.querySelectorAll('svg .edge text').forEach(t => t.setAttribute('x', parseFloat(t.getAttribute('x'))+5))
 
     /* add pan/zoom if available */
     if(typeof svgPanZoom === "function"){
