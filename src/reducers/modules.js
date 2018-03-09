@@ -191,12 +191,50 @@ export default (state = initialState, action) => {
         Direct: 'direct_transition',
         Complex: 'complex_transition',
       };
-      let transitionName = transitionMapping[action.data.transitionType] || 'direct_transition';
+
+      let transitionName = transitionMapping[action.data.transitionType];
+      let oldTransitionName = null;
+      if (action.data.nodeName.transition != null) {
+        oldTransitionName = transitionMapping[action.data.nodeName.transition.type];
+      }
+
       let paths = Object.values(transitionMapping);
       for (var pathIndex in paths) {
         delete newState[action.data.currentModuleKey].states[action.data.nodeName.name][paths[pathIndex]];
       }
       newState[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName] = _.clone(TransitionTemplates[action.data.transitionType]);
+
+      // Get first of previous transition locations if available
+      let transitionTo = null;
+      switch(oldTransitionName) {
+        case 'direct_transition':
+          transitionTo = _.get(action, 'data.nodeName.transition.to', null);
+          break;
+        case 'distributed_transition':
+        case 'conditional_transition':
+          transitionTo = _.get(action, 'data.nodeName.transition.transition[0].to', null);
+          break;
+        case 'complex_transition':
+          transitionTo = _.get(action, 'data.nodeName.transition.transition[0].distributions[0].to', null);
+          break;
+      }
+
+      // Provide previous transition location to new if available
+      if (transitionTo !== null) {
+        switch(transitionName) {
+          case 'direct_transition':
+            newState[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName] = transitionTo;
+            break;
+          case 'distributed_transition':
+          case 'conditional_transition':
+            newState[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName][0].transition = transitionTo;
+            break;
+          case 'complex_transition':
+            newState[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName][0].distributions[0].transition = transitionTo;
+            break;
+        }
+      }
+
       return newState
 
     case 'ADD_NODE':
