@@ -1,14 +1,27 @@
 // @flow
 import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
+import _ from 'lodash';
 import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
+import type { State } from '../../types/State';
 import { Codes } from './Code';
-import {TypeTemplates} from '../../templates/Templates';
+import { AttributeTemplates, TypeTemplates } from '../../templates/Templates';
 
 type Props = {
   conditional: Conditional,
+  options: State[],
   onChange: any
 }
+
+const unitOfTimeOptions = [
+  {id: 'years', text: 'years'},
+  {id: 'months', text: 'months'},
+  {id: 'weeks', text: 'weeks'},
+  {id: 'days', text: 'days'},
+  {id: 'hours', text: 'hours'},
+  {id: 'minutes', text: 'minutes'},
+  {id: 'seconds', text: 'seconds'}
+];
 
 const unitOfAgeOptions = [
   {id: 'years', text: 'years'},
@@ -46,7 +59,7 @@ class ConditionalEditor extends Component<Props> {
         return <ActiveMedication {...this.props} />
       case "Active CarePlan":
         return <ActiveCarePlan {...this.props} />
-      case "Prior State":
+      case "PriorState":
         return <PriorState {...this.props} />
       case "Attribute":
         return <Attribute {...this.props} />
@@ -266,14 +279,59 @@ class PriorState extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): PriorStateConditional);
-
-    let options = this.props.otherStates.map((s) => {return {id: s.name, text: s.name}});
-    let name = conditional.name === " "? "(none)" : conditional.name;
+    let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
+    let name = conditional.name;
     return (
-      <label> PriorState:
-        <RIESelect className='editable-text' value={{id: name , text: name}} propName="name" change={this.props.onChange('name')} options={options} />
+      <label>
+        Prior State Name: <RIESelect className='editable-text' value={{id: name, text: name}} propName="name" change={this.props.onChange('name')} options={options} />
+        <br />
+        {this.renderSince()}
+        <br />
+        {this.renderWithin()}
       </label>
     );
+  }
+
+  renderSince() {
+    let conditional = ((this.props.conditional: any): PriorStateConditional);
+    if (conditional.since == null) {
+      return (
+        <label>
+          <a className='editable-text' onClick={() => this.props.onChange('since')({val: {id: _.cloneDeep(AttributeTemplates.Since)}})}>Add Since</a>
+        </label>
+      );
+    } else {
+      let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
+      let since = conditional.since;
+      return (
+        <label>
+          Prior State Since: <RIESelect className='editable-text' value={{id: since, text: since}} propName="since" change={this.props.onChange('since')} options={options} />
+          <a className='editable-text' onClick={() => this.props.onChange('since')({val: {id: null}})}> (remove)</a>
+        </label>
+      );
+    }
+  }
+
+  renderWithin() {
+    let conditional = ((this.props.conditional: any): PriorStateConditional);
+    if (conditional.within == null) {
+      return (
+        <label>
+          <a className='editable-text' onClick={() => this.props.onChange('within')({val: {id: _.cloneDeep(AttributeTemplates.Within)}})}>Add Within</a>
+          <br />
+        </label>
+      );
+    } else {
+      return (
+        <label>
+          Prior State Within Quantity: <RIENumber className='editable-text' value={conditional.within.quantity} propName="quantity" change={this.props.onChange('within.quantity')} />
+          <br />
+          Prior State Within Unit: <RIESelect className='editable-text' value={{id: conditional.within.unit, text: conditional.within.unit}} propName="unit" change={this.props.onChange('within.unit')} options={unitOfTimeOptions} />
+          <br />
+          <a className='editable-text' onClick={() => this.props.onChange('within')({val: {id: null}})}>Remove Within</a>
+        </label>
+      );
+    }
   }
 
 }
