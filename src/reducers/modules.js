@@ -40,11 +40,21 @@ const renameModuleState = (module, stateName, newName) => {
         if(transition.transition === stateName){
           transition.transition = newName
         }
+        if(transition.condition){
+          if(transition.condition.condition_type === 'PriorState' && transition.condition.name === stateName){
+            transition.condition.name = newName
+          }
+        }
       })
     } else if (state.complex_transition){
       state.complex_transition.forEach( transition => {
         if(transition.transition === stateName){
           transition.transition = newName
+        }
+        if(transition.condition){
+          if(transition.condition.condition_type === 'PriorState' && transition.condition.name === stateName){
+            transition.condition.name = newName
+          }
         }
         if(transition.distributions){
           transition.distributions.forEach( distribution => {
@@ -84,6 +94,11 @@ const renameModuleState = (module, stateName, newName) => {
       case 'CarePlanEnd':
         if(state.careplan === stateName){
           state.careplan = newName;
+        }
+        break;
+      case 'Guard':
+        if(state.allow && state.allow.condition_type === 'PriorState' && state.allow.name === stateName){
+          state.allow.name = newName;
         }
         break;
     }
