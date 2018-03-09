@@ -55,7 +55,40 @@ const renameModuleState = (module, stateName, newName) => {
         }
       })
     }
+    switch(state['type']){
+      case 'Encounter':
+      case 'MedicationOrder':
+      case 'CarePlanStart':
+      case 'Procedure':
+        if(state.reason === stateName){
+          state.reason = newName;
+        }
+        break;
+      case 'ConditionOnset':
+      case 'AllergyOnset':
+        if(state.target_encounter === stateName){
+          state.target_encounter = newName;
+        }
+        break;
+      case 'Death':
+      case 'ConditionEnd':
+        if(state.condition_onset === stateName){
+          state.condition_onset = newName;
+        }
+        break;
+      case 'MedicationEnd':
+        if(state.medication_order === stateName){
+          state.medication_order = newName;
+        }
+        break;
+      case 'CarePlanEnd':
+        if(state.careplan === stateName){
+          state.careplan = newName;
+        }
+        break;
+    }
   });
+
   return newModule
 }
 
