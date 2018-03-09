@@ -217,7 +217,6 @@ export const AttributeTemplates = {
   Range: {
     low: 1,
     high: 2,
-    unit: "days"
   },
   RangeWithUnit: {
     low: 1,
@@ -257,7 +256,7 @@ export const TransitionTemplates = {
   Direct: 'Initial',
   Conditional: [{transition: 'Initial', condition: {...TypeTemplates.Condition.Age}}],
   Distributed: [{transition: 'Initial', distribution: 1.0}],
-  Complex: [{condition: {...TypeTemplates.Condition.Age}, distributions: [], to: 'Initial'}]
+  Complex: [{condition: {...TypeTemplates.Condition.Age}, distributions: [{transition: 'Initial', distribution: 1.0}]}]
 }
 
 export const StateTemplates = {
