@@ -18,7 +18,7 @@ class Download extends Component {
 
     let filename = this.props.module.name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
 
-    FileSaver.saveAs(blob, `${filename}.json`);
+    FileSaver.saveAs(blob, `${filename}.json`, true); // true = no BOM, see https://github.com/eligrey/FileSaver.js/issues/160
   }
 
   prepareJSON(){
