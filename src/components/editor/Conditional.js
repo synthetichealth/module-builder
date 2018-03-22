@@ -341,11 +341,16 @@ class Attribute extends Component<Props> {
   render() {
     let conditional = ((this.props.conditional: any): AttributeConditional);
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}, {id: "is nil", text: "is nil"}, {id: "is not nil", text: "is not nil"}];
+    let val = conditional.value;
+    if(typeof val === 'boolean'){
+      val = String(val);
+    }
+    debugger
     return (
       <label>
         <RIEInput className='editable-text' value={conditional.attribute} propName="attribute" change={this.props.onChange('attribute')} />
         <RIESelect className='editable-text' value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
-        <RIEInput className='editable-text' value={conditional.value||0} propName='value' change={this.props.onChange('value')} />
+        <RIEInput className='editable-text' value={val||0} propName='value' change={this.props.onChange('value')} />
       </label>
     );
   }

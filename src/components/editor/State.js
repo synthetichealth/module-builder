@@ -260,6 +260,7 @@ class SetAttribute extends Component<Props> {
 
   renderValue() {
     let state = ((this.props.state: any): SetAttributeState);
+
     if (state.value == null) {
       return (
         <div>
@@ -268,9 +269,13 @@ class SetAttribute extends Component<Props> {
         </div>
       );
     } else {
+      let val = state.value;
+      if(typeof val === 'boolean'){
+        val = String(val);
+      }
       return (
         <div>
-          Value: <RIEInput className='editable-text' value={state.value} propName={'value'} change={this.props.onChange('value')} />
+          Value: <RIEInput className='editable-text' value={val} propName={'value'} change={this.props.onChange('value')} />
           <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: null}})}>(remove)</a>
           <br />
         </div>
