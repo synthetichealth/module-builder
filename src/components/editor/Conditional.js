@@ -345,7 +345,6 @@ class Attribute extends Component<Props> {
     if(typeof val === 'boolean'){
       val = String(val);
     }
-    debugger
     return (
       <label>
         <RIEInput className='editable-text' value={conditional.attribute} propName="attribute" change={this.props.onChange('attribute')} />
