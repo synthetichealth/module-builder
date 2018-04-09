@@ -151,6 +151,9 @@ export default (state = initialState, action) => {
         if(/^[0-9.\-]+$/.test(value) && parseFloat(value)){
           value = parseFloat(value);
         }
+        if(/^(true|false)$/.test(value.toLowerCase())){
+          value = value.toLowerCase() === 'true';
+        }
         _.set(newState, path, value);
       }
       else{
