@@ -152,7 +152,7 @@ export default (state = initialState, action) => {
           value = parseFloat(value);
         }
         if(/^(true|false)$/.test(value.toLowerCase())){
-          value = value === 'true';
+          value = value.toLowerCase() === 'true';
         }
         _.set(newState, path, value);
       }
