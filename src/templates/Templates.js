@@ -19,6 +19,16 @@ export const TypeTemplates = {
       system: "NUBC",
       code: "1234",
       display: "NUBC Code"
+    },
+    DicomDCM: {
+      system: "DICOM-DCM",
+      code: "XX",
+      display: "DICOM Modality Code"
+    },
+    DicomSOP: {
+      system: "DICOM-SOP",
+      code: "1.2.3.4.5.6.7.8",
+      display: "DICOM Subject-Object Pair Code"
     }
   },
 
@@ -252,8 +262,22 @@ export const AttributeTemplates = {
   NamedDistribution: {
     attribute: "attribute",
     default: 1.0
-  }
+  },
 
+  ImagingStudy: {
+    Instance: {
+      title: "Title of this image",
+      sop_class: {...TypeTemplates.Code.DicomSOP}
+    },
+    Series: {
+      body_site: {...TypeTemplates.Code.Snomed},
+      modality: {...TypeTemplates.Code.DicomDCM},
+      instances: [{
+        title: "Title of this image",
+        sop_class: {...TypeTemplates.Code.DicomSOP}
+      }]
+    }
+  }
 }
 
 
@@ -384,6 +408,12 @@ export const StateTemplates = {
     type: "DiagnosticReport",
     number_of_observations: 0,
     codes: [{...TypeTemplates.Code.Loinc}]
+  },
+
+  ImagingStudy: {
+    type: "ImagingStudy",
+    procedure_code: {...TypeTemplates.Code.Snomed},
+    series: [{...AttributeTemplates.ImagingStudy.Series}]
   },
 
   Symptom: {
