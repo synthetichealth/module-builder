@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber, RIEToggle, RIETextArea } from 'riek';
 import _ from 'lodash';
 
-import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, SymptomState, DeathState } from '../../types/State';
+import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, ImagingStudyState, SymptomState, DeathState } from '../../types/State';
 
 import { Code, Codes } from './Code';
 import { Goals } from './Goal';
+import { SeriesList } from './ImagingStudyAttributes';
 import ConditionalEditor from './Conditional';
 import Transition from './Transition';
 import { AttributeTemplates, TypeTemplates, StateTemplates } from '../../templates/Templates';
@@ -89,6 +90,8 @@ class StateEditor extends Component<Props> {
         return <MultiObservation {...props} />
       case "DiagnosticReport":
         return <DiagnosticReport {...props} />
+      case "ImagingStudy":
+        return <ImagingStudy {...props} />
       case "Symptom":
         return <Symptom {...props} />
       case "Death":
@@ -1331,6 +1334,29 @@ class DiagnosticReport extends Component<Props> {
           Codes
           <br />
           <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
+        </div>
+      </div>
+    );
+  }
+
+}
+
+class ImagingStudy extends Component<Props> {
+
+  render() {
+    let state = ((this.props.state: any): ImagingStudyState);
+    return (
+      <div>
+        <div className='section'>
+          <b>Procedure Code:</b>
+          <Code code={state.procedure_code} system={"SNOMED-CT"} onChange={this.props.onChange('procedure_code')} />
+          <br />
+        </div>
+        <div className='section'>
+          <b>Series:</b>
+          <br />
+          <SeriesList series={state.series} onChange={this.props.onChange('series')} />
+          <br />
         </div>
       </div>
     );
