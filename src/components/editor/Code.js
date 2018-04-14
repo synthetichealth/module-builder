@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber } from 'riek';
+import { RIEInput } from 'riek';
 import _ from 'lodash';
 
 import type { Code as CodeType } from '../../types/Code';
@@ -47,7 +47,9 @@ export class Codes extends Component<CodesProps> {
       "SNOMED-CT": TypeTemplates.Code.Snomed,
       "LOINC": TypeTemplates.Code.Loinc,
       "RxNorm": TypeTemplates.Code.RxNorm,
-      "NUBC": TypeTemplates.Code.Nubc
+      "NUBC": TypeTemplates.Code.Nubc,
+      "DICOM-DCM": TypeTemplates.Code.DicomDCM,
+      "DICOM-SOP": TypeTemplates.Code.DicomSOP
     };
     return (
       <div>
