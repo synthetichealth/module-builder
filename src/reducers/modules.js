@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { StateTemplates, TransitionTemplates, StructureTemplates } from '../templates/Templates';
+import { normalizeType } from '../utils/normalizeType';
 
 // updates the module in-place with fixed state refences
 // if newName is null, then delete all references instead
@@ -147,14 +148,7 @@ export default (state = initialState, action) => {
       }
       newState = {...state};
       if(value) {
-        value = typeof value === 'string'? value.trim():value;
-        if(/^[0-9.\-]+$/.test(value) && (parseFloat(value) || parseFloat(value) === 0)){
-          value = parseFloat(value);
-        }
-        if(/^(true|false)$/i.test(value)){
-          value = value.toLowerCase() === 'true';
-        }
-        _.set(newState, path, value);
+        _.set(newState, path, normalizeType(value));
       }
       else{
         _.unset(newState, path);
