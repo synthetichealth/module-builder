@@ -6,7 +6,7 @@ export function normalizeType(value){
     return value;
   }
   value = value.trim();
-  if(/^[0-9.\-]+$/.test(value) && (parseFloat(value) || parseFloat(value) === 0)){
+  if(/^-?\d*[\.]?\d+$/.test(value) && (parseFloat(value) || parseFloat(value) === 0)){
     value = parseFloat(value);
   }
   if(/^(true|false)$/i.test(value)){
