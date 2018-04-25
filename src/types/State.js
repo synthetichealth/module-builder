@@ -2,7 +2,7 @@
 import type { Transition } from './Transition';
 import type { Conditional } from './Conditional';
 import type { Code } from './Code';
-import type { Goal } from './Goal';
+import type { Goal, Series } from './Attributes';
 import type { UnitOfTime } from './Units';
 
 export type InitialState = {
@@ -257,6 +257,15 @@ export type DiagnosticReportState = {
   type: 'DiagnosticReport',
   number_of_observations: number,
   codes: Code[],
+  transition?: Transition
+}
+
+export type ImagingStudyState = {
+  name: string,
+  remarks: string[],
+  type: 'ImagingStudy',
+  procedure_code: Code,
+  series: Series[],
   transition?: Transition
 }
 

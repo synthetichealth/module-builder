@@ -272,6 +272,18 @@ const stateDescription = (state) =>{
         details = `Record value from Attribute '${state["attribute"]}' ${unit}\\l`
       }
       break;
+      
+    case 'ImagingStudy':
+      let series = state['series'];
+      if (series.length > 0) {
+        let primarySeries = series[0];
+        let primaryModality = primarySeries['modality'];
+        let primaryBodySite = primarySeries['body_site'];
+
+        details = `DICOM-DCM[${primaryModality['code']}]: ${primaryModality['display']}\\l`
+        details += `SNOMED-CT[${primaryBodySite['code']}]: Body Site: ${primaryBodySite['display']}\\l`
+      }
+      break;
 
     case 'Counter':
       details = `${state['action']} value of attribute '${state["attribute"]}' by 1`
