@@ -1,4 +1,4 @@
-export default {"examplitis":{
+export default {"example_module":{
   "name": "Examplitis",
   "remarks": [
     "Examplitis is a painful condition that affects only males. Most patients ",
@@ -18,8 +18,7 @@ export default {"examplitis":{
         {
           "transition": "Terminal"
         }
-      ],
-      "name": "Initial"
+      ]
     },
     "Age_Guard": {
       "type": "Guard",
@@ -38,8 +37,7 @@ export default {"examplitis":{
           "distribution": 0.9,
           "transition": "Terminal"
         }
-      ],
-      "name": "Age_Guard"
+      ]
     },
     "Pre_Examplitis": {
       "type": "Delay",
@@ -48,8 +46,7 @@ export default {"examplitis":{
         "high": 10,
         "unit": "years"
       },
-      "direct_transition": "Examplitis",
-      "name": "Pre_Examplitis"
+      "direct_transition": "Examplitis"
     },
     "Examplitis": {
       "type": "ConditionOnset",
@@ -61,14 +58,12 @@ export default {"examplitis":{
           "display": "Examplitis"
         }
       ],
-      "direct_transition": "Wellness_Encounter",
-      "name": "Examplitis"
+      "direct_transition": "Wellness_Encounter"
     },
     "Wellness_Encounter": {
       "type": "Encounter",
       "wellness": true,
-      "direct_transition": "Examplitol",
-      "name": "Wellness_Encounter"
+      "direct_transition": "Examplitol"
     },
     "Examplitol": {
       "type": "MedicationOrder",
@@ -93,8 +88,7 @@ export default {"examplitis":{
           "distribution": 0.7,
           "transition": "Terminal"
         }
-      ],
-      "name": "Examplitol"
+      ]
     },
     "Pre_Examplotomy": {
       "type": "Delay",
@@ -103,8 +97,7 @@ export default {"examplitis":{
         "high": 36,
         "unit": "months"
       },
-      "direct_transition": "Examplotomy_Encounter",
-      "name": "Pre_Examplotomy"
+      "direct_transition": "Examplotomy_Encounter"
     },
     "Examplotomy_Encounter": {
       "type": "Encounter",
@@ -116,8 +109,7 @@ export default {"examplitis":{
           "display": "Examplotomy Encounter"
         }
       ],
-      "direct_transition": "Examplotomy",
-      "name": "Examplotomy_Encounter"
+      "direct_transition": "Examplotomy"
     },
     "Examplotomy": {
       "type": "Procedure",
@@ -134,8 +126,7 @@ export default {"examplitis":{
         }
       ],
       "reason": "Examplitis",
-      "direct_transition": "End_Examplotomy_Encounter",
-      "name": "Examplotomy"
+      "direct_transition": "End_Examplotomy_Encounter"
     },
     "End_Examplotomy_Encounter": {
       "type": "EncounterEnd",
@@ -148,8 +139,7 @@ export default {"examplitis":{
           "distribution": 0.9,
           "transition": "Terminal"
         }
-      ],
-      "name": "End_Examplotomy_Encounter"
+      ]
     },
     "Last_Days": {
       "type": "Delay",
@@ -158,16 +148,14 @@ export default {"examplitis":{
         "high": 20,
         "unit": "years"
       },
-      "direct_transition": "Death",
-      "name": "Last_Days"
+      "direct_transition": "Death"
     },
     "Death": {
       "type": "Death",
-      "name": "Death"
+      "direct_transition": "Terminal"
     },
     "Terminal": {
-      "type": "Terminal",
-      "name": "Terminal"
+      "type": "Terminal"
     }
   }
 }
@@ -11885,6 +11873,13 @@ export default {"examplitis":{
       "conditional_transition": [
         {
           "condition": {
+            "condition_type": "PriorState",
+            "name": "Adult_Contact_Dermatitis"
+          },
+          "transition": "Potential_CD_Resolves"
+        },
+        {
+          "condition": {
             "condition_type": "And",
             "conditions": [
               {
@@ -11909,27 +11904,7 @@ export default {"examplitis":{
           "transition": "Potentially_Outgrow_AD"
         },
         {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "PriorState",
-                "name": "Childhood_Atopic_Dermatitis"
-              },
-              {
-                "condition_type": "PriorState",
-                "name": "Potentially_Outgrow_AD"
-              }
-            ]
-          },
           "transition": "Potential_AD_Flare_Up"
-        },
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "Adult_Contact_Dermatitis"
-          },
-          "transition": "Potential_CD_Resolves"
         }
       ]
     },
@@ -12044,8 +12019,8 @@ export default {"examplitis":{
       ],
       "codes": [
         {
-          "system": "SNOMED-CT",
-          "code": "205168",
+          "system": "RxNorm",
+          "code": "835900",
           "display": "cycloSPORINE 50 MG Oral Capsule"
         }
       ],
@@ -12091,8 +12066,8 @@ export default {"examplitis":{
             "condition_type": "Active Medication",
             "codes": [
               {
-                "system": "SNOMED-CT",
-                "code": "205168",
+                "system": "RxNorm",
+                "code": "835900",
                 "display": "cycloSPORINE 50 MG Oral Capsule"
               }
             ]
@@ -12553,13 +12528,14 @@ export default {"examplitis":{
       "direct_transition": "Seizure_Encounter",
       "remarks": [
         ""
-      ]
+      ],
+      "assign_to_attribute": "seizure"
     },
     "Seizure_Encounter": {
       "type": "Encounter",
       "wellness": false,
       "encounter_class": "emergency",
-      "reason": "Seizure",
+      "reason": "seizure",
       "remarks": [
         "Patients start being diagnosed with seizure disorder when they have a seizure."
       ],
@@ -12802,7 +12778,7 @@ export default {"examplitis":{
       "type": "Encounter",
       "encounter_class": "outpatient",
       "wellness": true,
-      "reason": "Medication follow-Up",
+      "reason": "seizure",
       "remarks": [
         "Patients start with medication prescription or follow-up."
       ],
@@ -14807,7 +14783,10 @@ export default {"examplitis":{
               "transition": "Whiplash_Injury"
             },
             {
-              "distribution": 0.06,
+              "distribution": {
+                "attribute": "probability_of_fall_injury",
+                "default": 0.06
+              },
               "remarks": [
                 "Highest probability for elderly with osteoporosis.",
                 "see also http://www.shef.ac.uk/FRAX/charts.aspx",
@@ -14869,7 +14848,10 @@ export default {"examplitis":{
               "transition": "Whiplash_Injury"
             },
             {
-              "distribution": 0.035,
+              "distribution": {
+                "attribute": "probability_of_fall_injury",
+                "default": 0.035
+              },
               "remarks": [
                 "Retain high probability for elderly - reduced somewhat here since these are the patients without osteoporosis"
               ],
@@ -14932,7 +14914,16 @@ export default {"examplitis":{
           "display": "Emergency room admission"
         }
       ],
-      "direct_transition": "Spinal_Injury_CarePlan"
+      "distributed_transition": [
+        {
+          "transition": "Spinal_Cord_Damage",
+          "distribution": 0.25
+        },
+        {
+          "transition": "No_Spinal_Cord_Damage",
+          "distribution": 0.75
+        }
+      ]
     },
     "Spinal_Injury_CarePlan": {
       "type": "CarePlanStart",
@@ -14957,16 +14948,7 @@ export default {"examplitis":{
           "display": "Application of back brace"
         }
       ],
-      "distributed_transition": [
-        {
-          "distribution": 0.25,
-          "transition": "Spinal_Cord_Damage"
-        },
-        {
-          "distribution": 0.75,
-          "transition": "No_Spinal_Cord_Damage"
-        }
-      ]
+      "direct_transition": "Delay_After_Spinal_Surgery"
     },
     "Spinal_Cord_Damage": {
       "type": "ConditionOnset",
@@ -15017,7 +14999,7 @@ export default {"examplitis":{
           "display": "Fracture of vertebral column without spinal cord injury"
         }
       ],
-      "direct_transition": "Spinal_Injury_Treatment_Encounter"
+      "direct_transition": "Spinal_Injury_CarePlan"
     },
     "Spinal_Surgery": {
       "type": "Procedure",
@@ -15029,7 +15011,7 @@ export default {"examplitis":{
           "display": "Admission to neurosurgical department"
         }
       ],
-      "direct_transition": "Delay_After_Spinal_Surgery"
+      "direct_transition": "Spinal_Injury_CarePlan"
     },
     "Delay_After_Spinal_Surgery": {
       "type": "Delay",
@@ -15643,6 +15625,39 @@ export default {"examplitis":{
           "display": "Fracture of clavicle"
         }
       ],
+      "direct_transition": "Clavicle_X_Ray"
+    },
+    "Clavicle_X_Ray": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": "168594001",
+        "display": "Clavicle X-ray"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": "51299004",
+            "display": "Clavicle"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "DX",
+            "display": "Digital Radiography"
+          },
+          "instances": [
+            {
+              "title": "Image of clavicle",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.1.1",
+                "display": "Digital X-Ray Image Storage"
+              }
+            }
+          ]
+        }
+      ],
       "direct_transition": "Broken_Bone_Surgery"
     },
     "Broken_Arm": {
@@ -15654,6 +15669,39 @@ export default {"examplitis":{
           "system": "SNOMED-CT",
           "code": "65966004",
           "display": "Fracture of forearm"
+        }
+      ],
+      "direct_transition": "Arm_X_Ray"
+    },
+    "Arm_X_Ray": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": "1225002",
+        "display": "Upper arm X-ray"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": "40983000",
+            "display": "Arm"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "DX",
+            "display": "Digital Radiography"
+          },
+          "instances": [
+            {
+              "title": "Image of arm",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.1.1",
+                "display": "Digital X-Ray Image Storage"
+              }
+            }
+          ]
         }
       ],
       "direct_transition": "Broken_Bone_Immobilization"
@@ -15669,6 +15717,39 @@ export default {"examplitis":{
           "display": "Fracture subluxation of wrist"
         }
       ],
+      "direct_transition": "Wrist_X_Ray"
+    },
+    "Wrist_X_Ray": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": "60027007",
+        "display": "X-ray or wrist"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": "8205005",
+            "display": "Wrist"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "DX",
+            "display": "Digital Radiography"
+          },
+          "instances": [
+            {
+              "title": "Image of wrist",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.1.1",
+                "display": "Digital X-Ray Image Storage"
+              }
+            }
+          ]
+        }
+      ],
       "direct_transition": "Broken_Bone_Immobilization"
     },
     "Broken_Ankle": {
@@ -15680,6 +15761,39 @@ export default {"examplitis":{
           "system": "SNOMED-CT",
           "code": "16114001",
           "display": "Fracture of ankle"
+        }
+      ],
+      "direct_transition": "Ankle_X_Ray"
+    },
+    "Ankle_X_Ray": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": "19490002",
+        "display": "Ankle X-ray"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": "344001",
+            "display": "Ankle"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "DX",
+            "display": "Digital Radiography"
+          },
+          "instances": [
+            {
+              "title": "Image of ankle",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.1.1",
+                "display": "Digital X-Ray Image Storage"
+              }
+            }
+          ]
         }
       ],
       "direct_transition": "Broken_Bone_Immobilization"
@@ -15695,6 +15809,39 @@ export default {"examplitis":{
           "display": "Fracture of rib"
         }
       ],
+      "direct_transition": "Chest_X_Ray"
+    },
+    "Chest_X_Ray": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": "399208008",
+        "display": "Chest X-ray"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": "51185008",
+            "display": "Chest"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "DX",
+            "display": "Digital Radiography"
+          },
+          "instances": [
+            {
+              "title": "Image of chest",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.1.1",
+                "display": "Digital X-Ray Image Storage"
+              }
+            }
+          ]
+        }
+      ],
       "direct_transition": "Broken_Bone_Immobilization"
     },
     "Broken_Hip": {
@@ -15706,6 +15853,39 @@ export default {"examplitis":{
           "system": "SNOMED-CT",
           "code": "359817006",
           "display": "Closed fracture of hip"
+        }
+      ],
+      "direct_transition": "Pelvic_X_Ray"
+    },
+    "Pelvic_X_Ray": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": "268425006",
+        "display": "Pelvis X-ray"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": "12921003",
+            "display": "Pelvis"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "DX",
+            "display": "Digital Radiography"
+          },
+          "instances": [
+            {
+              "title": "Image of pelvis",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.1.1",
+                "display": "Digital X-Ray Image Storage"
+              }
+            }
+          ]
         }
       ],
       "direct_transition": "Broken_Bone_Surgery"
@@ -16601,7 +16781,57 @@ export default {"examplitis":{
           "display": "Emergency room admission"
         }
       ],
-      "direct_transition": "Knee_Injury_CarePlan"
+      "distributed_transition": [
+        {
+          "transition": "Torn_MCL",
+          "distribution": 0.3177
+        },
+        {
+          "transition": "Torn_ACL",
+          "distribution": 0.2235
+        },
+        {
+          "transition": "Torn_Meniscus",
+          "distribution": 0.2024
+        },
+        {
+          "transition": "Torn_Patellar_Tendon",
+          "distribution": 0.2564
+        }
+      ]
+    },
+    "Knee_X_Ray": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": "74016001",
+        "display": "Knee X-ray"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": "72696002",
+            "display": "Knee"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "DX",
+            "display": "Digital Radiography"
+          },
+          "instances": [
+            {
+              "title": "Image of knee",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.1.1",
+                "display": "Digital X-Ray Image Storage"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Knee_Injury_Prescribe_Non_Opioid"
     },
     "Knee_Injury_CarePlan": {
       "type": "CarePlanStart",
@@ -16626,24 +16856,7 @@ export default {"examplitis":{
           "display": "Stretching exercises"
         }
       ],
-      "distributed_transition": [
-        {
-          "distribution": 0.2235,
-          "transition": "Torn_ACL"
-        },
-        {
-          "distribution": 0.3177,
-          "transition": "Torn_MCL"
-        },
-        {
-          "distribution": 0.2024,
-          "transition": "Torn_Meniscus"
-        },
-        {
-          "distribution": 0.2564,
-          "transition": "Torn_Patellar_Tendon"
-        }
-      ]
+      "direct_transition": "Knee_X_Ray"
     },
     "Torn_ACL": {
       "type": "ConditionOnset",
@@ -16656,7 +16869,7 @@ export default {"examplitis":{
           "display": "Injury of anterior cruciate ligament"
         }
       ],
-      "direct_transition": "End_Knee_Injury_Encounter_I"
+      "direct_transition": "Knee_Injury_CarePlan"
     },
     "Torn_MCL": {
       "type": "ConditionOnset",
@@ -16669,7 +16882,7 @@ export default {"examplitis":{
           "display": "Injury of medial collateral ligament of knee"
         }
       ],
-      "direct_transition": "End_Knee_Injury_Encounter_I"
+      "direct_transition": "Knee_Injury_CarePlan"
     },
     "Torn_Meniscus": {
       "type": "ConditionOnset",
@@ -16685,7 +16898,7 @@ export default {"examplitis":{
           "display": "Tear of meniscus of knee"
         }
       ],
-      "direct_transition": "Knee_Injury_Prescribe_Non_Opioid"
+      "direct_transition": "Knee_Injury_CarePlan"
     },
     "Torn_Patellar_Tendon": {
       "type": "ConditionOnset",
@@ -16698,11 +16911,22 @@ export default {"examplitis":{
           "display": "Rupture of patellar tendon"
         }
       ],
-      "direct_transition": "End_Knee_Injury_Encounter_I"
+      "direct_transition": "Knee_Injury_CarePlan"
     },
     "End_Knee_Injury_Encounter_I": {
       "type": "EncounterEnd",
-      "direct_transition": "Wait_For_Knee_Surgery"
+      "conditional_transition": [
+        {
+          "transition": "Knee_Injury_Recovery_Period",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Torn_Meniscus"
+          }
+        },
+        {
+          "transition": "Wait_For_Knee_Surgery"
+        }
+      ]
     },
     "Wait_For_Knee_Surgery": {
       "type": "Delay",
@@ -16745,12 +16969,12 @@ export default {"examplitis":{
     "Knee_Injury_Prescribe_Opioid": {
       "type": "CallSubmodule",
       "submodule": "medications/moderate_opioid_pain_reliever",
-      "direct_transition": "Knee_Injury_Prescribe_Non_Opioid"
+      "direct_transition": "End_Knee_Injury_Encounter_II"
     },
     "Knee_Injury_Prescribe_Non_Opioid": {
       "type": "CallSubmodule",
       "submodule": "medications/otc_pain_reliever",
-      "direct_transition": "End_Knee_Injury_Encounter_II"
+      "direct_transition": "End_Knee_Injury_Encounter_I"
     },
     "End_Knee_Injury_Encounter_II": {
       "type": "EncounterEnd",
@@ -17075,114 +17299,20 @@ export default {"examplitis":{
     },
     "Lung Cancer Probabilities": {
       "type": "Simple",
-      "complex_transition": [
+      "distributed_transition": [
         {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Gender",
-                "gender": "M"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "smoker",
-                "operator": "==",
-                "value": false
-              }
-            ]
+          "distribution": {
+            "attribute": "probability_of_lung_cancer",
+            "default": 0.0645
           },
-          "distributions": [
-            {
-              "distribution": 0.002,
-              "transition": "Cough"
-            },
-            {
-              "distribution": 0.998,
-              "transition": "Terminal"
-            }
-          ]
+          "transition": "Onset_Lung_Cancer"
         },
         {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Gender",
-                "gender": "M"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "smoker",
-                "operator": "==",
-                "value": true
-              }
-            ]
+          "distribution": {
+            "attribute": "probability_of_no_lung_cancer",
+            "default": 0.93355
           },
-          "distributions": [
-            {
-              "distribution": 0.244,
-              "transition": "Cough"
-            },
-            {
-              "distribution": 0.766,
-              "transition": "Terminal"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Gender",
-                "gender": "F"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "smoker",
-                "operator": "==",
-                "value": false
-              }
-            ]
-          },
-          "distributions": [
-            {
-              "distribution": 0.004,
-              "transition": "Cough"
-            },
-            {
-              "distribution": 0.996,
-              "transition": "Terminal"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Gender",
-                "gender": "F"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "smoker",
-                "operator": "==",
-                "value": true
-              }
-            ]
-          },
-          "distributions": [
-            {
-              "distribution": 0.185,
-              "transition": "Cough"
-            },
-            {
-              "distribution": 0.815,
-              "transition": "Terminal"
-            }
-          ]
+          "transition": "Terminal"
         }
       ],
       "remarks": [
@@ -17193,6 +17323,47 @@ export default {"examplitis":{
         "In a 2006 European study, the risk of developing lung cancer was: 0.2 percent for men who never smoked (0.4% for women); 5.5 percent of male former smokers (2.6% in women); 15.9 percent of current male smokers (9.5% for women); 24.4 percent for male “heavy smokers” defined as smoking more than 5 cigarettes per day (18.5 percent for women)",
         "https://www.verywell.com/what-percentage-of-smokers-get-lung-cancer-2248868"
       ]
+    },
+    "Onset_Lung_Cancer": {
+      "type": "SetAttribute",
+      "attribute": "lung_cancer",
+      "value": true,
+      "direct_transition": "Init_Lung_Cancer_Counter"
+    },
+    "Init_Lung_Cancer_Counter": {
+      "type": "SetAttribute",
+      "attribute": "lung_cancer_nondiagnosis_counter",
+      "value": 0,
+      "direct_transition": "Undiagnosed_Lung_Cancer"
+    },
+    "Undiagnosed_Lung_Cancer": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "months"
+      },
+      "distributed_transition": [
+        {
+          "distribution": {
+            "attribute": "probability_of_lung_cancer_treatment",
+            "default": 0.2
+          },
+          "transition": "Cough"
+        },
+        {
+          "distribution": {
+            "attribute": "probability_of_no_lung_cancer_treatment",
+            "default": 0.8
+          },
+          "transition": "Increment_Counter"
+        }
+      ]
+    },
+    "Increment_Counter": {
+      "type": "Counter",
+      "action": "increment",
+      "attribute": "lung_cancer_nondiagnosis_counter",
+      "direct_transition": "Undiagnosed_Lung_Cancer"
     },
     "Cough": {
       "type": "Symptom",
@@ -17463,60 +17634,43 @@ export default {"examplitis":{
         "http://seer.cancer.gov/csr/1975_2013/browse_csr.php?sectionSEL=15&pageSEL=sect_15_table.14.html",
         "http://seer.cancer.gov/csr/1975_2013/browse_csr.php?sectionSEL=15&pageSEL=sect_15_table.13.html",
         "only 15 percent of lung cancer cases are diagnosed at an early stage.",
-        "http://www.lung.org/lung-health-and-diseases/lung-disease-lookup/lung-cancer/learn-about-lung-cancer/lung-cancer-fact-sheet.html"
+        "http://www.lung.org/lung-health-and-diseases/lung-disease-lookup/lung-cancer/learn-about-lung-cancer/lung-cancer-fact-sheet.html",
+        "updated remarks 2017-08-31:",
+        "http://oregon.providence.org/our-services/a/ask-a-providence-expert/forms-and-information/ask-an-expert-lung-cancer-growth-and-spread/",
+        "It takes at least 30 divisions of one cancer cell to create a tumor that is 1 centimeter in size (about half an inch).",
+        "That is the smallest size likely to be seen on an X-ray. It takes about three to six months for most lung cancers to double their size. ",
+        "Therefore, it could take several years for a typical lung cancer to reach a size at which it could be diagnosed on a chest X-ray. "
       ],
-      "complex_transition": [
+      "conditional_transition": [
         {
           "condition": {
             "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "NSCLC"
+            "attribute": "lung_cancer_nondiagnosis_counter",
+            "operator": "<=",
+            "value": 36
           },
-          "distributions": [
-            {
-              "distribution": 0.19,
-              "transition": "Stage I"
-            },
-            {
-              "distribution": 0.12,
-              "transition": "Stage II"
-            },
-            {
-              "distribution": 0.12,
-              "transition": "Stage III"
-            },
-            {
-              "distribution": 0.55,
-              "transition": "Stage IV"
-            }
-          ]
+          "transition": "Stage I"
         },
         {
           "condition": {
             "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "SCLC"
+            "attribute": "lung_cancer_nondiagnosis_counter",
+            "operator": "<=",
+            "value": 72
           },
-          "distributions": [
-            {
-              "distribution": 0.04,
-              "transition": "Stage I"
-            },
-            {
-              "distribution": 0.1,
-              "transition": "Stage II"
-            },
-            {
-              "distribution": 0.1,
-              "transition": "Stage III"
-            },
-            {
-              "distribution": 0.74,
-              "transition": "Stage IV"
-            }
-          ]
+          "transition": "Stage II"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "lung_cancer_nondiagnosis_counter",
+            "operator": "<=",
+            "value": 108
+          },
+          "transition": "Stage III"
+        },
+        {
+          "transition": "Stage IV"
         }
       ]
     },
@@ -19957,7 +20111,9 @@ export default {"examplitis":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "remarks": "Initial impl == direct translation of ruby module",
+      "remarks": [
+        "Initial impl == direct translation of ruby module"
+      ],
       "direct_transition": "Wellness_Encounter"
     },
     "Wellness_Encounter": {
@@ -20060,7 +20216,9 @@ export default {"examplitis":{
             "operator": "<=",
             "value": 5.7
           },
-          "remarks": "Normal level",
+          "remarks": [
+            "Normal level"
+          ],
           "transition": "Wellness_Encounter"
         },
         {
@@ -20076,7 +20234,9 @@ export default {"examplitis":{
             "operator": "<=",
             "value": 6.5
           },
-          "remarks": "Prediabetic level",
+          "remarks": [
+            "Prediabetic level"
+          ],
           "transition": "Set_Severity_0"
         },
         {
@@ -20092,7 +20252,9 @@ export default {"examplitis":{
             "operator": "<=",
             "value": 7.5
           },
-          "remarks": "Diabetic level",
+          "remarks": [
+            "Diabetic level"
+          ],
           "transition": "Set_Severity_1"
         },
         {
@@ -20108,7 +20270,9 @@ export default {"examplitis":{
             "operator": "<=",
             "value": 9
           },
-          "remarks": "Severe level",
+          "remarks": [
+            "Severe level"
+          ],
           "transition": "Set_Severity_2"
         },
         {
@@ -20142,7 +20306,9 @@ export default {"examplitis":{
           "transition": "Set_Severity_4"
         },
         {
-          "remarks": "> severe level",
+          "remarks": [
+            "> severe level"
+          ],
           "transition": "Set_Severity_3"
         }
       ]
@@ -20151,7 +20317,9 @@ export default {"examplitis":{
       "type": "SetAttribute",
       "attribute": "diabetes_severity",
       "value": 0,
-      "remarks": "setting prediabetes as severity 0 makes some things easier",
+      "remarks": [
+        "setting prediabetes as severity 0 makes some things easier"
+      ],
       "direct_transition": "Diagnose_Prediabetes"
     },
     "Diagnose_Prediabetes": {
@@ -20559,7 +20727,9 @@ export default {"examplitis":{
               }
             ]
           },
-          "remarks": "they have basal so stop it and change towards prandial",
+          "remarks": [
+            "they have basal so stop it and change towards prandial"
+          ],
           "transition": "End_Basal_Insulin_Towards_Prandial"
         },
         {
@@ -20573,11 +20743,15 @@ export default {"examplitis":{
               }
             ]
           },
-          "remarks": "they have prandial so do nothing",
+          "remarks": [
+            "they have prandial so do nothing"
+          ],
           "transition": "Check_Complications"
         },
         {
-          "remarks": "prescribe basal the first time around",
+          "remarks": [
+            "prescribe basal the first time around"
+          ],
           "transition": "Prescribe_Basal_Insulin"
         }
       ]
@@ -20610,7 +20784,7 @@ export default {"examplitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "106892",
+          "code": "865098",
           "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
         }
       ],
@@ -20667,7 +20841,7 @@ export default {"examplitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "106892",
+          "code": "865098",
           "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
         }
       ],
@@ -22089,7 +22263,9 @@ export default {"examplitis":{
           "transition": "No_Hypertension"
         }
       ],
-      "remarks": "probability: 0.296 # (1.0==100%) http://www.cdc.gov/MMWr/preview/mmwrhtml/su6203a24.htm#Tab"
+      "remarks": [
+        "probability: 0.296 # (1.0==100%) http://www.cdc.gov/MMWr/preview/mmwrhtml/su6203a24.htm#Tab"
+      ]
     },
     "Onset_Hypertension": {
       "type": "SetAttribute",
@@ -22128,12 +22304,16 @@ export default {"examplitis":{
             {
               "distribution": 0.083,
               "transition": "Eventual_Diabetes",
-              "remarks": "0.065 * 1.278"
+              "remarks": [
+                "0.065 * 1.278"
+              ]
             },
             {
               "distribution": 0.45,
               "transition": "Eventual_Prediabetes",
-              "remarks": "0.38 * 1.2"
+              "remarks": [
+                "0.38 * 1.2"
+              ]
             },
             {
               "distribution": 0.467,
@@ -22150,12 +22330,16 @@ export default {"examplitis":{
             {
               "distribution": 0.1815,
               "transition": "Eventual_Diabetes",
-              "remarks": "0.142 * 1.278"
+              "remarks": [
+                "0.142 * 1.278"
+              ]
             },
             {
               "distribution": 0.45,
               "transition": "Eventual_Prediabetes",
-              "remarks": "0.38 * 1.2"
+              "remarks": [
+                "0.38 * 1.2"
+              ]
             },
             {
               "distribution": 0.3685,
@@ -22172,12 +22356,16 @@ export default {"examplitis":{
             {
               "distribution": 0.1636,
               "transition": "Eventual_Diabetes",
-              "remarks": "0.128 * 1.278"
+              "remarks": [
+                "0.128 * 1.278"
+              ]
             },
             {
               "distribution": 0.45,
               "transition": "Eventual_Prediabetes",
-              "remarks": "0.38 * 1.2"
+              "remarks": [
+                "0.38 * 1.2"
+              ]
             },
             {
               "distribution": 0.3864,
@@ -22194,12 +22382,16 @@ export default {"examplitis":{
             {
               "distribution": 0.2045,
               "transition": "Eventual_Diabetes",
-              "remarks": "0.16 * 1.278"
+              "remarks": [
+                "0.16 * 1.278"
+              ]
             },
             {
               "distribution": 0.45,
               "transition": "Eventual_Prediabetes",
-              "remarks": "0.38 * 1.2"
+              "remarks": [
+                "0.38 * 1.2"
+              ]
             },
             {
               "distribution": 0.3455,
@@ -22216,12 +22408,16 @@ export default {"examplitis":{
             {
               "distribution": 0.1828,
               "transition": "Eventual_Diabetes",
-              "remarks": "0.143 * 1.278"
+              "remarks": [
+                "0.143 * 1.278"
+              ]
             },
             {
               "distribution": 0.36,
               "transition": "Eventual_Prediabetes",
-              "remarks": "0.30 * 1.2"
+              "remarks": [
+                "0.30 * 1.2"
+              ]
             },
             {
               "distribution": 0.4572,
@@ -22237,12 +22433,16 @@ export default {"examplitis":{
             {
               "distribution": 0.1022,
               "transition": "Eventual_Diabetes",
-              "remarks": "0.08 * 1.278"
+              "remarks": [
+                "0.08 * 1.278"
+              ]
             },
             {
               "distribution": 0.45,
               "transition": "Eventual_Prediabetes",
-              "remarks": "0.38 * 1.2"
+              "remarks": [
+                "0.38 * 1.2"
+              ]
             },
             {
               "distribution": 0.4478,
@@ -23308,7 +23508,15 @@ export default {"examplitis":{
     },
     "Enter_Directed_Use_Encounter3": {
       "type": "Encounter",
-      "wellness": true,
+      "encounter_class": "inpatient",
+      "reason": "Enter_Directed_Use_Condition3",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 183452005,
+          "display": "Encounter Inpatient"
+        }
+      ],
       "direct_transition": "Directed_Use_Prescription3"
     },
     "Directed_Use_Prescription3": {
@@ -24283,12 +24491,12 @@ export default {"examplitis":{
           "display": "Normal pregnancy"
         }
       ],
-      "direct_transition": "Week_10"
+      "direct_transition": "Delay_Eight_Weeks"
     },
-    "Week_10": {
+    "Delay_Eight_Weeks": {
       "type": "Delay",
       "exact": {
-        "quantity": 10,
+        "quantity": 8,
         "unit": "weeks"
       },
       "direct_transition": "Prenatal_Initial_Visit"
@@ -24315,6 +24523,19 @@ export default {"examplitis":{
           "system": "SNOMED-CT",
           "code": "252160004",
           "display": "Standard pregnancy test"
+        }
+      ],
+      "direct_transition": "Fetal_Viability_Ultrasound"
+    },
+    "Fetal_Viability_Ultrasound": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "169230002",
+          "display": "Ultrasound scan for fetal viability"
         }
       ],
       "remarks": [
@@ -24515,16 +24736,250 @@ export default {"examplitis":{
         },
         {
           "system": "SNOMED-CT",
-          "code": "226060000",
-          "display": "Stress management"
+          "code": "713076009",
+          "display": "Antenatal risk assessment"
         },
         {
           "system": "SNOMED-CT",
-          "code": "171054004",
-          "display": "Pregnancy diet education"
+          "code": "312404004",
+          "display": "Antenatal blood tests"
         }
       ],
       "assign_to_attribute": "pregnancy_careplan",
+      "direct_transition": "Inital_Visit_Fundal_Height"
+    },
+    "Inital_Visit_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Inital_Visit_Fetal_Heartbeat"
+    },
+    "Inital_Visit_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
+        }
+      ],
+      "direct_transition": "Blood_Typing"
+    },
+    "Blood_Typing": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "44608003",
+          "display": "Blood typing, RH typing"
+        }
+      ],
+      "direct_transition": "Hemoglobin_Test"
+    },
+    "Hemoglobin_Test": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "104091002",
+          "display": "Hemoglobin / Hematocrit / Platelet count"
+        }
+      ],
+      "direct_transition": "Hep_B_Surface_Antigen"
+    },
+    "Hep_B_Surface_Antigen": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "47758006",
+          "display": "Hepatitis B Surface Antigen Measurement"
+        }
+      ],
+      "direct_transition": "HIV_Test"
+    },
+    "HIV_Test": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "31676001",
+          "display": "Human immunodeficiency virus antigen test"
+        }
+      ],
+      "direct_transition": "Chlamydia_Test"
+    },
+    "Chlamydia_Test": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "310861008",
+          "display": "Chlamydia antigen test"
+        }
+      ],
+      "direct_transition": "Gonorrhea_Test"
+    },
+    "Gonorrhea_Test": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "165829005",
+          "display": "Gonorrhea infection test"
+        }
+      ],
+      "direct_transition": "Syphilis_Test"
+    },
+    "Syphilis_Test": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "269828009",
+          "display": "Syphilis infection test"
+        }
+      ],
+      "direct_transition": "Urine_Culture"
+    },
+    "Urine_Culture": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "117010004",
+          "display": "Urine culture"
+        }
+      ],
+      "direct_transition": "Pap_Smear"
+    },
+    "Pap_Smear": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "90226004",
+          "display": "Cytopathology procedure, preparation of smear, genital source"
+        }
+      ],
+      "direct_transition": "Diabetes_Screen"
+    },
+    "Diabetes_Screen": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "395123002",
+          "display": "Urine screening test for diabetes"
+        }
+      ],
+      "direct_transition": "Hep_C_Test"
+    },
+    "Hep_C_Test": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "104375008",
+          "display": "Hepatitis C antibody test"
+        }
+      ],
+      "direct_transition": "Rubella_Screen"
+    },
+    "Rubella_Screen": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "169690007",
+          "display": "Rubella screening"
+        }
+      ],
+      "direct_transition": "Varicella_Test"
+    },
+    "Varicella_Test": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "104326007",
+          "display": "Measurement of Varicella-zoster virus antibody "
+        }
+      ],
+      "direct_transition": "Tuberculosis_Test"
+    },
+    "Tuberculosis_Test": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "28163009",
+          "display": "Skin test for tuberculosis"
+        }
+      ],
+      "direct_transition": "Urine_Protein_Test"
+    },
+    "Urine_Protein_Test": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "167271000",
+          "display": "Urine protein test"
+        }
+      ],
+      "direct_transition": "Physical_Exam"
+    },
+    "Physical_Exam": {
+      "type": "Procedure",
+      "target_encounter": "Prenatal_Initial_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "5880005",
+          "display": "Physical examination of mother"
+        }
+      ],
       "direct_transition": "End_Prenatal_Initial_Visit"
     },
     "End_Initial_Visit_Towards_Abortion": {
@@ -24533,17 +24988,116 @@ export default {"examplitis":{
     },
     "End_Prenatal_Initial_Visit": {
       "type": "EncounterEnd",
-      "direct_transition": "Week_15"
+      "distributed_transition": [
+        {
+          "distribution": 0.9999,
+          "transition": "Week_12"
+        },
+        {
+          "distribution": 0.0001,
+          "transition": "Non_Low_Risk_Pregnancy"
+        }
+      ]
     },
-    "Week_15": {
+    "Non_Low_Risk_Pregnancy": {
+      "type": "ConditionOnset",
+      "remarks": [
+        "======================================================================",
+        " NON LOW RISK PREGNANCY                                                        ",
+        "======================================================================"
+      ],
+      "target_encounter": "Prenatal_Initial_Visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "47200007",
+          "display": "Non-low risk pregnancy"
+        }
+      ],
+      "assign_to_attribute": "non_low_risk_pregnancy",
+      "direct_transition": "Non_Low_Risk_Pregnancy_Ends"
+    },
+    "Non_Low_Risk_Pregnancy_Ends": {
+      "type": "ConditionEnd",
+      "referenced_by_attribute": "non_low_risk_pregnancy",
+      "direct_transition": "Normal_Birth"
+    },
+    "Week_12": {
       "type": "Delay",
       "exact": {
-        "quantity": 5,
+        "quantity": 4,
         "unit": "weeks"
       },
-      "direct_transition": "Week_15_Visit"
+      "direct_transition": "Week_12_Visit"
     },
-    "Week_15_Visit": {
+    "Week_12_Visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "424619006",
+          "display": "Prenatal visit"
+        }
+      ],
+      "direct_transition": "Week_12_Fundal_Height"
+    },
+    "Week_12_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_12_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Week_12_Fetal_Heartbeat"
+    },
+    "Week_12_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_12_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
+        }
+      ],
+      "direct_transition": "Fetal_Aneuploidy_Screen"
+    },
+    "Fetal_Aneuploidy_Screen": {
+      "type": "Procedure",
+      "target_encounter": "Week_12_Visit",
+      "reason": "Become_Pregnant",
+      "remarks": [
+        "This is just one option for genetic screening, many options exist but it is unreasonable to represent all options."
+      ],
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "443529005",
+          "display": "Screening for chromosomal aneuploidy in prenatal amniotic fluid"
+        }
+      ],
+      "direct_transition": "End_Week_12_Visit"
+    },
+    "End_Week_12_Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Week_16"
+    },
+    "Week_16": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 4,
+        "unit": "weeks"
+      },
+      "direct_transition": "Week_16_Visit"
+    },
+    "Week_16_Visit": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "Become_Pregnant",
@@ -24567,23 +25121,75 @@ export default {"examplitis":{
         },
         {
           "distribution": 0.962,
-          "transition": "End_Week_15_Visit"
+          "transition": "Fetal_Anatomy_Study"
         }
       ]
     },
-    "End_Week_15_Visit": {
-      "type": "EncounterEnd",
-      "direct_transition": "Week_26"
+    "Fetal_Anatomy_Study": {
+      "type": "Procedure",
+      "target_encounter": "Week_16_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "271442007",
+          "display": "Fetal anatomy study"
+        }
+      ],
+      "direct_transition": "AFP_Test"
     },
-    "Week_26": {
+    "AFP_Test": {
+      "type": "Procedure",
+      "target_encounter": "Week_16_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "275833003",
+          "display": "Alpha-fetoprotein test"
+        }
+      ],
+      "direct_transition": "Week_16_Fundal_Height"
+    },
+    "Week_16_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_16_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Week_16_Fetal_Heartbeat"
+    },
+    "Week_16_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_16_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
+        }
+      ],
+      "direct_transition": "End_Week_16_Visit"
+    },
+    "End_Week_16_Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Week_20"
+    },
+    "Week_20": {
       "type": "Delay",
       "exact": {
-        "quantity": 11,
+        "quantity": 4,
         "unit": "weeks"
       },
-      "direct_transition": "Week_26_Visit"
+      "direct_transition": "Week_20_Visit"
     },
-    "Week_26_Visit": {
+    "Week_20_Visit": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "Become_Pregnant",
@@ -24594,16 +25200,222 @@ export default {"examplitis":{
           "display": "Prenatal visit"
         }
       ],
-      "direct_transition": "End_Week_26_Visit"
+      "direct_transition": "Week_20_Fundal_Height"
     },
-    "End_Week_26_Visit": {
+    "Week_20_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_20_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Week_20_Fetal_Heartbeat"
+    },
+    "Week_20_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_20_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
+        }
+      ],
+      "direct_transition": "End_Week_20_Visit"
+    },
+    "End_Week_20_Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Week_24"
+    },
+    "Week_24": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 4,
+        "unit": "weeks"
+      },
+      "direct_transition": "Week_24_Visit"
+    },
+    "Week_24_Visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "424619006",
+          "display": "Prenatal visit"
+        }
+      ],
+      "direct_transition": "Week_24_Fundal_Height"
+    },
+    "Week_24_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_24_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Week_24_Fetal_Heartbeat"
+    },
+    "Week_24_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_24_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
+        }
+      ],
+      "direct_transition": "End_Week_24_Visit"
+    },
+    "End_Week_24_Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Week_28"
+    },
+    "Week_28": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 4,
+        "unit": "weeks"
+      },
+      "direct_transition": "Week_28_Visit"
+    },
+    "Week_28_Visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "424619006",
+          "display": "Prenatal visit"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "RH_NEG",
+            "operator": "==",
+            "value": true
+          },
+          "transition": "Antibody_Screen"
+        },
+        {
+          "transition": "Second_Hemoglobin_Test"
+        }
+      ]
+    },
+    "Antibody_Screen": {
+      "type": "Procedure",
+      "target_encounter": "Week_28_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "169673001",
+          "display": "Antenatal RhD antibody screening"
+        }
+      ],
+      "direct_transition": "RhoD_Immune_Globulin"
+    },
+    "RhoD_Immune_Globulin": {
+      "type": "Procedure",
+      "target_encounter": "Week_28_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "51116004",
+          "display": "RhD passive immunization"
+        }
+      ],
+      "direct_transition": "Second_Hemoglobin_Test"
+    },
+    "Second_Hemoglobin_Test": {
+      "type": "Procedure",
+      "target_encounter": "Week_28_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "104091002",
+          "display": "Hemoglobin / Hematocrit / Platelet count"
+        }
+      ],
+      "direct_transition": "Tdap_Vaccine"
+    },
+    "Tdap_Vaccine": {
+      "type": "Procedure",
+      "target_encounter": "Week_28_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "399014008",
+          "display": "Vaccination for diphtheria, pertussis, and tetanus"
+        }
+      ],
+      "direct_transition": "Glucose_Screen"
+    },
+    "Glucose_Screen": {
+      "type": "Procedure",
+      "target_encounter": "Week_28_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "268556000",
+          "display": "Urine screening for glucose"
+        }
+      ],
+      "direct_transition": "Week_28_Fundal_Height"
+    },
+    "Week_28_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_28_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Week_28_Fetal_Heartbeat"
+    },
+    "Week_28_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_28_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
+        }
+      ],
+      "direct_transition": "End_Week_28_Visit"
+    },
+    "End_Week_28_Visit": {
       "type": "EncounterEnd",
       "direct_transition": "Week_32"
     },
     "Week_32": {
       "type": "Delay",
       "exact": {
-        "quantity": 6,
+        "quantity": 4,
         "unit": "weeks"
       },
       "distributed_transition": [
@@ -24641,6 +25453,32 @@ export default {"examplitis":{
           "display": "Prenatal visit"
         }
       ],
+      "direct_transition": "Week_32_Fundal_Height"
+    },
+    "Week_32_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_32_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Week_32_Fetal_Heartbeat"
+    },
+    "Week_32_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_32_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
+        }
+      ],
       "direct_transition": "End_Week_32_Visit"
     },
     "End_Week_32_Visit": {
@@ -24659,8 +25497,12 @@ export default {"examplitis":{
           "transition": "Pre_Eclampsia_Check"
         },
         {
-          "distribution": 0.92,
+          "distribution": 0.8518,
           "transition": "Week_36_Visit"
+        },
+        {
+          "distribution": 0.0682,
+          "transition": "Premature_Birth"
         }
       ]
     },
@@ -24712,6 +25554,45 @@ export default {"examplitis":{
           "display": "Prenatal visit"
         }
       ],
+      "direct_transition": "Group_B_Strep_Test"
+    },
+    "Group_B_Strep_Test": {
+      "type": "Procedure",
+      "target_encounter": "Week_36_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "118001005",
+          "display": "Streptococcus pneumoniae group B antigen test"
+        }
+      ],
+      "direct_transition": "Week_36_Fundal_Height"
+    },
+    "Week_36_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_36_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Week_36_Fetal_Heartbeat"
+    },
+    "Week_36_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_36_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
+        }
+      ],
       "direct_transition": "End_Week_36_Visit"
     },
     "End_Week_36_Visit": {
@@ -24726,20 +25607,14 @@ export default {"examplitis":{
       },
       "distributed_transition": [
         {
-          "distribution": 0.06,
-          "transition": "Premature_Birth"
+          "distribution": 0.25,
+          "transition": "Normal_Birth"
         },
         {
-          "distribution": 0.94,
+          "distribution": 0.75,
           "transition": "Week_38_Visit"
         }
       ]
-    },
-    "Premature_Birth": {
-      "type": "SetAttribute",
-      "attribute": "birth_type",
-      "value": "premature",
-      "direct_transition": "Birth"
     },
     "Week_38_Visit": {
       "type": "Encounter",
@@ -24750,6 +25625,32 @@ export default {"examplitis":{
           "system": "SNOMED-CT",
           "code": "424619006",
           "display": "Prenatal visit"
+        }
+      ],
+      "direct_transition": "Week_38_Fundal_Height"
+    },
+    "Week_38_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_38_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Week_38_Fetal_Heartbeat"
+    },
+    "Week_38_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_38_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
         }
       ],
       "direct_transition": "End_Week_38_Visit"
@@ -24766,14 +25667,20 @@ export default {"examplitis":{
       },
       "distributed_transition": [
         {
-          "distribution": 0.15,
-          "transition": "Premature_Birth"
+          "distribution": 0.6,
+          "transition": "Normal_Birth"
         },
         {
-          "distribution": 0.85,
+          "distribution": 0.4,
           "transition": "Week_39_Visit"
         }
       ]
+    },
+    "Premature_Birth": {
+      "type": "SetAttribute",
+      "attribute": "birth_type",
+      "value": "premature",
+      "direct_transition": "Birth"
     },
     "Week_39_Visit": {
       "type": "Encounter",
@@ -24786,11 +25693,43 @@ export default {"examplitis":{
           "display": "Prenatal visit"
         }
       ],
+      "direct_transition": "Week_39_Fundal_Height"
+    },
+    "Week_39_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_39_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Week_39_Fetal_Heartbeat"
+    },
+    "Week_39_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_39_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
+        }
+      ],
       "direct_transition": "End_Week_39_Visit"
     },
     "End_Week_39_Visit": {
       "type": "EncounterEnd",
       "direct_transition": "Week_40"
+    },
+    "Normal_Birth": {
+      "type": "SetAttribute",
+      "attribute": "birth_type",
+      "value": "normal",
+      "direct_transition": "Birth"
     },
     "Week_40": {
       "type": "Delay",
@@ -24800,20 +25739,14 @@ export default {"examplitis":{
       },
       "distributed_transition": [
         {
-          "distribution": 0.2,
+          "distribution": 0.7,
           "transition": "Normal_Birth"
         },
         {
-          "distribution": 0.8,
+          "distribution": 0.3,
           "transition": "Week_40_Visit"
         }
       ]
-    },
-    "Normal_Birth": {
-      "type": "SetAttribute",
-      "attribute": "birth_type",
-      "value": "normal",
-      "direct_transition": "Birth"
     },
     "Week_40_Visit": {
       "type": "Encounter",
@@ -24824,6 +25757,32 @@ export default {"examplitis":{
           "system": "SNOMED-CT",
           "code": "424619006",
           "display": "Prenatal visit"
+        }
+      ],
+      "direct_transition": "Week_40_Fundal_Height"
+    },
+    "Week_40_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_40_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
+        }
+      ],
+      "direct_transition": "Week_40_Fetal_Heartbeat"
+    },
+    "Week_40_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_40_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
         }
       ],
       "direct_transition": "End_Week_40_Visit"
@@ -24840,11 +25799,11 @@ export default {"examplitis":{
       },
       "distributed_transition": [
         {
-          "distribution": 0.5,
+          "distribution": 0.9,
           "transition": "Normal_Birth"
         },
         {
-          "distribution": 0.5,
+          "distribution": 0.1,
           "transition": "Week_41_Visit"
         }
       ]
@@ -24860,43 +25819,35 @@ export default {"examplitis":{
           "display": "Prenatal visit"
         }
       ],
-      "direct_transition": "End_Week_41_Visit"
+      "direct_transition": "Week_41_Fundal_Height"
     },
-    "End_Week_41_Visit": {
-      "type": "EncounterEnd",
-      "direct_transition": "Week_42"
-    },
-    "Week_42": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 1,
-        "unit": "weeks"
-      },
-      "distributed_transition": [
-        {
-          "distribution": 0.7,
-          "transition": "Normal_Birth"
-        },
-        {
-          "distribution": 0.3,
-          "transition": "Week_42_Visit"
-        }
-      ]
-    },
-    "Week_42_Visit": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
+    "Week_41_Fundal_Height": {
+      "type": "Procedure",
+      "target_encounter": "Week_41_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "424619006",
-          "display": "Prenatal visit"
+          "code": "274804006",
+          "display": "Evaluation of uterine fundal height"
         }
       ],
-      "direct_transition": "End_Week_42_Visit"
+      "direct_transition": "Week_41_Fetal_Heartbeat"
     },
-    "End_Week_42_Visit": {
+    "Week_41_Fetal_Heartbeat": {
+      "type": "Procedure",
+      "target_encounter": "Week_41_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "225158009",
+          "display": "Auscultation of the fetal heart"
+        }
+      ],
+      "direct_transition": "End_Week_41_Visit"
+    },
+    "End_Week_41_Visit": {
       "type": "EncounterEnd",
       "discharge_disposition": {
         "system": "NUBC",
@@ -25209,7 +26160,7 @@ export default {"examplitis":{
       "distributed_transition": [
         {
           "distribution": 0.6,
-          "transition": "Early_Fetal_Chromosomal_Anomaly"
+          "transition": "Early_Uknown_Complication"
         },
         {
           "distribution": 0.285,
@@ -25251,14 +26202,14 @@ export default {"examplitis":{
         }
       ]
     },
-    "Early_Fetal_Chromosomal_Anomaly": {
+    "Early_Uknown_Complication": {
       "type": "ConditionOnset",
       "target_encounter": "Prenatal_Initial_Visit",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "267253006",
-          "display": "Fetus with chromosomal abnormality"
+          "code": "156073000",
+          "display": "Fetus with unknown complication"
         }
       ],
       "assign_to_attribute": "fatal_pregnancy_complication",
@@ -25288,18 +26239,18 @@ export default {"examplitis":{
         }
       ],
       "assign_to_attribute": "fatal_pregnancy_complication",
-      "direct_transition": "Wait_For_Ectopic_Pregnancy_Surgery"
+      "direct_transition": "Wait_For_Ectopic_Pregnancy_Encounter"
     },
-    "Wait_For_Ectopic_Pregnancy_Surgery": {
+    "Wait_For_Ectopic_Pregnancy_Encounter": {
       "type": "Delay",
       "range": {
         "low": 1,
         "high": 3,
         "unit": "weeks"
       },
-      "direct_transition": "Ectopic_Pregnancy_Surgery_Encounter"
+      "direct_transition": "Ectopic_Pregnancy_Encounter"
     },
-    "Ectopic_Pregnancy_Surgery_Encounter": {
+    "Ectopic_Pregnancy_Encounter": {
       "type": "Encounter",
       "encounter_class": "inpatient",
       "reason": "Ectopic_Pregnancy",
@@ -25310,11 +26261,37 @@ export default {"examplitis":{
           "display": "Admission to surgical department"
         }
       ],
-      "direct_transition": "Ectopic_Pregnancy_Surgery_Procedure"
+      "distributed_transition": [
+        {
+          "distribution": 0.5,
+          "transition": "Methotrexate_Injection",
+          "remarks": [
+            "This distribution is set to 50/50 for now as there is no available ",
+            "data regarding this distribution. "
+          ]
+        },
+        {
+          "distribution": 0.5,
+          "transition": "Ectopic_Pregnancy_Surgery_Procedure"
+        }
+      ]
+    },
+    "Methotrexate_Injection": {
+      "type": "Procedure",
+      "target_encounter": "Ectopic_Pregnancy_Encounter",
+      "reason": "Ectopic_Pregnancy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "236931002",
+          "display": "Methotrexate injection into tubal pregnancy"
+        }
+      ],
+      "direct_transition": "End_Miscarriage_Encounter"
     },
     "Ectopic_Pregnancy_Surgery_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Ectopic_Pregnancy_Surgery_Encounter",
+      "target_encounter": "Ectopic_Pregnancy_Encounter",
       "reason": "Ectopic_Pregnancy",
       "codes": [
         {
@@ -25330,8 +26307,7 @@ export default {"examplitis":{
       "target_encounter": "Week_15_Visit",
       "assign_to_attribute": "fatal_pregnancy_complication",
       "remarks": [
-        "This is the same condition that's assigned in Early_Fetal_Chromosomal_Anomaly ",
-        "but is a separate state due to the limitation that a ConditionOnset must occur ",
+        "This is a separate state due to the limitation that a ConditionOnset must occur ",
         "before or concurrently with its target_encounter."
       ],
       "codes": [
@@ -25393,21 +26369,68 @@ export default {"examplitis":{
           "display": "Prenatal visit"
         }
       ],
-      "direct_transition": "Miscarriage_End"
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "RH_NEG",
+            "operator": "==",
+            "value": true
+          },
+          "transition": "RhoD_Immune_Globulin_Post_Miscarriage"
+        },
+        {
+          "transition": "Physical_Exam_Post_Miscarriage"
+        }
+      ]
     },
-    "Miscarriage_End": {
-      "type": "ConditionEnd",
-      "referenced_by_attribute": "miscarriage",
-      "direct_transition": "Fatal_Pregnancy_Complication_Ends"
+    "RhoD_Immune_Globulin_Post_Miscarriage": {
+      "type": "Procedure",
+      "target_encounter": "Miscarriage_Followup_Encounter",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "51116004",
+          "display": "RhD passive immunization"
+        }
+      ],
+      "direct_transition": "Physical_Exam_Post_Miscarriage"
     },
-    "Fatal_Pregnancy_Complication_Ends": {
+    "Physical_Exam_Post_Miscarriage": {
+      "type": "Procedure",
+      "target_encounter": "Miscarriage_Followup_Encounter",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "5880005",
+          "display": "Physical examination"
+        }
+      ],
+      "direct_transition": "Depression_Screening_Post_Miscarriage"
+    },
+    "Depression_Screening_Post_Miscarriage": {
+      "type": "Procedure",
+      "target_encounter": "Miscarriage_Followup_Encounter",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "171207006",
+          "display": "Depression screening"
+        }
+      ],
+      "direct_transition": "Miscarriage_Fatal_Pregnancy_Complication_Ends"
+    },
+    "Miscarriage_Fatal_Pregnancy_Complication_Ends": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "fatal_pregnancy_complication",
       "direct_transition": "End_Miscarriage_Followup_Encounter"
     },
     "End_Miscarriage_Followup_Encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "Pregnancy_Ends"
+      "direct_transition": "Miscarriage_Ends"
     },
     "Wait_For_Induced_Abortion": {
       "type": "Delay",
@@ -25434,6 +26457,19 @@ export default {"examplitis":{
           "display": "Patient-initiated encounter"
         }
       ],
+      "direct_transition": "Induced_Abortion_Therapy"
+    },
+    "Induced_Abortion_Therapy": {
+      "type": "Procedure",
+      "target_encounter": "Induced_Abortion_Encounter",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "10383002",
+          "display": "Counseling for termination of pregnancy"
+        }
+      ],
       "direct_transition": "Induced_Abortion_Procedure"
     },
     "Induced_Abortion_Procedure": {
@@ -25451,7 +26487,98 @@ export default {"examplitis":{
     },
     "End_Induced_Abortion_Encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "Pregnancy_Ends"
+      "direct_transition": "Wait_For_Abortion_Followup_Encounter"
+    },
+    "Wait_For_Abortion_Followup_Encounter": {
+      "type": "Delay",
+      "range": {
+        "low": 1,
+        "high": 3,
+        "unit": "weeks"
+      },
+      "direct_transition": "Abortion_Followup_Encounter"
+    },
+    "Abortion_Followup_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "424619006",
+          "display": "Prenatal visit"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "RH_NEG",
+            "operator": "==",
+            "value": true
+          },
+          "transition": "RhoD_Immune_Globulin_Post_Abortion"
+        },
+        {
+          "transition": "Pregnancy_Termination_Care"
+        }
+      ]
+    },
+    "RhoD_Immune_Globulin_Post_Abortion": {
+      "type": "Procedure",
+      "target_encounter": "Abortion_Followup_Encounter",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "51116004",
+          "display": "RhD passive immunization"
+        }
+      ],
+      "direct_transition": "Pregnancy_Termination_Care"
+    },
+    "Pregnancy_Termination_Care": {
+      "type": "Procedure",
+      "target_encounter": "Abortion_Followup_Encounter",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "386394001",
+          "display": "Pregnancy termination care"
+        }
+      ],
+      "direct_transition": "Physical_Exam_Post_Abortion"
+    },
+    "Physical_Exam_Post_Abortion": {
+      "type": "Procedure",
+      "target_encounter": "Abortion_Followup_Encounter",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "5880005",
+          "display": "Physical exam following abortion"
+        }
+      ],
+      "direct_transition": "Depression_Screening_Post_Abortion"
+    },
+    "Depression_Screening_Post_Abortion": {
+      "type": "Procedure",
+      "target_encounter": "Abortion_Followup_Encounter",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "171207006",
+          "display": "Depression screening"
+        }
+      ],
+      "direct_transition": "End_Abortion_Followup_Encounter"
+    },
+    "End_Abortion_Followup_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Abortion_Ends"
     },
     "Normal_Pregnancy_Completion": {
       "type": "Counter",
@@ -25495,11 +26622,98 @@ export default {"examplitis":{
     },
     "End_Birth_Encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "Pregnancy_Ends"
+      "direct_transition": "Normal_Pregnancy_Ends"
     },
-    "Pregnancy_Ends": {
+    "Normal_Pregnancy_Ends": {
       "type": "ConditionEnd",
       "condition_onset": "Become_Pregnant",
+      "direct_transition": "Six_Weeks_After_Birth"
+    },
+    "Miscarriage_Ends": {
+      "type": "ConditionEnd",
+      "condition_onset": "Become_Pregnant",
+      "direct_transition": "Unset_Pregnant_Attribute"
+    },
+    "Abortion_Ends": {
+      "type": "ConditionEnd",
+      "condition_onset": "Become_Pregnant",
+      "direct_transition": "Unset_Pregnant_Attribute"
+    },
+    "Six_Weeks_After_Birth": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 6,
+        "unit": "weeks"
+      },
+      "direct_transition": "Postnatal_Visit"
+    },
+    "Postnatal_Visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "169762003",
+          "display": "Postnatal visit"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "RH_NEG",
+            "operator": "==",
+            "value": true
+          },
+          "transition": "RhoD_Immune_Globulin_Post_Birth"
+        },
+        {
+          "transition": "Physical_Exam_Post_Birth"
+        }
+      ]
+    },
+    "RhoD_Immune_Globulin_Post_Birth": {
+      "type": "Procedure",
+      "target_encounter": "Postnatal_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "51116004",
+          "display": "RhD passive immunization"
+        }
+      ],
+      "direct_transition": "Physical_Exam_Post_Birth"
+    },
+    "Physical_Exam_Post_Birth": {
+      "type": "Procedure",
+      "target_encounter": "Postnatal_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "5880005",
+          "display": "Physical examination following birth"
+        }
+      ],
+      "direct_transition": "Depression_Screening_Post_Birth"
+    },
+    "Depression_Screening_Post_Birth": {
+      "type": "Procedure",
+      "target_encounter": "Postnatal_Visit",
+      "reason": "Become_Pregnant",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "171207006",
+          "display": "Depression screening"
+        }
+      ],
+      "direct_transition": "End_Postnatal_Visit"
+    },
+    "End_Postnatal_Visit": {
+      "type": "EncounterEnd",
       "direct_transition": "Unset_Pregnant_Attribute"
     },
     "Unset_Pregnant_Attribute": {
@@ -27262,7 +28476,7 @@ export default {"examplitis":{
     "Chronic_Sinusitis_Followup": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "Inflammation_Starts",
+      "reason": "Sinusitis Condition",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -28975,4 +30189,5 @@ export default {"examplitis":{
       "direct_transition": "Wellness_Encounter"
     }
   }
-}};
+}
+,};
