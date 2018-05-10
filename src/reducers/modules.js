@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { StateTemplates, TransitionTemplates, StructureTemplates } from '../templates/Templates';
-import { normalizeType } from '../utils/normalizeType';
+import { normalizeType, cleanString } from '../utils/stringUtils';
 
 // updates the module in-place with fixed state refences
 // if newName is null, then delete all references instead

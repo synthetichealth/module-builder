@@ -12,6 +12,7 @@ import ModuleGraph from '../components/graph/ModuleGraph';
 import LoadModule from '../components/menu/LoadModule';
 import Download from '../components/menu/Download';
 import { extractStates } from '../transforms/Module';
+import {cleanString } from '../utils/stringUtils';
 
 import { findAvailableKey, createSafeKeyFromName } from '../utils/keys';
 import { StateTemplates, ModuleTemplates } from '../templates/Templates';
@@ -62,6 +63,7 @@ class Editor extends Component {
 
   renameNode = (targetModuleKey, targetNode) => {
     return (newName) => {
+      newName.name = cleanString(newName.name, {'.': '', '\\': '', '|': ''});
       this.props.renameNode(targetModuleKey, targetNode, newName);
     }
   }
