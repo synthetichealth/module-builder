@@ -1,4 +1,49 @@
-export const TypeTemplates = {
+import _ from 'lodash';
+
+// do not allow direct access because it is easy to forget to clone these templates
+export function getTemplate(path){
+
+
+  const parsedPath = path.split('.')
+  const template = parsedPath.shift();
+  const reducedPath = parsedPath.join('.')
+
+  let typeVar = null;
+  switch(template){
+    case 'Type':
+      typeVar = TypeTemplates;
+      break;
+
+    case 'Attribute':
+      typeVar = TypeTemplates;
+      break;
+
+    case 'Transition':
+      typeVar = TransitionTemplates;
+      break;
+
+    case 'State':
+      typeVar = StateTemplates;
+      break;
+
+    case 'Structure':
+      typeVar = StructureTemplates;
+      break;
+
+    case 'Module':
+      typeVar = ModuleTemplates;
+      break;
+  }
+
+
+  if(reducedPath.length == 0){
+    return typeVar
+  }
+
+  return _.cloneDeep(_.get(typeVar, reducedPath));
+}
+
+const TypeTemplates = {
   Code: {
     Snomed: {
       system: "SNOMED-CT",
@@ -216,7 +261,7 @@ export const TypeTemplates = {
   }
 }
 
-export const AttributeTemplates = {
+const AttributeTemplates = {
   Exact: {
     quantity: 1
   },
@@ -281,14 +326,14 @@ export const AttributeTemplates = {
 }
 
 
-export const TransitionTemplates = {
+const TransitionTemplates = {
   Direct: 'Initial',
   Conditional: [{transition: 'Initial', condition: {...TypeTemplates.Condition.Age}}],
   Distributed: [{transition: 'Initial', distribution: 1.0}],
   Complex: [{condition: {...TypeTemplates.Condition.Age}, distributions: [{transition: 'Initial', distribution: 1.0}]}]
 }
 
-export const StateTemplates = {
+const StateTemplates = {
   Initial: {
     type: "Initial",
   },
@@ -429,7 +474,7 @@ export const StateTemplates = {
   }
 }
 
-export const StructureTemplates = {
+const StructureTemplates = {
   CheckYearly: {
     CheckYearly: {...StateTemplates.Delay, exact: {...TypeTemplates.exact, quantity: 1, unit: 'years'},
       conditional_transition: [{transition: 'HasCondition', condition: {...TypeTemplates.Condition.ActiveCondition}},{transition: 'CheckYearly'}]},
@@ -507,7 +552,7 @@ export const StructureTemplates = {
   }
 }
 
-export const ModuleTemplates = {
+const ModuleTemplates = {
   Blank: {
     name: "My Module",
     remarks: ["A blank module"],

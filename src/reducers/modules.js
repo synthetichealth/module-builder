@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { StateTemplates, TransitionTemplates, StructureTemplates } from '../templates/Templates';
+import { getTemplate } from '../templates/Templates';
 import { normalizeType, cleanString } from '../utils/stringUtils';
 
 // updates the module in-place with fixed state refences
@@ -176,7 +176,7 @@ export default (state = initialState, action) => {
 
     case 'ADD_STRUCTURE':
       newState = {...state};
-      newState[action.data.currentModuleKey].states = {...newState[action.data.currentModuleKey].states, ...StructureTemplates[action.data.structureName]};
+      newState[action.data.currentModuleKey].states = {...newState[action.data.currentModuleKey].states, ...getTemplate(`Structure.${action.data.structureName}`)};
       return newState
 
     case 'ADD_TRANSITION':
@@ -199,7 +199,7 @@ export default (state = initialState, action) => {
       for (var pathIndex in paths) {
         delete newState[action.data.currentModuleKey].states[action.data.nodeName.name][paths[pathIndex]];
       }
-      newState[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName] = _.clone(TransitionTemplates[action.data.transitionType]);
+      newState[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName] = getTemplate(`Transition.${action.data.transitionType}`);
 
       // Get first of previous transition locations if available
       let transitionTo = null;
@@ -280,9 +280,9 @@ export default (state = initialState, action) => {
       // This line is weird because we need to add the new fields, overwrite any shared fields, then overwrite the type fields
       // TODO figure out how to remove unused fields
       newState[action.data.targetModuleKey].states[action.data.targetNode.name] =
-        { ...StateTemplates[newType],
+        { ...getTemplate(`State.${newType}`),
           ..._.pick(newState[action.data.targetModuleKey].states[action.data.targetNode.name], ['direct_transition', 'conditional_transition', 'distributed_transition', 'complex_transition', 'remarks']),
-          type: StateTemplates[newType].type
+          type: getTemplate(`State.${newType}`).type
         };
       return newState
     default:

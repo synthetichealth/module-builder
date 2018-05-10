@@ -5,7 +5,7 @@ import { RIEInput } from 'riek';
 import _ from 'lodash';
 
 import type { Code as CodeType } from '../../types/Code';
-import { TypeTemplates } from '../../templates/Templates';
+import { getTemplate } from '../../templates/Templates';
 
 type Props = {
   code: CodeType,
@@ -44,12 +44,12 @@ export class Codes extends Component<CodesProps> {
     }
     let system = this.props.system;
     let templates = {
-      "SNOMED-CT": TypeTemplates.Code.Snomed,
-      "LOINC": TypeTemplates.Code.Loinc,
-      "RxNorm": TypeTemplates.Code.RxNorm,
-      "NUBC": TypeTemplates.Code.Nubc,
-      "DICOM-DCM": TypeTemplates.Code.DicomDCM,
-      "DICOM-SOP": TypeTemplates.Code.DicomSOP
+      "SNOMED-CT": getTemplate('Type.Code.Snomed'),
+      "LOINC": getTemplate('Type.Code.Loinc'),
+      "RxNorm": getTemplate('Type.Code.RxNorm'),
+      "NUBC": getTemplate('Type.Code.Nubc'),
+      "DICOM-DCM": getTemplate('Type.Code.DicomDCM'),
+      "DICOM-SOP": getTemplate('Type.Code.DicomSOP')
     };
     return (
       <div>

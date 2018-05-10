@@ -7,7 +7,7 @@ import _ from 'lodash';
 import type { Instance as InstanceType, Series as SeriesType } from '../../types/Attributes';
 
 import { Code } from './Code';
-import { AttributeTemplates } from '../../templates/Templates';
+import { getTemplate } from '../../templates/Templates';
 
 type InstanceProps = {
   title: string,
@@ -55,7 +55,7 @@ export class InstanceList extends Component<InstanceListProps> {
             </div>
           )
         })}
-        <a className='editable-text' onClick={() => this.props.onChange(`[${this.props.instances.length}]`)({val: {id: _.cloneDeep(AttributeTemplates.ImagingStudy.Instance)}})}>+</a>
+        <a className='editable-text' onClick={() => this.props.onChange(`[${this.props.instances.length}]`)({val: {id: getTemplate('Attribute.ImagingStudy.Instance')}})}>+</a>
       </div>
     );
   }
@@ -116,7 +116,7 @@ export class SeriesList extends Component<SeriesListProps> {
             </div>
           )
         })}
-        <a className='editable-text' onClick={() => this.props.onChange(`[${this.props.series.length}]`)({val: {id: _.cloneDeep(AttributeTemplates.ImagingStudy.Series)}})}>+</a>
+        <a className='editable-text' onClick={() => this.props.onChange(`[${this.props.series.length}]`)({val: {id: getTemplate('Attribute.ImagingStudy.Series')}})}>+</a>
       </div>
     );
   }

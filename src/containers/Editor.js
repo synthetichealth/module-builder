@@ -15,7 +15,7 @@ import { extractStates } from '../transforms/Module';
 import {cleanString } from '../utils/stringUtils';
 
 import { findAvailableKey, createSafeKeyFromName } from '../utils/keys';
-import { StateTemplates, ModuleTemplates } from '../templates/Templates';
+import { getTemplate } from '../templates/Templates';
 import { BasicTutorial, EditTutorial } from '../templates/Tutorial';
 
 import './Editor.css';
@@ -81,7 +81,7 @@ class Editor extends Component {
   }
 
   newModule = (takenKeys) => {
-    return (module = _.cloneDeep(ModuleTemplates.Blank)) => {
+    return (module = getTemplate('Module.Blank')) => {
       let key = findAvailableKey(createSafeKeyFromName(module.name), takenKeys);
       this.props.newModule(key, module);
       this.props.push('#' + key)
@@ -91,7 +91,7 @@ class Editor extends Component {
   addNode = (selectedModuleKey, takenKeys) => {
     return () => {
       let key = findAvailableKey(createSafeKeyFromName('New State'), takenKeys);
-      let newState = {...StateTemplates.Simple, direct_transition: key };
+      let newState = {...getTemplate('State.Simple'), direct_transition: key };
       this.props.addNode(selectedModuleKey, key, newState);
     }
   }
