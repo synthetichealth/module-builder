@@ -62,6 +62,7 @@ class Editor extends Component {
 
   renameNode = (targetModuleKey, targetNode) => {
     return (newName) => {
+      newName.name = cleanString(newName.name, {'.': '', '\\': '|'});
       this.props.renameNode(targetModuleKey, targetNode, newName);
     }
   }

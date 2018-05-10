@@ -2,6 +2,8 @@
 import type { Module } from './types/Module';
 import type { State } from './types/State';
 
+import { cleanString } from '../utils/StringUtils';
+
 const STANDARD_COLOR = 'Black';
 /*
 const HIGHLIGHT_COLOR = '#007bff';
@@ -503,11 +505,11 @@ const findTransitions = (obj, ret) => {
 }
 
 const escapeId = (name) => {
-  return name.replace("?","").replace('"',"");
+  return cleanString(name, {'?': '', '"': ""});
 };
 
 const escapeName = (name) => {
-  return name.replace('"','\\"');
+  return  cleanString(name, {'"': '\\'});
 };
 
 const escapeLabel = (label) => {
@@ -519,11 +521,6 @@ const escapeLabel = (label) => {
         "&" : "&amp;",
         };
 
-  const regExp = new RegExp(Object.keys(mapObj).join("|"),"gi");
+  return cleanString(label, mapObj);
 
-  const newlabel =  label.replace(regExp, function(matched){
-    return mapObj[matched];
-  });
-
-  return newlabel;
 }

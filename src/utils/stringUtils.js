@@ -14,3 +14,7 @@ export function normalizeType(value){
   }
   return value
 }
+
+export function cleanString(value, mapObj){
+  return Object.keys(mapObj).reduce( (acc, cur) => acc.split(cur).join(mapObj[cur]), value)
+}
