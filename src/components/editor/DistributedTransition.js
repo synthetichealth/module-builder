@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 
 import type { DistributedTransition as DistributedTransitionType } from '../../types/Transition';
-import { AttributeTemplates, TransitionTemplates } from '../../templates/Templates';
+import { getTemplate } from '../../templates/Templates';
 import type { State } from '../../types/State';
 import './Transition.css';
 
@@ -41,7 +41,7 @@ class DistributedTransition extends Component<Props> {
             <a className='editable-text delete-button' onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
           </div>
         })}
-        <a className='editable-text add-button' onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: _.cloneDeep(TransitionTemplates.Distributed[0])}})}>+</a>
+        <a className='editable-text add-button' onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: getTemplate('Transition.Distributed[0]')}})}>+</a>
         <br/>
         {this.renderWarning()}
       </label>
@@ -56,7 +56,7 @@ class DistributedTransition extends Component<Props> {
           <br />
           Weight: <RIENumber className='editable-text' value={distribution.default} propName='default' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`[${index}].distribution.default`)} />
           <br />
-          <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: {id: _.cloneDeep(AttributeTemplates.UnnamedDistribution)}})}>Change to Unnamed Distribution</a>
+          <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: {id: getTemplate('Attribute.UnnamedDistribution')}})}>Change to Unnamed Distribution</a>
         </label>
       );
     } else {
@@ -64,7 +64,7 @@ class DistributedTransition extends Component<Props> {
         <label> Weight:
           <RIENumber className='editable-text' value={distribution} propName='distribution' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`[${index}].distribution`)} />
           <br />
-          <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: {id: _.cloneDeep(AttributeTemplates.NamedDistribution)}})}>Change to Named Distribution</a>
+          <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: {id: getTemplate('Attribute.NamedDistribution')}})}>Change to Named Distribution</a>
         </label>
       );
     }

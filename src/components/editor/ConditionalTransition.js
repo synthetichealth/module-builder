@@ -4,7 +4,7 @@ import { RIESelect } from 'riek';
 import _ from 'lodash';
 
 import type { ConditionalTransition as ConditionalTransitionType } from '../../types/Transition';
-import { TransitionTemplates } from '../../templates/Templates';
+import { getTemplate } from '../../templates/Templates';
 import ConditionalEditor from './Conditional';
 import type { State } from '../../types/State';
 import './Transition.css';
@@ -43,7 +43,7 @@ class ConditionalTransition extends Component<Props> {
 
           </div>
         })}
-        <a className='editable-text add-button'onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: _.cloneDeep(TransitionTemplates.Conditional[0])}})}>+</a>
+        <a className='editable-text add-button' onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: getTemplate('Transition.Conditional[0]')}})}>+</a>
 
       </label>
     );

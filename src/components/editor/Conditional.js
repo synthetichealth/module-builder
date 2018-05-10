@@ -5,7 +5,7 @@ import _ from 'lodash';
 import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
 import type { State } from '../../types/State';
 import { Codes } from './Code';
-import { AttributeTemplates, TypeTemplates } from '../../templates/Templates';
+import { getTemplate } from '../../templates/Templates';
 
 type Props = {
   conditional: Conditional,
@@ -83,10 +83,11 @@ class ConditionalEditor extends Component<Props> {
     if (!this.props.conditional) {
       return null;
     }
-    let options = Object.keys(TypeTemplates.Condition).sort().map((k) => {return {id: k, text: k}});
+    let template = getTemplate('Type.Condition');
+    let options = Object.keys(template).sort().map((k) => {return {id: k, text: k}});
     return (
       <div>
-        Condition Type: <RIESelect className='editable-text' propName='condition' value={{id: this.props.conditional.condition_type, text: this.props.conditional.condition_type}} change={(val) => this.props.onChange({condition:{id: TypeTemplates.Condition[val.condition.id]}})} options={options} />
+        Condition Type: <RIESelect className='editable-text' propName='condition' value={{id: this.props.conditional.condition_type, text: this.props.conditional.condition_type}} change={(val) => this.props.onChange({condition:{id: template[val.condition.id]}})} options={options} />
         <br/>
         {this.renderConditionalType()}
       </div>
@@ -208,7 +209,7 @@ class Observation extends Component<Props> {
 
     return (
       <label> Observation:
-        <Codes system={TypeTemplates.Code.Loinc.system} codes={conditional.codes} onChange={this.props.onChange('codes')} />
+        <Codes system={getTemplate('Type.Code.Loinc.system')} codes={conditional.codes} onChange={this.props.onChange('codes')} />
         <RIESelect className='editable-text' value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
         <RIENumber className='editable-text' value={conditional.value} propName='value' change={this.props.onChange('value')} />
       </label>
@@ -242,7 +243,7 @@ class ActiveCondition extends Component<Props> {
 
     return (
       <label> Active Condition:
-        <Codes system={TypeTemplates.Code.Snomed.system} codes={conditional.codes} onChange={this.props.onChange('codes')} />
+        <Codes system={getTemplate('Type.Code.Snomed.system')} codes={conditional.codes} onChange={this.props.onChange('codes')} />
       </label>
     );
   }
@@ -255,7 +256,7 @@ class ActiveMedication extends Component<Props> {
     let conditional = ((this.props.conditional: any): ActiveMedicationConditional);
     return (
       <label> ActiveMedication:
-      <Codes system={TypeTemplates.Code.RxNorm.system} codes={conditional.codes} onChange={this.props.onChange('codes')} />
+      <Codes system={getTemplate('Type.Code.RxNorm.system')} codes={conditional.codes} onChange={this.props.onChange('codes')} />
       </label>
     );
   }
@@ -268,7 +269,7 @@ class ActiveCarePlan extends Component<Props> {
     let conditional = ((this.props.conditional: any): ActiveCarePlanConditional);
     return (
       <label> ActiveCarePlan:
-      <Codes system={TypeTemplates.Code.Snomed.system} codes={conditional.codes} onChange={this.props.onChange('codes')} />
+      <Codes system={getTemplate('Type.Code.Snomed.system')} codes={conditional.codes} onChange={this.props.onChange('codes')} />
       </label>
     );
   }
@@ -297,7 +298,7 @@ class PriorState extends Component<Props> {
     if (conditional.since == null) {
       return (
         <label>
-          <a className='editable-text' onClick={() => this.props.onChange('since')({val: {id: _.cloneDeep(AttributeTemplates.Since)}})}>Add Since</a>
+          <a className='editable-text' onClick={() => this.props.onChange('since')({val: {id: getTemplate('Attribute.Since')}})}>Add Since</a>
         </label>
       );
     } else {
@@ -317,7 +318,7 @@ class PriorState extends Component<Props> {
     if (conditional.within == null) {
       return (
         <label>
-          <a className='editable-text' onClick={() => this.props.onChange('within')({val: {id: _.cloneDeep(AttributeTemplates.Within)}})}>Add Within</a>
+          <a className='editable-text' onClick={() => this.props.onChange('within')({val: {id: getTemplate('Attribute.Within')}})}>Add Within</a>
           <br />
         </label>
       );

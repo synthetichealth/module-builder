@@ -7,7 +7,7 @@ import _ from 'lodash';
 import type { Goal as GoalType } from '../../types/Attributes';
 import { Codes } from './Code';
 import { StringsEditor } from './String';
-import { AttributeTemplates } from '../../templates/Templates';
+import { getTemplate } from '../../templates/Templates';
 
 type Props = {
   goal: GoalType,
@@ -47,7 +47,7 @@ export class Goal extends Component<Props> {
     if (!goal.observation) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('observation')({val: {id: _.cloneDeep(AttributeTemplates.Observation)}})}>Add Observation</a>
+          <a className='editable-text' onClick={() => this.props.onChange('observation')({val: {id: getTemplate('Attribute.Observation')}})}>Add Observation</a>
           <br />
         </div>
       );
@@ -115,7 +115,7 @@ export class Goals extends Component<GoalsProps> {
             </div>
           )
         })}
-        <a className='editable-text' onClick={() => this.props.onChange(`[${this.props.goals.length}]`)({val: {id: _.cloneDeep(AttributeTemplates.Goal)}})}>+</a>
+        <a className='editable-text' onClick={() => this.props.onChange(`[${this.props.goals.length}]`)({val: {id: getTemplate('Attribute.Goal')}})}>+</a>
       </div>
     );
   }

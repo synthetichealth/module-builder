@@ -4,7 +4,7 @@ import { RIESelect } from 'riek';
 import _ from 'lodash';
 
 import type { ConditionalTransition as ConditionalTransitionType } from '../../types/Transition';
-import { TransitionTemplates } from '../../templates/Templates';
+import { getTemplate } from '../../templates/Templates';
 import ConditionalEditor from './Conditional';
 import DistributedTransitionEditor from './DistributedTransition';
 import DirectTransitionEditor from './DirectTransition';
@@ -47,7 +47,7 @@ class ComplexTransition extends Component<Props> {
 
           </div>
         })}
-        <a className='editable-text add-button' onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: _.cloneDeep(TransitionTemplates.Complex[0])}})}>+</a>
+        <a className='editable-text add-button' onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: getTemplate('Transition.Complex[0]')}})}>+</a>
 
       </label>
     );

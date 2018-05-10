@@ -10,7 +10,7 @@ import { Goals } from './Goal';
 import { SeriesList } from './ImagingStudyAttributes';
 import ConditionalEditor from './Conditional';
 import Transition from './Transition';
-import { AttributeTemplates, TypeTemplates, StateTemplates } from '../../templates/Templates';
+import { getTemplate } from '../../templates/Templates';
 import { BasicTutorial, EditTutorial } from '../../templates/Tutorial';
 
 
@@ -111,7 +111,7 @@ class StateEditor extends Component<Props> {
       return null;
     }
 
-    let typeOptions = Object.keys(StateTemplates).sort().map((k) => {return {id: k, text: k}});
+    let typeOptions = Object.keys(getTemplate('State')).sort().map((k) => {return {id: k, text: k}});
     const transitionOptions = [
       {id:"None" ,text:"None"},
       {id:"Direct" ,text:"Direct"},
@@ -225,7 +225,7 @@ class Delay extends Component<Props> {
           <br />
           Exact Unit: <RIESelect className='editable-text' value={{id: state.exact.unit, text: state.exact.unit}} propName="unit" change={this.props.onChange('exact.unit')} options={unitOfTimeOptions} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: _.cloneDeep(AttributeTemplates.RangeWithUnit)}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Range</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.RangeWithUnit')}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Range</a>
           <br />
         </div>
       );
@@ -239,7 +239,7 @@ class Delay extends Component<Props> {
           <br />
           Range Unit: <RIESelect className='editable-text' value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: _.cloneDeep(AttributeTemplates.ExactWithUnit)}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.ExactWithUnit')}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
           <br />
         </div>
       );
@@ -406,7 +406,7 @@ class EncounterEnd extends Component<Props> {
     if (!state.discharge_disposition) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('discharge_disposition')({val: {id: _.cloneDeep(TypeTemplates.Code.Nubc)}})}>Add Discharge Disposition</a>
+          <a className='editable-text' onClick={() => this.props.onChange('discharge_disposition')({val: {id: getTemplate('Type.Code.Nubc')}})}>Add Discharge Disposition</a>
           <br />
         </div>
       );
@@ -521,7 +521,7 @@ class ConditionEnd extends Component<Props> {
     if (!state.codes) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [_.cloneDeep(TypeTemplates.Code.Snomed)]}})}>Add Codes</a>
+          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
           <br />
         </div>
       );
@@ -638,7 +638,7 @@ class AllergyEnd extends Component<Props> {
     if (!state.codes) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [_.cloneDeep(TypeTemplates.Code.Snomed)]}})}>Add Codes</a>
+          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
           <br />
         </div>
       );
@@ -721,7 +721,7 @@ class MedicationOrder extends Component<Props> {
     if (!state.prescription) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('prescription')({val: {id: _.cloneDeep(AttributeTemplates.Prescription)}})}>Add Prescription</a>
+          <a className='editable-text' onClick={() => this.props.onChange('prescription')({val: {id: getTemplate('Attribute.Prescription')}})}>Add Prescription</a>
           <br />
         </div>
       );
@@ -819,7 +819,7 @@ class MedicationOrder extends Component<Props> {
     if (!state.prescription.instructions) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('prescription.instructions')({val: {id: [_.cloneDeep(TypeTemplates.Code.Snomed)]}})}>Add Instructions</a>
+          <a className='editable-text' onClick={() => this.props.onChange('prescription.instructions')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Instructions</a>
           <br />
         </div>
       );
@@ -896,7 +896,7 @@ class MedicationEnd extends Component<Props> {
     if (!state.codes) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [_.cloneDeep(TypeTemplates.Code.RxNorm)]}})}>Add Codes</a>
+          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.RxNorm')]}})}>Add Codes</a>
           <br />
         </div>
       );
@@ -980,7 +980,7 @@ class CarePlanStart extends Component<Props> {
     if (!state.activities) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('activities')({val: {id: [_.cloneDeep(TypeTemplates.Code.Snomed)]}})}>Add Activities</a>
+          <a className='editable-text' onClick={() => this.props.onChange('activities')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Activities</a>
           <br />
         </div>
       );
@@ -1002,7 +1002,7 @@ class CarePlanStart extends Component<Props> {
     if (!state.goals) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('goals')({val: {id: [_.cloneDeep(AttributeTemplates.Goal)]}})}>Add Goals</a>
+          <a className='editable-text' onClick={() => this.props.onChange('goals')({val: {id: [getTemplate('Attribute.Goal')]}})}>Add Goals</a>
           <br />
         </div>
       );
@@ -1079,7 +1079,7 @@ class CarePlanEnd extends Component<Props> {
     if (!state.codes) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [_.cloneDeep(TypeTemplates.Code.Snomed)]}})}>Add Codes</a>
+          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
           <br />
         </div>
       );
@@ -1177,7 +1177,7 @@ class VitalSign extends Component<Props> {
         <div className='section'>
           Exact Quantity: <RIENumber className='editable-text' value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: _.cloneDeep(AttributeTemplates.Range)}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Range</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Range</a>
           <br />
         </div>
       );
@@ -1189,7 +1189,7 @@ class VitalSign extends Component<Props> {
           <br />
           Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: _.cloneDeep(AttributeTemplates.Exact)}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
           <br />
         </div>
       );
@@ -1236,7 +1236,7 @@ class Observation extends Component<Props> {
         <div className='section'>
           Exact Quantity: <RIENumber className='editable-text' value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: _.cloneDeep(AttributeTemplates.Range)}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Range</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Range</a>
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('attribute')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Attribute</a>
           <br />
@@ -1251,7 +1251,7 @@ class Observation extends Component<Props> {
           <br />
           Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: _.cloneDeep(AttributeTemplates.Exact)}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Exact</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Exact</a>
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('attribute')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Attribute</a>
           <br />
@@ -1264,9 +1264,9 @@ class Observation extends Component<Props> {
         <div className='section'>
           Attribute: <RIEInput className='editable-text' value={state.attribute} propName={'attribute'}  change={this.props.onChange('attribute')} />
           <br/>
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: _.cloneDeep(AttributeTemplates.Exact)}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Exact</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Exact</a>
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: _.cloneDeep(AttributeTemplates.Range)}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Range</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Range</a>
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('vital_sign')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}})}}>Change to Vital Sign</a>
           <br />
@@ -1277,9 +1277,9 @@ class Observation extends Component<Props> {
         <div className='section'>
           Vital Sign: <RIEInput className='editable-text' value={state.vital_sign} propName={'vital_sign'}  change={this.props.onChange('vital_sign')} />
           <br/>
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: _.cloneDeep(AttributeTemplates.Exact)}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Exact</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Exact</a>
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: _.cloneDeep(AttributeTemplates.Range)}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Range</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Range</a>
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('attribute')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Attribute</a>
           <br />
@@ -1404,7 +1404,7 @@ class Symptom extends Component<Props> {
         <div className='section'>
           Exact Quantity: <RIENumber className='editable-text' value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: _.cloneDeep(AttributeTemplates.Range)}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Range</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Range</a>
           <br />
         </div>
       );
@@ -1416,7 +1416,7 @@ class Symptom extends Component<Props> {
           <br />
           Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: _.cloneDeep(AttributeTemplates.Exact)}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
           <br />
         </div>
       );
@@ -1448,7 +1448,7 @@ class Death extends Component<Props> {
           <br />
           Exact Unit: <RIESelect className='editable-text' value={{id: state.exact.unit, text: state.exact.unit}} propName="unit" change={this.props.onChange('exact.unit')} options={unitOfTimeOptions} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: _.cloneDeep(AttributeTemplates.RangeWithUnit)}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Range</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.RangeWithUnit')}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Range</a>
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: null}}); this.props.onChange('exact')({val: {id: null}})}}>Remove Exact/Range</a>
           <br />
@@ -1464,7 +1464,7 @@ class Death extends Component<Props> {
           <br />
           Range Unit: <RIESelect className='editable-text' value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: _.cloneDeep(AttributeTemplates.ExactWithUnit)}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.ExactWithUnit')}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: null}}); this.props.onChange('exact')({val: {id: null}})}}>Remove Exact/Range</a>
           <br />
@@ -1473,7 +1473,7 @@ class Death extends Component<Props> {
     } else {
       return (
         <div>
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: _.cloneDeep(AttributeTemplates.ExactWithUnit)}}); this.props.onChange('range')({val: {id: null}})}}>Add Exact/Range</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.ExactWithUnit')}}); this.props.onChange('range')({val: {id: null}})}}>Add Exact/Range</a>
           <br />
         </div>
       );
@@ -1485,7 +1485,7 @@ class Death extends Component<Props> {
     if (!state.codes) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [_.cloneDeep(TypeTemplates.Code.Snomed)]}})}>Add Codes</a>
+          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
           <br />
         </div>
       );
