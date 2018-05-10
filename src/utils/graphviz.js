@@ -2,7 +2,7 @@
 import type { Module } from './types/Module';
 import type { State } from './types/State';
 
-import { cleanString } from '../utils/StringUtils';
+import { cleanString } from '../utils/stringUtils';
 
 const STANDARD_COLOR = 'Black';
 /*
