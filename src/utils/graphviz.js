@@ -46,7 +46,7 @@ const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) 
     state['name'] = name
 
     let node = {
-      id: 'node_' + name.replace('?', ''),
+      id: 'node_' + escapeId(name),
       shape: 'record',
       style: 'rounded,filled',
       fillcolor: 'White',
@@ -73,9 +73,11 @@ const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) 
       node['label'] = `{ ${name} | { ${state['type']} | ${details} } }`
     }
 
+    node['label'] = escapeLabel(node['label']);
+
     let params = Object.keys(node).map((key) => `${key} = "${node[key]}"`).join(", ");
 
-    return `"${name}" [${params};]`
+    return `"${escapeName(name)}" [${params};]`
 
   }).join("\n");
 
@@ -86,6 +88,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
   return Object.keys(module.states).map( name => {
 
     let state = module.states[name]
+    let escapedName = escapeName(name);
 
     let className='';
 
@@ -102,7 +105,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
         className='';
       }
       if(module.states[state.direct_transition]){
-        return `  "${name}" -> "${module.states[state.direct_transition].name}" [class = "transition ${className}"];\n`
+        return `  "${escapedName}" -> "${escapeName(module.states[state.direct_transition].name)}" [class = "transition ${className}"];\n`
       } else {
         console.log(`NO SUCH NODE TO TRANSITION TO: ${state.direct_transition} FROM ${name}`);
       }
@@ -125,7 +128,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
           if(selectedState && t.transition === selectedState.name && selectedState.name !== name){
             transitionClassName = '';
           }
-          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${distLabel}", class = "transition ${transitionClassName}"];\n`
+          out_transitions += `  "${escapedName}" -> "${escapeName(module.states[t.transition].name)}" [label = "${distLabel}", class = "transition ${transitionClassName}"];\n`
         } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition} FROM ${name}`);
         }
@@ -140,7 +143,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
           if(selectedState && t.transition === selectedState.name){
             transitionClassName = ''
           }
-          out_transitions += `  "${name}" -> "${module.states[t.transition].name}" [label = "${i+1}. ${cnd}", class = "transition ${transitionClassName}"];\n`
+          out_transitions += `  "${escapedName}" -> "${escapeName(module.states[t.transition].name)}" [label = "${i+1}. ${cnd}", class = "transition ${transitionClassName}"];\n`
         } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition} FROM ${name}\n`);
         }
@@ -154,7 +157,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
         let cnd = t.condition !== undefined ? logicDetails(t['condition']) : 'else'
         if(t.transition !== undefined){
           if(module.states[t.transition]){
-            let nodes = `  "${name}" -> "${t.transition}"`
+            let nodes = `  "${escapedName}" -> "${t.transition}"`
             if(selectedState && t.transition === selectedState.name){
               nodeHighlighted[nodes] = 'standard'
             }
@@ -172,7 +175,7 @@ const transitionsAsDOT = (module: Module, selectedState: State) => {
           t.distributions.forEach( dist => {
             if(module.states[dist.transition]){
               let pct = dist.distribution * 100
-              let nodes = `  "${name}" -> "${dist.transition}"`
+              let nodes = `  "${escapedName}" -> "${dist.transition}"`
               if(selectedState && dist.transition === selectedState.name){
                 nodeHighlighted[nodes] = 'standard'
               }
@@ -497,4 +500,30 @@ const findTransitions = (obj, ret) => {
     }
   }
   return ret;
+}
+
+const escapeId = (name) => {
+  return name.replace("?","").replace('"',"");
+};
+
+const escapeName = (name) => {
+  return name.replace('"','\\"');
+};
+
+const escapeLabel = (label) => {
+
+  const mapObj = {
+        "<" : "&lt;",
+        ">" : "&gt;",
+        '"' : '\\"',
+        "&" : "&amp;",
+        };
+
+  const regExp = new RegExp(Object.keys(mapObj).join("|"),"gi");
+
+  const newlabel =  label.replace(regExp, function(matched){
+    return mapObj[matched];
+  });
+
+  return newlabel;
 }
