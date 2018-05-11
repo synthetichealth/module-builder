@@ -514,11 +514,12 @@ const escapeName = (name) => {
 
 const escapeLabel = (label) => {
 
+  // note: order matters; in practice order is retained in browsers but we may want to make an array
   const mapObj = {
+        "&" : "&amp;",
         "<" : "&lt;",
         ">" : "&gt;",
         '"' : '\\"',
-        "&" : "&amp;",
         };
 
   return cleanString(label, mapObj);
