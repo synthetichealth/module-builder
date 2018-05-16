@@ -3,7 +3,6 @@ import _ from 'lodash';
 // do not allow direct access because it is easy to forget to clone these templates
 export function getTemplate(path){
 
-
   const parsedPath = path.split('.')
   const template = parsedPath.shift();
   const reducedPath = parsedPath.join('.')
@@ -15,7 +14,7 @@ export function getTemplate(path){
       break;
 
     case 'Attribute':
-      typeVar = TypeTemplates;
+      typeVar = AttributeTemplates;
       break;
 
     case 'Transition':
