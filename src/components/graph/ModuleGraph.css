@@ -21,12 +21,12 @@
 
 .node.node-highlighted path{
   stroke: #336699;
-  stroke-width: 2px;
+  /* stroke-width: 2px; */
 }
 
 .node.node-highlighted polyline{
-  stroke: #336699;
-  stroke-width: 2px;
+  stroke: #003366;
+  /* stroke-width: 2px; */
 }
 
 .node.node-muted text{
