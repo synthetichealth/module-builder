@@ -16,7 +16,7 @@
 
 .node.node-highlighted text{
   fill: #336699;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .node.node-highlighted path{
@@ -60,7 +60,7 @@
 
 .transition.transition-highlighted text {
   fill: #336699;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .transition.transition-muted path {
