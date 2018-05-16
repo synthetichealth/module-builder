@@ -52,6 +52,16 @@ export class Goal extends Component<Props> {
         </div>
       );
     } else {
+      let goalObservationValue = (
+        <div>
+          Goal Observation Value: <RIENumber className='editable-text' value={goal.observation.value} propName={'value'} change={this.props.onChange('observation.value')} />
+        </div>
+      );
+
+      if(goal.observation.operator === 'is nil' || goal.observation.operator === 'is not nil'){
+        goalObservationValue = <div/>
+      }
+      
       return (
         <div className='section'>
           Observation
@@ -63,8 +73,7 @@ export class Goal extends Component<Props> {
             <br />
           </div>
           Goal Observation Operator: <RIESelect className='editable-text' value={{id: goal.observation.operator, text: goal.observation.operator}} propName={'operator'} change={this.props.onChange('observation.operator')} options={options} />
-          <br/>
-          Goal Observation Value: <RIENumber className='editable-text' value={goal.observation.value} propName={'value'} change={this.props.onChange('observation.value')} />
+          {goalObservationValue}
           <br/>
           <a className='editable-text' onClick={() => this.props.onChange('observation')({val: {id: null}})}>Remove Observation</a>
           <br/>

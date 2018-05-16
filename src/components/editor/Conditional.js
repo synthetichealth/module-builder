@@ -207,11 +207,19 @@ class Observation extends Component<Props> {
     let conditional = ((this.props.conditional: any): ObservationConditional);
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}, {id: "is nil", text: "is nil"}, {id: "is not nil", text: "is not nil"}];
 
+    let valueInput = <div/>
+
+    // It appears that conditional is inconsistent, sometimes values are in ids
+    // This should be tracked down
+    if(conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){ 
+      valueInput = <RIEInput className='editable-text' value={conditional.value} propName='value' change={this.props.onChange('value')} />
+    }
+
     return (
       <label> Observation:
         <Codes system={getTemplate('Type.Code.Loinc.system')} codes={conditional.codes} onChange={this.props.onChange('codes')} />
         <RIESelect className='editable-text' value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
-        <RIENumber className='editable-text' value={conditional.value} propName='value' change={this.props.onChange('value')} />
+        {valueInput}
       </label>
     );
   }
@@ -342,15 +350,25 @@ class Attribute extends Component<Props> {
   render() {
     let conditional = ((this.props.conditional: any): AttributeConditional);
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}, {id: "is nil", text: "is nil"}, {id: "is not nil", text: "is not nil"}];
+
     let val = conditional.value;
     if(typeof val === 'boolean'){
       val = String(val);
     }
+
+    let valueInput = <div/>
+
+    // It appears that conditional is inconsistent, sometimes values are in ids
+    // This should be tracked down
+    if(conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){ 
+      valueInput = <RIEInput className='editable-text' value={val||0} propName='value' change={this.props.onChange('value')} />
+    }
+
     return (
       <label>
         <RIEInput className='editable-text' value={conditional.attribute} propName="attribute" change={this.props.onChange('attribute')} />
         <RIESelect className='editable-text' value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
-        <RIEInput className='editable-text' value={val||0} propName='value' change={this.props.onChange('value')} />
+        {valueInput}
       </label>
     );
   }
