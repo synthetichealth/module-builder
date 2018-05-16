@@ -378,7 +378,7 @@ const stateDescription = (state) =>{
       } else if(goal['observation']) {
         let logic = goal['observation']
         let obs = findReferencedType(logic)
-        details = details + `Observation ${obs} \\${logic['operator']} ${logic['value']}\\l`
+        details = details + `Observation ${obs} \\${logic['operator']}${leaveUndefinedBlank(logic['value'])}\\l`
       }
     })
   }
@@ -442,10 +442,10 @@ const logicDetails = logic => {
       }
       return `${prior_description} \\l`
     case 'Attribute':
-      return `Attribute: '${logic['attribute']}' \\${logic['operator']} ${logic['value']}\\l`
+      return `Attribute: '${logic['attribute']}' \\${logic['operator']}${leaveUndefinedBlank(logic['value'])}\\l`
     case 'Observation':
       let obs = findReferencedType(logic)
-      return `Observation ${obs} \\${logic['operator']} ${logic['value']}\\l`
+      return `Observation ${obs} \\${logic['operator']}${leaveUndefinedBlank(logic['value'])}\\l`
     case 'Vital Sign':
       return `Vital Sign ${logic['vital_sign']} \\${logic['operator']} ${logic['value']}\\l`
     case 'Active Condition':
@@ -502,6 +502,14 @@ const findTransitions = (obj, ret) => {
     }
   }
   return ret;
+}
+
+const leaveUndefinedBlank = (value) => {
+  if(value === undefined){
+    return '';
+  } else {
+    return ' ' + value;
+  }
 }
 
 const escapeId = (name) => {

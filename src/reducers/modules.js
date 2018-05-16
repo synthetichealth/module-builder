@@ -147,8 +147,28 @@ export default (state = initialState, action) => {
         value = value.id;
       }
       newState = {...state};
-      if(value) {
+      if(value !== null && value !== undefined) {
         _.set(newState, path, normalizeType(value));
+
+        // FIX DEPENDENT THINGS
+        let splitPath = []
+        if(Array.isArray(path)){
+          splitPath = path.join('.').split('.')
+        } else {
+          splitPath = path.split('.')
+        }
+
+        // If change operator on attribute, clean up value if needed
+        if(splitPath[splitPath.length-1] === 'operator'){
+          const parent = _.get(newState, splitPath.slice(0,-1).join('.'));
+          if((parent.operator === 'is nil' || parent.operator === 'is not nil')){
+            _.unset(newState, splitPath.slice(0,-1).join('.') + '.value')
+          } else {
+            if(parent.operator.value === undefined){
+              _.set(newState, splitPath.slice(0,-1).join('.') + '.value', 0)
+            }
+          }
+        }
       }
       else{
         _.unset(newState, path);
@@ -170,6 +190,7 @@ export default (state = initialState, action) => {
           let stateName = splitPath[2]
           fixStateReferences(newState[splitPath[0]], stateName, null)
         }
+
       }
 
       return {...newState}
