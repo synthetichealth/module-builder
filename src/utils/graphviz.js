@@ -253,7 +253,7 @@ const stateDescription = (state) =>{
       break;
     case 'SetAttribute':
       let v = state['value']
-      details = `Set '${state["attribute"]}' = ${!v ? 'nil' : v}`
+      details = `Set '${state["attribute"]}' = ${(v === undefined || v === null || v === "") ? 'nil' : v}`
       break;
     case 'Symptom':
       let s = state['symptom']
