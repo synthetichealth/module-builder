@@ -1,7 +1,7 @@
 
 // @flow
 import modulesJSON from '../data/modules';
-import generateDOT from './graphviz';
+import { generateDOT } from './graphviz';
 import Viz from 'viz.js';
 import { expect } from '../helpers/test_helper';
 
