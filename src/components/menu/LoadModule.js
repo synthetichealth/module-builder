@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Dropzone from 'react-dropzone';
 import './LoadModule.css';
 import {generateDOT} from '../../utils/graphviz';
 
@@ -9,17 +10,9 @@ class LoadModule extends Component {
     this.state = {json: '', selectedOption: 'core'}
   }
 
-  onClick = (key) => {
-    return () => {
-      this.setState({...this.state, json: '', selectedOption: 'core'})
-      this.props.push('#' + key);   
-    }
-  }
-
-  onLoadJSON = () => {
-    const json = ''
+  loadModule = (json) => {
     try {
-      let module = JSON.parse(this.state.json)
+      let module = JSON.parse(json)
 
       if(module.name === undefined){
         throw new Error('Module must have a name.')
@@ -38,6 +31,33 @@ class LoadModule extends Component {
     } catch (ex) {
       alert('Error creating module: ' + ex.message);
     }
+
+  }
+
+  onClick = (key) => {
+    return () => {
+      this.setState({...this.state, json: '', selectedOption: 'core'})
+      this.props.push('#' + key);   
+    }
+  }
+
+  onDrop = (files) => {
+
+    files.forEach(file => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.loadModule(reader.result);
+      };
+
+      reader.readAsText(file);
+
+    });
+
+  }
+
+  onLoadJSON = () => {
+    this.loadModule(this.state.json);
   };
 
   onOptionClick = (key) =>{
@@ -116,6 +136,9 @@ class LoadModule extends Component {
                 </button>
               </div>
               <div className="modal-body LoadModule-body">
+                <Dropzone activeClassName='LoadModule-dropzoneActive' className='LoadModule-dropzone' onDrop={this.onDrop.bind(this)}>
+                   Drop files here or click to upload new modules.
+                </Dropzone>
                 <div className='container'>
                   <div className='row'>
                     <div className='col-3 nopadding'>

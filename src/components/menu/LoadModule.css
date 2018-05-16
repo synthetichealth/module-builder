@@ -54,3 +54,22 @@
 .LoadModule-options .selected{
   background-color: #eee;
 }
+
+.LoadModule-dropzone {
+  width: 100%;
+  height: 80px;
+  padding: 25px 10px 10px;
+  text-align: center;
+  border-width: 2px;
+  border-color: rgb(102, 102, 102);
+  border-style: dashed;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.LoadModule-dropzoneActive {
+  border-color: #336699;
+  background-color: #dceaef;
+  color: #336699;
+}
