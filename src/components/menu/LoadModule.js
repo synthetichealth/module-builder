@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './LoadModule.css';
-import generateDOT from '../../utils/graphviz';
+import {generateDOT} from '../../utils/graphviz';
 
 class LoadModule extends Component {
 
