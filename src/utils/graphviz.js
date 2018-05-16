@@ -10,7 +10,7 @@ const HIGHLIGHT_COLOR = '#007bff';
 const MUTED_COLOR = '#CCCCCC'
 */
 
-export default function generateDOT(module: Module, selectedState: State) {
+export function generateDOT(module: Module, selectedState: State) {
 
   let relatedStates = {};
 
@@ -533,3 +533,18 @@ const escapeLabel = (label) => {
   return cleanString(label, mapObj);
 
 }
+
+export const svgDefs = `<defs>
+
+  <filter id="outershadow" height="200%" width="200%" x="-75%" y="-75%" color-interpolation-filters="sRGB">
+    <feMorphology operator="dilate" radius="3" in="SourceAlpha" result="thicken" />
+    <feGaussianBlur in="thicken" stdDeviation="4" result="blurred" />
+    <feFlood flood-color="#336699" result="glowColor" />
+    <feComposite in="glowColor" in2="blurred" operator="in" result="glowComposite" />
+    <feMerge>
+      <feMergeNode in="glowComposite"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+</defs>`;
+

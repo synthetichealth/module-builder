@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import svgPanZoom from  'svg-pan-zoom';
 
 import Viz from 'viz.js';
-import generateDOT from '../../utils/graphviz';
+import {generateDOT,svgDefs} from '../../utils/graphviz';
 
 import './ModuleGraph.css';
 
@@ -86,10 +86,10 @@ class ModuleGraph extends Component<Props> {
 
     /* write SVG */
     try {
-      this.mount.innerHTML= Viz(generateDOT(module, selectedState));
+      this.mount.innerHTML= Viz(generateDOT(module, selectedState)).replace('</svg>', svgDefs + '</svg>');
     } catch (ex) {
       alert('Invalid module: ' + ex.message)
-      this.mount.innerHTML = '<svg width="10px" height="10px"/>';
+      this.mount.innerHTML = `<svg width="10px" height="10px"/>`;
     }
 
     let svg = this.mount.children[0]
@@ -99,6 +99,13 @@ class ModuleGraph extends Component<Props> {
       let el = document.getElementById(`node_${s.replace('?','')}`)
  ;     if(el){
         el.addEventListener('mouseup', (e) => {e.stopPropagation(); this.props.onClick(s)});
+      }
+
+      if(selectedState && s === selectedState.name){
+        // assume path is at index 1 to speed things up.  bad assumption?
+        el.children[1].setAttribute('filter', 'url(#outershadow)')
+      } else {
+        el.children[1].removeAttribute('filter')
       }
     })
 
