@@ -12,6 +12,24 @@
   border-radius: 5px;
 }
 
+.state-buttons {
+  position: absolute;
+  padding: 0;
+  list-style: none;
+  top: 0;
+  right: 10px;
+}
+
+.state-buttons li {
+  display:inline-block;
+  padding: 0 3px;
+}
+
+.state-buttons li a {
+  cursor: pointer;
+}
+
+
 .Transition {
   position: relative;
   padding-left: 10px;
@@ -64,10 +82,6 @@ span.editable-text > :empty:after {
 }
 
 .delete-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.0rem 1rem;
   color: inherit;
   cursor:pointer;
 }
