@@ -129,6 +129,38 @@ const fixStateReferences = (module, stateName, newName) => {
   });
 }
 
+// When nodes are cloned, loopback transitions point to node being cloned, instead of new copy
+const renameLoopbackTransition = (state, newStateName, oldStateName) => {
+  if(state.direct_transition === oldStateName){
+    state.direct_transition = newStateName;
+  } else if (state.distributed_transition){
+    state.distributed_transition.forEach( transition => {
+      if(transition.transition === oldStateName){
+        transition.transition = newStateName
+      }
+    })
+  } else if (state.conditional_transition){
+    state.conditional_transition.forEach( transition => {
+      if(transition.transition === oldStateName){
+        transition.transition = newStateName
+      }
+    })
+  } else if (state.complex_transition){
+    state.complex_transition.forEach( transition => {
+      if(transition.transition === oldStateName){
+        transition.transition = newStateName
+      }
+      if(transition.distributions){
+        transition.distributions.forEach( distribution => {
+          if(distribution.transition === oldStateName){
+            distribution.transition = newStateName
+          }
+        })
+      }
+    })
+  }
+}
+
 
 const initialState = {};
 
@@ -289,11 +321,16 @@ export default (state = initialState, action) => {
       return newState
 
     case 'COPY_NODE':
-      let newStateName = action.data.newName;
       newState = {...state};
+      let newStateName = action.data.newName;
       let newModuleCopy = _.cloneDeep(state[action.data.targetModuleKey])
-      newModuleCopy.states[newStateName] = _.cloneDeep(newModuleCopy.states[action.data.targetNode.name])
-      newModuleCopy.states[newStateName].name = newStateName
+      let newModuleState = _.cloneDeep(newModuleCopy.states[action.data.targetNode.name]);
+      newModuleState.name = newStateName;
+
+      /* fix loopback transition case */
+      renameLoopbackTransition(newModuleState, newStateName, action.data.targetNode.name);
+
+      newModuleCopy.states[newStateName] = newModuleState;
       newState[action.data.targetModuleKey] = newModuleCopy
       return newState
 
