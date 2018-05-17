@@ -137,7 +137,7 @@ class LoadModule extends Component {
               </div>
               <div className="modal-body LoadModule-body">
                 <Dropzone activeClassName='LoadModule-dropzoneActive' className='LoadModule-dropzone' onDrop={this.onDrop.bind(this)}>
-                   Drop files here or click to upload new modules.
+                   Drop files here or click to open saved modules.
                 </Dropzone>
                 <div className='container'>
                   <div className='row'>
