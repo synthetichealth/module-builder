@@ -292,7 +292,7 @@ export default (state = initialState, action) => {
       let newStateName = action.data.newName;
       newState = {...state};
       let newModuleCopy = _.cloneDeep(state[action.data.targetModuleKey])
-      newModuleCopy.states[newStateName] = _.cloneDeep(action.data.targetNode)
+      newModuleCopy.states[newStateName] = _.cloneDeep(newModuleCopy.states[action.data.targetNode.name])
       newModuleCopy.states[newStateName].name = newStateName
       newState[action.data.targetModuleKey] = newModuleCopy
       return newState
