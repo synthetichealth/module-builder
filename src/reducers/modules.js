@@ -287,6 +287,16 @@ export default (state = initialState, action) => {
       fixStateReferences(newModule, stateName, newName);
       newState[action.data.targetModuleKey] = newModule
       return newState
+
+    case 'COPY_NODE':
+      let newStateName = action.data.newName;
+      newState = {...state};
+      let newModuleCopy = _.cloneDeep(state[action.data.targetModuleKey])
+      newModuleCopy.states[newStateName] = _.cloneDeep(action.data.targetNode)
+      newModuleCopy.states[newStateName].name = newStateName
+      newState[action.data.targetModuleKey] = newModuleCopy
+      return newState
+
     case 'EDIT_MODULE_NAME':
       newState = {...state};
       newState[action.data.targetModuleKey].name = action.data.newName;

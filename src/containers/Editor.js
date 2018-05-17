@@ -27,6 +27,7 @@ import {selectNode,
         addTransition,
         editNode,
         renameNode,
+        copyNode,
         newModule,
         showLoadModule,
         hideLoadModule,
@@ -65,6 +66,13 @@ class Editor extends Component {
     return (newName) => {
       newName.name = cleanString(newName.name, {'.': '', '\\': '', '|': ''});
       this.props.renameNode(targetModuleKey, targetNode, newName);
+    }
+  }
+
+  copyNode = (targetModuleKey, targetNode, takenKeys) => {
+    return () => {
+      let newNodeName = findAvailableKey(targetNode.name, takenKeys);
+      this.props.copyNode(targetModuleKey, targetNode, newNodeName);
     }
   }
 
@@ -149,6 +157,7 @@ class Editor extends Component {
               helpFunction={this.startTutorial}
               renameNode={this.renameNode(this.props.selectedModuleKey, this.props.moduleState)}
               changeType={this.changeStateType(this.props.selectedModuleKey, this.props.moduleState)}
+              copyNode={this.copyNode(this.props.selectedModuleKey, this.props.moduleState, Object.keys(this.props.module.states))}
               addTransition={this.addTransition(this.props.selectedModuleKey, this.props.moduleState)}
               state={this.props.moduleState}
               otherStates={this.props.moduleStates}
@@ -218,6 +227,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addTransition,
   editNode,
   renameNode,
+  copyNode,
   changeStateType,
   newModule,
   showLoadModule,

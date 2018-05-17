@@ -47,6 +47,17 @@ export const renameNode = (targetModuleKey, targetNode, newName) => {
   })
 }
 
+export const copyNode = (targetModuleKey, targetNode, newName) => {
+  return ({
+    type: 'COPY_NODE',
+    data:{
+      targetModuleKey,
+      targetNode,
+      newName
+    }
+  })
+}
+
 export const jsonLoad = (key, module) => {
   return ({
     type: 'JSON_LOAD',

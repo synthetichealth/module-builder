@@ -22,6 +22,7 @@ type Props = {
   otherStates: State[],
   onChange: any,
   renameNode: any,
+  copyNode: any,
   changeType: any,
   addTransition: any,
   helpFunction: any
@@ -128,7 +129,10 @@ class StateEditor extends Component<Props> {
         <div className="State">
           <h3><RIEInput className='editable-text' className='editable-text' propName={'name'} value={this.props.state.name} change={this.props.renameNode} /></h3>
           State Type: <RIESelect className='editable-text' className='editable-text' value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
-          <br/>
+          <ul className="state-buttons">
+            <li><a className="editable-text delete-button" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Remove State</a></li>
+            <li><a className="editable-text delete-button" onClick={this.props.copyNode}>Copy State</a></li>
+          </ul>
           <hr/>
           <RIETextArea className='editable-text' value={remarks} propName="remarks" change={this.updateRemarks} />
           <br/>
@@ -149,9 +153,9 @@ class StateEditor extends Component<Props> {
               transition={this.props.state.transition}
               onChange={this.props.onChange(`states.${this.props.state.name}`)} />
           </div>
-            <br/>
-            <a className="editable-text delete-button" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Remove State</a>
-            <a onClick={this.props.helpFunction(EditTutorial)}>Help</a>
+          <br/>
+          <a onClick={this.props.helpFunction(EditTutorial)}>Help</a>
+       
 
         </div>
     )

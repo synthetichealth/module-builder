@@ -14,6 +14,10 @@ it('creates a new key that appends _4 when there are three matches', () => {
   expect(findAvailableKey('three', keys)).toEqual('three_4')
 })
 
+it('creates a new key that appends _4 when there are three matches', () => {
+  expect(findAvailableKey('three_2', keys)).toEqual('three_4')
+})
+
 it('creates a key from a name properly', () => {
   expect(createSafeKeyFromName('modulename')).toEqual('modulename')
   expect(createSafeKeyFromName('ModuleName')).toEqual('modulename')
