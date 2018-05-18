@@ -13,6 +13,9 @@ export function extractModule(data: any): Module {
 }
 
 export function extractStates(data: any): State[] {
+  if(!data){
+      return []
+  }
   let stateNames = Object.keys(data.states);
   return stateNames.map((name) => {
     return extractState(name, data.states[name]);

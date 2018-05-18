@@ -72,6 +72,13 @@ export const newModule = (key, module) => {
   })
 }
 
+export const bulkLoadModules = (modules) => {
+  return ({
+    type: 'BULK_LOAD_MODULES',
+    data: modules
+  })
+}
+
 export const showLoadModule = () => {
   return ({
     type: 'SHOW_LOAD_MODULE'

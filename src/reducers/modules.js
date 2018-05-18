@@ -172,6 +172,10 @@ export default (state = initialState, action) => {
       newState[action.data.key] = action.data.module;
       return newState
 
+    case 'BULK_LOAD_MODULES':
+      newState = {...state, ...action.data}
+      return newState
+
     case 'EDIT_NODE':
       let path = action.data.path.join('.');
       let value = Object.values(action.data.update)[0]
