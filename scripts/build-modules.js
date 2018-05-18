@@ -53,9 +53,6 @@ if(files.length == 0){
   process.exit()
 }
 
-// add examplitis to the top
-files.unshift('./src/data/example_module.json');
-
 var count = 0;
 var output = 'export default {'
 for(var i = 0; i< files.length; i++){
@@ -69,8 +66,6 @@ for(var i = 0; i< files.length; i++){
     count++
 
     var filename = files[i].replace(directory + '/','').replace('.json','')
-    filename = filename.replace('./src/data/','') // for examplitis
-
 
     if(filename.split('/').length > 2){
       console.log('\n\nERROR: THERE SHOULD NOT BE MORE THAN ONE / IN THIS FILENAME.  YOU ARE TOO HIGH IN THE DIRECTORY TREE: ' + filename) 
@@ -107,7 +102,7 @@ fs.writeFileSync(outputFile, output)
 
 
 console.log('\x1b[1m')
-console.log('\n\nCompleted importing ' + count + ' modules from ' + directory + ' (including example module in /src/data)\n\n')
+console.log('\n\nCompleted importing ' + count + ' modules from ' + directory + '\n\n')
 console.log('Overwrite ' + outputFile + 'with new data')
 console.log('Run tests before committing (and no other files should have been changed)')
 console.log('\n\n\x1b[0m')

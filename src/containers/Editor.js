@@ -29,6 +29,7 @@ import {selectNode,
         renameNode,
         copyNode,
         newModule,
+        bulkLoadModules,
         showLoadModule,
         hideLoadModule,
         showDownload,
@@ -48,6 +49,12 @@ class Editor extends Component {
         stepIndex: 0
       }
     }
+  }
+
+  componentDidMount() {
+    import("../data/modules").then(modules => {
+      this.props.bulkLoadModules(modules.default);
+    });
   }
 
   /*
@@ -110,6 +117,58 @@ class Editor extends Component {
       this.setState({joyride: {run: true, steps}})
     }
   }
+  renderAddButton = () => {
+    if(this.props.module){
+      return <button className='btn btn-secondary nav-action-button' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
+    }
+    return <div/>
+  }
+
+  renderStateEditor = () => {
+    if(this.props.module){
+      return <StateEditor
+        moduleName={this.props.module.name}
+        helpFunction={this.startTutorial}
+        renameNode={this.renameNode(this.props.selectedModuleKey, this.props.moduleState)}
+        changeType={this.changeStateType(this.props.selectedModuleKey, this.props.moduleState)}
+        copyNode={this.copyNode(this.props.selectedModuleKey, this.props.moduleState, Object.keys(this.props.module.states))}
+        addTransition={this.addTransition(this.props.selectedModuleKey, this.props.moduleState)}
+        state={this.props.moduleState}
+        otherStates={this.props.moduleStates}
+        onChange={this.onChange(this.props.selectedModuleKey)} />
+    }
+    return <div/>
+
+  }
+
+  renderDownload = () => {
+    if(this.props.module){
+      return <Download module={this.props.module}
+        visible={this.props.downloadVisible}
+        onHide={this.props.hideDownload}/>
+    }
+    return <div/>
+  }
+
+  renderModulePropertiesEditor = () => {
+    if(this.props.module){
+      return <ModulePropertiesEditor
+              module={this.props.module}
+              onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleKey, name)}
+              onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleKey, remarks)}/>
+    }
+    return <div/>
+  }
+
+  renderModuleGraph = () => {
+    if(this.props.module){
+      return <ModuleGraph
+            module={this.props.module}
+            onClick={this.props.selectNode}
+            selectedState={this.props.moduleState}/>
+    }
+    return <div/>
+  }
 
   render() {
     return (
@@ -124,7 +183,7 @@ class Editor extends Component {
               <button className="btn btn-link nav-item nav-link" onClick={this.newModule(Object.keys(this.props.modules)).bind(this, undefined)}>New Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showLoadModule}>Load Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showDownload}>Download</button>
-              <button className='btn btn-secondary nav-action-button' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
+              {this.renderAddButton()}
               {/*<button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button> */}
               <button className='btn btn-secondary nav-action-button disabled' data-tip='Structures are not yet available' onClick={() => null}> Add Structure </button>
               <button className='btn btn-secondary nav-action-button' onClick={this.startTutorial(BasicTutorial)}> Help </button>
@@ -139,36 +198,19 @@ class Editor extends Component {
           newModule={this.newModule(Object.keys(this.props.modules))}
           />
 
-        <Download module={this.props.module}
-          visible={this.props.downloadVisible}
-          onHide={this.props.hideDownload}/>
+        {this.renderDownload()}
 
         <div className='Editor-main'>
 
           <div className='Editor-panel'>
 
-            <ModulePropertiesEditor
-              module={this.props.module}
-              onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleKey, name)}
-              onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleKey, remarks)}/>
+            {this.renderModulePropertiesEditor()}
 
-            <StateEditor
-              moduleName={this.props.module.name}
-              helpFunction={this.startTutorial}
-              renameNode={this.renameNode(this.props.selectedModuleKey, this.props.moduleState)}
-              changeType={this.changeStateType(this.props.selectedModuleKey, this.props.moduleState)}
-              copyNode={this.copyNode(this.props.selectedModuleKey, this.props.moduleState, Object.keys(this.props.module.states))}
-              addTransition={this.addTransition(this.props.selectedModuleKey, this.props.moduleState)}
-              state={this.props.moduleState}
-              otherStates={this.props.moduleStates}
-              onChange={this.onChange(this.props.selectedModuleKey)} />
+            {this.renderStateEditor()}
 
            </div>
 
-          <ModuleGraph
-            module={this.props.module}
-            onClick={this.props.selectNode}
-            selectedState={this.props.moduleState}/>
+          {this.renderModuleGraph()}
 
         </div>
 
@@ -230,6 +272,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   copyNode,
   changeStateType,
   newModule,
+  bulkLoadModules,
   showLoadModule,
   hideLoadModule,
   showDownload,

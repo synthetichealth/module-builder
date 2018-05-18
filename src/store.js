@@ -3,9 +3,9 @@ import { routerMiddleware } from 'react-router-redux';
 
 import reducers from './reducers';
 
-import modulesJSON from './data/modules';
+import exampleModule from './data/example_module'
 
-const initialState = {modules: modulesJSON};
+const initialState = {modules: exampleModule};
 const enhancers = [];
 const middleware = [];
 
