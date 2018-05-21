@@ -54,7 +54,7 @@ class DistributedTransition extends Component<Props> {
         <label>
           Attribute: <RIEInput className='editable-text' value={distribution.attribute} propName='attribute' change={this.props.onChange(`[${index}].distribution.attribute`)} />
           <br />
-          Weight: <RIENumber className='editable-text' value={distribution.default} propName='default' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`[${index}].distribution.default`)} />
+          Default Weight: <RIENumber className='editable-text' value={distribution.default} propName='default' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`[${index}].distribution.default`)} />
           <br />
           <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: {id: getTemplate('Attribute.UnnamedDistribution')}})}>Change to Unnamed Distribution</a>
         </label>
