@@ -34,7 +34,7 @@ class ComplexTransition extends Component<Props> {
         oldEntry.distributions = _.clone(this.props.transition.transition[indexTo].distributions.map((d) => ({distribution: d.distribution, transition: d.to})))
       }
       if(this.props.transition.transition[indexTo].transition.to){
-        oldEntry.transition = this.props.transition[indexTo].transition.to
+        oldEntry.transition = this.props.transition.transition[indexTo].transition.to
       }
 
       if(this.props.transition.transition[indexFrom].condition){
@@ -44,7 +44,7 @@ class ComplexTransition extends Component<Props> {
         newEntry.distributions = _.clone(this.props.transition.transition[indexFrom].distributions.map((d) => ({distribution: d.distribution, transition: d.to})))
       }
       if(this.props.transition.transition[indexFrom].transition.to){
-        newEntry.transition = this.props.transition[indexFrom].transition.to
+        newEntry.transition = this.props.transition.transition[indexFrom].transition.to
       }
 
       return () => {
