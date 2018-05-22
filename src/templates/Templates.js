@@ -423,7 +423,12 @@ const StateTemplates = {
 
   Procedure: {
     type: "Procedure",
-    codes: [{...TypeTemplates.Code.Snomed}]
+    codes: [{...TypeTemplates.Code.Snomed}],
+    duration: {
+      low: 30,
+      high: 30,
+      unit: 'minutes'
+    }
   },
 
   VitalSign: {
