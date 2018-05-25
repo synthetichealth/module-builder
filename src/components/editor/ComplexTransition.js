@@ -72,18 +72,44 @@ class ComplexTransition extends Component<Props> {
     }
   }
 
-  renderIf(index){
-    if(!this.props.transition.transition[index].condition){
-      return 'Else:'
-    }
-    if(index === 0){
+  renderIf(index, isLast){
+    if(!this.props.transition.transition[index].condition && isLast && index !==0){
+      return <span>
+                Else: <a className="editable-text delete-button" onClick={()=>{this.props.onChange(`[${index}].condition`)({val: {id: getTemplate('Type.Condition.Age')}})}}>
+                        (add condition)
+                      </a>
+            </span>
+    } else if(!this.props.transition.transition[index].condition){
+      return <span>
+                <a className="editable-text delete-button editable-error" onClick={()=>{this.props.onChange(`[${index}].condition`)({val: {id: getTemplate('Type.Condition.Age')}})}}>
+                        Add Condition
+                      </a>
+            </span>
+    } else if(index === 0 && !this.props.transition.transition[index].condition){
+      return <span>
+                If: <a className="editable-text delete-button" onClick={()=>{this.props.onChange(`[${index}].condition`)({val: {id: getTemplate('Type.Condition.Age')}})}}>
+                        (add condition)
+                      </a>
+            </span>
+
+    } else if(index === 0){
       return <span>If:</span>
+
+    } else if(!isLast){
+      return <span>
+              Else If:
+            </span>
+
     }else{
-      return <span>Else If:</span>
+      return <span>
+            Else If: <a className="editable-text delete-button" onClick={()=>{this.props.onChange(`[${index}].condition`)({val: {id: null}})}}>
+                (remove condition)
+              </a>
+            </span>
     }
   }
 
-  renderTransition(t, i){
+  renderTransition(t, i, isLast){
 
     let transitionEditor = null;
 
@@ -121,7 +147,7 @@ class ComplexTransition extends Component<Props> {
 
     return <div className='transition-option' key={i}>
             <label>
-            {this.renderIf(i)} <ConditionalEditor {...this.props} conditional={t.condition} onChange={this.props.onChange(`${i}.condition`)}/>
+            {this.renderIf(i, isLast)} <ConditionalEditor {...this.props} conditional={t.condition} onChange={this.props.onChange(`${i}.condition`)}/>
             </label>
             <br/>
             <label>
@@ -150,7 +176,7 @@ class ComplexTransition extends Component<Props> {
         Complex Transition:
 
         {currentValue.map((t, i) => {
-          return this.renderTransition(t, i);
+          return this.renderTransition(t, i, i === currentValue.length-1);
         })}
 
         <a className='editable-text add-button' onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: getTemplate('Transition.Complex[0]')}})}>+</a>

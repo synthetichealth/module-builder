@@ -53,6 +53,10 @@ textarea {
   padding-right: .2em;
 }
 
+.editable-error {
+  color: #ff3300 !important;
+}
+
 span.editable-text:empty {
   color: #ff3300 !important;
 }
