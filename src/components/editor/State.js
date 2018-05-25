@@ -144,7 +144,7 @@ class StateEditor extends Component<Props> {
           <hr />
           <div>
             <div className="Transition-Type">Transition Type:
-              <RIESelect className='editable-text' className='editable-text' value={{id: transitionType, text: transitionType}} propName='transition'change={(e) => this.props.addTransition(e.transition.id)} options={transitionOptions}/>
+              <RIESelect className='editable-text' className='editable-text' value={{id: transitionType, text: transitionType}} propName='transition' change={(e) => this.props.addTransition(e.transition.id)} options={transitionOptions}/>
             </div>
           </div>
           <div className="Transition">

@@ -83,6 +83,57 @@ class ComplexTransition extends Component<Props> {
     }
   }
 
+  renderTransition(t, i){
+
+    let transitionEditor = null;
+
+    if(t.transition.to !== undefined){
+      const newDistributedTransition = {...t, distributions: [{distribution: 1, transition: t.transition.to}]};
+      delete newDistributedTransition.transition;
+      console.log(newDistributedTransition);
+      transitionEditor = <div>
+                           <DirectTransitionEditor 
+                             transition={t.transition}
+                             options={this.props.options} 
+                             onChange={this.props.onChange(`[${i}].transition`)} />
+                           <br/>
+                           <a className="editable-text delete-button" 
+                              onClick={()=>{this.props.onChange(`[${i}]`)({val: {id: newDistributedTransition}})}}>Change to Distributed Transition</a>
+                          </div>
+    } else {
+      let nextTransition = 'Initial';
+      if(t.distributions.length > 0){
+        nextTransition = t.distributions[0].to
+      }
+
+      const newDirectTransition = {...t, distributions: [], transition: nextTransition};
+
+      transitionEditor = <div>
+                          <DistributedTransitionEditor 
+                             transition={{transition: t.distributions}} 
+                             options={this.props.options} 
+                             onChange={this.props.onChange(`[${i}].distributions`)} />
+                           <br/>
+                           <a className="editable-text delete-button" 
+                              onClick={()=>{this.props.onChange(`[${i}]`)({val: {id: newDirectTransition}})}}>Change to Direct Transition</a>
+                          </div>
+    }
+
+    return <div className='transition-option' key={i}>
+            <label>
+            {this.renderIf(i)} <ConditionalEditor {...this.props} conditional={t.condition} onChange={this.props.onChange(`${i}.condition`)}/>
+            </label>
+            <br/>
+            <label>
+            {transitionEditor}
+            </label>
+            <br/>
+            {this.renderUpDown(i)}
+            <br/>
+            <a className='editable-text delete-button' onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
+          </div>
+  }
+
   render() {
     let currentValue = [];
     if (this.props.transition) {
@@ -93,24 +144,13 @@ class ComplexTransition extends Component<Props> {
     }
     const states = this.props.options;
     const options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
+
     return (
       <label>
         Complex Transition:
-        {currentValue.map((t, i) => {
-          return <div className='transition-option' key={i}>
-            <label>
-            {this.renderIf(i)} <ConditionalEditor {...this.props} conditional={t.condition} onChange={this.props.onChange(`${i}.condition`)}/>
-            </label>
-            <br/>
-            <label>
-              <DistributedTransitionEditor transition={{transition: t.distributions}} options={states} onChange={this.props.onChange(`[${i}].distributions`)} />
-            </label>
-            <br/>
-            {this.renderUpDown(i)}
-            <br/>
-            <a className='editable-text delete-button' onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
 
-          </div>
+        {currentValue.map((t, i) => {
+          return this.renderTransition(t, i);
         })}
 
         <a className='editable-text add-button' onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: getTemplate('Transition.Complex[0]')}})}>+</a>
