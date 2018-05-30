@@ -4,6 +4,7 @@ var argv = process.argv.slice(2);
 
 if(argv.length == 0){
   console.log('\x1b[1m')
+  console.log('\n\nreformat-modules: Import and export all modules to format in a standardize manner.')
   console.log('\n\nPlease specify directory where synthea modules are located.')
   console.log('USAGE: npm run build-modules ../synthea/src/main/resources/modules\n\n\n')
   console.log('Please point to the exact top level generic module directory')
@@ -21,7 +22,7 @@ try {
 } catch(e){
   console.log('\x1b[1m')
   console.log('\n\nNo such directory ' + directory)
-  console.log('EXAMPLE USAGE: npm run build-modules ../synthea/src/main/resources\n\n\n')
+  console.log('EXAMPLE USAGE: npm run reformat-modules ../synthea/src/main/resources\n\n\n')
   console.log('\x1b[0m')
   process.exit()
 }
@@ -48,61 +49,21 @@ var files = walkSync(directory);
 if(files.length == 0){
   console.log('\x1b[1m')
   console.log('\n\nNo json files located at ' + directory)
-  console.log('USAGE: npm run build-modules ../synthea/src/main/resources/modules\n\n\n')
+  console.log('USAGE: npm run format-modules ../synthea/src/main/resources/modules\n\n\n')
   console.log('\x1b[0m')
   process.exit()
 }
 
-var count = 0;
-var output = 'export default {'
 for(var i = 0; i< files.length; i++){
   
   var contents = fs.readFileSync(files[i], 'utf8');
-
-  var json = JSON.parse(contents)
-
-  if(json.name && json.states){
-
-    count++
-
-    var filename = files[i].replace(directory + '/','').replace('.json','')
-
-    if(filename.split('/').length > 2){
-      console.log('\n\nERROR: THERE SHOULD NOT BE MORE THAN ONE / IN THIS FILENAME.  YOU ARE TOO HIGH IN THE DIRECTORY TREE: ' + filename) 
-      process.exit()
-    }
-
-    output += '"' + filename + '":' + JSON.stringify(json,undefined,2)
-
-    console.log('Added module: ' + filename)
-    
-    output += "\n,\n"
-
-  } else {
-    console.log('File: ' + files[i] + ' does not appear to be a valid module')
-  }
+  var scrubbedModule = JSON.stringify(JSON.parse(contents), undefined, 2);
+  
+  fs.writeFileSync(files[i], scrubbedModule)
 
 }
-
-output = output.slice(0,-1)
-output += '};'
-
-let outputFile = './src/data/modules.js'
-
-try {
-  fs.lstatSync(outputFile).isFile()
-} catch(e){
-  console.log('\x1b[1m')
-  console.log('\n\nCould not find module file for writing. Has something changed? ' + outputFile)
-  console.log('\x1b[0m')
-  process.exit()
-}
-
-fs.writeFileSync(outputFile, output)
 
 
 console.log('\x1b[1m')
-console.log('\n\nCompleted importing ' + count + ' modules from ' + directory + '\n\n')
-console.log('Overwrite ' + outputFile + ' with new data')
-console.log('Run tests before committing (and no other files should have been changed)')
+console.log('\n\nReformatted ' + files.length + ' modules in place in ' + directory + '\n\n')
 console.log('\n\n\x1b[0m')
