@@ -20020,7 +20020,7 @@ export default {"allergic_rhinitis":{
           "transition": "Record_HA1C"
         },
         {
-          "transition": "Wellness_Encounter"
+          "transition": "Obese_Check"
         }
       ]
     },
@@ -20036,7 +20036,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "unit": "%",
-      "direct_transition": "Diagnosis"
+      "direct_transition": "Blood_Sugar_Check"
     },
     "Diagnosis": {
       "type": "Simple",
@@ -21513,7 +21513,12 @@ export default {"allergic_rhinitis":{
           "display": "Renal dialysis (procedure)"
         }
       ],
-      "direct_transition": "Potential_Amputation"
+      "direct_transition": "Potential_Amputation",
+      "duration": {
+        "low": 3,
+        "high": 4,
+        "unit": "hours"
+      }
     },
     "Potential_Amputation": {
       "type": "Simple",
@@ -22049,6 +22054,169 @@ export default {"allergic_rhinitis":{
       ],
       "reason": "Diagnose_End_Stage_Renal_Disease",
       "direct_transition": "Record_HA1C"
+    },
+    "Obesity": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "obesity",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 162864005,
+          "display": "Body mass index 30+ - obesity (finding)"
+        }
+      ],
+      "direct_transition": "Wellness_Encounter"
+    },
+    "Severe Obesity": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "obesity",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 408512008,
+          "display": "Body mass index 40+ - severely obese (finding)"
+        }
+      ],
+      "direct_transition": "Wellness_Encounter"
+    },
+    "Obese_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Severe Obesity",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "BMI",
+            "operator": ">=",
+            "value": 40
+          }
+        },
+        {
+          "transition": "Obesity",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "BMI",
+            "operator": ">=",
+            "value": 30
+          }
+        },
+        {
+          "transition": "Wellness_Encounter"
+        }
+      ]
+    },
+    "Blood_Sugar_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Hyperglycemia",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Glucose",
+            "operator": ">=",
+            "value": 130
+          }
+        },
+        {
+          "transition": "Triglyceride_Check"
+        }
+      ]
+    },
+    "Hyperglycemia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hyperglycemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 80394007,
+          "display": "Hyperglycemia (disorder)"
+        }
+      ],
+      "direct_transition": "Triglyceride_Check"
+    },
+    "Triglyceride_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Hypertriglyceridemia",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Triglycerides",
+            "operator": ">=",
+            "value": 150
+          }
+        },
+        {
+          "transition": "Metabolic_Check"
+        }
+      ]
+    },
+    "Hypertriglyceridemia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hypertriglyceridemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 302870006,
+          "display": "Hypertriglyceridemia (disorder)"
+        }
+      ],
+      "direct_transition": "Metabolic_Check"
+    },
+    "Metabolic_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Metabolic_Syndrome",
+          "condition": {
+            "condition_type": "At Least",
+            "minimum": 3,
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "obesity",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hyperglycemia",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertriglyceridemia",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Vital Sign",
+                "vital_sign": "HDL",
+                "operator": "<",
+                "value": 50
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Diagnosis"
+        }
+      ]
+    },
+    "Metabolic_Syndrome": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "metabolic_syndrome",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 237602007,
+          "display": "Metabolic syndrome X (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis"
     }
   }
 }
@@ -23619,7 +23787,7 @@ export default {"allergic_rhinitis":{
     },
     "Directed_Use_Overdose_Encounter": {
       "type": "Encounter",
-      "encounter_class": "outpatient",
+      "encounter_class": "emergency",
       "reason": "Directed_Use_Overdose",
       "codes": [
         {
@@ -23657,7 +23825,7 @@ export default {"allergic_rhinitis":{
     },
     "Misuse_Overdose_Encounter": {
       "type": "Encounter",
-      "encounter_class": "outpatient",
+      "encounter_class": "emergency",
       "reason": "Misuse_Overdose",
       "codes": [
         {
@@ -23695,7 +23863,7 @@ export default {"allergic_rhinitis":{
     },
     "Addiction_Overdose_Encounter": {
       "type": "Encounter",
-      "encounter_class": "outpatient",
+      "encounter_class": "emergency",
       "reason": "Addiction_Overdose",
       "codes": [
         {
@@ -28337,7 +28505,7 @@ export default {"allergic_rhinitis":{
           "distributions": [
             {
               "distribution": 0.95,
-              "transition": "Chronic_Sinusitis_Continues"
+              "transition": "Chronic_Sinusitis_Followup_without_action"
             },
             {
               "distribution": 0.05,
@@ -28412,6 +28580,10 @@ export default {"allergic_rhinitis":{
       "type": "ConditionEnd",
       "condition_onset": "Diagnose_Chronic_Sinusitis",
       "direct_transition": "Sinusitis_Ends"
+    },
+    "Chronic_Sinusitis_Followup_without_action": {
+      "type": "EncounterEnd",
+      "direct_transition": "Chronic_Sinusitis_Continues"
     }
   }
 }
