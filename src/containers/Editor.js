@@ -21,6 +21,18 @@ import { BasicTutorial, EditTutorial } from '../templates/Tutorial';
 import './Editor.css';
 import '../../node_modules/react-joyride/lib/react-joyride-compiled.css'
 
+import StateList from '../components/analysis/StateList';
+
+import SyntheaLogo from './synthea-logo-dark-glow.png'
+import FullscreenButton from './fullscreen.svg'
+import InfoButton from './Info.png'
+import StateButton from './state-button.png'
+import StateListButton from './statelist.png'
+import CodeButton from './code-button.png'
+import AttributeButton from './attribute-button.png'
+import RelatedButton from './related-button.png'
+import WarningButton from './warning-button.png'
+
 import {selectNode,
         addNode,
         addStructure,
@@ -36,7 +48,8 @@ import {selectNode,
         hideDownload,
         changeStateType,
         editModuleName,
-        editModuleRemarks} from '../actions/editor';
+        editModuleRemarks,
+        changeModulePanel} from '../actions/editor';
 
 class Editor extends Component {
 
@@ -164,17 +177,70 @@ class Editor extends Component {
     if(this.props.module){
       return <ModuleGraph
             module={this.props.module}
+            fullscreen={!this.props.modulePanelVisible}
             onClick={this.props.selectNode}
             selectedState={this.props.moduleState}/>
     }
     return <div/>
   }
 
+  renderPanelContent = () => {
+    switch(this.props.selectedModulePanel){
+      case 'info':
+        return this.renderModulePropertiesEditor();
+      case 'state':
+        return this.renderStateEditor();
+      case 'statelist':
+        return <StateList selectedState={this.props.moduleState} states={this.props.moduleStates} onClick={this.props.selectNode} />
+      case 'code':
+        return <div>TODO LIVE CODE EDITOR</div>
+      case 'attribute':
+        return <div>TODO ATTRIBUTES</div>
+      case 'warning':
+        return <div>TODO LIST OF WARNINGS</div>
+      case 'related':
+        return <div>MODULES RELATED BY ATTRIBUTES, ETC</div>
+      default:
+        return <div/>
+    }
+  }
+
+  renderStateButton = () => {
+    let className = '';
+    let onClick = this.leftNavClick('state');
+    if(this.props.selectedModulePanel === 'state'){
+      className = 'Editor-left-selected';
+    } else if(!this.props.moduleState){
+      className = 'Editor-left-disabled';
+      onClick = () => {};
+    }
+
+    return <li className={className}><button onClick={onClick}><img src={StateButton}/></button></li>
+  }
+
+
+  leftNavClick = (nav) => {
+    return () => {
+      if(nav !== 'hide' || (nav === 'hide' && this.props.modulePanelVisible)){
+        this.props.changeModulePanel(nav);
+      } else if (nav === 'hide') {
+        if(this.props.selectedStateKey){
+          this.props.changeModulePanel('state');
+        } else {
+          this.props.changeModulePanel('info');
+        }
+      }
+    }
+  }
+
   render() {
     return (
       <div className='Editor'>
-        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="#">Synthea Module Builder</a>
+        <nav className="navbar fixed-top navbar-expand-lg navbar-dark">
+          <a className="navbar-brand Editor-title" href="#">
+            <img src={SyntheaLogo} className='synthea-logo'/>
+            Synthea Module Builder
+           </a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -190,6 +256,9 @@ class Editor extends Component {
             </div>
           </div>
         </nav>
+        <button className="Editor-fullscreen-name" onClick={this.leftNavClick('info')}>
+           {this.props.module.name}
+        </button>
 
         <LoadModule modules={this.props.modules}
           visible={this.props.loadModuleVisible}
@@ -202,11 +271,31 @@ class Editor extends Component {
 
         <div className='Editor-main'>
 
-          <div className='Editor-panel'>
+          <div className='Editor-left'>
+           <ul>
+             <li className={'Editor-left-fullscreen'}><button onClick={this.leftNavClick('hide')}><img className={!this.props.modulePanelVisible ? 'Editor-left-fullscreen-active' : 'Editor-left-fullscreen-inactive'} src={FullscreenButton}/></button></li>
+             <li className='Editor-left-spacer'></li>
+             <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
+             {this.renderStateButton()}
+             <li className='Editor-left-spacer'></li>
+             <li className={this.props.selectedModulePanel === 'statelist' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('statelist')}><img src={StateListButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'attribute' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('attribute')}><img src={AttributeButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'warning' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('warning')}><img src={WarningButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'related' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('related')}><img src={RelatedButton}/></button></li>
+           </ul>
+          </div>
 
-            {this.renderModulePropertiesEditor()}
+          <div className={'Editor-panel ' +  (!this.props.modulePanelVisible ? 'Editor-panel-hidden' : 'Editor-panel-show')}>
+            <div className="Editor-module-name">
+              <span className="Module-name">
+                {this.props.module.name}
+              </span>
+            </div>
 
-            {this.renderStateEditor()}
+            <div className='Editor-panel-content'>
+              {this.renderPanelContent()}
+            </div>
 
            </div>
 
@@ -259,6 +348,8 @@ const mapStateToProps = state => {
     selectedStateKey: state.editor.selectedStateKey,
     loadModuleVisible: state.editor.loadModuleVisible,
     downloadVisible: state.editor.downloadVisible,
+    selectedModulePanel: state.editor.selectedModulePanel,
+    modulePanelVisible: state.editor.modulePanelVisible
   }
 }
 
@@ -279,6 +370,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   hideDownload,
   editModuleName,
   editModuleRemarks,
+  changeModulePanel,
   push
 }, dispatch)
 

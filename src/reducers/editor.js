@@ -3,13 +3,26 @@ const initialState = {
     selectedStateKey: null, 
     selectedModuleKey: 'examplitis', 
     loadModuleVisible: false, 
-    downloadVisible: false
+    downloadVisible: false,
+    selectedModulePanel: 'info',
+    modulePanelVisible: true
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'SELECT_NODE':
-      return { ...state, selectedStateKey: action.data};
+      let selectedModulePanel = state.selectedModulePanel;
+      if(action.data){
+        if(selectedModulePanel === 'info'){
+          selectedModulePanel = 'state';
+        }
+      } else {
+        if(selectedModulePanel === 'state'){
+          selectedModulePanel = 'info';
+        }
+      }
+
+      return { ...state, selectedModulePanel, selectedModulePanel, selectedStateKey: action.data};
 
     case 'RENAME_NODE':
       return { ...state, selectedStateKey: action.data.newName.name};
@@ -20,6 +33,7 @@ export default (state = initialState, action) => {
     case 'ADD_NODE':
       let newState = {...state}
       newState.selectedStateKey = action.data.stateKey;
+      newState.selectedModulePanel= 'state';
       return { ...newState }
 
     case '@@router/LOCATION_CHANGE':
@@ -48,6 +62,9 @@ export default (state = initialState, action) => {
 
     case 'HIDE_DOWNLOAD':
       return { ...state, downloadVisible: false};
+
+    case 'CHANGE_MODULE_PANEL':
+      return { ...state, selectedModulePanel: action.data.targetPanel, modulePanelVisible: action.data.targetPanel !== 'hide'};
 
     default:
       return state;

@@ -1,4 +1,5 @@
 export const selectNode = (key) => {
+  console.log('select node' + key);
   return ({
     type: 'SELECT_NODE',
     data: key
@@ -130,6 +131,15 @@ export const changeStateType = (targetModuleKey, targetNode, newType) => {
       targetModuleKey,
       targetNode,
       newType
+    }
+  })
+}
+
+export const changeModulePanel = (targetPanel) => {
+  return ({
+    type: 'CHANGE_MODULE_PANEL',
+    data:{
+      targetPanel
     }
   })
 }

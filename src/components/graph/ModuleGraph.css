@@ -3,7 +3,20 @@
   width: 100%;
   height: 100%;
   left: 500px;
-  padding-top: 40px;
+  padding-top: 60px;
+}
+
+.Module svg {
+  top: 50px;
+  position:absolute;
+}
+
+.Module-fullscreen {
+  left: 0;
+}
+
+.Module-standard-screen {
+  left: 500px;
 }
 
 .Editor.hide-info .Module {
