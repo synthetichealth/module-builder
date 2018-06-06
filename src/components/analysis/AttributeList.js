@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 import './AttributeList.css';
-import CancelButton from './cancel-button.svg';
+import CancelButton from './cancel-button.png';
 
 type Props = {
   states: State[],

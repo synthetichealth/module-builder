@@ -25,7 +25,7 @@ import StateList from '../components/analysis/StateList';
 import AttributeList from '../components/analysis/AttributeList';
 
 import SyntheaLogo from './synthea-logo-dark-glow.png'
-import FullscreenButton from './fullscreen.svg'
+import FullscreenButton from './fullscreen.png'
 import InfoButton from './Info.png'
 import StateButton from './state-button.png'
 import StateListButton from './statelist.png'
