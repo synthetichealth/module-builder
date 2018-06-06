@@ -280,10 +280,10 @@ class Editor extends Component {
              {this.renderStateButton()}
              <li className='Editor-left-spacer'></li>
              <li className={this.props.selectedModulePanel === 'statelist' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('statelist')}><img src={StateListButton}/></button></li>
-             <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
              <li className={this.props.selectedModulePanel === 'attribute' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('attribute')}><img src={AttributeButton}/></button></li>
              <li className={this.props.selectedModulePanel === 'warning' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('warning')}><img src={WarningButton}/></button></li>
              <li className={this.props.selectedModulePanel === 'related' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('related')}><img src={RelatedButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
            </ul>
           </div>
 
