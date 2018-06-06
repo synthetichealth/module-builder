@@ -22,6 +22,7 @@ import './Editor.css';
 import '../../node_modules/react-joyride/lib/react-joyride-compiled.css'
 
 import StateList from '../components/analysis/StateList';
+import AttributeList from '../components/analysis/AttributeList';
 
 import SyntheaLogo from './synthea-logo-dark-glow.png'
 import FullscreenButton from './fullscreen.svg'
@@ -195,7 +196,7 @@ class Editor extends Component {
       case 'code':
         return <div>TODO LIVE CODE EDITOR</div>
       case 'attribute':
-        return <div>TODO ATTRIBUTES</div>
+        return <AttributeList selectedState={this.props.moduleState} modules={this.props.modules} states={this.props.moduleStates} onClick={this.props.selectNode} />
       case 'warning':
         return <div>TODO LIST OF WARNINGS</div>
       case 'related':

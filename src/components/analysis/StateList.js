@@ -19,12 +19,11 @@ class StateList extends Component<Props> {
   }
 
   onClick(state) {
-    return () => { console.log(state.name);this.props.onClick(state.name)}
+    return () => { this.props.onClick(state.name)}
   }
 
   onChange(event){
     this.setState({search: event.target.value});
-    console.log(event.target.value)
   }
 
   clearSearch(){
@@ -44,7 +43,6 @@ class StateList extends Component<Props> {
           <div className="btn-group">
             <input type="text" className="form-control" placeholder="Find" value={this.state.search} onChange={this.onChange.bind(this)}/>
             <img className="search-clear" src={CancelButton} onClick={this.clearSearch.bind(this)}/>
-            <span id="searchclear" className="glyphicon glyphicon-remove-circle"></span>
           </div>
           <table className="table table-sm table-hover">
               <thead className="thead-light">
