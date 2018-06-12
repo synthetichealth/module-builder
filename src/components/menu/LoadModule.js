@@ -84,8 +84,8 @@ class LoadModule extends Component {
       case 'core':
         return (
           <ul className='LoadModule-list'>
-            { Object.keys(this.props.modules).filter(n => (n.indexOf('/') === -1)).map( (key, index) => {
-              let module = this.props.modules[key]
+            { Object.keys(this.props.library).filter(n => (n.indexOf('/') === -1)).map( (key, index) => {
+              let module = this.props.library[key]
               return (
                 <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name}</button></li>
               )
@@ -96,14 +96,27 @@ class LoadModule extends Component {
       case 'submodules':
         return (
           <ul className='LoadModule-list'>
-            { Object.keys(this.props.modules).filter(n => (n.indexOf('/') > -1)).map( (key, index) => {
-              let module = this.props.modules[key]
+            { Object.keys(this.props.library).filter(n => (n.indexOf('/') > -1)).map( (key, index) => {
+              let module = this.props.library[key]
               return (
                 <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{key.split('/')[0] + ': ' + module.name}</button></li>
               )
             })}
           </ul>
         )
+
+      case 'my':
+        return (
+          <ul className='LoadModule-list'>
+            { Object.keys(this.props.modules).map( (key, index) => {
+              let module = this.props.modules[key]
+              return (
+                <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name} ({key})</button></li>
+              )
+            })}
+          </ul>
+        )
+
 
       case 'json':
         return (
@@ -145,6 +158,7 @@ class LoadModule extends Component {
                       <ul className='LoadModule-options'>
                          <li className={(this.state.selectedOption === 'core') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('core')}>Core Modules</button></li>
                          <li className={(this.state.selectedOption === 'submodules') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('submodules')}>Submodules</button></li>
+                         {Object.keys(this.props.modules).length > 0 ? <li className={(this.state.selectedOption === 'my') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('my')}>My Modules</button></li> : ''}
                          <li className={(this.state.selectedOption === 'json') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('json')}>Paste JSON</button></li>
                       </ul>
                     </div>

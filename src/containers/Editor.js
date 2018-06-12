@@ -42,7 +42,6 @@ import {selectNode,
         renameNode,
         copyNode,
         newModule,
-        bulkLoadModules,
         showLoadModule,
         hideLoadModule,
         showDownload,
@@ -51,6 +50,8 @@ import {selectNode,
         editModuleName,
         editModuleRemarks,
         changeModulePanel} from '../actions/editor';
+
+import {loadLibrary} from '../actions/library';
 
 class Editor extends Component {
 
@@ -67,7 +68,7 @@ class Editor extends Component {
 
   componentDidMount() {
     import("../data/modules").then(modules => {
-      this.props.bulkLoadModules(modules.default);
+      this.props.loadLibrary(modules.default);
     });
   }
 
@@ -117,11 +118,11 @@ class Editor extends Component {
     }
   }
 
-  addNode = (selectedModuleKey, takenKeys) => {
+  addNode = (selectedModuleKey, takenKeys, selectedState, selectedStateTransition) => {
     return () => {
       let key = findAvailableKey(createSafeKeyFromName('New State'), takenKeys);
       let newState = {...getTemplate('State.Simple'), direct_transition: key };
-      this.props.addNode(selectedModuleKey, key, newState);
+      this.props.addNode(selectedModuleKey, key, newState, selectedState, selectedStateTransition);
     }
   }
 
@@ -131,9 +132,27 @@ class Editor extends Component {
       this.setState({joyride: {run: true, steps}})
     }
   }
-  renderAddButton = () => {
+  renderAddStateButton = () => {
     if(this.props.module){
-      return <button className='btn btn-secondary nav-action-button' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
+      return <button className='' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
+    }
+    return <div/>
+  }
+
+  renderInsertStateButton = () => {
+    if(this.props.module){
+
+      let className = ''
+      let tip = 'Insert a state within the currently selected a transition.'
+      let onClick = this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states), this.props.selectedStateKey, this.props.selectedStateTransition);
+      if(typeof this.props.selectedStateTransition !== 'number'){
+        className = 'Insert a state within a transition.  Please select a transition.'
+        className = 'disabled'
+        onClick = () => {};
+      }
+      return <button className={className} 
+                     data-tip='Insert a state within a transition.  Please select a transition.' 
+                     onClick={onClick}> Insert State </button>
     }
     return <div/>
   }
@@ -180,7 +199,8 @@ class Editor extends Component {
             module={this.props.module}
             fullscreen={!this.props.modulePanelVisible}
             onClick={this.props.selectNode}
-            selectedState={this.props.moduleState}/>
+            selectedState={this.props.moduleState}
+            selectedStateTransition={this.props.selectedStateTransition}/>
     }
     return <div/>
   }
@@ -194,13 +214,13 @@ class Editor extends Component {
       case 'statelist':
         return <StateList selectedState={this.props.moduleState} states={this.props.moduleStates} onClick={this.props.selectNode} />
       case 'code':
-        return <div>TODO LIVE CODE EDITOR</div>
+        return <div>Code Editor not yet implemented.</div>
       case 'attribute':
         return <AttributeList selectedState={this.props.moduleState} modules={this.props.modules} states={this.props.moduleStates} onClick={this.props.selectNode} />
       case 'warning':
-        return <div>TODO LIST OF WARNINGS</div>
+        return <div>Warning list not yet implemented.</div>
       case 'related':
-        return <div>MODULES RELATED BY ATTRIBUTES, ETC</div>
+        return <div>Related modules not yet implemented.</div>
       default:
         return <div/>
     }
@@ -215,8 +235,13 @@ class Editor extends Component {
       className = 'Editor-left-disabled';
       onClick = () => {};
     }
+    let dataTip = 'View currently selected state.'
 
-    return <li className={className}><button onClick={onClick}><img src={StateButton}/></button></li>
+    if(this.props.moduleStates){
+      dataTip += ' Please selected a state in the graph, state list, or attribute list.'
+    }
+
+    return <li className={className}><button data-tip={dataTip} onClick={onClick}><img src={StateButton}/></button></li>
   }
 
 
@@ -250,9 +275,6 @@ class Editor extends Component {
               <button className="btn btn-link nav-item nav-link" onClick={this.newModule(Object.keys(this.props.modules)).bind(this, undefined)}>New Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showLoadModule}>Load Module</button>
               <button className="btn btn-link nav-item nav-link" onClick={this.props.showDownload}>Download</button>
-              {this.renderAddButton()}
-              {/*<button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button> */}
-              <button className='btn btn-secondary nav-action-button disabled' data-tip='Structures are not yet available' onClick={() => null}> Add Structure </button>
               <button className='btn btn-secondary nav-action-button' onClick={this.startTutorial(BasicTutorial)}> Help </button>
             </div>
           </div>
@@ -262,6 +284,7 @@ class Editor extends Component {
         </button>
 
         <LoadModule modules={this.props.modules}
+          library={this.props.library}
           visible={this.props.loadModuleVisible}
           onHide={this.props.hideLoadModule}
           push={this.props.push}
@@ -274,16 +297,16 @@ class Editor extends Component {
 
           <div className='Editor-left'>
            <ul>
-             <li className={'Editor-left-fullscreen'}><button onClick={this.leftNavClick('hide')}><img className={!this.props.modulePanelVisible ? 'Editor-left-fullscreen-active' : 'Editor-left-fullscreen-inactive'} src={FullscreenButton}/></button></li>
+             <li className={'Editor-left-fullscreen'}><button data-tip='Show/hide editor panel.' onClick={this.leftNavClick('hide')}><img className={!this.props.modulePanelVisible ? 'Editor-left-fullscreen-active' : 'Editor-left-fullscreen-inactive'} src={FullscreenButton}/></button></li>
              <li className='Editor-left-spacer'></li>
-             <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button data-tip='Module Properties.' onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
              {this.renderStateButton()}
              <li className='Editor-left-spacer'></li>
-             <li className={this.props.selectedModulePanel === 'statelist' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('statelist')}><img src={StateListButton}/></button></li>
-             <li className={this.props.selectedModulePanel === 'attribute' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('attribute')}><img src={AttributeButton}/></button></li>
-             <li className={this.props.selectedModulePanel === 'warning' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('warning')}><img src={WarningButton}/></button></li>
-             <li className={this.props.selectedModulePanel === 'related' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('related')}><img src={RelatedButton}/></button></li>
-             <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'statelist' ? 'Editor-left-selected' : ''}><button data-tip='Searchable list of states.' onClick={this.leftNavClick('statelist')}><img src={StateListButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'attribute' ? 'Editor-left-selected' : ''}><button data-tip='Attributes set in this module.' onClick={this.leftNavClick('attribute')}><img src={AttributeButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'warning' ? 'Editor-left-selected' : ''}><button data-tip='Problems in module that need to be resolved. Not yet implemented.' onClick={this.leftNavClick('warning')}><img src={WarningButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'related' ? 'Editor-left-selected' : ''}><button data-tip='Related modules, such as those that share attributes. Not yet implemented.' onClick={this.leftNavClick('related')}><img src={RelatedButton}/></button></li>
+             <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON. Not yet implemented.' onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
            </ul>
           </div>
 
@@ -300,7 +323,16 @@ class Editor extends Component {
 
            </div>
 
+           <div className='Editor-graph-buttons'>
+              {this.renderAddStateButton()}
+              {this.renderInsertStateButton()}
+              {/*<button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button> */}
+              <button className='disabled' data-tip='Structures are not yet available' onClick={() => null}> Add Structure </button>
+
+           </div>
+
           {this.renderModuleGraph()}
+
 
         </div>
 
@@ -332,21 +364,23 @@ const mapStateToProps = state => {
 
   let selectedModuleKey = state.editor.selectedModuleKey;
 
-  if(!state.modules[selectedModuleKey]){
-    selectedModuleKey = Object.keys(state.modules)[0];
+  if(!state.editor.modules[selectedModuleKey]){
+    selectedModuleKey = Object.keys(state.editor.modules)[0];
   }
 
-  let module = state.modules[selectedModuleKey];
+  let module = state.editor.modules[selectedModuleKey];
   let moduleStates = extractStates(module);
   let moduleState =  moduleStates.find(s => (s.name === state.editor.selectedStateKey))
 
   return {
     module,
-    modules: state.modules,
+    modules: state.editor.modules,
+    library: state.library.modules,
     selectedModuleKey,
     moduleState,
     moduleStates,
     selectedStateKey: state.editor.selectedStateKey,
+    selectedStateTransition: state.editor.selectedStateTransition,
     loadModuleVisible: state.editor.loadModuleVisible,
     downloadVisible: state.editor.downloadVisible,
     selectedModulePanel: state.editor.selectedModulePanel,
@@ -364,7 +398,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   copyNode,
   changeStateType,
   newModule,
-  bulkLoadModules,
+  loadLibrary,
   showLoadModule,
   hideLoadModule,
   showDownload,

@@ -1,11 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
+import thunk from 'redux-thunk';
 
 import reducers from './reducers';
 
 import exampleModule from './data/example_module'
 
-const initialState = {modules: exampleModule};
+const initialState = {editor: {modules: exampleModule, selectedModulePanel: 'info', modulePanelVisible: true}}
 const enhancers = [];
 const middleware = [];
 
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const createAppStore = (history) => {
   middleware.push(routerMiddleware(history))
+  middleware.push(thunk)
   const composedEnhancers = compose(
     applyMiddleware(...middleware),
     ...enhancers

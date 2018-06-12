@@ -70,6 +70,18 @@
   fill: #336699;
   stroke: #336699;
 }
+.transition.transition-highlighted.transition-selected path {
+  stroke: violet;
+  stroke-width: 3px;
+}
+.transition.transition-highlighted.transition-selected polygon {
+  fill: violet;
+  stroke: violet;
+}
+
+.transition.transition-highlighted.transition-selected text {
+  fill: violet;
+}
 
 .transition.transition-highlighted text {
   fill: #336699;

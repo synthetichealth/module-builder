@@ -40,7 +40,7 @@ class ModuleGraph extends Component<Props> {
       this.panZoomSettings = null
     }
 
-    this.writeSVG(nextProps.module, nextProps.selectedState);
+    this.writeSVG(nextProps.module, nextProps.selectedState, nextProps.selectedStateTransition);
 
     if(nextProps.fullscreen !== this.props.fullscreen){
       if(nextProps.fullscreen){
@@ -134,9 +134,9 @@ class ModuleGraph extends Component<Props> {
 
   }
 
-  writeSVG(module: Module, selectedState: State){
+  writeSVG(module: Module, selectedState: State, selectedStateTransition: Number){
 
-    const dot = generateDOT(module, selectedState);
+    const dot = generateDOT(module, selectedState, selectedStateTransition: Number);
     if(dot === this.lastDOT){
       return;
     }
@@ -186,13 +186,23 @@ class ModuleGraph extends Component<Props> {
     document.querySelectorAll('.edge.transition').forEach( group => {
       let originator = group.querySelector('title').innerHTML.split('-&gt;')[0]
       let hitLine = group.querySelector('path').cloneNode(true)
+      let transitionIndex = null;
+      let transitionIndexClass = group.className.baseVal.split(' ').find(t => t.startsWith('transition-index'));
+      if(transitionIndexClass){
+        try{
+          transitionIndex = parseInt(transitionIndexClass.split('_')[1])
+        } catch(e){
+          // just ignore if not a number
+        }
+
+      }
       hitLine.setAttribute('stroke-width', 20)
       hitLine.setAttribute('opacity', 0)
       group.appendChild(hitLine)
 
       group.querySelectorAll('path,text').forEach( path => {
         // force rerender because of a pan bug
-        path.addEventListener('mouseup', (e) => {this.lastDOT = null;e.stopPropagation(); this.props.onClick(originator)});
+        path.addEventListener('mouseup', (e) => {this.lastDOT = null;e.stopPropagation(); this.props.onClick(originator, transitionIndex)});
       })
     })
 
@@ -239,14 +249,15 @@ class ModuleGraph extends Component<Props> {
         document.getElementById('svg-pan-zoom-zoom-out').addEventListener('mouseup', (e) => {this.svgPanZoom.zoomOut()});
         document.getElementById('svg-pan-zoom-reset-pan-zoom').addEventListener('mouseup', (e) => {
           e.stopPropagation();
-          this.svgPanZoom.pan({x: this.svgPanZoom.getPan().x - offsetLeft/2 , y: 0}, true)
+          this.svgPanZoom.pan({x: this.svgPanZoom.getPan().x - offsetLeft/2 , y: 50}, true)
           this.svgPanZoom.zoom(Math.pow(.8,zoomFactor), true);
         });
       }
 
       if(!this.panZoomSettings){
         /* first time load of module */
-        this.svgPanZoom.pan({x: this.svgPanZoom.getPan().x - offsetLeft/2 , y: 0}, true)
+        /* center and bump down a bit */
+        this.svgPanZoom.pan({x: this.svgPanZoom.getPan().x - offsetLeft/2 , y: 50}, true)
         this.svgPanZoom.zoom(Math.pow(.8,zoomFactor), true);
       }
 

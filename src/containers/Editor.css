@@ -233,6 +233,49 @@ z-index: 500;
   margin-top: 140px;
 }
 
+.Editor-graph-buttons {
+  position: fixed;
+  top: 75px;
+  right: 5px;
+  z-index: 2000;
+}
+
+.Editor-graph-buttons button.disabled {
+  opacity: .5;
+}
+
+.Editor-graph-buttons button {
+    border: none;
+    margin: 0 10px;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+
+    background: transparent;
+
+    /* inherit font & color from ancestor */
+    color: inherit;
+    font: inherit;
+
+    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+    line-height: normal;
+
+    /* Corrects font smoothing for webkit */
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+
+    /* Corrects inability to style clickable `input` types in iOS */
+    -webkit-appearance: none;
+
+    text-shadow: 5px 5px 8px rgba(0,0,0,0.23);
+    color: #22425e;
+    font-size: 1.25rem;
+}
+
+.Editor-graph-buttons button:focus {
+  outline: none;
+}
+
 .nav-action-button {
   margin-left: 10px;
 }

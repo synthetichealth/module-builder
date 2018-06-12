@@ -116,7 +116,6 @@ class ComplexTransition extends Component<Props> {
     if(t.transition.to !== undefined){
       const newDistributedTransition = {...t, distributions: [{distribution: 1, transition: t.transition.to}]};
       delete newDistributedTransition.transition;
-      console.log(newDistributedTransition);
       transitionEditor = <div>
                            <DirectTransitionEditor 
                              transition={t.transition}
