@@ -196,6 +196,7 @@ class ModuleGraph extends Component<Props> {
         }
 
       }
+      hitLine.setAttribute('class', 'transition-hitbox');
       hitLine.setAttribute('stroke-width', 20)
       hitLine.setAttribute('opacity', 0)
       group.appendChild(hitLine)

@@ -2,167 +2,10 @@ import _ from 'lodash';
 import { getTemplate } from '../templates/Templates';
 import { normalizeType, cleanString } from '../utils/stringUtils';
 
-// updates the module in-place with fixed state refences
-// if newName is null, then delete all references instead
-const fixStateReferences = (module, stateName, newName) => {
-
-  Object.keys(module.states).map(s => module.states[s]).forEach( state => {
-
-    if(state.direct_transition === stateName){
-      if(newName === null){
-        delete state.direct_transition
-      } else {
-        state.direct_transition = newName
-      }
-
-    } else if (state.distributed_transition){
-      state.distributed_transition.forEach( transition => {
-        if(transition.transition === stateName){
-          if(newName === null){
-            delete transition.transition
-          } else {
-            transition.transition = newName
-          }
-        }
-      })
-    } else if (state.conditional_transition){
-      state.conditional_transition.forEach( transition => {
-        if(transition.transition === stateName){
-          if(newName === null){
-            delete transition.transition
-          } else {
-            transition.transition = newName
-          }
-        }
-        if(transition.condition){
-          if(transition.condition.condition_type === 'PriorState' && transition.condition.name === stateName){
-            if(newName === null){
-              delete transition.condition.name
-            } else {
-              transition.condition.name = newName
-            }
-          }
-        }
-      })
-    } else if (state.complex_transition){
-      state.complex_transition.forEach( transition => {
-        if(transition.transition === stateName){
-          if(newName === null){
-            delete transition.transition
-          } else {
-            transition.transition = newName
-          }
-        }
-        if(transition.condition){
-          if(transition.condition.condition_type === 'PriorState' && transition.condition.name === stateName){
-            if(newName === null) {
-              delete transition.condition.name
-            } else {
-              transition.condition.name = newName
-            }
-          }
-        }
-        if(transition.distributions){
-          transition.distributions.forEach( distribution => {
-            if(distribution.transition === stateName){
-              if(newName === null){
-                delete distribution.transition
-              } else {
-                distribution.transition = newName
-              }
-            }
-          })
-        }
-      })
-    }
-    if(state.reason === stateName){
-      if(newName === null){
-        delete state.reason
-      } else {
-        state.reason = newName;
-      }
-    }
-    if(state.target_encounter === stateName){
-      if(newName === null){
-        state.target_encounter = "" // this is a requried field
-      } else {
-        state.target_encounter = newName;
-      }
-    }
-    if(state.condition_onset === stateName){
-      if(newName === null){
-        delete state.condition_onset
-      } else {
-        state.condition_onset = newName;
-      }
-    }
-    if(state.allergy_onset === stateName){
-      if(newName === null){
-        delete state.allergy_onset
-      } else {
-        state.allergy_onset = newName;
-      }
-    }
-    if(state.medication_order === stateName){
-      if(newName === null){
-        delete state.medication_order
-      } else {
-        state.medication_order = newName;
-      }
-    }
-    if(state.careplan === stateName){
-      if(newName === null){
-        delete state.careplan;
-      } else {
-        state.careplan = newName;
-      }
-    }
-    if(state.allow && state.allow.condition_type === 'PriorState' && state.allow.name === stateName){
-      if(newName === null){
-        delete state.allow.name
-      } else {
-        state.allow.name = newName;
-      }
-    }
-  });
-}
-
-// When nodes are cloned, loopback transitions point to node being cloned, instead of new copy
-const renameLoopbackTransition = (state, newStateName, oldStateName) => {
-  if(state.direct_transition === oldStateName){
-    state.direct_transition = newStateName;
-  } else if (state.distributed_transition){
-    state.distributed_transition.forEach( transition => {
-      if(transition.transition === oldStateName){
-        transition.transition = newStateName
-      }
-    })
-  } else if (state.conditional_transition){
-    state.conditional_transition.forEach( transition => {
-      if(transition.transition === oldStateName){
-        transition.transition = newStateName
-      }
-    })
-  } else if (state.complex_transition){
-    state.complex_transition.forEach( transition => {
-      if(transition.transition === oldStateName){
-        transition.transition = newStateName
-      }
-      if(transition.distributions){
-        transition.distributions.forEach( distribution => {
-          if(distribution.transition === oldStateName){
-            distribution.transition = newStateName
-          }
-        })
-      }
-    })
-  }
-}
-
 const initialState = {
     selectedStateKey: null, 
     selectedStateTransition: null, 
-    selectedModuleKey: 'examplitis', 
+    selectedModuleKey: null, 
     loadModuleVisible: false, 
     downloadVisible: false,
     selectedModulePanel: 'info',
@@ -176,19 +19,20 @@ export default (state = initialState, action) => {
 
   let newState = {...state}
 
-
-
   if(['COPY_NODE', 'ADD_NODE', 'INSERT_NODE', 'ADD_STRUCTURE',
       'EDIT_NODE', 'ADD_TRANSITION', 'RENAME_NODE', 'EDIT_MODULE_NAME',
       'EDIT_MODULE_REMARKS', 'CHANGE_STATE_TYPE'].includes(action.type)){
     // DESCTRUCTIVE EDITS
-    newState.history = [_.cloneDeep(newState.modules[newState.selectedModuleKey])].concat(newState.history);
+    
+      newState.history = [_.cloneDeep(newState.modules[newState.selectedModuleKey])].concat(newState.history);
+
+    
   }
 
   switch (action.type) {
     case 'SELECT_NODE':
       let selectedModulePanel = state.selectedModulePanel;
-      if(action.data){
+      if(action.data.key){
         if(selectedModulePanel === 'info'){
           selectedModulePanel = 'state';
         }
@@ -511,3 +355,161 @@ export default (state = initialState, action) => {
 
   }
 }
+
+// updates the module in-place with fixed state refences
+// if newName is null, then delete all references instead
+const fixStateReferences = (module, stateName, newName) => {
+
+  Object.keys(module.states).map(s => module.states[s]).forEach( state => {
+
+    if(state.direct_transition === stateName){
+      if(newName === null){
+        delete state.direct_transition
+      } else {
+        state.direct_transition = newName
+      }
+
+    } else if (state.distributed_transition){
+      state.distributed_transition.forEach( transition => {
+        if(transition.transition === stateName){
+          if(newName === null){
+            delete transition.transition
+          } else {
+            transition.transition = newName
+          }
+        }
+      })
+    } else if (state.conditional_transition){
+      state.conditional_transition.forEach( transition => {
+        if(transition.transition === stateName){
+          if(newName === null){
+            delete transition.transition
+          } else {
+            transition.transition = newName
+          }
+        }
+        if(transition.condition){
+          if(transition.condition.condition_type === 'PriorState' && transition.condition.name === stateName){
+            if(newName === null){
+              delete transition.condition.name
+            } else {
+              transition.condition.name = newName
+            }
+          }
+        }
+      })
+    } else if (state.complex_transition){
+      state.complex_transition.forEach( transition => {
+        if(transition.transition === stateName){
+          if(newName === null){
+            delete transition.transition
+          } else {
+            transition.transition = newName
+          }
+        }
+        if(transition.condition){
+          if(transition.condition.condition_type === 'PriorState' && transition.condition.name === stateName){
+            if(newName === null) {
+              delete transition.condition.name
+            } else {
+              transition.condition.name = newName
+            }
+          }
+        }
+        if(transition.distributions){
+          transition.distributions.forEach( distribution => {
+            if(distribution.transition === stateName){
+              if(newName === null){
+                delete distribution.transition
+              } else {
+                distribution.transition = newName
+              }
+            }
+          })
+        }
+      })
+    }
+    if(state.reason === stateName){
+      if(newName === null){
+        delete state.reason
+      } else {
+        state.reason = newName;
+      }
+    }
+    if(state.target_encounter === stateName){
+      if(newName === null){
+        state.target_encounter = "" // this is a requried field
+      } else {
+        state.target_encounter = newName;
+      }
+    }
+    if(state.condition_onset === stateName){
+      if(newName === null){
+        delete state.condition_onset
+      } else {
+        state.condition_onset = newName;
+      }
+    }
+    if(state.allergy_onset === stateName){
+      if(newName === null){
+        delete state.allergy_onset
+      } else {
+        state.allergy_onset = newName;
+      }
+    }
+    if(state.medication_order === stateName){
+      if(newName === null){
+        delete state.medication_order
+      } else {
+        state.medication_order = newName;
+      }
+    }
+    if(state.careplan === stateName){
+      if(newName === null){
+        delete state.careplan;
+      } else {
+        state.careplan = newName;
+      }
+    }
+    if(state.allow && state.allow.condition_type === 'PriorState' && state.allow.name === stateName){
+      if(newName === null){
+        delete state.allow.name
+      } else {
+        state.allow.name = newName;
+      }
+    }
+  });
+}
+
+// When nodes are cloned, loopback transitions point to node being cloned, instead of new copy
+const renameLoopbackTransition = (state, newStateName, oldStateName) => {
+  if(state.direct_transition === oldStateName){
+    state.direct_transition = newStateName;
+  } else if (state.distributed_transition){
+    state.distributed_transition.forEach( transition => {
+      if(transition.transition === oldStateName){
+        transition.transition = newStateName
+      }
+    })
+  } else if (state.conditional_transition){
+    state.conditional_transition.forEach( transition => {
+      if(transition.transition === oldStateName){
+        transition.transition = newStateName
+      }
+    })
+  } else if (state.complex_transition){
+    state.complex_transition.forEach( transition => {
+      if(transition.transition === oldStateName){
+        transition.transition = newStateName
+      }
+      if(transition.distributions){
+        transition.distributions.forEach( distribution => {
+          if(distribution.transition === oldStateName){
+            distribution.transition = newStateName
+          }
+        })
+      }
+    })
+  }
+}
+

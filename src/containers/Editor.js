@@ -18,12 +18,17 @@ import { findAvailableKey, createSafeKeyFromName } from '../utils/keys';
 import { getTemplate } from '../templates/Templates';
 import { BasicTutorial, EditTutorial } from '../templates/Tutorial';
 
+import { RIEInput } from 'riek';
+
+import examplitis from '../data/example_module'
+
 import './Editor.css';
 import '../../node_modules/react-joyride/lib/react-joyride-compiled.css'
 
 import StateList from '../components/analysis/StateList';
 import AttributeList from '../components/analysis/AttributeList';
 
+import LoadingLogo from './synthea-animated-logo.svg'
 import SyntheaLogo from './synthea-logo-dark-glow.png'
 import FullscreenButton from './fullscreen.png'
 import InfoButton from './Info.png'
@@ -68,8 +73,14 @@ class Editor extends Component {
 
   componentDidMount() {
     import("../data/modules").then(modules => {
-      this.props.loadLibrary(modules.default);
+      this.props.loadLibrary({...examplitis, ...modules.default});
+
+      // see https://github.com/wwayne/react-tooltip/issues/40
+      setTimeout(() => {
+       ReactTooltip.rebuild();
+      }, 1000)
     });
+
   }
 
   /*
@@ -133,8 +144,8 @@ class Editor extends Component {
     }
   }
   renderAddStateButton = () => {
-    if(this.props.module){
-      return <button className='' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> Add State </button>
+    if(this.props.selectedModuleKey){
+      return <button className='' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> + Add State </button>
     }
     return <div/>
   }
@@ -152,7 +163,7 @@ class Editor extends Component {
       }
       return <button className={className} 
                      data-tip='Insert a state within a transition.  Please select a transition.' 
-                     onClick={onClick}> Insert State </button>
+                     onClick={onClick}> -/- Insert State </button>
     }
     return <div/>
   }
@@ -183,11 +194,21 @@ class Editor extends Component {
     return <div/>
   }
 
+  renderLoadModule = () => {
+    return <LoadModule modules={this.props.modules}
+          library={this.props.library}
+          visible={this.props.loadModuleVisible}
+          onHide={this.props.hideLoadModule}
+          push={this.props.push}
+          welcome={!this.props.module}
+          newModule={this.newModule(Object.keys(this.props.modules))}
+          />
+  }
+
   renderModulePropertiesEditor = () => {
     if(this.props.module){
       return <ModulePropertiesEditor
               module={this.props.module}
-              onNameChange={(name) => this.props.editModuleName(this.props.selectedModuleKey, name)}
               onRemarksChange={(remarks) => this.props.editModuleRemarks(this.props.selectedModuleKey, remarks)}/>
     }
     return <div/>
@@ -259,9 +280,8 @@ class Editor extends Component {
     }
   }
 
-  render() {
-    return (
-      <div className='Editor'>
+  renderNav = () => {
+    return(
         <nav className="navbar fixed-top navbar-expand-lg navbar-dark">
           <a className="navbar-brand Editor-title" href="#">
             <img src={SyntheaLogo} className='synthea-logo'/>
@@ -279,62 +299,86 @@ class Editor extends Component {
             </div>
           </div>
         </nav>
+    )
+
+  }
+
+  renderMainEditor = () => {
+
+    if(!this.props.module){
+      return <img className='Editor-loading-logo' src={LoadingLogo} />
+    }
+
+    return (
+      <div className='Editor-main'>
+
         <button className="Editor-fullscreen-name" onClick={this.leftNavClick('info')}>
            {this.props.module.name}
         </button>
 
-        <LoadModule modules={this.props.modules}
-          library={this.props.library}
-          visible={this.props.loadModuleVisible}
-          onHide={this.props.hideLoadModule}
-          push={this.props.push}
-          newModule={this.newModule(Object.keys(this.props.modules))}
-          />
+        <div className='Editor-left'>
+         <ul>
+           <li className={'Editor-left-fullscreen'}><button data-tip='Show/hide editor panel.' onClick={this.leftNavClick('hide')}><img className={!this.props.modulePanelVisible ? 'Editor-left-fullscreen-active' : 'Editor-left-fullscreen-inactive'} src={FullscreenButton}/></button></li>
+           <li className='Editor-left-spacer'></li>
+           <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button data-tip='Module Properties.' onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
+           {this.renderStateButton()}
+           <li className='Editor-left-spacer'></li>
+           <li className={this.props.selectedModulePanel === 'statelist' ? 'Editor-left-selected' : ''}><button data-tip='Searchable list of states.' onClick={this.leftNavClick('statelist')}><img src={StateListButton}/></button></li>
+           <li className={this.props.selectedModulePanel === 'attribute' ? 'Editor-left-selected' : ''}><button data-tip='Attributes set in this module.' onClick={this.leftNavClick('attribute')}><img src={AttributeButton}/></button></li>
+            {/*
 
-        {this.renderDownload()}
+           <li className={this.props.selectedModulePanel === 'warning' ? 'Editor-left-selected' : ''}><button data-tip='Problems in module that need to be resolved. Not yet implemented.' onClick={this.leftNavClick('warning')}><img src={WarningButton}/></button></li>
+           <li className={this.props.selectedModulePanel === 'related' ? 'Editor-left-selected' : ''}><button data-tip='Related modules, such as those that share attributes. Not yet implemented.' onClick={this.leftNavClick('related')}><img src={RelatedButton}/></button></li>
+           <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON. Not yet implemented.' onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
 
-        <div className='Editor-main'>
+           */}
+         </ul>
+        </div>
 
-          <div className='Editor-left'>
-           <ul>
-             <li className={'Editor-left-fullscreen'}><button data-tip='Show/hide editor panel.' onClick={this.leftNavClick('hide')}><img className={!this.props.modulePanelVisible ? 'Editor-left-fullscreen-active' : 'Editor-left-fullscreen-inactive'} src={FullscreenButton}/></button></li>
-             <li className='Editor-left-spacer'></li>
-             <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button data-tip='Module Properties.' onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
-             {this.renderStateButton()}
-             <li className='Editor-left-spacer'></li>
-             <li className={this.props.selectedModulePanel === 'statelist' ? 'Editor-left-selected' : ''}><button data-tip='Searchable list of states.' onClick={this.leftNavClick('statelist')}><img src={StateListButton}/></button></li>
-             <li className={this.props.selectedModulePanel === 'attribute' ? 'Editor-left-selected' : ''}><button data-tip='Attributes set in this module.' onClick={this.leftNavClick('attribute')}><img src={AttributeButton}/></button></li>
-             <li className={this.props.selectedModulePanel === 'warning' ? 'Editor-left-selected' : ''}><button data-tip='Problems in module that need to be resolved. Not yet implemented.' onClick={this.leftNavClick('warning')}><img src={WarningButton}/></button></li>
-             <li className={this.props.selectedModulePanel === 'related' ? 'Editor-left-selected' : ''}><button data-tip='Related modules, such as those that share attributes. Not yet implemented.' onClick={this.leftNavClick('related')}><img src={RelatedButton}/></button></li>
-             <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON. Not yet implemented.' onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
-           </ul>
+        <div className={'Editor-panel ' +  (!this.props.modulePanelVisible ? 'Editor-panel-hidden' : 'Editor-panel-show')}>
+          <div className="Editor-module-name">
+            <RIEInput value={this.props.module.name} propName="name" change={(name) => {this.props.editModuleName(this.props.selectedModuleKey, name.name)}} />
           </div>
 
-          <div className={'Editor-panel ' +  (!this.props.modulePanelVisible ? 'Editor-panel-hidden' : 'Editor-panel-show')}>
-            <div className="Editor-module-name">
-              <span className="Module-name">
-                {this.props.module.name}
-              </span>
-            </div>
+          <div className='Editor-panel-content'>
+            {this.renderPanelContent()}
+          </div>
 
-            <div className='Editor-panel-content'>
-              {this.renderPanelContent()}
-            </div>
+         </div>
 
-           </div>
+         <div className='Editor-graph-buttons'>
+            {this.renderAddStateButton()}
+            {this.renderInsertStateButton()}
+            {/*<button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button> */}
+        { /* <button className='disabled' data-tip='Structures are not yet available' onClick={() => null}> Add Structure </button> */ }
 
-           <div className='Editor-graph-buttons'>
-              {this.renderAddStateButton()}
-              {this.renderInsertStateButton()}
-              {/*<button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button> */}
-              <button className='disabled' data-tip='Structures are not yet available' onClick={() => null}> Add Structure </button>
+         </div>
 
-           </div>
-
-          {this.renderModuleGraph()}
+        {this.renderModuleGraph()}
 
 
-        </div>
+      </div>)
+
+  }
+
+  render() {
+
+    return (
+      <div className='Editor'>
+
+        <ReactTooltip
+          className='react-tooltip-customized'
+          effect='solid'
+          delayShow={800}
+          />
+
+        { this.renderNav() }
+
+        { this.renderLoadModule() }
+        { this.renderDownload() }
+
+        { this.renderMainEditor() }
+
 
         <Joyride
           ref={c => (this.joyride = c)}
@@ -350,10 +394,8 @@ class Editor extends Component {
           keyboardNavigation={true}
         />
 
-        <ReactTooltip
-          className='react-tooltip-customized'
-          effect='solid'
-          />
+
+
 
       </div>
     )
@@ -364,13 +406,16 @@ const mapStateToProps = state => {
 
   let selectedModuleKey = state.editor.selectedModuleKey;
 
-  if(!state.editor.modules[selectedModuleKey]){
-    selectedModuleKey = Object.keys(state.editor.modules)[0];
+  let loadModuleVisible = state.editor.loadModuleVisible;
+
+  if(!selectedModuleKey){
+    loadModuleVisible = true;
   }
 
   let module = state.editor.modules[selectedModuleKey];
-  let moduleStates = extractStates(module);
-  let moduleState =  moduleStates.find(s => (s.name === state.editor.selectedStateKey))
+
+  let moduleStates = selectedModuleKey && extractStates(module);
+  let moduleState =  moduleStates && moduleStates.find(s => (s.name === state.editor.selectedStateKey))
 
   return {
     module,
@@ -381,7 +426,7 @@ const mapStateToProps = state => {
     moduleStates,
     selectedStateKey: state.editor.selectedStateKey,
     selectedStateTransition: state.editor.selectedStateTransition,
-    loadModuleVisible: state.editor.loadModuleVisible,
+    loadModuleVisible: loadModuleVisible,
     downloadVisible: state.editor.downloadVisible,
     selectedModulePanel: state.editor.selectedModulePanel,
     modulePanelVisible: state.editor.modulePanelVisible

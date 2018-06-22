@@ -4,9 +4,7 @@ import thunk from 'redux-thunk';
 
 import reducers from './reducers';
 
-import exampleModule from './data/example_module'
-
-const initialState = {editor: {modules: exampleModule, selectedModulePanel: 'info', modulePanelVisible: true}}
+const initialState = {}
 const enhancers = [];
 const middleware = [];
 

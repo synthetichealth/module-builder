@@ -160,6 +160,60 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for symptom"
         }
       ],
+      "direct_transition": "Allergic_Rhinitis_Symptom1"
+    },
+    "Allergic_Rhinitis_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom2"
+    },
+    "Allergic_Rhinitis_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Nasal Discharge",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom3"
+    },
+    "Allergic_Rhinitis_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Itching",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom4"
+    },
+    "Allergic_Rhinitis_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Sneezing Fits",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom5"
+    },
+    "Allergic_Rhinitis_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Ear Pressure",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Symptom_Period"
+    },
+    "Symptom_Period": {
+      "type": "Delay",
+      "range": {
+        "low": 2,
+        "high": 3,
+        "unit": "weeks"
+      },
       "direct_transition": "Prescribe_OTC_Antihistamine"
     },
     "Prescribe_OTC_Antihistamine": {
@@ -261,6 +315,38 @@ export default {"allergic_rhinitis":{
     "Allergic_Rhinitis_Subsides": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "allergic_rhinitis",
+      "direct_transition": "Allergic_Rhinitis_Symptom1_Ends"
+    },
+    "Allergic_Rhinitis_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom2_Ends"
+    },
+    "Allergic_Rhinitis_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Nasal Discharge",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom3_Ends"
+    },
+    "Allergic_Rhinitis_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Itching",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom4_Ends"
+    },
+    "Allergic_Rhinitis_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Ear Pressure",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Terminal"
     },
     "Terminal": {
@@ -3343,7 +3429,7 @@ export default {"allergic_rhinitis":{
         "high": 17,
         "unit": "years"
       },
-      "direct_transition": "Appendicitis"
+      "direct_transition": "Appendicitis_Symptom1"
     },
     "Ages_18_44": {
       "type": "Delay",
@@ -3352,7 +3438,7 @@ export default {"allergic_rhinitis":{
         "high": 44,
         "unit": "years"
       },
-      "direct_transition": "Appendicitis"
+      "direct_transition": "Appendicitis_Symptom1"
     },
     "Ages_45_64": {
       "type": "Delay",
@@ -3361,7 +3447,7 @@ export default {"allergic_rhinitis":{
         "high": 64,
         "unit": "years"
       },
-      "direct_transition": "Appendicitis"
+      "direct_transition": "Appendicitis_Symptom1"
     },
     "Ages_65_Plus": {
       "type": "Delay",
@@ -3369,6 +3455,78 @@ export default {"allergic_rhinitis":{
         "low": 65,
         "high": 99,
         "unit": "years"
+      },
+      "direct_transition": "Appendicitis_Symptom1"
+    },
+    "Appendicitis_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Abdominal Pain",
+      "range": {
+        "low": 50,
+        "high": 150
+      },
+      "direct_transition": "Appendicitis_Symptom2"
+    },
+    "Appendicitis_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "Appendicitis_Symptom3"
+    },
+    "Appendicitis_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Loss of Appetite",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "Appendicitis_Symptom4"
+    },
+    "Appendicitis_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Appendicitis_Symptom5"
+    },
+    "Appendicitis_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Diarrhea",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Appendicitis_Symptom6"
+    },
+    "Appendicitis_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Bloating/Gas",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Appendicitis_Symptom7"
+    },
+    "Appendicitis_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Constipation",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Symptom_Period"
+    },
+    "Symptom_Period": {
+      "type": "Delay",
+      "range": {
+        "low": 1,
+        "high": 3,
+        "unit": "days"
       },
       "direct_transition": "Appendicitis"
     },
@@ -3474,6 +3632,62 @@ export default {"allergic_rhinitis":{
         "Avg operative time is ~55 minutes",
         "https://www.ncbi.nlm.nih.gov/pubmed/17658102"
       ],
+      "direct_transition": "Appendicitis_Symptom1_Ends"
+    },
+    "Appendicitis_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Abdominal Pain",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom2_Ends"
+    },
+    "Appendicitis_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom3_Ends"
+    },
+    "Appendicitis_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Loss of Appetite",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom4_Ends"
+    },
+    "Appendicitis_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom5_Ends"
+    },
+    "Appendicitis_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Diarrhea",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom6_Ends"
+    },
+    "Appendicitis_Symptom6_Ends": {
+      "type": "Symptom",
+      "symptom": "Bloating/Gas",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom7_Ends"
+    },
+    "Appendicitis_Symptom7_Ends": {
+      "type": "Symptom",
+      "symptom": "Constipation",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Recovery"
     },
     "Recovery": {
@@ -3672,6 +3886,60 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for symptom"
         }
       ],
+      "direct_transition": "Asthma_Symptom1"
+    },
+    "Asthma_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Wheezing",
+      "range": {
+        "low": 25,
+        "high": 75
+      },
+      "direct_transition": "Asthma_Symptom2"
+    },
+    "Asthma_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Shortness of Breath",
+      "range": {
+        "low": 25,
+        "high": 75
+      },
+      "direct_transition": "Asthma_Symptom3"
+    },
+    "Asthma_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Chest Pressure",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Asthma_Symptom4"
+    },
+    "Asthma_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Asthma_Symptom5"
+    },
+    "Asthma_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Asthma_Symptom6"
+    },
+    "Asthma_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Mucus Secretion",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
       "direct_transition": "Asthma_Screening"
     },
     "Asthma_Screening": {
@@ -3999,6 +4267,54 @@ export default {"allergic_rhinitis":{
     "Childhood_Asthma_Subsides": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "asthma_condition",
+      "direct_transition": "Asthma_Symptom1_Ends"
+    },
+    "Asthma_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Wheezing",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Asthma_Symptom2_Ends"
+    },
+    "Asthma_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Shortness of Breath",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Asthma_Symptom3_Ends"
+    },
+    "Asthma_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Chest Pressure",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Asthma_Symptom4_Ends"
+    },
+    "Asthma_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Asthma_Symptom5_Ends"
+    },
+    "Asthma_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Asthma_Symptom6_Ends"
+    },
+    "Asthma_Symptom6_Ends": {
+      "type": "Symptom",
+      "symptom": "Mucus Secretion",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "End_Asthma_CarePlan"
     },
     "End_Asthma_CarePlan": {
@@ -4288,6 +4604,51 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
+      "direct_transition": "ADD_Symptom1"
+    },
+    "ADD_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Poor Eye Contact",
+      "range": {
+        "low": 0,
+        "high": 30
+      },
+      "direct_transition": "ADD_Symptom2"
+    },
+    "ADD_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Delayed Verbal/Language Skills",
+      "range": {
+        "low": 0,
+        "high": 30
+      },
+      "direct_transition": "ADD_Symptom3"
+    },
+    "ADD_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Hyperactive Behavior",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "ADD_Symptom4"
+    },
+    "ADD_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Inability to Focus/Concentrate",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "ADD_Symptom5"
+    },
+    "ADD_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Poor Socialization",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
       "direct_transition": "ADHD_CarePlan"
     },
     "ADHD_CarePlan": {
@@ -4559,6 +4920,46 @@ export default {"allergic_rhinitis":{
     "ADHD_Ends": {
       "type": "ConditionEnd",
       "condition_onset": "ADHD",
+      "direct_transition": "ADD_Symptom1_Ends"
+    },
+    "ADD_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Poor Eye Contact",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "ADD_Symptom2_Ends"
+    },
+    "ADD_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Delayed Verbal/Language Skills",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "ADD_Symptom3_Ends"
+    },
+    "ADD_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Hyperactive Behavior",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "ADD_Symptom4_Ends"
+    },
+    "ADD_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Inability to Focus/Concentrate",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "ADD_Symptom5_Ends"
+    },
+    "ADD_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Poor Socialization",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "ADHD_CarePlan_Ends"
     },
     "ADHD_CarePlan_Ends": {
@@ -4666,8 +5067,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Cough",
       "range": {
-        "low": 50,
-        "high": 100
+        "low": 25,
+        "high": 75
       },
       "direct_transition": "Bronchitis_Symptom2"
     },
@@ -4675,8 +5076,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Mucus",
       "range": {
-        "low": 0,
-        "high": 100
+        "low": 25,
+        "high": 50
       },
       "direct_transition": "Bronchitis_Symptom3"
     },
@@ -4684,8 +5085,71 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Shortness of Breath",
       "range": {
-        "low": 50,
-        "high": 100
+        "low": 25,
+        "high": 75
+      },
+      "direct_transition": "Bronchitis_Symptom4"
+    },
+    "Bronchitis_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "range": {
+        "low": 25,
+        "high": 50
+      },
+      "direct_transition": "Bronchitis_Symptom5"
+    },
+    "Bronchitis_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 25,
+        "high": 75
+      },
+      "direct_transition": "Bronchitis_Symptom6"
+    },
+    "Bronchitis_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 25,
+        "high": 50
+      },
+      "direct_transition": "Bronchitis_Symptom7"
+    },
+    "Bronchitis_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Body Aches",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Bronchitis_Symptom8"
+    },
+    "Bronchitis_Symptom8": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "range": {
+        "low": 25,
+        "high": 50
+      },
+      "direct_transition": "Bronchitis_Symptom9"
+    },
+    "Bronchitis_Symptom9": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Bronchitis_Symptom10"
+    },
+    "Bronchitis_Symptom10": {
+      "type": "Symptom",
+      "symptom": "Diarrhea",
+      "range": {
+        "low": 0,
+        "high": 25
       },
       "direct_transition": "Symptoms_Dont_improve"
     },
@@ -4878,7 +5342,7 @@ export default {"allergic_rhinitis":{
             "condition_type": "Symptom",
             "symptom": "Mucus",
             "operator": "<",
-            "value": 20
+            "value": 30
           },
           "distributions": [
             {
@@ -4963,6 +5427,62 @@ export default {"allergic_rhinitis":{
     "Bronchitis_Symptom2_Subsides": {
       "type": "Symptom",
       "symptom": "Mucus",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom4_Subsides"
+    },
+    "Bronchitis_Symptom4_Subsides": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom5_Subsides"
+    },
+    "Bronchitis_Symptom5_Subsides": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom6_Subsides"
+    },
+    "Bronchitis_Symptom6_Subsides": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom7_Subsides"
+    },
+    "Bronchitis_Symptom7_Subsides": {
+      "type": "Symptom",
+      "symptom": "Body Aches",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom8_Subsides"
+    },
+    "Bronchitis_Symptom8_Subsides": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom9_Subsides"
+    },
+    "Bronchitis_Symptom9_Subsides": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom10_Subsides"
+    },
+    "Bronchitis_Symptom10_Subsides": {
+      "type": "Symptom",
+      "symptom": "Diarrhea",
       "exact": {
         "quantity": 0
       },
@@ -5663,6 +6183,51 @@ export default {"allergic_rhinitis":{
     },
     "End_Symptom_Encounter": {
       "type": "EncounterEnd",
+      "direct_transition": "Colorectal_Cancer_Symptom_3"
+    },
+    "Colorectal_Cancer_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Constipation",
+      "range": {
+        "low": 50,
+        "high": 150
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom_4"
+    },
+    "Colorectal_Cancer_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Cramping",
+      "range": {
+        "low": 50,
+        "high": 150
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom_5"
+    },
+    "Colorectal_Cancer_Symptom_5": {
+      "type": "Symptom",
+      "symptom": "Abdominal Pain",
+      "range": {
+        "low": 50,
+        "high": 150
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom_6"
+    },
+    "Colorectal_Cancer_Symptom_6": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom_7"
+    },
+    "Colorectal_Cancer_Symptom_7": {
+      "type": "Symptom",
+      "symptom": "Weight Loss",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
       "direct_transition": "Wait_For_Diagnostic_Colonoscopy"
     },
     "Wait_For_Diagnostic_Colonoscopy": {
@@ -6434,6 +6999,46 @@ export default {"allergic_rhinitis":{
     },
     "End_Remission_Encounter": {
       "type": "EncounterEnd",
+      "direct_transition": "Colorectal_Cancer_Symptom3_Ends"
+    },
+    "Colorectal_Cancer_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Constipation",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom4_Ends"
+    },
+    "Colorectal_Cancer_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Cramping",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom5_Ends"
+    },
+    "Colorectal_Cancer_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Abdominal Pain",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom6_Ends"
+    },
+    "Colorectal_Cancer_Symptom6_Ends": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom7_Ends"
+    },
+    "Colorectal_Cancer_Symptom7_Ends": {
+      "type": "Symptom",
+      "symptom": "Weight Loss",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Terminal"
     },
     "Terminal": {
@@ -9367,8 +9972,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Shortness of Breath",
       "range": {
-        "low": 70,
-        "high": 100
+        "low": 50,
+        "high": 550
       },
       "direct_transition": "Emphysema_Symptom2"
     },
@@ -9376,21 +9981,48 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Cough",
       "range": {
-        "low": 10,
-        "high": 60
+        "low": 50,
+        "high": 150
       },
-      "direct_transition": "DiagnosisEncounter"
+      "direct_transition": "Common_Symptom1"
     },
     "Bronchitis_Symptom1": {
       "type": "Symptom",
       "symptom": "Shortness of Breath",
       "range": {
         "low": 0,
-        "high": 40
+        "high": 250
       },
       "direct_transition": "Bronchitis_Symptom2"
     },
     "Bronchitis_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 150,
+        "high": 250
+      },
+      "direct_transition": "Common_Symptom1"
+    },
+    "Common_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 70,
+        "high": 100
+      },
+      "direct_transition": "Common_Symptom2"
+    },
+    "Common_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 70,
+        "high": 100
+      },
+      "direct_transition": "Common_Symptom3"
+    },
+    "Common_Symptom3": {
       "type": "Symptom",
       "symptom": "Cough",
       "range": {
@@ -10239,13 +10871,58 @@ export default {"allergic_rhinitis":{
       "remarks": [
         "2. Very mild decline, also considered normal aged forgetfulness"
       ],
+      "direct_transition": "DecreasedCommunication"
+    },
+    "DecreasedCommunication": {
+      "type": "Symptom",
+      "symptom": "Decreased Communication",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "DecreasedAttentiveness"
+    },
+    "DecreasedAttentiveness": {
+      "type": "Symptom",
+      "symptom": "Decreased Attentiveness",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "DecreasedJudgment"
+    },
+    "DecreasedJudgment": {
+      "type": "Symptom",
+      "symptom": "Decreased in Judgement",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "DecreasedVisualPerception"
+    },
+    "DecreasedVisualPerception": {
+      "type": "Symptom",
+      "symptom": "Decreased Visual Perception",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Confusion"
+    },
+    "Confusion": {
+      "type": "Symptom",
+      "symptom": "Confusion",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
       "direct_transition": "MildMemoryLoss"
     },
     "MildMemoryLoss": {
       "type": "Symptom",
       "symptom": "Memory Loss",
       "range": {
-        "low": 1,
+        "low": 0,
         "high": 50
       },
       "direct_transition": "MildDecline"
@@ -10479,8 +11156,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Memory Loss",
       "range": {
-        "low": 40,
-        "high": 80
+        "low": 50,
+        "high": 100
       },
       "remarks": [
         "These numbers do not map to any real data, they are just picked mathematically to get the %s right"
@@ -10774,7 +11451,7 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "34285007",
+          "code": "32485007",
           "display": "Hospital admission"
         }
       ],
@@ -11522,6 +12199,33 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
+      "direct_transition": "Dermatitis_Symptom1"
+    },
+    "Dermatitis_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Itchiness",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "Dermatitis_Symptom2"
+    },
+    "Dermatitis_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Red Skin",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "Dermatitis_Symptom3"
+    },
+    "Dermatitis_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Rash",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
       "direct_transition": "Dermatitis_Careplan"
     },
     "Dermatitis_Careplan": {
@@ -11948,6 +12652,30 @@ export default {"allergic_rhinitis":{
     "End_Dermatitis_CarePlan": {
       "type": "CarePlanEnd",
       "careplan": "Dermatitis_Careplan",
+      "direct_transition": "Dermatitis_Symptom1_Ends"
+    },
+    "Dermatitis_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Itchiness",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Dermatitis_Symptom2_Ends"
+    },
+    "Dermatitis_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Red Skin",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Dermatitis_Symptom3_Ends"
+    },
+    "Dermatitis_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Rash",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Terminal"
     },
     "Terminal": {
@@ -13147,6 +13875,60 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
+      "direct_transition": "Fibromyalgia_Symptom1"
+    },
+    "Fibromyalgia_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Muscle Pain",
+      "range": {
+        "low": 25,
+        "high": 100
+      },
+      "direct_transition": "Fibromyalgia_Symptom2"
+    },
+    "Fibromyalgia_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Muscle Tenderness",
+      "range": {
+        "low": 25,
+        "high": 100
+      },
+      "direct_transition": "Fibromyalgia_Symptom3"
+    },
+    "Fibromyalgia_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Fibromyalgia_Symptom4"
+    },
+    "Fibromyalgia_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Sleep Disturbances",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Fibromyalgia_Symptom5"
+    },
+    "Fibromyalgia_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Cognitive Difficulties",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Fibromyalgia_Symptom6"
+    },
+    "Fibromyalgia_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Stiffness",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
       "direct_transition": "Fibromyalgia_CarePlan"
     },
     "Fibromyalgia_CarePlan": {
@@ -13739,6 +14521,42 @@ export default {"allergic_rhinitis":{
           "display": "Gout"
         }
       ],
+      "direct_transition": "Gout_Symptom1"
+    },
+    "Gout_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Gout_Symptom2"
+    },
+    "Gout_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Joint Swelling",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Gout_Symptom3"
+    },
+    "Gout_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Joint Redness",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Gout_Symptom4"
+    },
+    "Gout_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
       "direct_transition": "Gout_Diagnosis"
     },
     "Gout_Diagnosis": {
@@ -14350,217 +15168,6 @@ export default {"allergic_rhinitis":{
       "attribute": "homeless",
       "value": false,
       "direct_transition": "Potential_Homelessness"
-    }
-  }
-}
-,
-"hypothyroidism":{
-  "name": "Primary atrophic hypothyroidism",
-  "remarks": [
-    "A blank module"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Age delay"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Age delay": {
-      "type": "Delay",
-      "range": {
-        "low": 50,
-        "high": 75,
-        "unit": "years"
-      },
-      "remarks": [
-        "common onset of primary atrophic hypothyroidism does not occer till after 50 years of age.",
-        ""
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "F"
-          },
-          "distributions": [
-            {
-              "transition": "Hypothyroid symptom",
-              "distribution": 0.048
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.952
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          },
-          "distributions": [
-            {
-              "transition": "Hypothyroid symptom",
-              "distribution": 0.009
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.991
-            }
-          ]
-        }
-      ]
-    },
-    "Hypothyroid symptoms": {
-      "type": "Symptom",
-      "symptom": "fatigue",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "Hypothyroidism followup encounter"
-    },
-    "Hypothyroid Condition Onset": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "hypothyroidism",
-      "target_encounter": "Hypothyroidism followup encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 83664006,
-          "display": "Idiopathic atrophic hypothyroidism"
-        }
-      ],
-      "direct_transition": "Hypothyroidism Encounter Workup"
-    },
-    "Hypothyroidism Encounter Workup": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "hypothyroidism",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185347001,
-          "display": "Encounter for Problem"
-        }
-      ],
-      "direct_transition": "fT4 panel results"
-    },
-    "Hypothyroid symptom": {
-      "type": "Symptom",
-      "symptom": "cold intolerance",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "Hypothyroidism"
-    },
-    "Hypothyroidism": {
-      "type": "Symptom",
-      "symptom": "decreased appetite",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "hypothyroidism"
-    },
-    "hypothyroidism": {
-      "type": "Symptom",
-      "symptom": "weight gain",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "Hypothyroid Condition Onset"
-    },
-    "Hypothyroidism followup encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "hypothyroidism",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185347001,
-          "display": "Encounter for Problem"
-        }
-      ],
-      "direct_transition": "Synthroid Medication Order"
-    },
-    "encounter time delay": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 1,
-        "unit": "weeks"
-      },
-      "direct_transition": "Hypothyroid symptoms"
-    },
-    "encounter end": {
-      "type": "EncounterEnd",
-      "direct_transition": "encounter time delay"
-    },
-    "fT4 panel results": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "ng/dl",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "3024-7",
-          "display": "Thyroxine (T4) free [Mass/​volume] in Serum or Plasma"
-        }
-      ],
-      "direct_transition": "TSH panel result",
-      "range": {
-        "low": 0.1,
-        "high": 0.4
-      }
-    },
-    "TSH panel result": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "m[IU]/L",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "3016-3",
-          "display": "Thyrotropin [Units/​volume] in Serum or Plasma"
-        }
-      ],
-      "direct_transition": "encounter end",
-      "range": {
-        "low": 5,
-        "high": 2
-      }
-    },
-    "Synthroid Medication Order": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 966222,
-          "display": "Levothyroxine Sodium 0.075 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "end encounter",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 60,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 60,
-          "unit": "days"
-        },
-        "refills": 6
-      }
-    },
-    "end encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
     }
   }
 }
@@ -17421,6 +18028,78 @@ export default {"allergic_rhinitis":{
         "low": 50,
         "high": 100
       },
+      "direct_transition": "Bloody Cough"
+    },
+    "Bloody Cough": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 100,
+        "high": 350
+      },
+      "direct_transition": "Shortness of Breath"
+    },
+    "Shortness of Breath": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 100,
+        "high": 350
+      },
+      "direct_transition": "Fever"
+    },
+    "Fever": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 250
+      },
+      "direct_transition": "Head and neck swelling"
+    },
+    "Head and neck swelling": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 250
+      },
+      "direct_transition": "Fatigue"
+    },
+    "Sweats": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 250
+      },
+      "direct_transition": "Fatigue"
+    },
+    "Fatigue": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 250
+      },
+      "direct_transition": "Decrease in appetite"
+    },
+    "Decrease in appetite": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "Decrease in weight"
+    },
+    "Decrease in weight": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
       "direct_transition": "Chest Pain"
     },
     "Chest Pain": {
@@ -17428,7 +18107,7 @@ export default {"allergic_rhinitis":{
       "symptom": "Chest Pain",
       "range": {
         "low": 50,
-        "high": 100
+        "high": 250
       },
       "direct_transition": "Suspected Lung Cancer"
     },
@@ -18343,6 +19022,42 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
+      "direct_transition": "Lupus_Symptom1"
+    },
+    "Lupus_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Lupus_Symptom2"
+    },
+    "Lupus_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Lupus_Symptom3"
+    },
+    "Lupus_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Rash",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Lupus_Symptom4"
+    },
+    "Lupus_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
       "direct_transition": "Lupus_CarePlan"
     },
     "Lupus_CarePlan": {
@@ -20178,31 +20893,23 @@ export default {"allergic_rhinitis":{
             "condition_type": "And",
             "conditions": [
               {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 18,
+                "unit": "years"
+              },
+              {
                 "condition_type": "Attribute",
                 "attribute": "hypertension",
                 "operator": "==",
                 "value": true
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertension_dx",
-                "operator": "is nil"
               }
             ]
           },
           "transition": "Diagnose_Hypertension"
         },
         {
-          "transition": "Check_Diabetes",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "hypertension",
-            "operator": "!=",
-            "value": true
-          }
-        },
-        {
-          "transition": "Check_Hypertension_BP"
+          "transition": "Check_Diabetes"
         }
       ]
     },
@@ -20215,8 +20922,7 @@ export default {"allergic_rhinitis":{
           "display": "Hypertension"
         }
       ],
-      "assign_to_attribute": "hypertension_dx",
-      "direct_transition": "Check_Hypertension_BP"
+      "direct_transition": "Check_Diabetes"
     },
     "Check_Diabetes": {
       "type": "Simple",
@@ -20240,7 +20946,7 @@ export default {"allergic_rhinitis":{
           "transition": "Record_HA1C"
         },
         {
-          "transition": "Wellness_Encounter"
+          "transition": "Obese_Check"
         }
       ]
     },
@@ -20256,7 +20962,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "unit": "%",
-      "direct_transition": "Diagnosis"
+      "direct_transition": "Blood_Sugar_Check"
     },
     "Diagnosis": {
       "type": "Simple",
@@ -21733,7 +22439,12 @@ export default {"allergic_rhinitis":{
           "display": "Renal dialysis (procedure)"
         }
       ],
-      "direct_transition": "Potential_Amputation"
+      "direct_transition": "Potential_Amputation",
+      "duration": {
+        "low": 3,
+        "high": 4,
+        "unit": "hours"
+      }
     },
     "Potential_Amputation": {
       "type": "Simple",
@@ -22270,158 +22981,168 @@ export default {"allergic_rhinitis":{
       "reason": "Diagnose_End_Stage_Renal_Disease",
       "direct_transition": "Record_HA1C"
     },
-    "Hypertension_Medication_Low": {
-      "type": "MedicationOrder",
+    "Obesity": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "obesity",
       "codes": [
         {
-          "system": "RxNorm",
-          "code": 316052,
-          "display": "Hydrochlorothiazide 6.25 MG"
+          "system": "SNOMED-CT",
+          "code": 162864005,
+          "display": "Body mass index 30+ - obesity (finding)"
         }
       ],
-      "direct_transition": "Check_Diabetes",
-      "assign_to_attribute": "hypertension_medication",
-      "reason": "hypertension_dx"
+      "direct_transition": "Wellness_Encounter"
     },
-    "Hypertension_Medication_High": {
-      "type": "MedicationOrder",
+    "Severe Obesity": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "obesity",
       "codes": [
         {
-          "system": "RxNorm",
-          "code": 316049,
-          "display": "Hydrochlorothiazide 25 MG"
+          "system": "SNOMED-CT",
+          "code": 408512008,
+          "display": "Body mass index 40+ - severely obese (finding)"
         }
       ],
-      "direct_transition": "Check_Diabetes",
-      "assign_to_attribute": "hypertension_medication",
-      "reason": "hypertension_dx"
+      "direct_transition": "Wellness_Encounter"
     },
-    "End_Hypertension_Medication": {
-      "type": "MedicationEnd",
-      "referenced_by_attribute": "hypertension_medication",
+    "Obese_Check": {
+      "type": "Simple",
       "conditional_transition": [
         {
-          "transition": "Hypertension_Medication_Low",
+          "transition": "Severe Obesity",
           "condition": {
             "condition_type": "Vital Sign",
-            "vital_sign": "Systolic Blood Pressure",
-            "operator": "<",
-            "value": 160
-          }
-        },
-        {
-          "transition": "Hypertension_Medication_High",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Systolic Blood Pressure",
+            "vital_sign": "BMI",
             "operator": ">=",
-            "value": 160
-          }
-        }
-      ]
-    },
-    "Check_Hypertension_BP": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Check_Low_Dose",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Systolic Blood Pressure",
-            "operator": "<",
-            "value": 160
+            "value": 40
           }
         },
         {
-          "transition": "Check_High_Dose",
+          "transition": "Obesity",
           "condition": {
             "condition_type": "Vital Sign",
-            "vital_sign": "Systolic Blood Pressure",
+            "vital_sign": "BMI",
             "operator": ">=",
-            "value": 160
+            "value": 30
           }
+        },
+        {
+          "transition": "Wellness_Encounter"
         }
       ]
     },
-    "Check_Low_Dose": {
+    "Blood_Sugar_Check": {
       "type": "Simple",
       "conditional_transition": [
         {
-          "transition": "Check_Diabetes",
+          "transition": "Hyperglycemia",
           "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": 316052,
-                "display": "Hydrochlorothiazide 6.25 MG"
-              }
-            ]
+            "condition_type": "Vital Sign",
+            "vital_sign": "Glucose",
+            "operator": ">=",
+            "value": 130
           }
         },
         {
-          "transition": "End_Hypertension_Medication",
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": 316049,
-                "display": "Hydrochlorothiazide 25 MG"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Hypertension_Medication_Low",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "hypertension",
-            "operator": "==",
-            "value": true
-          }
+          "transition": "Triglyceride_Check"
         }
       ]
     },
-    "Check_High_Dose": {
+    "Hyperglycemia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hyperglycemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 80394007,
+          "display": "Hyperglycemia (disorder)"
+        }
+      ],
+      "direct_transition": "Triglyceride_Check"
+    },
+    "Triglyceride_Check": {
       "type": "Simple",
       "conditional_transition": [
         {
-          "transition": "Check_Diabetes",
+          "transition": "Hypertriglyceridemia",
           "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": 316049,
-                "display": "Hydrochlorothiazide 25 MG"
-              }
-            ]
+            "condition_type": "Vital Sign",
+            "vital_sign": "Triglycerides",
+            "operator": ">=",
+            "value": 150
           }
         },
         {
-          "transition": "End_Hypertension_Medication",
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": 316052,
-                "display": "Hydrochlorothiazide 6.25 MG"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Hypertension_Medication_High",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "hypertension",
-            "operator": "==",
-            "value": true
-          }
+          "transition": "Metabolic_Check"
         }
       ]
+    },
+    "Hypertriglyceridemia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hypertriglyceridemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 302870006,
+          "display": "Hypertriglyceridemia (disorder)"
+        }
+      ],
+      "direct_transition": "Metabolic_Check"
+    },
+    "Metabolic_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Metabolic_Syndrome",
+          "condition": {
+            "condition_type": "At Least",
+            "minimum": 3,
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "obesity",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hyperglycemia",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertriglyceridemia",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Vital Sign",
+                "vital_sign": "HDL",
+                "operator": "<",
+                "value": 50
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Diagnosis"
+        }
+      ]
+    },
+    "Metabolic_Syndrome": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "metabolic_syndrome",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 237602007,
+          "display": "Metabolic syndrome X (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis"
     }
   }
 }
@@ -22464,72 +23185,202 @@ export default {"allergic_rhinitis":{
     },
     "Chance_to_Onset_Hypertension": {
       "type": "Simple",
-      "remarks": [
-        "probability: 0.296 # (1.0==100%) http://www.cdc.gov/MMWr/preview/mmwrhtml/su6203a24.htm#Tab"
-      ],
-      "conditional_transition": [
+      "distributed_transition": [
         {
-          "transition": "Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          }
+          "distribution": 0.296,
+          "transition": "Onset_Hypertension"
         },
         {
-          "transition": "Non_Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
+          "distribution": 0.704,
+          "transition": "No_Hypertension"
         }
+      ],
+      "remarks": [
+        "probability: 0.296 # (1.0==100%) http://www.cdc.gov/MMWr/preview/mmwrhtml/su6203a24.htm#Tab"
       ]
     },
     "Onset_Hypertension": {
       "type": "SetAttribute",
       "attribute": "hypertension",
       "value": true,
-      "conditional_transition": [
-        {
-          "transition": "Non_Veteran_Diabetes_Prevalence",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
-        },
-        {
-          "transition": "Veteran_Diabetes_Prevalence",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          }
-        }
-      ]
+      "direct_transition": "Diabetes_Prevalence"
     },
     "No_Hypertension": {
       "type": "SetAttribute",
       "attribute": "hypertension",
       "value": false,
-      "conditional_transition": [
+      "direct_transition": "Diabetes_Prevalence"
+    },
+    "Diabetes_Prevalence": {
+      "type": "Simple",
+      "remarks": [
+        "diabetes prevalence %s based on the following",
+        "http://www.mass.gov/eohhs/gov/departments/dph/programs/community-health/diabetes/facts/diabetes-statistics.html",
+        "prediabetes prevalence is ~38 % overall and similar among most races but slightly lower among Native americans",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3830901/",
+        "http://www.diabetes.org/living-with-diabetes/treatment-and-care/high-risk-populations/treatment-american-indians.html",
+        "It is estimated that 27.8% of people with diabetes are undiagnosed",
+        "https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf",
+        "therefore the diabetes %s are all scaled up by a factor of 1.278, ",
+        "so that the total % of people that eventually get diabetes is higher, but the current population with diabetes should be around 8.8%",
+        "because there is a delay before diabetes onsets",
+        "similarly the prediabetes #s are scaled up (but by a little less) so the current prediabetic % at any time is ~38%"
+      ],
+      "complex_transition": [
         {
-          "transition": "Non_Veteran_Diabetes_Prevalence",
           "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
+            "condition_type": "Race",
+            "race": "White"
+          },
+          "distributions": [
+            {
+              "distribution": 0.083,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.065 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.45,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.38 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.467,
+              "transition": "No_Diabetes"
+            }
+          ]
         },
         {
-          "transition": "Veteran_Diabetes_Prevalence",
           "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil",
-            "value": 0
-          }
+            "condition_type": "Race",
+            "race": "Hispanic"
+          },
+          "distributions": [
+            {
+              "distribution": 0.1815,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.142 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.45,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.38 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.3685,
+              "transition": "No_Diabetes"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Black"
+          },
+          "distributions": [
+            {
+              "distribution": 0.1636,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.128 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.45,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.38 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.3864,
+              "transition": "No_Diabetes"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Asian"
+          },
+          "distributions": [
+            {
+              "distribution": 0.2045,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.16 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.45,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.38 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.3455,
+              "transition": "No_Diabetes"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Native"
+          },
+          "distributions": [
+            {
+              "distribution": 0.1828,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.143 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.36,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.30 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.4572,
+              "transition": "No_Diabetes"
+            }
+          ]
+        },
+        {
+          "remarks": [
+            "for Other races, just fall back to overall state %s"
+          ],
+          "distributions": [
+            {
+              "distribution": 0.1022,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.08 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.45,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.38 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.4478,
+              "transition": "No_Diabetes"
+            }
+          ]
         }
       ]
     },
@@ -23326,222 +24177,6 @@ export default {"allergic_rhinitis":{
     "Loop_back_to_Start": {
       "type": "Simple",
       "direct_transition": "Diabetes_Progression"
-    },
-    "Veteran": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Onset_Hypertension",
-          "distribution": 0.306
-        },
-        {
-          "transition": "No_Hypertension",
-          "distribution": 0.694
-        }
-      ]
-    },
-    "Non_Veteran": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Onset_Hypertension",
-          "distribution": 0.296
-        },
-        {
-          "transition": "No_Hypertension",
-          "distribution": 0.704
-        }
-      ]
-    },
-    "Non_Veteran_Diabetes_Prevalence": {
-      "type": "Simple",
-      "remarks": [
-        "diabetes prevalence %s based on the following",
-        "http://www.mass.gov/eohhs/gov/departments/dph/programs/community-health/diabetes/facts/diabetes-statistics.html",
-        "prediabetes prevalence is ~38 % overall and similar among most races but slightly lower among Native americans",
-        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3830901/",
-        "http://www.diabetes.org/living-with-diabetes/treatment-and-care/high-risk-populations/treatment-american-indians.html",
-        "It is estimated that 27.8% of people with diabetes are undiagnosed",
-        "https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf",
-        "therefore the diabetes %s are all scaled up by a factor of 1.278, ",
-        "so that the total % of people that eventually get diabetes is higher, but the current population with diabetes should be around 8.8%",
-        "because there is a delay before diabetes onsets",
-        "similarly the prediabetes #s are scaled up (but by a little less) so the current prediabetic % at any time is ~38%"
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "White"
-          },
-          "distributions": [
-            {
-              "distribution": 0.083,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.065 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.467,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Hispanic"
-          },
-          "distributions": [
-            {
-              "distribution": 0.1815,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.142 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.3685,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Black"
-          },
-          "distributions": [
-            {
-              "distribution": 0.1636,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.128 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.3864,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Asian"
-          },
-          "distributions": [
-            {
-              "distribution": 0.2045,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.16 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.3455,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Native"
-          },
-          "distributions": [
-            {
-              "distribution": 0.1828,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.143 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.36,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.30 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.4572,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "remarks": [
-            "for Other races, just fall back to overall state %s"
-          ],
-          "distributions": [
-            {
-              "distribution": 0.1022,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.08 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.4478,
-              "transition": "No_Diabetes"
-            }
-          ]
-        }
-      ]
-    },
-    "Veteran_Diabetes_Prevalence": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Eventual_Diabetes",
-          "distribution": 0.21
-        },
-        {
-          "transition": "Eventual_Prediabetes",
-          "distribution": 0.45
-        },
-        {
-          "transition": "No_Diabetes",
-          "distribution": 0.34
-        }
-      ]
     }
   }
 }
@@ -23936,6 +24571,96 @@ export default {"allergic_rhinitis":{
         }
       ]
     },
+    "Opioid_Addiction_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Anxiety",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "Opioid_Addiction_Symptom2"
+    },
+    "Opioid_Addiction_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Confusion",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Opioid_Addiction_Symptom3"
+    },
+    "Opioid_Addiction_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Cognitive Difficulties",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "Opioid_Addiction_Symptom4"
+    },
+    "Opioid_Addiction_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Opioid_Addiction_Symptom5"
+    },
+    "Opioid_Addiction_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Shortness Constipation Breath",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Opioid_Addiction_Symptom6"
+    },
+    "Opioid_Addiction_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Pain Sensitivity",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Opioid_Addiction_Symptom7"
+    },
+    "Opioid_Addiction_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Reduced Sex Drive",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Opioid_Addiction_Symptom8"
+    },
+    "Opioid_Addiction_Symptom8": {
+      "type": "Symptom",
+      "symptom": "Slurred Speech",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "Opioid_Addiction_Symptom9"
+    },
+    "Opioid_Addiction_Symptom9": {
+      "type": "Symptom",
+      "symptom": "Shallow Breathing",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "Opioid_Addiction_Symptom10"
+    },
+    "Opioid_Addiction_Symptom10": {
+      "type": "Symptom",
+      "symptom": "Mood Swing",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Active_Addiction"
+    },
     "Active_Addiction": {
       "type": "Delay",
       "exact": {
@@ -24078,7 +24803,7 @@ export default {"allergic_rhinitis":{
     },
     "Directed_Use_Overdose_Encounter": {
       "type": "Encounter",
-      "encounter_class": "outpatient",
+      "encounter_class": "emergency",
       "reason": "Directed_Use_Overdose",
       "codes": [
         {
@@ -24116,7 +24841,7 @@ export default {"allergic_rhinitis":{
     },
     "Misuse_Overdose_Encounter": {
       "type": "Encounter",
-      "encounter_class": "outpatient",
+      "encounter_class": "emergency",
       "reason": "Misuse_Overdose",
       "codes": [
         {
@@ -24154,7 +24879,7 @@ export default {"allergic_rhinitis":{
     },
     "Addiction_Overdose_Encounter": {
       "type": "Encounter",
-      "encounter_class": "outpatient",
+      "encounter_class": "emergency",
       "reason": "Addiction_Overdose",
       "codes": [
         {
@@ -24262,33 +24987,94 @@ export default {"allergic_rhinitis":{
         " | Osteoarthritis |   0.34000  |    2:1    | ",
         " ------------------------------------------- "
       ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "distribution": 0.113,
+              "transition": "Delay_Until_Symptoms"
+            },
+            {
+              "distribution": 0.887,
+              "transition": "Terminal"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "distribution": 0.2267,
+              "transition": "Delay_Until_Symptoms"
+            },
+            {
+              "distribution": 0.7733,
+              "transition": "Terminal"
+            }
+          ]
+        }
+      ]
+    },
+    "Delay_Until_Symptoms": {
+      "type": "Delay",
+      "range": {
+        "low": 10,
+        "high": 40,
+        "unit": "years"
+      },
+      "direct_transition": "OA_Symptom1"
+    },
+    "OA_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "OA_Symptom2"
+    },
+    "OA_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
       "direct_transition": "Delay_Until_Arthritis"
     },
     "Delay_Until_Arthritis": {
       "type": "Delay",
       "range": {
-        "low": 25,
-        "high": 80,
+        "low": 15,
+        "high": 40,
         "unit": "years"
       },
-      "conditional_transition": [
-        {
-          "transition": "Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "Non_Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
-        }
-      ]
+      "direct_transition": "OA_Symptom1_Advances"
+    },
+    "OA_Symptom1_Advances": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "OA_Symptom2_Advances"
+    },
+    "OA_Symptom2_Advances": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Osteoarthritis"
     },
     "Osteoarthritis": {
       "type": "Simple",
@@ -24471,60 +25257,26 @@ export default {"allergic_rhinitis":{
     },
     "End_Encounter": {
       "type": "EncounterEnd",
+      "direct_transition": "OA_Symptom1_Ends"
+    },
+    "OA_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "OA_Symptom2_Ends"
+    },
+    "OA_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Terminal"
     },
     "Terminal": {
       "type": "Terminal"
-    },
-    "Veteran": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Osteoarthritis",
-          "distribution": 0.21
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.79
-        }
-      ]
-    },
-    "Non_Veteran": {
-      "type": "Simple",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          },
-          "distributions": [
-            {
-              "transition": "Osteoarthritis",
-              "distribution": 0.21
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.79
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "F"
-          },
-          "distributions": [
-            {
-              "transition": "Osteoarthritis",
-              "distribution": 0.2267
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.7733
-            }
-          ]
-        }
-      ]
     }
   }
 }
@@ -24656,6 +25408,15 @@ export default {"allergic_rhinitis":{
       "type": "SetAttribute",
       "attribute": "osteoporosis",
       "value": true,
+      "direct_transition": "Osteoporosis_Symptom1"
+    },
+    "Osteoporosis_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Decrease in Height",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
       "direct_transition": "Wellness_Encounter"
     },
     "Wellness_Encounter": {
@@ -27059,6 +27820,208 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"primary_atrophic_hypothyroidism":{
+  "name": "Primary atrophic hypothyroidism",
+  "remarks": [
+    "Hypothyroidism is a disorder of the endocrine system in which the thyroid gland does not produce enough thyroid hormone. Diagnosed by lab panel, and treated with synthroid."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Age delay"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Age delay": {
+      "type": "Delay",
+      "range": {
+        "low": 50,
+        "high": 75,
+        "unit": "years"
+      },
+      "remarks": [
+        "common onset of primary atrophic hypothyroidism does not occer till after 50 years of age.",
+        ""
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Cold Symptom",
+              "distribution": 0.048
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.952
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Cold Symptom",
+              "distribution": 0.009
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.991
+            }
+          ]
+        }
+      ]
+    },
+    "Hypothyroid Condition Onset": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Hypothyroidism encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 40930008,
+          "display": "Hypothyroidism (disorder)"
+        }
+      ],
+      "direct_transition": "Hypothyroidism encounter"
+    },
+    "encounter end": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "fT4 panel results": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ng/dl",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "3024-7",
+          "display": "Thyroxine (T4) free [Mass/​volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "TSH panel result",
+      "range": {
+        "low": 0.1,
+        "high": 0.4
+      }
+    },
+    "TSH panel result": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "m[IU]/L",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "3016-3",
+          "display": "Thyrotropin [Units/​volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "Label Panel Results",
+      "range": {
+        "low": 2,
+        "high": 5
+      }
+    },
+    "Synthroid Medication Order": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 966222,
+          "display": "Levothyroxine Sodium 0.075 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "encounter end",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 60,
+          "unit": "days"
+        },
+        "refills": 6
+      }
+    },
+    "Label Panel Results": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 2,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24348-5",
+          "display": "Free T4 and TSH panel - Serum or Plasma"
+        }
+      ],
+      "direct_transition": "Synthroid Medication Order"
+    },
+    "Cold Symptom": {
+      "type": "Symptom",
+      "symptom": "cold intolerance",
+      "cause": "",
+      "direct_transition": "Decreased Appetite",
+      "range": {
+        "low": 1,
+        "high": 20
+      }
+    },
+    "Decreased Appetite": {
+      "type": "Symptom",
+      "symptom": "decreased appetite",
+      "cause": "",
+      "direct_transition": "Weight Gain",
+      "range": {
+        "low": 1,
+        "high": 20
+      }
+    },
+    "Weight Gain": {
+      "type": "Symptom",
+      "symptom": "weight gain",
+      "cause": "",
+      "direct_transition": "Fatigue Symptom",
+      "range": {
+        "low": 1,
+        "high": 20
+      }
+    },
+    "Fatigue Symptom": {
+      "type": "Symptom",
+      "symptom": "fatigue",
+      "cause": "",
+      "direct_transition": "Hypothyroid Condition Onset",
+      "range": {
+        "low": 1,
+        "high": 20
+      }
+    },
+    "Hypothyroidism encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom"
+        }
+      ],
+      "direct_transition": "fT4 panel results"
+    }
+  }
+}
+,
 "rheumatoid_arthritis":{
   "name": "Rheumatoid Arthritis",
   "remarks": [
@@ -27099,6 +28062,51 @@ export default {"allergic_rhinitis":{
         "low": 25,
         "high": 80,
         "unit": "years"
+      },
+      "direct_transition": "RA_Symptom1"
+    },
+    "RA_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "RA_Symptom2"
+    },
+    "RA_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "RA_Symptom3"
+    },
+    "RA_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Joint Swelling",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "RA_Symptom4"
+    },
+    "RA_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "RA_Symptom5"
+    },
+    "RA_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 20
       },
       "direct_transition": "Rheumatoid_Arthritis"
     },
@@ -27344,6 +28352,46 @@ export default {"allergic_rhinitis":{
     "End_RA_Nonopioid": {
       "type": "MedicationEnd",
       "medication_order": "RA_Nonopioid_Pain_Medication",
+      "direct_transition": "RA_Symptom1_Ends"
+    },
+    "RA_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "RA_Symptom2_Ends"
+    },
+    "RA_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "RA_Symptom3_Ends"
+    },
+    "RA_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Joint Swelling",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "RA_Symptom4_Ends"
+    },
+    "RA_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "RA_Symptom5_Ends"
+    },
+    "RA_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Terminal"
     },
     "Terminal": {
@@ -28587,8 +29635,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Sinus Pain",
       "range": {
-        "low": 40,
-        "high": 60
+        "low": 50,
+        "high": 80
       },
       "direct_transition": "Common_Symptom"
     },
@@ -28609,8 +29657,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Sinus Pain",
       "range": {
-        "low": 20,
-        "high": 80
+        "low": 30,
+        "high": 50
       },
       "direct_transition": "Common_Symptom"
     },
@@ -28618,8 +29666,71 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Nasal Congestion",
       "range": {
-        "low": 60,
-        "high": 90
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Common_Symptom1"
+    },
+    "Common_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Common_Symptom2"
+    },
+    "Common_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Headache",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom3"
+    },
+    "Common_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Nasal Discharge",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom4"
+    },
+    "Common_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom5"
+    },
+    "Common_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom6"
+    },
+    "Common_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Facial Swelling",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom7"
+    },
+    "Common_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Pain with Bright Lights",
+      "range": {
+        "low": 25,
+        "high": 50
       },
       "direct_transition": "Wait_to_see_Dr"
     },
@@ -28772,6 +29883,62 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
+      "direct_transition": "Symptom3_Subsides"
+    },
+    "Symptom3_Subsides": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom4_Subsides"
+    },
+    "Symptom4_Subsides": {
+      "type": "Symptom",
+      "symptom": "Headache",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom5_Subsides"
+    },
+    "Symptom5_Subsides": {
+      "type": "Symptom",
+      "symptom": "Nasal Discharge",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom6_Subsides"
+    },
+    "Symptom6_Subsides": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom7_Subsides"
+    },
+    "Symptom7_Subsides": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom8_Subsides"
+    },
+    "Symptom8_Subsides": {
+      "type": "Symptom",
+      "symptom": "Facial Swelling",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom9_Subsides"
+    },
+    "Symptom9_Subsides": {
+      "type": "Symptom",
+      "symptom": "Pain with Bright Lights",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Potential_Onset"
     },
     "Chronic_Sinusitis_Continues": {
@@ -28799,8 +29966,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Sinus Pain",
       "range": {
-        "low": 60,
-        "high": 100
+        "low": 70,
+        "high": 130
       },
       "direct_transition": "Chronic_Sinusitis_Followup"
     },
@@ -28830,7 +29997,7 @@ export default {"allergic_rhinitis":{
           "distributions": [
             {
               "distribution": 0.95,
-              "transition": "Chronic_Sinusitis_Continues"
+              "transition": "Chronic_Sinusitis_Followup_without_action"
             },
             {
               "distribution": 0.05,
@@ -28905,212 +30072,10 @@ export default {"allergic_rhinitis":{
       "type": "ConditionEnd",
       "condition_onset": "Diagnose_Chronic_Sinusitis",
       "direct_transition": "Sinusitis_Ends"
-    }
-  }
-}
-,
-"smoking_status":{
-  "name": "Veteran Smoking Status",
-  "remarks": [
-    "A blank module"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Age_Guard"
     },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Veteran_Status": {
-      "type": "Guard",
-      "allow": {
-        "condition_type": "Attribute",
-        "attribute": "veteran",
-        "operator": "is not nil"
-      },
-      "distributed_transition": [
-        {
-          "transition": "smoker",
-          "distribution": 0.27
-        },
-        {
-          "transition": "non_smoker",
-          "distribution": 0.73
-        }
-      ]
-    },
-    "smoker": {
-      "type": "Simple",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "smoking",
-            "operator": "is nil"
-          },
-          "distributions": [
-            {
-              "transition": "Smoking_Condition",
-              "distribution": 0.27
-            },
-            {
-              "transition": "non_smoker",
-              "distribution": 0.73
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "smoking",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "transition": "Smoking_Encounter",
-              "distribution": 1
-            }
-          ]
-        }
-      ]
-    },
-    "non_smoker": {
-      "type": "Simple",
-      "direct_transition": "Terminal"
-    },
-    "Age_Guard": {
-      "type": "Guard",
-      "allow": {
-        "condition_type": "Age",
-        "operator": ">",
-        "quantity": 18,
-        "unit": "years"
-      },
-      "direct_transition": "Veteran_Status"
-    },
-    "Smoking_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "smoking",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1234",
-          "display": "SNOMED Code"
-        }
-      ],
-      "direct_transition": "Smoking_Careplan"
-    },
-    "Smoking_Condition": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "smoking",
-      "target_encounter": "Smoking_Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 449868002,
-          "display": "Smokes tobacco daily"
-        }
-      ],
-      "direct_transition": "Smoking_Encounter"
-    },
-    "Smoking_Careplan": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 191887008,
-          "display": "Tobacco dependence, continuous"
-        }
-      ],
-      "reason": "smoking",
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": 710081004,
-          "display": "smoking cessation therapy"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "1234",
-          "display": "SNOMED Code"
-        }
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "smoking_medication",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "transition": "smoking_encounter_end",
-              "distribution": 1
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "smoking_medication",
-            "operator": "is nil"
-          },
-          "distributions": [
-            {
-              "transition": "Smoking Medication",
-              "distribution": 1
-            }
-          ]
-        }
-      ]
-    },
-    "Smoking Medication": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 198031,
-          "display": "24hr nicotine transdermal patch"
-        }
-      ],
-      "direct_transition": "smoking_encounter_end",
-      "reason": "smoking",
-      "assign_to_attribute": "smoking_medication"
-    },
-    "Smoking_Cessation": {
-      "type": "ConditionEnd",
-      "direct_transition": "Terminal",
-      "referenced_by_attribute": "smoking",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 449868002,
-          "display": "Smokes tobacco daily"
-        }
-      ]
-    },
-    "smoking_encounter_end": {
+    "Chronic_Sinusitis_Followup_without_action": {
       "type": "EncounterEnd",
-      "direct_transition": "smoking_time_gate"
-    },
-    "smoking_time_gate": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 6,
-        "unit": "months"
-      },
-      "distributed_transition": [
-        {
-          "transition": "Smoking_Cessation",
-          "distribution": 0.25
-        },
-        {
-          "transition": "smoker",
-          "distribution": 0.75
-        }
-      ]
+      "direct_transition": "Chronic_Sinusitis_Continues"
     }
   }
 }
@@ -29206,8 +30171,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Cough",
       "range": {
-        "low": 40,
-        "high": 100
+        "low": 0,
+        "high": 50
       },
       "direct_transition": "Viral_Symptom_2"
     },
@@ -29216,7 +30181,7 @@ export default {"allergic_rhinitis":{
       "symptom": "Swollen Lymph Nodes",
       "range": {
         "low": 0,
-        "high": 60
+        "high": 50
       },
       "direct_transition": "Viral_Symptom_3"
     },
@@ -29225,7 +30190,70 @@ export default {"allergic_rhinitis":{
       "symptom": "Swollen Tonsils",
       "range": {
         "low": 0,
-        "high": 60
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_1"
+    },
+    "Common_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_2"
+    },
+    "Common_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Difficulty Swallowing",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_3"
+    },
+    "Common_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Runny/Stuffy Nose",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_4"
+    },
+    "Common_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_5"
+    },
+    "Common_Symptom_5": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_6"
+    },
+    "Common_Symptom_6": {
+      "type": "Symptom",
+      "symptom": "Body Aches",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_7"
+    },
+    "Common_Symptom_7": {
+      "type": "Symptom",
+      "symptom": "Decreased Appetite",
+      "range": {
+        "low": 0,
+        "high": 50
       },
       "direct_transition": "Symptoms_dont_resolve"
     },
@@ -29257,8 +30285,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Swollen Lymph Nodes",
       "range": {
-        "low": 40,
-        "high": 100
+        "low": 20,
+        "high": 70
       },
       "remarks": [
         "Strep generally presents with swollen lymph nodes"
@@ -29269,10 +30297,10 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Swollen Tonsils",
       "range": {
-        "low": 40,
-        "high": 100
+        "low": 20,
+        "high": 70
       },
-      "direct_transition": "Symptoms_dont_resolve"
+      "direct_transition": "Common_Symptom_1"
     },
     "Symptoms_dont_resolve": {
       "type": "Delay",
@@ -29374,19 +30402,19 @@ export default {"allergic_rhinitis":{
                 "condition_type": "Symptom",
                 "symptom": "Cough",
                 "operator": "<",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Symptom",
                 "symptom": "Swollen Lymph Nodes",
                 "operator": ">",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Symptom",
                 "symptom": "Swollen Tonsils",
                 "operator": ">",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Observation",
@@ -29425,19 +30453,19 @@ export default {"allergic_rhinitis":{
                 "condition_type": "Symptom",
                 "symptom": "Cough",
                 "operator": "<",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Symptom",
                 "symptom": "Swollen Lymph Nodes",
                 "operator": ">",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Symptom",
                 "symptom": "Swollen Tonsils",
                 "operator": ">",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Observation",
@@ -29588,6 +30616,62 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
+      "direct_transition": "Symptom_4_Ends"
+    },
+    "Symptom_4_Ends": {
+      "type": "Symptom",
+      "symptom": "Difficulty Swallowing",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_5_Ends"
+    },
+    "Symptom_5_Ends": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_6_Ends"
+    },
+    "Symptom_6_Ends": {
+      "type": "Symptom",
+      "symptom": "Runny/Stuffy Nose",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_7_Ends"
+    },
+    "Symptom_7_Ends": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_8_Ends"
+    },
+    "Symptom_8_Ends": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_9_Ends"
+    },
+    "Symptom_9_Ends": {
+      "type": "Symptom",
+      "symptom": "Body Aches",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_10_Ends"
+    },
+    "Symptom_10_Ends": {
+      "type": "Symptom",
+      "symptom": "Decreased Appetite",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Condition_Resolves"
     },
     "Condition_Resolves": {
@@ -29610,6 +30694,916 @@ export default {"allergic_rhinitis":{
       "type": "MedicationEnd",
       "referenced_by_attribute": "Sore Throat Antibiotic",
       "direct_transition": "Potential_Infection"
+    }
+  }
+}
+,
+"total_joint_replacement/functional_status_assessments":{
+  "name": "Functional Status Assessments",
+  "remarks": [
+    "This is a submodule that includes the possible assessments a patient will go through prior to and following either a total knee replacement or a total hip replacement.\n"
+  ],
+  "states": {
+    "KOOS_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 5,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72091-2",
+          "display": "Knee injury and Osteoarthritis Outcome Score [KOOS]"
+        }
+      ],
+      "direct_transition": "KOOS_Attribute_Set",
+      "remarks": [
+        "Five different subscales are scored separately: KOOS Pain (9 items); KOOS Symptoms (7 items); KOOS ADL (17 items); KOOS Sport/Rec (5 items); KOOS QOL (4 items). Each item has five possible answer options scored from 0 (No Problems) to 4 (Extreme Problems), and the scores are transformed to a 0–100 scale, with zero representing extreme knee problems and 100 representing no knee problems.",
+        "http://www.koos.nu",
+        ""
+      ]
+    },
+    "PROMIS10_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 2,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "61576-5",
+          "display": "PROMIS short form - global - version 1.1"
+        }
+      ],
+      "direct_transition": "PROMIS10_Attribute_Set",
+      "remarks": [
+        "Two different subscales are scored separately: Global Mental Health and Global Physical Health. Each have a score between 4 - 20."
+      ]
+    },
+    "HOOS_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 5,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72092-0",
+          "display": "Hip Dysfunction and Osteoarthritis Outcome Score [HOOS]"
+        }
+      ],
+      "direct_transition": "HOOS_Attribute_Set",
+      "remarks": [
+        "Five different subscales are scored separately: HOOS Pain (9 items); HOOS Symptoms (7 items); HOOS ADL (17 items); HOOS Sport/Rec (5 items); HOOS QOL (4 items). The scores are transformed to a 0–100 scale, with zero representing extreme knee problems and 100 representing no knee problems.",
+        "http://www.koos.nu"
+      ]
+    },
+    "Joint_Replacement_Assessment_Terminal": {
+      "type": "Terminal"
+    },
+    "VR36_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 8,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71933-6",
+          "display": "Veterans Rand health survey - 36 item (VR-36)"
+        }
+      ],
+      "direct_transition": "VR36_Attribute_Set",
+      "remarks": [
+        "Eight different subscales are scored separately: Mental Health, Role Emotion, Social Functioning, Vitality, General Health, Bodily Pain, Role Physical, and Physical Functioning. Each have a score between 4 - 20."
+      ]
+    },
+    "PROMIS29_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 7,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "62337-1",
+          "display": "PROMIS item bank - 29 profile"
+        }
+      ],
+      "direct_transition": "PROMIS29_Attribute_Set",
+      "remarks": [
+        "Seven different subscales are scored separately: Sleep Disturbance, Satisfaction with Participation in Social Roles,",
+        "Physical Function, Pain Interference, Fatigue, Depression, and Anxiety. Each have a score between 4 - 20."
+      ]
+    },
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "Perform_Functional_Status_Assessment_Knee",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "knee"
+          }
+        },
+        {
+          "transition": "Perform_Functional_Status_Assessment_Hip",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "hip"
+          }
+        },
+        {
+          "transition": "Joint_Replacement_Assessment_Terminal"
+        }
+      ]
+    },
+    "Perform_Functional_Status_Assessment_Knee": {
+      "type": "Simple",
+      "remarks": [
+        "Possible assessment options obtained from:",
+        "https://ecqi.healthit.gov/ecqm/measures/cms066v7"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "KOOS_Symptoms",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "KOOS"
+          }
+        },
+        {
+          "transition": "PROMIS10_GPH",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "PROMIS-10"
+          }
+        },
+        {
+          "transition": "VR12_Mental_Health",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "VR-12"
+          }
+        },
+        {
+          "transition": "First_FSA_Knee"
+        }
+      ]
+    },
+    "Perform_Functional_Status_Assessment_Hip": {
+      "type": "Simple",
+      "remarks": [
+        "Possible assessment options obtained from:",
+        "https://ecqi.healthit.gov/ecqm/measures/cms056v5"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "HOOS_Symptoms",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "HOOS"
+          }
+        },
+        {
+          "transition": "PROMIS10_GPH",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "PROMIS-10"
+          }
+        },
+        {
+          "transition": "PROMIS29_Sleep_Disturbance",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "PROMIS-29"
+          }
+        },
+        {
+          "transition": "VR12_Mental_Health",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "VR-12"
+          }
+        },
+        {
+          "transition": "VR36_Mental_Health",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "VR-36"
+          }
+        },
+        {
+          "transition": "First_FSA_Hip"
+        }
+      ]
+    },
+    "VR12_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 8,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71934-4",
+          "display": "Veterans Rand health survey - 12 item (VR-12)"
+        }
+      ],
+      "direct_transition": "VR12_Attribute_Set",
+      "remarks": [
+        "Eight different subscales are scored separately: Mental Health, Role Emotion, Social Functioning, Vitality, General Health, Bodily Pain, Role Physical, and Physical Functioning. Each have a score between 4 - 20."
+      ]
+    },
+    "KOOS_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "KOOS"
+    },
+    "PROMIS10_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "PROMIS-10"
+    },
+    "PROMIS29_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "PROMIS-29"
+    },
+    "VR12_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "VR-12"
+    },
+    "VR36_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "VR-36"
+    },
+    "HOOS_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "HOOS"
+    },
+    "FSA_Performed": {
+      "type": "Simple",
+      "direct_transition": "Joint_Replacement_Assessment_Terminal"
+    },
+    "PROMIS10_GPH": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71972-4",
+          "display": "PROMIS-10 Global Physical Health (GPH) score"
+        }
+      ],
+      "direct_transition": "PROMIS10_GMH",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS10_GMH": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71970-8",
+          "display": "PROMIS-10 Global Mental Health (GMH) score"
+        }
+      ],
+      "direct_transition": "PROMIS10_Total_Assessment",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "KOOS_Symptoms": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72101-9",
+          "display": "Symptoms score [KOOS]"
+        }
+      ],
+      "direct_transition": "KOOS_Pain",
+      "range": {
+        "low": 0,
+        "high": 100
+      }
+    },
+    "KOOS_Pain": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72102-7",
+          "display": "Pain score [KOOS]"
+        }
+      ],
+      "direct_transition": "KOOS_ADL",
+      "range": {
+        "low": 0,
+        "high": 100
+      }
+    },
+    "KOOS_ADL": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72100-1",
+          "display": "Activities of daily living score [KOOS]"
+        }
+      ],
+      "direct_transition": "KOOS_Sport/Recreation",
+      "range": {
+        "low": 0,
+        "high": 100
+      }
+    },
+    "KOOS_Sport/Recreation": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72099-5",
+          "display": "Sport-recreation score [KOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "KOOS_QOL"
+    },
+    "KOOS_QOL": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72098-7",
+          "display": "Quality of life score [KOOS]"
+        }
+      ],
+      "direct_transition": "KOOS_Total_Assessment",
+      "range": {
+        "low": 0,
+        "high": 100
+      }
+    },
+    "HOOS_Symptoms": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72096-1",
+          "display": "Symptoms score [HOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "HOOS_Pain"
+    },
+    "HOOS_Pain": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72097-9",
+          "display": "Pain score [HOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "HOOS_ADL"
+    },
+    "HOOS_ADL": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72095-3",
+          "display": "Activities of daily living score [HOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "HOOS_Sport/Recreation"
+    },
+    "HOOS_Sport/Recreation": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72094-6",
+          "display": "Sport-recreation score [HOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "HOOS_QOL"
+    },
+    "HOOS_QOL": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72093-8",
+          "display": "Quality of life score [HOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "HOOS_Total_Assessment"
+    },
+    "VR12_Mental_Health": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72009-4",
+          "display": "VR-12 Mental health (MH) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Role_Emotion",
+      "range": {
+        "low": 2,
+        "high": 12
+      }
+    },
+    "VR12_Role_Emotion": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72010-2",
+          "display": "VR-12 Role emotion (RE) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Social_Functioning",
+      "range": {
+        "low": 2,
+        "high": 10
+      }
+    },
+    "VR12_Social_Functioning": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72011-0",
+          "display": "VR-12 Social functioning (SF) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Vitality",
+      "range": {
+        "low": 1,
+        "high": 5
+      }
+    },
+    "VR12_Vitality": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72012-8",
+          "display": "VR-12 Vitality (VT) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_General_Health",
+      "range": {
+        "low": 1,
+        "high": 6
+      }
+    },
+    "VR12_General_Health": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72013-6",
+          "display": "VR-12 General health (GH) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Bodily_Pain",
+      "range": {
+        "low": 1,
+        "high": 5
+      }
+    },
+    "VR12_Bodily_Pain": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72014-4",
+          "display": "VR-12 Bodily pain (BP) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Role_Physical",
+      "range": {
+        "low": 1,
+        "high": 5
+      }
+    },
+    "VR12_Role_Physical": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72015-1",
+          "display": "VR-12 Role physical (RP) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Physical_Functioning",
+      "range": {
+        "low": 2,
+        "high": 10
+      }
+    },
+    "VR12_Physical_Functioning": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72016-9",
+          "display": "VR-12 Physical functioning (PF) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Total_Assessment",
+      "range": {
+        "low": 2,
+        "high": 6
+      }
+    },
+    "VR36_Mental_Health": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71973-2",
+          "display": "VR-36 Mental health (MH) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 5,
+        "high": 30
+      },
+      "direct_transition": "VR36_Role_Emotion"
+    },
+    "VR36_Role_Emotion": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71974-0",
+          "display": "VR-36 Role emotion (RE) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 3,
+        "high": 15
+      },
+      "direct_transition": "VR36_Social_Functioning"
+    },
+    "VR36_Social_Functioning": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71975-7",
+          "display": "VR-36 Social functioning (SF) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 2,
+        "high": 10
+      },
+      "direct_transition": "VR36_Vitality"
+    },
+    "VR36_Vitality": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71976-5",
+          "display": "VR-36 Vitality (VT) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 24
+      },
+      "direct_transition": "VR36_General_Health"
+    },
+    "VR36_General_Health": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71977-3",
+          "display": "VR-36 General health (GH) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 5,
+        "high": 25
+      },
+      "direct_transition": "VR36_Bodily_Pain"
+    },
+    "VR36_Bodily_Pain": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71978-1",
+          "display": "VR-36 Bodily pain (BP) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 2,
+        "high": 12
+      },
+      "direct_transition": "VR36_Role_Physical"
+    },
+    "VR36_Role_Physical": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71979-9",
+          "display": "VR-36 Role physical (RP) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 20
+      },
+      "direct_transition": "VR36_Physical_Functioning"
+    },
+    "VR36_Physical_Functioning": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71980-7",
+          "display": "VR-36 Physical functioning (PF) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 10,
+        "high": 30
+      },
+      "direct_transition": "VR36_Total_Assessment"
+    },
+    "PROMIS29_Sleep_Disturbance": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71956-7",
+          "display": "PROMIS-29 Sleep disturbance score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Satisfaction_With_Participation_In_Social_Roles",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS29_Satisfaction_With_Participation_In_Social_Roles": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71958-3",
+          "display": "PROMIS-29 Satisfaction with participation in social roles score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Physical_Function",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS29_Physical_Function": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71960-9",
+          "display": "PROMIS-29 Physical function score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Pain_Interference",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS29_Pain_Interference": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71962-5",
+          "display": "PROMIS-29 Pain interference score"
+        }
+      ],
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "PROMIS29_Fatigue"
+    },
+    "PROMIS29_Fatigue": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71964-1",
+          "display": "PROMIS-29 Fatigue score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Depression",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS29_Depression": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71966-6",
+          "display": "PROMIS-29 Depression score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Anxiety",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS29_Anxiety": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71968-2",
+          "display": "PROMIS-29 Anxiety score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Total_Assessment",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "First_FSA_Knee": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "KOOS_Symptoms",
+          "distribution": 0.34
+        },
+        {
+          "transition": "PROMIS10_GPH",
+          "distribution": 0.33
+        },
+        {
+          "transition": "VR12_Mental_Health",
+          "distribution": 0.33
+        }
+      ]
+    },
+    "First_FSA_Hip": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "HOOS_Symptoms",
+          "distribution": 0.2
+        },
+        {
+          "transition": "PROMIS10_GPH",
+          "distribution": 0.2
+        },
+        {
+          "transition": "PROMIS29_Sleep_Disturbance",
+          "distribution": 0.2
+        },
+        {
+          "transition": "VR12_Mental_Health",
+          "distribution": 0.2
+        },
+        {
+          "transition": "VR36_Mental_Health",
+          "distribution": 0.2
+        }
+      ]
     }
   }
 }
@@ -29662,7 +31656,7 @@ export default {"allergic_rhinitis":{
         "high": 12,
         "unit": "months"
       },
-      "direct_transition": "Joint_Replacement_Encounter"
+      "direct_transition": "Pre_Procedure_Encounter"
     },
     "Joint_Replacement_Encounter": {
       "type": "Encounter",
@@ -29775,7 +31769,26 @@ export default {"allergic_rhinitis":{
     "End_Post_Op_CarePlan": {
       "type": "CarePlanEnd",
       "careplan": "Post_Op_CarePlan",
-      "direct_transition": "Delay_Until_New_Replacement_Needed"
+      "conditional_transition": [
+        {
+          "transition": "Delay_For_Post_Assessment_Knee",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "knee"
+          }
+        },
+        {
+          "transition": "Delay_For_Post_Assessment_Hip",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "hip"
+          }
+        }
+      ]
     },
     "Delay_Until_New_Replacement_Needed": {
       "type": "Delay",
@@ -29801,6 +31814,116 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Delay_After_Assessments": {
+      "type": "Delay",
+      "direct_transition": "Joint_Replacement_Encounter",
+      "range": {
+        "low": 0,
+        "high": 90,
+        "unit": "days"
+      }
+    },
+    "Delay_After_Assessments_2": {
+      "type": "Delay",
+      "direct_transition": "Joint_Replacement_Encounter",
+      "range": {
+        "low": 0,
+        "high": 180,
+        "unit": "days"
+      }
+    },
+    "Pre_Procedure_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185349003,
+          "display": "Encounter for check up (procedure)"
+        }
+      ],
+      "direct_transition": "Functional_Status_Assessments"
+    },
+    "Pre_Procedure_Encounter_End": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Delay_After_Assessments",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "knee"
+          }
+        },
+        {
+          "transition": "Delay_After_Assessments_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "hip"
+          }
+        }
+      ]
+    },
+    "Functional_Status_Assessments": {
+      "type": "CallSubmodule",
+      "submodule": "total_joint_replacement/functional_status_assessments",
+      "direct_transition": "Pre_Procedure_Encounter_End"
+    },
+    "Post_Procedure_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185389009,
+          "display": "Follow-up visit (procedure)"
+        }
+      ],
+      "direct_transition": "Functional_Status_Assessments_2"
+    },
+    "Delay_For_Post_Assessment_Hip": {
+      "type": "Delay",
+      "direct_transition": "Post_Procedure_Encounter",
+      "range": {
+        "low": 30,
+        "high": 150,
+        "unit": "days"
+      },
+      "remarks": [
+        "Obtained from:",
+        "https://ecqi.healthit.gov/system/files/ecqm/measures/CMS56v5_2.html",
+        "1 month recovery subtracted from overall delay time"
+      ]
+    },
+    "Delay_For_Post_Assessment_Knee": {
+      "type": "Delay",
+      "direct_transition": "Post_Procedure_Encounter",
+      "range": {
+        "low": 240,
+        "high": 335,
+        "unit": "days"
+      },
+      "remarks": [
+        "Obtained from:",
+        "https://ecqi.healthit.gov/ecqm/measures/cms066v7",
+        "1 month recovery time subtracted from overall delay time",
+        ""
+      ]
+    },
+    "Functional_Status_Assessments_2": {
+      "type": "CallSubmodule",
+      "submodule": "total_joint_replacement/functional_status_assessments",
+      "direct_transition": "Post_Procedure_Encounter_End"
+    },
+    "Post_Procedure_Encounter_End": {
+      "type": "EncounterEnd",
+      "direct_transition": "Delay_Until_New_Replacement_Needed"
     }
   }
 }
@@ -29980,6 +32103,78 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for symptom"
         }
       ],
+      "direct_transition": "UTI_Symptom1"
+    },
+    "UTI_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Dysuria",
+      "range": {
+        "low": 5,
+        "high": 25
+      },
+      "direct_transition": "UTI_Symptom2"
+    },
+    "UTI_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Urgent Desire to Urinate",
+      "range": {
+        "low": 5,
+        "high": 25
+      },
+      "direct_transition": "UTI_Symptom3"
+    },
+    "UTI_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "range": {
+        "low": 5,
+        "high": 25
+      },
+      "direct_transition": "UTI_Symptom4"
+    },
+    "UTI_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Discolored Urine",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "UTI_Symptom5"
+    },
+    "UTI_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Odor of Urine",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "UTI_Symptom6"
+    },
+    "UTI_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Pelvic Pain",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "UTI_Symptom7"
+    },
+    "UTI_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Symptom_Period"
+    },
+    "Symptom_Period": {
+      "type": "Delay",
+      "range": {
+        "low": 24,
+        "high": 48,
+        "unit": "days"
+      },
       "direct_transition": "Prescribe_UTI_Antibiotic"
     },
     "Prescribe_UTI_Antibiotic": {
@@ -30114,6 +32309,62 @@ export default {"allergic_rhinitis":{
     "End_Urinary_Tract_Infection": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "uti",
+      "direct_transition": "UTI_Symptom1_Ends"
+    },
+    "UTI_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Dysuria",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom2_Ends"
+    },
+    "UTI_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Urgent Desire to Urinate",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom3_Ends"
+    },
+    "UTI_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom4_Ends"
+    },
+    "UTI_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Discolored Urine",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom5_Ends"
+    },
+    "UTI_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Odor of Urine",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom6_Ends"
+    },
+    "UTI_Symptom6_Ends": {
+      "type": "Symptom",
+      "symptom": "Pelvic Pain",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom7_Ends"
+    },
+    "UTI_Symptom7_Ends": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "End_OTC_Painkiller"
     },
     "End_OTC_Painkiller": {
@@ -30173,8803 +32424,6 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
-    }
-  }
-}
-,
-"veteran":{
-  "name": "Veteran",
-  "remarks": [
-    "Sources:\n[1] https://factfinder.census.gov/bkmk/table/1.0/en/ACS/16_1YR/B21002\n[2] https://www.benefits.va.gov/pension/wartimeperiod.asp\n\nRelevant conflicts\n    World War II (December 7, 1941 – December 31, 1946)\n    Korean conflict (June 27, 1950 – January 31, 1955)\n    Vietnam era (February 28, 1961 – May 7, 1975)\n    Gulf War (August 2, 1990 – through a future date to be set by law or Presidential Proclamation)\n\nPer [1] , only about 3% of living veterans in 2016 were involved in more than 1 of these conflict, so for simplicity we assume a veteran was only involved in 1."
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Wait_Until_18"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Wait_Until_18": {
-      "type": "Guard",
-      "allow": {
-        "condition_type": "Age",
-        "operator": ">=",
-        "quantity": 18,
-        "unit": "years"
-      },
-      "conditional_transition": [
-        {
-          "transition": "Late_Gulf_War",
-          "condition": {
-            "condition_type": "Date",
-            "operator": ">",
-            "year": 2001
-          }
-        },
-        {
-          "transition": "Early_Gulf_War",
-          "condition": {
-            "condition_type": "Date",
-            "operator": ">",
-            "year": 1990
-          }
-        },
-        {
-          "transition": "Between_VW_and_GW",
-          "condition": {
-            "condition_type": "Date",
-            "operator": ">",
-            "year": 1975
-          }
-        },
-        {
-          "transition": "Vietnam_War",
-          "condition": {
-            "condition_type": "Date",
-            "operator": ">",
-            "year": 1961,
-            "value": 0
-          }
-        },
-        {
-          "transition": "Between_KW_and_VW",
-          "condition": {
-            "condition_type": "Date",
-            "operator": ">",
-            "year": 1955
-          }
-        },
-        {
-          "transition": "Korean_War",
-          "condition": {
-            "condition_type": "Date",
-            "operator": ">",
-            "year": 1950
-          }
-        },
-        {
-          "transition": "Between_WW2_and_KW",
-          "condition": {
-            "condition_type": "Date",
-            "operator": ">",
-            "year": 1946
-          }
-        },
-        {
-          "transition": "WW2",
-          "condition": {
-            "condition_type": "Date",
-            "operator": ">",
-            "year": 1941
-          }
-        },
-        {
-          "transition": "Pre_WW2",
-          "condition": {
-            "condition_type": "True"
-          }
-        }
-      ]
-    },
-    "Pre_WW2": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Set_Veteran_Pre_WW2",
-          "distribution": 0.2
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Set_Veteran_Pre_WW2": {
-      "type": "SetAttribute",
-      "attribute": "veteran",
-      "value": "Pre_WW2",
-      "direct_transition": "Terminal"
-    },
-    "WW2": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Set_Veteran_WW2",
-          "distribution": 0.2
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Set_Veteran_WW2": {
-      "type": "SetAttribute",
-      "attribute": "veteran",
-      "value": "WW2",
-      "direct_transition": "Terminal"
-    },
-    "Between_WW2_and_KW": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Set_Veteran_Between_WW2_and_KW",
-          "distribution": 0.2
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Set_Veteran_Between_WW2_and_KW": {
-      "type": "SetAttribute",
-      "attribute": "veteran",
-      "value": "Between_WW2_and_KW",
-      "direct_transition": "Terminal"
-    },
-    "Korean_War": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Set_Veteran_Korean_War",
-          "distribution": 0.2
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Set_Veteran_Korean_War": {
-      "type": "SetAttribute",
-      "attribute": "veteran",
-      "value": "Korean_War",
-      "direct_transition": "Terminal"
-    },
-    "Between_KW_and_VW": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Set_Veteran_Between_KW_and_VW",
-          "distribution": 0.2
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Set_Veteran_Between_KW_and_VW": {
-      "type": "SetAttribute",
-      "attribute": "veteran",
-      "value": "Between_KW_and_VW",
-      "direct_transition": "Terminal"
-    },
-    "Vietnam_War": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Set_Veteran_Vietnam_War",
-          "distribution": 0.2
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Set_Veteran_Vietnam_War": {
-      "type": "SetAttribute",
-      "attribute": "veteran",
-      "value": "Vietnam_War",
-      "direct_transition": "Terminal"
-    },
-    "Between_VW_and_GW": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Set_Veteran_Between_VW_and_GW",
-          "distribution": 0.2
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Set_Veteran_Between_VW_and_GW": {
-      "type": "SetAttribute",
-      "attribute": "veteran",
-      "value": "Between_VW_and_GW",
-      "direct_transition": "Terminal"
-    },
-    "Early_Gulf_War": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Set_Veteran_Early_Gulf_War",
-          "distribution": 0.2
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Set_Veteran_Early_Gulf_War": {
-      "type": "SetAttribute",
-      "attribute": "veteran",
-      "value": "Early_Gulf_War",
-      "direct_transition": "Terminal"
-    },
-    "Late_Gulf_War": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Set_Veteran_Late_Gulf_War",
-          "distribution": 0.2
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Set_Veteran_Late_Gulf_War": {
-      "type": "SetAttribute",
-      "attribute": "veteran",
-      "value": "Late_Gulf_War",
-      "direct_transition": "Terminal"
-    }
-  }
-}
-,
-"veteran_colorectal_cancer":{
-  "name": "Veteran Colorectal Cancer",
-  "remarks": [
-    "Colorectal cancer typically starts as benign polyps on the lining of the colon ",
-    "or rectum that slowly become cancerous over a period of 10-15 years. Annually ",
-    "136,000 new cases are diagnosed and 51,300 people die from colorectal cancer in the U.S.",
-    "The lifetime risk of developing colorectal cancer is 4.7% for men, 4.4% for women.",
-    "source: http://www.cancer.org/cancer/colonandrectumcancer/detailedguide/colorectal-cancer-key-statistics",
-    "Some things not modeled in this module: ",
-    "1. Colorectal cancer in children. Although possible it's highly unlikely. ",
-    "2. Diabetes, obesity, and poor diet as risk factors. I could not find any ",
-    "   conclusive statistics or reports linking these to an increased incidence ",
-    "   of colorectal cancer. ",
-    "3. The progression of cancer from one stage to another. Whatever stage the patient ",
-    "   is initially diagnosed at they remain at."
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Veteran Status"
-    },
-    "Delay_For_Smoking_History": {
-      "type": "Delay",
-      "remarks": [
-        "======================================================================",
-        " INCIDENCE                                                            ",
-        "======================================================================",
-        "About 1/3 of people over age 50 still do not get regular colonoscopies. ",
-        "These people develop more advanced colorectal cancer before it's detected.",
-        "Smoking increases your risk of colorectal cancer by 1.5x.",
-        "Wait for smoking history (possibly none) to accumulate."
-      ],
-      "exact": {
-        "quantity": 30,
-        "unit": "years"
-      },
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "smoking",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.7,
-              "transition": "Routine_Colonoscopy_Guard"
-            },
-            {
-              "distribution": 0.285,
-              "transition": "Terminal"
-            },
-            {
-              "distribution": 0.015,
-              "transition": "Delay_Until_Symptoms_Start"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.7,
-              "transition": "Routine_Colonoscopy_Guard"
-            },
-            {
-              "distribution": 0.29,
-              "transition": "Terminal"
-            },
-            {
-              "distribution": 0.01,
-              "transition": "Delay_Until_Symptoms_Start"
-            }
-          ]
-        }
-      ]
-    },
-    "Delay_Until_Symptoms_Start": {
-      "type": "Delay",
-      "remarks": [
-        "These patients do not get regular colonscopies or get colorectal cancer ",
-        "before they reach age 50. The median age for early-onset colorectal cancer ",
-        "is 44. See the 'Colorectal Cancer Symptoms' section."
-      ],
-      "range": {
-        "low": 5,
-        "high": 40,
-        "unit": "years"
-      },
-      "direct_transition": "Colorectal_Cancer_Symptom_1"
-    },
-    "Routine_Colonoscopy_Guard": {
-      "type": "Guard",
-      "remarks": [
-        "======================================================================",
-        " ROUTINE COLONOSCOPY                                                  ",
-        "======================================================================"
-      ],
-      "allow": {
-        "condition_type": "Age",
-        "operator": ">=",
-        "quantity": 50,
-        "unit": "years"
-      },
-      "direct_transition": "Routine_Colonoscopy_Encounter"
-    },
-    "Routine_Colonoscopy_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185349003",
-          "display": "Encounter for 'check-up'"
-        }
-      ],
-      "direct_transition": "Routine_Colonoscopy_Procedure"
-    },
-    "Routine_Colonoscopy_Procedure": {
-      "type": "Procedure",
-      "target_encounter": "Routine_Colonoscopy_Encounter",
-      "remarks": [
-        "NIH study on the epidemiology of colorectal adenomas (polyps): ",
-        "https://www.ncbi.nlm.nih.gov/pubmed/15666099 ",
-        "10-20% of sigmoidoscopy and colonoscopy patients are found to have adenomas.",
-        "To make this more realistic I slowly increase the rate that adenomas are found ",
-        "as patients age. Colonoscopies are generally not recommended for those over 75-80."
-      ],
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "73761001",
-          "display": "Colonoscopy"
-        }
-      ],
-      "duration": {
-        "low": 25,
-        "high": 45,
-        "unit": "minutes"
-      },
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Age",
-            "operator": "<",
-            "quantity": 60,
-            "unit": "years"
-          },
-          "distributions": [
-            {
-              "distribution": 0.9,
-              "transition": "End_Routine_Colonoscopy_Encounter"
-            },
-            {
-              "distribution": 0.1,
-              "transition": "Detect_Adenoma"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Age",
-            "operator": "<",
-            "quantity": 70,
-            "unit": "years"
-          },
-          "distributions": [
-            {
-              "distribution": 0.85,
-              "transition": "End_Routine_Colonoscopy_Encounter"
-            },
-            {
-              "distribution": 0.15,
-              "transition": "Detect_Adenoma"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Age",
-            "operator": "<",
-            "quantity": 80,
-            "unit": "years"
-          },
-          "distributions": [
-            {
-              "distribution": 0.8,
-              "transition": "End_Routine_Colonoscopy_Encounter"
-            },
-            {
-              "distribution": 0.2,
-              "transition": "Detect_Adenoma"
-            }
-          ]
-        }
-      ]
-    },
-    "End_Routine_Colonoscopy_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Wait_For_Next_Routine_Colonoscopy"
-    },
-    "Wait_For_Next_Routine_Colonoscopy": {
-      "type": "Delay",
-      "remarks": [
-        "If no anomalies are detected at age 50 colonoscopies are scheduled at ",
-        "5-year intervals from here on out. Based on these CDC guidelines: ",
-        "http://www.cdc.gov/cancer/colorectal/basic_info/screening/guidelines.htm"
-      ],
-      "exact": {
-        "quantity": 5,
-        "unit": "years"
-      },
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Age",
-            "operator": ">=",
-            "quantity": 80,
-            "unit": "years"
-          },
-          "transition": "Terminal"
-        },
-        {
-          "transition": "Routine_Colonoscopy_Encounter"
-        }
-      ]
-    },
-    "Detect_Adenoma": {
-      "type": "ConditionOnset",
-      "remarks": [
-        "======================================================================",
-        " COLORECTAL ADENOMA DIAGNOSIS                                         ",
-        "======================================================================",
-        "Although the incidence of colorectal polyps is 10-20% only about 10% of these polyps become cancerous. Source: ",
-        "http://www.hopkinscoloncancercenter.org/CMS/CMS_Page.aspx?CurrentUDV=59&CMS_Page_ID=0B34E9BE-5DE6-4CB4-B387-4158CC924084"
-      ],
-      "target_encounter": "Routine_Colonoscopy_Encounter",
-      "assign_to_attribute": "colorectal_adenoma",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "68496003",
-          "display": "Polyp of colon"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.9,
-          "transition": "Benign_Adenoma"
-        },
-        {
-          "distribution": 0.1,
-          "transition": "Malignant_Adenoma"
-        }
-      ]
-    },
-    "Benign_Adenoma": {
-      "type": "Observation",
-      "category": "procedure",
-      "range": {
-        "low": 2,
-        "high": 7
-      },
-      "unit": "mm",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "33756-8",
-          "display": "Polyp size greatest dimension by CAP cancer protocols"
-        }
-      ],
-      "direct_transition": "Fecal_Test"
-    },
-    "Malignant_Adenoma": {
-      "type": "Observation",
-      "category": "procedure",
-      "range": {
-        "low": 10,
-        "high": 25
-      },
-      "unit": "mm",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "33756-8",
-          "display": "Polyp size greatest dimension by CAP cancer protocols"
-        }
-      ],
-      "direct_transition": "Fecal_Test"
-    },
-    "Fecal_Test": {
-      "type": "Procedure",
-      "remarks": [
-        "======================================================================",
-        " FECAL IMMUNOCHEMICAL TEST                                            ",
-        "======================================================================",
-        "This test is used to detect trace amounts of blood in the stool that ",
-        "is indicative of colorectal cancer. The estimated cutoff level for this ",
-        "test is 100 ng/mL. Source: http://cebp.aacrjournals.org/content/20/2/272",
-        "Interestingly, if the patient previously had a positive test result (from ",
-        "a malignant adenoma) the 'Malignant_Adenoma' PriorState will remain true. ",
-        "If the patient is then later diagnosed with a benign adenoma the fecal test ",
-        "will still return postive. This aligns with the likelihood of recurrent ",
-        "adenomas being cancerous."
-      ],
-      "target_encounter": "Routine_Colonoscopy_Encounter",
-      "reason": "colorectal_adenoma",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1015401000000102",
-          "display": "Fecal occult blood test"
-        }
-      ],
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "Malignant_Adenoma"
-          },
-          "transition": "Fecal_Test_Positive_Result"
-        },
-        {
-          "transition": "Fecal_Test_Negative_Result"
-        }
-      ]
-    },
-    "Fecal_Test_Positive_Result": {
-      "type": "Observation",
-      "category": "laboratory",
-      "range": {
-        "low": 150,
-        "high": 500
-      },
-      "unit": "ng/mL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "57905-2",
-          "display": "Hemoglobin.gastrointestinal [Presence] in Stool by Immunologic method"
-        }
-      ],
-      "direct_transition": "Adenoma_Removal"
-    },
-    "Fecal_Test_Negative_Result": {
-      "type": "Observation",
-      "category": "laboratory",
-      "range": {
-        "low": 0,
-        "high": 25
-      },
-      "unit": "ng/mL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "57905-2",
-          "display": "Hemoglobin.gastrointestinal [Presence] in Stool by Immunologic method"
-        }
-      ],
-      "direct_transition": "Adenoma_Removal"
-    },
-    "Adenoma_Removal": {
-      "type": "Procedure",
-      "remarks": [
-        "======================================================================",
-        " COLORECTAL ADENOMA TREATMENT                                         ",
-        "======================================================================",
-        "When found these polyps are almost always removed. If the polyps are ",
-        "large and potentially cancerous a biopsy is then performed. For simplicity ",
-        "all large colorectal adenomas found in this module are also cancerous."
-      ],
-      "target_encounter": "Routine_Colonoscopy_Encounter",
-      "reason": "colorectal_adenoma",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "274031008",
-          "display": "Rectal polypectomy"
-        }
-      ],
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "Malignant_Adenoma"
-          },
-          "transition": "Adenoma_Biopsy"
-        },
-        {
-          "transition": "End_Routine_Colonoscopy_with_Benign_Adenoma"
-        }
-      ]
-    },
-    "End_Routine_Colonoscopy_with_Benign_Adenoma": {
-      "type": "EncounterEnd",
-      "direct_transition": "Wait_For_Followup_Colonoscopy"
-    },
-    "Adenoma_Biopsy": {
-      "type": "Procedure",
-      "target_encounter": "Routine_Colonoscopy_Encounter",
-      "reason": "colorectal_adenoma",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "76164006",
-          "display": "Biopsy of colon"
-        }
-      ],
-      "direct_transition": "End_Routine_Colonoscopy_with_Malignant_Adenoma"
-    },
-    "End_Routine_Colonoscopy_with_Malignant_Adenoma": {
-      "type": "EncounterEnd",
-      "direct_transition": "Wait_For_Biopsy_Followup"
-    },
-    "Wait_For_Biopsy_Followup": {
-      "type": "Delay",
-      "range": {
-        "low": 2,
-        "high": 7,
-        "unit": "days"
-      },
-      "direct_transition": "Biopsy_Followup"
-    },
-    "Biopsy_Followup": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "colorectal_adenoma",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "End_Biopsy_Followup"
-    },
-    "End_Biopsy_Followup": {
-      "type": "EncounterEnd",
-      "distributed_transition": [
-        {
-          "distribution": 0.4,
-          "transition": "Colorectal_Cancer_Diagnose_Stage_I"
-        },
-        {
-          "distribution": 0.2,
-          "transition": "Colorectal_Cancer_Diagnose_Stage_II"
-        },
-        {
-          "distribution": 0.4,
-          "transition": "Wait_For_Followup_Colonoscopy"
-        }
-      ]
-    },
-    "Wait_For_Followup_Colonoscopy": {
-      "type": "Delay",
-      "remarks": [
-        "======================================================================",
-        " FOLLOWUP COLONOSCOPY                                                 ",
-        "======================================================================",
-        "If colorectal adenomas are found a followup colonoscopy is scheduled ",
-        "for one year later. If the adenomas recur there's a good chance the ",
-        "patient will get cancer."
-      ],
-      "range": {
-        "low": 12,
-        "high": 18,
-        "unit": "months"
-      },
-      "direct_transition": "Followup_Colonoscopy_Encounter"
-    },
-    "Followup_Colonoscopy_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185349003",
-          "display": "Encounter for 'check-up'"
-        }
-      ],
-      "direct_transition": "Followup_Colonoscopy_Procedure"
-    },
-    "Followup_Colonoscopy_Procedure": {
-      "type": "Procedure",
-      "target_encounter": "Followup_Colonoscopy_Encounter",
-      "remarks": [
-        "Colorectal polyps recur at about 20-30% over a lifetime.",
-        "Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2780113/"
-      ],
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "73761001",
-          "display": "Colonoscopy"
-        }
-      ],
-      "duration": {
-        "low": 25,
-        "high": 45,
-        "unit": "minutes"
-      },
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Active Condition",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "713197008",
-                "display": "Recurrent rectal polyp"
-              }
-            ],
-            "remarks": [
-              "For variety, if the patient was referred to a followup and not ",
-              "immediately diagnosed with colorectal cancer that means his/her ",
-              "recurrent adenomas were on the fence. We give these patients a ",
-              "break and return them back to the general pool."
-            ]
-          },
-          "distributions": [
-            {
-              "distribution": 1,
-              "transition": "End_Recurrent_Adenoma"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.75,
-              "transition": "End_Colorectal_Adenoma"
-            },
-            {
-              "distribution": 0.25,
-              "transition": "Recurrent_Colorectal_Adenoma"
-            }
-          ]
-        }
-      ]
-    },
-    "End_Colorectal_Adenoma": {
-      "type": "ConditionEnd",
-      "remarks": [
-        "If the patient's colorectal adenoma does not return after a year ",
-        "we return them to the regular 5-year pattern. However, they will ",
-        "still have the option for their adenoma to recur later in the future."
-      ],
-      "referenced_by_attribute": "colorectal_adenoma",
-      "direct_transition": "End_Followup_Encounter_Clean"
-    },
-    "End_Followup_Encounter_Clean": {
-      "type": "EncounterEnd",
-      "direct_transition": "Wait_For_Next_Routine_Colonoscopy"
-    },
-    "Recurrent_Colorectal_Adenoma": {
-      "type": "ConditionOnset",
-      "remarks": [
-        "======================================================================",
-        " RECURRENT COLORECTAL ADENOMA                                         ",
-        "======================================================================",
-        "Survival after recurrent colorectal adenoma is much lower, anywhere ",
-        "in the range of 15-40%. If we detect recurent colorectal adenoma ",
-        "we move the patient along to stage III cancer. ",
-        "Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2780113/"
-      ],
-      "target_encounter": "Followup_Colonoscopy_Encounter",
-      "assign_to_attribute": "recurrent_colorectal_adenoma",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "713197008",
-          "display": "Recurrent rectal polyp"
-        }
-      ],
-      "direct_transition": "Recurrent_Adenoma_Removal"
-    },
-    "Recurrent_Adenoma_Removal": {
-      "type": "Procedure",
-      "target_encounter": "Followup_Colonoscopy_Encounter",
-      "reason": "recurrent_colorectal_adenoma",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "274031008",
-          "display": "Rectal polypectomy"
-        }
-      ],
-      "direct_transition": "End_Followup_Encounter_After_Adenoma_Removal"
-    },
-    "End_Followup_Encounter_After_Adenoma_Removal": {
-      "type": "EncounterEnd",
-      "distributed_transition": [
-        {
-          "distribution": 0.3,
-          "transition": "Colorectal_Cancer_Diagnose_Stage_II"
-        },
-        {
-          "distribution": 0.3,
-          "transition": "Colorectal_Cancer_Diagnose_Stage_III"
-        },
-        {
-          "distribution": 0.4,
-          "transition": "Wait_For_Followup_Colonoscopy"
-        }
-      ]
-    },
-    "End_Recurrent_Adenoma": {
-      "type": "ConditionEnd",
-      "referenced_by_attribute": "recurrent_colorectal_adenoma",
-      "direct_transition": "End_Colorectal_Adenoma"
-    },
-    "Colorectal_Cancer_Symptom_1": {
-      "type": "ConditionOnset",
-      "remarks": [
-        "======================================================================",
-        " COLORECTAL CANCER SYMPTOMS                                           ",
-        "======================================================================",
-        "If the patient begins experiencing the symptoms of colorectal cancer ",
-        "before ever having a colonoscopy usually the cancer is further along."
-      ],
-      "target_encounter": "Symptom_Encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "236077008",
-          "display": "Protracted diarrhea"
-        }
-      ],
-      "direct_transition": "Colorectal_Cancer_Symptom_2"
-    },
-    "Colorectal_Cancer_Symptom_2": {
-      "type": "ConditionOnset",
-      "target_encounter": "Symptom_Encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "6072007",
-          "display": "Bleeding from anus"
-        }
-      ],
-      "direct_transition": "Symptom_Encounter"
-    },
-    "Symptom_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "Colorectal_Cancer_Symptom_2",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185345009",
-          "display": "Encounter for symptom"
-        }
-      ],
-      "direct_transition": "End_Symptom_Encounter"
-    },
-    "End_Symptom_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Wait_For_Diagnostic_Colonoscopy"
-    },
-    "Wait_For_Diagnostic_Colonoscopy": {
-      "type": "Delay",
-      "remarks": [
-        "The patient needs to wait for a couple of days for his/her colon ",
-        "to clear out before the colonoscopy can be performed."
-      ],
-      "range": {
-        "low": 3,
-        "high": 5,
-        "unit": "days"
-      },
-      "direct_transition": "Diagnostic_Colonoscopy_Encounter"
-    },
-    "Diagnostic_Colonoscopy_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185349003",
-          "display": "Encounter for 'check-up'"
-        }
-      ],
-      "direct_transition": "Diagnostic_Colonoscopy_Procedure"
-    },
-    "Diagnostic_Colonoscopy_Procedure": {
-      "type": "Procedure",
-      "target_encounter": "Diagnostic_Colonoscopy_Encounter",
-      "remarks": [
-        "The patient is showing all signs of advanced colorectal cancer. ",
-        "The prognosis will not be good."
-      ],
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "73761001",
-          "display": "Colonoscopy"
-        }
-      ],
-      "duration": {
-        "low": 25,
-        "high": 45,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_Diagnostic_Colonoscopy_Encounter"
-    },
-    "End_Diagnostic_Colonoscopy_Encounter": {
-      "type": "EncounterEnd",
-      "distributed_transition": [
-        {
-          "distribution": 0.5,
-          "transition": "Colorectal_Cancer_Diagnose_Stage_III"
-        },
-        {
-          "distribution": 0.5,
-          "transition": "Colorectal_Cancer_Diagnose_Stage_IV"
-        }
-      ]
-    },
-    "Colorectal_Cancer_Diagnose_Stage_I": {
-      "type": "SetAttribute",
-      "attribute": "colorectal_cancer_stage",
-      "value": 1,
-      "direct_transition": "Colorectal_Cancer"
-    },
-    "Colorectal_Cancer_Diagnose_Stage_II": {
-      "type": "SetAttribute",
-      "attribute": "colorectal_cancer_stage",
-      "value": 2,
-      "direct_transition": "Colorectal_Cancer"
-    },
-    "Colorectal_Cancer_Diagnose_Stage_III": {
-      "type": "SetAttribute",
-      "attribute": "colorectal_cancer_stage",
-      "value": 3,
-      "direct_transition": "Colorectal_Cancer"
-    },
-    "Colorectal_Cancer_Diagnose_Stage_IV": {
-      "type": "SetAttribute",
-      "attribute": "colorectal_cancer_stage",
-      "value": 4,
-      "direct_transition": "Colorectal_Cancer"
-    },
-    "Colorectal_Cancer": {
-      "type": "Simple",
-      "remarks": [
-        "This state mainly exists to isolate the colonoscopy and diagnosis ",
-        "portion of the module from the portion devoted to cancer treatment.",
-        "======================================================================",
-        " COLORECTAL CANCER                                                    ",
-        "======================================================================",
-        "| Stage | Survival Rate | Treatments                                 |",
-        "----------------------------------------------------------------------",
-        "|    I  |      92%      | Polypectomy, Parial colectomy              |",
-        "|   II  |      75%      | Partial colectomy, colectomy, chemo        |",
-        "|  III  |      65%      | Colectomy, chemo                           |",
-        "|   IV  |      11%      | Chemo, radiotherapy                        |",
-        "----------------------------------------------------------------------"
-      ],
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "colorectal_cancer_stage",
-            "operator": "==",
-            "value": 1
-          },
-          "transition": "Colorectal_Cancer_Stage_I"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "colorectal_cancer_stage",
-            "operator": "==",
-            "value": 2
-          },
-          "transition": "Colorectal_Cancer_Stage_II"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "colorectal_cancer_stage",
-            "operator": "==",
-            "value": 3
-          },
-          "transition": "Colorectal_Cancer_Stage_III"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "colorectal_cancer_stage",
-            "operator": "==",
-            "value": 4
-          },
-          "transition": "Colorectal_Cancer_Stage_IV"
-        }
-      ]
-    },
-    "Colorectal_Cancer_Stage_I": {
-      "type": "ConditionOnset",
-      "target_encounter": "Oncologist_Encounter",
-      "assign_to_attribute": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "93761005",
-          "display": "Primary malignant neoplasm of colon"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.08,
-          "transition": "Eventual_Death"
-        },
-        {
-          "distribution": 0.92,
-          "transition": "Wait_For_Oncologist_Encounter"
-        }
-      ]
-    },
-    "Colorectal_Cancer_Stage_II": {
-      "type": "ConditionOnset",
-      "target_encounter": "Oncologist_Encounter",
-      "assign_to_attribute": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "109838007",
-          "display": "Overlapping malignant neoplasm of colon"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.25,
-          "transition": "Eventual_Death"
-        },
-        {
-          "distribution": 0.75,
-          "transition": "Wait_For_Oncologist_Encounter"
-        }
-      ]
-    },
-    "Colorectal_Cancer_Stage_III": {
-      "type": "ConditionOnset",
-      "target_encounter": "Oncologist_Encounter",
-      "assign_to_attribute": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "363406005",
-          "display": "Malignant tumor of colon"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.35,
-          "transition": "Eventual_Death"
-        },
-        {
-          "distribution": 0.65,
-          "transition": "Wait_For_Oncologist_Encounter"
-        }
-      ]
-    },
-    "Colorectal_Cancer_Stage_IV": {
-      "type": "ConditionOnset",
-      "target_encounter": "Oncologist_Encounter",
-      "assign_to_attribute": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "94260004",
-          "display": "Secondary malignant neoplasm of colon"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.89,
-          "transition": "Eventual_Death"
-        },
-        {
-          "distribution": 0.11,
-          "transition": "Wait_For_Oncologist_Encounter"
-        }
-      ]
-    },
-    "Eventual_Death": {
-      "type": "Death",
-      "referenced_by_attribute": "colorectal_cancer",
-      "remarks": [
-        "These patients will eventually die from their colorectal cancer."
-      ],
-      "range": {
-        "low": 2,
-        "high": 5,
-        "unit": "years"
-      },
-      "direct_transition": "Wait_For_Oncologist_Encounter"
-    },
-    "Wait_For_Oncologist_Encounter": {
-      "type": "Delay",
-      "range": {
-        "low": 3,
-        "high": 7,
-        "unit": "days"
-      },
-      "direct_transition": "Oncologist_Encounter"
-    },
-    "Oncologist_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "colorectal_cancer",
-      "remarks": [
-        "Annual incidence of progression: ",
-        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2095643/"
-      ],
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "Colorectal_Cancer_CarePlan"
-    },
-    "Colorectal_Cancer_CarePlan": {
-      "type": "CarePlanStart",
-      "remarks": [
-        "======================================================================",
-        " COLORECTAL CANCER TREATMENTS                                         ",
-        "======================================================================",
-        "Caring for colorectal cancer differs by stage. Source for all treatment information: ",
-        "http://www.cancer.org/cancer/colonandrectumcancer/detailedguide/colorectal-cancer-treating-by-stage-colon"
-      ],
-      "target_encounter": "Oncologist_Encounter",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "395082007",
-          "display": "Cancer care plan"
-        }
-      ],
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": "226234005",
-          "display": "Healthy diet"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "703993001",
-          "display": "Colonoscopy planned"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "243072006",
-          "display": "Cancer education"
-        }
-      ],
-      "direct_transition": "End_Oncologist_Encounter"
-    },
-    "End_Oncologist_Encounter": {
-      "type": "EncounterEnd",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "colorectal_cancer_stage",
-            "operator": "==",
-            "value": 1
-          },
-          "remarks": [
-            "The treatment for stage 1 typically requires only a polypectomy (already performed ",
-            "as part of the last colonoscopy) or occasionally a partial colectomy of the affected ",
-            "portion of the colon."
-          ],
-          "distributions": [
-            {
-              "distribution": 0.3,
-              "transition": "Wait_For_Partial_Colectomy"
-            },
-            {
-              "distribution": 0.7,
-              "transition": "Remission_Period"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "colorectal_cancer_stage",
-            "operator": "==",
-            "value": 2
-          },
-          "remarks": [
-            "The treatment for stage 2 typically requires a partial colectomy. Additional ",
-            "chemotherapy treatment is sometimes used post-surgery if the cancer is likely ",
-            "to recur."
-          ],
-          "distributions": [
-            {
-              "distribution": 1,
-              "transition": "Wait_For_Partial_Colectomy"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "colorectal_cancer_stage",
-            "operator": "==",
-            "value": 3
-          },
-          "remarks": [
-            "The treatment for stage 3 is a partial colectomy followed by chemo. Additional ",
-            "radiation therapy is sometimes used, especially for patients that are not healthy ",
-            "enough for surgery."
-          ],
-          "distributions": [
-            {
-              "distribution": 1,
-              "transition": "Wait_For_Partial_Colectomy"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "colorectal_cancer_stage",
-            "operator": "==",
-            "value": 4
-          },
-          "remarks": [
-            "The treatment for stage 4 is chemo an occasionally surgery. However, surgery is ",
-            "only recommended to relieve symptoms or in rare cases where chemo has shrunk the ",
-            "tumors enough to make surgery viable. Survival from stage 4 is unlikely."
-          ],
-          "distributions": [
-            {
-              "distribution": 0.15,
-              "transition": "Wait_For_Diverting_Colostomy"
-            },
-            {
-              "distribution": 0.85,
-              "transition": "Wait_For_Initial_Chemotherapy_Treatment"
-            }
-          ]
-        }
-      ]
-    },
-    "Wait_For_Partial_Colectomy": {
-      "type": "Delay",
-      "remarks": [
-        "======================================================================",
-        " PARTIAL COLECTOMY                                                    ",
-        "======================================================================",
-        "Surgical removal of the affected portion of the colon."
-      ],
-      "range": {
-        "low": 1,
-        "high": 2,
-        "unit": "weeks"
-      },
-      "direct_transition": "Partial_Colectomy_Encounter"
-    },
-    "Partial_Colectomy_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "inpatient",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "Partial_Colectomy_Procedure"
-    },
-    "Partial_Colectomy_Procedure": {
-      "type": "Procedure",
-      "target_encounter": "Partial_Colectomy_Encounter",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "43075005",
-          "display": "Partial resection of colon"
-        }
-      ],
-      "direct_transition": "Partial_Colectomy_CarePlan"
-    },
-    "Partial_Colectomy_CarePlan": {
-      "type": "CarePlanStart",
-      "target_encounter": "Partial_Colectomy_Encounter",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "781831000000109",
-          "display": "Major surgery care management"
-        }
-      ],
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": "10888001",
-          "display": "Liquid diet"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "103744005",
-          "display": "Administration of intravenous fluids"
-        }
-      ],
-      "direct_transition": "End_Partial_Colectomy_Encounter"
-    },
-    "End_Partial_Colectomy_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Delay_For_Partial_Colectomy_Recovery"
-    },
-    "Delay_For_Partial_Colectomy_Recovery": {
-      "type": "Delay",
-      "range": {
-        "low": 7,
-        "high": 21,
-        "unit": "days"
-      },
-      "direct_transition": "End_Partial_Colectomy_CarePlan"
-    },
-    "End_Partial_Colectomy_CarePlan": {
-      "type": "CarePlanEnd",
-      "careplan": "Partial_Colectomy_CarePlan",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "colorectal_cancer_stage",
-            "operator": "==",
-            "value": 2
-          },
-          "distributions": [
-            {
-              "distribution": 0.33,
-              "transition": "Wait_For_Initial_Chemotherapy_Treatment"
-            },
-            {
-              "distribution": 0.67,
-              "transition": "Remission_Period"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "colorectal_cancer_stage",
-            "operator": "==",
-            "value": 3
-          },
-          "distributions": [
-            {
-              "distribution": 1,
-              "transition": "Wait_For_Initial_Chemotherapy_Treatment"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 1,
-              "transition": "Remission_Period"
-            }
-          ]
-        }
-      ]
-    },
-    "Wait_For_Diverting_Colostomy": {
-      "type": "Delay",
-      "remarks": [
-        "======================================================================",
-        " DIVERTING COLECTOMY                                                  ",
-        "======================================================================",
-        "Used to treat advanced colorectal cancer. Bypasses blockage of the colon ",
-        "to an external bag that collects waste. This is mainly a treatment of ",
-        "symptoms rather than a treatment of the cancer itself."
-      ],
-      "range": {
-        "low": 1,
-        "high": 2,
-        "unit": "weeks"
-      },
-      "direct_transition": "Diverting_Colostomy_Encounter"
-    },
-    "Diverting_Colostomy_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "inpatient",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "Diverting_Colostomy_Procedure"
-    },
-    "Diverting_Colostomy_Procedure": {
-      "type": "Procedure",
-      "target_encounter": "Diverting_Colostomy_Encounter",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "387607004",
-          "display": "Construction of diverting colostomy"
-        }
-      ],
-      "direct_transition": "Diverting_Colostomy_CarePlan"
-    },
-    "Diverting_Colostomy_CarePlan": {
-      "type": "CarePlanStart",
-      "target_encounter": "Diverting_Colostomy_Encounter",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "781831000000109",
-          "display": "Major surgery care management"
-        }
-      ],
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": "10888001",
-          "display": "Liquid diet"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "103744005",
-          "display": "Administration of intravenous fluids"
-        }
-      ],
-      "direct_transition": "End_Diverting_Colostomy_Encounter"
-    },
-    "End_Diverting_Colostomy_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Delay_For_Diverting_Colostomy_Recovery"
-    },
-    "Delay_For_Diverting_Colostomy_Recovery": {
-      "type": "Delay",
-      "range": {
-        "low": 7,
-        "high": 21,
-        "unit": "days"
-      },
-      "direct_transition": "End_Diverting_Colostomy_CarePlan"
-    },
-    "End_Diverting_Colostomy_CarePlan": {
-      "type": "CarePlanEnd",
-      "careplan": "Diverting_Colostomy_CarePlan",
-      "remarks": [
-        "TODO: Chemo for stage II"
-      ],
-      "direct_transition": "Wait_For_Initial_Chemotherapy_Treatment"
-    },
-    "Wait_For_Initial_Chemotherapy_Treatment": {
-      "type": "Delay",
-      "range": {
-        "low": 1,
-        "high": 2,
-        "unit": "weeks"
-      },
-      "direct_transition": "Initialize_Chemo_Counter"
-    },
-    "Initialize_Chemo_Counter": {
-      "type": "SetAttribute",
-      "attribute": "cr_chemo_count",
-      "value": 0,
-      "direct_transition": "Chemotherapy_Treatment_Path"
-    },
-    "Chemotherapy_Treatment_Path": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " CHEMOTHERAPY                                                         ",
-        "======================================================================",
-        "Chemotherapy of the affected areas using one of: ",
-        "FOLFOX: leucovorin, 5-FU, and oxaliplatin (Eloxatin) ",
-        "FOLFIRI: leucovorin, 5-FU, and irinotecan (Camptosar) ",
-        "CapeOX: capecitabine (Xeloda) and oxaliplatin",
-        "Chemotherapy treatment is typically given for about 6 months. This ",
-        "equates to 6 chemo treatments."
-      ],
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "cr_chemo_count",
-            "operator": ">=",
-            "value": 6
-          },
-          "transition": "Remission_Period"
-        },
-        {
-          "transition": "Chemotherapy_Encounter"
-        }
-      ]
-    },
-    "Chemotherapy_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "Chemotherapy_Drugs_I"
-    },
-    "Chemotherapy_Drugs_I": {
-      "type": "MedicationOrder",
-      "target_encounter": "Chemotherapy_Encounter",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "1803932",
-          "display": "Leucovorin 100 MG Injection"
-        }
-      ],
-      "direct_transition": "Chemotherapy_Drugs_II"
-    },
-    "Chemotherapy_Drugs_II": {
-      "type": "MedicationOrder",
-      "target_encounter": "Chemotherapy_Encounter",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "575971",
-          "display": "oxaliplatin 5 MG/ML [Eloxatin]"
-        }
-      ],
-      "direct_transition": "Chemotherapy_Procedure"
-    },
-    "Chemotherapy_Procedure": {
-      "type": "Procedure",
-      "target_encounter": "Chemotherapy_Encounter",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "703423002",
-          "display": "Combined chemotherapy and radiation therapy (procedure)"
-        }
-      ],
-      "direct_transition": "End_Chemotherapy_Encounter"
-    },
-    "End_Chemotherapy_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Count_A_Chemo_Treatment"
-    },
-    "Count_A_Chemo_Treatment": {
-      "type": "Counter",
-      "action": "increment",
-      "attribute": "cr_chemo_count",
-      "direct_transition": "Chemotherapy_Treatment_Delay"
-    },
-    "Chemotherapy_Treatment_Delay": {
-      "type": "Delay",
-      "range": {
-        "low": 28,
-        "high": 35,
-        "unit": "days"
-      },
-      "direct_transition": "Chemotherapy_Treatment_Path"
-    },
-    "Remission_Period": {
-      "type": "Delay",
-      "remarks": [
-        "If the patient isn't going to die at a later date we give them some time to ",
-        "go into remission following treatment. For those that achieve remission they ",
-        "are returned back to the general pool of candidates for colorectal cancer."
-      ],
-      "range": {
-        "low": 12,
-        "high": 24,
-        "unit": "months"
-      },
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "Eventual_Death"
-          },
-          "transition": "Terminal"
-        },
-        {
-          "transition": "Remission_Encounter"
-        }
-      ]
-    },
-    "Remission_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "colorectal_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185349003",
-          "display": "Encounter for 'check-up'"
-        }
-      ],
-      "direct_transition": "End_Colorectal_Cancer_CarePlan"
-    },
-    "End_Colorectal_Cancer_CarePlan": {
-      "type": "CarePlanEnd",
-      "careplan": "Colorectal_Cancer_CarePlan",
-      "direct_transition": "End_Colorectal_Cancer"
-    },
-    "End_Colorectal_Cancer": {
-      "type": "ConditionEnd",
-      "referenced_by_attribute": "colorectal_cancer",
-      "direct_transition": "End_Remission_Encounter"
-    },
-    "End_Remission_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Veteran Status": {
-      "type": "Guard",
-      "allow": {
-        "condition_type": "Attribute",
-        "attribute": "veteran",
-        "operator": "is not nil"
-      },
-      "direct_transition": "Delay_For_Smoking_History"
-    }
-  }
-}
-,
-"veteran_congestive_heart_failure":{
-  "name": "Veteran Congestive Heart Failure",
-  "remarks": [
-    "A blank module"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "age guard"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "age guard": {
-      "type": "Delay",
-      "direct_transition": "veteran guard",
-      "range": {
-        "low": 50,
-        "high": 80,
-        "unit": "years"
-      }
-    },
-    "veteran guard": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "CHF symptom onset 1",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "Terminal",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
-        }
-      ]
-    },
-    "CHF symptom onset 1": {
-      "type": "Symptom",
-      "symptom": "shortness of breath",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "CHF symptom onset 2"
-    },
-    "CHF symptom onset 2": {
-      "type": "Symptom",
-      "symptom": "swelling",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "CHF symptom onset 3"
-    },
-    "CHF symptom onset 3": {
-      "type": "Symptom",
-      "symptom": "excercise intolerance",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "CHF Condition Start"
-    },
-    "CHF Condition Start": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "chf",
-      "target_encounter": "CHF initial workup encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 88805009,
-          "display": "congestive heart failure"
-        }
-      ],
-      "direct_transition": "CHF initial workup encounter"
-    },
-    "CHF initial workup encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "chf",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185347001,
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "BNP lab workup"
-    },
-    "Initial Workup labs for CHF": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "24320-4",
-          "display": "basic metabolic panel"
-        }
-      ],
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "initial encounter end"
-    },
-    "inital workup imaging for CHF": {
-      "type": "ImagingStudy",
-      "procedure_code": {
-        "system": "SNOMED-CT",
-        "code": "34552-0",
-        "display": "trans thoracic echocardiogram"
-      },
-      "series": [
-        {
-          "body_site": {
-            "system": "SNOMED-CT",
-            "code": 261179002,
-            "display": "thoracic"
-          },
-          "modality": {
-            "system": "DICOM-DCM",
-            "code": "XX",
-            "display": "DICOM Modality Code"
-          },
-          "instances": [
-            {
-              "title": "dummy instance",
-              "sop_class": {
-                "system": "DICOM-SOP",
-                "code": "1.2.3.4.5.6.7.8",
-                "display": "dummy code"
-              }
-            }
-          ]
-        }
-      ],
-      "direct_transition": "CHF careplan"
-    },
-    "BNP lab workup": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "pg/mL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "42637-9",
-          "display": "Natriuretic peptide B"
-        }
-      ],
-      "direct_transition": "Record_Glucose",
-      "range": {
-        "low": 100,
-        "high": 2
-      }
-    },
-    "Record_Glucose": {
-      "type": "Observation",
-      "category": "laboratory",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2339-0",
-          "display": "Glucose"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_UreaNitrogen",
-      "vital_sign": "Glucose"
-    },
-    "Record_UreaNitrogen": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Urea Nitrogen",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "6299-2",
-          "display": "Urea Nitrogen"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_Creatinine"
-    },
-    "Record_Creatinine": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Creatinine",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "38483-4",
-          "display": "Creatinine"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_Calcium"
-    },
-    "Record_Calcium": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Calcium",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "49765-1",
-          "display": "Calcium"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_Sodium"
-    },
-    "Record_Sodium": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Sodium",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2947-0",
-          "display": "Sodium"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_Potassium"
-    },
-    "Record_Potassium": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Potassium",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "6298-4",
-          "display": "Potassium"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_Chloride"
-    },
-    "Record_Chloride": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Chloride",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2069-3",
-          "display": "Chloride"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_CO2"
-    },
-    "Record_CO2": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Carbon Dioxide",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "20565-8",
-          "display": "Carbon Dioxide"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_MetabolicPanel"
-    },
-    "Record_MetabolicPanel": {
-      "type": "DiagnosticReport",
-      "number_of_observations": 8,
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "51990-0",
-          "display": "Basic Metabolic Panel"
-        }
-      ],
-      "direct_transition": "Initial Workup labs for CHF"
-    },
-    "followup_CHF_encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185347001,
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "inital workup imaging for CHF"
-    },
-    "CHF careplan": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 735984001,
-          "display": "Heart failure self management plan"
-        }
-      ],
-      "direct_transition": "CHF Medication Start 1",
-      "reason": "chf",
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": 183063000,
-          "display": "low salt diet education"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 183301007,
-          "display": "physical exercise"
-        }
-      ]
-    },
-    "initial encounter end": {
-      "type": "EncounterEnd",
-      "direct_transition": "intra_encounter time gate"
-    },
-    "intra_encounter time gate": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 3,
-        "unit": "weeks"
-      },
-      "direct_transition": "followup_CHF_encounter"
-    },
-    "CHF Medication Start 1": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 866414,
-          "display": "24 HR metoprolol succinate 100 MG Extended Release Oral Tablet [Toprol]"
-        }
-      ],
-      "direct_transition": "CHF Medication Start 2",
-      "reason": "chf",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 30,
-          "unit": "days"
-        },
-        "refills": 12
-      }
-    },
-    "CHF Medication Start 2": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 315971,
-          "display": "Lasix 40mg"
-        }
-      ],
-      "direct_transition": "end_followup_encounter",
-      "reason": "chf",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 30,
-          "unit": "days"
-        },
-        "refills": 10
-      }
-    },
-    "end_followup_encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
-    }
-  }
-}
-,
-"veteran_hyperlipidemia":{
-  "name": "Veteran Hyperlipidemia",
-  "remarks": [
-    "A blank module"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "age guard"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "age guard": {
-      "type": "Delay",
-      "direct_transition": "veteran guard",
-      "range": {
-        "low": 40,
-        "high": 80,
-        "unit": "years"
-      }
-    },
-    "veteran guard": {
-      "type": "Simple",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "transition": "Hyperlipidemia symptom onset 1",
-              "distribution": 0.397
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.603
-            }
-          ]
-        }
-      ]
-    },
-    "Record_Glucose": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Glucose",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2339-0",
-          "display": "Glucose"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_UreaNitrogen"
-    },
-    "Record_UreaNitrogen": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Urea Nitrogen",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "6299-2",
-          "display": "Urea Nitrogen"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_Creatinine"
-    },
-    "Record_Creatinine": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Creatinine",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "38483-4",
-          "display": "Creatinine"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_Calcium"
-    },
-    "Record_Calcium": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Calcium",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "49765-1",
-          "display": "Calcium"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_Sodium"
-    },
-    "Record_Sodium": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Sodium",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2947-0",
-          "display": "Sodium"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_Potassium"
-    },
-    "Record_Potassium": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Potassium",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "6298-4",
-          "display": "Potassium"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_Chloride"
-    },
-    "Record_Chloride": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Chloride",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2069-3",
-          "display": "Chloride"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_CO2"
-    },
-    "Record_CO2": {
-      "type": "Observation",
-      "category": "laboratory",
-      "vital_sign": "Carbon Dioxide",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "20565-8",
-          "display": "Carbon Dioxide"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_MetabolicPanel"
-    },
-    "Record_MetabolicPanel": {
-      "type": "DiagnosticReport",
-      "number_of_observations": 8,
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "51990-0",
-          "display": "Basic Metabolic Panel"
-        }
-      ],
-      "direct_transition": "initial encounter end"
-    },
-    "initial encounter end": {
-      "type": "EncounterEnd",
-      "direct_transition": "intra_encounter time gate"
-    },
-    "intra_encounter time gate": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 3,
-        "unit": "weeks"
-      },
-      "direct_transition": "followup_hyperlipidemia_encounter"
-    },
-    "followup encounter end": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
-    },
-    "Hyperlipidemia symptom onset 1": {
-      "type": "Symptom",
-      "symptom": "weight gain",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "Hyperlipidemia Condition Start"
-    },
-    "Hyperlipidemia Condition Start": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "hyperlipidemia",
-      "target_encounter": "Hyperlipidemia initial workup encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 55822004,
-          "display": "hyperlipidemia"
-        }
-      ],
-      "direct_transition": "Hyperlipidemia initial workup encounter"
-    },
-    "Hyperlipidemia initial workup encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "hyperlipidemia",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185345009,
-          "display": "Encounter for symptom"
-        }
-      ],
-      "direct_transition": "Total Cholesterol lab workup"
-    },
-    "Total Cholesterol lab workup": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "mg/dL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2093-3",
-          "display": "Cholesterol"
-        }
-      ],
-      "direct_transition": "HDL Cholesterol lab workup",
-      "range": {
-        "low": 205,
-        "high": 305
-      }
-    },
-    "HDL Cholesterol lab workup": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "mg/dL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2085-9",
-          "display": "Cholesterol in HDL"
-        }
-      ],
-      "direct_transition": "LDL Cholesterol lab workup",
-      "range": {
-        "low": 20,
-        "high": 65
-      }
-    },
-    "Triglycerides lab workup": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "mg/dL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2571-8",
-          "display": "Triglyceride"
-        }
-      ],
-      "direct_transition": "Record_lipidpanel",
-      "range": {
-        "low": 100,
-        "high": 400
-      }
-    },
-    "LDL Cholesterol lab workup": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "mg/dL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "13457-7",
-          "display": "Cholesterol in LDL"
-        }
-      ],
-      "direct_transition": "Triglycerides lab workup",
-      "range": {
-        "low": 101,
-        "high": 200
-      }
-    },
-    "Record_lipidpanel": {
-      "type": "DiagnosticReport",
-      "number_of_observations": 4,
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "24331-1",
-          "display": "Lipid Panel"
-        }
-      ],
-      "direct_transition": "Record_Glucose"
-    },
-    "followup_hyperlipidemia_encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "hyperlipidemia",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 390906007,
-          "display": "Follow-up encounter"
-        }
-      ],
-      "direct_transition": "inital workup imaging for hyperlipidemia"
-    },
-    "inital workup imaging for hyperlipidemia": {
-      "type": "ImagingStudy",
-      "procedure_code": {
-        "system": "SNOMED-CT",
-        "code": "34552-0",
-        "display": "trans thoracic echocardiogram"
-      },
-      "series": [
-        {
-          "body_site": {
-            "system": "SNOMED-CT",
-            "code": 261179002,
-            "display": "thoracic"
-          },
-          "modality": {
-            "system": "DICOM-DCM",
-            "code": "XX",
-            "display": "DICOM Modality Code"
-          },
-          "instances": [
-            {
-              "title": "Title of this image",
-              "sop_class": {
-                "system": "DICOM-SOP",
-                "code": "1.2.3.4.5.6.7.8",
-                "display": "DICOM Subject-Object Pair Code"
-              }
-            },
-            {
-              "title": "Title of this image",
-              "sop_class": {
-                "system": "DICOM-SOP",
-                "code": "1.2.3.4.5.6.7.8",
-                "display": "DICOM Subject-Object Pair Code"
-              }
-            }
-          ]
-        }
-      ],
-      "direct_transition": "hyperlipidemia careplan"
-    },
-    "hyperlipidemia careplan": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 736285004,
-          "display": "Hyperlipidemia clinical management plan"
-        }
-      ],
-      "direct_transition": "Hyperlipidemia medication start",
-      "reason": "hyperlipidemia",
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": 183063000,
-          "display": "low salt diet education"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 183301007,
-          "display": "physical exercise"
-        }
-      ]
-    },
-    "Hyperlipidemia medication start": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 316672,
-          "display": "Simvistatin 10 MG"
-        }
-      ],
-      "direct_transition": "followup encounter end",
-      "reason": "hyperlipidemia",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 1,
-          "unit": "days"
-        },
-        "refills": 10
-      }
-    }
-  }
-}
-,
-"veteran_lung_cancer":{
-  "name": "Veteran Lung Cancer",
-  "remarks": [
-    "Most of the data for this module was synthesized from two primary sources:",
-    "1. The comprehensive pages starting at http://www.cancer.org/cancer/lungcancer/index",
-    "2. The Cancer Care Ontario Pathway Maps at https://www.cancercare.on.ca/ocs/qpi/dispathmgmt/pathways/lung_cancer_pathway_map/",
-    "Some data statistics came from:",
-    "3. The American Lung Association Lung Cancer Fact Sheet @ http://www.lung.org/lung-health-and-diseases/lung-disease-lookup/lung-cancer/learn-about-lung-cancer/lung-cancer-fact-sheet.html",
-    "4. https://www.verywell.com/what-percentage-of-smokers-get-lung-cancer-2248868",
-    "5. Life Expectancies: http://www.healthcommunities.com/lung-cancer/prognosis.shtml"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Veteran_Guard"
-    },
-    "Ages_45_65": {
-      "type": "Delay",
-      "range": {
-        "low": 45,
-        "high": 65,
-        "unit": "years"
-      },
-      "direct_transition": "smoking_status",
-      "remarks": [
-        "Lung cancer mainly occurs in older people. About 2 out of 3 people diagnosed with lung cancer are 65 or older, while less than 2% are younger than 45. The average age at the time of diagnosis is about 70.",
-        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-key-statistics"
-      ]
-    },
-    "Onset_Lung_Cancer": {
-      "type": "SetAttribute",
-      "attribute": "lung_cancer",
-      "value": true,
-      "direct_transition": "Init_Lung_Cancer_Counter"
-    },
-    "Init_Lung_Cancer_Counter": {
-      "type": "SetAttribute",
-      "attribute": "lung_cancer_nondiagnosis_counter",
-      "value": 0,
-      "direct_transition": "Undiagnosed_Lung_Cancer"
-    },
-    "Undiagnosed_Lung_Cancer": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 1,
-        "unit": "months"
-      },
-      "distributed_transition": [
-        {
-          "distribution": {
-            "attribute": "probability_of_lung_cancer_treatment",
-            "default": 0.2
-          },
-          "transition": "Cough"
-        },
-        {
-          "distribution": {
-            "attribute": "probability_of_no_lung_cancer_treatment",
-            "default": 0.8
-          },
-          "transition": "Increment_Counter"
-        }
-      ]
-    },
-    "Increment_Counter": {
-      "type": "Counter",
-      "action": "increment",
-      "attribute": "lung_cancer_nondiagnosis_counter",
-      "direct_transition": "Undiagnosed_Lung_Cancer"
-    },
-    "Cough": {
-      "type": "Symptom",
-      "symptom": "Cough",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "Chest Pain"
-    },
-    "Chest Pain": {
-      "type": "Symptom",
-      "symptom": "Chest Pain",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "Suspected Lung Cancer"
-    },
-    "Suspected Lung Cancer": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter I",
-      "assign_to_attribute": "Suspected Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "162573006",
-          "display": "Suspected lung cancer (situation)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter I"
-    },
-    "Diagnosis Encounter I": {
-      "type": "Encounter",
-      "encounter_class": "emergency",
-      "reason": "Suspected Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "50849002",
-          "display": "Emergency Room Admission"
-        }
-      ],
-      "direct_transition": "Chest X-Ray"
-    },
-    "Chest X-Ray": {
-      "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter I",
-      "reason": "Suspected Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "399208008",
-          "display": "Plain chest X-ray (procedure)"
-        }
-      ],
-      "duration": {
-        "low": 10,
-        "high": 25,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_Diagnosis_Encounter_I"
-    },
-    "End_Diagnosis_Encounter_I": {
-      "type": "EncounterEnd",
-      "direct_transition": "Schedule Follow Up I"
-    },
-    "Schedule Follow Up I": {
-      "type": "Delay",
-      "range": {
-        "low": 2,
-        "high": 9,
-        "unit": "days"
-      },
-      "direct_transition": "Diagnosis Encounter II"
-    },
-    "Diagnosis Encounter II": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "reason": "Suspected Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "Chest CT Scan"
-    },
-    "Chest CT Scan": {
-      "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter II",
-      "reason": "Suspected Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "418891003",
-          "display": "Computed tomography of chest and abdomen"
-        }
-      ],
-      "duration": {
-        "low": 20,
-        "high": 60,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_Diagnosis_Encounter_II"
-    },
-    "End_Diagnosis_Encounter_II": {
-      "type": "EncounterEnd",
-      "direct_transition": "Schedule Follow Up II"
-    },
-    "Schedule Follow Up II": {
-      "type": "Delay",
-      "range": {
-        "low": 1,
-        "high": 9,
-        "unit": "days"
-      },
-      "distributed_transition": [
-        {
-          "distribution": 0.85,
-          "transition": "Non-Small Cell Lung Cancer"
-        },
-        {
-          "distribution": 0.15,
-          "transition": "Small Cell Lung Cancer"
-        }
-      ],
-      "remarks": [
-        "About 85% of lung cancers are non-small cell lung cancers.",
-        "About 10%-15% of lung cancers are small cell lung cancers.",
-        "http://www.cancer.org/cancer/lungcancer/index"
-      ]
-    },
-    "Non-Small Cell Lung Cancer": {
-      "type": "SetAttribute",
-      "attribute": "Lung Cancer Type",
-      "value": "NSCLC",
-      "direct_transition": "NSCLC"
-    },
-    "NSCLC": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter III",
-      "assign_to_attribute": "Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "254637007",
-          "display": "Non-small cell lung cancer (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter III"
-    },
-    "Small Cell Lung Cancer": {
-      "type": "SetAttribute",
-      "attribute": "Lung Cancer Type",
-      "value": "SCLC",
-      "direct_transition": "SCLC"
-    },
-    "SCLC": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter III",
-      "assign_to_attribute": "Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "254632001",
-          "display": "Small cell carcinoma of lung (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter III"
-    },
-    "Diagnosis Encounter III": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "reason": "Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.25,
-          "transition": "Sputum Cytology (Phelgm)"
-        },
-        {
-          "distribution": 0.25,
-          "transition": "Thoracentesis (Fluid)"
-        },
-        {
-          "distribution": 0.25,
-          "transition": "Needle Biopsy (Cells)"
-        },
-        {
-          "distribution": 0.25,
-          "transition": "Bronchoscopy (Tube)"
-        }
-      ]
-    },
-    "Sputum Cytology (Phelgm)": {
-      "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
-      "reason": "Suspected Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "167995008",
-          "display": "Sputum microscopy (procedure)"
-        }
-      ],
-      "direct_transition": "End_Diagnosis_Encounter_III"
-    },
-    "Thoracentesis (Fluid)": {
-      "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
-      "reason": "Suspected Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "91602002",
-          "display": "Thoracentesis (procedure)"
-        }
-      ],
-      "direct_transition": "End_Diagnosis_Encounter_III"
-    },
-    "Needle Biopsy (Cells)": {
-      "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
-      "reason": "Suspected Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "432231006",
-          "display": "Fine needle aspiration biopsy of lung (procedure)"
-        }
-      ],
-      "direct_transition": "End_Diagnosis_Encounter_III"
-    },
-    "Bronchoscopy (Tube)": {
-      "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
-      "reason": "Suspected Lung Cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "173160006",
-          "display": "Diagnostic fiberoptic bronchoscopy (procedure)"
-        }
-      ],
-      "direct_transition": "End_Diagnosis_Encounter_III"
-    },
-    "End_Diagnosis_Encounter_III": {
-      "type": "EncounterEnd",
-      "direct_transition": "Schedule Follow Up III"
-    },
-    "Schedule Follow Up III": {
-      "type": "Delay",
-      "range": {
-        "low": 1,
-        "high": 3,
-        "unit": "days"
-      },
-      "remarks": [
-        "See Stage Distribution (%) 2006-2012, Case Counts and Percentages",
-        "http://seer.cancer.gov/csr/1975_2013/browse_csr.php?sectionSEL=15&pageSEL=sect_15_table.14.html",
-        "http://seer.cancer.gov/csr/1975_2013/browse_csr.php?sectionSEL=15&pageSEL=sect_15_table.13.html",
-        "only 15 percent of lung cancer cases are diagnosed at an early stage.",
-        "http://www.lung.org/lung-health-and-diseases/lung-disease-lookup/lung-cancer/learn-about-lung-cancer/lung-cancer-fact-sheet.html",
-        "updated remarks 2017-08-31:",
-        "http://oregon.providence.org/our-services/a/ask-a-providence-expert/forms-and-information/ask-an-expert-lung-cancer-growth-and-spread/",
-        "It takes at least 30 divisions of one cancer cell to create a tumor that is 1 centimeter in size (about half an inch).",
-        "That is the smallest size likely to be seen on an X-ray. It takes about three to six months for most lung cancers to double their size. ",
-        "Therefore, it could take several years for a typical lung cancer to reach a size at which it could be diagnosed on a chest X-ray. "
-      ],
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "lung_cancer_nondiagnosis_counter",
-            "operator": "<=",
-            "value": 36
-          },
-          "transition": "Stage I"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "lung_cancer_nondiagnosis_counter",
-            "operator": "<=",
-            "value": 72
-          },
-          "transition": "Stage II"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "lung_cancer_nondiagnosis_counter",
-            "operator": "<=",
-            "value": 108
-          },
-          "transition": "Stage III"
-        },
-        {
-          "transition": "Stage IV"
-        }
-      ]
-    },
-    "Stage I": {
-      "type": "Death",
-      "range": {
-        "low": 2,
-        "high": 6,
-        "unit": "years"
-      },
-      "referenced_by_attribute": "Lung Cancer",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "SCLC"
-          },
-          "transition": "SCLC I"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "NSCLC"
-          },
-          "transition": "NSCLC I"
-        }
-      ]
-    },
-    "Stage II": {
-      "type": "Death",
-      "range": {
-        "low": 16,
-        "high": 28,
-        "unit": "months"
-      },
-      "referenced_by_attribute": "Lung Cancer",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "SCLC"
-          },
-          "transition": "SCLC II"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "NSCLC"
-          },
-          "transition": "NSCLC II"
-        }
-      ]
-    },
-    "Stage III": {
-      "type": "Death",
-      "range": {
-        "low": 9,
-        "high": 18,
-        "unit": "months"
-      },
-      "referenced_by_attribute": "Lung Cancer",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "SCLC"
-          },
-          "transition": "SCLC III"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "NSCLC"
-          },
-          "transition": "NSCLC III"
-        }
-      ]
-    },
-    "Stage IV": {
-      "type": "Death",
-      "range": {
-        "low": 6,
-        "high": 10,
-        "unit": "months"
-      },
-      "referenced_by_attribute": "Lung Cancer",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "SCLC"
-          },
-          "transition": "SCLC IV"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "NSCLC"
-          },
-          "transition": "NSCLC IV"
-        }
-      ]
-    },
-    "NSCLC I": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter IV",
-      "assign_to_attribute": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "424132000",
-          "display": "Non-small cell carcinoma of lung, TNM stage 1 (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter IV"
-    },
-    "NSCLC II": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter IV",
-      "assign_to_attribute": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "425048006",
-          "display": "Non-small cell carcinoma of lung, TNM stage 2 (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter IV"
-    },
-    "NSCLC III": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter IV",
-      "assign_to_attribute": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "422968005",
-          "display": "Non-small cell carcinoma of lung, TNM stage 3 (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter IV"
-    },
-    "NSCLC IV": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter IV",
-      "assign_to_attribute": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "423121009",
-          "display": "Non-small cell carcinoma of lung, TNM stage 4 (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter IV"
-    },
-    "SCLC I": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter IV",
-      "assign_to_attribute": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "67811000119102",
-          "display": "Primary small cell malignant neoplasm of lung, TNM stage 1 (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter IV"
-    },
-    "SCLC II": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter IV",
-      "assign_to_attribute": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "67821000119109",
-          "display": "Primary small cell malignant neoplasm of lung, TNM stage 2 (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter IV"
-    },
-    "SCLC III": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter IV",
-      "assign_to_attribute": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "67831000119107",
-          "display": "Primary small cell malignant neoplasm of lung, TNM stage 3 (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter IV"
-    },
-    "SCLC IV": {
-      "type": "ConditionOnset",
-      "target_encounter": "Diagnosis Encounter IV",
-      "assign_to_attribute": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "67841000119103",
-          "display": "Primary small cell malignant neoplasm of lung, TNM stage 4 (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis Encounter IV"
-    },
-    "Diagnosis Encounter IV": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "reason": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "Lung_Cancer_CarePlan"
-    },
-    "Lung_Cancer_CarePlan": {
-      "type": "CarePlanStart",
-      "target_encounter": "Diagnosis Encounter IV",
-      "reason": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "182964004",
-          "display": "Terminal care"
-        }
-      ],
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": "133918004",
-          "display": "Comfort measures"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "408957008",
-          "display": "Chronic pain control management"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "243072006",
-          "display": "Cancer education"
-        }
-      ],
-      "direct_transition": "MRI Brain"
-    },
-    "MRI Brain": {
-      "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter IV",
-      "reason": "Lung Cancer Condition",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "698354004",
-          "display": "Magnetic resonance imaging for measurement of brain volume (procedure)"
-        }
-      ],
-      "duration": {
-        "low": 30,
-        "high": 120,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_Diagnosis_Encounter_IV"
-    },
-    "End_Diagnosis_Encounter_IV": {
-      "type": "EncounterEnd",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "SCLC"
-          },
-          "transition": "SCLC Treatment Path"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Lung Cancer Type",
-            "operator": "==",
-            "value": "NSCLC"
-          },
-          "transition": "NSCLC Treatment Path"
-        }
-      ]
-    },
-    "SCLC Treatment Path": {
-      "type": "Simple",
-      "direct_transition": "SCLC Treatment Encounter"
-    },
-    "SCLC Treatment Encounter": {
-      "type": "Encounter",
-      "encounter_class": "inpatient",
-      "reason": "Lung Cancer Condition",
-      "remarks": [
-        "TODO: This inpatient encounter should last 5 days, not the standard 15 minutes."
-      ],
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "SCLC Chemotheraphy I"
-    },
-    "SCLC Chemotheraphy I": {
-      "type": "MedicationOrder",
-      "target_encounter": "SCLC Treatment Encounter",
-      "reason": "Lung Cancer Condition",
-      "assign_to_attribute": "chemotherapy1",
-      "remarks": [
-        "SCLC is generally treated with combinations of chemotherapy drugs. The combinations most often used are: Cisplatin and etoposide",
-        "http://www.cancer.org/cancer/lungcancer-smallcell/detailedguide/small-cell-lung-cancer-treating-chemotherapy"
-      ],
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "1736854",
-          "display": "Cisplatin 50 MG Injection"
-        }
-      ],
-      "direct_transition": "SCLC Chemotheraphy IB"
-    },
-    "SCLC Chemotheraphy IB": {
-      "type": "MedicationEnd",
-      "referenced_by_attribute": "chemotherapy1",
-      "direct_transition": "SCLC Chemotheraphy II"
-    },
-    "SCLC Chemotheraphy II": {
-      "type": "MedicationOrder",
-      "target_encounter": "SCLC Treatment Encounter",
-      "reason": "Lung Cancer Condition",
-      "assign_to_attribute": "chemotherapy2",
-      "remarks": [
-        "SCLC is generally treated with combinations of chemotherapy drugs. The combinations most often used are: Cisplatin and etoposide",
-        "http://www.cancer.org/cancer/lungcancer-smallcell/detailedguide/small-cell-lung-cancer-treating-chemotherapy"
-      ],
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "1734340",
-          "display": "Etoposide 100 MG Injection"
-        }
-      ],
-      "direct_transition": "SCLC Chemotheraphy IIB"
-    },
-    "SCLC Chemotheraphy IIB": {
-      "type": "MedicationEnd",
-      "referenced_by_attribute": "chemotherapy2",
-      "direct_transition": "SCLC Radiation"
-    },
-    "SCLC Radiation": {
-      "type": "Procedure",
-      "target_encounter": "SCLC Treatment Encounter",
-      "reason": "Lung Cancer Condition",
-      "remarks": [
-        "The type of radiation therapy most often used to treat SCLC is called external beam radiation therapy (EBRT).",
-        "http://www.cancer.org/cancer/lungcancer-smallcell/detailedguide/small-cell-lung-cancer-treating-radiation-therapy"
-      ],
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "703423002",
-          "display": "Combined chemotherapy and radiation therapy (procedure)"
-        }
-      ],
-      "duration": {
-        "low": 0.5,
-        "high": 4,
-        "unit": "hours"
-      },
-      "direct_transition": "End_SCLC_Treatment_Encounter"
-    },
-    "End_SCLC_Treatment_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "SCLC Treatment Delay"
-    },
-    "SCLC Treatment Delay": {
-      "type": "Delay",
-      "range": {
-        "low": 21,
-        "high": 28,
-        "unit": "days"
-      },
-      "remarks": [
-        "Doctors give chemo in cycles, with a period of treatment (usually 1 to 3 days) followed by a rest period to allow your body time to recover. Each cycle generally lasts about 3 to 4 weeks",
-        "http://www.cancer.org/cancer/lungcancer-smallcell/detailedguide/small-cell-lung-cancer-treating-chemotherapy",
-        "Most often, radiation as part of the initial treatment for SCLC is given once or twice daily, 5 days a week, for 3 to 7 weeks.",
-        "http://www.cancer.org/cancer/lungcancer-smallcell/detailedguide/small-cell-lung-cancer-treating-radiation-therapy"
-      ],
-      "direct_transition": "SCLC Treatment Path"
-    },
-    "NSCLC Treatment Path": {
-      "type": "Simple",
-      "direct_transition": "NSCLC Treatment Encounter"
-    },
-    "NSCLC Treatment Encounter": {
-      "type": "Encounter",
-      "encounter_class": "inpatient",
-      "remarks": [
-        "TODO: This inpatient encounter should last 5 days, not the standard 15 minutes."
-      ],
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "NSCLC Chemotheraphy I"
-    },
-    "NSCLC Chemotheraphy I": {
-      "type": "MedicationOrder",
-      "target_encounter": "NSCLC Treatment Encounter",
-      "reason": "Lung Cancer Condition",
-      "assign_to_attribute": "chemotherapy1",
-      "remarks": [
-        "Most often, treatment for NSCLC uses a combination of 2 chemo drugs.",
-        "If a combination is used, it often includes cisplatin or carboplatin plus one other drug",
-        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-treating-chemotherapy"
-      ],
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "1736854",
-          "display": "Cisplatin 50 MG Injection"
-        }
-      ],
-      "direct_transition": "NSCLC Chemotheraphy IB"
-    },
-    "NSCLC Chemotheraphy IB": {
-      "type": "MedicationEnd",
-      "referenced_by_attribute": "chemotherapy1",
-      "direct_transition": "NSCLC Chemotheraphy II"
-    },
-    "NSCLC Chemotheraphy II": {
-      "type": "MedicationOrder",
-      "target_encounter": "NSCLC Treatment Encounter",
-      "reason": "Lung Cancer Condition",
-      "assign_to_attribute": "chemotherapy2",
-      "remarks": [
-        "The chemo drugs most often used for NSCLC include ... Paclitaxel (Taxol)",
-        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-treating-chemotherapy"
-      ],
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "583214",
-          "display": "PACLitaxel 100 MG Injection"
-        }
-      ],
-      "direct_transition": "NSCLC Chemotheraphy IIB"
-    },
-    "NSCLC Chemotheraphy IIB": {
-      "type": "MedicationEnd",
-      "referenced_by_attribute": "chemotherapy2",
-      "direct_transition": "NSCLC Radiation"
-    },
-    "NSCLC Radiation": {
-      "type": "Procedure",
-      "target_encounter": "NSCLC Treatment Encounter",
-      "reason": "Lung Cancer Condition",
-      "remarks": [
-        "External beam radiation therapy (EBRT) focuses radiation from outside the body on the cancer. This is the type of radiation therapy most often used to treat NSCLC or its spread to other organs.",
-        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-treating-radiation-therapy"
-      ],
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "703423002",
-          "display": "Combined chemotherapy and radiation therapy (procedure)"
-        }
-      ],
-      "duration": {
-        "low": 0.5,
-        "high": 4,
-        "unit": "hours"
-      },
-      "direct_transition": "End_NSCLC_Treatment_Encounter"
-    },
-    "End_NSCLC_Treatment_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "NSCLC Treatment Delay"
-    },
-    "NSCLC Treatment Delay": {
-      "type": "Delay",
-      "range": {
-        "low": 28,
-        "high": 35,
-        "unit": "days"
-      },
-      "remarks": [
-        "Doctors give chemo in cycles, with a period of treatment (usually 1 to 3 days) followed by a rest period to allow the body time to recover. Some chemo drugs, though, are given every day. Chemo cycles generally last about 3 to 4 weeks.",
-        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-treating-radiation-therapy",
-        "Most often, radiation treatments to the lungs are given 5 days a week for 5 to 7 weeks",
-        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-treating-radiation-therapy"
-      ],
-      "direct_transition": "NSCLC Treatment Path"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Veteran_Guard": {
-      "type": "Guard",
-      "allow": {
-        "condition_type": "Attribute",
-        "attribute": "veteran",
-        "operator": "is not nil"
-      },
-      "direct_transition": "Ages_45_65"
-    },
-    "smoking_status": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "veteran_smoker",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "smoker",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "veteran_non_smoker",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "smoker",
-            "operator": "is nil"
-          }
-        }
-      ]
-    },
-    "veteran_smoker": {
-      "type": "Simple",
-      "direct_transition": "smoker_Lung Cancer Probabilities"
-    },
-    "veteran_non_smoker": {
-      "type": "Simple",
-      "direct_transition": "non_smoker_Lung Cancer Probabilities"
-    },
-    "non_smoker_Lung Cancer Probabilities": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "distribution": {
-            "attribute": "probability_of_lung_cancer",
-            "default": 0.0645
-          },
-          "transition": "Onset_Lung_Cancer"
-        },
-        {
-          "distribution": {
-            "attribute": "probability_of_no_lung_cancer",
-            "default": 0.93355
-          },
-          "transition": "Terminal"
-        }
-      ],
-      "remarks": [
-        "Overall, the chance that a man will develop lung cancer in his lifetime is about 1 in 14; for a woman, the risk is about 1 in 17.",
-        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-key-statistics",
-        "Men who smoke are 23 times more likely to develop lung cancer. Women are 13 times more likely, compared to never smokers.",
-        "http://www.lung.org/lung-health-and-diseases/lung-disease-lookup/lung-cancer/learn-about-lung-cancer/lung-cancer-fact-sheet.html",
-        "In a 2006 European study, the risk of developing lung cancer was: 0.2 percent for men who never smoked (0.4% for women); 5.5 percent of male former smokers (2.6% in women); 15.9 percent of current male smokers (9.5% for women); 24.4 percent for male “heavy smokers” defined as smoking more than 5 cigarettes per day (18.5 percent for women)",
-        "https://www.verywell.com/what-percentage-of-smokers-get-lung-cancer-2248868"
-      ]
-    },
-    "smoker_Lung Cancer Probabilities": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Onset_Lung_Cancer",
-          "distribution": 0.3
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.7
-        }
-      ]
-    }
-  }
-}
-,
-"veteran_mdd":{
-  "name": "Veteran MDD",
-  "remarks": [
-    "A blank module"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "age guard"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Female": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Onset_age_18_to_29_Female",
-          "distribution": 0.15
-        },
-        {
-          "transition": "Onset_age_30_to_39_Female",
-          "distribution": 0.25
-        },
-        {
-          "transition": "Onset_age_40_to_49_Female",
-          "distribution": 0.23
-        },
-        {
-          "transition": "Onset_age_50_to_59_Female",
-          "distribution": 0.16
-        },
-        {
-          "transition": "Onset_age_60_to_69_Female",
-          "distribution": 0.15
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.06
-        }
-      ],
-      "remarks": [
-        "Females suffer depression at rates 2x than males (www.americanhealthrankings.com), cited by VA",
-        "Age related and War Era related distributions of MDD provided by "
-      ]
-    },
-    "Male": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Onset_age_18_to_29_Male",
-          "distribution": 0.156
-        },
-        {
-          "transition": "Onset_age_30_to_39_Male",
-          "distribution": 0.155
-        },
-        {
-          "transition": "Onset_age_40_to_49_Male",
-          "distribution": 0.13
-        },
-        {
-          "transition": "Onset_age_50_to_59_Male",
-          "distribution": 0.095
-        },
-        {
-          "transition": "Onset_age_60_to_69_Male",
-          "distribution": 0.09
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.374
-        }
-      ]
-    },
-    "Veteran": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Female",
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "F"
-          }
-        },
-        {
-          "transition": "Male",
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          }
-        }
-      ]
-    },
-    "Non_Veteran": {
-      "type": "Simple",
-      "direct_transition": "Terminal"
-    },
-    "Onset_age_18_to_29_Male": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 18,
-        "unit": "years"
-      },
-      "direct_transition": "MDD Episode"
-    },
-    "Onset_age_18_to_29_Female": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 18,
-        "unit": "years"
-      },
-      "direct_transition": "MDD Episode"
-    },
-    "Onset_age_30_to_39_Male": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 30,
-        "unit": "years"
-      },
-      "direct_transition": "MDD Episode"
-    },
-    "Onset_age_30_to_39_Female": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 30,
-        "unit": "years"
-      },
-      "direct_transition": "MDD Episode"
-    },
-    "Onset_age_40_to_49_Male": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 40,
-        "unit": "years"
-      },
-      "direct_transition": "MDD Episode"
-    },
-    "Onset_age_40_to_49_Female": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 40,
-        "unit": "years"
-      },
-      "direct_transition": "MDD Episode"
-    },
-    "Onset_age_50_to_59_Female": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 50,
-        "unit": "years"
-      },
-      "direct_transition": "MDD Episode"
-    },
-    "Onset_age_60_to_69_Female": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 60,
-        "unit": "years"
-      },
-      "direct_transition": "MDD Episode"
-    },
-    "Onset_age_50_to_59_Male": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 50,
-        "unit": "years"
-      },
-      "direct_transition": "MDD Episode"
-    },
-    "Onset_age_60_to_69_Male": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 60,
-        "unit": "years"
-      },
-      "direct_transition": "MDD Episode"
-    },
-    "Evaluation Gate delay": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 3,
-        "unit": "months"
-      },
-      "direct_transition": "MDD_Re_evaluation Encounter"
-    },
-    "end_Psych_encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Evaluation Gate delay"
-    },
-    "end re_evaluation_medication": {
-      "type": "MedicationEnd",
-      "direct_transition": "MDD Medication Order",
-      "referenced_by_attribute": "ssri"
-    },
-    "MDD Episode": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "mdd",
-      "target_encounter": "MDD_Encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 36923009,
-          "display": "major depression, single episode"
-        }
-      ],
-      "direct_transition": "Time Gate"
-    },
-    "MDD_Encouter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "mdd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 36923009,
-          "display": "major depression, single episode"
-        }
-      ],
-      "direct_transition": "MDD_Initial_Careplan"
-    },
-    "Time Gate": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 6,
-        "unit": "weeks"
-      },
-      "direct_transition": "MDD_Encouter"
-    },
-    "MDD_Initial_Careplan": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 718347000,
-          "display": "Mental health care plan"
-        }
-      ],
-      "assign_to_attribute": "MDD care plan",
-      "reason": "mdd",
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": 79094001,
-          "display": "Initial psychiatric interview with mental status and evaluation"
-        }
-      ],
-      "direct_transition": "end_MDD_Encounter"
-    },
-    "end_MDD_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Initial_Psychiatric_MDD_Encounter",
-      "discharge_disposition": {
-        "system": "NUBC",
-        "code": 1,
-        "display": "Discharged home safe"
-      }
-    },
-    "Initial_Psychiatric_MDD_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 370143000,
-          "display": "major depression disorder"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 79094001,
-          "display": "Initial Psychiatric Interview with mental status evaluation"
-        }
-      ],
-      "reason": "mdd",
-      "distributed_transition": [
-        {
-          "transition": "Positive_PHQ9",
-          "distribution": 0.9
-        },
-        {
-          "transition": "Negative_PHQ9",
-          "distribution": 0.1
-        }
-      ]
-    },
-    "MDD Diagnosis": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "mdd_psych",
-      "target_encounter": "initial_Psychiatric_MDD_Encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 370143000,
-          "display": "major depression disorder"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "transition": "Change_Dx_Not_MDD",
-          "distribution": 0.1
-        },
-        {
-          "transition": "MDD_Careplan_Psych",
-          "distribution": 0.2
-        },
-        {
-          "transition": "MDD_Careplan_Psych_and_Rx",
-          "distribution": 0.4
-        },
-        {
-          "transition": "MDD_Careplan_Rx_ONLY",
-          "distribution": 0.3
-        }
-      ]
-    },
-    "Change_Dx_Not_MDD": {
-      "type": "ConditionEnd",
-      "direct_transition": "end_MDD_Re_evaluation Encounter",
-      "referenced_by_attribute": "mdd"
-    },
-    "end_MDD_Re_evaluation Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
-    },
-    "MDD_Careplan_Psych_and_Rx": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 88848003,
-          "display": "Psychiatric Follow-up"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 385724002,
-          "display": "Coping Support Management"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 225337009,
-          "display": "Suicide Risk Assessment"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 425680009,
-          "display": "Cognitive behavioral therapy by multidisciplinary team"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 304822001,
-          "display": "Psychodynamic Interpersonal Therapy"
-        }
-      ],
-      "conditional_transition": [
-        {
-          "transition": "end re_evaluation_medication",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ssri",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "MDD Medication Order",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ssri",
-            "operator": "is nil"
-          }
-        }
-      ],
-      "reason": "mdd_psych"
-    },
-    "MDD_Careplan_Psych": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 88848003,
-          "display": "Psychiatric Follow-up"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 225337009,
-          "display": "Suicide Risk Assessment"
-        }
-      ],
-      "direct_transition": "end_Psych_encounter",
-      "reason": "mdd_psych",
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": 385724002,
-          "display": "Coping Support Management"
-        }
-      ]
-    },
-    "MDD_Re_evaluation Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "mdd_psych",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 370143000,
-          "display": "major depression disorder"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "transition": "negative_re_eval_phq9",
-          "distribution": 0.5
-        },
-        {
-          "transition": "positive_re_eval_phq9",
-          "distribution": 0.5
-        }
-      ]
-    },
-    "MDD Medication Order": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 406022,
-          "display": "Fluoxetine 25MG"
-        }
-      ],
-      "assign_to_attribute": "ssri",
-      "reason": "mdd",
-      "distributed_transition": [
-        {
-          "transition": "end_Psych_encounter",
-          "distribution": 0.5
-        },
-        {
-          "transition": "MDD Chronic Pain Med",
-          "distribution": 0.5
-        }
-      ],
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 60,
-          "unit": "days"
-        },
-        "refills": 12
-      }
-    },
-    "MDD_Careplan_Rx_ONLY": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 737434004,
-          "display": "Major depressive disorder clinical management plan"
-        }
-      ],
-      "conditional_transition": [
-        {
-          "transition": "end re_evaluation_medication",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ssri",
-            "operator": "is not nil",
-            "value": 0
-          }
-        },
-        {
-          "transition": "MDD Medication Order",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ssri",
-            "operator": "is nil"
-          }
-        }
-      ],
-      "reason": "mdd_psych"
-    },
-    "Positive_PHQ9": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 112001000119100,
-          "display": "positive screening for PHQ-9"
-        }
-      ],
-      "direct_transition": "MDD Diagnosis",
-      "reason": "mdd"
-    },
-    "Negative_PHQ9": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 112011000119102,
-          "display": "negative screening for PHQ9"
-        }
-      ],
-      "direct_transition": "Change_Dx_Not_MDD",
-      "reason": "mdd"
-    },
-    "positive_re_eval_phq9": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 112001000119100,
-          "display": "positive screening for depression on phq9"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "transition": "MDD_Careplan_Psych_and_Rx",
-          "distribution": 0.3
-        },
-        {
-          "transition": "MDD_Careplan_Psych",
-          "distribution": 0.3
-        },
-        {
-          "transition": "MDD_Careplan_Rx_ONLY",
-          "distribution": 0.4
-        }
-      ]
-    },
-    "negative_re_eval_phq9": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 112011000119102,
-          "display": "negative screening for depression on phq9"
-        }
-      ],
-      "direct_transition": "Change_Dx_Not_MDD"
-    },
-    "MDD Chronic Pain Med": {
-      "type": "CallSubmodule",
-      "submodule": "medications/moderate_opioid_pain_reliever",
-      "direct_transition": "end_Psych_encounter"
-    },
-    "age guard": {
-      "type": "Guard",
-      "allow": {
-        "condition_type": "Age",
-        "operator": ">",
-        "quantity": 21,
-        "unit": "years"
-      },
-      "direct_transition": "veteran guard"
-    },
-    "veteran guard": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "Non_Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
-        }
-      ]
-    }
-  }
-}
-,
-"veteran_metabolic_syndrome_disease_progression":{
-  "name": "Veteran Metabolic Syndrome Disease Progression",
-  "remarks": [],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Initial_Kidney_Health"
-    },
-    "Initial_Kidney_Health": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_kidney_damage",
-      "value": 0,
-      "direct_transition": "Initial_Eye_Health"
-    },
-    "Initial_Eye_Health": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_eye_damage",
-      "value": 0,
-      "direct_transition": "Initial_Nerve_Health"
-    },
-    "Initial_Nerve_Health": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_nerve_damage",
-      "value": 0,
-      "direct_transition": "Age_Guard"
-    },
-    "Age_Guard": {
-      "type": "Guard",
-      "allow": {
-        "condition_type": "Age",
-        "operator": ">=",
-        "quantity": 21,
-        "unit": "years"
-      },
-      "direct_transition": "Chance_to_Onset_Hypertension"
-    },
-    "Chance_to_Onset_Hypertension": {
-      "type": "Simple",
-      "remarks": [
-        "probability: 0.296 # (1.0==100%) http://www.cdc.gov/MMWr/preview/mmwrhtml/su6203a24.htm#Tab"
-      ],
-      "conditional_transition": [
-        {
-          "transition": "Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "Non_Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
-        }
-      ]
-    },
-    "Onset_Hypertension": {
-      "type": "SetAttribute",
-      "attribute": "hypertension",
-      "value": true,
-      "direct_transition": "Diabetes_Prevalence"
-    },
-    "No_Hypertension": {
-      "type": "SetAttribute",
-      "attribute": "hypertension",
-      "value": false,
-      "direct_transition": "Diabetes_Prevalence"
-    },
-    "Diabetes_Prevalence": {
-      "type": "Simple",
-      "remarks": [
-        "diabetes prevalence %s based on the following",
-        "http://www.mass.gov/eohhs/gov/departments/dph/programs/community-health/diabetes/facts/diabetes-statistics.html",
-        "prediabetes prevalence is ~38 % overall and similar among most races but slightly lower among Native americans",
-        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3830901/",
-        "http://www.diabetes.org/living-with-diabetes/treatment-and-care/high-risk-populations/treatment-american-indians.html",
-        "It is estimated that 27.8% of people with diabetes are undiagnosed",
-        "https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf",
-        "therefore the diabetes %s are all scaled up by a factor of 1.278, ",
-        "so that the total % of people that eventually get diabetes is higher, but the current population with diabetes should be around 8.8%",
-        "because there is a delay before diabetes onsets",
-        "similarly the prediabetes #s are scaled up (but by a little less) so the current prediabetic % at any time is ~38%"
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "White"
-          },
-          "distributions": [
-            {
-              "distribution": 0.24,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.065 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.31,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Hispanic"
-          },
-          "distributions": [
-            {
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.142 * 1.278"
-              ],
-              "distribution": 0.337
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.213,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Black"
-          },
-          "distributions": [
-            {
-              "distribution": 0.25,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.128 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.3,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Asian"
-          },
-          "distributions": [
-            {
-              "distribution": 0.213,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.16 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.337,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Native"
-          },
-          "distributions": [
-            {
-              "distribution": 0.1828,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.143 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.36,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.30 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.4572,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "remarks": [
-            "for Other races, just fall back to overall state %s"
-          ],
-          "distributions": [
-            {
-              "distribution": 0.1022,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.08 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.4478,
-              "transition": "No_Diabetes"
-            }
-          ]
-        }
-      ]
-    },
-    "Eventual_Prediabetes": {
-      "type": "Delay",
-      "range": {
-        "low": 0,
-        "high": 37,
-        "unit": "years"
-      },
-      "remarks": [
-        "we assume that diabetes and prediabetes generally onset between the ages of 18-55"
-      ],
-      "direct_transition": "Onset_Prediabetes"
-    },
-    "Eventual_Diabetes": {
-      "type": "Delay",
-      "range": {
-        "low": 0,
-        "high": 30,
-        "unit": "years"
-      },
-      "remarks": [
-        "we assume that diabetes and prediabetes generally onset between the ages of 18-55",
-        "this tracks a little lower so that we can diagnose prediabetes early and then diabetes later",
-        "there is little info on how many patients with prediabetes progress to diabetes",
-        "so we assume that 38% of patients with diabetes had a prediabetes diagnosis"
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.38,
-          "transition": "Onset_Prediabetes_Towards_Diabetes"
-        },
-        {
-          "distribution": 0.62,
-          "transition": "Delay_before_Diabetes"
-        }
-      ]
-    },
-    "Onset_Prediabetes": {
-      "type": "SetAttribute",
-      "attribute": "prediabetes",
-      "value": true,
-      "direct_transition": "No_Diabetes"
-    },
-    "No_Diabetes": {
-      "type": "Terminal"
-    },
-    "Onset_Prediabetes_Towards_Diabetes": {
-      "type": "SetAttribute",
-      "attribute": "prediabetes",
-      "value": true,
-      "direct_transition": "Delay_before_Diabetes"
-    },
-    "Delay_before_Diabetes": {
-      "type": "Delay",
-      "range": {
-        "low": 0,
-        "high": 7,
-        "unit": "years"
-      },
-      "remarks": [
-        "we assume that diabetes and prediabetes generally onset between the ages of 18-55",
-        "at this point we are between 18-48, so we wait 0-7 years"
-      ],
-      "direct_transition": "Onset_Diabetes"
-    },
-    "Onset_Diabetes": {
-      "type": "SetAttribute",
-      "attribute": "diabetes",
-      "value": true,
-      "direct_transition": "Chance_to_Onset_Hypertension_at_Diabetes_Onset"
-    },
-    "Chance_to_Onset_Hypertension_at_Diabetes_Onset": {
-      "type": "Simple",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "hypertension",
-            "operator": "==",
-            "value": true
-          },
-          "transition": "Nephropathy_Progression"
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.423,
-              "transition": "Onset_Hypertension_with_Diabetes"
-            },
-            {
-              "distribution": 0.577,
-              "transition": "No_Hypertension_With_Diabetes"
-            }
-          ],
-          "remarks": [
-            "59.4% of adults with diabetes have hypertension http://www.cdc.gov/MMWr/preview/mmwrhtml/su6203a24.htm#Tab",
-            "but we already gave 29.6% of adults hypertension above, so we only give 42.3% hypertension here, not 59%",
-            ".296 + .704(x) = .594,  x = .423"
-          ]
-        }
-      ]
-    },
-    "Onset_Hypertension_with_Diabetes": {
-      "type": "SetAttribute",
-      "attribute": "hypertension",
-      "value": true,
-      "direct_transition": "Nephropathy_Progression"
-    },
-    "No_Hypertension_With_Diabetes": {
-      "type": "SetAttribute",
-      "attribute": "hypertension",
-      "value": false,
-      "direct_transition": "Nephropathy_Progression"
-    },
-    "Diabetes_Progression": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 1,
-        "unit": "months"
-      },
-      "direct_transition": "Nephropathy_Progression"
-    },
-    "Nephropathy_Progression": {
-      "type": "Simple",
-      "remarks": [
-        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4727808/",
-        "There are 5 defined stages of kidney disease; stage 5 is End-stage where dialysis is necessary",
-        "Prevalence of Nephropathy is 34.5% - http://link.springer.com/chapter/10.1007%2F978-1-4939-0793-9_2",
-        "Prevalence of microalbuminuria is ~ 28.8% - https://www.ncbi.nlm.nih.gov/pubmed/11877563",
-        "Prevalence of End stage renal disease is ~ .78% - ",
-        "https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf"
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_kidney_damage",
-            "operator": "==",
-            "value": 0
-          },
-          "remarks": [
-            "we want ~ 35% of patients to hit mild kidney disease",
-            "assuming roughly 20 yrs, 0.18% / month ~~> 35% over 20 yrs "
-          ],
-          "distributions": [
-            {
-              "distribution": 0.99532,
-              "transition": "Retinopathy_Progression"
-            },
-            {
-              "distribution": 0.00468,
-              "transition": "Set_Mild_Kidney_Damage"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_kidney_damage",
-            "operator": "==",
-            "value": 1
-          },
-          "remarks": [
-            "moderate damage == microalbuminuria",
-            "we want ~ 28.8% of patients to hit moderate, with ~35% hitting mild",
-            "so 28.8% / 35% == 82%.  1.35% / month ~~> 83% over 10 yrs",
-            "10 yrs because kidney damage accelerates as is it increases -",
-            "http://www.edren.org/pages/edreninfo/ckd-chronic-renal-failure-and-its-progression.php"
-          ],
-          "distributions": [
-            {
-              "distribution": 0.9649,
-              "transition": "Set_Mild_Kidney_Damage"
-            },
-            {
-              "distribution": 0.0351,
-              "transition": "Set_Moderate_Kidney_Damage"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_kidney_damage",
-            "operator": "==",
-            "value": 2
-          },
-          "remarks": [
-            "limited data on prevalence of proteinuria, so we assume roughly 14%",
-            "(midway between the 28.8% of microalbuminuria and end-stage)",
-            "so we want ~ 50% of patients with moderate damage to progress to severe"
-          ],
-          "distributions": [
-            {
-              "distribution": 0.9844,
-              "transition": "Set_Moderate_Kidney_Damage"
-            },
-            {
-              "distribution": 0.0156,
-              "transition": "Set_Severe_Kidney_Damage"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_kidney_damage",
-            "operator": "==",
-            "value": 3
-          },
-          "remarks": [
-            "Prevalence of end_stage_renal_disease is 0.78%",
-            "where ~14% make it to severe, so we want 0.78/14 = ~ 6% of patients to progress to end-stage"
-          ],
-          "distributions": [
-            {
-              "distribution": 0.9844,
-              "transition": "Set_Severe_Kidney_Damage"
-            },
-            {
-              "distribution": 0.0156,
-              "transition": "Set_End_Stage_Kidney_Damage"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_kidney_damage",
-            "operator": "==",
-            "value": 4
-          },
-          "transition": "Set_End_Stage_Kidney_Damage"
-        }
-      ]
-    },
-    "Set_Mild_Kidney_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_kidney_damage",
-      "value": 1,
-      "direct_transition": "Set_Nephropathy"
-    },
-    "Set_Nephropathy": {
-      "type": "SetAttribute",
-      "attribute": "nephropathy",
-      "value": true,
-      "direct_transition": "Mild_Kidney_Damage_Symptom_1"
-    },
-    "Mild_Kidney_Damage_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "Mild_Kidney_Damage_Symptom_2"
-    },
-    "Mild_Kidney_Damage_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "Mild_Kidney_Damage_Symptom_3"
-    },
-    "Mild_Kidney_Damage_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "Mild_Kidney_Damage_Symptom_4"
-    },
-    "Mild_Kidney_Damage_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "Set_Moderate_Kidney_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_kidney_damage",
-      "value": 2,
-      "direct_transition": "Set_Microalbuminuria"
-    },
-    "Set_Microalbuminuria": {
-      "type": "SetAttribute",
-      "attribute": "microalbuminuria",
-      "value": true,
-      "direct_transition": "Moderate_Kidney_Damage_Symptom_1"
-    },
-    "Moderate_Kidney_Damage_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Moderate_Kidney_Damage_Symptom_2"
-    },
-    "Moderate_Kidney_Damage_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Moderate_Kidney_Damage_Symptom_3"
-    },
-    "Moderate_Kidney_Damage_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Moderate_Kidney_Damage_Symptom_4"
-    },
-    "Moderate_Kidney_Damage_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "Set_Severe_Kidney_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_kidney_damage",
-      "value": 3,
-      "direct_transition": "Set_Proteinuria"
-    },
-    "Set_Proteinuria": {
-      "type": "SetAttribute",
-      "attribute": "proteinuria",
-      "value": true,
-      "direct_transition": "Severe_Kidney_Damage_Symptom_1"
-    },
-    "Severe_Kidney_Damage_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "Severe_Kidney_Damage_Symptom_2"
-    },
-    "Severe_Kidney_Damage_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "Severe_Kidney_Damage_Symptom_3"
-    },
-    "Severe_Kidney_Damage_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "Severe_Kidney_Damage_Symptom_4"
-    },
-    "Severe_Kidney_Damage_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "Set_End_Stage_Kidney_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_kidney_damage",
-      "value": 4,
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "end_stage_renal_disease",
-            "operator": "==",
-            "value": true
-          },
-          "transition": "End_Stage_Kidney_Damage_Symptom_1"
-        },
-        {
-          "transition": "Set_End_Stage_Renal_Disease"
-        }
-      ]
-    },
-    "Set_End_Stage_Renal_Disease": {
-      "type": "SetAttribute",
-      "attribute": "end_stage_renal_disease",
-      "value": true,
-      "direct_transition": "Expected_Lifespan_for_ESRD"
-    },
-    "Expected_Lifespan_for_ESRD": {
-      "type": "Death",
-      "range": {
-        "low": 4,
-        "high": 10,
-        "unit": "years"
-      },
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "46177005",
-          "display": "End stage renal disease (disorder)"
-        }
-      ],
-      "remarks": [
-        "Life expectency depends on many factors, but for patients > 40 it's generally less than 10 years with dialysis",
-        "http://link.springer.com/article/10.1007/s00467-016-3383-8 (Table 2"
-      ],
-      "direct_transition": "End_Stage_Kidney_Damage_Symptom_1"
-    },
-    "End_Stage_Kidney_Damage_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "remarks": [
-        "Without intervention, 20-40 percent of patients with type 2 diabetes/microalbuminuria, will evolve to macroalbuminuria.",
-        "Shlipak, Michael. 'Clinical Evidence Handbook: Diabetic Nephropathy: Preventing Progression - American Family Physician'. www.aafp.org."
-      ],
-      "direct_transition": "End_Stage_Kidney_Damage_Symptom_2"
-    },
-    "End_Stage_Kidney_Damage_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "End_Stage_Kidney_Damage_Symptom_3"
-    },
-    "End_Stage_Kidney_Damage_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "End_Stage_Kidney_Damage_Symptom_4"
-    },
-    "End_Stage_Kidney_Damage_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "Retinopathy_Progression": {
-      "type": "Simple",
-      "remarks": [
-        "In the USA, studies estimate that 28.5–40.3 % of patients with type 2 diabetes had DR, and 4.4–8.2 % of them had VTDR",
-        "https://www.ncbi.nlm.nih.gov/pubmed/15078674",
-        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4657234/",
-        "https://eandv.biomedcentral.com/articles/10.1186/s40662-015-0026-2",
-        "Currently the %s below do not take into consideration any medications the patient may be taking"
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_eye_damage",
-            "operator": "==",
-            "value": 0
-          },
-          "distributions": [
-            {
-              "distribution": 0.998,
-              "transition": "Neuropathy_Progression"
-            },
-            {
-              "distribution": 0.002,
-              "transition": "Set_Mild_Eye_Damage"
-            }
-          ],
-          "remarks": [
-            "Prevalence of DR = ~40%, we assume an estimated lifespan of ~20 yrs after diagnosis",
-            ".2%/month  over 20 yrs, 1- (.998 ^ (12*20)) = .38 "
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_eye_damage",
-            "operator": "==",
-            "value": 1
-          },
-          "distributions": [
-            {
-              "distribution": 0.9915,
-              "transition": "Set_Mild_Eye_Damage"
-            },
-            {
-              "distribution": 0.0085,
-              "transition": "Set_Moderate_Eye_Damage"
-            }
-          ],
-          "remarks": [
-            "Roughly 10% chance of DR progression per year == 0.85% chance per month",
-            "https://eandv.biomedcentral.com/articles/10.1186/s40662-015-0026-2 (Table 3)"
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_eye_damage",
-            "operator": "==",
-            "value": 2
-          },
-          "distributions": [
-            {
-              "distribution": 0.9975,
-              "transition": "Set_Moderate_Eye_Damage"
-            },
-            {
-              "distribution": 0.0025,
-              "transition": "Set_Severe_Eye_Damage"
-            }
-          ],
-          "remarks": [
-            "Roughly 3% progression from NPDR to PDR per year == .25% per month",
-            "https://eandv.biomedcentral.com/articles/10.1186/s40662-015-0026-2 (Table 3 again)"
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_eye_damage",
-            "operator": "==",
-            "value": 3
-          },
-          "transition": "Set_Severe_Eye_Damage"
-        }
-      ]
-    },
-    "Set_Mild_Eye_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_eye_damage",
-      "value": 1,
-      "direct_transition": "Mild_Eye_Damage_Symptom"
-    },
-    "Mild_Eye_Damage_Symptom": {
-      "type": "Symptom",
-      "symptom": "Blurred Vision",
-      "range": {
-        "low": 1,
-        "high": 60
-      },
-      "direct_transition": "Set_Retinopathy"
-    },
-    "Set_Retinopathy": {
-      "type": "SetAttribute",
-      "attribute": "retinopathy",
-      "value": true,
-      "direct_transition": "Neuropathy_Progression"
-    },
-    "Set_Moderate_Eye_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_eye_damage",
-      "value": 2,
-      "direct_transition": "Moderate_Eye_Damage_Symptom"
-    },
-    "Moderate_Eye_Damage_Symptom": {
-      "type": "Symptom",
-      "symptom": "Blurred Vision",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Set_Nonproliferative_Retinopathy"
-    },
-    "Set_Nonproliferative_Retinopathy": {
-      "type": "SetAttribute",
-      "attribute": "nonproliferative_retinopathy",
-      "value": true,
-      "direct_transition": "Chance_of_Macular_Edema"
-    },
-    "Set_Severe_Eye_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_eye_damage",
-      "value": 3,
-      "direct_transition": "Severe_Eye_Damage_Symptom"
-    },
-    "Severe_Eye_Damage_Symptom": {
-      "type": "Symptom",
-      "symptom": "Blurred Vision",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "Set_Proliferative_Retinopathy"
-    },
-    "Set_Proliferative_Retinopathy": {
-      "type": "SetAttribute",
-      "attribute": "proliferative_retinopathy",
-      "value": true,
-      "direct_transition": "Chance_of_Macular_Edema"
-    },
-    "Chance_of_Macular_Edema": {
-      "type": "Simple",
-      "remarks": [
-        "Incidence of DME is very low. Very rough estimate == ~1% per year.",
-        "only around 20% of patients will hit this state, so we scale up to about 5% per year among those patients",
-        "5% / yr = .4% / month",
-        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4657234/table/Tab5/"
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.004,
-          "transition": "Set_Macular_Edema"
-        },
-        {
-          "distribution": 0.996,
-          "transition": "Chance_of_Blindness"
-        }
-      ]
-    },
-    "Set_Macular_Edema": {
-      "type": "SetAttribute",
-      "attribute": "macular_edema",
-      "value": true,
-      "direct_transition": "Chance_of_Blindness"
-    },
-    "Chance_of_Blindness": {
-      "type": "Simple",
-      "remarks": [
-        "estimated prevalence of blindness is ~1% in MA; among diabetics we estimate 3%",
-        "3% / 30 yrs = ~ 0.01 % / month",
-        "http://www.idf.org/sites/default/files/IDF%2520Toolkit_Backgrounder_FINAL.pdf"
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.0001,
-          "transition": "Set_Blindness"
-        },
-        {
-          "distribution": 0.9999,
-          "transition": "Neuropathy_Progression"
-        }
-      ]
-    },
-    "Set_Blindness": {
-      "type": "SetAttribute",
-      "attribute": "blindness",
-      "value": true,
-      "direct_transition": "Neuropathy_Progression"
-    },
-    "Neuropathy_Progression": {
-      "type": "Simple",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_nerve_damage",
-            "operator": "==",
-            "value": 0
-          },
-          "distributions": [
-            {
-              "distribution": 0.9971,
-              "transition": "Loop_back_to_Start"
-            },
-            {
-              "distribution": 0.0029,
-              "transition": "Set_Mild_Nerve_Damage"
-            }
-          ],
-          "remarks": [
-            "DPN affects as many as 1/2 of all patients with diabetes.",
-            "50% over 20 years == ~ 0.29% per month"
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_nerve_damage",
-            "operator": "==",
-            "value": 1
-          },
-          "distributions": [
-            {
-              "distribution": 0.997,
-              "transition": "Set_Mild_Nerve_Damage"
-            },
-            {
-              "distribution": 0.003,
-              "transition": "Set_Moderate_Nerve_Damage"
-            }
-          ],
-          "remarks": [
-            "at/beyond this point I can't find any well-defined #s on progression of diabetic neuropathy",
-            "0.3% / month --> 3.5% / yr --> 66% over 30 yrs"
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_nerve_damage",
-            "operator": "==",
-            "value": 2
-          },
-          "distributions": [
-            {
-              "distribution": 0.997,
-              "transition": "Set_Moderate_Nerve_Damage"
-            },
-            {
-              "distribution": 0.003,
-              "transition": "Set_Severe_Nerve_Damage"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetic_nerve_damage",
-            "operator": "==",
-            "value": 3
-          },
-          "transition": "Set_Severe_Nerve_Damage"
-        }
-      ]
-    },
-    "Set_Mild_Nerve_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_nerve_damage",
-      "value": 1,
-      "direct_transition": "Set_Neuropathy"
-    },
-    "Set_Neuropathy": {
-      "type": "SetAttribute",
-      "attribute": "neuropathy",
-      "value": true,
-      "direct_transition": "Mild_Nerve_Damage_Symptom"
-    },
-    "Mild_Nerve_Damage_Symptom": {
-      "type": "Symptom",
-      "symptom": "Tingling in Hands and Feet",
-      "range": {
-        "low": 1,
-        "high": 80
-      },
-      "direct_transition": "Loop_back_to_Start"
-    },
-    "Set_Moderate_Nerve_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_nerve_damage",
-      "value": 2,
-      "direct_transition": "Moderate_Nerve_Damage_Symptom"
-    },
-    "Moderate_Nerve_Damage_Symptom": {
-      "type": "Symptom",
-      "symptom": "Tingling in Hands and Feet",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Loop_back_to_Start"
-    },
-    "Set_Severe_Nerve_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_nerve_damage",
-      "value": 3,
-      "direct_transition": "Severe_Nerve_Damage_Symptom"
-    },
-    "Severe_Nerve_Damage_Symptom": {
-      "type": "Symptom",
-      "symptom": "Tingling in Hands and Feet",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "Loop_back_to_Start"
-    },
-    "Loop_back_to_Start": {
-      "type": "Simple",
-      "direct_transition": "Diabetes_Progression"
-    },
-    "Veteran": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Onset_Hypertension",
-          "distribution": 0.306
-        },
-        {
-          "transition": "No_Hypertension",
-          "distribution": 0.694
-        }
-      ]
-    },
-    "Non_Veteran": {
-      "type": "Simple",
-      "direct_transition": "No_Diabetes"
-    }
-  }
-}
-,
-"veteran_osteoarthritis":{
-  "name": "Veteran Osteoarthritis",
-  "remarks": [
-    "Osteoarthritis (OA) is a breakdown of cartilage in the joints. It is a chronic condition ",
-    "that only worsens with time. OA is more likely in females (2:1) and the risk of OA increases ",
-    "with age. OA also accounts for most of the total joint replacements (knees and hips) in the U.S.",
-    "Joint replacements are handled by the total_joint_replacement module and triggered by the ",
-    "'joint_replacement' attribute.",
-    "Information on treatment, prevalence, and incidence of specific arthritis types from the CDC: ",
-    "http://www.cdc.gov/arthritis/basics/types.html",
-    "Overall prevalence of arthritis: ",
-    "http://www.cdc.gov/arthritis/data_statistics/national-statistics.html"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "remarks": [
-        "======================================================================",
-        " INCIDENCE                                                            ",
-        "======================================================================",
-        " | Arthritis Type | Prevalence | Ratio F:M | ",
-        " ------------------------------------------- ",
-        " | Osteoarthritis |   0.34000  |    2:1    | ",
-        " ------------------------------------------- "
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          },
-          "distributions": [
-            {
-              "distribution": 0.113,
-              "transition": "Delay_Until_Arthritis"
-            },
-            {
-              "distribution": 0.887,
-              "transition": "Terminal"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "F"
-          },
-          "distributions": [
-            {
-              "distribution": 0.2267,
-              "transition": "Delay_Until_Arthritis"
-            },
-            {
-              "distribution": 0.7733,
-              "transition": "Terminal"
-            }
-          ]
-        }
-      ]
-    },
-    "Delay_Until_Arthritis": {
-      "type": "Delay",
-      "range": {
-        "low": 25,
-        "high": 80,
-        "unit": "years"
-      },
-      "direct_transition": "Veteran Status Guard"
-    },
-    "Osteoarthritis": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " OSTEOARTHRITIS                                                       ",
-        "======================================================================",
-        "Source: http://www.cdc.gov/arthritis/basics/osteoarthritis.htm"
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.234,
-          "transition": "OA_Of_The_Hand"
-        },
-        {
-          "distribution": 0.561,
-          "transition": "OA_Of_The_Knee"
-        },
-        {
-          "distribution": 0.205,
-          "transition": "OA_Of_The_Hip"
-        }
-      ]
-    },
-    "OA_Of_The_Hand": {
-      "type": "ConditionOnset",
-      "target_encounter": "OA_Diagnosis",
-      "assign_to_attribute": "osteoarthritis",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "201834006",
-          "display": "Localized, primary osteoarthritis of the hand"
-        }
-      ],
-      "direct_transition": "OA_Diagnosis"
-    },
-    "OA_Of_The_Knee": {
-      "type": "ConditionOnset",
-      "target_encounter": "OA_Diagnosis",
-      "assign_to_attribute": "osteoarthritis",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "239873007",
-          "display": "Osteoarthritis of knee"
-        }
-      ],
-      "direct_transition": "OA_Diagnosis"
-    },
-    "OA_Of_The_Hip": {
-      "type": "ConditionOnset",
-      "target_encounter": "OA_Diagnosis",
-      "assign_to_attribute": "osteoarthritis",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "239872002",
-          "display": "Osteoarthritis of hip"
-        }
-      ],
-      "direct_transition": "OA_Diagnosis"
-    },
-    "OA_Diagnosis": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "osteoarthritis",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "OA_CarePlan"
-    },
-    "OA_CarePlan": {
-      "type": "CarePlanStart",
-      "target_encounter": "OA_Diagnosis",
-      "assign_to_attribute": "arthritis_careplan",
-      "reason": "osteoarthritis",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "872781000000100",
-          "display": "Musculoskeletal care"
-        }
-      ],
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": "872781000000100",
-          "display": "Joint mobility exercises"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "266694003",
-          "display": "Heat therapy"
-        }
-      ],
-      "direct_transition": "OA_Pain_Medication"
-    },
-    "OA_Pain_Medication": {
-      "type": "MedicationOrder",
-      "target_encounter": "OA_Diagnosis",
-      "reason": "osteoarthritis",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "849727",
-          "display": "Naproxen sodium 220 MG [Aleve]"
-        }
-      ],
-      "remarks": [
-        "For knees or hips we can consider joint replacement surgery. However this is not a ",
-        "treatment option for arthritis of the hand. The total_joint_replacement module will ",
-        "not process a joint replacement surgery until the patient is over 50 years of age.",
-        "Source for hip and knee replacement prevalence: ",
-        "http://www.cdc.gov/arthritis/data_statistics/arthritis-related-stats.htm ",
-        "Estimated prevalence of Osteoarthritis is 34%. ",
-        "Estimated prevalence of hip replacements is 0.165% (80% are for OA => 0.132%).",
-        "Therefore (0.00132 / (0.34 * 0.205)) => 0.0189 of all hip OA leads to hip replacement.",
-        "Estimated prevalence of knee replacements is 0.243% (95% are for OA => 0.231%).",
-        "Therefore (0.00231 / (0.34 * 0.561)) => 0.0121 of all knee OA leads to knee replacement."
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "OA_Of_The_Knee"
-          },
-          "distributions": [
-            {
-              "distribution": 0.0121,
-              "transition": "Setup_Knee_Replacement"
-            },
-            {
-              "distribution": 0.9879,
-              "transition": "End_Encounter"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "OA_Of_The_Hip"
-          },
-          "distributions": [
-            {
-              "distribution": 0.0189,
-              "transition": "Setup_Hip_Replacement"
-            },
-            {
-              "distribution": 0.9811,
-              "transition": "End_Encounter"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 1,
-              "transition": "End_Encounter"
-            }
-          ]
-        }
-      ]
-    },
-    "Setup_Knee_Replacement": {
-      "type": "SetAttribute",
-      "attribute": "joint_replacement",
-      "value": "knee",
-      "direct_transition": "End_Encounter"
-    },
-    "Setup_Hip_Replacement": {
-      "type": "SetAttribute",
-      "attribute": "joint_replacement",
-      "value": "hip",
-      "direct_transition": "End_Encounter"
-    },
-    "End_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Veteran Status Guard": {
-      "type": "Simple",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Vietnam_War",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "transition": "Osteoarthritis",
-              "distribution": 0.2
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.8
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Early_Gulf_War",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "transition": "Osteoarthritis",
-              "distribution": 0.2642
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.7358
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "Late_Gulf_War",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "transition": "Osteoarthritis",
-              "distribution": 0.22
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.78
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
-,
-"veteran_prostate_cancer":{
-  "name": "Veteran Prostate Cancer",
-  "remarks": [
-    "A blank module"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "age_guard"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "veteran_status": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "male_guard",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "Terminal",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
-        }
-      ]
-    },
-    "age_guard": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 60,
-        "unit": "years"
-      },
-      "direct_transition": "veteran_status"
-    },
-    "annual_wellness_visit": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "codes": [],
-      "direct_transition": "wellness_procedure",
-      "wellness": true
-    },
-    "male_guard": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "annual_wellness_visit",
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          }
-        },
-        {
-          "transition": "Terminal",
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "F"
-          }
-        }
-      ]
-    },
-    "wellness_procedure": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 410006001,
-          "display": "Digital examination of rectum"
-        }
-      ],
-      "duration": {
-        "low": 2,
-        "high": 5,
-        "unit": "minutes"
-      },
-      "distributed_transition": [
-        {
-          "transition": "Prostate Cancer Symptom 2",
-          "distribution": 0.6
-        },
-        {
-          "transition": "normal_DRE",
-          "distribution": 0.4
-        }
-      ]
-    },
-    "detect_abnormal results": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "ng/mL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2857-1",
-          "display": "Prostate specific Ag [Mass/​volume] in Serum or Plasma"
-        }
-      ],
-      "direct_transition": "end_wellness_visit",
-      "range": {
-        "low": 4.5,
-        "high": 7.7
-      }
-    },
-    "end_wellness_visit": {
-      "type": "EncounterEnd",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Observation",
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "2857-1",
-                "display": "Prostate specific Ag [Mass/volume] in Serum or Plasma"
-              }
-            ],
-            "operator": "<=",
-            "value": 4
-          },
-          "distributions": [
-            {
-              "transition": "wellness_visit_time_delay",
-              "distribution": 1
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Observation",
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "2857-1",
-                "display": "Prostate specific Ag [Mass/volume] in Serum or Plasma"
-              }
-            ],
-            "operator": ">=",
-            "value": 4.1
-          },
-          "distributions": [
-            {
-              "transition": "Prostate Cancer Symptom",
-              "distribution": 1
-            }
-          ]
-        }
-      ]
-    },
-    "detect_normal results": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "ng/mL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2857-1",
-          "display": "Prostate specific Ag [Mass/​volume] in Serum or Plasma"
-        }
-      ],
-      "direct_transition": "end_wellness_visit",
-      "range": {
-        "low": 0.5,
-        "high": 4
-      }
-    },
-    "abnormal_DRE": {
-      "type": "Observation",
-      "category": "exam",
-      "unit": "{nominal}",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": 275302008,
-          "display": "Prostate enlarged on PR"
-        }
-      ],
-      "exact": {
-        "quantity": 1
-      },
-      "distributed_transition": [
-        {
-          "transition": "detect_abnormal results",
-          "distribution": 0.29
-        },
-        {
-          "transition": "detect_normal results",
-          "distribution": 0.71
-        }
-      ]
-    },
-    "normal_DRE": {
-      "type": "Observation",
-      "category": "exam",
-      "unit": "{nominal}",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": 300531004,
-          "display": "Normal size prostate"
-        }
-      ],
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "detect_normal results"
-    },
-    "wellness_visit_time_delay": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 1,
-        "unit": "years"
-      },
-      "direct_transition": "male_guard"
-    },
-    "biopsy_visit": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185345009,
-          "display": "Encounter for symptom"
-        }
-      ],
-      "direct_transition": "biopsy procedure"
-    },
-    "biopsy procedure": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 65575008,
-          "display": "Biopsy of prostate"
-        }
-      ],
-      "duration": {
-        "low": 30,
-        "high": 30,
-        "unit": "minutes"
-      },
-      "distributed_transition": [
-        {
-          "transition": "biopsy_results_abnormal",
-          "distribution": 0.5
-        },
-        {
-          "transition": "biopsy_results_normal",
-          "distribution": 0.5
-        }
-      ]
-    },
-    "biopsy_results_abnormal": {
-      "type": "Observation",
-      "category": "procedure",
-      "unit": "{nominal}",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": 165132006,
-          "display": "Surgical biopsy result abnormal"
-        }
-      ],
-      "direct_transition": "Prostate_Cancer",
-      "attribute": "biopsy_abnormal"
-    },
-    "biopsy_results_normal": {
-      "type": "Observation",
-      "category": "procedure",
-      "unit": "{nominal}",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": 165131004,
-          "display": "Surgical biopsy result normal"
-        }
-      ],
-      "direct_transition": "biopsy_visit_end",
-      "attribute": "biopsy_normal"
-    },
-    "biopsy_visit_end": {
-      "type": "EncounterEnd",
-      "conditional_transition": [
-        {
-          "transition": "Prostate Symtpom 3",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "prostate_cancer",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "wellness_visit_time_delay",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "prostate_cancer",
-            "operator": "is nil"
-          }
-        }
-      ]
-    },
-    "Prostate_Cancer": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "prostate_cancer",
-      "target_encounter": "Prostate_Cancer_Therapy",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 126906006,
-          "display": "Neoplasm of prostate"
-        }
-      ],
-      "direct_transition": "biopsy_visit_end"
-    },
-    "Prostate_Cancer Therapy": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "prostate_cancer",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185347001,
-          "display": "Encounter for problem"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "transition": "Aggressive_Therapy_Careplan",
-          "distribution": 0.7
-        },
-        {
-          "transition": "Watchful_Waiting_Careplan",
-          "distribution": 0.3
-        }
-      ]
-    },
-    "Aggressive_Therapy_Careplan": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 736252007,
-          "display": "Cancer care plan"
-        }
-      ],
-      "direct_transition": "Chemotherapy_Hormone Order",
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": 408580007,
-          "display": "Physical activity target light exercise"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 229578001,
-          "display": "Ice bath treatment"
-        }
-      ],
-      "reason": "prostate_cancer"
-    },
-    "Watchful_Waiting_Careplan": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 736252007,
-          "display": "Cancer care plan"
-        }
-      ],
-      "direct_transition": "end_cancer_therapy encounter",
-      "assign_to_attribute": "watchful_waiting",
-      "reason": "prostate_cancer"
-    },
-    "Chemotherapy_Hormone Order": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 1860480,
-          "display": "1 ML DOCEtaxel 20 MG/ML Injection"
-        },
-        {
-          "system": "RxNorm",
-          "code": "Leuprolide",
-          "display": "0.25 ML Leuprolide Acetate 30 MG/ML Prefilled Syringe"
-        }
-      ],
-      "assign_to_attribute": "prostate cancer",
-      "conditional_transition": [
-        {
-          "transition": "Prostatectomy",
-          "condition": {
-            "condition_type": "Age",
-            "operator": ">",
-            "quantity": 0,
-            "unit": "years"
-          }
-        }
-      ]
-    },
-    "Prostatectomy": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 90470006,
-          "display": "Prostatectomy"
-        }
-      ],
-      "duration": {
-        "low": 4,
-        "high": 6,
-        "unit": "hours"
-      },
-      "direct_transition": "end_chemo_med",
-      "reason": "prostate_cancer"
-    },
-    "end_cancer_therapy encounter": {
-      "type": "EncounterEnd",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "watchful_waiting",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "transition": "watchful_waiting_guard",
-              "distribution": 1
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "watchful_waiting",
-            "operator": "is nil"
-          },
-          "distributions": [
-            {
-              "transition": "eventual_death",
-              "distribution": 1
-            }
-          ]
-        }
-      ]
-    },
-    "watchful_waiting_guard": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 3,
-        "unit": "months"
-      },
-      "direct_transition": "Prostate_Cancer Therapy"
-    },
-    "eventual_death": {
-      "type": "Simple",
-      "direct_transition": "Terminal"
-    },
-    "Prostate Cancer Symptom": {
-      "type": "Symptom",
-      "symptom": "difficulty with urination",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "biopsy_visit"
-    },
-    "Prostate Cancer Symptom 2": {
-      "type": "Symptom",
-      "symptom": "blood in urine",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "abnormal_DRE"
-    },
-    "Prostate Symtpom 3": {
-      "type": "Symptom",
-      "symptom": "urinary frequency",
-      "cause": "",
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "Prostate_Cancer Therapy"
-    },
-    "Prostatectomy ": {
-      "type": "CarePlanEnd",
-      "direct_transition": "Prostatectomy "
-    },
-    "end_chemo_med": {
-      "type": "MedicationEnd",
-      "direct_transition": "end_cancer_therapy encounter"
-    }
-  }
-}
-,
-"veteran_ptsd":{
-  "name": "Veteran PTSD",
-  "remarks": [
-    "A blank module"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "age guard"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Female": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Onset_age_18_to_29_Female",
-          "distribution": 0.0315
-        },
-        {
-          "transition": "Onset_age_30_to_39_Female",
-          "distribution": 0.0245
-        },
-        {
-          "transition": "Onset_age_40_to_49_Female",
-          "distribution": 0.0252
-        },
-        {
-          "transition": "Onset_age_50_to_59_Female",
-          "distribution": 0.014
-        },
-        {
-          "transition": "Onset_age_60_to_69_Female",
-          "distribution": 0.0084
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8964
-        }
-      ]
-    },
-    "Male": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Onset_age_18_to_29_Male",
-          "distribution": 0.049
-        },
-        {
-          "transition": "Onset_age_30_to_39_Male",
-          "distribution": 0.0385
-        },
-        {
-          "transition": "Onset_age_40_to_49_Male",
-          "distribution": 0.0266
-        },
-        {
-          "transition": "Onset_age_50_to_59_Male",
-          "distribution": 0.014
-        },
-        {
-          "transition": "Onset_age_60_to_69_Male",
-          "distribution": 0.007
-        },
-        {
-          "transition": "Terminal",
-          "distribution": 0.8649
-        }
-      ]
-    },
-    "Veteran": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Female",
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "F"
-          }
-        },
-        {
-          "transition": "Male",
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          }
-        }
-      ]
-    },
-    "Non_Veteran": {
-      "type": "Simple",
-      "direct_transition": "Terminal"
-    },
-    "Onset_age_18_to_29_Male": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 18,
-        "unit": "years"
-      },
-      "direct_transition": "PTSD Episode"
-    },
-    "Onset_age_18_to_29_Female": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 18,
-        "unit": "years"
-      },
-      "direct_transition": "PTSD Episode"
-    },
-    "Onset_age_30_to_39_Male": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 30,
-        "unit": "years"
-      },
-      "direct_transition": "PTSD Episode"
-    },
-    "Onset_age_30_to_39_Female": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 30,
-        "unit": "years"
-      },
-      "direct_transition": "PTSD Episode"
-    },
-    "Onset_age_40_to_49_Male": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 40,
-        "unit": "years"
-      },
-      "direct_transition": "PTSD Episode"
-    },
-    "Onset_age_40_to_49_Female": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 40,
-        "unit": "years"
-      },
-      "direct_transition": "PTSD Episode"
-    },
-    "Onset_age_50_to_59_Female": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 50,
-        "unit": "years"
-      },
-      "direct_transition": "PTSD Episode"
-    },
-    "Onset_age_60_to_69_Female": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 60,
-        "unit": "years"
-      },
-      "direct_transition": "PTSD Episode"
-    },
-    "Onset_age_50_to_59_Male": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 50,
-        "unit": "years"
-      },
-      "direct_transition": "PTSD Episode"
-    },
-    "Onset_age_60_to_69_Male": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 60,
-        "unit": "years"
-      },
-      "direct_transition": "PTSD Episode"
-    },
-    "PTSD Episode": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "ptsd",
-      "target_encounter": "PTSD_Encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 47505003,
-          "display": "Posttraumatic stress disorder"
-        }
-      ],
-      "direct_transition": "PTSD_Encouter"
-    },
-    "PTSD_Encouter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "ptsd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185345009,
-          "display": "Encounter for symptom"
-        }
-      ],
-      "direct_transition": "PTSD_Initial_Careplan"
-    },
-    "PTSD_Initial_Careplan": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 736254008,
-          "display": "Psychiatry care plan"
-        }
-      ],
-      "reason": "ptsd",
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": 79094001,
-          "display": "Initial psychiatric interview with mental status and evaluation"
-        }
-      ],
-      "direct_transition": "end_PTSD_Encounter"
-    },
-    "Initial_Psychiatric_PTSD_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 79094001,
-          "display": "Initial Psychiatric Interview with mental status evaluation"
-        }
-      ],
-      "reason": "ptsd",
-      "distributed_transition": [
-        {
-          "transition": "PTSD Diagnosis",
-          "distribution": 0.9
-        },
-        {
-          "transition": "Change_Dx_Not_PTSD",
-          "distribution": 0.1
-        }
-      ]
-    },
-    "PTSD_Careplan_Psych_and_Rx": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 88848003,
-          "display": "Psychiatric Follow-up"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 225337009,
-          "display": "Suicide Risk Assessment"
-        }
-      ],
-      "conditional_transition": [
-        {
-          "transition": "end re_evaluation_medication",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "SSRI",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "PTSD Medication Order",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "SSRI",
-            "operator": "is nil",
-            "value": "Vicodin"
-          }
-        }
-      ],
-      "reason": "ptsd",
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": 385724002,
-          "display": "Coping Support Management"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 406185000,
-          "display": "Trauma Therapy"
-        }
-      ],
-      "assign_to_attribute": "ptsd_careplan"
-    },
-    "PTSD_Careplan_Psych": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 88848003,
-          "display": "Psychiatric Follow-up"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 385724002,
-          "display": "Coping Support Management"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 225337009,
-          "display": "Suicide Risk Assessment"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": 406185000,
-          "display": "Trauma Therapy"
-        }
-      ],
-      "direct_transition": "end_Psych_encounter",
-      "reason": "ptsd",
-      "assign_to_attribute": "ptsd_careplan"
-    },
-    "Change_Dx_Not_PTSD": {
-      "type": "ConditionEnd",
-      "direct_transition": "end_PTSD_Re_evaluation_Encounter",
-      "referenced_by_attribute": "ptsd"
-    },
-    "PTSD_Careplan_Rx_ONLY": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1234",
-          "display": "SNOMED Code"
-        }
-      ],
-      "conditional_transition": [
-        {
-          "transition": "end re_evaluation_medication",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "SSRI",
-            "operator": "is not nil",
-            "value": "Vicodin"
-          }
-        },
-        {
-          "transition": "PTSD Medication Order",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "SSRI",
-            "operator": "is nil"
-          }
-        }
-      ],
-      "reason": "ptsd",
-      "assign_to_attribute": "ptsd_careplan"
-    },
-    "PTSD Diagnosis": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "",
-      "target_encounter": "initial_Psychiatric_PTSD_Encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 47505003,
-          "display": "posttraumatic stress disorder"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "transition": "Change_Dx_Not_PTSD",
-          "distribution": 0.1
-        },
-        {
-          "transition": "PTSD_Careplan_Psych",
-          "distribution": 0.2
-        },
-        {
-          "transition": "PTSD_Careplan_Psych_and_Rx",
-          "distribution": 0.4
-        },
-        {
-          "transition": "PTSD_Careplan_Rx_ONLY",
-          "distribution": 0.3
-        }
-      ]
-    },
-    "end_PTSD_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "time gate",
-      "discharge_disposition": {
-        "system": "NUBC",
-        "code": 1,
-        "display": "Discharged home safe"
-      }
-    },
-    "Evaluation Gate delay": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 6,
-        "unit": "months"
-      },
-      "direct_transition": "PTSD_Re_evaluation Encounter"
-    },
-    "PTSD_Re_evaluation Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 47505003,
-          "display": "posttraumatic stress disorder"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "transition": "Change_Dx_Not_PTSD",
-          "distribution": 0.5
-        },
-        {
-          "transition": "PTSD_Careplan_Psych",
-          "distribution": 0.15
-        },
-        {
-          "transition": "PTSD_Careplan_Rx_ONLY",
-          "distribution": 0.2
-        },
-        {
-          "transition": "PTSD_Careplan_Psych_and_Rx",
-          "distribution": 0.15
-        }
-      ],
-      "reason": "ptsd"
-    },
-    "end_Psych_encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Evaluation Gate delay"
-    },
-    "PTSD Medication Order": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 328670,
-          "display": "Sertraline 100MG"
-        }
-      ],
-      "assign_to_attribute": "SSRI",
-      "reason": "ptsd",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 1,
-          "unit": "days"
-        }
-      },
-      "distributed_transition": [
-        {
-          "transition": "end_Psych_encounter",
-          "distribution": 0.5
-        },
-        {
-          "transition": "PTSD Chronic Pain Med",
-          "distribution": 0.5
-        }
-      ]
-    },
-    "end re_evaluation_medication": {
-      "type": "MedicationEnd",
-      "direct_transition": "PTSD Medication Order",
-      "medication_order": "",
-      "referenced_by_attribute": "SSRI"
-    },
-    "end_PTSD_Re_evaluation_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "end_follow_up_careplan"
-    },
-    "age guard": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 21,
-        "unit": "years"
-      },
-      "direct_transition": "veteran guard"
-    },
-    "veteran guard": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "Non_Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
-        }
-      ]
-    },
-    "PTSD Chronic Pain Med": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 856980,
-          "display": "Acetaminophen/Hydrocodone"
-        }
-      ],
-      "direct_transition": "end_Psych_encounter",
-      "reason": "ptsd"
-    },
-    "end_follow_up_careplan": {
-      "type": "CarePlanEnd",
-      "direct_transition": "Terminal",
-      "referenced_by_attribute": "ptsd_careplan"
-    },
-    "time gate": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 2,
-        "unit": "weeks"
-      },
-      "direct_transition": "Initial_Psychiatric_PTSD_Encounter"
-    }
-  }
-}
-,
-"veterans_metabolic_syndrome_standards_of_care":{
-  "name": "Veterans Metabolic Syndrome Standards of Care",
-  "remarks": [],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "remarks": [
-        "Initial impl == direct translation of ruby module"
-      ],
-      "direct_transition": "time delay"
-    },
-    "Wellness_Encounter": {
-      "type": "Encounter",
-      "wellness": true,
-      "direct_transition": "Check_Hypertension"
-    },
-    "Check_Hypertension": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Age",
-                "operator": ">=",
-                "quantity": 18,
-                "unit": "years"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertension",
-                "operator": "==",
-                "value": true
-              }
-            ]
-          },
-          "transition": "Diagnose_Hypertension"
-        },
-        {
-          "transition": "Check_Diabetes"
-        }
-      ]
-    },
-    "Diagnose_Hypertension": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "38341003",
-          "display": "Hypertension"
-        }
-      ],
-      "direct_transition": "Check_Diabetes"
-    },
-    "Check_Diabetes": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "prediabetes",
-                "operator": "is not nil"
-              }
-            ]
-          },
-          "transition": "Record_HA1C"
-        },
-        {
-          "transition": "Obese_Check"
-        }
-      ]
-    },
-    "Record_HA1C": {
-      "type": "Observation",
-      "vital_sign": "Blood Glucose",
-      "category": "laboratory",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "4548-4",
-          "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
-        }
-      ],
-      "unit": "%",
-      "direct_transition": "Blood_Sugar_Check"
-    },
-    "Diagnosis": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Observation",
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "4548-4",
-                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
-              }
-            ],
-            "operator": "<=",
-            "value": 5.7
-          },
-          "remarks": [
-            "Normal level"
-          ],
-          "transition": "Wellness_Encounter"
-        },
-        {
-          "condition": {
-            "condition_type": "Observation",
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "4548-4",
-                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
-              }
-            ],
-            "operator": "<=",
-            "value": 6.5
-          },
-          "remarks": [
-            "Prediabetic level"
-          ],
-          "transition": "Set_Severity_0"
-        },
-        {
-          "condition": {
-            "condition_type": "Observation",
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "4548-4",
-                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
-              }
-            ],
-            "operator": "<=",
-            "value": 7.5
-          },
-          "remarks": [
-            "Diabetic level"
-          ],
-          "transition": "Set_Severity_1"
-        },
-        {
-          "condition": {
-            "condition_type": "Observation",
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "4548-4",
-                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
-              }
-            ],
-            "operator": "<=",
-            "value": 9
-          },
-          "remarks": [
-            "Severe level"
-          ],
-          "transition": "Set_Severity_2"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": ">=",
-                "value": 3
-              },
-              {
-                "condition_type": "PriorState",
-                "name": "Set_Severity_3",
-                "within": {
-                  "quantity": 1,
-                  "unit": "years"
-                }
-              }
-            ]
-          },
-          "remarks": [
-            "in words - if the severity is >= 3 and they have been set severity 3 within a year"
-          ],
-          "transition": "Set_Severity_4"
-        },
-        {
-          "remarks": [
-            "> severe level"
-          ],
-          "transition": "Set_Severity_3"
-        }
-      ]
-    },
-    "Set_Severity_0": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_severity",
-      "value": 0,
-      "remarks": [
-        "setting prediabetes as severity 0 makes some things easier"
-      ],
-      "direct_transition": "Diagnose_Prediabetes"
-    },
-    "Diagnose_Prediabetes": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "15777000",
-          "display": "Prediabetes"
-        }
-      ],
-      "assign_to_attribute": "diabetes_stage",
-      "direct_transition": "Check_CarePlan"
-    },
-    "Set_Severity_1": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_severity",
-      "value": 1,
-      "direct_transition": "Diagnose_Diabetes"
-    },
-    "Set_Severity_2": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_severity",
-      "value": 2,
-      "direct_transition": "Diagnose_Diabetes"
-    },
-    "Set_Severity_3": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_severity",
-      "value": 3,
-      "direct_transition": "Diagnose_Diabetes"
-    },
-    "Set_Severity_4": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_severity",
-      "value": 4,
-      "direct_transition": "Diagnose_Diabetes"
-    },
-    "Diagnose_Diabetes": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "44054006",
-          "display": "Diabetes"
-        }
-      ],
-      "assign_to_attribute": "diabetes_stage",
-      "direct_transition": "Check_CarePlan"
-    },
-    "Check_CarePlan": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active CarePlan",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "698360004",
-                "display": "Diabetes self management plan"
-              }
-            ]
-          },
-          "transition": "Prescribe_Medications"
-        },
-        {
-          "transition": "Diabetic_CarePlan"
-        }
-      ]
-    },
-    "Diabetic_CarePlan": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "698360004",
-          "display": "Diabetes self management plan"
-        }
-      ],
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": "160670007",
-          "display": "Diabetic diet"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "229065009",
-          "display": "Exercise therapy"
-        }
-      ],
-      "goals": [
-        {
-          "observation": {
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "4548-4",
-                "display": "Hemoglobin A1c total in Blood"
-              }
-            ],
-            "operator": "<",
-            "value": "7.0"
-          },
-          "addresses": [
-            "diabetes_stage"
-          ]
-        },
-        {
-          "observation": {
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "2339-0",
-                "display": "Glucose [Mass/volume] in Blood"
-              }
-            ],
-            "operator": "<",
-            "value": "108"
-          },
-          "addresses": [
-            "diabetes_stage"
-          ]
-        },
-        {
-          "text": "Maintain blood pressure below 140/90 mmHg",
-          "addresses": [
-            "diabetes_stage"
-          ]
-        },
-        {
-          "text": "Improve and maintenance of optimal foot health: aim at early detection of peripheral vascular problems and neuropathy presumed due to diabetes; and prevention of diabetic foot ulcer, gangrene",
-          "addresses": [
-            "diabetes_stage"
-          ]
-        },
-        {
-          "text": "Address patient knowledge deficit on diabetic self-care",
-          "addresses": [
-            "diabetes_stage"
-          ]
-        }
-      ],
-      "remarks": [
-        "based on https://github.com/clinical-cloud/sample-careplans"
-      ],
-      "reason": "diabetes_stage",
-      "direct_transition": "Prescribe_Medications"
-    },
-    "Prescribe_Medications": {
-      "type": "Simple",
-      "direct_transition": "Monotherapy"
-    },
-    "Monotherapy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": ">=",
-                "value": 2
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Medication",
-                  "codes": [
-                    {
-                      "system": "RxNorm",
-                      "code": "860975",
-                      "display": "24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Prescribe_Metformin"
-        },
-        {
-          "transition": "Bitherapy"
-        }
-      ]
-    },
-    "Prescribe_Metformin": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "860975",
-          "display": "24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet"
-        }
-      ],
-      "reason": "Diagnose_Diabetes",
-      "direct_transition": "Bitherapy"
-    },
-    "Bitherapy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": ">=",
-                "value": 3
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Medication",
-                  "codes": [
-                    {
-                      "system": "RxNorm",
-                      "code": "897122",
-                      "display": "3 ML liraglutide 6 MG/ML Pen Injector"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Prescribe_Liraglutide"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": "<",
-                "value": 3
-              },
-              {
-                "condition_type": "Active Medication",
-                "codes": [
-                  {
-                    "system": "RxNorm",
-                    "code": "897122",
-                    "display": "3 ML liraglutide 6 MG/ML Pen Injector"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Liraglutide"
-        },
-        {
-          "transition": "Tritherapy"
-        }
-      ]
-    },
-    "Prescribe_Liraglutide": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "897122",
-          "display": "3 ML liraglutide 6 MG/ML Pen Injector"
-        }
-      ],
-      "reason": "Diagnose_Diabetes",
-      "direct_transition": "Tritherapy"
-    },
-    "End_Liraglutide": {
-      "type": "MedicationEnd",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "897122",
-          "display": "3 ML liraglutide 6 MG/ML Pen Injector"
-        }
-      ],
-      "direct_transition": "Tritherapy"
-    },
-    "Tritherapy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": ">=",
-                "value": 4
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Medication",
-                  "codes": [
-                    {
-                      "system": "RxNorm",
-                      "code": "1373463",
-                      "display": "canagliflozin 100 MG Oral Tablet"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Prescribe_Canagliflozin"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": "<",
-                "value": 4
-              },
-              {
-                "condition_type": "Active Medication",
-                "codes": [
-                  {
-                    "system": "RxNorm",
-                    "code": "1373463",
-                    "display": "canagliflozin 100 MG Oral Tablet"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Canagliflozin"
-        },
-        {
-          "transition": "Insulin"
-        }
-      ]
-    },
-    "Prescribe_Canagliflozin": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "1373463",
-          "display": "canagliflozin 100 MG Oral Tablet"
-        }
-      ],
-      "reason": "Diagnose_Diabetes",
-      "direct_transition": "Insulin"
-    },
-    "End_Canagliflozin": {
-      "type": "MedicationEnd",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "1373463",
-          "display": "canagliflozin 100 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "Insulin"
-    },
-    "Insulin": {
-      "type": "Simple",
-      "remarks": [
-        "around a third of patients with type 2 diabetes are on insulin ",
-        "30.8% (17.8% only insulin and 13.0% insulin and other med)",
-        "https://www.cdc.gov/diabetes/statistics/meduse/fig2.htm",
-        "coincidentally around a third of patients have nephropathy",
-        "for simplicity we'll make this a 1-1 relationship so that nephropathy --> insulin"
-      ],
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active Condition",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "127013003",
-                "display": "Diabetic renal disease (disorder)"
-              }
-            ]
-          },
-          "transition": "Prescribe_Insulin"
-        },
-        {
-          "transition": "End_Insulin"
-        }
-      ]
-    },
-    "Prescribe_Insulin": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": "106892",
-                "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
-              }
-            ]
-          },
-          "remarks": [
-            "they have basal so stop it and change towards prandial"
-          ],
-          "transition": "End_Basal_Insulin_Towards_Prandial"
-        },
-        {
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": "865098",
-                "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
-              }
-            ]
-          },
-          "remarks": [
-            "they have prandial so do nothing"
-          ],
-          "transition": "Check_Complications"
-        },
-        {
-          "remarks": [
-            "prescribe basal the first time around"
-          ],
-          "transition": "Prescribe_Basal_Insulin"
-        }
-      ]
-    },
-    "Prescribe_Basal_Insulin": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "106892",
-          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
-        }
-      ],
-      "reason": "Diagnose_Diabetes",
-      "direct_transition": "Check_Complications"
-    },
-    "End_Basal_Insulin_Towards_Prandial": {
-      "type": "MedicationEnd",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "106892",
-          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
-        }
-      ],
-      "direct_transition": "Prescribe_Prandial_Insulin"
-    },
-    "Prescribe_Prandial_Insulin": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "865098",
-          "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
-        }
-      ],
-      "reason": "Diagnose_Diabetes",
-      "direct_transition": "Check_Complications"
-    },
-    "End_Insulin": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": "106892",
-                "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
-              }
-            ]
-          },
-          "transition": "End_Basal_Insulin"
-        },
-        {
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": "865098",
-                "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
-              }
-            ]
-          },
-          "transition": "End_Prandial_Insulin"
-        },
-        {
-          "transition": "Check_Complications"
-        }
-      ]
-    },
-    "End_Basal_Insulin": {
-      "type": "MedicationEnd",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "106892",
-          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
-        }
-      ],
-      "direct_transition": "Check_Complications"
-    },
-    "End_Prandial_Insulin": {
-      "type": "MedicationEnd",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "865098",
-          "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
-        }
-      ],
-      "direct_transition": "Check_Complications"
-    },
-    "Check_Complications": {
-      "type": "Simple",
-      "direct_transition": "Check_Nephropathy"
-    },
-    "Check_Nephropathy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "nephropathy",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "127013003",
-                      "display": "Diabetic renal disease (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Nephropathy"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "nephropathy",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "127013003",
-                    "display": "Diabetic renal disease (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Nephropathy"
-        },
-        {
-          "transition": "Check_Microalbuminuria"
-        }
-      ]
-    },
-    "Diagnose_Nephropathy": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "127013003",
-          "display": "Diabetic renal disease (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Microalbuminuria"
-    },
-    "End_Nephropathy": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "127013003",
-          "display": "Diabetic renal disease (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Microalbuminuria"
-    },
-    "Check_Microalbuminuria": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "microalbuminuria",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "90781000119102",
-                      "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Microalbuminuria"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "microalbuminuria",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "90781000119102",
-                    "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Microalbuminuria"
-        },
-        {
-          "transition": "Check_Proteinuria"
-        }
-      ]
-    },
-    "Diagnose_Microalbuminuria": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "90781000119102",
-          "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Proteinuria"
-    },
-    "End_Microalbuminuria": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "90781000119102",
-          "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Proteinuria"
-    },
-    "Check_Proteinuria": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "proteinuria",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "157141000119108",
-                      "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Proteinuria"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "proteinuria",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "157141000119108",
-                    "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Proteinuria"
-        },
-        {
-          "transition": "Check_End_Stage_Renal_Disease"
-        }
-      ]
-    },
-    "Diagnose_Proteinuria": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "157141000119108",
-          "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_End_Stage_Renal_Disease"
-    },
-    "End_Proteinuria": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "157141000119108",
-          "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_End_Stage_Renal_Disease"
-    },
-    "Check_End_Stage_Renal_Disease": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "end_stage_renal_disease",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "46177005",
-                      "display": "End stage renal disease (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_End_Stage_Renal_Disease"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "end_stage_renal_disease",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "46177005",
-                    "display": "End stage renal disease (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_End_Stage_Renal_Disease"
-        },
-        {
-          "transition": "Check_Retinopathy"
-        }
-      ]
-    },
-    "Diagnose_End_Stage_Renal_Disease": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "46177005",
-          "display": "End stage renal disease (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Retinopathy"
-    },
-    "End_End_Stage_Renal_Disease": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "46177005",
-          "display": "End stage renal disease (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Retinopathy"
-    },
-    "Check_Retinopathy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "retinopathy",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "422034002",
-                      "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Retinopathy"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "retinopathy",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "422034002",
-                    "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Retinopathy"
-        },
-        {
-          "transition": "Check_Nonproliferative_Retinopathy"
-        }
-      ]
-    },
-    "Diagnose_Retinopathy": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "422034002",
-          "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Nonproliferative_Retinopathy"
-    },
-    "End_Retinopathy": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "422034002",
-          "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Nonproliferative_Retinopathy"
-    },
-    "Check_Nonproliferative_Retinopathy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "nonproliferative_retinopathy",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "1551000119108",
-                      "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Nonproliferative_Retinopathy"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "nonproliferative_retinopathy",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "1551000119108",
-                    "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Nonproliferative_Retinopathy"
-        },
-        {
-          "transition": "Check_Proliferative_Retinopathy"
-        }
-      ]
-    },
-    "Diagnose_Nonproliferative_Retinopathy": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1551000119108",
-          "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Proliferative_Retinopathy"
-    },
-    "End_Nonproliferative_Retinopathy": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1551000119108",
-          "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Proliferative_Retinopathy"
-    },
-    "Check_Proliferative_Retinopathy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "proliferative_retinopathy",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "1501000119109",
-                      "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Proliferative_Retinopathy"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "proliferative_retinopathy",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "1501000119109",
-                    "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Proliferative_Retinopathy"
-        },
-        {
-          "transition": "Check_Macular_Edema"
-        }
-      ]
-    },
-    "Diagnose_Proliferative_Retinopathy": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1501000119109",
-          "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Macular_Edema"
-    },
-    "End_Proliferative_Retinopathy": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1501000119109",
-          "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Macular_Edema"
-    },
-    "Check_Macular_Edema": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "macular_edema",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "97331000119101",
-                      "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Macular_Edema"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "macular_edema",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "97331000119101",
-                    "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Macular_Edema"
-        },
-        {
-          "transition": "Check_Blindness"
-        }
-      ]
-    },
-    "Diagnose_Macular_Edema": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "97331000119101",
-          "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Blindness"
-    },
-    "End_Macular_Edema": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "97331000119101",
-          "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Blindness"
-    },
-    "Check_Blindness": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "blindness",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "60951000119105",
-                      "display": "Blindness due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Blindness"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "blindness",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "60951000119105",
-                    "display": "Blindness due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Blindness"
-        },
-        {
-          "transition": "Check_Neuropathy"
-        }
-      ]
-    },
-    "Diagnose_Blindness": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "60951000119105",
-          "display": "Blindness due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Neuropathy"
-    },
-    "End_Blindness": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "60951000119105",
-          "display": "Blindness due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Neuropathy"
-    },
-    "Check_Neuropathy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "neuropathy",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "368581000119106",
-                      "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Neuropathy"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "neuropathy",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "368581000119106",
-                    "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Neuropathy"
-        },
-        {
-          "transition": "Consider_Procedures"
-        }
-      ]
-    },
-    "Diagnose_Neuropathy": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "368581000119106",
-          "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Consider_Procedures"
-    },
-    "End_Neuropathy": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "368581000119106",
-          "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Consider_Procedures"
-    },
-    "Consider_Procedures": {
-      "type": "Simple",
-      "direct_transition": "Potential_Dialysis"
-    },
-    "Potential_Dialysis": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active Condition",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "46177005",
-                "display": "End stage renal disease (disorder)"
-              }
-            ]
-          },
-          "transition": "Dialysis"
-        },
-        {
-          "transition": "Potential_Amputation"
-        }
-      ]
-    },
-    "Dialysis": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "265764009",
-          "display": "Renal dialysis (procedure)"
-        }
-      ],
-      "direct_transition": "Potential_Amputation",
-      "duration": {
-        "low": 3,
-        "high": 4,
-        "unit": "hours"
-      }
-    },
-    "Potential_Amputation": {
-      "type": "Simple",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "Amputation_Necessary",
-            "within": {
-              "quantity": 1,
-              "unit": "years"
-            }
-          },
-          "remarks": [
-            "dialysis means this check is made every few days which can skew results.",
-            "we only want to consider amputation once a year"
-          ],
-          "transition": "No_Amputation_Necessary"
-        },
-        {
-          "condition": {
-            "condition_type": "Active Condition",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "368581000119106",
-                "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
-              }
-            ]
-          },
-          "distributions": [
-            {
-              "distribution": 0.0025,
-              "transition": "Amputation_Necessary"
-            },
-            {
-              "distribution": 0.9975,
-              "transition": "No_Amputation_Necessary"
-            }
-          ],
-          "remarks": [
-            "In 2010, about 73,000 non-traumatic lower-limb amputations were performed in adults aged 20 years or older with diagnosed diabetes.",
-            "28.9 million adults had diagnosed diabetes. 73,000/ 28,900,000 = 0.0025 or 0.25% per year",
-            "https://www.cdc.gov/diabetes/data/statistics/2014statisticsreport.html"
-          ]
-        },
-        {
-          "transition": "No_Amputation_Necessary"
-        }
-      ]
-    },
-    "Amputation_Necessary": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_amputation_necessary",
-      "value": true,
-      "direct_transition": "Schedule_Followup"
-    },
-    "No_Amputation_Necessary": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_amputation_necessary",
-      "value": false,
-      "direct_transition": "Schedule_Followup"
-    },
-    "Schedule_Followup": {
-      "type": "EncounterEnd",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetes_amputation_necessary",
-            "operator": "==",
-            "value": true
-          },
-          "transition": "Delay_Before_Amputation"
-        },
-        {
-          "transition": "Living_With_Diabetes"
-        }
-      ]
-    },
-    "Delay_Before_Amputation": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 6,
-        "unit": "weeks"
-      },
-      "direct_transition": "Amputation"
-    },
-    "Amputation": {
-      "type": "Encounter",
-      "encounter_class": "inpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "reason": "Diagnose_Neuropathy",
-      "remarks": [
-        "lower limb amputation occurs in 0.65% of the diabetic population",
-        " with upper limb amputation occurring in an ever fewer 0.034%",
-        "http://www.amputee-coalition.org/resources/massachusetts/",
-        "== lower limb =~ 20x more likely than upper limb"
-      ],
-      "distributed_transition": [
-        {
-          "distribution": 0.2375,
-          "transition": "Potential_Amputation_of_Left_Foot"
-        },
-        {
-          "distribution": 0.2375,
-          "transition": "Potential_Amputation_of_Left_Leg"
-        },
-        {
-          "distribution": 0.2375,
-          "transition": "Potential_Amputation_of_Right_Foot"
-        },
-        {
-          "distribution": 0.2375,
-          "transition": "Potential_Amputation_of_Right_Leg"
-        },
-        {
-          "distribution": 0.0125,
-          "transition": "Potential_Amputation_of_Left_Hand"
-        },
-        {
-          "distribution": 0.0125,
-          "transition": "Potential_Amputation_of_Left_Arm"
-        },
-        {
-          "distribution": 0.0125,
-          "transition": "Potential_Amputation_of_Right_Hand"
-        },
-        {
-          "distribution": 0.0125,
-          "transition": "Potential_Amputation_of_Right_Arm"
-        }
-      ]
-    },
-    "Potential_Amputation_of_Left_Foot": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "PriorState",
-                "name": "Amputation_of_Left_Foot"
-              },
-              {
-                "condition_type": "PriorState",
-                "name": "Amputation_of_Left_Leg"
-              }
-            ]
-          },
-          "transition": "End_Amputation_Encounter"
-        },
-        {
-          "transition": "Amputation_of_Left_Foot"
-        }
-      ]
-    },
-    "Amputation_of_Left_Foot": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "180030006",
-          "display": "Amputation of left foot"
-        }
-      ],
-      "duration": {
-        "low": 1,
-        "high": 4,
-        "unit": "hours"
-      },
-      "reason": "Diagnose_Neuropathy",
-      "direct_transition": "History_of_Foot_Amputation"
-    },
-    "Potential_Amputation_of_Right_Foot": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "PriorState",
-                "name": "Amputation_of_Right_Foot"
-              },
-              {
-                "condition_type": "PriorState",
-                "name": "Amputation_of_Right_Leg"
-              }
-            ]
-          },
-          "transition": "End_Amputation_Encounter"
-        },
-        {
-          "transition": "Amputation_of_Right_Foot"
-        }
-      ]
-    },
-    "Amputation_of_Right_Foot": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "180030006",
-          "display": "Amputation of right foot"
-        }
-      ],
-      "duration": {
-        "low": 1,
-        "high": 4,
-        "unit": "hours"
-      },
-      "reason": "Diagnose_Neuropathy",
-      "direct_transition": "History_of_Foot_Amputation"
-    },
-    "Potential_Amputation_of_Left_Leg": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "Amputation_of_Left_Leg"
-          },
-          "transition": "End_Amputation_Encounter"
-        },
-        {
-          "transition": "Amputation_of_Left_Leg"
-        }
-      ]
-    },
-    "Amputation_of_Left_Leg": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "79733001",
-          "display": "Amputation of left leg"
-        }
-      ],
-      "duration": {
-        "low": 1,
-        "high": 4,
-        "unit": "hours"
-      },
-      "reason": "Diagnose_Neuropathy",
-      "direct_transition": "History_of_Lower_Limb_Amputation"
-    },
-    "Potential_Amputation_of_Right_Leg": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "Amputation_of_Right_Leg"
-          },
-          "transition": "End_Amputation_Encounter"
-        },
-        {
-          "transition": "Amputation_of_Right_Leg"
-        }
-      ]
-    },
-    "Amputation_of_Right_Leg": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "79733001",
-          "display": "Amputation of right leg"
-        }
-      ],
-      "duration": {
-        "low": 1,
-        "high": 4,
-        "unit": "hours"
-      },
-      "reason": "Diagnose_Neuropathy",
-      "direct_transition": "History_of_Lower_Limb_Amputation"
-    },
-    "History_of_Lower_Limb_Amputation": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "161622006",
-          "display": "History of lower limb amputation (situation)"
-        }
-      ],
-      "direct_transition": "Recovery_After_Amputation"
-    },
-    "History_of_Foot_Amputation": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "429280009",
-          "display": "History of amputation of foot (situation)"
-        }
-      ],
-      "direct_transition": "Recovery_After_Amputation"
-    },
-    "Potential_Amputation_of_Left_Hand": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "PriorState",
-                "name": "Amputation_of_Left_Hand"
-              },
-              {
-                "condition_type": "PriorState",
-                "name": "Amputation_of_Left_Arm"
-              }
-            ]
-          },
-          "transition": "End_Amputation_Encounter"
-        },
-        {
-          "transition": "Amputation_of_Left_Hand"
-        }
-      ]
-    },
-    "Amputation_of_Left_Hand": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "46028000",
-          "display": "Amputation of left hand"
-        }
-      ],
-      "duration": {
-        "low": 1,
-        "high": 4,
-        "unit": "hours"
-      },
-      "reason": "Diagnose_Neuropathy",
-      "direct_transition": "History_of_Hand_Amputation"
-    },
-    "Potential_Amputation_of_Right_Hand": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "PriorState",
-                "name": "Amputation_of_Right_Hand"
-              },
-              {
-                "condition_type": "PriorState",
-                "name": "Amputation_of_Right_Arm"
-              }
-            ]
-          },
-          "transition": "End_Amputation_Encounter"
-        },
-        {
-          "transition": "Amputation_of_Right_Hand"
-        }
-      ]
-    },
-    "Amputation_of_Right_Hand": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "46028000",
-          "display": "Amputation of right hand"
-        }
-      ],
-      "duration": {
-        "low": 1,
-        "high": 4,
-        "unit": "hours"
-      },
-      "reason": "Diagnose_Neuropathy",
-      "direct_transition": "History_of_Hand_Amputation"
-    },
-    "Potential_Amputation_of_Right_Arm": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "Amputation_of_Right_Arm"
-          },
-          "transition": "End_Amputation_Encounter"
-        },
-        {
-          "transition": "Amputation_of_Right_Arm"
-        }
-      ]
-    },
-    "Amputation_of_Right_Arm": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "13995008",
-          "display": "Amputation of right arm"
-        }
-      ],
-      "duration": {
-        "low": 1,
-        "high": 4,
-        "unit": "hours"
-      },
-      "reason": "Diagnose_Neuropathy",
-      "direct_transition": "History_of_Upper_Limb_Amputation"
-    },
-    "Potential_Amputation_of_Left_Arm": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "Amputation_of_Left_Arm"
-          },
-          "transition": "End_Amputation_Encounter"
-        },
-        {
-          "transition": "Amputation_of_Left_Arm"
-        }
-      ]
-    },
-    "Amputation_of_Left_Arm": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "13995008",
-          "display": "Amputation of left arm"
-        }
-      ],
-      "duration": {
-        "low": 1,
-        "high": 4,
-        "unit": "hours"
-      },
-      "reason": "Diagnose_Neuropathy",
-      "direct_transition": "History_of_Upper_Limb_Amputation"
-    },
-    "History_of_Upper_Limb_Amputation": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "161621004",
-          "display": "History of upper limb amputation (situation)"
-        }
-      ],
-      "direct_transition": "Recovery_After_Amputation"
-    },
-    "History_of_Hand_Amputation": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "698423002",
-          "display": "History of disarticulation at wrist (situation)"
-        }
-      ],
-      "direct_transition": "Recovery_After_Amputation"
-    },
-    "Recovery_After_Amputation": {
-      "type": "Delay",
-      "range": {
-        "low": 3,
-        "high": 6,
-        "unit": "weeks"
-      },
-      "direct_transition": "End_Amputation_Encounter"
-    },
-    "End_Amputation_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Living_With_Diabetes"
-    },
-    "Living_With_Diabetes": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active Condition",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "46177005",
-                "display": "End stage renal disease (disorder)"
-              }
-            ]
-          },
-          "transition": "Delay_Before_Next_Dialysis_Encounter"
-        },
-        {
-          "transition": "Followup_Encounter_After_Diagnosis"
-        }
-      ]
-    },
-    "Followup_Encounter_After_Diagnosis": {
-      "type": "Encounter",
-      "wellness": true,
-      "direct_transition": "Record_HA1C"
-    },
-    "Delay_Before_Next_Dialysis_Encounter": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 3,
-        "unit": "days"
-      },
-      "direct_transition": "Dialysis_Encounter"
-    },
-    "Dialysis_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "reason": "Diagnose_End_Stage_Renal_Disease",
-      "direct_transition": "Record_HA1C"
-    },
-    "Obesity": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "obesity",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 162864005,
-          "display": "Body mass index 30+ - obesity (finding)"
-        }
-      ],
-      "direct_transition": "Wellness_Encounter"
-    },
-    "Severe Obesity": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "obesity",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 408512008,
-          "display": "Body mass index 40+ - severely obese (finding)"
-        }
-      ],
-      "direct_transition": "Wellness_Encounter"
-    },
-    "Obese_Check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Severe Obesity",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "BMI",
-            "operator": ">=",
-            "value": 40
-          }
-        },
-        {
-          "transition": "Obesity",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "BMI",
-            "operator": ">=",
-            "value": 30
-          }
-        },
-        {
-          "transition": "Wellness_Encounter"
-        }
-      ]
-    },
-    "Blood_Sugar_Check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Hyperglycemia",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Glucose",
-            "operator": ">=",
-            "value": 130
-          }
-        },
-        {
-          "transition": "Triglyceride_Check"
-        }
-      ]
-    },
-    "Hyperglycemia": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "hyperglycemia",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 80394007,
-          "display": "Hyperglycemia (disorder)"
-        }
-      ],
-      "direct_transition": "Triglyceride_Check"
-    },
-    "Triglyceride_Check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Hypertriglyceridemia",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Triglycerides",
-            "operator": ">=",
-            "value": 150
-          }
-        },
-        {
-          "transition": "Metabolic_Check"
-        }
-      ]
-    },
-    "Hypertriglyceridemia": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "hypertriglyceridemia",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 302870006,
-          "display": "Hypertriglyceridemia (disorder)"
-        }
-      ],
-      "direct_transition": "Metabolic_Check"
-    },
-    "Metabolic_Check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Metabolic_Syndrome",
-          "condition": {
-            "condition_type": "At Least",
-            "minimum": 3,
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "obesity",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertension",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hyperglycemia",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertriglyceridemia",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Vital Sign",
-                "vital_sign": "HDL",
-                "operator": "<",
-                "value": 50
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Diagnosis"
-        }
-      ]
-    },
-    "Metabolic_Syndrome": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "metabolic_syndrome",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 237602007,
-          "display": "Metabolic syndrome X (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis"
-    },
-    "veteran guard": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Wellness_Encounter",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "Terminal",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
-        }
-      ]
-    },
-    "time delay": {
-      "type": "Delay",
-      "direct_transition": "veteran guard",
-      "range": {
-        "low": 35,
-        "high": 80,
-        "unit": "years"
-      }
-    },
-    "Terminal": {
-      "type": "Terminal",
-      "direct_transition": "Terminal"
     }
   }
 }

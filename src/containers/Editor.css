@@ -7,6 +7,18 @@
 .Editor-main {
 }
 
+.Editor-loading-logo{
+
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+  opacity: .3;
+}
+
 .Editor .navbar-brand.Editor-title {
   font-size: 1.5rem;
 }
@@ -174,6 +186,11 @@ z-index: 500;
   /* padding-left: 55px; */
 }
 
+.Editor .Editor-module-name input {
+  font-size: 1rem;
+  width: 480px;
+}
+
 .Editor-panel {
   background-color: #fff;
   position:fixed;
@@ -235,9 +252,9 @@ z-index: 500;
 
 .Editor-graph-buttons {
   position: fixed;
-  top: 75px;
+  top: 80px;
   right: 5px;
-  z-index: 2000;
+  z-index: 1000;
 }
 
 .Editor-graph-buttons button.disabled {

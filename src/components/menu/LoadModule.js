@@ -128,6 +128,16 @@ class LoadModule extends Component {
     }
   }
 
+  renderWelcomeMessage = () => {
+    if(this.props.welcome){
+      return (<div>
+        Welcome to Synthea Module Builder.  Please visit the documentation first.
+        </div>)
+    }
+
+    return <div />
+  }
+
   render() {
 
     let classDetails = " hide", style = {display: 'none'}
@@ -143,8 +153,8 @@ class LoadModule extends Component {
           <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Load Module</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.props.onHide}>
+                <h5 className="modal-title">{(!this.props.welcome ? 'Load Module' : 'Synthea Module Builder')}</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.props.onHide} style={{display: (this.props.welcome ? 'none' : '')}}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -168,7 +178,7 @@ class LoadModule extends Component {
                   </div>
                 </div>
               </div>
-              <div className="modal-footer">
+              <div className="modal-footer" style={{display: (this.props.welcome ? 'none' : '')}}>
 
                 {this.renderLoadButton()}
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.props.onHide}>Close</button>
