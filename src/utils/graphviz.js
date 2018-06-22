@@ -42,7 +42,7 @@ export function generateDOT(module: Module, selectedState: State, selectedStateT
 
 const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) => {
 
-  return Object.keys(module.states).map( name => {
+  return Object.keys(module.states).filter(name => typeof module.states[name] === 'object').map( name => {
 
     let state = module.states[name]
     state['name'] = name
