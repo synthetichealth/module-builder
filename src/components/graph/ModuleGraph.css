@@ -3,7 +3,20 @@
   width: 100%;
   height: 100%;
   left: 500px;
-  padding-top: 40px;
+  padding-top: 60px;
+}
+
+.Module svg {
+  top: 50px;
+  position:absolute;
+}
+
+.Module-fullscreen {
+  left: 0;
+}
+
+.Module-standard-screen {
+  left: 500px;
 }
 
 .Editor.hide-info .Module {
@@ -53,9 +66,31 @@
   stroke: #336699;
   stroke-width: 3px;
 }
+
+.transition.transition-highlighted path.transition-hitbox {
+  stroke-width: 20px;
+}
+
 .transition.transition-highlighted polygon {
   fill: #336699;
   stroke: #336699;
+}
+.transition.transition-highlighted.transition-selected path {
+  stroke: violet;
+  stroke-width: 3px;
+}
+
+.transition.transition-highlighted.transition-selected path.transition-hitbox {
+  stroke: violet;
+  stroke-width: 3px;
+}
+.transition.transition-highlighted.transition-selected polygon {
+  fill: violet;
+  stroke: violet;
+}
+
+.transition.transition-highlighted.transition-selected text {
+  fill: violet;
 }
 
 .transition.transition-highlighted text {
@@ -79,12 +114,22 @@
   stroke-width: 3;
 }
 
+.Module.bold-lines path.transition-hitbox{
+  stroke-width: 25;
+}
+
+
 .Module.bold-lines polyline{
   stroke-width: 3;
 }
 
 .Module.bold-lines .node.node-highlighted path{
   stroke-width: 5px;
+}
+
+
+.Module.bold-lines .node.node-highlighted path.transition-hitbox{
+  stroke-width: 25px;
 }
 
 .Module.bold-lines .node.node-highlighted polyline{

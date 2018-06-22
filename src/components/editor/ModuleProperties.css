@@ -2,9 +2,9 @@
   left: -400px;
 }
 
-.ModuleProperties {
+.ModuleProperties { 
+  padding-top: 10px;
   padding-bottom: 10px;
-
 }
 
 .ModuleProperties input {
@@ -12,7 +12,7 @@
 }
 
 .ModuleProperties textarea {
-  height: 200px;
+  height: 100vw;
   width: 100%;
 }
 
@@ -24,6 +24,4 @@
 
 .ModuleProperties-remarks {
   font-size: .8em;
-  max-height: 200px;
-  overflow-y: auto;
 }

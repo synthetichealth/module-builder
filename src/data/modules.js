@@ -160,6 +160,60 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for symptom"
         }
       ],
+      "direct_transition": "Allergic_Rhinitis_Symptom1"
+    },
+    "Allergic_Rhinitis_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom2"
+    },
+    "Allergic_Rhinitis_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Nasal Discharge",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom3"
+    },
+    "Allergic_Rhinitis_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Itching",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom4"
+    },
+    "Allergic_Rhinitis_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Sneezing Fits",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom5"
+    },
+    "Allergic_Rhinitis_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Ear Pressure",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Symptom_Period"
+    },
+    "Symptom_Period": {
+      "type": "Delay",
+      "range": {
+        "low": 2,
+        "high": 3,
+        "unit": "weeks"
+      },
       "direct_transition": "Prescribe_OTC_Antihistamine"
     },
     "Prescribe_OTC_Antihistamine": {
@@ -261,6 +315,38 @@ export default {"allergic_rhinitis":{
     "Allergic_Rhinitis_Subsides": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "allergic_rhinitis",
+      "direct_transition": "Allergic_Rhinitis_Symptom1_Ends"
+    },
+    "Allergic_Rhinitis_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom2_Ends"
+    },
+    "Allergic_Rhinitis_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Nasal Discharge",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom3_Ends"
+    },
+    "Allergic_Rhinitis_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Itching",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom4_Ends"
+    },
+    "Allergic_Rhinitis_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Ear Pressure",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Terminal"
     },
     "Terminal": {
@@ -3343,7 +3429,7 @@ export default {"allergic_rhinitis":{
         "high": 17,
         "unit": "years"
       },
-      "direct_transition": "Appendicitis"
+      "direct_transition": "Appendicitis_Symptom1"
     },
     "Ages_18_44": {
       "type": "Delay",
@@ -3352,7 +3438,7 @@ export default {"allergic_rhinitis":{
         "high": 44,
         "unit": "years"
       },
-      "direct_transition": "Appendicitis"
+      "direct_transition": "Appendicitis_Symptom1"
     },
     "Ages_45_64": {
       "type": "Delay",
@@ -3361,7 +3447,7 @@ export default {"allergic_rhinitis":{
         "high": 64,
         "unit": "years"
       },
-      "direct_transition": "Appendicitis"
+      "direct_transition": "Appendicitis_Symptom1"
     },
     "Ages_65_Plus": {
       "type": "Delay",
@@ -3369,6 +3455,78 @@ export default {"allergic_rhinitis":{
         "low": 65,
         "high": 99,
         "unit": "years"
+      },
+      "direct_transition": "Appendicitis_Symptom1"
+    },
+    "Appendicitis_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Abdominal Pain",
+      "range": {
+        "low": 50,
+        "high": 150
+      },
+      "direct_transition": "Appendicitis_Symptom2"
+    },
+    "Appendicitis_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "Appendicitis_Symptom3"
+    },
+    "Appendicitis_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Loss of Appetite",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "Appendicitis_Symptom4"
+    },
+    "Appendicitis_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Appendicitis_Symptom5"
+    },
+    "Appendicitis_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Diarrhea",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Appendicitis_Symptom6"
+    },
+    "Appendicitis_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Bloating/Gas",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Appendicitis_Symptom7"
+    },
+    "Appendicitis_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Constipation",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Symptom_Period"
+    },
+    "Symptom_Period": {
+      "type": "Delay",
+      "range": {
+        "low": 1,
+        "high": 3,
+        "unit": "days"
       },
       "direct_transition": "Appendicitis"
     },
@@ -3474,6 +3632,62 @@ export default {"allergic_rhinitis":{
         "Avg operative time is ~55 minutes",
         "https://www.ncbi.nlm.nih.gov/pubmed/17658102"
       ],
+      "direct_transition": "Appendicitis_Symptom1_Ends"
+    },
+    "Appendicitis_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Abdominal Pain",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom2_Ends"
+    },
+    "Appendicitis_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom3_Ends"
+    },
+    "Appendicitis_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Loss of Appetite",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom4_Ends"
+    },
+    "Appendicitis_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom5_Ends"
+    },
+    "Appendicitis_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Diarrhea",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom6_Ends"
+    },
+    "Appendicitis_Symptom6_Ends": {
+      "type": "Symptom",
+      "symptom": "Bloating/Gas",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Appendicitis_Symptom7_Ends"
+    },
+    "Appendicitis_Symptom7_Ends": {
+      "type": "Symptom",
+      "symptom": "Constipation",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Recovery"
     },
     "Recovery": {
@@ -3672,6 +3886,60 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for symptom"
         }
       ],
+      "direct_transition": "Asthma_Symptom1"
+    },
+    "Asthma_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Wheezing",
+      "range": {
+        "low": 25,
+        "high": 75
+      },
+      "direct_transition": "Asthma_Symptom2"
+    },
+    "Asthma_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Shortness of Breath",
+      "range": {
+        "low": 25,
+        "high": 75
+      },
+      "direct_transition": "Asthma_Symptom3"
+    },
+    "Asthma_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Chest Pressure",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Asthma_Symptom4"
+    },
+    "Asthma_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Asthma_Symptom5"
+    },
+    "Asthma_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Asthma_Symptom6"
+    },
+    "Asthma_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Mucus Secretion",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
       "direct_transition": "Asthma_Screening"
     },
     "Asthma_Screening": {
@@ -3999,6 +4267,54 @@ export default {"allergic_rhinitis":{
     "Childhood_Asthma_Subsides": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "asthma_condition",
+      "direct_transition": "Asthma_Symptom1_Ends"
+    },
+    "Asthma_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Wheezing",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Asthma_Symptom2_Ends"
+    },
+    "Asthma_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Shortness of Breath",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Asthma_Symptom3_Ends"
+    },
+    "Asthma_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Chest Pressure",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Asthma_Symptom4_Ends"
+    },
+    "Asthma_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Asthma_Symptom5_Ends"
+    },
+    "Asthma_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Asthma_Symptom6_Ends"
+    },
+    "Asthma_Symptom6_Ends": {
+      "type": "Symptom",
+      "symptom": "Mucus Secretion",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "End_Asthma_CarePlan"
     },
     "End_Asthma_CarePlan": {
@@ -4288,6 +4604,51 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
+      "direct_transition": "ADD_Symptom1"
+    },
+    "ADD_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Poor Eye Contact",
+      "range": {
+        "low": 0,
+        "high": 30
+      },
+      "direct_transition": "ADD_Symptom2"
+    },
+    "ADD_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Delayed Verbal/Language Skills",
+      "range": {
+        "low": 0,
+        "high": 30
+      },
+      "direct_transition": "ADD_Symptom3"
+    },
+    "ADD_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Hyperactive Behavior",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "ADD_Symptom4"
+    },
+    "ADD_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Inability to Focus/Concentrate",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "ADD_Symptom5"
+    },
+    "ADD_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Poor Socialization",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
       "direct_transition": "ADHD_CarePlan"
     },
     "ADHD_CarePlan": {
@@ -4559,6 +4920,46 @@ export default {"allergic_rhinitis":{
     "ADHD_Ends": {
       "type": "ConditionEnd",
       "condition_onset": "ADHD",
+      "direct_transition": "ADD_Symptom1_Ends"
+    },
+    "ADD_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Poor Eye Contact",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "ADD_Symptom2_Ends"
+    },
+    "ADD_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Delayed Verbal/Language Skills",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "ADD_Symptom3_Ends"
+    },
+    "ADD_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Hyperactive Behavior",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "ADD_Symptom4_Ends"
+    },
+    "ADD_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Inability to Focus/Concentrate",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "ADD_Symptom5_Ends"
+    },
+    "ADD_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Poor Socialization",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "ADHD_CarePlan_Ends"
     },
     "ADHD_CarePlan_Ends": {
@@ -4666,8 +5067,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Cough",
       "range": {
-        "low": 50,
-        "high": 100
+        "low": 25,
+        "high": 75
       },
       "direct_transition": "Bronchitis_Symptom2"
     },
@@ -4675,8 +5076,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Mucus",
       "range": {
-        "low": 0,
-        "high": 100
+        "low": 25,
+        "high": 50
       },
       "direct_transition": "Bronchitis_Symptom3"
     },
@@ -4684,8 +5085,71 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Shortness of Breath",
       "range": {
-        "low": 50,
-        "high": 100
+        "low": 25,
+        "high": 75
+      },
+      "direct_transition": "Bronchitis_Symptom4"
+    },
+    "Bronchitis_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "range": {
+        "low": 25,
+        "high": 50
+      },
+      "direct_transition": "Bronchitis_Symptom5"
+    },
+    "Bronchitis_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 25,
+        "high": 75
+      },
+      "direct_transition": "Bronchitis_Symptom6"
+    },
+    "Bronchitis_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 25,
+        "high": 50
+      },
+      "direct_transition": "Bronchitis_Symptom7"
+    },
+    "Bronchitis_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Body Aches",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Bronchitis_Symptom8"
+    },
+    "Bronchitis_Symptom8": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "range": {
+        "low": 25,
+        "high": 50
+      },
+      "direct_transition": "Bronchitis_Symptom9"
+    },
+    "Bronchitis_Symptom9": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Bronchitis_Symptom10"
+    },
+    "Bronchitis_Symptom10": {
+      "type": "Symptom",
+      "symptom": "Diarrhea",
+      "range": {
+        "low": 0,
+        "high": 25
       },
       "direct_transition": "Symptoms_Dont_improve"
     },
@@ -4878,7 +5342,7 @@ export default {"allergic_rhinitis":{
             "condition_type": "Symptom",
             "symptom": "Mucus",
             "operator": "<",
-            "value": 20
+            "value": 30
           },
           "distributions": [
             {
@@ -4963,6 +5427,62 @@ export default {"allergic_rhinitis":{
     "Bronchitis_Symptom2_Subsides": {
       "type": "Symptom",
       "symptom": "Mucus",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom4_Subsides"
+    },
+    "Bronchitis_Symptom4_Subsides": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom5_Subsides"
+    },
+    "Bronchitis_Symptom5_Subsides": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom6_Subsides"
+    },
+    "Bronchitis_Symptom6_Subsides": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom7_Subsides"
+    },
+    "Bronchitis_Symptom7_Subsides": {
+      "type": "Symptom",
+      "symptom": "Body Aches",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom8_Subsides"
+    },
+    "Bronchitis_Symptom8_Subsides": {
+      "type": "Symptom",
+      "symptom": "Nasal Congestion",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom9_Subsides"
+    },
+    "Bronchitis_Symptom9_Subsides": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Bronchitis_Symptom10_Subsides"
+    },
+    "Bronchitis_Symptom10_Subsides": {
+      "type": "Symptom",
+      "symptom": "Diarrhea",
       "exact": {
         "quantity": 0
       },
@@ -5663,6 +6183,51 @@ export default {"allergic_rhinitis":{
     },
     "End_Symptom_Encounter": {
       "type": "EncounterEnd",
+      "direct_transition": "Colorectal_Cancer_Symptom_3"
+    },
+    "Colorectal_Cancer_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Constipation",
+      "range": {
+        "low": 50,
+        "high": 150
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom_4"
+    },
+    "Colorectal_Cancer_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Cramping",
+      "range": {
+        "low": 50,
+        "high": 150
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom_5"
+    },
+    "Colorectal_Cancer_Symptom_5": {
+      "type": "Symptom",
+      "symptom": "Abdominal Pain",
+      "range": {
+        "low": 50,
+        "high": 150
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom_6"
+    },
+    "Colorectal_Cancer_Symptom_6": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom_7"
+    },
+    "Colorectal_Cancer_Symptom_7": {
+      "type": "Symptom",
+      "symptom": "Weight Loss",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
       "direct_transition": "Wait_For_Diagnostic_Colonoscopy"
     },
     "Wait_For_Diagnostic_Colonoscopy": {
@@ -6434,6 +6999,46 @@ export default {"allergic_rhinitis":{
     },
     "End_Remission_Encounter": {
       "type": "EncounterEnd",
+      "direct_transition": "Colorectal_Cancer_Symptom3_Ends"
+    },
+    "Colorectal_Cancer_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Constipation",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom4_Ends"
+    },
+    "Colorectal_Cancer_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Cramping",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom5_Ends"
+    },
+    "Colorectal_Cancer_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Abdominal Pain",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom6_Ends"
+    },
+    "Colorectal_Cancer_Symptom6_Ends": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Colorectal_Cancer_Symptom7_Ends"
+    },
+    "Colorectal_Cancer_Symptom7_Ends": {
+      "type": "Symptom",
+      "symptom": "Weight Loss",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Terminal"
     },
     "Terminal": {
@@ -9367,8 +9972,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Shortness of Breath",
       "range": {
-        "low": 70,
-        "high": 100
+        "low": 50,
+        "high": 550
       },
       "direct_transition": "Emphysema_Symptom2"
     },
@@ -9376,21 +9981,48 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Cough",
       "range": {
-        "low": 10,
-        "high": 60
+        "low": 50,
+        "high": 150
       },
-      "direct_transition": "DiagnosisEncounter"
+      "direct_transition": "Common_Symptom1"
     },
     "Bronchitis_Symptom1": {
       "type": "Symptom",
       "symptom": "Shortness of Breath",
       "range": {
         "low": 0,
-        "high": 40
+        "high": 250
       },
       "direct_transition": "Bronchitis_Symptom2"
     },
     "Bronchitis_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 150,
+        "high": 250
+      },
+      "direct_transition": "Common_Symptom1"
+    },
+    "Common_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 70,
+        "high": 100
+      },
+      "direct_transition": "Common_Symptom2"
+    },
+    "Common_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 70,
+        "high": 100
+      },
+      "direct_transition": "Common_Symptom3"
+    },
+    "Common_Symptom3": {
       "type": "Symptom",
       "symptom": "Cough",
       "range": {
@@ -10239,13 +10871,58 @@ export default {"allergic_rhinitis":{
       "remarks": [
         "2. Very mild decline, also considered normal aged forgetfulness"
       ],
+      "direct_transition": "DecreasedCommunication"
+    },
+    "DecreasedCommunication": {
+      "type": "Symptom",
+      "symptom": "Decreased Communication",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "DecreasedAttentiveness"
+    },
+    "DecreasedAttentiveness": {
+      "type": "Symptom",
+      "symptom": "Decreased Attentiveness",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "DecreasedJudgment"
+    },
+    "DecreasedJudgment": {
+      "type": "Symptom",
+      "symptom": "Decreased in Judgement",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "DecreasedVisualPerception"
+    },
+    "DecreasedVisualPerception": {
+      "type": "Symptom",
+      "symptom": "Decreased Visual Perception",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Confusion"
+    },
+    "Confusion": {
+      "type": "Symptom",
+      "symptom": "Confusion",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
       "direct_transition": "MildMemoryLoss"
     },
     "MildMemoryLoss": {
       "type": "Symptom",
       "symptom": "Memory Loss",
       "range": {
-        "low": 1,
+        "low": 0,
         "high": 50
       },
       "direct_transition": "MildDecline"
@@ -10479,8 +11156,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Memory Loss",
       "range": {
-        "low": 40,
-        "high": 80
+        "low": 50,
+        "high": 100
       },
       "remarks": [
         "These numbers do not map to any real data, they are just picked mathematically to get the %s right"
@@ -10774,7 +11451,7 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "34285007",
+          "code": "32485007",
           "display": "Hospital admission"
         }
       ],
@@ -11522,6 +12199,33 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
+      "direct_transition": "Dermatitis_Symptom1"
+    },
+    "Dermatitis_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Itchiness",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "Dermatitis_Symptom2"
+    },
+    "Dermatitis_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Red Skin",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "Dermatitis_Symptom3"
+    },
+    "Dermatitis_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Rash",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
       "direct_transition": "Dermatitis_Careplan"
     },
     "Dermatitis_Careplan": {
@@ -11948,6 +12652,30 @@ export default {"allergic_rhinitis":{
     "End_Dermatitis_CarePlan": {
       "type": "CarePlanEnd",
       "careplan": "Dermatitis_Careplan",
+      "direct_transition": "Dermatitis_Symptom1_Ends"
+    },
+    "Dermatitis_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Itchiness",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Dermatitis_Symptom2_Ends"
+    },
+    "Dermatitis_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Red Skin",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Dermatitis_Symptom3_Ends"
+    },
+    "Dermatitis_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Rash",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Terminal"
     },
     "Terminal": {
@@ -13147,6 +13875,60 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
+      "direct_transition": "Fibromyalgia_Symptom1"
+    },
+    "Fibromyalgia_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Muscle Pain",
+      "range": {
+        "low": 25,
+        "high": 100
+      },
+      "direct_transition": "Fibromyalgia_Symptom2"
+    },
+    "Fibromyalgia_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Muscle Tenderness",
+      "range": {
+        "low": 25,
+        "high": 100
+      },
+      "direct_transition": "Fibromyalgia_Symptom3"
+    },
+    "Fibromyalgia_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Fibromyalgia_Symptom4"
+    },
+    "Fibromyalgia_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Sleep Disturbances",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Fibromyalgia_Symptom5"
+    },
+    "Fibromyalgia_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Cognitive Difficulties",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Fibromyalgia_Symptom6"
+    },
+    "Fibromyalgia_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Stiffness",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
       "direct_transition": "Fibromyalgia_CarePlan"
     },
     "Fibromyalgia_CarePlan": {
@@ -13739,6 +14521,42 @@ export default {"allergic_rhinitis":{
           "display": "Gout"
         }
       ],
+      "direct_transition": "Gout_Symptom1"
+    },
+    "Gout_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Gout_Symptom2"
+    },
+    "Gout_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Joint Swelling",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Gout_Symptom3"
+    },
+    "Gout_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Joint Redness",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Gout_Symptom4"
+    },
+    "Gout_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
       "direct_transition": "Gout_Diagnosis"
     },
     "Gout_Diagnosis": {
@@ -17210,6 +18028,78 @@ export default {"allergic_rhinitis":{
         "low": 50,
         "high": 100
       },
+      "direct_transition": "Bloody Cough"
+    },
+    "Bloody Cough": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 100,
+        "high": 350
+      },
+      "direct_transition": "Shortness of Breath"
+    },
+    "Shortness of Breath": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 100,
+        "high": 350
+      },
+      "direct_transition": "Fever"
+    },
+    "Fever": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 250
+      },
+      "direct_transition": "Head and neck swelling"
+    },
+    "Head and neck swelling": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 250
+      },
+      "direct_transition": "Fatigue"
+    },
+    "Sweats": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 250
+      },
+      "direct_transition": "Fatigue"
+    },
+    "Fatigue": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 250
+      },
+      "direct_transition": "Decrease in appetite"
+    },
+    "Decrease in appetite": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "Decrease in weight"
+    },
+    "Decrease in weight": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
       "direct_transition": "Chest Pain"
     },
     "Chest Pain": {
@@ -17217,7 +18107,7 @@ export default {"allergic_rhinitis":{
       "symptom": "Chest Pain",
       "range": {
         "low": 50,
-        "high": 100
+        "high": 250
       },
       "direct_transition": "Suspected Lung Cancer"
     },
@@ -18132,6 +19022,42 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
+      "direct_transition": "Lupus_Symptom1"
+    },
+    "Lupus_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Lupus_Symptom2"
+    },
+    "Lupus_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Lupus_Symptom3"
+    },
+    "Lupus_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Rash",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Lupus_Symptom4"
+    },
+    "Lupus_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
       "direct_transition": "Lupus_CarePlan"
     },
     "Lupus_CarePlan": {
@@ -23645,6 +24571,96 @@ export default {"allergic_rhinitis":{
         }
       ]
     },
+    "Opioid_Addiction_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Anxiety",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "Opioid_Addiction_Symptom2"
+    },
+    "Opioid_Addiction_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Confusion",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Opioid_Addiction_Symptom3"
+    },
+    "Opioid_Addiction_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Cognitive Difficulties",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "Opioid_Addiction_Symptom4"
+    },
+    "Opioid_Addiction_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Opioid_Addiction_Symptom5"
+    },
+    "Opioid_Addiction_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Shortness Constipation Breath",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Opioid_Addiction_Symptom6"
+    },
+    "Opioid_Addiction_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Pain Sensitivity",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Opioid_Addiction_Symptom7"
+    },
+    "Opioid_Addiction_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Reduced Sex Drive",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Opioid_Addiction_Symptom8"
+    },
+    "Opioid_Addiction_Symptom8": {
+      "type": "Symptom",
+      "symptom": "Slurred Speech",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "Opioid_Addiction_Symptom9"
+    },
+    "Opioid_Addiction_Symptom9": {
+      "type": "Symptom",
+      "symptom": "Shallow Breathing",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "Opioid_Addiction_Symptom10"
+    },
+    "Opioid_Addiction_Symptom10": {
+      "type": "Symptom",
+      "symptom": "Mood Swing",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Active_Addiction"
+    },
     "Active_Addiction": {
       "type": "Delay",
       "exact": {
@@ -23980,7 +24996,7 @@ export default {"allergic_rhinitis":{
           "distributions": [
             {
               "distribution": 0.113,
-              "transition": "Delay_Until_Arthritis"
+              "transition": "Delay_Until_Symptoms"
             },
             {
               "distribution": 0.887,
@@ -23996,7 +25012,7 @@ export default {"allergic_rhinitis":{
           "distributions": [
             {
               "distribution": 0.2267,
-              "transition": "Delay_Until_Arthritis"
+              "transition": "Delay_Until_Symptoms"
             },
             {
               "distribution": 0.7733,
@@ -24006,12 +25022,57 @@ export default {"allergic_rhinitis":{
         }
       ]
     },
+    "Delay_Until_Symptoms": {
+      "type": "Delay",
+      "range": {
+        "low": 10,
+        "high": 40,
+        "unit": "years"
+      },
+      "direct_transition": "OA_Symptom1"
+    },
+    "OA_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "OA_Symptom2"
+    },
+    "OA_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "Delay_Until_Arthritis"
+    },
     "Delay_Until_Arthritis": {
       "type": "Delay",
       "range": {
-        "low": 25,
-        "high": 80,
+        "low": 15,
+        "high": 40,
         "unit": "years"
+      },
+      "direct_transition": "OA_Symptom1_Advances"
+    },
+    "OA_Symptom1_Advances": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "OA_Symptom2_Advances"
+    },
+    "OA_Symptom2_Advances": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "range": {
+        "low": 0,
+        "high": 50
       },
       "direct_transition": "Osteoarthritis"
     },
@@ -24196,6 +25257,22 @@ export default {"allergic_rhinitis":{
     },
     "End_Encounter": {
       "type": "EncounterEnd",
+      "direct_transition": "OA_Symptom1_Ends"
+    },
+    "OA_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "OA_Symptom2_Ends"
+    },
+    "OA_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Terminal"
     },
     "Terminal": {
@@ -24331,6 +25408,15 @@ export default {"allergic_rhinitis":{
       "type": "SetAttribute",
       "attribute": "osteoporosis",
       "value": true,
+      "direct_transition": "Osteoporosis_Symptom1"
+    },
+    "Osteoporosis_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Decrease in Height",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
       "direct_transition": "Wellness_Encounter"
     },
     "Wellness_Encounter": {
@@ -26734,6 +27820,208 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"primary_atrophic_hypothyroidism":{
+  "name": "Primary atrophic hypothyroidism",
+  "remarks": [
+    "Hypothyroidism is a disorder of the endocrine system in which the thyroid gland does not produce enough thyroid hormone. Diagnosed by lab panel, and treated with synthroid."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Age delay"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Age delay": {
+      "type": "Delay",
+      "range": {
+        "low": 50,
+        "high": 75,
+        "unit": "years"
+      },
+      "remarks": [
+        "common onset of primary atrophic hypothyroidism does not occer till after 50 years of age.",
+        ""
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Cold Symptom",
+              "distribution": 0.048
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.952
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Cold Symptom",
+              "distribution": 0.009
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.991
+            }
+          ]
+        }
+      ]
+    },
+    "Hypothyroid Condition Onset": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Hypothyroidism encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 40930008,
+          "display": "Hypothyroidism (disorder)"
+        }
+      ],
+      "direct_transition": "Hypothyroidism encounter"
+    },
+    "encounter end": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "fT4 panel results": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ng/dl",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "3024-7",
+          "display": "Thyroxine (T4) free [Mass/​volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "TSH panel result",
+      "range": {
+        "low": 0.1,
+        "high": 0.4
+      }
+    },
+    "TSH panel result": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "m[IU]/L",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "3016-3",
+          "display": "Thyrotropin [Units/​volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "Label Panel Results",
+      "range": {
+        "low": 2,
+        "high": 5
+      }
+    },
+    "Synthroid Medication Order": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 966222,
+          "display": "Levothyroxine Sodium 0.075 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "encounter end",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 60,
+          "unit": "days"
+        },
+        "refills": 6
+      }
+    },
+    "Label Panel Results": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 2,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24348-5",
+          "display": "Free T4 and TSH panel - Serum or Plasma"
+        }
+      ],
+      "direct_transition": "Synthroid Medication Order"
+    },
+    "Cold Symptom": {
+      "type": "Symptom",
+      "symptom": "cold intolerance",
+      "cause": "",
+      "direct_transition": "Decreased Appetite",
+      "range": {
+        "low": 1,
+        "high": 20
+      }
+    },
+    "Decreased Appetite": {
+      "type": "Symptom",
+      "symptom": "decreased appetite",
+      "cause": "",
+      "direct_transition": "Weight Gain",
+      "range": {
+        "low": 1,
+        "high": 20
+      }
+    },
+    "Weight Gain": {
+      "type": "Symptom",
+      "symptom": "weight gain",
+      "cause": "",
+      "direct_transition": "Fatigue Symptom",
+      "range": {
+        "low": 1,
+        "high": 20
+      }
+    },
+    "Fatigue Symptom": {
+      "type": "Symptom",
+      "symptom": "fatigue",
+      "cause": "",
+      "direct_transition": "Hypothyroid Condition Onset",
+      "range": {
+        "low": 1,
+        "high": 20
+      }
+    },
+    "Hypothyroidism encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom"
+        }
+      ],
+      "direct_transition": "fT4 panel results"
+    }
+  }
+}
+,
 "rheumatoid_arthritis":{
   "name": "Rheumatoid Arthritis",
   "remarks": [
@@ -26774,6 +28062,51 @@ export default {"allergic_rhinitis":{
         "low": 25,
         "high": 80,
         "unit": "years"
+      },
+      "direct_transition": "RA_Symptom1"
+    },
+    "RA_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "RA_Symptom2"
+    },
+    "RA_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "RA_Symptom3"
+    },
+    "RA_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Joint Swelling",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "RA_Symptom4"
+    },
+    "RA_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 0,
+        "high": 20
+      },
+      "direct_transition": "RA_Symptom5"
+    },
+    "RA_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 20
       },
       "direct_transition": "Rheumatoid_Arthritis"
     },
@@ -27019,6 +28352,46 @@ export default {"allergic_rhinitis":{
     "End_RA_Nonopioid": {
       "type": "MedicationEnd",
       "medication_order": "RA_Nonopioid_Pain_Medication",
+      "direct_transition": "RA_Symptom1_Ends"
+    },
+    "RA_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "RA_Symptom2_Ends"
+    },
+    "RA_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "RA_Symptom3_Ends"
+    },
+    "RA_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Joint Swelling",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "RA_Symptom4_Ends"
+    },
+    "RA_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "RA_Symptom5_Ends"
+    },
+    "RA_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Terminal"
     },
     "Terminal": {
@@ -28262,8 +29635,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Sinus Pain",
       "range": {
-        "low": 40,
-        "high": 60
+        "low": 50,
+        "high": 80
       },
       "direct_transition": "Common_Symptom"
     },
@@ -28284,8 +29657,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Sinus Pain",
       "range": {
-        "low": 20,
-        "high": 80
+        "low": 30,
+        "high": 50
       },
       "direct_transition": "Common_Symptom"
     },
@@ -28293,8 +29666,71 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Nasal Congestion",
       "range": {
-        "low": 60,
-        "high": 90
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Common_Symptom1"
+    },
+    "Common_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 25
+      },
+      "direct_transition": "Common_Symptom2"
+    },
+    "Common_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Headache",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom3"
+    },
+    "Common_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Nasal Discharge",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom4"
+    },
+    "Common_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom5"
+    },
+    "Common_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom6"
+    },
+    "Common_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Facial Swelling",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom7"
+    },
+    "Common_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Pain with Bright Lights",
+      "range": {
+        "low": 25,
+        "high": 50
       },
       "direct_transition": "Wait_to_see_Dr"
     },
@@ -28447,6 +29883,62 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
+      "direct_transition": "Symptom3_Subsides"
+    },
+    "Symptom3_Subsides": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom4_Subsides"
+    },
+    "Symptom4_Subsides": {
+      "type": "Symptom",
+      "symptom": "Headache",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom5_Subsides"
+    },
+    "Symptom5_Subsides": {
+      "type": "Symptom",
+      "symptom": "Nasal Discharge",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom6_Subsides"
+    },
+    "Symptom6_Subsides": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom7_Subsides"
+    },
+    "Symptom7_Subsides": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom8_Subsides"
+    },
+    "Symptom8_Subsides": {
+      "type": "Symptom",
+      "symptom": "Facial Swelling",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom9_Subsides"
+    },
+    "Symptom9_Subsides": {
+      "type": "Symptom",
+      "symptom": "Pain with Bright Lights",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Potential_Onset"
     },
     "Chronic_Sinusitis_Continues": {
@@ -28474,8 +29966,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Sinus Pain",
       "range": {
-        "low": 60,
-        "high": 100
+        "low": 70,
+        "high": 130
       },
       "direct_transition": "Chronic_Sinusitis_Followup"
     },
@@ -28679,8 +30171,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Cough",
       "range": {
-        "low": 40,
-        "high": 100
+        "low": 0,
+        "high": 50
       },
       "direct_transition": "Viral_Symptom_2"
     },
@@ -28689,7 +30181,7 @@ export default {"allergic_rhinitis":{
       "symptom": "Swollen Lymph Nodes",
       "range": {
         "low": 0,
-        "high": 60
+        "high": 50
       },
       "direct_transition": "Viral_Symptom_3"
     },
@@ -28698,7 +30190,70 @@ export default {"allergic_rhinitis":{
       "symptom": "Swollen Tonsils",
       "range": {
         "low": 0,
-        "high": 60
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_1"
+    },
+    "Common_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_2"
+    },
+    "Common_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Difficulty Swallowing",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_3"
+    },
+    "Common_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Runny/Stuffy Nose",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_4"
+    },
+    "Common_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_5"
+    },
+    "Common_Symptom_5": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_6"
+    },
+    "Common_Symptom_6": {
+      "type": "Symptom",
+      "symptom": "Body Aches",
+      "range": {
+        "low": 0,
+        "high": 50
+      },
+      "direct_transition": "Common_Symptom_7"
+    },
+    "Common_Symptom_7": {
+      "type": "Symptom",
+      "symptom": "Decreased Appetite",
+      "range": {
+        "low": 0,
+        "high": 50
       },
       "direct_transition": "Symptoms_dont_resolve"
     },
@@ -28730,8 +30285,8 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Swollen Lymph Nodes",
       "range": {
-        "low": 40,
-        "high": 100
+        "low": 20,
+        "high": 70
       },
       "remarks": [
         "Strep generally presents with swollen lymph nodes"
@@ -28742,10 +30297,10 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Swollen Tonsils",
       "range": {
-        "low": 40,
-        "high": 100
+        "low": 20,
+        "high": 70
       },
-      "direct_transition": "Symptoms_dont_resolve"
+      "direct_transition": "Common_Symptom_1"
     },
     "Symptoms_dont_resolve": {
       "type": "Delay",
@@ -28847,19 +30402,19 @@ export default {"allergic_rhinitis":{
                 "condition_type": "Symptom",
                 "symptom": "Cough",
                 "operator": "<",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Symptom",
                 "symptom": "Swollen Lymph Nodes",
                 "operator": ">",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Symptom",
                 "symptom": "Swollen Tonsils",
                 "operator": ">",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Observation",
@@ -28898,19 +30453,19 @@ export default {"allergic_rhinitis":{
                 "condition_type": "Symptom",
                 "symptom": "Cough",
                 "operator": "<",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Symptom",
                 "symptom": "Swollen Lymph Nodes",
                 "operator": ">",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Symptom",
                 "symptom": "Swollen Tonsils",
                 "operator": ">",
-                "value": 50
+                "value": 30
               },
               {
                 "condition_type": "Observation",
@@ -29061,6 +30616,62 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
+      "direct_transition": "Symptom_4_Ends"
+    },
+    "Symptom_4_Ends": {
+      "type": "Symptom",
+      "symptom": "Difficulty Swallowing",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_5_Ends"
+    },
+    "Symptom_5_Ends": {
+      "type": "Symptom",
+      "symptom": "Sore Throat",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_6_Ends"
+    },
+    "Symptom_6_Ends": {
+      "type": "Symptom",
+      "symptom": "Runny/Stuffy Nose",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_7_Ends"
+    },
+    "Symptom_7_Ends": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_8_Ends"
+    },
+    "Symptom_8_Ends": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_9_Ends"
+    },
+    "Symptom_9_Ends": {
+      "type": "Symptom",
+      "symptom": "Body Aches",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Symptom_10_Ends"
+    },
+    "Symptom_10_Ends": {
+      "type": "Symptom",
+      "symptom": "Decreased Appetite",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "Condition_Resolves"
     },
     "Condition_Resolves": {
@@ -29083,6 +30694,916 @@ export default {"allergic_rhinitis":{
       "type": "MedicationEnd",
       "referenced_by_attribute": "Sore Throat Antibiotic",
       "direct_transition": "Potential_Infection"
+    }
+  }
+}
+,
+"total_joint_replacement/functional_status_assessments":{
+  "name": "Functional Status Assessments",
+  "remarks": [
+    "This is a submodule that includes the possible assessments a patient will go through prior to and following either a total knee replacement or a total hip replacement.\n"
+  ],
+  "states": {
+    "KOOS_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 5,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72091-2",
+          "display": "Knee injury and Osteoarthritis Outcome Score [KOOS]"
+        }
+      ],
+      "direct_transition": "KOOS_Attribute_Set",
+      "remarks": [
+        "Five different subscales are scored separately: KOOS Pain (9 items); KOOS Symptoms (7 items); KOOS ADL (17 items); KOOS Sport/Rec (5 items); KOOS QOL (4 items). Each item has five possible answer options scored from 0 (No Problems) to 4 (Extreme Problems), and the scores are transformed to a 0–100 scale, with zero representing extreme knee problems and 100 representing no knee problems.",
+        "http://www.koos.nu",
+        ""
+      ]
+    },
+    "PROMIS10_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 2,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "61576-5",
+          "display": "PROMIS short form - global - version 1.1"
+        }
+      ],
+      "direct_transition": "PROMIS10_Attribute_Set",
+      "remarks": [
+        "Two different subscales are scored separately: Global Mental Health and Global Physical Health. Each have a score between 4 - 20."
+      ]
+    },
+    "HOOS_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 5,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72092-0",
+          "display": "Hip Dysfunction and Osteoarthritis Outcome Score [HOOS]"
+        }
+      ],
+      "direct_transition": "HOOS_Attribute_Set",
+      "remarks": [
+        "Five different subscales are scored separately: HOOS Pain (9 items); HOOS Symptoms (7 items); HOOS ADL (17 items); HOOS Sport/Rec (5 items); HOOS QOL (4 items). The scores are transformed to a 0–100 scale, with zero representing extreme knee problems and 100 representing no knee problems.",
+        "http://www.koos.nu"
+      ]
+    },
+    "Joint_Replacement_Assessment_Terminal": {
+      "type": "Terminal"
+    },
+    "VR36_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 8,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71933-6",
+          "display": "Veterans Rand health survey - 36 item (VR-36)"
+        }
+      ],
+      "direct_transition": "VR36_Attribute_Set",
+      "remarks": [
+        "Eight different subscales are scored separately: Mental Health, Role Emotion, Social Functioning, Vitality, General Health, Bodily Pain, Role Physical, and Physical Functioning. Each have a score between 4 - 20."
+      ]
+    },
+    "PROMIS29_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 7,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "62337-1",
+          "display": "PROMIS item bank - 29 profile"
+        }
+      ],
+      "direct_transition": "PROMIS29_Attribute_Set",
+      "remarks": [
+        "Seven different subscales are scored separately: Sleep Disturbance, Satisfaction with Participation in Social Roles,",
+        "Physical Function, Pain Interference, Fatigue, Depression, and Anxiety. Each have a score between 4 - 20."
+      ]
+    },
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "Perform_Functional_Status_Assessment_Knee",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "knee"
+          }
+        },
+        {
+          "transition": "Perform_Functional_Status_Assessment_Hip",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "hip"
+          }
+        },
+        {
+          "transition": "Joint_Replacement_Assessment_Terminal"
+        }
+      ]
+    },
+    "Perform_Functional_Status_Assessment_Knee": {
+      "type": "Simple",
+      "remarks": [
+        "Possible assessment options obtained from:",
+        "https://ecqi.healthit.gov/ecqm/measures/cms066v7"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "KOOS_Symptoms",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "KOOS"
+          }
+        },
+        {
+          "transition": "PROMIS10_GPH",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "PROMIS-10"
+          }
+        },
+        {
+          "transition": "VR12_Mental_Health",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "VR-12"
+          }
+        },
+        {
+          "transition": "First_FSA_Knee"
+        }
+      ]
+    },
+    "Perform_Functional_Status_Assessment_Hip": {
+      "type": "Simple",
+      "remarks": [
+        "Possible assessment options obtained from:",
+        "https://ecqi.healthit.gov/ecqm/measures/cms056v5"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "HOOS_Symptoms",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "HOOS"
+          }
+        },
+        {
+          "transition": "PROMIS10_GPH",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "PROMIS-10"
+          }
+        },
+        {
+          "transition": "PROMIS29_Sleep_Disturbance",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "PROMIS-29"
+          }
+        },
+        {
+          "transition": "VR12_Mental_Health",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "VR-12"
+          }
+        },
+        {
+          "transition": "VR36_Mental_Health",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "assessment_done",
+            "operator": "==",
+            "value": "VR-36"
+          }
+        },
+        {
+          "transition": "First_FSA_Hip"
+        }
+      ]
+    },
+    "VR12_Total_Assessment": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 8,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71934-4",
+          "display": "Veterans Rand health survey - 12 item (VR-12)"
+        }
+      ],
+      "direct_transition": "VR12_Attribute_Set",
+      "remarks": [
+        "Eight different subscales are scored separately: Mental Health, Role Emotion, Social Functioning, Vitality, General Health, Bodily Pain, Role Physical, and Physical Functioning. Each have a score between 4 - 20."
+      ]
+    },
+    "KOOS_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "KOOS"
+    },
+    "PROMIS10_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "PROMIS-10"
+    },
+    "PROMIS29_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "PROMIS-29"
+    },
+    "VR12_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "VR-12"
+    },
+    "VR36_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "VR-36"
+    },
+    "HOOS_Attribute_Set": {
+      "type": "SetAttribute",
+      "attribute": "assessment_done",
+      "direct_transition": "FSA_Performed",
+      "value": "HOOS"
+    },
+    "FSA_Performed": {
+      "type": "Simple",
+      "direct_transition": "Joint_Replacement_Assessment_Terminal"
+    },
+    "PROMIS10_GPH": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71972-4",
+          "display": "PROMIS-10 Global Physical Health (GPH) score"
+        }
+      ],
+      "direct_transition": "PROMIS10_GMH",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS10_GMH": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71970-8",
+          "display": "PROMIS-10 Global Mental Health (GMH) score"
+        }
+      ],
+      "direct_transition": "PROMIS10_Total_Assessment",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "KOOS_Symptoms": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72101-9",
+          "display": "Symptoms score [KOOS]"
+        }
+      ],
+      "direct_transition": "KOOS_Pain",
+      "range": {
+        "low": 0,
+        "high": 100
+      }
+    },
+    "KOOS_Pain": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72102-7",
+          "display": "Pain score [KOOS]"
+        }
+      ],
+      "direct_transition": "KOOS_ADL",
+      "range": {
+        "low": 0,
+        "high": 100
+      }
+    },
+    "KOOS_ADL": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72100-1",
+          "display": "Activities of daily living score [KOOS]"
+        }
+      ],
+      "direct_transition": "KOOS_Sport/Recreation",
+      "range": {
+        "low": 0,
+        "high": 100
+      }
+    },
+    "KOOS_Sport/Recreation": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72099-5",
+          "display": "Sport-recreation score [KOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "KOOS_QOL"
+    },
+    "KOOS_QOL": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72098-7",
+          "display": "Quality of life score [KOOS]"
+        }
+      ],
+      "direct_transition": "KOOS_Total_Assessment",
+      "range": {
+        "low": 0,
+        "high": 100
+      }
+    },
+    "HOOS_Symptoms": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72096-1",
+          "display": "Symptoms score [HOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "HOOS_Pain"
+    },
+    "HOOS_Pain": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72097-9",
+          "display": "Pain score [HOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "HOOS_ADL"
+    },
+    "HOOS_ADL": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72095-3",
+          "display": "Activities of daily living score [HOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "HOOS_Sport/Recreation"
+    },
+    "HOOS_Sport/Recreation": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72094-6",
+          "display": "Sport-recreation score [HOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "HOOS_QOL"
+    },
+    "HOOS_QOL": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72093-8",
+          "display": "Quality of life score [HOOS]"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 100
+      },
+      "direct_transition": "HOOS_Total_Assessment"
+    },
+    "VR12_Mental_Health": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72009-4",
+          "display": "VR-12 Mental health (MH) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Role_Emotion",
+      "range": {
+        "low": 2,
+        "high": 12
+      }
+    },
+    "VR12_Role_Emotion": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72010-2",
+          "display": "VR-12 Role emotion (RE) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Social_Functioning",
+      "range": {
+        "low": 2,
+        "high": 10
+      }
+    },
+    "VR12_Social_Functioning": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72011-0",
+          "display": "VR-12 Social functioning (SF) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Vitality",
+      "range": {
+        "low": 1,
+        "high": 5
+      }
+    },
+    "VR12_Vitality": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72012-8",
+          "display": "VR-12 Vitality (VT) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_General_Health",
+      "range": {
+        "low": 1,
+        "high": 6
+      }
+    },
+    "VR12_General_Health": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72013-6",
+          "display": "VR-12 General health (GH) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Bodily_Pain",
+      "range": {
+        "low": 1,
+        "high": 5
+      }
+    },
+    "VR12_Bodily_Pain": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72014-4",
+          "display": "VR-12 Bodily pain (BP) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Role_Physical",
+      "range": {
+        "low": 1,
+        "high": 5
+      }
+    },
+    "VR12_Role_Physical": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72015-1",
+          "display": "VR-12 Role physical (RP) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Physical_Functioning",
+      "range": {
+        "low": 2,
+        "high": 10
+      }
+    },
+    "VR12_Physical_Functioning": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72016-9",
+          "display": "VR-12 Physical functioning (PF) score - oblique method"
+        }
+      ],
+      "direct_transition": "VR12_Total_Assessment",
+      "range": {
+        "low": 2,
+        "high": 6
+      }
+    },
+    "VR36_Mental_Health": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71973-2",
+          "display": "VR-36 Mental health (MH) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 5,
+        "high": 30
+      },
+      "direct_transition": "VR36_Role_Emotion"
+    },
+    "VR36_Role_Emotion": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71974-0",
+          "display": "VR-36 Role emotion (RE) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 3,
+        "high": 15
+      },
+      "direct_transition": "VR36_Social_Functioning"
+    },
+    "VR36_Social_Functioning": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71975-7",
+          "display": "VR-36 Social functioning (SF) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 2,
+        "high": 10
+      },
+      "direct_transition": "VR36_Vitality"
+    },
+    "VR36_Vitality": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71976-5",
+          "display": "VR-36 Vitality (VT) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 24
+      },
+      "direct_transition": "VR36_General_Health"
+    },
+    "VR36_General_Health": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71977-3",
+          "display": "VR-36 General health (GH) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 5,
+        "high": 25
+      },
+      "direct_transition": "VR36_Bodily_Pain"
+    },
+    "VR36_Bodily_Pain": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71978-1",
+          "display": "VR-36 Bodily pain (BP) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 2,
+        "high": 12
+      },
+      "direct_transition": "VR36_Role_Physical"
+    },
+    "VR36_Role_Physical": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71979-9",
+          "display": "VR-36 Role physical (RP) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 20
+      },
+      "direct_transition": "VR36_Physical_Functioning"
+    },
+    "VR36_Physical_Functioning": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71980-7",
+          "display": "VR-36 Physical functioning (PF) score - oblique method"
+        }
+      ],
+      "range": {
+        "low": 10,
+        "high": 30
+      },
+      "direct_transition": "VR36_Total_Assessment"
+    },
+    "PROMIS29_Sleep_Disturbance": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71956-7",
+          "display": "PROMIS-29 Sleep disturbance score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Satisfaction_With_Participation_In_Social_Roles",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS29_Satisfaction_With_Participation_In_Social_Roles": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71958-3",
+          "display": "PROMIS-29 Satisfaction with participation in social roles score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Physical_Function",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS29_Physical_Function": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71960-9",
+          "display": "PROMIS-29 Physical function score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Pain_Interference",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS29_Pain_Interference": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71962-5",
+          "display": "PROMIS-29 Pain interference score"
+        }
+      ],
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "PROMIS29_Fatigue"
+    },
+    "PROMIS29_Fatigue": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71964-1",
+          "display": "PROMIS-29 Fatigue score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Depression",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS29_Depression": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71966-6",
+          "display": "PROMIS-29 Depression score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Anxiety",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "PROMIS29_Anxiety": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "units",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "71968-2",
+          "display": "PROMIS-29 Anxiety score"
+        }
+      ],
+      "direct_transition": "PROMIS29_Total_Assessment",
+      "range": {
+        "low": 4,
+        "high": 20
+      }
+    },
+    "First_FSA_Knee": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "KOOS_Symptoms",
+          "distribution": 0.34
+        },
+        {
+          "transition": "PROMIS10_GPH",
+          "distribution": 0.33
+        },
+        {
+          "transition": "VR12_Mental_Health",
+          "distribution": 0.33
+        }
+      ]
+    },
+    "First_FSA_Hip": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "HOOS_Symptoms",
+          "distribution": 0.2
+        },
+        {
+          "transition": "PROMIS10_GPH",
+          "distribution": 0.2
+        },
+        {
+          "transition": "PROMIS29_Sleep_Disturbance",
+          "distribution": 0.2
+        },
+        {
+          "transition": "VR12_Mental_Health",
+          "distribution": 0.2
+        },
+        {
+          "transition": "VR36_Mental_Health",
+          "distribution": 0.2
+        }
+      ]
     }
   }
 }
@@ -29135,7 +31656,7 @@ export default {"allergic_rhinitis":{
         "high": 12,
         "unit": "months"
       },
-      "direct_transition": "Joint_Replacement_Encounter"
+      "direct_transition": "Pre_Procedure_Encounter"
     },
     "Joint_Replacement_Encounter": {
       "type": "Encounter",
@@ -29248,7 +31769,26 @@ export default {"allergic_rhinitis":{
     "End_Post_Op_CarePlan": {
       "type": "CarePlanEnd",
       "careplan": "Post_Op_CarePlan",
-      "direct_transition": "Delay_Until_New_Replacement_Needed"
+      "conditional_transition": [
+        {
+          "transition": "Delay_For_Post_Assessment_Knee",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "knee"
+          }
+        },
+        {
+          "transition": "Delay_For_Post_Assessment_Hip",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "hip"
+          }
+        }
+      ]
     },
     "Delay_Until_New_Replacement_Needed": {
       "type": "Delay",
@@ -29274,6 +31814,116 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Delay_After_Assessments": {
+      "type": "Delay",
+      "direct_transition": "Joint_Replacement_Encounter",
+      "range": {
+        "low": 0,
+        "high": 90,
+        "unit": "days"
+      }
+    },
+    "Delay_After_Assessments_2": {
+      "type": "Delay",
+      "direct_transition": "Joint_Replacement_Encounter",
+      "range": {
+        "low": 0,
+        "high": 180,
+        "unit": "days"
+      }
+    },
+    "Pre_Procedure_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185349003,
+          "display": "Encounter for check up (procedure)"
+        }
+      ],
+      "direct_transition": "Functional_Status_Assessments"
+    },
+    "Pre_Procedure_Encounter_End": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Delay_After_Assessments",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "knee"
+          }
+        },
+        {
+          "transition": "Delay_After_Assessments_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "joint_replacement",
+            "operator": "==",
+            "value": "hip"
+          }
+        }
+      ]
+    },
+    "Functional_Status_Assessments": {
+      "type": "CallSubmodule",
+      "submodule": "total_joint_replacement/functional_status_assessments",
+      "direct_transition": "Pre_Procedure_Encounter_End"
+    },
+    "Post_Procedure_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185389009,
+          "display": "Follow-up visit (procedure)"
+        }
+      ],
+      "direct_transition": "Functional_Status_Assessments_2"
+    },
+    "Delay_For_Post_Assessment_Hip": {
+      "type": "Delay",
+      "direct_transition": "Post_Procedure_Encounter",
+      "range": {
+        "low": 30,
+        "high": 150,
+        "unit": "days"
+      },
+      "remarks": [
+        "Obtained from:",
+        "https://ecqi.healthit.gov/system/files/ecqm/measures/CMS56v5_2.html",
+        "1 month recovery subtracted from overall delay time"
+      ]
+    },
+    "Delay_For_Post_Assessment_Knee": {
+      "type": "Delay",
+      "direct_transition": "Post_Procedure_Encounter",
+      "range": {
+        "low": 240,
+        "high": 335,
+        "unit": "days"
+      },
+      "remarks": [
+        "Obtained from:",
+        "https://ecqi.healthit.gov/ecqm/measures/cms066v7",
+        "1 month recovery time subtracted from overall delay time",
+        ""
+      ]
+    },
+    "Functional_Status_Assessments_2": {
+      "type": "CallSubmodule",
+      "submodule": "total_joint_replacement/functional_status_assessments",
+      "direct_transition": "Post_Procedure_Encounter_End"
+    },
+    "Post_Procedure_Encounter_End": {
+      "type": "EncounterEnd",
+      "direct_transition": "Delay_Until_New_Replacement_Needed"
     }
   }
 }
@@ -29453,6 +32103,78 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for symptom"
         }
       ],
+      "direct_transition": "UTI_Symptom1"
+    },
+    "UTI_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Dysuria",
+      "range": {
+        "low": 5,
+        "high": 25
+      },
+      "direct_transition": "UTI_Symptom2"
+    },
+    "UTI_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Urgent Desire to Urinate",
+      "range": {
+        "low": 5,
+        "high": 25
+      },
+      "direct_transition": "UTI_Symptom3"
+    },
+    "UTI_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "range": {
+        "low": 5,
+        "high": 25
+      },
+      "direct_transition": "UTI_Symptom4"
+    },
+    "UTI_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Discolored Urine",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "UTI_Symptom5"
+    },
+    "UTI_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Odor of Urine",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "UTI_Symptom6"
+    },
+    "UTI_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Pelvic Pain",
+      "range": {
+        "low": 0,
+        "high": 15
+      },
+      "direct_transition": "UTI_Symptom7"
+    },
+    "UTI_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "range": {
+        "low": 0,
+        "high": 10
+      },
+      "direct_transition": "Symptom_Period"
+    },
+    "Symptom_Period": {
+      "type": "Delay",
+      "range": {
+        "low": 24,
+        "high": 48,
+        "unit": "days"
+      },
       "direct_transition": "Prescribe_UTI_Antibiotic"
     },
     "Prescribe_UTI_Antibiotic": {
@@ -29587,6 +32309,62 @@ export default {"allergic_rhinitis":{
     "End_Urinary_Tract_Infection": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "uti",
+      "direct_transition": "UTI_Symptom1_Ends"
+    },
+    "UTI_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Dysuria",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom2_Ends"
+    },
+    "UTI_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Urgent Desire to Urinate",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom3_Ends"
+    },
+    "UTI_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom4_Ends"
+    },
+    "UTI_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Discolored Urine",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom5_Ends"
+    },
+    "UTI_Symptom5_Ends": {
+      "type": "Symptom",
+      "symptom": "Odor of Urine",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom6_Ends"
+    },
+    "UTI_Symptom6_Ends": {
+      "type": "Symptom",
+      "symptom": "Pelvic Pain",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "UTI_Symptom7_Ends"
+    },
+    "UTI_Symptom7_Ends": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "exact": {
+        "quantity": 0
+      },
       "direct_transition": "End_OTC_Painkiller"
     },
     "End_OTC_Painkiller": {

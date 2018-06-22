@@ -84,8 +84,8 @@ class LoadModule extends Component {
       case 'core':
         return (
           <ul className='LoadModule-list'>
-            { Object.keys(this.props.modules).filter(n => (n.indexOf('/') === -1)).map( (key, index) => {
-              let module = this.props.modules[key]
+            { Object.keys(this.props.library).filter(n => (n.indexOf('/') === -1)).map( (key, index) => {
+              let module = this.props.library[key]
               return (
                 <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name}</button></li>
               )
@@ -96,14 +96,27 @@ class LoadModule extends Component {
       case 'submodules':
         return (
           <ul className='LoadModule-list'>
-            { Object.keys(this.props.modules).filter(n => (n.indexOf('/') > -1)).map( (key, index) => {
-              let module = this.props.modules[key]
+            { Object.keys(this.props.library).filter(n => (n.indexOf('/') > -1)).map( (key, index) => {
+              let module = this.props.library[key]
               return (
                 <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{key.split('/')[0] + ': ' + module.name}</button></li>
               )
             })}
           </ul>
         )
+
+      case 'my':
+        return (
+          <ul className='LoadModule-list'>
+            { Object.keys(this.props.modules).map( (key, index) => {
+              let module = this.props.modules[key]
+              return (
+                <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name} ({key})</button></li>
+              )
+            })}
+          </ul>
+        )
+
 
       case 'json':
         return (
@@ -113,6 +126,16 @@ class LoadModule extends Component {
         return;
 
     }
+  }
+
+  renderWelcomeMessage = () => {
+    if(this.props.welcome){
+      return (<div>
+        Welcome to Synthea Module Builder.  Please visit the documentation first.
+        </div>)
+    }
+
+    return <div />
   }
 
   render() {
@@ -130,8 +153,8 @@ class LoadModule extends Component {
           <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Load Module</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.props.onHide}>
+                <h5 className="modal-title">{(!this.props.welcome ? 'Load Module' : 'Synthea Module Builder')}</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.props.onHide} style={{display: (this.props.welcome ? 'none' : '')}}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -145,6 +168,7 @@ class LoadModule extends Component {
                       <ul className='LoadModule-options'>
                          <li className={(this.state.selectedOption === 'core') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('core')}>Core Modules</button></li>
                          <li className={(this.state.selectedOption === 'submodules') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('submodules')}>Submodules</button></li>
+                         {Object.keys(this.props.modules).length > 0 ? <li className={(this.state.selectedOption === 'my') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('my')}>My Modules</button></li> : ''}
                          <li className={(this.state.selectedOption === 'json') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('json')}>Paste JSON</button></li>
                       </ul>
                     </div>
@@ -154,7 +178,7 @@ class LoadModule extends Component {
                   </div>
                 </div>
               </div>
-              <div className="modal-footer">
+              <div className="modal-footer" style={{display: (this.props.welcome ? 'none' : '')}}>
 
                 {this.renderLoadButton()}
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.props.onHide}>Close</button>

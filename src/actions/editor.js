@@ -1,14 +1,14 @@
-export const selectNode = (key) => {
+export const selectNode = (key, transitionIndex) => {
   return ({
     type: 'SELECT_NODE',
-    data: key
+    data: {key, transitionIndex}
   })
 }
 
-export const addNode = (currentModuleKey, stateKey, state) => {
+export const addNode = (currentModuleKey, stateKey, state, selectedState, selectedStateTransition) => {
   return ({
     type: 'ADD_NODE',
-    data: {currentModuleKey, stateKey, state}
+    data: {currentModuleKey, stateKey, state, selectedState, selectedStateTransition}
   })
 }
 
@@ -72,13 +72,6 @@ export const newModule = (key, module) => {
   })
 }
 
-export const bulkLoadModules = (modules) => {
-  return ({
-    type: 'BULK_LOAD_MODULES',
-    data: modules
-  })
-}
-
 export const showLoadModule = () => {
   return ({
     type: 'SHOW_LOAD_MODULE'
@@ -130,6 +123,15 @@ export const changeStateType = (targetModuleKey, targetNode, newType) => {
       targetModuleKey,
       targetNode,
       newType
+    }
+  })
+}
+
+export const changeModulePanel = (targetPanel) => {
+  return ({
+    type: 'CHANGE_MODULE_PANEL',
+    data:{
+      targetPanel
     }
   })
 }

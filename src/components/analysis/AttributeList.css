@@ -1,0 +1,30 @@
+.AttributeList {
+  font-size: .75em;
+}
+
+.AttributeList table {
+  border-top: 2px solid #ccc;
+}
+
+.AttributeList input {
+  margin: 5px 0 10px;
+  width: 470px;
+  font-size: .9rem;
+}
+
+.AttributeList .search-clear {
+    position: absolute;
+    right: 8px;
+    top: 0;
+    bottom: 0;
+    height: 16px;
+    margin: auto;
+    cursor: pointer;
+    opacity: .5;
+}
+
+.AttributeList-header {
+  font-size: 1.25rem;
+  padding: 5px 0 0;
+
+}

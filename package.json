@@ -23,6 +23,7 @@
     "react-scripts": "1.0.17",
     "react-tooltip": "^3.4.0",
     "redux": "^3.7.2",
+    "redux-thunk": "^2.3.0",
     "svg-pan-zoom": "^3.5.3",
     "uuid-js": "^0.7.5",
     "viz.js": "^1.8.0"

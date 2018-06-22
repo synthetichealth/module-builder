@@ -1,19 +1,296 @@
+.synthea-logo {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
 .Editor-main {
 }
 
+.Editor-loading-logo{
+
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+  opacity: .3;
+}
+
+.Editor .navbar-brand.Editor-title {
+  font-size: 1.5rem;
+}
+
+
+.Editor .navbar {
+  background-color: #54544e;
+  border-bottom: 10px solid #22425e;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+-moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+z-index: 500;
+}
+
+.Editor-fullscreen-name {
+  position: absolute;
+  top: 75px;
+  left: 65px;
+  font-size: 1.25em;
+  text-shadow: 5px 5px 8px rgba(0,0,0,0.23);
+  background-color: inherit;
+  z-index: 200;
+  border: 0;
+  padding: 0;
+}
+
+.Editor-fullscreen-name:focus {
+  outline: 0;
+}
+
+.Editor-left {
+  background-color: #efefef;
+  width: 50px;
+  position: fixed;
+  height: 100%;
+  top: 70px;
+  left: 0px;
+  z-index: 1000;
+}
+
+.Editor-left ul{
+  padding: 0;
+}
+
+.Editor-left li{
+  list-style: none;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
+  text-align:center;
+  background-color: #d8d7d5;
+}
+
+.Editor-left .Editor-left-spacer {
+  background-color: #efefef;
+  height: 10px;
+  border-bottom: 2px solid #999;
+}
+
+.Editor-left button {
+  width: 50px;
+  height: 50px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color:#d8d7d5;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
+}
+
+.Editor-left button:focus {
+  outline: 0;
+}
+
+.Editor-left li.Editor-left-selected button {
+  border-right: 0px;
+  background-color: #fff;
+}
+
+.Editor-left li.Editor-left-selected button:hover {
+  background-color: #fff;
+}
+
+.Editor-left li.Editor-left-disabled button {
+  opacity: .1;
+}
+
+.Editor-left li button:hover {
+  background-color: #ccc;
+}
+
+.Editor-left-fullscreen img{
+  width: 30px;
+}
+
+.Editor-left .Editor-left-fullscreen{
+  border: 0;
+}
+
+.Editor-left-fullscreen img {
+  margin-top: -10px;
+}
+
+.Editor-left .Editor-left-fullscreen button{
+  border-right: 0px;
+  background-color: #22425e;
+  height: 40px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 50px;
+}
+
+.Editor-left .Editor-left-fullscreen button:hover{
+  background-color: #22425e;
+}
+
+.Editor-left .Editor-left-fullscreen-active{
+  animation-name: rotateto;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+
+.Editor-left .Editor-left-fullscreen-inactive{
+  animation-name: rotateback;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+
+@keyframes rotateto {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotateback {
+  from {
+    transform: rotate(180deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Editor .Editor-module-name {
+  
+  /* width: 500px; */
+  /* height: 100px; */
+  /* position: fixed; */
+  /* top: 100px; */
+  /* left: 0px; */
+  /* z-index: 300; */
+
+
+  /* margin-top: 60px; */
+  background-color: #22425e;
+  color: #eee;
+  font-size: 1.25rem;
+  padding: 2px 0 8px 10px;
+  /* padding-left: 55px; */
+}
+
+.Editor .Editor-module-name input {
+  font-size: 1rem;
+  width: 480px;
+}
+
 .Editor-panel {
+  background-color: #fff;
   position:fixed;
-  height: 90%;
-  overflow: hidden;
+  height: 100%;
   top: 0;
-  left: 0;
+  left: 50px;
   width: 500px;
-  z-index: 100;
-  margin: 70px 20px 200px 10px;
-  padding: 15px;
-  border: 1px solid #aaa;
-  border-radius: 5px;
+  z-index: 900;
+  margin: 70px 20px 200px 0;
+  padding: 0;
+
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+}
+
+@keyframes slideout {
+  from {
+    left: 50px;
+  }
+
+  to {
+    left: -450px;
+  }
+}
+
+@keyframes slidein {
+  from {
+    left: -450px;
+  }
+
+  to {
+    left: 50px;
+  }
+}
+
+.Editor-panel.Editor-panel-hidden {
+  animation-name: slideout;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+
+.Editor-panel.Editor-panel-show {
+  animation-name: slidein;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+
+.Editor-panel-content {
+  padding-left: 15px;
+  width: 500px;
+  padding-right: 15px;
+  position: absolute;
+  height: 100%;
   overflow-y: scroll;
+  top: -100px;
+  margin-top: 140px;
+}
+
+.Editor-graph-buttons {
+  position: fixed;
+  top: 80px;
+  right: 5px;
+  z-index: 1000;
+}
+
+.Editor-graph-buttons button.disabled {
+  opacity: .5;
+}
+
+.Editor-graph-buttons button {
+    border: none;
+    margin: 0 10px;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+
+    background: transparent;
+
+    /* inherit font & color from ancestor */
+    color: inherit;
+    font: inherit;
+
+    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+    line-height: normal;
+
+    /* Corrects font smoothing for webkit */
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+
+    /* Corrects inability to style clickable `input` types in iOS */
+    -webkit-appearance: none;
+
+    text-shadow: 5px 5px 8px rgba(0,0,0,0.23);
+    color: #22425e;
+    font-size: 1.25rem;
+}
+
+.Editor-graph-buttons button:focus {
+  outline: none;
 }
 
 .nav-action-button {
