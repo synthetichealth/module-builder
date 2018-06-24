@@ -19,13 +19,6 @@ export default (state = initialState, action) => {
 
   let newState = {...state}
 
-  if(['COPY_NODE', 'ADD_NODE', 'INSERT_NODE', 'ADD_STRUCTURE',
-      'EDIT_NODE', 'ADD_TRANSITION', 'RENAME_NODE', 'EDIT_MODULE_NAME',
-      'EDIT_MODULE_REMARKS', 'CHANGE_STATE_TYPE'].includes(action.type)){
-    // DESCTRUCTIVE EDITS
-    
-  }
-
   switch (action.type) {
     case 'SELECT_NODE':
       let selectedModulePanel = state.selectedModulePanel;
@@ -41,7 +34,9 @@ export default (state = initialState, action) => {
 
       newState = { ...newState, selectedModulePanel, selectedStateKey: action.data.key, selectedStateTransition: action.data.transitionIndex};
 
-      saveHistory(newState);
+      // special case where we just want to reflect the selection change in the current history
+      newState.history = [...newState.history]
+      newState.history[0] = {...newState.history[0], selectedStateKey: action.data.key, selectedStateTransition: action.data.transitionIndex};
 
       return newState;
 
