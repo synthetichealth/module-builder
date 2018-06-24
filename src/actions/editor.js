@@ -135,3 +135,15 @@ export const changeModulePanel = (targetPanel) => {
     }
   })
 }
+
+export const undo = () => {
+  return ({
+    type: 'UNDO'
+  })
+}
+
+export const redo = () => {
+  return ({
+    type: 'REDO'
+  })
+}
