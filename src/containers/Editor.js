@@ -54,6 +54,8 @@ import {selectNode,
         changeStateType,
         editModuleName,
         editModuleRemarks,
+        undo,
+        redo,
         changeModulePanel} from '../actions/editor';
 
 import {loadLibrary} from '../actions/library';
@@ -167,6 +169,23 @@ class Editor extends Component {
     }
     return <div/>
   }
+
+  renderUndoButton = () => {
+    let className = '';
+    if(!this.props.undoEnabled){
+      className='disabled'
+    }
+    return <button className={className} data-tip='Undo' onClick={() => this.props.undo()}> Undo</button>
+  }
+
+  renderRedoButton = () => {
+    let className = '';
+    if(!this.props.redoEnabled){
+      className='disabled'
+    }
+    return <button className={className} data-tip='Redo' onClick={() => this.props.redo()}> Redo</button>
+  }
+
 
   renderStateEditor = () => {
     if(this.props.module){
@@ -349,9 +368,12 @@ class Editor extends Component {
          <div className='Editor-graph-buttons'>
             {this.renderAddStateButton()}
             {this.renderInsertStateButton()}
-            {/*<button className='btn btn-secondary nav-action-button' onClick={() => this.props.addStructure(this.props.selectedModuleKey, 'CheckYearly')}> Add Structure </button> */}
-        { /* <button className='disabled' data-tip='Structures are not yet available' onClick={() => null}> Add Structure </button> */ }
+            {this.renderUndoButton()}
+            {this.renderRedoButton()}
 
+         </div>
+
+         <div className='UndoRedoButtons'>
          </div>
 
         {this.renderModuleGraph()}
@@ -393,10 +415,6 @@ class Editor extends Component {
           allowClicksThruHole={false}
           keyboardNavigation={true}
         />
-
-
-
-
       </div>
     )
   }
@@ -417,6 +435,9 @@ const mapStateToProps = state => {
   let moduleStates = selectedModuleKey && extractStates(module);
   let moduleState =  moduleStates && moduleStates.find(s => (s.name === state.editor.selectedStateKey))
 
+  let undoEnabled = state.editor.historyIndex < state.editor.history.length - 1;
+  let redoEnabled = state.editor.historyIndex > 0;
+
   return {
     module,
     modules: state.editor.modules,
@@ -429,7 +450,9 @@ const mapStateToProps = state => {
     loadModuleVisible: loadModuleVisible,
     downloadVisible: state.editor.downloadVisible,
     selectedModulePanel: state.editor.selectedModulePanel,
-    modulePanelVisible: state.editor.modulePanelVisible
+    modulePanelVisible: state.editor.modulePanelVisible,
+    undoEnabled,
+    redoEnabled
   }
 }
 
@@ -451,6 +474,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   editModuleName,
   editModuleRemarks,
   changeModulePanel,
+  undo,
+  redo,
   push
 }, dispatch)
 

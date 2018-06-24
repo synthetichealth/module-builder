@@ -19,16 +19,6 @@ export default (state = initialState, action) => {
 
   let newState = {...state}
 
-  if(['COPY_NODE', 'ADD_NODE', 'INSERT_NODE', 'ADD_STRUCTURE',
-      'EDIT_NODE', 'ADD_TRANSITION', 'RENAME_NODE', 'EDIT_MODULE_NAME',
-      'EDIT_MODULE_REMARKS', 'CHANGE_STATE_TYPE'].includes(action.type)){
-    // DESCTRUCTIVE EDITS
-    
-      newState.history = [_.cloneDeep(newState.modules[newState.selectedModuleKey])].concat(newState.history);
-
-    
-  }
-
   switch (action.type) {
     case 'SELECT_NODE':
       let selectedModulePanel = state.selectedModulePanel;
@@ -42,7 +32,13 @@ export default (state = initialState, action) => {
         }
       }
 
-      return { ...newState, selectedModulePanel, selectedStateKey: action.data.key, selectedStateTransition: action.data.transitionIndex};
+      newState = { ...newState, selectedModulePanel, selectedStateKey: action.data.key, selectedStateTransition: action.data.transitionIndex};
+
+      // special case where we just want to reflect the selection change in the current history
+      newState.history = [...newState.history]
+      newState.history[0] = {...newState.history[0], selectedStateKey: action.data.key, selectedStateTransition: action.data.transitionIndex};
+
+      return newState;
 
     case 'COPY_NODE':
       let newStateName = action.data.newName;
@@ -57,6 +53,9 @@ export default (state = initialState, action) => {
       newState.modules[action.data.targetModuleKey] = newModuleCopy
       newState.selectedStateKey = action.data.newName;
       newState.selectedStateTransition = null;
+
+      saveHistory(newState);
+
       return newState
 
     case 'ADD_NODE':
@@ -97,7 +96,6 @@ export default (state = initialState, action) => {
           let transitionIndex = 0;
           let rightNode = null;
           alteredState.complex_transition.forEach( (t, i) => {
-            console.log('looping through now');
 
             if(t.transition !== undefined){
               let nodes = t.transition;
@@ -108,14 +106,12 @@ export default (state = initialState, action) => {
                   let oldTransitionPoint = t.transition;
                   t.transition = action.data.stateKey;
                   newState.modules[action.data.currentModuleKey].states[action.data.stateKey].direct_transition = oldTransitionPoint;
-                    console.log('hita!' + transitionIndex + ' ' + rightNode);
                 }
                 transitionIndex++;
               } else if(nodes === rightNode){
                 let oldTransitionPoint = t.transition;
                 t.transition = action.data.stateKey;
                 newState.modules[action.data.currentModuleKey].states[action.data.stateKey].direct_transition = oldTransitionPoint;
-                console.log('hitb!' + transitionIndex + ' ' + rightNode);
               }
             } else {
               t.distributions.forEach( dist => {
@@ -127,14 +123,12 @@ export default (state = initialState, action) => {
                     let oldTransitionPoint = dist.transition;
                     dist.transition = action.data.stateKey;
                     newState.modules[action.data.currentModuleKey].states[action.data.stateKey].direct_transition = oldTransitionPoint;
-                    console.log('hitc!' + transitionIndex + ' ' + rightNode);
                   }
                   transitionIndex++;
                 } else if(nodes == rightNode){
                   let oldTransitionPoint = dist.transition;
                   dist.transition = action.data.stateKey;
                   newState.modules[action.data.currentModuleKey].states[action.data.stateKey].direct_transition = oldTransitionPoint;
-                  console.log('hitd!' + transitionIndex + ' ' + rightNode);
                 }
               })
             }
@@ -142,6 +136,9 @@ export default (state = initialState, action) => {
           newState.modules[action.data.currentModuleKey].states[action.data.selectedState] = alteredState;
         }
       }
+
+      saveHistory(newState);
+
       return newState;
 
     case 'INSERT_NODE':
@@ -152,12 +149,18 @@ export default (state = initialState, action) => {
       newState.selectedStateKey = action.data.stateKey;
       newState.selectedModulePanel= 'state';
       newState.selectedStateTransition = null;
-      return newState;
+
+      saveHistory(newState);
+
+      return {...newState};
 
     case 'ADD_STRUCTURE':
       newState.modules[action.data.currentModuleKey].states = {...newState.modules[action.data.currentModuleKey].states, ...getTemplate(`Structure.${action.data.structureName}`)};
       newState.selectedStateTransition = null;
-      return newState
+
+      saveHistory(newState);
+
+      return {...newState}
 
     case 'OPEN_MODULE':
       let selectedModuleKey = state.selectedModuleKey;
@@ -168,11 +171,26 @@ export default (state = initialState, action) => {
         newState.modules[action.data.key] = _.cloneDeep(action.data.libraryModule)
       }
 
-      return { ...newState, selectedModuleKey, selectedStateKey: null, selectedStateTransition: null, loadModuleVisible: false, selectedModulePanel: 'info'};
+      newState.history = [];
+      newState.historyIndex = 0;
+      saveHistory(newState);
+
+      return { ...newState, 
+               selectedModuleKey,
+               selectedStateKey: null,
+               selectedStateTransition: null,
+               loadModuleVisible: false,
+               selectedModulePanel: 'info',
+              };
 
     case 'NEW_MODULE':
       let newModules = {...state.modules}
       newModules[action.data.key] = action.data.module;
+
+      newState.history = [];
+      newState.historyIndex = 0;
+      saveHistory(newState);
+
       return {...newState, modules: {...newModules}, selectedStateKey: null, selectedStateTransition: null, selectedModuleKey: action.data.key}
 
     case 'EDIT_NODE':
@@ -226,6 +244,8 @@ export default (state = initialState, action) => {
         }
 
       }
+
+      saveHistory(newState);
 
       return newState
 
@@ -281,6 +301,8 @@ export default (state = initialState, action) => {
         }
       }
 
+      saveHistory(newState);
+
       return newState
 
     case 'RENAME_NODE':
@@ -311,14 +333,23 @@ export default (state = initialState, action) => {
       fixStateReferences(newModule, stateName, newName);
       newState.modules[action.data.targetModuleKey] = newModule;
       newState.selectedStateKey = action.data.newName.name;
+
+      saveHistory(newState);
+
       return newState
 
     case 'EDIT_MODULE_NAME':
       newState.modules[action.data.targetModuleKey].name = action.data.newName;
+
+      saveHistory(newState);
+
       return newState;
 
     case 'EDIT_MODULE_REMARKS':
       newState.modules[action.data.targetModuleKey].remarks = [action.data.newRemarks]; // Need to split into rows for readability
+
+      saveHistory(newState);
+
       return newState;
 
     case 'CHANGE_STATE_TYPE':
@@ -330,9 +361,17 @@ export default (state = initialState, action) => {
           ..._.pick(newState.modules[action.data.targetModuleKey].states[action.data.targetNode.name], ['direct_transition', 'conditional_transition', 'distributed_transition', 'complex_transition', 'remarks']),
           type: getTemplate(`State.${newType}`).type
         };
+
+      saveHistory(newState);
+
       return newState
 
     case 'LOAD_JSON':
+
+      newState.history = []
+      newState.historyIndex = 0;
+      saveHistory(newState);
+
       return { ...newState, selectedModuleKey: action.data.selectedModuleKey, selectedStateTransition: null};
 
     case 'SHOW_LOAD_MODULE':
@@ -349,6 +388,26 @@ export default (state = initialState, action) => {
 
     case 'CHANGE_MODULE_PANEL':
       return { ...newState, selectedModulePanel: action.data.targetPanel, modulePanelVisible: action.data.targetPanel !== 'hide'};
+
+    case 'UNDO':
+      if(newState.history.length > newState.historyIndex + 1){
+        newState.historyIndex++;
+        newState.modules = {...newState.modules}
+        newState.modules[newState.selectedModuleKey] = _.cloneDeep(newState.history[newState.historyIndex].module);
+        newState.selectedStateKey = newState.history[newState.historyIndex].selectedStateKey;
+        newState.selectedStateTransition = newState.history[newState.historyIndex].selectedStateTransition;
+      }
+      return {...newState}
+
+    case 'REDO':
+      if(newState.historyIndex > 0){
+        newState.historyIndex--;
+        newState.modules = {...newState.modules}
+        newState.modules[newState.selectedModuleKey] = _.cloneDeep(newState.history[newState.historyIndex].module);
+        newState.selectedStateKey = newState.history[newState.historyIndex].selectedStateKey;
+        newState.selectedStateTransition = newState.history[newState.historyIndex].selectedStateTransition;
+      }
+      return {...newState}
 
     default:
       return newState;
@@ -479,6 +538,25 @@ const fixStateReferences = (module, stateName, newName) => {
       }
     }
   });
+}
+
+const saveHistory = (state) => {
+  let selectedStateKey = state.selectedStateKey;
+  let selectedStateTransition = state.selectedStateTransition;
+
+  if(state.historyIndex > 0){
+    while(state.historyIndex > 0 && state.history.length > 0){
+      state.historyIndex--;
+      state.history.shift()
+    }
+
+    state.historyIndex = 0; // should always be 0 anyhow
+
+  }
+
+  state.history = [{selectedStateKey, selectedStateTransition, module: _.cloneDeep(state.modules[state.selectedModuleKey])}].concat(state.history);
+
+  state.history.splice(20) // only save the last 20 changes
 }
 
 // When nodes are cloned, loopback transitions point to node being cloned, instead of new copy
