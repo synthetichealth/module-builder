@@ -86,6 +86,7 @@ z-index: 500;
   background-color:#d8d7d5;
   border-bottom: 1px solid #999;
   border-right: 1px solid #999;
+  position: relative;
 }
 
 .Editor-left button:focus {
@@ -107,6 +108,17 @@ z-index: 500;
 
 .Editor-left li button:hover {
   background-color: #ccc;
+}
+
+.Editor-left button .Editor-button-count{
+  bottom: 4px;
+  position: absolute;
+  background-color: #b40707;
+  padding: 1px 5px;
+  border-radius: 10px;
+  font-size: .5em;
+  color: white;
+  right: 2px;
 }
 
 .Editor-left-fullscreen img{
