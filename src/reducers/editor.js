@@ -171,17 +171,16 @@ export default (state = initialState, action) => {
         newState.modules[action.data.key] = _.cloneDeep(action.data.libraryModule)
       }
 
+      newState.selectedModuleKey = selectedModuleKey;
+      newState.selectedStateKey = null;
+      newState.selectStateTransition = null;
+      newState.loadModuleVisible = false;
       newState.history = [];
       newState.historyIndex = 0;
+
       saveHistory(newState);
 
-      return { ...newState, 
-               selectedModuleKey,
-               selectedStateKey: null,
-               selectedStateTransition: null,
-               loadModuleVisible: false,
-               selectedModulePanel: 'info',
-              };
+      return { ...newState };
 
     case 'NEW_MODULE':
       let newModules = {...state.modules}
