@@ -70,12 +70,21 @@ class LoadModule extends Component {
     this.setState({...this.state, json: event.target.value})
   }
 
-  renderLoadButton = () => {
+  renderFooter = () => {
+    let loadButton = <span/>
     if(this.state.selectedOption === 'json'){
-      return (
-        <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onLoadJSON}>Load</button>
-      )
+        loadButton = <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onLoadJSON}>Load</button>
     }
+    let closeButton = <span/>
+    if(!this.props.welcome){
+      closeButton = <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.props.onHide}>Close</button>
+    }
+
+    return <div className="modal-footer" style={{height: 69}}>
+      {loadButton}
+      {closeButton}
+    </div>
+
   }
 
   renderDetails = () => {
@@ -178,11 +187,7 @@ class LoadModule extends Component {
                   </div>
                 </div>
               </div>
-              <div className="modal-footer" style={{display: (this.props.welcome ? 'none' : '')}}>
-
-                {this.renderLoadButton()}
-                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.props.onHide}>Close</button>
-              </div>
+              {this.renderFooter()}
             </div>
           </div>
         </div>
