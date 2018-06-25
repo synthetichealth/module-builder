@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
     case 'SELECT_NODE':
       let selectedModulePanel = state.selectedModulePanel;
       if(action.data.key){
-        if(selectedModulePanel === 'info'){
+        if(selectedModulePanel === 'info' || state.selectedStateKey === action.data.key){ // if on info or a 'double click'
           selectedModulePanel = 'state';
         }
       } else {
