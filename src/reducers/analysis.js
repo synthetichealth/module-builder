@@ -134,25 +134,6 @@ export default (state = initialState, action) => {
       });
       return newState
 
-    case 'NEW_MODULE':
-      newState = {...state}
-      newState.moduleCodes = {...newState.moduleCodes}
-
-
-      Object.keys(action.data.module.states).forEach(stateName => {
-        const state = action.data.module.states[stateName];
-        state.codes && state.codes.forEach(code => {
-          if(!newState.moduleCodes[code.code]){
-            newState.moduleCodes[code.code] = []
-          } else {
-            newState.moduleCodes[code.code] = [...newState.moduleCodes]
-          }
-          newState.moduleCodes[code.code].push({...code, module: action.data.key, state: state.name});
-        });
-      });
-
-      return newState
-
     default:
       return state;
   }
