@@ -3,7 +3,11 @@ import {analyze} from  './analysis';
 const dispatchThenAnalyze = (action) => {
   return (dispatch, getState) => {
     dispatch(action);
-    dispatch(analyze(getState().editor.modules[getState().editor.selectedModuleKey]));
+    let moduleKey = getState().editor.selectedModuleKey;
+    let module = getState().editor.modules[moduleKey];
+    if(module){
+      dispatch(analyze(moduleKey, module));
+    }
   }
 }
 

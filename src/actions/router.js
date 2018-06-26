@@ -10,7 +10,7 @@ export const openModule = (key) => {
 
     dispatch(action);
     if(getState().editor.modules[key]){
-      dispatch(analyze(getState().editor.modules[key]));
+      dispatch(analyze(key, getState().editor.modules[key]));
     }
   }
 }
