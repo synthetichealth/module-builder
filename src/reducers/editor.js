@@ -192,6 +192,12 @@ export default (state = initialState, action) => {
 
       return {...newState, modules: {...newModules}, selectedStateKey: null, selectedStateTransition: null, selectedModuleKey: action.data.key}
 
+    case 'JSON_EDIT':
+      newState.modules = {...newState.modules}
+      newState.modules[state.selectedModuleKey] = _.cloneDeep(action.data.module);
+      saveHistory(newState);
+      return {...newState};
+
     case 'EDIT_NODE':
       let path = action.data.path.join('.');
       let value = Object.values(action.data.update)[0]

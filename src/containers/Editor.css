@@ -257,8 +257,9 @@ z-index: 500;
 
 .Editor-panel-content {
   padding-left: 15px;
+  padding-botom: 75px;
   width: 500px;
-  padding-right: 15px;
+  /* padding-right: 15px; */
   position: absolute;
   height: 100%;
   overflow-y: scroll;

@@ -11,6 +11,7 @@
     "history": "^4.7.2",
     "jquery": "^3.2.1",
     "jsdom": "^11.5.1",
+    "jsoneditor-react": "^0.1.9",
     "lodash": "^4.17.4",
     "react": "^16.1.0",
     "react-addons-test-utils": "^15.6.2",

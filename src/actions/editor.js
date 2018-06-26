@@ -71,10 +71,10 @@ export const copyNode = (targetModuleKey, targetNode, newName) => {
   })
 }
 
-export const jsonLoad = (key, module) => {
+export const jsonEdit = (module) => {
   return dispatchThenAnalyze({
-    type: 'JSON_LOAD',
-    data: {key, module}
+    type: 'JSON_EDIT',
+    data: {module}
   })
 }
 

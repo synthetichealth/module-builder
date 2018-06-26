@@ -25,6 +25,8 @@ import examplitis from '../data/example_module'
 import './Editor.css';
 import '../../node_modules/react-joyride/lib/react-joyride-compiled.css'
 
+import JsonEditor from '../components/editor/JsonEditor';
+
 import StateList from '../components/analysis/StateList';
 import AttributeList from '../components/analysis/AttributeList';
 import WarningList from '../components/analysis/WarningList';
@@ -49,6 +51,7 @@ import {selectNode,
         renameNode,
         copyNode,
         newModule,
+        jsonEdit,
         showLoadModule,
         hideLoadModule,
         showDownload,
@@ -256,7 +259,7 @@ class Editor extends Component {
       case 'statelist':
         return <StateList selectedState={this.props.moduleState} states={this.props.moduleStates} onClick={this.props.selectNode} />
       case 'code':
-        return <div>Code Editor not yet implemented.</div>
+        return <JsonEditor onChange={(value) => {this.props.jsonEdit(value)}} module={this.props.module}/>
       case 'attribute':
         return <AttributeList attributes={this.props.attributes} selectedState={this.props.moduleState} modules={this.props.modules} states={this.props.moduleStates} onClick={this.props.selectNode} />
       case 'warning':
@@ -382,15 +385,14 @@ class Editor extends Component {
            <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button data-tip='Module Properties.' onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
            {this.renderStateButton()}
            <li className='Editor-left-spacer'></li>
+           <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON. Not yet implemented.' onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
+           <li className='Editor-left-spacer'></li>
            {this.renderStateListButton()}
            {this.renderAttributesButton()}
            {this.renderWarningButton()}
            {this.renderRelatedModulesButton()}
-            {/*
 
-           <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON. Not yet implemented.' onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
 
-           */}
          </ul>
         </div>
 
@@ -517,6 +519,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   editModuleName,
   editModuleRemarks,
   changeModulePanel,
+  jsonEdit,
   undo,
   redo,
   push
