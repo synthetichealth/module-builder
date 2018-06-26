@@ -28,6 +28,7 @@ import '../../node_modules/react-joyride/lib/react-joyride-compiled.css'
 import StateList from '../components/analysis/StateList';
 import AttributeList from '../components/analysis/AttributeList';
 import WarningList from '../components/analysis/WarningList';
+import RelatedList from '../components/analysis/RelatedList';
 
 import LoadingLogo from './synthea-animated-logo.svg'
 import SyntheaLogo from './synthea-logo-dark-glow.png'
@@ -257,11 +258,11 @@ class Editor extends Component {
       case 'code':
         return <div>Code Editor not yet implemented.</div>
       case 'attribute':
-        return <AttributeList selectedState={this.props.moduleState} modules={this.props.modules} states={this.props.moduleStates} onClick={this.props.selectNode} />
+        return <AttributeList attributes={this.props.attributes} selectedState={this.props.moduleState} modules={this.props.modules} states={this.props.moduleStates} onClick={this.props.selectNode} />
       case 'warning':
         return <WarningList warnings={this.props.warnings} selectedState={this.props.moduleState} onClick={this.props.selectNode} />
       case 'related':
-        return <div>Related modules not yet implemented.</div>
+        return <RelatedList related={this.props.relatedModules} selectedState={this.props.moduleState} onClick={this.props.selectNode} />
       default:
         return <div/>
     }
@@ -285,15 +286,43 @@ class Editor extends Component {
     return <li className={className}><button data-tip={dataTip} onClick={onClick}><img src={StateButton}/></button></li>
   }
 
-  renderWarningButton = () => {
-   let warningCount = <span />
-   if(this.props.warnings.length > 0){
-     warningCount = <span className='Editor-button-count'>{this.props.warnings.length}</span>
+  renderStateListButton = () => {
+   let stateCount = <span className='Editor-button-count'>0</span>
+   if(this.props.moduleStates.length > 0){
+       stateCount = <span className='Editor-button-count'>{this.props.moduleStates.length}</span>
    }
-   return <li className={this.props.selectedModulePanel === 'warning' ? 'Editor-left-selected' : ''}><button data-tip='Problems in module that need to be resolved. Not yet implemented.' onClick={this.leftNavClick('warning')}><img src={WarningButton} />{warningCount}</button></li>
+   return <li className={this.props.selectedModulePanel === 'statelist' ? 'Editor-left-selected' : ''}><button data-tip='Searchable list of states.' onClick={this.leftNavClick('statelist')}><img src={StateListButton}/>{stateCount}</button></li>
 
   }
 
+  renderAttributesButton = () => {
+   let attributesCount = <span className='Editor-button-count'>0</span>
+   if(this.props.attributes.length > 0){
+     attributesCount = <span className='Editor-button-count'>{this.props.attributes.length}</span>
+   }
+   return <li className={this.props.selectedModulePanel === 'attribute' ? 'Editor-left-selected' : ''}><button data-tip='Attributes set in this module.' onClick={this.leftNavClick('attribute')}><img src={AttributeButton}/>{attributesCount}</button></li>
+
+  }
+
+
+  renderWarningButton = () => {
+   let warningCount = <span className='Editor-button-count'>0</span>
+   if(this.props.warnings.length > 0){
+     warningCount = <span className='Editor-button-count Editor-button-count-warning'>{this.props.warnings.length}</span>
+   }
+   return <li className={this.props.selectedModulePanel === 'warning' ? 'Editor-left-selected' : ''}><button data-tip='Problems in module that need to be resolved.' onClick={this.leftNavClick('warning')}><img src={WarningButton} />{warningCount}</button></li>
+
+  }
+
+  renderRelatedModulesButton = () => {
+
+   let relatedCount = <span className='Editor-button-count'>0</span>
+   if(this.props.relatedModules.length > 0){
+     relatedCount = <span className='Editor-button-count'>{this.props.relatedModules.length}</span>
+   }
+   return <li className={this.props.selectedModulePanel === 'related' ? 'Editor-left-selected' : ''}><button data-tip='Related modules, such as those that share attributes. ' onClick={this.leftNavClick('related')}><img src={RelatedButton}/>{relatedCount}</button></li>
+
+  }
 
 
   leftNavClick = (nav) => {
@@ -353,12 +382,12 @@ class Editor extends Component {
            <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button data-tip='Module Properties.' onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
            {this.renderStateButton()}
            <li className='Editor-left-spacer'></li>
-           <li className={this.props.selectedModulePanel === 'statelist' ? 'Editor-left-selected' : ''}><button data-tip='Searchable list of states.' onClick={this.leftNavClick('statelist')}><img src={StateListButton}/></button></li>
-           <li className={this.props.selectedModulePanel === 'attribute' ? 'Editor-left-selected' : ''}><button data-tip='Attributes set in this module.' onClick={this.leftNavClick('attribute')}><img src={AttributeButton}/></button></li>
+           {this.renderStateListButton()}
+           {this.renderAttributesButton()}
            {this.renderWarningButton()}
+           {this.renderRelatedModulesButton()}
             {/*
 
-           <li className={this.props.selectedModulePanel === 'related' ? 'Editor-left-selected' : ''}><button data-tip='Related modules, such as those that share attributes. Not yet implemented.' onClick={this.leftNavClick('related')}><img src={RelatedButton}/></button></li>
            <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON. Not yet implemented.' onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
 
            */}
@@ -463,6 +492,8 @@ const mapStateToProps = state => {
     selectedModulePanel: state.editor.selectedModulePanel,
     modulePanelVisible: state.editor.modulePanelVisible,
     warnings: state.analysis.warnings,
+    relatedModules: state.analysis.relatedModules,
+    attributes: state.analysis.attributes,
     undoEnabled,
     redoEnabled
   }

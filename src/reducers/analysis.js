@@ -1,9 +1,33 @@
 import _ from 'lodash'
 
 const initialState = {
-  moduleCodes: {}, // list types of nodes
-  warnings: []
+  libraryModuleCodes: {}, // list types of nodes
+  warnings: [],
+  libraryRelatedModules: {},
+  relatedModules: [],
+  attributes: []
 };
+
+const attributes = module => {
+  const attributes = [];
+  Object.keys(module.states).forEach(stateName => {
+    let state = module.states[stateName];
+    
+     if(state.type === 'SetAttribute'){
+       attributes.push({attribute: state.attribute, stateName: state.name, stateType: state.type});
+     } else if(state.assign_to_attribute){
+       attributes.push({attribute: state.assign_to_attribute, stateName: state.name, stateType: state.type});
+     }
+  });
+
+  return attributes.sort(function(a, b){
+    var x = a.attribute.toLowerCase();
+    var y = b.attribute.toLowerCase();
+    if (x < y) {return -1;}
+    if (x > y) {return 1;}
+    return 0;
+  })
+}
 
 const stateCollisionWarnings = (module, globalCodes) => {
   const equivalentStates = [
@@ -119,23 +143,58 @@ const orphanStateWarnings = (module) => {
 }
 
 const libraryModuleCodes = (modules) => {
-    const moduleCodes = {};
+    const libraryModuleCodes = {};
 
     Object.keys(modules).forEach(moduleKey => {
       const module = modules[moduleKey];
       Object.keys(module.states).forEach(stateName => {
         const moduleState = module.states[stateName];
         moduleState.codes && moduleState.codes.forEach(code => {
-          if(!moduleCodes[code.code]){
-            moduleCodes[code.code] = []
+          if(!libraryModuleCodes[code.code]){
+            libraryModuleCodes[code.code] = []
           }
-          moduleCodes[code.code].push({...code, moduleKey, stateName, state: moduleState});
+          libraryModuleCodes[code.code].push({...code, moduleKey, stateName, state: moduleState});
         });
       });
     });
+    return libraryModuleCodes;
+}
 
+const libraryRelatedModules = (modules) => {
+  const libraryRelatedModules = {};
 
-    return moduleCodes;
+  Object.keys(modules).forEach(moduleKey => {
+    const module = modules[moduleKey];
+    Object.keys(module.states).forEach(stateName => {
+      const moduleState = module.states[stateName];
+      if(moduleState.type == 'CallSubmodule'){
+        libraryRelatedModules[moduleKey] = libraryRelatedModules[stateName] || []
+        libraryRelatedModules[moduleKey].push({type: 'submodule', moduleKey: moduleState.submodule, stateName})
+
+        libraryRelatedModules[moduleState.submodule] = libraryRelatedModules[moduleState.submodule] || []
+        libraryRelatedModules[moduleState.submodule].push({type: 'submodule', moduleKey, stateName})
+      }
+    });
+  });
+  return libraryRelatedModules;
+
+}
+
+const relatedBySubmodule = (moduleKey, module, relatedMap) => {
+  let related = [];
+
+  if(relatedMap[moduleKey]){
+    related = _.cloneDeep(relatedMap[moduleKey]);
+  }
+  
+  Object.keys(module.states).forEach(stateName => {
+    const moduleState = module.states[stateName];
+     if(moduleState.type == 'CallSubmodule'){
+       related.push({type: 'submodule', module: moduleState.submodule, stateName});
+     }
+  });
+
+  return related;
 }
 
 export default (state = initialState, action) => {
@@ -143,15 +202,20 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case 'ANALYZE':
 
-      newState.warnings = []
-      newState.warnings = [...newState.warnings, ...stateCollisionWarnings(action.data.module, newState.moduleCodes)];
-      newState.warnings = [...newState.warnings, ...orphanStateWarnings(action.data.module)];
+      newState.warnings = [...stateCollisionWarnings(action.data.module, newState.libraryModuleCodes),
+                           ...orphanStateWarnings(action.data.module)];
+
+      newState.relatedModules = [...relatedBySubmodule(action.data.moduleKey, action.data.module, newState.libraryRelatedModules)];
+
+      newState.attributes = attributes(action.data.module);
 
       return newState;
 
     case 'LOAD_LIBRARY':
 
-      newState.moduleCodes = libraryModuleCodes(action.data);
+      newState.libraryModuleCodes = libraryModuleCodes(action.data);
+      newState.libraryRelatedModules = libraryRelatedModules(action.data);
+
       return newState
 
     default:

@@ -113,12 +113,16 @@ z-index: 500;
 .Editor-left button .Editor-button-count{
   bottom: 4px;
   position: absolute;
-  background-color: #b40707;
+  background-color: #333;
   padding: 1px 5px;
   border-radius: 10px;
   font-size: .5em;
   color: white;
   right: 2px;
+}
+
+.Editor-left button .Editor-button-count.Editor-button-count-warning{
+  background-color: #b40707;
 }
 
 .Editor-left-fullscreen img{

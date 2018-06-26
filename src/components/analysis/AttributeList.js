@@ -31,25 +31,6 @@ class AttributeList extends Component<Props> {
     this.setState({search: ''})
   }
 
-  attributes(){
-    const attributes = [];
-    this.props.states.forEach( state => {
-     if(state.type === 'SetAttribute'){
-       attributes.push({attribute: state.attribute, stateName: state.name, stateType: state.type});
-     } else if(state.assign_to_attribute){
-       attributes.push({attribute: state.assign_to_attribute, stateName: state.name, stateType: state.type});
-     }
-    });
-
-    return attributes.sort(function(a, b){
-      var x = a.attribute.toLowerCase();
-      var y = b.attribute.toLowerCase();
-      if (x < y) {return -1;}
-      if (x > y) {return 1;}
-      return 0;
-    })
-  }
-
   attributeFilter(attribute){
     return attribute.attribute.toLowerCase().includes(this.state.search.toLowerCase()) || 
            attribute.stateName.toLowerCase().includes(this.state.search.toLowerCase());
@@ -77,7 +58,7 @@ class AttributeList extends Component<Props> {
                 </tr>
               </thead>
               <tbody>
-              {this.attributes().filter(this.attributeFilter.bind(this)).map((attribute, i) => {
+              {this.props.attributes.filter(this.attributeFilter.bind(this)).map((attribute, i) => {
                 return (
                   <tr key={i} onClick={this.onClick(attribute)} className={this.props.selectedState && (attribute.stateName === this.props.selectedState.name) ? "table-info" : ""}>
                     <th scope="row">{attribute.attribute}</th>
