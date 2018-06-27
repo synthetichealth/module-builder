@@ -45,6 +45,9 @@ class JsonEditor extends Component<Props> {
 
 
   render() {
+    if(this.props.refreshCodeFlag){
+      return <div/>
+    }
     return (
       <div className='JsonEditor'>
         <Editor

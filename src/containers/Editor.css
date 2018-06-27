@@ -152,36 +152,13 @@ z-index: 500;
   background-color: #22425e;
 }
 
+.Editor-left img{ 
+  transform: rotate(0deg);
+  transition: transform .5s;
+}
+
 .Editor-left .Editor-left-fullscreen-active{
-  animation-name: rotateto;
-  animation-fill-mode: forwards;
-  animation-duration: 1s;
-}
-
-.Editor-left .Editor-left-fullscreen-inactive{
-  animation-name: rotateback;
-  animation-fill-mode: forwards;
-  animation-duration: 1s;
-}
-
-@keyframes rotateto {
-  from {
-    transform: rotate(0);
-  }
-
-  to {
-    transform: rotate(180deg);
-  }
-}
-
-@keyframes rotateback {
-  from {
-    transform: rotate(180deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+  transform: rotate(180deg);
 }
 
 .Editor .Editor-module-name {
@@ -213,7 +190,6 @@ z-index: 500;
   height: 100%;
   top: 0;
   left: 50px;
-  width: 500px;
   z-index: 900;
   margin: 70px 20px 200px 0;
   padding: 0;
@@ -221,44 +197,24 @@ z-index: 500;
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
   -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
   box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+  transition-property: left;
+  transition-duration: .5s;
+  transition-timing-function: ease-in-out;
 }
 
-@keyframes slideout {
-  from {
-    left: 50px;
-  }
-
-  to {
-    left: -450px;
-  }
+.Editor-panel .Editor-panel-resize {
+  width:16px;
+  height: 100%;
+  position:absolute;
 }
-
-@keyframes slidein {
-  from {
-    left: -450px;
-  }
-
-  to {
-    left: 50px;
-  }
-}
-
-.Editor-panel.Editor-panel-hidden {
-  animation-name: slideout;
-  animation-fill-mode: forwards;
-  animation-duration: 1s;
-}
-
-.Editor-panel.Editor-panel-show {
-  animation-name: slidein;
-  animation-fill-mode: forwards;
-  animation-duration: 1s;
+.Editor-panel .Editor-panel-resize:hover {
+  cursor: col-resize;
 }
 
 .Editor-panel-content {
   padding-left: 15px;
   padding-botom: 75px;
-  width: 500px;
+  width: 100%;
   /* padding-right: 15px; */
   position: absolute;
   height: 100%;

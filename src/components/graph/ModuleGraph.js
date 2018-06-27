@@ -44,11 +44,11 @@ class ModuleGraph extends Component<Props> {
 
     if(nextProps.fullscreen !== this.props.fullscreen){
       if(nextProps.fullscreen){
-        this.svgPanZoom.panBy({x: 500, y: 0});
-        this.customPanBy({x: -200, y: 0})
+        this.svgPanZoom.panBy({x: 250, y: 0});
+        this.customPanBy({x: -100, y: 0})
       }else{
-        this.svgPanZoom.panBy({x: -500, y: 0});
-        this.customPanBy({x: 200, y: 0})
+        this.svgPanZoom.panBy({x: -250, y: 0});
+        this.customPanBy({x: 100, y: 0})
       }
     }
 

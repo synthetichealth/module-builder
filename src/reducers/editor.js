@@ -12,7 +12,8 @@ const initialState = {
     modulePanelVisible: true,
     modules: {},
     history: [],
-    historyIndex: -1
+    historyIndex: -1,
+    refreshCodeFlag: false
 };
 
 export default (state = initialState, action) => {
@@ -393,6 +394,9 @@ export default (state = initialState, action) => {
 
     case 'CHANGE_MODULE_PANEL':
       return { ...newState, selectedModulePanel: action.data.targetPanel, modulePanelVisible: action.data.targetPanel !== 'hide'};
+
+    case 'REFRESH_CODE_FLAG': 
+      return {...newState, refreshCodeFlag: action.data.flag}
 
     case 'UNDO':
       if(newState.history.length > newState.historyIndex + 1){

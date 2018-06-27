@@ -8,6 +8,12 @@ const dispatchThenAnalyze = (action) => {
     if(module){
       dispatch(analyze(moduleKey, module));
     }
+
+    // refresh the editor if the change didn't originate from the editor
+    if(action.type !== 'JSON_EDIT'){
+      dispatch(refreshCode())
+    }
+
   }
 }
 
@@ -160,5 +166,25 @@ export const changeModulePanel = (targetPanel) => {
       targetPanel
     }
   })
+}
+
+export const refreshCode = () => {
+  return dispatch => {
+    dispatch({
+      type: 'REFRESH_CODE_FLAG',
+      data:{
+        flag: true
+      }
+    })
+
+    setTimeout(() => {dispatch({
+      type: 'REFRESH_CODE_FLAG',
+      data:{
+        flag: false
+      }
+    })}, 250)
+
+
+  }
 }
 
