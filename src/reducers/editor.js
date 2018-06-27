@@ -12,7 +12,8 @@ const initialState = {
     modulePanelVisible: true,
     modules: {},
     history: [],
-    historyIndex: -1
+    historyIndex: -1,
+    refreshCodeFlag: false
 };
 
 export default (state = initialState, action) => {
@@ -191,6 +192,12 @@ export default (state = initialState, action) => {
       saveHistory(newState);
 
       return {...newState, modules: {...newModules}, selectedStateKey: null, selectedStateTransition: null, selectedModuleKey: action.data.key}
+
+    case 'JSON_EDIT':
+      newState.modules = {...newState.modules}
+      newState.modules[state.selectedModuleKey] = _.cloneDeep(action.data.module);
+      saveHistory(newState);
+      return {...newState};
 
     case 'EDIT_NODE':
       let path = action.data.path.join('.');
@@ -387,6 +394,9 @@ export default (state = initialState, action) => {
 
     case 'CHANGE_MODULE_PANEL':
       return { ...newState, selectedModulePanel: action.data.targetPanel, modulePanelVisible: action.data.targetPanel !== 'hide'};
+
+    case 'REFRESH_CODE_FLAG': 
+      return {...newState, refreshCodeFlag: action.data.flag}
 
     case 'UNDO':
       if(newState.history.length > newState.historyIndex + 1){

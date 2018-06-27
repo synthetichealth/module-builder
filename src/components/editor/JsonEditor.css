@@ -1,0 +1,20 @@
+.JsonEditor{
+  height: 100%;
+}
+
+.JsonEditor > div{
+  height: 100%;
+}
+
+.JsonEditor .jsoneditor{
+  border: inherit;
+}
+
+.JsonEditor .jsoneditor .jsoneditor-menu{
+  display: none;
+}
+
+.JsonEditor .jsoneditor .ace_gutter{
+  background-color: #fff;
+  border-right: 1px solid #aaa
+}

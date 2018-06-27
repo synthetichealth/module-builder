@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import Joyride from 'react-joyride'
 import ReactTooltip from 'react-tooltip'
+import Draggable from 'react-draggable'
 
 import StateEditor from '../components/editor/State';
 import ModulePropertiesEditor from '../components/editor/ModuleProperties';
@@ -24,6 +25,8 @@ import examplitis from '../data/example_module'
 
 import './Editor.css';
 import '../../node_modules/react-joyride/lib/react-joyride-compiled.css'
+
+import JsonEditor from '../components/editor/JsonEditor';
 
 import StateList from '../components/analysis/StateList';
 import AttributeList from '../components/analysis/AttributeList';
@@ -49,10 +52,12 @@ import {selectNode,
         renameNode,
         copyNode,
         newModule,
+        jsonEdit,
         showLoadModule,
         hideLoadModule,
         showDownload,
         hideDownload,
+        refreshCode,
         changeStateType,
         editModuleName,
         editModuleRemarks,
@@ -66,12 +71,15 @@ class Editor extends Component {
 
   constructor() {
     super();
+
+    this.originalPanelWidth = 500;
     this.state = {
       joyride: {
         run: false,
         steps: BasicTutorial,
         stepIndex: 0
-      }
+      },
+      panelWidth: this.originalPanelWidth,
     }
   }
 
@@ -247,6 +255,18 @@ class Editor extends Component {
     return <div/>
   }
 
+  onPanelResize = (event, data) => {
+    this.setState({...this.state, panelWidth: this.state.panelWidth + data.deltaX})
+  }
+
+  onPanelResizeDone = () => {
+    this.props.refreshCode();
+    if(this.state.panelWidth <= 250){
+      this.setState({...this.state, panelWidth: 250});
+      this.leftNavClick('hide')();
+    }
+  }
+
   renderPanelContent = () => {
     switch(this.props.selectedModulePanel){
       case 'info':
@@ -256,7 +276,7 @@ class Editor extends Component {
       case 'statelist':
         return <StateList selectedState={this.props.moduleState} states={this.props.moduleStates} onClick={this.props.selectNode} />
       case 'code':
-        return <div>Code Editor not yet implemented.</div>
+        return <JsonEditor onChange={(value) => {this.props.jsonEdit(value)}} module={this.props.module} refreshCodeFlag={this.props.refreshCodeFlag}/>
       case 'attribute':
         return <AttributeList attributes={this.props.attributes} selectedState={this.props.moduleState} modules={this.props.modules} states={this.props.moduleStates} onClick={this.props.selectNode} />
       case 'warning':
@@ -382,19 +402,18 @@ class Editor extends Component {
            <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button data-tip='Module Properties.' onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
            {this.renderStateButton()}
            <li className='Editor-left-spacer'></li>
+           <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON.' onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
+           <li className='Editor-left-spacer'></li>
            {this.renderStateListButton()}
            {this.renderAttributesButton()}
            {this.renderWarningButton()}
            {this.renderRelatedModulesButton()}
-            {/*
 
-           <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON. Not yet implemented.' onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
 
-           */}
          </ul>
         </div>
 
-        <div className={'Editor-panel ' +  (!this.props.modulePanelVisible ? 'Editor-panel-hidden' : 'Editor-panel-show')}>
+        <div className='Editor-panel' style={{left: this.props.modulePanelVisible ? 50 :  -this.state.panelWidth, width: this.state.panelWidth}}>
           <div className="Editor-module-name">
             <RIEInput value={this.props.module.name} propName="name" change={(name) => {this.props.editModuleName(this.props.selectedModuleKey, name.name)}} />
           </div>
@@ -402,6 +421,15 @@ class Editor extends Component {
           <div className='Editor-panel-content'>
             {this.renderPanelContent()}
           </div>
+
+          <Draggable
+             axis='x'
+             onDrag={this.onPanelResize}
+             onStop={this.onPanelResizeDone}
+             bounds={{left: -250, top: 0, right: Infinity, bottom: 0}}
+            >
+            <div className='Editor-panel-resize' style={{left: this.originalPanelWidth - 8}}></div>
+          </Draggable>
 
          </div>
 
@@ -495,7 +523,8 @@ const mapStateToProps = state => {
     relatedModules: state.analysis.relatedModules,
     attributes: state.analysis.attributes,
     undoEnabled,
-    redoEnabled
+    redoEnabled,
+    refreshCodeFlag: state.editor.refreshCodeFlag
   }
 }
 
@@ -514,9 +543,11 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   hideLoadModule,
   showDownload,
   hideDownload,
+  refreshCode,
   editModuleName,
   editModuleRemarks,
   changeModulePanel,
+  jsonEdit,
   undo,
   redo,
   push
