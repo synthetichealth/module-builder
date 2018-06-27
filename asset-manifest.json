@@ -1,10 +1,11 @@
 {
-  "main.css": "static/css/main.d64628d2.css",
-  "main.css.map": "static/css/main.d64628d2.css.map",
-  "main.js": "static/js/main.45a6ffe3.js",
-  "main.js.map": "static/js/main.45a6ffe3.js.map",
-  "static/js/0.d8f43c7d.chunk.js": "static/js/0.d8f43c7d.chunk.js",
-  "static/js/0.d8f43c7d.chunk.js.map": "static/js/0.d8f43c7d.chunk.js.map",
+  "main.css": "static/css/main.8b03f3fa.css",
+  "main.css.map": "static/css/main.8b03f3fa.css.map",
+  "main.js": "static/js/main.967f3efc.js",
+  "main.js.map": "static/js/main.967f3efc.js.map",
+  "static/js/0.d0abc53c.chunk.js": "static/js/0.d0abc53c.chunk.js",
+  "static/js/0.d0abc53c.chunk.js.map": "static/js/0.d0abc53c.chunk.js.map",
+  "static/media/jsoneditor-icons.svg": "static/media/jsoneditor-icons.bfab7b16.svg",
   "static/media/synthea-animated-logo.svg": "static/media/synthea-animated-logo.d15f277a.svg",
   "static/media/synthea-logo-dark-glow.png": "static/media/synthea-logo-dark-glow.6cd8594a.png"
 }
