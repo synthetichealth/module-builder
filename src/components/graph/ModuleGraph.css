@@ -3,11 +3,9 @@
   width: 100%;
   height: 100%;
   left: 250px;
-  padding-top: 60px;
 }
 
 .Module svg {
-  top: 50px;
   position:absolute;
 }
 
@@ -76,21 +74,21 @@
   stroke: #336699;
 }
 .transition.transition-highlighted.transition-selected path {
-  stroke: violet;
+  stroke: #cb7732;
   stroke-width: 3px;
 }
 
 .transition.transition-highlighted.transition-selected path.transition-hitbox {
-  stroke: violet;
+  stroke: #cb7732;
   stroke-width: 3px;
 }
 .transition.transition-highlighted.transition-selected polygon {
-  fill: violet;
-  stroke: violet;
+  fill: #cb7732;
+  stroke: #cb7732;
 }
 
 .transition.transition-highlighted.transition-selected text {
-  fill: violet;
+  fill: #cb7732;
 }
 
 .transition.transition-highlighted text {

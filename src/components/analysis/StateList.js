@@ -37,7 +37,7 @@ class StateList extends Component<Props> {
 
   render() {
     return (<div className='StateList'>
-          <div className='StateList-header'> 
+          <div className='Editor-panel-title'> 
              State List
           </div>
           <div className="btn-group">

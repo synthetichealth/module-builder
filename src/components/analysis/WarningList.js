@@ -17,7 +17,7 @@ class WarningList extends Component<Props> {
 
   render() {
     return (<div className='WarningList'>
-          <div className='WarningList-header'> 
+          <div className='Editor-panel-title'> 
             Warnings
           </div>
 

@@ -38,7 +38,7 @@ class AttributeList extends Component<Props> {
 
   render() {
     return (<div className='AttributeList'>
-          <div className='AttributeList-header'> 
+          <div className='Editor-panel-title'> 
              Attribute List
           </div>
 
