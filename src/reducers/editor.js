@@ -136,6 +136,7 @@ export default (state = initialState, action) => {
           })
           newState.modules[action.data.currentModuleKey].states[action.data.selectedState] = alteredState;
         }
+        newState.selectedStateTransition = 0;
       }
 
       saveHistory(newState);
@@ -168,8 +169,14 @@ export default (state = initialState, action) => {
 
       selectedModuleKey = action.data.key
       if(action.data.libraryModule){
-        newState.modules = {...newState.modules}
-        newState.modules[action.data.key] = _.cloneDeep(action.data.libraryModule)
+        delete newState.modules[action.data.key];
+        let newModule = {}
+        newModule[action.data.key] = _.cloneDeep(action.data.libraryModule);
+        newState.modules = {...newModule, ...newState.modules}
+      }
+
+      if(!newState.modules[action.data.key]){
+        selectedModuleKey = null;
       }
 
       newState.selectedModuleKey = selectedModuleKey;
@@ -178,6 +185,7 @@ export default (state = initialState, action) => {
       newState.loadModuleVisible = false;
       newState.history = [];
       newState.historyIndex = 0;
+      newState.selectedModulePanel = 'info';
 
       saveHistory(newState);
 
@@ -185,13 +193,17 @@ export default (state = initialState, action) => {
 
     case 'NEW_MODULE':
       let newModules = {...state.modules}
-      newModules[action.data.key] = action.data.module;
+      delete newModules[action.data.key]
+
+      let tempModule = {}; // put in the right order in the object for the tabs
+      tempModule[action.data.key] = action.data.module;
+    
 
       newState.history = [];
       newState.historyIndex = 0;
       saveHistory(newState);
 
-      return {...newState, modules: {...newModules}, selectedStateKey: null, selectedStateTransition: null, selectedModuleKey: action.data.key}
+      return {...newState, modules: {...tempModule, ...newModules}, selectedStateKey: null, selectedStateTransition: null, selectedModuleKey: action.data.key}
 
     case 'JSON_EDIT':
       newState.modules = {...newState.modules}
@@ -247,6 +259,10 @@ export default (state = initialState, action) => {
         if(splitPath.length === 3 && splitPath[1] === 'states'){
           let stateName = splitPath[2]
           fixStateReferences(newState.modules[splitPath[0]], stateName, null)
+
+          if(splitPath[2] == newState.selectedStateKey){
+            newState.selectedStateKey = null; // deleselect
+          }
         }
 
       }
@@ -378,7 +394,17 @@ export default (state = initialState, action) => {
       newState.historyIndex = 0;
       saveHistory(newState);
 
-      return { ...newState, selectedModuleKey: action.data.selectedModuleKey, selectedStateTransition: null};
+      return { ...newState, selectedModuleKey: action.data.selectedModuleKey, selectedStateKey: null, selectedStateTransition: null};
+
+    case 'CLOSE_MODULE':
+
+      delete newState.modules[action.data.selectedModuleKey];
+
+      newState.history = []
+      newState.historyIndex = 0;
+      saveHistory(newState);
+
+      return { ...newState};
 
     case 'SHOW_LOAD_MODULE':
       return { ...newState, loadModuleVisible: true};

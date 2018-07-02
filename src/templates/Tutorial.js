@@ -1,7 +1,7 @@
 export const BasicTutorial = [
-  {title: "Create Module", selector: ".navbar-nav :nth-child(1)", text: "Create a new module"},
-  {title: "Load Module", selector: ".navbar-nav :nth-child(2)", text: "Load a module by selecting Load Module"},
-  {title: "Save Module", selector: ".navbar-nav :nth-child(3)", text: "Download module by selecting Download"},
+  {title: "Create Module", selector: ".Editor-top-open :nth-child(1)", text: "Create a new module"},
+  {title: "Open Module", selector: ".Editor-top-open :nth-child(2)", text: "Open a module by selecting Open Module"},
+  {title: "Download Module", selector: ".Editor-top-open :nth-child(3)", text: "Download module by selecting Download"},
   {title: "Edit Node", selector: "#node_Initial", text: "To edit a node you can click on it in the graph"},
   {title: "Module Remarks", selector: ".ModuleProperties-remarks", text: "This is a place to put any remarks or citations for this module."},
   {title: "Adding a State", selector: ".navbar-nav :nth-child(4)", text: "This will add a new state to the module, it can then be edited like any other state."},

@@ -1,4 +1,5 @@
 import {analyze} from  './analysis';
+import { push } from 'react-router-redux'
 
 const dispatchThenAnalyze = (action) => {
   return (dispatch, getState) => {
@@ -82,6 +83,27 @@ export const jsonEdit = (module) => {
     type: 'JSON_EDIT',
     data: {module}
   })
+}
+
+export const closeModule = (selectedModuleKey) => {
+
+  return (dispatch, getState) => {
+
+    if(Object.keys(getState().editor.modules).length > 1){
+      if(Object.keys(getState().editor.modules)[0] === selectedModuleKey){
+        dispatch(push('#' + Object.keys(getState().editor.modules)[1])); // handling case where first is the one we already have open
+      }else {
+        dispatch(push('#' + Object.keys(getState().editor.modules)[0]));
+      }
+    } else {
+      dispatch({type: 'OPEN_MODULE', data: {}}); // open nothing to force welcome screen
+      dispatch(push('#'));
+    }
+
+
+    return dispatch({type: 'CLOSE_MODULE', data: {selectedModuleKey}});
+
+  }
 }
 
 export const newModule = (key, module) => {

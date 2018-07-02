@@ -17,7 +17,7 @@ class RelatedList extends Component<Props> {
 
   render() {
     return (<div className='RelatedList'>
-          <div className='RelatedList-header'> 
+          <div className='Editor-panel-title'> 
             Related Modules
           </div>
 

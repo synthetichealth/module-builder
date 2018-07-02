@@ -558,7 +558,7 @@ const StructureTemplates = {
 
 const ModuleTemplates = {
   Blank: {
-    name: "My Module",
+    name: "Untitled",
     remarks: ["A blank module"],
     states: {
       Initial: {...StateTemplates.Initial, direct_transition: 'Terminal'},

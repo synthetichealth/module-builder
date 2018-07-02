@@ -1,10 +1,92 @@
-.synthea-logo {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
+button {
+  cursor: pointer;
+}
+
+.button-clear {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+
+}
+
+.button-clear:focus {
+  outline: none;
 }
 
 .Editor-main {
+}
+
+.Editor-top {
+   background-color: #fff;
+   height: 50px;
+   border-bottom: 1px solid #aaa;
+}
+
+.Editor-top-title {
+  display: inline-block;
+  font-size: 1.3em;
+  margin: 10px 20px 0 65px;
+
+}
+
+.Editor-top-module{
+  display: inline-block;
+  font-size: 1.5em;
+  margin-left: 65px;
+  color: #7f9ad3;
+
+}
+
+.Editor-top-logo {
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.Editor-top button.Editor-top-help{
+  position: absolute;
+  top: 9px;
+  right: 16px;
+  color: #fff1f1;
+  background-color: #28435c;
+  padding: 1px 6px;
+  border-radius: 20px;
+  border: 3px solid #28435c;
+  font-size: 1em;
+
+}
+
+.Editor-top-open {
+  display:inline-block;
+}
+
+.Editor-top-open button {
+  color: #5190cb;
+  margin: 0 12px
+}
+
+.Editor-top-open button.Editor-top-download {
+  color: #cb7732;
 }
 
 .Editor-loading-logo{
@@ -49,14 +131,30 @@ z-index: 500;
   outline: 0;
 }
 
+.Editor-action-bar {
+    height: 40px;
+    background-color: #fafafa;
+    position:relative;
+    border-bottom: 1px solid #aaa;
+    /* -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+    /* -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+    /* box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+}
+
+.Editor-graph-buttons button.Editor-action-download {
+  border: 0;
+  background-color: #cb7732;
+}
+
 .Editor-left {
-  background-color: #efefef;
+  background-color: #fff;
   width: 50px;
   position: fixed;
   height: 100%;
-  top: 70px;
+  top: 90px;
   left: 0px;
   z-index: 1000;
+  border-right: 1px solid #aaa;
 }
 
 .Editor-left ul{
@@ -65,16 +163,14 @@ z-index: 500;
 
 .Editor-left li{
   list-style: none;
-  border-bottom: 1px solid #999;
-  border-right: 1px solid #999;
   text-align:center;
   background-color: #d8d7d5;
 }
 
 .Editor-left .Editor-left-spacer {
-  background-color: #efefef;
+  background-color: #fff;
   height: 10px;
-  border-bottom: 2px solid #999;
+  border-bottom: 1px solid #999;
 }
 
 .Editor-left button {
@@ -95,7 +191,7 @@ z-index: 500;
 
 .Editor-left li.Editor-left-selected button {
   border-right: 0px;
-  background-color: #fff;
+  background-color: #fafafa;
 }
 
 .Editor-left li.Editor-left-selected button:hover {
@@ -127,20 +223,22 @@ z-index: 500;
 
 .Editor-left-fullscreen img{
   width: 30px;
+  margin-top: -4px;
 }
 
 .Editor-left .Editor-left-fullscreen{
   border: 0;
-}
-
-.Editor-left-fullscreen img {
-  margin-top: -10px;
+  height: 0;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+  transition: height .5s;
 }
 
 .Editor-left .Editor-left-fullscreen button{
   border-right: 0px;
   background-color: #22425e;
-  height: 40px;
+  height: 30px;
   border: 0;
   padding: 0;
   margin: 0;
@@ -152,13 +250,13 @@ z-index: 500;
   background-color: #22425e;
 }
 
-.Editor-left img{ 
-  transform: rotate(0deg);
-  transition: transform .5s;
+.Editor-left .Editor-left-fullscreen img{ 
+  transform: rotate(180deg);
 }
 
 .Editor-left .Editor-left-fullscreen-active{
-  transform: rotate(180deg);
+  height: 30px;
+  /* transform: rotate(180deg); */
 }
 
 .Editor .Editor-module-name {
@@ -185,21 +283,22 @@ z-index: 500;
 }
 
 .Editor-panel {
-  background-color: #fff;
+  background-color: #fafafa;
   position:fixed;
   height: 100%;
   top: 0;
   left: 50px;
   z-index: 900;
-  margin: 70px 20px 200px 0;
+  margin: 90px 20px 200px 0;
   padding: 0;
 
-  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
-  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
-  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+  /* -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+  /* -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+  /* box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
   transition-property: left;
   transition-duration: .5s;
   transition-timing-function: ease-in-out;
+  border-right: 2px solid #ccc;
 }
 
 .Editor-panel .Editor-panel-resize {
@@ -211,6 +310,15 @@ z-index: 500;
   cursor: col-resize;
 }
 
+.Editor-panel-title {
+  font-size: 1.25rem;
+  padding: 5px 0;
+}
+
+.Editor-panel-menu {
+
+}
+
 .Editor-panel-content {
   padding-left: 15px;
   padding-botom: 75px;
@@ -220,13 +328,30 @@ z-index: 500;
   height: 100%;
   overflow-y: scroll;
   top: -100px;
-  margin-top: 140px;
+  margin-top: 100px;
+}
+
+.Editor-panel-minimize {
+  position:absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.Editor-panel-minimize img{
+  height: 15px;
+  width: 15px;
+  opacity: .5;
+  transition: opacity 1s;
+}
+
+.Editor-panel-minimize img:hover{
+  opacity: 1;
 }
 
 .Editor-graph-buttons {
-  position: fixed;
-  top: 80px;
-  right: 5px;
+  position: absolute;
+  top: 7px;
+  right: 0px;
   z-index: 1000;
 }
 
@@ -235,31 +360,14 @@ z-index: 500;
 }
 
 .Editor-graph-buttons button {
-    border: none;
-    margin: 0 10px;
-    padding: 0;
-    width: auto;
-    overflow: visible;
-
-    background: transparent;
-
-    /* inherit font & color from ancestor */
-    color: inherit;
-    font: inherit;
-
-    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
-    line-height: normal;
-
-    /* Corrects font smoothing for webkit */
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
-
-    /* Corrects inability to style clickable `input` types in iOS */
-    -webkit-appearance: none;
-
-    text-shadow: 5px 5px 8px rgba(0,0,0,0.23);
-    color: #22425e;
-    font-size: 1.25rem;
+  padding: 3px 5px;
+  border-radius: 4px;
+  border: 1px solid #999;
+  /* text-shadow: 5px 5px 8px rgba(0,0,0,0.23); */
+  color: #fff;
+  background-color: #7f9ad3;
+  margin: 0 5px;
+  font-size: .9em;
 }
 
 .Editor-graph-buttons button:focus {
@@ -272,5 +380,4 @@ z-index: 500;
 
 .__react_component_tooltip.react-tooltip-customized {
   z-index: 10000 /* so it is over the navbar */
-
 }

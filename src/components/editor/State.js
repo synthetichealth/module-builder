@@ -127,12 +127,11 @@ class StateEditor extends Component<Props> {
     const transitionType = (this.props.state.transition||{}).type;
     return (
         <div className="State">
+          <div className='Editor-panel-title'> 
+            State Editor
+          </div>
           <h3><RIEInput className='editable-text' className='editable-text' propName={'name'} value={this.props.state.name} change={this.props.renameNode} /></h3>
           State Type: <RIESelect className='editable-text' className='editable-text' value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
-          <ul className="state-buttons">
-            <li><a className="editable-text delete-button" onClick={() => this.props.onChange(`states.${this.props.state.name}`)({val: {id: null}})}>Remove State</a></li>
-            <li><a className="editable-text delete-button" onClick={this.props.copyNode}>Copy State</a></li>
-          </ul>
           <hr/>
           <RIETextArea className='editable-text' value={remarks} propName="remarks" change={this.updateRemarks} />
           <br/>

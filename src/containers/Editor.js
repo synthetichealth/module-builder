@@ -12,6 +12,7 @@ import ModulePropertiesEditor from '../components/editor/ModuleProperties';
 import ModuleGraph from '../components/graph/ModuleGraph';
 import LoadModule from '../components/menu/LoadModule';
 import Download from '../components/menu/Download';
+import NavTabs from '../components/editor/NavTabs';
 import { extractStates } from '../transforms/Module';
 import {cleanString } from '../utils/stringUtils';
 
@@ -34,7 +35,9 @@ import WarningList from '../components/analysis/WarningList';
 import RelatedList from '../components/analysis/RelatedList';
 
 import LoadingLogo from './synthea-animated-logo.svg'
-import SyntheaLogo from './synthea-logo-dark-glow.png'
+// import SyntheaLogo from './synthea-logo-dark-glow.png'
+import SyntheaLogo from './synthea-logo.png'
+import MinimizePanel from './minimize-panel.png'
 import FullscreenButton from './fullscreen.png'
 import InfoButton from './Info.png'
 import StateButton from './state-button.png'
@@ -61,6 +64,7 @@ import {selectNode,
         changeStateType,
         editModuleName,
         editModuleRemarks,
+        closeModule,
         undo,
         redo,
         changeModulePanel} from '../actions/editor';
@@ -157,7 +161,7 @@ class Editor extends Component {
   }
   renderAddStateButton = () => {
     if(this.props.selectedModuleKey){
-      return <button className='' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> + Add State </button>
+      return <button className='button-clear' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> + Add State </button>
     }
     return <div/>
   }
@@ -165,12 +169,12 @@ class Editor extends Component {
   renderInsertStateButton = () => {
     if(this.props.module){
 
-      let className = ''
+      let className = 'button-clear '
       let tip = 'Insert a state within the currently selected a transition.'
       let onClick = this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states), this.props.selectedStateKey, this.props.selectedStateTransition);
       if(typeof this.props.selectedStateTransition !== 'number'){
-        className = 'Insert a state within a transition.  Please select a transition.'
-        className = 'disabled'
+        tip = 'Insert a state within a transition.  Please select a transition.'
+        className += ' disabled'
         onClick = () => {};
       }
       return <button className={className} 
@@ -181,19 +185,46 @@ class Editor extends Component {
   }
 
   renderUndoButton = () => {
-    let className = '';
+    let className = 'button-clear';
     if(!this.props.undoEnabled){
-      className='disabled'
+      className+=' disabled'
     }
     return <button className={className} data-tip='Undo' onClick={() => this.props.undo()}> Undo</button>
   }
 
   renderRedoButton = () => {
-    let className = '';
+    let className = 'button-clear';
     if(!this.props.redoEnabled){
-      className='disabled'
+      className+=' disabled'
     }
     return <button className={className} data-tip='Redo' onClick={() => this.props.redo()}> Redo</button>
+  }
+
+  renderDownloadButton = () => {
+  }
+
+  renderUndoButton = () => {
+    let className = 'button-clear';
+    if(!this.props.undoEnabled){
+      className+=' disabled'
+    }
+    return <button className={className} data-tip='Undo' onClick={() => this.props.undo()}> Undo</button>
+  }
+  
+  renderDeleteButton = () => {
+    let className = 'button-clear';
+    if(!this.props.selectedStateKey){
+      className+=' disabled'
+    }
+    return <button className={className} data-tip='Delete State' onClick={() => this.props.selectedStateKey && this.onChange(`${this.props.selectedModuleKey}.states.${this.props.selectedStateKey}`)({val: {id: null}})}> Delete State</button>
+  }
+
+  renderCopyButton = () => {
+    let className = 'button-clear';
+    if(!this.props.selectedStateKey){
+      className+=' disabled'
+    }
+    return <button className={className} data-tip='Delete State' onClick={this.props.selectedStateKey && this.copyNode(this.props.selectedModuleKey, this.props.moduleState, Object.keys(this.props.module.states))}> Copy State</button>
   }
 
 
@@ -361,23 +392,22 @@ class Editor extends Component {
 
   renderNav = () => {
     return(
-        <nav className="navbar fixed-top navbar-expand-lg navbar-dark">
-          <a className="navbar-brand Editor-title" href="#">
-            <img src={SyntheaLogo} className='synthea-logo'/>
-            Synthea Module Builder
-           </a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <button className="btn btn-link nav-item nav-link" onClick={this.newModule(Object.keys(this.props.modules)).bind(this, undefined)}>New Module</button>
-              <button className="btn btn-link nav-item nav-link" onClick={this.props.showLoadModule}>Load Module</button>
-              <button className="btn btn-link nav-item nav-link" onClick={this.props.showDownload}>Download</button>
-              <button className='btn btn-secondary nav-action-button' onClick={this.startTutorial(BasicTutorial)}> Help </button>
-            </div>
-          </div>
-        </nav>
+      <div className='Editor-top'>
+        <img src={SyntheaLogo} className='Editor-top-logo'/>
+        <div className='Editor-top-title'>Synthea Module Builder</div>
+        <div className='Editor-top-open'>
+          <button className='button-clear' onClick={this.newModule(Object.keys(this.props.modules)).bind(this, undefined)}>New Module</button>
+          <button className='button-clear' onClick={this.props.showLoadModule}>Open Module</button>
+          <button className='button-clear Editor-top-download' onClick={this.props.showDownload}>Download</button>
+        </div>
+        <button className='button-clear Editor-top-help' onClick={this.startTutorial(BasicTutorial)}> ? </button>
+        <NavTabs selectedModuleKey={this.props.selectedModuleKey}
+                 modules={this.props.modules}
+                 onChangeModule={(key) => this.props.push('#' + key)}
+                 onCloseModule={(key) => {this.props.closeModule(key)}}
+                 />
+              
+      </div>
     )
 
   }
@@ -391,13 +421,23 @@ class Editor extends Component {
     return (
       <div className='Editor-main'>
 
-        <button className="Editor-fullscreen-name" onClick={this.leftNavClick('info')}>
-           {this.props.module.name}
-        </button>
+        <div className='Editor-action-bar'>
+              <RIEInput className='Editor-top-module' value={(this.props.module && this.props.module.name) || 'Untitled'} propName="name" change={(name) => {this.props.editModuleName(this.props.selectedModuleKey, name.name)}} />
+             <div className='Editor-graph-buttons'>
+                {this.renderAddStateButton()}
+                {this.renderInsertStateButton()}
+                {this.renderUndoButton()}
+                {this.renderRedoButton()}
+                {this.renderDeleteButton()}
+                {this.renderCopyButton()}
+                {this.renderDownloadButton()}
+
+             </div>
+        </div>
 
         <div className='Editor-left'>
          <ul>
-           <li className={'Editor-left-fullscreen'}><button data-tip='Show/hide editor panel.' onClick={this.leftNavClick('hide')}><img className={!this.props.modulePanelVisible ? 'Editor-left-fullscreen-active' : 'Editor-left-fullscreen-inactive'} src={FullscreenButton}/></button></li>
+        <li className={'Editor-left-fullscreen' + (!this.props.modulePanelVisible ? ' Editor-left-fullscreen-active' : '')}><button data-tip='Show/hide editor panel.' onClick={this.leftNavClick('hide')}><img src={FullscreenButton}/></button></li>
            <li className='Editor-left-spacer'></li>
            <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button data-tip='Module Properties.' onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
            {this.renderStateButton()}
@@ -414,11 +454,8 @@ class Editor extends Component {
         </div>
 
         <div className='Editor-panel' style={{left: this.props.modulePanelVisible ? 50 :  -this.state.panelWidth, width: this.state.panelWidth}}>
-          <div className="Editor-module-name">
-            <RIEInput value={this.props.module.name} propName="name" change={(name) => {this.props.editModuleName(this.props.selectedModuleKey, name.name)}} />
-          </div>
-
           <div className='Editor-panel-content'>
+            <button className='Editor-panel-minimize button-clear' onClick={this.leftNavClick('hide')} ><img src={MinimizePanel} /></button>
             {this.renderPanelContent()}
           </div>
 
@@ -433,16 +470,7 @@ class Editor extends Component {
 
          </div>
 
-         <div className='Editor-graph-buttons'>
-            {this.renderAddStateButton()}
-            {this.renderInsertStateButton()}
-            {this.renderUndoButton()}
-            {this.renderRedoButton()}
 
-         </div>
-
-         <div className='UndoRedoButtons'>
-         </div>
 
         {this.renderModuleGraph()}
 
@@ -548,6 +576,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   editModuleRemarks,
   changeModulePanel,
   jsonEdit,
+  closeModule,
   undo,
   redo,
   push
