@@ -25,6 +25,10 @@ export function getTemplate(path){
       typeVar = StateTemplates;
       break;
 
+    case 'Contained':
+      typeVar = ContainedTemplates;
+      break;
+
     case 'Structure':
       typeVar = StructureTemplates;
       break;
@@ -455,8 +459,8 @@ const StateTemplates = {
 
   DiagnosticReport: {
     type: "DiagnosticReport",
-    number_of_observations: 0,
-    codes: [{...TypeTemplates.Code.Loinc}]
+    codes: [{...TypeTemplates.Code.Loinc}],
+    observations: []
   },
 
   ImagingStudy: {
@@ -475,6 +479,15 @@ const StateTemplates = {
   Death: {
     type: "Death",
     exact: {...AttributeTemplates.ExactWithUnit}
+  }
+}
+
+const ContainedTemplates = {
+  Observation: {
+    category: "laboratory",
+    unit: "",
+    codes: [{...TypeTemplates.Code.Loinc}],
+    exact: {...AttributeTemplates.Exact}
   }
 }
 

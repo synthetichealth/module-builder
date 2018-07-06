@@ -23,5 +23,5 @@ export function findAvailableKey(root, keys){
 }
 
 export function createSafeKeyFromName(name){
-  return name.replace(/[^A-Z0-9]/ig, "_").toLowerCase();
+  return name.replace(/[^A-Z0-9]/ig, "_");
 }

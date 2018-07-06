@@ -20,7 +20,7 @@ it('creates a new key that appends _4 when there are three matches', () => {
 
 it('creates a key from a name properly', () => {
   expect(createSafeKeyFromName('modulename')).toEqual('modulename')
-  expect(createSafeKeyFromName('ModuleName')).toEqual('modulename')
-  expect(createSafeKeyFromName('Module Name')).toEqual('module_name')
-  expect(createSafeKeyFromName('Module!Name')).toEqual('module_name')
+  expect(createSafeKeyFromName('ModuleName')).toEqual('ModuleName')
+  expect(createSafeKeyFromName('Module Name')).toEqual('Module_Name')
+  expect(createSafeKeyFromName('Module!Name')).toEqual('Module_Name')
 })

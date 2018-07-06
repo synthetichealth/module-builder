@@ -118,13 +118,20 @@ class Editor extends Component {
     }
   }
 
-  copyNode = (targetModuleKey, targetNode, takenKeys) => {
+  copyNode = (targetModuleKey, targetNode) => {
     return () => {
-      let newNodeName = findAvailableKey(targetNode.name, takenKeys);
-      this.props.copyNode(targetModuleKey, targetNode, newNodeName);
+      this.props.copyNode(targetModuleKey, targetNode);
     }
   }
 
+  pasteNode = (selectedModuleKey, takenKeys, selectedState, selectedStateTransition) => {
+    return () => {
+      let key = findAvailableKey(createSafeKeyFromName(this.props.clipboard.name), takenKeys);
+      let newState = _.cloneDeep(this.props.clipboard);
+      this.props.addNode(selectedModuleKey, key, newState, selectedState, selectedStateTransition);
+    }
+  }
+  
   changeStateType = (targetModuleKey, targetNode) => {
     return (newType) => {
       this.props.changeStateType(targetModuleKey, targetNode, newType);
@@ -161,25 +168,7 @@ class Editor extends Component {
   }
   renderAddStateButton = () => {
     if(this.props.selectedModuleKey){
-      return <button className='button-clear' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states))}> + Add State </button>
-    }
-    return <div/>
-  }
-
-  renderInsertStateButton = () => {
-    if(this.props.module){
-
-      let className = 'button-clear '
-      let tip = 'Insert a state within the currently selected a transition.'
-      let onClick = this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states), this.props.selectedStateKey, this.props.selectedStateTransition);
-      if(typeof this.props.selectedStateTransition !== 'number'){
-        tip = 'Insert a state within a transition.  Please select a transition.'
-        className += ' disabled'
-        onClick = () => {};
-      }
-      return <button className={className} 
-                     data-tip='Insert a state within a transition.  Please select a transition.' 
-                     onClick={onClick}> -/- Insert State </button>
+      return <button className='button-clear' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states), this.props.selectedStateKey, this.props.selectedStateTransition)}> + Add State </button>
     }
     return <div/>
   }
@@ -224,9 +213,16 @@ class Editor extends Component {
     if(!this.props.selectedStateKey){
       className+=' disabled'
     }
-    return <button className={className} data-tip='Delete State' onClick={this.props.selectedStateKey && this.copyNode(this.props.selectedModuleKey, this.props.moduleState, Object.keys(this.props.module.states))}> Copy State</button>
+    return <button className={className} data-tip='Copy State' onClick={this.props.selectedStateKey && this.copyNode(this.props.selectedModuleKey, this.props.moduleState, Object.keys(this.props.module.states))}> Copy State</button>
   }
 
+  renderPasteButton = () => {
+    let className = 'button-clear';
+    if(!this.props.clipboard){
+      className+=' disabled'
+    }
+    return <button className={className} data-tip='Paste State Here' onClick={this.props.clipboard && this.pasteNode(this.props.selectedModuleKey, Object.keys(this.props.module.states), this.props.selectedStateKey, this.props.selectedStateTransition)}> Paste State</button>
+  }
 
   renderStateEditor = () => {
     if(this.props.module){
@@ -425,11 +421,11 @@ class Editor extends Component {
               <RIEInput className='Editor-top-module' value={(this.props.module && this.props.module.name) || 'Untitled'} propName="name" change={(name) => {this.props.editModuleName(this.props.selectedModuleKey, name.name)}} />
              <div className='Editor-graph-buttons'>
                 {this.renderAddStateButton()}
-                {this.renderInsertStateButton()}
                 {this.renderUndoButton()}
                 {this.renderRedoButton()}
                 {this.renderDeleteButton()}
                 {this.renderCopyButton()}
+                {this.renderPasteButton()}
                 {this.renderDownloadButton()}
 
              </div>
@@ -552,7 +548,8 @@ const mapStateToProps = state => {
     attributes: state.analysis.attributes,
     undoEnabled,
     redoEnabled,
-    refreshCodeFlag: state.editor.refreshCodeFlag
+    refreshCodeFlag: state.editor.refreshCodeFlag,
+    clipboard: state.editor.clipboard
   }
 }
 
