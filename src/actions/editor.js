@@ -68,14 +68,13 @@ export const renameNode = (targetModuleKey, targetNode, newName) => {
 }
 
 export const copyNode = (targetModuleKey, targetNode, newName) => {
-  return dispatchThenAnalyze({
+  return {
     type: 'COPY_NODE',
     data:{
       targetModuleKey,
-      targetNode,
-      newName
+      targetNode
     }
-  })
+  }
 }
 
 export const jsonEdit = (module) => {

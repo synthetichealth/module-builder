@@ -12,6 +12,7 @@ const initialState = {
     modulePanelVisible: true,
     modules: {},
     history: [],
+    clipboard: null,
     historyIndex: -1,
     refreshCodeFlag: false
 };
@@ -42,20 +43,21 @@ export default (state = initialState, action) => {
       return newState;
 
     case 'COPY_NODE':
-      let newStateName = action.data.newName;
-      let newModuleCopy = _.cloneDeep(state.modules[action.data.targetModuleKey])
-      let newModuleState = _.cloneDeep(newModuleCopy.states[action.data.targetNode.name]);
-      newModuleState.name = newStateName;
+      // let newStateName = action.data.newName;
+      // let newModuleState = _.cloneDeep(newModuleCopy.states[action.data.targetNode.name]);
+      // newModuleState.name = newStateName;
 
-      /* fix loopback transition case */
-      renameLoopbackTransition(newModuleState, newStateName, action.data.targetNode.name);
+      // /* fix loopback transition case */
+      // renameLoopbackTransition(newModuleState, newStateName, action.data.targetNode.name);
 
-      newModuleCopy.states[newStateName] = newModuleState;
-      newState.modules[action.data.targetModuleKey] = newModuleCopy
-      newState.selectedStateKey = action.data.newName;
-      newState.selectedStateTransition = null;
+      // newModuleCopy.states[newStateName] = newModuleState;
+      // newState.modules[action.data.targetModuleKey] = newModuleCopy
+      // newState.selectedStateKey = action.data.newName;
+      // newState.selectedStateTransition = null;
 
-      saveHistory(newState);
+      newState.clipboard = _.cloneDeep(state.modules[action.data.targetModuleKey].states[action.data.targetNode.name])
+
+      // saveHistory(newState);
 
       return newState
 
@@ -64,9 +66,6 @@ export default (state = initialState, action) => {
       newState.modules = {...newState.modules}
 
       newState.modules[action.data.currentModuleKey].states = {...newState.modules[action.data.currentModuleKey].states, [action.data.stateKey]:action.data.state};
-      newState.selectedStateKey = action.data.stateKey;
-      newState.selectedModulePanel= 'state';
-      newState.selectedStateTransition = null;
 
       if(action.data.selectedState && typeof action.data.selectedStateTransition === 'number'){
         // We have been instructed to insert into the middle of an existing transition
@@ -137,7 +136,37 @@ export default (state = initialState, action) => {
           newState.modules[action.data.currentModuleKey].states[action.data.selectedState] = alteredState;
         }
         newState.selectedStateTransition = 0;
+      } else if(action.data.selectedState){
+        // we have selected a state, so we will add it AFTER
+        let alteredState = _.cloneDeep(newState.modules[action.data.currentModuleKey].states[action.data.selectedState]);
+
+        delete newState.modules[action.data.currentModuleKey].states[action.data.stateKey]['direct_transition']
+        delete newState.modules[action.data.currentModuleKey].states[action.data.stateKey]['conditional_transition']
+        delete newState.modules[action.data.currentModuleKey].states[action.data.stateKey]['distributed_transition']
+        delete newState.modules[action.data.currentModuleKey].states[action.data.stateKey]['complex_transition']
+
+
+        if(alteredState.direct_transition){
+          newState.modules[action.data.currentModuleKey].states[action.data.stateKey].direct_transition = alteredState.direct_transition;
+        } else if(alteredState.distributed_transition){
+          newState.modules[action.data.currentModuleKey].states[action.data.stateKey].distributed_transition = _.cloneDeep(alteredState.distributed_transition);
+          delete alteredState['distributed_transition']
+        } else if(alteredState.conditional_transition){
+          newState.modules[action.data.currentModuleKey].states[action.data.stateKey].conditional_transition = _.cloneDeep(alteredState.conditional_transition);
+          delete alteredState['conditional_transition']
+        } else if(alteredState.complex_transition){
+          newState.modules[action.data.currentModuleKey].states[action.data.stateKey].complex_transition = _.cloneDeep(alteredState.complex_transition);
+          delete alteredState['complex_transition']
+        }
+        alteredState.direct_transition = action.data.stateKey;
+        newState.modules[action.data.currentModuleKey].states[action.data.selectedState] = alteredState;
+
       }
+
+      newState.selectedStateKey = action.data.stateKey;
+      newState.selectedModulePanel= 'state';
+      newState.selectedStateTransition = null;
+
 
       saveHistory(newState);
 
