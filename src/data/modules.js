@@ -27881,7 +27881,6 @@ export default {"allergic_rhinitis":{
     },
     "Hypothyroid Condition Onset": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Hypothyroidism encounter",
       "codes": [
         {
@@ -27895,40 +27894,6 @@ export default {"allergic_rhinitis":{
     "encounter end": {
       "type": "EncounterEnd",
       "direct_transition": "Terminal"
-    },
-    "fT4 panel results": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "ng/dl",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "3024-7",
-          "display": "Thyroxine (T4) free [Mass/​volume] in Serum or Plasma"
-        }
-      ],
-      "direct_transition": "TSH panel result",
-      "range": {
-        "low": 0.1,
-        "high": 0.4
-      }
-    },
-    "TSH panel result": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "m[IU]/L",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "3016-3",
-          "display": "Thyrotropin [Units/​volume] in Serum or Plasma"
-        }
-      ],
-      "direct_transition": "Label Panel Results",
-      "range": {
-        "low": 2,
-        "high": 5
-      }
     },
     "Synthroid Medication Order": {
       "type": "MedicationOrder",
@@ -27954,14 +27919,45 @@ export default {"allergic_rhinitis":{
         "refills": 6
       }
     },
-    "Label Panel Results": {
+    "Lab Panel Results": {
       "type": "DiagnosticReport",
-      "number_of_observations": 2,
       "codes": [
         {
           "system": "LOINC",
           "code": "24348-5",
           "display": "Free T4 and TSH panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "ng/dl",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "3024-7",
+              "display": "Thyroxine (T4) free [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.1,
+            "high": 0.4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "m[IU]/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "3016-3",
+              "display": "Thyrotropin [Units/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 5
+          }
         }
       ],
       "direct_transition": "Synthroid Medication Order"
@@ -28017,7 +28013,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for symptom"
         }
       ],
-      "direct_transition": "fT4 panel results"
+      "direct_transition": "Lab Panel Results"
     }
   }
 }
@@ -30707,7 +30703,6 @@ export default {"allergic_rhinitis":{
     "KOOS_Total_Assessment": {
       "type": "MultiObservation",
       "category": "survey",
-      "number_of_observations": 5,
       "codes": [
         {
           "system": "LOINC",
@@ -30715,22 +30710,129 @@ export default {"allergic_rhinitis":{
           "display": "Knee injury and Osteoarthritis Outcome Score [KOOS]"
         }
       ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72101-9",
+              "display": "Symptoms score [KOOS]"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 100
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72102-7",
+              "display": "Pain score [KOOS]"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 100
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72100-1",
+              "display": "Activities of daily living score [KOOS]"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 100
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72099-5",
+              "display": "Sport-recreation score [KOOS]"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 100
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72098-7",
+              "display": "Quality of life score [KOOS]"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 100
+          }
+        }
+      ],
       "direct_transition": "KOOS_Attribute_Set",
       "remarks": [
         "Five different subscales are scored separately: KOOS Pain (9 items); KOOS Symptoms (7 items); KOOS ADL (17 items); KOOS Sport/Rec (5 items); KOOS QOL (4 items). Each item has five possible answer options scored from 0 (No Problems) to 4 (Extreme Problems), and the scores are transformed to a 0–100 scale, with zero representing extreme knee problems and 100 representing no knee problems.",
-        "http://www.koos.nu",
-        ""
+        "http://www.koos.nu"
       ]
     },
     "PROMIS10_Total_Assessment": {
       "type": "MultiObservation",
       "category": "survey",
-      "number_of_observations": 2,
       "codes": [
         {
           "system": "LOINC",
           "code": "61576-5",
           "display": "PROMIS short form - global - version 1.1"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71972-4",
+              "display": "PROMIS-10 Global Physical Health (GPH) score"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 20
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71970-8",
+              "display": "PROMIS-10 Global Mental Health (GMH) score"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 20
+          }
         }
       ],
       "direct_transition": "PROMIS10_Attribute_Set",
@@ -30741,12 +30843,88 @@ export default {"allergic_rhinitis":{
     "HOOS_Total_Assessment": {
       "type": "MultiObservation",
       "category": "survey",
-      "number_of_observations": 5,
       "codes": [
         {
           "system": "LOINC",
           "code": "72092-0",
           "display": "Hip Dysfunction and Osteoarthritis Outcome Score [HOOS]"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72096-1",
+              "display": "Symptoms score [HOOS]"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 100
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72097-9",
+              "display": "Pain score [HOOS]"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 100
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72095-3",
+              "display": "Activities of daily living score [HOOS]"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 100
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72094-6",
+              "display": "Sport-recreation score [HOOS]"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 100
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72093-8",
+              "display": "Quality of life score [HOOS]"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 100
+          }
         }
       ],
       "direct_transition": "HOOS_Attribute_Set",
@@ -30761,12 +30939,133 @@ export default {"allergic_rhinitis":{
     "VR36_Total_Assessment": {
       "type": "MultiObservation",
       "category": "survey",
-      "number_of_observations": 8,
       "codes": [
         {
           "system": "LOINC",
           "code": "71933-6",
           "display": "Veterans Rand health survey - 36 item (VR-36)"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71973-2",
+              "display": "VR-36 Mental health (MH) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 30
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71974-0",
+              "display": "VR-36 Role emotion (RE) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 3,
+            "high": 15
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71975-7",
+              "display": "VR-36 Social functioning (SF) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 10
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71976-5",
+              "display": "VR-36 Vitality (VT) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 24
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71977-3",
+              "display": "VR-36 General health (GH) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 25
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71978-1",
+              "display": "VR-36 Bodily pain (BP) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 12
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71979-9",
+              "display": "VR-36 Role physical (RP) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 20
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71980-7",
+              "display": "VR-36 Physical functioning (PF) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 10,
+            "high": 30
+          }
         }
       ],
       "direct_transition": "VR36_Attribute_Set",
@@ -30777,12 +31076,117 @@ export default {"allergic_rhinitis":{
     "PROMIS29_Total_Assessment": {
       "type": "MultiObservation",
       "category": "survey",
-      "number_of_observations": 7,
       "codes": [
         {
           "system": "LOINC",
           "code": "62337-1",
           "display": "PROMIS item bank - 29 profile"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71956-7",
+              "display": "PROMIS-29 Sleep disturbance score"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 20
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71958-3",
+              "display": "PROMIS-29 Satisfaction with participation in social roles score"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 20
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71960-9",
+              "display": "PROMIS-29 Physical function score"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 20
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71962-5",
+              "display": "PROMIS-29 Pain interference score"
+            }
+          ],
+          "exact": {
+            "quantity": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71964-1",
+              "display": "PROMIS-29 Fatigue score"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 20
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71966-6",
+              "display": "PROMIS-29 Depression score"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 20
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71968-2",
+              "display": "PROMIS-29 Anxiety score"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 20
+          }
         }
       ],
       "direct_transition": "PROMIS29_Attribute_Set",
@@ -30825,7 +31229,7 @@ export default {"allergic_rhinitis":{
       ],
       "conditional_transition": [
         {
-          "transition": "KOOS_Symptoms",
+          "transition": "KOOS_Total_Assessment",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "assessment_done",
@@ -30834,7 +31238,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "PROMIS10_GPH",
+          "transition": "PROMIS10_Total_Assessment",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "assessment_done",
@@ -30843,7 +31247,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "VR12_Mental_Health",
+          "transition": "VR12_Total_Assessment",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "assessment_done",
@@ -30864,7 +31268,7 @@ export default {"allergic_rhinitis":{
       ],
       "conditional_transition": [
         {
-          "transition": "HOOS_Symptoms",
+          "transition": "HOOS_Total_Assessment",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "assessment_done",
@@ -30873,7 +31277,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "PROMIS10_GPH",
+          "transition": "PROMIS10_Total_Assessment",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "assessment_done",
@@ -30882,7 +31286,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "PROMIS29_Sleep_Disturbance",
+          "transition": "PROMIS29_Total_Assessment",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "assessment_done",
@@ -30891,7 +31295,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "VR12_Mental_Health",
+          "transition": "VR12_Total_Assessment",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "assessment_done",
@@ -30900,7 +31304,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "VR36_Mental_Health",
+          "transition": "VR36_Total_Assessment",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "assessment_done",
@@ -30916,12 +31320,138 @@ export default {"allergic_rhinitis":{
     "VR12_Total_Assessment": {
       "type": "MultiObservation",
       "category": "survey",
-      "number_of_observations": 8,
       "codes": [
         {
           "system": "LOINC",
           "code": "71934-4",
           "display": "Veterans Rand health survey - 12 item (VR-12)"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72009-4",
+              "display": "VR-12 Mental health (MH) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 12
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72010-2",
+              "display": "VR-12 Role emotion (RE) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 10
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72011-0",
+              "display": "VR-12 Social functioning (SF) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 5
+          }
+        },
+        {
+          "type": "Observation",
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72012-8",
+              "display": "VR-12 Vitality (VT) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 6
+          }
+        },
+        {
+          "type": "Observation",
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72013-6",
+              "display": "VR-12 General health (GH) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 5
+          }
+        },
+        {
+          "type": "Observation",
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72014-4",
+              "display": "VR-12 Bodily pain (BP) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 5
+          }
+        },
+        {
+          "type": "Observation",
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72015-1",
+              "display": "VR-12 Role physical (RP) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 10
+          }
+        },
+        {
+          "type": "Observation",
+          "category": "survey",
+          "unit": "units",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "72016-9",
+              "display": "VR-12 Physical functioning (PF) score - oblique method"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 6
+          }
         }
       ],
       "direct_transition": "VR12_Attribute_Set",
@@ -30969,613 +31499,19 @@ export default {"allergic_rhinitis":{
       "type": "Simple",
       "direct_transition": "Joint_Replacement_Assessment_Terminal"
     },
-    "PROMIS10_GPH": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71972-4",
-          "display": "PROMIS-10 Global Physical Health (GPH) score"
-        }
-      ],
-      "direct_transition": "PROMIS10_GMH",
-      "range": {
-        "low": 4,
-        "high": 20
-      }
-    },
-    "PROMIS10_GMH": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71970-8",
-          "display": "PROMIS-10 Global Mental Health (GMH) score"
-        }
-      ],
-      "direct_transition": "PROMIS10_Total_Assessment",
-      "range": {
-        "low": 4,
-        "high": 20
-      }
-    },
-    "KOOS_Symptoms": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72101-9",
-          "display": "Symptoms score [KOOS]"
-        }
-      ],
-      "direct_transition": "KOOS_Pain",
-      "range": {
-        "low": 0,
-        "high": 100
-      }
-    },
-    "KOOS_Pain": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72102-7",
-          "display": "Pain score [KOOS]"
-        }
-      ],
-      "direct_transition": "KOOS_ADL",
-      "range": {
-        "low": 0,
-        "high": 100
-      }
-    },
-    "KOOS_ADL": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72100-1",
-          "display": "Activities of daily living score [KOOS]"
-        }
-      ],
-      "direct_transition": "KOOS_Sport/Recreation",
-      "range": {
-        "low": 0,
-        "high": 100
-      }
-    },
-    "KOOS_Sport/Recreation": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72099-5",
-          "display": "Sport-recreation score [KOOS]"
-        }
-      ],
-      "range": {
-        "low": 0,
-        "high": 100
-      },
-      "direct_transition": "KOOS_QOL"
-    },
-    "KOOS_QOL": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72098-7",
-          "display": "Quality of life score [KOOS]"
-        }
-      ],
-      "direct_transition": "KOOS_Total_Assessment",
-      "range": {
-        "low": 0,
-        "high": 100
-      }
-    },
-    "HOOS_Symptoms": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72096-1",
-          "display": "Symptoms score [HOOS]"
-        }
-      ],
-      "range": {
-        "low": 0,
-        "high": 100
-      },
-      "direct_transition": "HOOS_Pain"
-    },
-    "HOOS_Pain": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72097-9",
-          "display": "Pain score [HOOS]"
-        }
-      ],
-      "range": {
-        "low": 0,
-        "high": 100
-      },
-      "direct_transition": "HOOS_ADL"
-    },
-    "HOOS_ADL": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72095-3",
-          "display": "Activities of daily living score [HOOS]"
-        }
-      ],
-      "range": {
-        "low": 0,
-        "high": 100
-      },
-      "direct_transition": "HOOS_Sport/Recreation"
-    },
-    "HOOS_Sport/Recreation": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72094-6",
-          "display": "Sport-recreation score [HOOS]"
-        }
-      ],
-      "range": {
-        "low": 0,
-        "high": 100
-      },
-      "direct_transition": "HOOS_QOL"
-    },
-    "HOOS_QOL": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72093-8",
-          "display": "Quality of life score [HOOS]"
-        }
-      ],
-      "range": {
-        "low": 0,
-        "high": 100
-      },
-      "direct_transition": "HOOS_Total_Assessment"
-    },
-    "VR12_Mental_Health": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72009-4",
-          "display": "VR-12 Mental health (MH) score - oblique method"
-        }
-      ],
-      "direct_transition": "VR12_Role_Emotion",
-      "range": {
-        "low": 2,
-        "high": 12
-      }
-    },
-    "VR12_Role_Emotion": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72010-2",
-          "display": "VR-12 Role emotion (RE) score - oblique method"
-        }
-      ],
-      "direct_transition": "VR12_Social_Functioning",
-      "range": {
-        "low": 2,
-        "high": 10
-      }
-    },
-    "VR12_Social_Functioning": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72011-0",
-          "display": "VR-12 Social functioning (SF) score - oblique method"
-        }
-      ],
-      "direct_transition": "VR12_Vitality",
-      "range": {
-        "low": 1,
-        "high": 5
-      }
-    },
-    "VR12_Vitality": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72012-8",
-          "display": "VR-12 Vitality (VT) score - oblique method"
-        }
-      ],
-      "direct_transition": "VR12_General_Health",
-      "range": {
-        "low": 1,
-        "high": 6
-      }
-    },
-    "VR12_General_Health": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72013-6",
-          "display": "VR-12 General health (GH) score - oblique method"
-        }
-      ],
-      "direct_transition": "VR12_Bodily_Pain",
-      "range": {
-        "low": 1,
-        "high": 5
-      }
-    },
-    "VR12_Bodily_Pain": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72014-4",
-          "display": "VR-12 Bodily pain (BP) score - oblique method"
-        }
-      ],
-      "direct_transition": "VR12_Role_Physical",
-      "range": {
-        "low": 1,
-        "high": 5
-      }
-    },
-    "VR12_Role_Physical": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72015-1",
-          "display": "VR-12 Role physical (RP) score - oblique method"
-        }
-      ],
-      "direct_transition": "VR12_Physical_Functioning",
-      "range": {
-        "low": 2,
-        "high": 10
-      }
-    },
-    "VR12_Physical_Functioning": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "72016-9",
-          "display": "VR-12 Physical functioning (PF) score - oblique method"
-        }
-      ],
-      "direct_transition": "VR12_Total_Assessment",
-      "range": {
-        "low": 2,
-        "high": 6
-      }
-    },
-    "VR36_Mental_Health": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71973-2",
-          "display": "VR-36 Mental health (MH) score - oblique method"
-        }
-      ],
-      "range": {
-        "low": 5,
-        "high": 30
-      },
-      "direct_transition": "VR36_Role_Emotion"
-    },
-    "VR36_Role_Emotion": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71974-0",
-          "display": "VR-36 Role emotion (RE) score - oblique method"
-        }
-      ],
-      "range": {
-        "low": 3,
-        "high": 15
-      },
-      "direct_transition": "VR36_Social_Functioning"
-    },
-    "VR36_Social_Functioning": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71975-7",
-          "display": "VR-36 Social functioning (SF) score - oblique method"
-        }
-      ],
-      "range": {
-        "low": 2,
-        "high": 10
-      },
-      "direct_transition": "VR36_Vitality"
-    },
-    "VR36_Vitality": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71976-5",
-          "display": "VR-36 Vitality (VT) score - oblique method"
-        }
-      ],
-      "range": {
-        "low": 4,
-        "high": 24
-      },
-      "direct_transition": "VR36_General_Health"
-    },
-    "VR36_General_Health": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71977-3",
-          "display": "VR-36 General health (GH) score - oblique method"
-        }
-      ],
-      "range": {
-        "low": 5,
-        "high": 25
-      },
-      "direct_transition": "VR36_Bodily_Pain"
-    },
-    "VR36_Bodily_Pain": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71978-1",
-          "display": "VR-36 Bodily pain (BP) score - oblique method"
-        }
-      ],
-      "range": {
-        "low": 2,
-        "high": 12
-      },
-      "direct_transition": "VR36_Role_Physical"
-    },
-    "VR36_Role_Physical": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71979-9",
-          "display": "VR-36 Role physical (RP) score - oblique method"
-        }
-      ],
-      "range": {
-        "low": 4,
-        "high": 20
-      },
-      "direct_transition": "VR36_Physical_Functioning"
-    },
-    "VR36_Physical_Functioning": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71980-7",
-          "display": "VR-36 Physical functioning (PF) score - oblique method"
-        }
-      ],
-      "range": {
-        "low": 10,
-        "high": 30
-      },
-      "direct_transition": "VR36_Total_Assessment"
-    },
-    "PROMIS29_Sleep_Disturbance": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71956-7",
-          "display": "PROMIS-29 Sleep disturbance score"
-        }
-      ],
-      "direct_transition": "PROMIS29_Satisfaction_With_Participation_In_Social_Roles",
-      "range": {
-        "low": 4,
-        "high": 20
-      }
-    },
-    "PROMIS29_Satisfaction_With_Participation_In_Social_Roles": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71958-3",
-          "display": "PROMIS-29 Satisfaction with participation in social roles score"
-        }
-      ],
-      "direct_transition": "PROMIS29_Physical_Function",
-      "range": {
-        "low": 4,
-        "high": 20
-      }
-    },
-    "PROMIS29_Physical_Function": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71960-9",
-          "display": "PROMIS-29 Physical function score"
-        }
-      ],
-      "direct_transition": "PROMIS29_Pain_Interference",
-      "range": {
-        "low": 4,
-        "high": 20
-      }
-    },
-    "PROMIS29_Pain_Interference": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71962-5",
-          "display": "PROMIS-29 Pain interference score"
-        }
-      ],
-      "exact": {
-        "quantity": 1
-      },
-      "direct_transition": "PROMIS29_Fatigue"
-    },
-    "PROMIS29_Fatigue": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71964-1",
-          "display": "PROMIS-29 Fatigue score"
-        }
-      ],
-      "direct_transition": "PROMIS29_Depression",
-      "range": {
-        "low": 4,
-        "high": 20
-      }
-    },
-    "PROMIS29_Depression": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71966-6",
-          "display": "PROMIS-29 Depression score"
-        }
-      ],
-      "direct_transition": "PROMIS29_Anxiety",
-      "range": {
-        "low": 4,
-        "high": 20
-      }
-    },
-    "PROMIS29_Anxiety": {
-      "type": "Observation",
-      "category": "survey",
-      "unit": "units",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "71968-2",
-          "display": "PROMIS-29 Anxiety score"
-        }
-      ],
-      "direct_transition": "PROMIS29_Total_Assessment",
-      "range": {
-        "low": 4,
-        "high": 20
-      }
-    },
     "First_FSA_Knee": {
       "type": "Simple",
       "distributed_transition": [
         {
-          "transition": "KOOS_Symptoms",
+          "transition": "KOOS_Total_Assessment",
           "distribution": 0.34
         },
         {
-          "transition": "PROMIS10_GPH",
+          "transition": "PROMIS10_Total_Assessment",
           "distribution": 0.33
         },
         {
-          "transition": "VR12_Mental_Health",
+          "transition": "VR12_Total_Assessment",
           "distribution": 0.33
         }
       ]
@@ -31584,23 +31520,23 @@ export default {"allergic_rhinitis":{
       "type": "Simple",
       "distributed_transition": [
         {
-          "transition": "HOOS_Symptoms",
+          "transition": "HOOS_Total_Assessment",
           "distribution": 0.2
         },
         {
-          "transition": "PROMIS10_GPH",
+          "transition": "PROMIS10_Total_Assessment",
           "distribution": 0.2
         },
         {
-          "transition": "PROMIS29_Sleep_Disturbance",
+          "transition": "PROMIS29_Total_Assessment",
           "distribution": 0.2
         },
         {
-          "transition": "VR12_Mental_Health",
+          "transition": "VR12_Total_Assessment",
           "distribution": 0.2
         },
         {
-          "transition": "VR36_Mental_Health",
+          "transition": "VR36_Total_Assessment",
           "distribution": 0.2
         }
       ]
@@ -32482,7 +32418,7 @@ export default {"allergic_rhinitis":{
           "remarks": [
             "BMI is not particularly meaningful for children under 2"
           ],
-          "transition": "Record_Systolic_BP"
+          "transition": "Record_BP"
         },
         {
           "transition": "Record_BMI"
@@ -32502,42 +32438,11 @@ export default {"allergic_rhinitis":{
         }
       ],
       "unit": "kg/m2",
-      "direct_transition": "Record_Systolic_BP"
-    },
-    "Record_Systolic_BP": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "vital-signs",
-      "vital_sign": "Systolic Blood Pressure",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "8480-6",
-          "display": "Systolic Blood Pressure"
-        }
-      ],
-      "unit": "mmHg",
-      "direct_transition": "Record_Diastolic_BP"
-    },
-    "Record_Diastolic_BP": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "vital-signs",
-      "vital_sign": "Diastolic Blood Pressure",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "8462-4",
-          "display": "Diastolic Blood Pressure"
-        }
-      ],
-      "unit": "mmHg",
       "direct_transition": "Record_BP"
     },
     "Record_BP": {
       "type": "MultiObservation",
       "category": "vital-signs",
-      "number_of_observations": 2,
       "codes": [
         {
           "system": "LOINC",
@@ -32545,215 +32450,34 @@ export default {"allergic_rhinitis":{
           "display": "Blood Pressure"
         }
       ],
-      "target_encounter": "Wellness_Encounter",
-      "direct_transition": "Lab_1_HA1C"
-    },
-    "Lab_1_HA1C": {
-      "type": "Simple",
-      "conditional_transition": [
+      "observations": [
         {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "44054006",
-                    "display": "Diabetes"
-                  }
-                ]
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "15777000",
-                    "display": "Prediabetes"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "Record_HA1C"
+          "category": "vital-signs",
+          "vital_sign": "Systolic Blood Pressure",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8480-6",
+              "display": "Systolic Blood Pressure"
+            }
+          ],
+          "unit": "mmHg"
         },
         {
-          "transition": "Lab_2_MetabolicPanel"
-        }
-      ]
-    },
-    "Record_HA1C": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Blood Glucose",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "4548-4",
-          "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+          "category": "vital-signs",
+          "vital_sign": "Diastolic Blood Pressure",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8462-4",
+              "display": "Diastolic Blood Pressure"
+            }
+          ],
+          "unit": "mmHg"
         }
       ],
-      "unit": "%",
-      "direct_transition": "Lab_2_MetabolicPanel"
-    },
-    "Lab_2_MetabolicPanel": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "44054006",
-                    "display": "Diabetes"
-                  }
-                ]
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "15777000",
-                    "display": "Prediabetes"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "Record_Glucose"
-        },
-        {
-          "transition": "Lab_3_LipidPanel"
-        }
-      ]
-    },
-    "Record_Glucose": {
-      "type": "Observation",
       "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Glucose",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2339-0",
-          "display": "Glucose"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_UreaNitrogen"
-    },
-    "Record_UreaNitrogen": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Urea Nitrogen",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "6299-2",
-          "display": "Urea Nitrogen"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_Creatinine"
-    },
-    "Record_Creatinine": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Creatinine",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "38483-4",
-          "display": "Creatinine"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_Calcium"
-    },
-    "Record_Calcium": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Calcium",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "49765-1",
-          "display": "Calcium"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_Sodium"
-    },
-    "Record_Sodium": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Sodium",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2947-0",
-          "display": "Sodium"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_Potassium"
-    },
-    "Record_Potassium": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Potassium",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "6298-4",
-          "display": "Potassium"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_Chloride"
-    },
-    "Record_Chloride": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Chloride",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2069-3",
-          "display": "Chloride"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_CO2"
-    },
-    "Record_CO2": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Carbon Dioxide",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "20565-8",
-          "display": "Carbon Dioxide"
-        }
-      ],
-      "unit": "mmol/L",
-      "direct_transition": "Record_MetabolicPanel"
+      "direct_transition": "Lab_MetabolicPanel"
     },
     "Record_MetabolicPanel": {
       "type": "DiagnosticReport",
@@ -32765,10 +32489,237 @@ export default {"allergic_rhinitis":{
           "display": "Basic Metabolic Panel"
         }
       ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Creatinine",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        }
+      ],
       "target_encounter": "Wellness_Encounter",
-      "direct_transition": "Lab_3_LipidPanel"
+      "direct_transition": "Lab_LipidPanel"
     },
-    "Lab_3_LipidPanel": {
+    "Record_LipidPanel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 4,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "57698-3",
+          "display": "Lipid Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Total Cholesterol",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2093-3",
+              "display": "Total Cholesterol"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Triglycerides",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2571-8",
+              "display": "Triglycerides"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "LDL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "18262-6",
+              "display": "Low Density Lipoprotein Cholesterol"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "HDL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2085-9",
+              "display": "High Density Lipoprotein Cholesterol"
+            }
+          ],
+          "unit": "mg/dL"
+        }
+      ],
+      "target_encounter": "Wellness_Encounter",
+      "direct_transition": "Lab_ACR"
+    },
+    "Record_ACR": {
+      "type": "Observation",
+      "target_encounter": "Wellness_Encounter",
+      "vital_sign": "Microalbumin Creatinine Ratio",
+      "category": "laboratory",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "14959-1",
+          "display": "Microalbumin Creatinine Ratio"
+        }
+      ],
+      "unit": "mg/g",
+      "direct_transition": "Lab_EGFR"
+    },
+    "Record_EGFR": {
+      "type": "Observation",
+      "target_encounter": "Wellness_Encounter",
+      "category": "laboratory",
+      "vital_sign": "EGFR",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "33914-3",
+          "display": "Estimated Glomerular Filtration Rate"
+        }
+      ],
+      "unit": "mL/min/{1.73_m2}",
+      "direct_transition": "Wellness_Encounter"
+    },
+    "Lab_MetabolicPanel": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "44054006",
+                    "display": "Diabetes"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "15777000",
+                    "display": "Prediabetes"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "Record_MetabolicPanel"
+        },
+        {
+          "transition": "Lab_LipidPanel"
+        }
+      ]
+    },
+    "Lab_LipidPanel": {
       "type": "Simple",
       "conditional_transition": [
         {
@@ -32792,7 +32743,7 @@ export default {"allergic_rhinitis":{
                     "condition_type": "Not",
                     "condition": {
                       "condition_type": "PriorState",
-                      "name": "Record_Cholesterol",
+                      "name": "Record_LipidPanel",
                       "within": {
                         "quantity": 3,
                         "unit": "years"
@@ -32809,87 +32760,14 @@ export default {"allergic_rhinitis":{
               }
             ]
           },
-          "transition": "Record_Cholesterol"
+          "transition": "Record_LipidPanel"
         },
         {
-          "transition": "Lab_4_ACR"
+          "transition": "Lab_ACR"
         }
       ]
     },
-    "Record_Cholesterol": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Total Cholesterol",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2093-3",
-          "display": "Total Cholesterol"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_Triglycerides"
-    },
-    "Record_Triglycerides": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "Triglycerides",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2571-8",
-          "display": "Triglycerides"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_LDL"
-    },
-    "Record_LDL": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "LDL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "18262-6",
-          "display": "Low Density Lipoprotein Cholesterol"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_HDL"
-    },
-    "Record_HDL": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "HDL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "2085-9",
-          "display": "High Density Lipoprotein Cholesterol"
-        }
-      ],
-      "unit": "mg/dL",
-      "direct_transition": "Record_LipidPanel"
-    },
-    "Record_LipidPanel": {
-      "type": "DiagnosticReport",
-      "number_of_observations": 4,
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "57698-3",
-          "display": "Lipid Panel"
-        }
-      ],
-      "target_encounter": "Wellness_Encounter",
-      "direct_transition": "Lab_4_ACR"
-    },
-    "Lab_4_ACR": {
+    "Lab_ACR": {
       "type": "Simple",
       "conditional_transition": [
         {
@@ -32906,26 +32784,11 @@ export default {"allergic_rhinitis":{
           "transition": "Record_ACR"
         },
         {
-          "transition": "Lab_5_EGFR"
+          "transition": "Lab_EGFR"
         }
       ]
     },
-    "Record_ACR": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "vital_sign": "Microalbumin Creatinine Ratio",
-      "category": "laboratory",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "14959-1",
-          "display": "Microalbumin Creatinine Ratio"
-        }
-      ],
-      "unit": "mg/g",
-      "direct_transition": "Lab_5_EGFR"
-    },
-    "Lab_5_EGFR": {
+    "Lab_EGFR": {
       "type": "Simple",
       "conditional_transition": [
         {
@@ -32960,21 +32823,6 @@ export default {"allergic_rhinitis":{
           "transition": "Wellness_Encounter"
         }
       ]
-    },
-    "Record_EGFR": {
-      "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
-      "category": "laboratory",
-      "vital_sign": "EGFR",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "33914-3",
-          "display": "Estimated Glomerular Filtration Rate"
-        }
-      ],
-      "unit": "mL/min/{1.73_m2}",
-      "direct_transition": "Wellness_Encounter"
     }
   }
 }

@@ -1305,6 +1305,7 @@ class MultiObservation extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): MultiObservationState);
+    let observationCount = (state.observations && state.observations.length) || 0;
     let options = [
       {id: 'social-history', text: 'social-history'},
       {id: 'vital-signs', text: 'vital-signs'},
@@ -1319,13 +1320,24 @@ class MultiObservation extends Component<Props> {
       <div>
         Category: <RIESelect className='editable-text' value={{id: state.category, text: state.category}} propName="category" change={this.props.onChange('category')} options={options} />
         <br />
-        Number of Observations: <RIENumber className='editable-text' value={state.number_of_observations} propName='number_of_observations' change={this.props.onChange('number_of_observations')} />
-        <br />
         <div className='section'>
           Codes
           <br />
           <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
           <br />
+        </div>
+        <div className='section'>
+          <b>Observations</b>
+          <br />
+          {state.observations && state.observations.map((observation, i) => {
+            return (
+              <div className='section' key={i}>
+                Observation #{i+1} (<a className='editable-text delete-button' onClick={() => this.props.onChange(`observations.[${i}]`)({val: {id: null}})}>remove</a>)
+                <Observation state={observation} onChange={this.props.onChange(`observations.[${i}]`)} />
+              </div>
+            )
+          })}
+          <a className='editable-text' onClick={() => this.props.onChange(`observations.[${observationCount}]`)({val: {id: _.cloneDeep(getTemplate('Contained.Observation'))}})}>+</a>
         </div>
       </div>
     );
@@ -1337,14 +1349,27 @@ class DiagnosticReport extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): DiagnosticReportState);
+    let observationCount = (state.observations && state.observations.length) || 0;
     return (
       <div>
-        Number of Observations: <RIENumber className='editable-text' value={state.number_of_observations} propName='number_of_observations' change={this.props.onChange('number_of_observations')} />
-        <br />
         <div className='section'>
-          Codes
+          <b>Codes</b>
           <br />
           <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
+        </div>
+        <div className='section'>
+          <b>Observations</b>
+          <br />
+          {state.observations && state.observations.map((observation, i) => {
+            return (
+              <div className='section' key={i}>
+                Observation #{i+1} (<a className='editable-text delete-button' onClick={() => this.props.onChange(`observations.[${i}]`)({val: {id: null}})}>remove</a>)
+                <Observation state={observation} onChange={this.props.onChange(`observations.[${i}]`)} />
+              </div>
+            )
+          })}
+        <a className='editable-text' onClick={() => this.props.onChange(`observations.[${observationCount}]`)({val: {id: _.cloneDeep(getTemplate('Contained.Observation'))}})}>+</a>
+
         </div>
       </div>
     );

@@ -271,7 +271,7 @@ const stateDescription = (state) =>{
       details = `Set '${state["attribute"]}' = ${(v === undefined || v === null || v === "") ? 'nil' : v}`
       break;
     case 'Symptom':
-      let s = state['symptom']
+     let s = state['symptom']
       if(state.range !== undefined){
         let r = state['range']
         details = `${s}: ${r['low']} - ${r['high']}`
@@ -290,6 +290,12 @@ const stateDescription = (state) =>{
         details = `Record value from Vital Sign '${state["vital_sign"]}' ${unit}\\l`
       } else if (state.attribute !== undefined) {
         details = `Record value from Attribute '${state["attribute"]}' ${unit}\\l`
+      } else if(state.range !== undefined){
+        let r = state['range']
+        details = `Record value between: ${r['low']} - ${r['high']} ${unit}\\l`
+      } else if (state.exact !== undefined) {
+        let e = state['exact']
+        details = `Record value ${e['quantity']} ${unit}\\l`
       }
       break;
       
@@ -324,7 +330,37 @@ const stateDescription = (state) =>{
       break;
     case 'MultiObservation':
     case 'DiagnosticReport':
-      details = `Group the last ${state['number_of_observations']} Observations\\l`
+      if(state.observations && state.observations.length > 0){
+        let diagType = ['Type']
+        let diagValue = ['Value']
+        let diagUnits = ['Unit'];
+        state.observations.forEach( (s,i) => {
+          let unit = s['unit']
+          if(unit){
+            unit = unit.replace('{','(').replace('}',')')
+          }
+          diagType.push(s.codes.map(c => c.display).join('\\l'))
+          diagUnits.push(unit)
+
+          if(s.vital_sign !== undefined) {
+            diagValue.push(`Vital Sign: '${s["vital_sign"]}'`)
+          } else if (s.attribute !== undefined) {
+            diagValue.push(`Attribute: '${s["attribute"]}'`)
+          } else if(s.range !== undefined){
+            let r = s['range']
+            diagValue.push(`${r['low']} - ${r['high']}`)
+          } else if (s.exact !== undefined) {
+            let e = s['exact']
+            diagValue.push(`${e['quantity']}`);
+          }
+        });
+        details += `{${diagType.map(t => t).join('|')}}|`;
+        details += `{${diagValue.map(t => t).join('|')}}|`;
+        details += `{${diagUnits.map(t => t).join('|')}}|`;
+      } else {
+        details = `No Observations\\l`;
+      }
+
       break;
     default:
       break;
