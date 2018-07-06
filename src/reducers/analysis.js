@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { getTemplate } from '../templates/Templates'
 
 const initialState = {
   libraryModuleCodes: {}, // list types of nodes
@@ -27,6 +28,76 @@ const attributes = module => {
     if (x > y) {return 1;}
     return 0;
   })
+}
+
+const templateCodes = {};
+Object.keys(getTemplate('Type').Code).map(c => getTemplate('Type').Code[c]).forEach(code => {
+  templateCodes[`${code.code}-${code.system}-${code.display}`] = true;
+});
+
+const placeholderCodeWarnings = (module) => {
+  const warnings = [];
+  Object.keys(module.states).forEach(stateName => {
+    let state = module.states[stateName];
+    state.codes && state.codes.forEach(code => {
+      if(templateCodes[`${code.code}-${code.system}-${code.display}`]){
+        warnings.push({stateName: stateName, message: 'Code uses an invalid template code: ' + code.system + '[' + code.code + ']'});
+      }
+    });
+
+    switch(state.type){
+      case 'MultiObservation':
+      case 'DiagnosticReport':
+        if(state.observations){
+          state.observations.forEach(o => {
+          o.codes && o.codes.forEach(code => {
+            if(templateCodes[`${code.code}-${code.system}-${code.display}`]){
+              warnings.push({stateName: stateName, message: 'Code in observation uses an invalid template code: ' + code.system + '[' + code.code + ']'});
+            }
+          })
+        })}
+
+        break; 
+      case 'ImagingStudy':
+        if(state.procedure_code){
+            if(templateCodes[`${state.procedure_code.code}-${state.procedure_code.system}-${state.procedure_code.display}`]){
+              warnings.push({stateName: stateName, message: 'Code in procedure code uses an invalid template code: ' + state.procedure_code.system + '[' + state.procedure_code.code + ']'});
+            }
+        }
+        if(state.series ){
+          state.series.forEach(series => {
+            if(series.body_site){
+              if(templateCodes[`${series.body_site.code}-${series.body_site.system}-${series.body_site.display}`]){
+                warnings.push({stateName: stateName, message: 'Code in imaging series uses an invalid template code: ' + series.body_site.system + '[' + series.body_site.code + ']'});
+              }
+            }
+            if(series.modality){
+              if(templateCodes[`${series.modality.code}-${series.modality.system}-${series.modality.display}`]){
+                warnings.push({stateName: stateName, message: 'Code in imaging series uses an invalid template code: ' + series.modality.system + '[' + series.modality.code + ']'});
+              }
+            }
+            if(series.instances){
+              series.instances.forEach(instance => {
+                if(instance.sop_class){
+                  if(templateCodes[`${instance.sop_class.code}-${instance.sop_class.system}-${instance.sop_class.display}`]){
+                    warnings.push({stateName: stateName, message: 'Code in imaging series uses an invalid template code: ' + instance.sop_class.system + '[' + instance.sop_class.code + ']'});
+                  }
+                }
+              })
+            }
+
+          })
+
+        }
+
+      default:
+        break;
+
+
+    }
+  })
+  return warnings;
+
 }
 
 const stateCollisionWarnings = (module, globalCodes) => {
@@ -203,7 +274,8 @@ export default (state = initialState, action) => {
     case 'ANALYZE':
 
       newState.warnings = [...stateCollisionWarnings(action.data.module, newState.libraryModuleCodes),
-                           ...orphanStateWarnings(action.data.module)];
+                           ...orphanStateWarnings(action.data.module),
+                           ...placeholderCodeWarnings(action.data.module)];
 
       newState.relatedModules = [...relatedBySubmodule(action.data.moduleKey, action.data.module, newState.libraryRelatedModules)];
 
