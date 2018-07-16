@@ -1247,12 +1247,7 @@ class Observation extends Component<Props> {
         <div className='section'>
           Exact Quantity: <RIENumber className='editable-text' value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Range</a>
-          <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('attribute')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Attribute</a>
-          <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('vital_sign')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}})}}>Change to Vital Sign</a>
-          <br />
+          { this.renderToggles('exact') }
         </div>
       );
     } else if (state.range) {
@@ -1262,12 +1257,7 @@ class Observation extends Component<Props> {
           <br />
           Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Exact</a>
-          <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('attribute')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Attribute</a>
-          <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('vital_sign')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}})}}>Change to Vital Sign</a>
-          <br />
+          { this.renderToggles('range') }
         </div>
       );
     } else if (state.attribute) {
@@ -1275,28 +1265,77 @@ class Observation extends Component<Props> {
         <div className='section'>
           Attribute: <RIEInput className='editable-text' value={state.attribute} propName={'attribute'}  change={this.props.onChange('attribute')} />
           <br/>
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Exact</a>
-          <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Range</a>
-          <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('vital_sign')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}})}}>Change to Vital Sign</a>
-          <br />
+          { this.renderToggles('attribute') }
+        </div>
+      );
+    } else if (state.value_code) {
+      return (
+        <div className='section'>
+          <Code code={state.value_code} system={"SNOMED-CT"} onChange={this.props.onChange('value_code')} />
+          { this.renderToggles('value_code') }
         </div>
       );
     } else { // vital_sign
       return (
         <div className='section'>
           Vital Sign: <RIEInput className='editable-text' value={state.vital_sign} propName={'vital_sign'}  change={this.props.onChange('vital_sign')} />
-          <br/>
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Exact</a>
-          <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Range</a>
-          <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('attribute')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Attribute</a>
-          <br />
+          { this.renderToggles('vital_sign') }
         </div>
       );
     }
+  }
+
+  renderToggles(currentItem) {
+    console.log(currentItem);
+
+    let toggles = [];
+
+    if (currentItem != 'exact') {
+      toggles.push(
+                <div>
+                  <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Exact</a>
+                  <br />
+                </div>
+        );
+    }
+
+    if (currentItem != 'range') {
+      toggles.push(
+                <div>
+                  <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Range</a>
+                  <br />
+                </div>
+        );
+    }
+
+    if (currentItem != 'attribute') {
+      toggles.push(
+                <div>
+                  <a className='editable-text' onClick={() => {this.props.onChange('attribute')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Attribute</a>
+                  <br />
+                </div>
+        );
+    }
+
+    if (currentItem != 'vital_sign') {
+      toggles.push(
+                <div>
+                  <a className='editable-text' onClick={() => {this.props.onChange('vital_sign')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Vital Sign</a>
+                  <br />
+                </div>
+        );
+    }
+
+    if (currentItem != 'value_code') {
+      toggles.push(
+                <div>
+                  <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id:  getTemplate('Type.Code.Snomed')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Value Code</a>
+                  <br />
+                </div>
+        );
+    }
+
+    return toggles;
   }
 
 }
