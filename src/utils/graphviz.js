@@ -296,6 +296,9 @@ const stateDescription = (state) =>{
       } else if (state.exact !== undefined) {
         let e = state['exact']
         details = `Record value ${e['quantity']} ${unit}\\l`
+      } else if (state.value_code !== undefined) {
+        let v = state['value_code']
+        details = `Record value ${v['system']}:[${v['code']}] ${v['display']}\\l`
       }
       break;
       
