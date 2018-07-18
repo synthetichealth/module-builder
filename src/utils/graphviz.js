@@ -298,7 +298,7 @@ const stateDescription = (state) =>{
         details = `Record value ${e['quantity']} ${unit}\\l`
       } else if (state.value_code !== undefined) {
         let v = state['value_code']
-        details = `Record value ${v['system']}:[${v['code']}] ${v['display']}\\l`
+        details = `Record value ${v['system']}[${v['code']}]: ${v['display']}\\l`
       }
       break;
       
