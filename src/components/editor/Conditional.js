@@ -224,63 +224,36 @@ class Observation extends Component<Props> {
 
   renderValueOrCodeValue() { // renders numerical or code value
     let conditional = ((this.props.conditional: any): ObservationConditional);
-    let value_code = null;
-    let valueInput = <div/>
-    if (conditional.value) { 
-      valueInput = <RIEInput className='editable-text' value={conditional.value} propName='value' change={this.props.onChange('value')} /> 
-      if (conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){
-        return (
-          <div>
-            Numeric Value:
-            {valueInput}
-            <br />
-            <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id: getTemplate('Type.Code.Snomed')}}); this.props.onChange('value')({val: {id: null}})}}>Change to Value Code</a>
-            <br />
-          </div>
-        );
-      } else {
-        return (
-          <div>
-            No value needed for '{conditional.operator}'
-          </div>
-        )
-      }  
-    } else if (conditional.value_code) { 
-      value_code = <Code className='editable-text' system={getTemplate('Type.Code.Snomed.display')} code={conditional.value_code} onChange={this.props.onChange('value_code')} /> 
-      if (conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){
+    let value_code = <Code className='editable-text' system={getTemplate('Type.Code.Snomed.display')} code={conditional.value_code} onChange={this.props.onChange('value_code')} />
+    let value = <RIEInput className='editable-text' value={conditional.value} propName='value' change={this.props.onChange('value')} />
+    if (conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){
+      if (conditional.value_code) { 
         return (
           <div>
             Value Code:
             <div className='section'>
             {value_code}
             </div>
-            <a className='editable-text' onClick={() => {this.props.onChange('value')({val: {id: "Enter value"}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Numeric Value</a>
+            <a className='editable-text' onClick={() => {this.props.onChange('value')({val: {id: "0"}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Numeric Value</a>
           </div>
-        );
-      } else {
+        );  
+      } else { 
         return (
           <div>
-            No value needed for '{conditional.operator}'
+            Numeric Value:
+            {value}
+            <br />
+            <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id: getTemplate('Type.Code.Snomed')}}); this.props.onChange('value')({val: {id: null}})}}>Change to Value Code</a>
+            <br />
           </div>
-        )
+        );
       }  
     } else {
-      if (conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){
-        return (
-          <div>
-            <a className='editable-text' onClick={() => {this.props.onChange('value')({val: {id: "Enter value"}}); this.props.onChange('value_code')({val: {id: null}})}}>Add Numeric Value</a>
-            <br />
-            <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id: getTemplate('Type.Code.Snomed')}}); this.props.onChange('value')({val: {id: null}})}}>Add Value Code</a>
-            <br />
-          </div>
-        );
-      } else {
-        return (
-          <div>
-            No value needed for '{conditional.operator}'
-          </div>
-        )
-      }  
+      return (
+        <div>
+          No value needed for '{conditional.operator}'
+        </div>
+      )
     }
   }  
 }
