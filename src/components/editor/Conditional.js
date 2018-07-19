@@ -5,6 +5,7 @@ import _ from 'lodash';
 import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
 import type { State } from '../../types/State';
 import { Codes } from './Code';
+import { Code } from './Code';
 import { getTemplate } from '../../templates/Templates';
 
 type Props = {
@@ -205,25 +206,83 @@ class Observation extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): ObservationConditional);
-    let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}, {id: "is nil", text: "is nil"}, {id: "is not nil", text: "is not nil"}];
-
-    let valueInput = <div/>
-
-    // It appears that conditional is inconsistent, sometimes values are in ids
-    // This should be tracked down
-    if(conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){ 
-      valueInput = <RIEInput className='editable-text' value={conditional.value} propName='value' change={this.props.onChange('value')} />
+    let options = [];
+    if (conditional.value_code) {
+      options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "is nil", text: "is nil"}, {id: "is not nil", text: "is not nil"}];
+    } else {
+      options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}, {id: "is nil", text: "is nil"}, {id: "is not nil", text: "is not nil"}];
     }
 
     return (
       <label> Observation:
         <Codes system={getTemplate('Type.Code.Loinc.system')} codes={conditional.codes} onChange={this.props.onChange('codes')} />
         <RIESelect className='editable-text' value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
-        {valueInput}
+        {this.renderValueOrCodeValue()}
       </label>
     );
   }
 
+  renderValueOrCodeValue() { // renders numerical or code value
+    let conditional = ((this.props.conditional: any): ObservationConditional);
+    let value_code = null;
+    let valueInput = <div/>
+    if (conditional.value) { 
+      valueInput = <RIEInput className='editable-text' value={conditional.value} propName='value' change={this.props.onChange('value')} /> 
+      if (conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){
+        return (
+          <div>
+            Numeric Value:
+            {valueInput}
+            <br />
+            <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id: getTemplate('Type.Code.Snomed')}}); this.props.onChange('value')({val: {id: null}})}}>Change to Value Code</a>
+            <br />
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            No value needed for '{conditional.operator}'
+          </div>
+        )
+      }  
+    } else if (conditional.value_code) { 
+      value_code = <Code className='editable-text' system={getTemplate('Type.Code.Snomed.display')} code={conditional.value_code} onChange={this.props.onChange('value_code')} /> 
+      if (conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){
+        return (
+          <div>
+            Value Code:
+            <div className='section'>
+            {value_code}
+            </div>
+            <a className='editable-text' onClick={() => {this.props.onChange('value')({val: {id: "Enter value"}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Numeric Value</a>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            No value needed for '{conditional.operator}'
+          </div>
+        )
+      }  
+    } else {
+      if (conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){
+        return (
+          <div>
+            <a className='editable-text' onClick={() => {this.props.onChange('value')({val: {id: "Enter value"}}); this.props.onChange('value_code')({val: {id: null}})}}>Add Numeric Value</a>
+            <br />
+            <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id: getTemplate('Type.Code.Snomed')}}); this.props.onChange('value')({val: {id: null}})}}>Add Value Code</a>
+            <br />
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            No value needed for '{conditional.operator}'
+          </div>
+        )
+      }  
+    }
+  }  
 }
 
 class VitalSign extends Component<Props> {

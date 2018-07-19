@@ -127,7 +127,7 @@ const TypeTemplates = {
           "display": "Mini Mental State Examination"
         }
       ],
-      "operator": ">",
+      "operator": "==",
       "value": 0
     },
     "Vital Sign": {

@@ -499,7 +499,16 @@ const logicDetails = logic => {
       return `Attribute: '${logic['attribute']}' \\${logic['operator']}${leaveUndefinedBlank(logic['value'])}\\l`
     case 'Observation':
       let obs = findReferencedType(logic)
-      return `Observation ${obs} \\${logic['operator']}${leaveUndefinedBlank(logic['value'])}\\l`
+      if (logic.operator !== 'is nil' && logic.operator !== 'is not nil' && logic.operator.id !== 'is nil' && logic.operator.id !== 'is not nil'){
+        if(logic.value !== undefined){
+          return `Observation ${obs} \\${logic['operator']}${leaveUndefinedBlank(logic['value'])}\\l`
+        } else if (logic.value_code !== undefined) {
+          return `Observation ${obs} \\${logic['operator']} ${logic.value_code['system']}[${logic.value_code['code']}]: ${logic.value_code['display']}\\l`
+        }
+      } else {
+        return `Observation ${obs} \\${logic['operator']}\\l`
+      }  
+      
     case 'Vital Sign':
       return `Vital Sign ${logic['vital_sign']} \\${logic['operator']} ${logic['value']}\\l`
     case 'Active Condition':
