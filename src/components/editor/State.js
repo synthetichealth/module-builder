@@ -1290,7 +1290,7 @@ class Observation extends Component<Props> {
 
     let toggles = [];
 
-    if (currentItem != 'exact') {
+    if (currentItem !== 'exact') {
       toggles.push(
                 <div key='exact'>
                   <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Exact</a>
@@ -1299,7 +1299,7 @@ class Observation extends Component<Props> {
         );
     }
 
-    if (currentItem != 'range') {
+    if (currentItem !== 'range') {
       toggles.push(
                 <div key='range'>
                   <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Range</a>
@@ -1308,7 +1308,7 @@ class Observation extends Component<Props> {
         );
     }
 
-    if (currentItem != 'attribute') {
+    if (currentItem !== 'attribute') {
       toggles.push(
                 <div key='attribute'>
                   <a className='editable-text' onClick={() => {this.props.onChange('attribute')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Attribute</a>
@@ -1317,7 +1317,7 @@ class Observation extends Component<Props> {
         );
     }
 
-    if (currentItem != 'vital_sign') {
+    if (currentItem !== 'vital_sign') {
       toggles.push(
                 <div key='vital_sign'>
                   <a className='editable-text' onClick={() => {this.props.onChange('vital_sign')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Vital Sign</a>
@@ -1326,7 +1326,7 @@ class Observation extends Component<Props> {
         );
     }
 
-    if (currentItem != 'value_code') {
+    if (currentItem !== 'value_code') {
       toggles.push(
                 <div key='value_code'>
                   <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id:  getTemplate('Type.Code.Snomed')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Value Code</a>
