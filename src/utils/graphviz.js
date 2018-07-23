@@ -355,6 +355,9 @@ const stateDescription = (state) =>{
           } else if (s.exact !== undefined) {
             let e = s['exact']
             diagValue.push(`${e['quantity']}`);
+          } else if (s.value_code !== undefined) {
+            let v = s['value_code']
+            diagValue.push(`${v['system']}[${v['code']}]: ${v['display']}`);
           }
         });
         details += `{${diagType.map(t => t).join('|')}}|`;
