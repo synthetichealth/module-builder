@@ -42,7 +42,8 @@ export type ObservationConditional = {
   condition_type: "Observation",
   codes: Code[] | string,
   operator: '==' | '!=' | "<" | "<=" | ">" | ">=" | "is nil" | "is not nil",
-  value: number
+  value?: number,
+  value_code?: Code
 }
 
 export type VitalSignConditional = {

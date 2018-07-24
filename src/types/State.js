@@ -238,6 +238,7 @@ export type ObservationState = {
   },
   attribute?: string,
   vital_sign?: string,
+  value_code?: Code,
   transition?: Transition
 }
 
