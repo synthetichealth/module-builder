@@ -103,7 +103,7 @@ class StateEditor extends Component<Props> {
   }
 
   updateRemarks = (el:any) => {
-    const remarks = el.remarks? el.remarks.split("\n") : " ";
+    const remarks = el.remarks? el.remarks.split("\n") : null;
     this.props.onChange(`states.${this.props.state.name}.remarks`)({remarks:{id:remarks}});
   }
 
