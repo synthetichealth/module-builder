@@ -47,6 +47,14 @@ export function getTemplate(path){
 }
 
 const TypeTemplates = {
+  Date: {
+    Year: 2000,
+    Month: 12,
+    Day: 25,
+    Hour: 0,
+    Minute: 0,
+    Second: 0,
+  },
   Code: {
     Snomed: {
       system: "SNOMED-CT",

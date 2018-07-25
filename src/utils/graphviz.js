@@ -486,7 +486,14 @@ const logicDetails = logic => {
     case 'Race':
       return `race is '${logic['race']}'\\l`
     case 'Date':
-      return `Year is \\${logic['operator']} ${logic['year']}\\l`
+      if (logic.year !== undefined) {
+        return `Year is \\${logic['operator']} ${logic['year']}\\l`
+      } else if (logic.month !== undefined) { 
+        return `Month is \\${logic['operator']} ${logic['month']}\\l`
+      } else if (logic.date !== undefined) {
+        let d = logic['date']
+        return `Date is \\${logic['operator']} ${d['year']}-${d['month']}-${d['day']} ${d['hour']}:${d['minute']}:${d['second']}\\l`
+      }
     case 'Symptom':
       return `Symptom: '${logic['symptom']}' \\${logic['operator']} ${logic['value']}\\l`
     case 'PriorState':
