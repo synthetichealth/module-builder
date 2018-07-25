@@ -397,8 +397,11 @@ export default (state = initialState, action) => {
       return newState;
 
     case 'EDIT_MODULE_REMARKS':
-      newState.modules[action.data.targetModuleKey].remarks = [action.data.newRemarks]; // Need to split into rows for readability
 
+      newState.modules[action.data.targetModuleKey].remarks = action.data.newRemarks ? action.data.newRemarks.split("\n") : null;
+      if(newState.modules[action.data.targetModuleKey].remarks === null){
+        delete newState.modules[action.data.targetModuleKey].remarks;
+      }
       saveHistory(newState);
 
       return newState;
