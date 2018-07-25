@@ -20,7 +20,7 @@ export type DateConditional = {
   operator: '==' | '!=' | "<" | "<=" | ">" | ">=",
   year?: number
   month?: number
-  date?: string
+  date?: DateInput
 }
 
 export type SocioeconomicStatusConditional = {

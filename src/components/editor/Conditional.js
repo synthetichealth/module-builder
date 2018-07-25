@@ -194,55 +194,6 @@ class Date extends Component<Props> {
       );
     }
   }
-  
-  /*changeDate(datePart) {
-    let conditional = ((this.props.conditional: any): DateConditional);
-    let newDate = new String(conditional.date.year + "-" + conditional.date.month + "-" + conditional.date.day + " " + conditional.date.hour + ":" + conditional.date.minute + ":" + conditional.date.second + "." + conditional.date.millisecond);
-      
-    switch(datePart) {
-      case 'year':
-        return newDate = new String(datePart.value + "-" + conditional.date.month + "-" + conditional.date.day + " " + conditional.date.hour + ":" + conditional.date.minute + ":" + conditional.date.second + "." + conditional.date.millisecond);
-      case 'month':
-        return newDate = new String(conditional.date.year + "-" + datePart.value + "-" + conditional.date.day + " " + conditional.date.hour + ":" + conditional.date.minute + ":" + conditional.date.second + "." + conditional.date.millisecond);
-      case 'day':
-        return newDate = new String(conditional.date.year + "-" + conditional.date.month + "-" + datePart.value + " " + conditional.date.hour + ":" + conditional.date.minute + ":" + conditional.date.second + "." + conditional.date.millisecond);
-      case 'hour':
-        return newDate = new String(conditional.date.year + "-" + conditional.date.month + "-" + conditional.date.day + " " + datePart.value + ":" + conditional.date.minute + ":" + conditional.date.second + "." + conditional.date.millisecond);
-      case 'minute':
-        return newDate = new String(conditional.date.year + "-" + conditional.date.month + "-" + conditional.date.day + " " + conditional.date.hour + ":" + datePart.value + ":" + conditional.date.second + "." + conditional.date.millisecond);
-      case 'second':
-        return newDate = new String(conditional.date.year + "-" + conditional.date.month + "-" + conditional.date.day + " " + conditional.date.hour + ":" + conditional.date.minute + ":" + datePart.value + "." + conditional.date.millisecond);
-      case 'millisecond':
-        return newDate = new String(conditional.date.year + "-" + conditional.date.month + "-" + conditional.date.day + " " + conditional.date.hour + ":" + conditional.date.minute + ":" + conditional.date.second + "." + datePart.value);
-    }
-    this.props.onChange('date')({val: {id: newDate}});
-
-
-
-    try{
-      let newDate = new Date(2000, 11, 25, 0, 0, 0, 0);
-      
-      switch(datePart) {
-        case 'year':
-          return newDate.setFullYear(datePart.value);
-        case 'month':
-          return newDate.setMonth(datePart.value);
-        case 'day':
-          return newDate.setDate(datePart.value);
-        case 'hour':
-          return newDate.setHours(datePart.value);
-        case 'minute':
-          return newDate.setMinutes(datePart.value);
-        case 'second':
-          return newDate.setSeconds(datePart.value);
-        case 'millisecond':
-          return newDate.setMilliseconds(datePart.value);
-      }
-      this.props.onChange('date')({val: {id: newDate}})
-    } catch(error) {
-      console.error(error);
-    }
-  }*/
 
 }
 
