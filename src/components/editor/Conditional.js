@@ -155,7 +155,7 @@ class Date extends Component<Props> {
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('month')({val: {id: null}}); this.props.onChange('date')({val: {id: null}})}}>Change to Year</a>
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('date.year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('date.month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('date.day')({val: {id: getTemplate('Type.Date.Day')}}); this.props.onChange('date.hour')({val: {id: getTemplate('Type.Date.Hour')}}); this.props.onChange('date.minute')({val: {id: getTemplate('Type.Date.Minute')}}); this.props.onChange('date.second')({val: {id: getTemplate('Type.Date.Second')}}); this.props.onChange('month')({val: {id: null}}); this.props.onChange('year')({val: {id: null}})}}>Change to Date</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('date.year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('date.month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('date.day')({val: {id: getTemplate('Type.Date.Day')}}); this.props.onChange('date.hour')({val: {id: getTemplate('Type.Date.Hour')}}); this.props.onChange('date.minute')({val: {id: getTemplate('Type.Date.Minute')}}); this.props.onChange('date.second')({val: {id: getTemplate('Type.Date.Second')}}); this.props.onChange('date.millisecond')({val: {id: getTemplate('Type.Date.Millisecond')}}); this.props.onChange('month')({val: {id: null}}); this.props.onChange('year')({val: {id: null}})}}>Change to Date</a>
         </div>  
       );
     } else if (conditional.date) {
@@ -165,14 +165,15 @@ class Date extends Component<Props> {
       let hourInput = <RIEInput className='editable-text' value={conditional.date.hour} propName='date.hour' change={this.props.onChange('date.hour')} />
       let minuteInput = <RIEInput className='editable-text' value={conditional.date.minute} propName='date.minute' change={this.props.onChange('date.minute')} />
       let secondInput = <RIEInput className='editable-text' value={conditional.date.second} propName='date.second' change={this.props.onChange('date.second')} />
+      let millisecondInput = <RIEInput className='editable-text' value={conditional.date.millisecond} propName='date.millisecond' change={this.props.onChange('date.millisecond')} />
       
       return (
         <div>
           Date:
           <br />
-          {yearInput}/{monthInput}/{dayInput} {hourInput}:{minuteInput}:{secondInput}
+          {yearInput}/{monthInput}/{dayInput} {hourInput}:{minuteInput}:{secondInput}.{millisecondInput}
           <br /> 
-          (yyyy/MM/dd HH:mm:ss)
+          (yyyy/MM/dd HH:mm:ss.SSS)
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('month')({val: {id: null}}); this.props.onChange('date')({val: {id: null}})}}>Change to Year</a>
           <br />
@@ -189,7 +190,7 @@ class Date extends Component<Props> {
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('year')({val: {id: null}}); this.props.onChange('date')({val: {id: null}})}}>Change to Month</a>
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('date.year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('date.month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('date.day')({val: {id: getTemplate('Type.Date.Day')}}); this.props.onChange('date.hour')({val: {id: getTemplate('Type.Date.Hour')}}); this.props.onChange('date.minute')({val: {id: getTemplate('Type.Date.Minute')}}); this.props.onChange('date.second')({val: {id: getTemplate('Type.Date.Second')}}); this.props.onChange('year')({val: {id: null}}); this.props.onChange('month')({val: {id: null}})}}>Change to Date</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('date.year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('date.month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('date.day')({val: {id: getTemplate('Type.Date.Day')}}); this.props.onChange('date.hour')({val: {id: getTemplate('Type.Date.Hour')}}); this.props.onChange('date.minute')({val: {id: getTemplate('Type.Date.Minute')}}); this.props.onChange('date.second')({val: {id: getTemplate('Type.Date.Second')}}); this.props.onChange('date.millisecond')({val: {id: getTemplate('Type.Date.Millisecond')}}); this.props.onChange('year')({val: {id: null}}); this.props.onChange('month')({val: {id: null}})}}>Change to Date</a>
         </div>  
       );
     }

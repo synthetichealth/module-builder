@@ -492,7 +492,7 @@ const logicDetails = logic => {
         return `Month is \\${logic['operator']} ${logic['month']}\\l`
       } else if (logic.date !== undefined) {
         let d = logic['date']
-        return `Date is \\${logic['operator']} ${d['year']}-${d['month']}-${d['day']} ${d['hour']}:${d['minute']}:${d['second']}\\l`
+        return `Date is \\${logic['operator']} ${d['year']}-${d['month']}-${d['day']} ${d['hour']}:${d['minute']}:${d['second']}.${d['millisecond']}\\l`
       }
     case 'Symptom':
       return `Symptom: '${logic['symptom']}' \\${logic['operator']} ${logic['value']}\\l`
