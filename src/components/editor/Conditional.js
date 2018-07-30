@@ -139,6 +139,7 @@ class Date extends Component<Props> {
       <label>
       <RIESelect className='editable-text' value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
       {this.renderType()}
+      {this.renderWarning()}
       </label>
     );
   }
@@ -159,13 +160,13 @@ class Date extends Component<Props> {
         </div>  
       );
     } else if (conditional.date) {
-      let yearInput = <RIEInput className='editable-text' value={conditional.date.year} propName='date.year' change={this.props.onChange('date.year')} />
-      let monthInput = <RIEInput className='editable-text' value={conditional.date.month} propName='date.month' change={this.props.onChange('date.month')} />
-      let dayInput = <RIEInput className='editable-text' value={conditional.date.day} propName='date.day' change={this.props.onChange('date.day')} />
-      let hourInput = <RIEInput className='editable-text' value={conditional.date.hour} propName='date.hour' change={this.props.onChange('date.hour')} />
-      let minuteInput = <RIEInput className='editable-text' value={conditional.date.minute} propName='date.minute' change={this.props.onChange('date.minute')} />
-      let secondInput = <RIEInput className='editable-text' value={conditional.date.second} propName='date.second' change={this.props.onChange('date.second')} />
-      let millisecondInput = <RIEInput className='editable-text' value={conditional.date.millisecond} propName='date.millisecond' change={this.props.onChange('date.millisecond')} />
+      let yearInput = <RIENumber className='editable-text' value={conditional.date.year} propName='date.year' change={this.props.onChange('date.year')} />
+      let monthInput = <RIENumber className='editable-text' value={conditional.date.month} propName='date.month' change={this.props.onChange('date.month')} />
+      let dayInput = <RIENumber className='editable-text' value={conditional.date.day} propName='date.day' change={this.props.onChange('date.day')} />
+      let hourInput = <RIENumber className='editable-text' value={conditional.date.hour} propName='date.hour' change={this.props.onChange('date.hour')} />
+      let minuteInput = <RIENumber className='editable-text' value={conditional.date.minute} propName='date.minute' change={this.props.onChange('date.minute')} />
+      let secondInput = <RIENumber className='editable-text' value={conditional.date.second} propName='date.second' change={this.props.onChange('date.second')} />
+      let millisecondInput = <RIENumber className='editable-text' value={conditional.date.millisecond} propName='date.millisecond' change={this.props.onChange('date.millisecond')} />
       
       return (
         <div>
@@ -196,6 +197,51 @@ class Date extends Component<Props> {
     }
   }
 
+  renderWarning(){
+    if (this.props.conditional.year < 1) {
+      return (
+        <label className='warning'>Invalid Year.</label>
+      );
+    } else if (this.props.conditional.month < 1 || this.props.conditional.month > 12) {
+      return (
+        <label className='warning'>Invalid Month. Must be between 1 and 12.</label>
+      );
+    } else if (this.props.conditional.date) {
+      if (this.props.conditional.date.year < 1) {
+        return (
+          <label className='warning'>Invalid Year</label>
+        );
+      } else if (this.props.conditional.date.month < 1 || this.props.conditional.date.month > 12) {
+        return (
+          <label className='warning'>Invalid Month. Must be between 1 and 12.</label>
+        );
+      } else if (this.props.conditional.date.day < 1 || this.props.conditional.date.day > 31) {
+        return (
+          <label className='warning'>Invalid Day. Must at least 1 and never greater than 31.</label>
+        );
+      } else if (this.props.conditional.date.hour < 0 || this.props.conditional.date.hour > 24) {
+        return (
+          <label className='warning'>Invalid Hour. Must be between 0 and 24.</label>
+        );
+      } else if (this.props.conditional.date.minute < 0 || this.props.conditional.date.minute > 60) {
+        return (
+          <label className='warning'>Invalid Minute. Must be between 0 and 60.</label>
+        );
+      } else if (this.props.conditional.date.second < 0 || this.props.conditional.date.second > 60) {
+        return (
+          <label className='warning'>Invalid Second. Must be between 0 and 60.</label>
+        );
+      } else if (this.props.conditional.date.millisecond < 0 || this.props.conditional.date.millisecond > 999) {
+        return (
+          <label className='warning'>Invalid Millisecond. Must be between 0 and 999.</label>
+        );
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 }
 
 class SocioeconomicStatus extends Component<Props> {
