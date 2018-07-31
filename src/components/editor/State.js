@@ -551,9 +551,11 @@ class AllergyOnset extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): AllergyOnsetState);
+    let encounters = this.props.otherStates.filter((s) => {return s.type === "Encounter"});
+    let options = encounters.map((e) => {return {id: e.name, text: e.name}});
     return (
       <div>
-        Target Encounter: <RIEInput className='editable-text' value={state.target_encounter} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
+        Target Encounter: <RIESelect className='editable-text' value={{id: state.target_encounter, text: state.target_encounter}} propName={'target_encounter'} change={this.props.onChange('target_encounter')} options={options} />
         <br />
         {this.renderAssignToAttribute()}
         <div className='section'>
