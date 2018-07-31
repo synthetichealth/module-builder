@@ -1049,6 +1049,8 @@ class CarePlanEnd extends Component<Props> {
 
   renderCarePlan() {
     let state = ((this.props.state: any): CarePlanEndState);
+    let careplans = this.props.otherStates.filter((s) => {return s.type === "CarePlanStart"});
+    let options = careplans.map((e) => {return {id: e.name, text: e.name}});
     if (!state.careplan) {
       return (
         <div>
@@ -1059,7 +1061,7 @@ class CarePlanEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Care Plan: <RIEInput className='editable-text' value={state.careplan} propName={'careplan'}  change={this.props.onChange('careplan')} />
+          Care Plan: <RIESelect className='editable-text' value={{id: state.careplan, text: state.careplan}} propName={'careplan'}  change={this.props.onChange('careplan')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('careplan')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
