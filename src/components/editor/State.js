@@ -1591,6 +1591,8 @@ class Death extends Component<Props> {
 
   renderConditionOnset() {
     let state = ((this.props.state: any): DeathState);
+    let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+    let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
     if (!state.condition_onset) {
       return (
         <div>
@@ -1601,7 +1603,7 @@ class Death extends Component<Props> {
     } else {
       return (
         <div>
-          Condition Onset: <RIEInput className='editable-text' value={state.condition_onset} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} />
+          Condition Onset: <RIESelect className='editable-text' value={{id: state.condition_onset, text: state.condition_onset}} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
