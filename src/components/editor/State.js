@@ -864,6 +864,8 @@ class MedicationEnd extends Component<Props> {
 
   renderMedicationOrder() {
     let state = ((this.props.state: any): MedicationEndState);
+    let medicationOrder = this.props.otherStates.filter((s) => {return s.type === "MedicationOrder"});
+    let options = medicationOrder.map((e) => {return {id: e.name, text: e.name}});
     if (!state.medication_order) {
       return (
         <div>
@@ -874,7 +876,7 @@ class MedicationEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Medication Order: <RIEInput className='editable-text' value={state.medication_order} propName={'medication_order'}  change={this.props.onChange('medication_order')} />
+          Medication Order: <RIESelect className='editable-text' value={{id: state.medication_order, text: state.medication_order}} propName={'medication_order'}  change={this.props.onChange('medication_order')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('medication_order')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
