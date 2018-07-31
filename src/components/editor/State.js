@@ -604,6 +604,8 @@ class AllergyEnd extends Component<Props> {
 
   renderAllergyOnset() {
     let state = ((this.props.state: any): AllergyEndState);
+    let allergyOnset = this.props.otherStates.filter((s) => {return s.type === "AllergyOnset"});
+    let options = allergyOnset.map((e) => {return {id: e.name, text: e.name}});
     if (!state.allergy_onset) {
       return (
         <div>
@@ -614,7 +616,7 @@ class AllergyEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Allergy Onset: <RIEInput className='editable-text' value={state.allergy_onset} propName={'allergy_onset'}  change={this.props.onChange('allergy_onset')} />
+          Allergy Onset: <RIESelect className='editable-text' value={{id: state.allergy_onset, text: state.allergy_onset}} propName={'allergy_onset'}  change={this.props.onChange('allergy_onset')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('allergy_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
