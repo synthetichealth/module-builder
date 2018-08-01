@@ -448,12 +448,9 @@ class ConditionOnset extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): ConditionOnsetState);
-    let encounters = this.props.otherStates.filter((s) => {return s.type === "Encounter"});
-    let options = encounters.map((e) => {return {id: e.name, text: e.name}});
     return (
       <div>
-        Target Encounter: <RIESelect className='editable-text' value={{id: state.target_encounter, text: state.target_encounter}} propName="target_encounter" change={this.props.onChange('target_encounter')} options={options} />
-        <br />
+        {this.renderTargetEncounter()}
         {this.renderAssignToAttribute()}
         <div className='section'>
           Codes
@@ -462,6 +459,30 @@ class ConditionOnset extends Component<Props> {
         </div>
       </div>
     );
+  }
+
+  renderTargetEncounter() {
+    let state = ((this.props.state: any): ConditionOnsetState);
+    let encounters = this.props.otherStates.filter((s) => {return s.type === "Encounter"});
+    let options = encounters.map((e) => {return {id: e.name, text: e.name}});
+    let targetEncounter = <RIESelect className='editable-text' value={{id: state.target_encounter, text: state.target_encounter}} propName={'target_encounter'}  change={this.props.onChange('target_encounter')} options={options} />
+    if (state.target_encounter) {
+      return (
+        <div>
+          Target Encounter: {targetEncounter}
+          <br/>
+          <a className='editable-text' onClick={() => this.props.onChange('target_encounter')({val: {id: null}})}>(remove to diagnose immediately)</a>
+          <br/>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <a className='editable-text' onClick={() => this.props.onChange('target_encounter')({val: {id: "text"}})}>Add Target Encounter</a>
+          <br />
+        </div>
+      );
+    }
   }
 
   renderAssignToAttribute() {
