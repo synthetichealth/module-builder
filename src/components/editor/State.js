@@ -373,21 +373,39 @@ class Encounter extends Component<Props> {
 
   renderReason() {
     let state = ((this.props.state: any): EncounterState);
+    let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+    let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+    let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
+    let allOptions = options.concat(inputAttribute);
+    let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
     if (!state.reason) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "text"}})}>Add Reason</a>
+          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "Select Condition/Enter Attribute"}})}>Add Reason</a>
           <br />
         </div>
       );
     } else {
-      return (
-        <div>
-          Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
-          <br/>
-        </div>
-      );
+      if (state.reason === "*Input Attribute*") {
+        let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        return (
+          <div>
+            Reason: {reason}
+            <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
+            <br/>
+            Attribute: {attribute}
+            <br/>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            Reason: {reason}
+            <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
+            <br/>
+          </div>
+        );
+      }
     }
   }
 
@@ -706,7 +724,7 @@ class MedicationOrder extends Component<Props> {
       );
     }
   }
-
+//here
   renderReason() {
     let state = ((this.props.state: any): MedicationOrderState);
     if (!state.reason) {
@@ -967,7 +985,7 @@ class CarePlanStart extends Component<Props> {
       );
     }
   }
-
+//here
   renderReason() {
     let state = ((this.props.state: any): CarePlanStartState);
     if (!state.reason) {
@@ -1130,7 +1148,7 @@ class Procedure extends Component<Props> {
       </div>
     );
   }
-
+//here
   renderReason() {
     let state = ((this.props.state: any): ProcedureState);
     if (!state.reason) {
