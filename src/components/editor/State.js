@@ -373,11 +373,6 @@ class Encounter extends Component<Props> {
 
   renderReason() {
     let state = ((this.props.state: any): EncounterState);
-    let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
-    let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
-    let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
-    let allOptions = options.concat(inputAttribute);
-    let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
     if (!state.reason) {
       return (
         <div>
@@ -386,6 +381,11 @@ class Encounter extends Component<Props> {
         </div>
       );
     } else {
+      let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+      let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+      let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
+      let allOptions = options.concat(inputAttribute);
+      let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
       if (state.reason === "*Input Attribute*") {
         let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
         return (
@@ -748,11 +748,6 @@ class MedicationOrder extends Component<Props> {
 
   renderReason() {
     let state = ((this.props.state: any): MedicationOrder);
-    let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
-    let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
-    let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
-    let allOptions = options.concat(inputAttribute);
-    let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
     if (!state.reason) {
       return (
         <div>
@@ -761,6 +756,11 @@ class MedicationOrder extends Component<Props> {
         </div>
       );
     } else {
+      let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+      let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+      let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
+      let allOptions = options.concat(inputAttribute);
+      let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
       if (state.reason === "*Input Attribute*") {
         let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
         return (
@@ -1027,11 +1027,6 @@ class CarePlanStart extends Component<Props> {
 
   renderReason() {
     let state = ((this.props.state: any): CarePlanStart);
-    let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
-    let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
-    let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
-    let allOptions = options.concat(inputAttribute);
-    let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
     if (!state.reason) {
       return (
         <div>
@@ -1040,6 +1035,11 @@ class CarePlanStart extends Component<Props> {
         </div>
       );
     } else {
+      let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+      let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+      let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
+      let allOptions = options.concat(inputAttribute);
+      let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
       if (state.reason === "*Input Attribute*") {
         let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
         return (
@@ -1208,11 +1208,6 @@ class Procedure extends Component<Props> {
 
   renderReason() {
     let state = ((this.props.state: any): Procedure);
-    let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
-    let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
-    let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
-    let allOptions = options.concat(inputAttribute);
-    let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
     if (!state.reason) {
       return (
         <div>
@@ -1221,6 +1216,11 @@ class Procedure extends Component<Props> {
         </div>
       );
     } else {
+      let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+      let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+      let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
+      let allOptions = options.concat(inputAttribute);
+      let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
       if (state.reason === "*Input Attribute*") {
         let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
         return (
