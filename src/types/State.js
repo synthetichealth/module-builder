@@ -230,7 +230,7 @@ export type ObservationState = {
   unit: string,
   codes: Code[],
   exact?: {
-    quantity: number
+    quantity: string
   },
   range?: {
     low: number,
