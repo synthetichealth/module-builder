@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber, RIEToggle } from 'riek';
+import { RIESelect, RIEInput, RIENumber } from 'riek';
 import _ from 'lodash';
 
 
