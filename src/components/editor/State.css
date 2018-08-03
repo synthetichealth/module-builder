@@ -60,11 +60,11 @@ span.editable-text:empty {
 }
 
 span.editable-text:empty:after {
-  content: 'Enter value';
+  content: 'Add Remarks';
 }
 
-span.editable-text > :empty:after {
-  content: 'Enter value';
+span.editable-text > :first-child:empty:after {
+  content: 'Add Remarks';
 }
 
 .section {
