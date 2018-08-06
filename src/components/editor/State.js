@@ -12,7 +12,7 @@ import ConditionalEditor from './Conditional';
 import Transition from './Transition';
 import { getTemplate } from '../../templates/Templates';
 import { BasicTutorial, EditTutorial } from '../../templates/Tutorial';
-
+import TextArea from './TextArea'
 
 import './State.css';
 
@@ -123,7 +123,6 @@ class StateEditor extends Component<Props> {
 
     let remarks = this.props.state.remarks ||"";
     remarks = Array.isArray(remarks)? remarks.join("\n"): remarks;
-
     const transitionType = (this.props.state.transition||{}).type;
     return (
         <div className="State">
@@ -133,8 +132,8 @@ class StateEditor extends Component<Props> {
           <h3><RIEInput className='editable-text' className='editable-text' propName={'name'} value={this.props.state.name} change={this.props.renameNode} /></h3>
           State Type: <RIESelect className='editable-text' className='editable-text' value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
           <hr/>
-          <RIETextArea className='editable-text' value={remarks} propName="remarks" change={this.updateRemarks} />
-          <br/>
+          <TextArea className='remarks-text' value={remarks} propName="remarks" change={this.updateRemarks} />
+          <br />
           <hr/>
           <div className="State-Editor">
             {this.renderStateType()}
@@ -436,6 +435,8 @@ class ConditionOnset extends Component<Props> {
         <br />
         {this.renderAssignToAttribute()}
         <div className='section'>
+          Value Set: <RIEInput className='value-set-text editable-text' value={state.value_set || ''} propName={'value_set'} change={this.props.onChange('value_set')} />
+          <br />
           Codes
           <br />
           <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />

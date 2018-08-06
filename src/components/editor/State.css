@@ -51,6 +51,15 @@ textarea {
   padding-right: .2em;
 }
 
+.remarks-text {
+  font-style: italic;
+  text-decoration: underline !important;
+  cursor: text;
+  color: #336699 !important;
+  padding-left: .2em;
+  padding-right: .2em;
+}
+
 .editable-error {
   color: #ff3300 !important;
 }
@@ -59,12 +68,20 @@ span.editable-text:empty {
   color: #ff3300 !important;
 }
 
-span.editable-text:empty:after {
+span.remarks-text:empty:after {
   content: 'Add Remarks';
 }
 
-span.editable-text > :first-child:empty:after {
+span.remarks-text > :empty:after {
   content: 'Add Remarks';
+}
+
+span.editable-text:empty:after {
+  content: 'Enter Value';
+}
+
+span.editable-text > :empty:after {
+  content: 'Enter Value';
 }
 
 .section {
@@ -91,3 +108,4 @@ span.editable-text > :first-child:empty:after {
 .warning {
   color: #ff3300;
 }
+
