@@ -435,8 +435,6 @@ class ConditionOnset extends Component<Props> {
         <br />
         {this.renderAssignToAttribute()}
         <div className='section'>
-          Value Set: <RIEInput className='value-set-text editable-text' value={state.value_set || ''} propName={'value_set'} change={this.props.onChange('value_set')} />
-          <br />
           Codes
           <br />
           <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
