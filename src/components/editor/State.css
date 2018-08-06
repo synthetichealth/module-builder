@@ -51,11 +51,12 @@ textarea {
   padding-right: .2em;
 }
 
-.remarks-text {
+.remarks-text span {
   font-style: italic;
   text-decoration: underline !important;
   cursor: text;
   color: #336699 !important;
+  position:relative;
   padding-left: .2em;
   padding-right: .2em;
 }
