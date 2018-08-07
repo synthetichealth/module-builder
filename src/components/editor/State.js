@@ -335,19 +335,29 @@ class Encounter extends Component<Props> {
       {id: 'inpatient', text: 'inpatient'},
       {id: 'ambulatory', text: 'ambulatory'}
     ];
-    return (
-      <div>
-        {this.renderWellness()}
-        Encounter Class: <RIESelect className='editable-text' value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
-        <br />
-        {this.renderReason()}
-        <div className='section'>
-          Codes
+    if (state.wellness == null) {
+      return (
+        <div>
+          {this.renderWellness()}
+          Encounter Class: <RIESelect className='editable-text' value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
           <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
+          {this.renderReason()}
+          <div className='section'>
+            Codes
+            <br />
+            <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div>
+          {this.renderWellness()}
+          {this.renderReason()}
+        </div>
+      );
+    }
+    
   }
 
   renderWellness() {
@@ -355,7 +365,7 @@ class Encounter extends Component<Props> {
     if (state.wellness == null) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('wellness')({val: {id: true}})}>Add Wellness</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('wellness')({val: {id: true}}); this.props.onChange('codes')({val: {id: null}}); this.props.onChange('encounter_class')({val: {id: null}})}}>Add Wellness</a>
           <br />
         </div>
       );
@@ -363,7 +373,7 @@ class Encounter extends Component<Props> {
       return (
         <div>
           Wellness
-          <a className='editable-text' onClick={() => this.props.onChange('wellness')({val: {id: null}})}>(remove)</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('wellness')({val: {id: null}}); this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}}>(remove)</a>
           <br />
         </div>
       );
