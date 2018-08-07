@@ -133,23 +133,35 @@ class LoadModule extends Component {
         )
 
       case 'git':
-        return(
-        <div className='row'>  
-          <ul className='LoadModule-list'>
-            {this.state.Branch}  
-          </ul>
-          <div>
+        let moduleList = null;
+        let submoduleList = null;
+        if (this.state.Modules) {
+          moduleList = (
+          <div className='col-4 nopadding'>
             <div>&ensp; On branch: {this.state.currentBranch}</div>
             <ul className='LoadModule-list'>
               {this.state.Modules}
             </ul>
           </div>
-          <div>
-            <div>&ensp; In folder: {this.state.currentModule}</div>
-            <ul className='LoadModule-list'>
-              {this.state.Submodules}
-            </ul>
-          </div>
+          )
+          if (this.state.Submodules) {
+            submoduleList = (
+              <div className='col-4 nopadding'>
+                <div>&ensp; In folder: {this.state.currentModule}</div>
+                <ul className='LoadModule-list'>
+                  {this.state.Submodules}
+                </ul>
+              </div>
+            )
+          }
+        }
+        return(
+        <div className='row'>  
+          <ul className='LoadModule-list'>
+            {this.state.Branch}  
+          </ul>
+          {moduleList}
+          {submoduleList}
         </div>  
         ) 
 
@@ -194,7 +206,6 @@ class LoadModule extends Component {
         .then(data => this.loadModule(data))
         .catch(error => console.log('error: ', error));
     } else {
-      console.log(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + name + `?ref=` + this.state.currentBranch)
       fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + name + `?ref=` + this.state.currentBranch)  
       .then(response => response.json())
       .then(data => this.setState({
@@ -240,7 +251,7 @@ class LoadModule extends Component {
       <div>
         <div className={'modal ' +  classDetails} style={style}>
           <div className="modal-dialog modal-lg" role="document">
-            <div className="modal-content">
+            <div className="modal-content" style={{width:"900px"}}>
               <div className="modal-header">
                 <h5 className="modal-title">{(!this.props.welcome ? 'Load Module' : 'Synthea Module Builder')}</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.props.onHide} style={{display: (this.props.welcome ? 'none' : '')}}>
