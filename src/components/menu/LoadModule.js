@@ -131,10 +131,90 @@ class LoadModule extends Component {
         return (
           <textarea id='loadJSON' value={this.state.json} onChange={this.updateJson}></textarea>
         )
-      default:
-        return;
+
+      case 'git':
+        return(
+        <div className='row'>  
+          <ul className='LoadModule-list'>
+            {this.state.Branch}  
+          </ul>
+          <div>
+            <div>&ensp; On branch: {this.state.currentBranch}</div>
+            <ul className='LoadModule-list'>
+              {this.state.Modules}
+            </ul>
+          </div>
+          <div>
+            <div>&ensp; In folder: {this.state.currentModule}</div>
+            <ul className='LoadModule-list'>
+              {this.state.Submodules}
+            </ul>
+          </div>
+        </div>  
+        ) 
+
+    default:
+      return;
 
     }
+  }
+  
+  fetchBranchList() {
+    fetch(`https://api.github.com/repos/synthetichealth/synthea/branches`)
+      .then(response => response.json())
+      .then(data => this.setState({
+        Branch: data.map((branch, i) => (
+          <li key={i}><button className='btn btn-link' onClick={() => {this.fetchModuleList(branch.name)}}>{branch.name}</button></li>
+        ))
+      }))
+      .catch(error => console.log('error: ', error));
+  }
+
+  fetchModuleList(branch) {
+    this.setState({
+      currentBranch: branch
+    })
+    fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules?ref=` + branch)  
+      .then(response => response.json())
+      .then(data => this.setState({
+        Modules: data.map((name, i) => (
+          <li key={i}><button className='btn btn-link' onClick={() => {this.fetchModule(name.name)}}>{name.name}</button></li>
+        ))
+      }))
+      .catch(error => console.log('error: ', error));
+  }
+
+  fetchModule(name) {
+    this.setState({
+      currentModule: name
+    })
+    if (name.includes(".json")) {
+      fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + name)  
+        .then(response => response.text())
+        .then(data => this.loadModule(data))
+        .catch(error => console.log('error: ', error));
+    } else {
+      console.log(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + name + `?ref=` + this.state.currentBranch)
+      fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + name + `?ref=` + this.state.currentBranch)  
+      .then(response => response.json())
+      .then(data => this.setState({
+        Submodules: data.map((name, i) => (
+          <li key={i}><button className='btn btn-link' onClick={() => {this.fetchSubmodule(name.name)}}>{name.name}</button></li>
+        ))
+      }))
+      .catch(error => console.log('error: ', error));
+    }
+  }
+
+  fetchSubmodule(name) {
+    fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + this.state.currentModule + `/` + name)  
+      .then(response => response.text())
+      .then(data => this.loadModule(data))
+      .catch(error => console.log('error: ', error));
+  }    
+
+  componentDidMount() {
+    this.fetchBranchList()
   }
 
   renderWelcomeMessage = () => {
@@ -179,6 +259,7 @@ class LoadModule extends Component {
                          <li className={(this.state.selectedOption === 'submodules') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('submodules')}>Submodules</button></li>
                          {Object.keys(this.props.modules).length > 0 ? <li className={(this.state.selectedOption === 'my') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('my')}>My Modules</button></li> : ''}
                          <li className={(this.state.selectedOption === 'json') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('json')}>Paste JSON</button></li>
+                         <li className={(this.state.selectedOption === 'git') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('git')}>GitHub Modules</button></li>
                       </ul>
                     </div>
                     <div className='col-9 nopadding'>
