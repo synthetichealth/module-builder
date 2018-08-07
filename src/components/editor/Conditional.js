@@ -324,7 +324,11 @@ class Observation extends Component<Props> {
   renderValueOrCodeValue() { // renders numerical or code value
     let conditional = ((this.props.conditional: any): ObservationConditional);
     let value_code = <Code className='editable-text' system={getTemplate('Type.Code.Snomed.display')} code={conditional.value_code} onChange={this.props.onChange('value_code')} />
-    let value = <RIEInput className='editable-text' value={conditional.value} propName='value' change={this.props.onChange('value')} />
+    let value = conditional.value;
+    if(typeof value === 'boolean'){
+      value = String(value);
+    }
+    let valueInput = <RIEInput className='editable-text' value={value} propName='value' change={this.props.onChange('value')} />
     if (conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){
       if (conditional.value_code) { 
         return (
@@ -339,8 +343,8 @@ class Observation extends Component<Props> {
       } else { 
         return (
           <div>
-            Numeric Value:
-            {value}
+            Value:
+            {valueInput}
             <br />
             <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id: getTemplate('Type.Code.Snomed')}}); this.props.onChange('value')({val: {id: null}})}}>Change to Value Code</a>
             <br />

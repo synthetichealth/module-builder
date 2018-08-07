@@ -1348,9 +1348,13 @@ class Observation extends Component<Props> {
   renderValueContainer() { // renders exact, range, attribute, or vital_sign
     let state = ((this.props.state: any): ObservationState);
     if (state.exact) {
+      let value = state.exact.quantity;
+      if(typeof value === 'boolean'){
+        value = String(value);
+      }
       return (
         <div className='section'>
-          Exact Quantity: <RIENumber className='editable-text' value={state.exact.quantity} propName='quantity' change={this.props.onChange('exact.quantity')} />
+          Exact Value: <RIEInput className='editable-text' value={value} propName='quantity' change={this.props.onChange('exact.quantity')} />
           <br />
           { this.renderToggles('exact') }
         </div>
