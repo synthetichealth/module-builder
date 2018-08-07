@@ -376,18 +376,36 @@ class Encounter extends Component<Props> {
     if (!state.reason) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "text"}})}>Add Reason</a>
+          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "Select Condition/Enter Attribute"}})}>Add Reason</a>
           <br />
         </div>
       );
     } else {
-      return (
-        <div>
-          Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
-          <br/>
-        </div>
-      );
+      let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+      let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+      let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
+      let allOptions = options.concat(inputAttribute);
+      let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
+      if (state.reason === "*Input Attribute*") {
+        let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        return (
+          <div>
+            Reason: {reason}
+            <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
+            <br/>
+            Attribute: {attribute}
+            <br/>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            Reason: {reason}
+            <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
+            <br/>
+          </div>
+        );
+      }
     }
   }
 
@@ -432,8 +450,7 @@ class ConditionOnset extends Component<Props> {
     let state = ((this.props.state: any): ConditionOnsetState);
     return (
       <div>
-        Target Encounter: <RIEInput className='editable-text' value={state.target_encounter || ''} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
-        <br />
+        {this.renderTargetEncounter()}
         {this.renderAssignToAttribute()}
         <div className='section'>
           Codes
@@ -442,6 +459,30 @@ class ConditionOnset extends Component<Props> {
         </div>
       </div>
     );
+  }
+
+  renderTargetEncounter() {
+    let state = ((this.props.state: any): ConditionOnsetState);
+    let encounters = this.props.otherStates.filter((s) => {return s.type === "Encounter"});
+    let options = encounters.map((e) => {return {id: e.name, text: e.name}});
+    let targetEncounter = <RIESelect className='editable-text' value={{id: state.target_encounter, text: state.target_encounter}} propName={'target_encounter'}  change={this.props.onChange('target_encounter')} options={options} />
+    if (state.target_encounter) {
+      return (
+        <div>
+          Target Encounter: {targetEncounter}
+          <br/>
+          <a className='editable-text' onClick={() => this.props.onChange('target_encounter')({val: {id: null}})}>(remove to diagnose immediately)</a>
+          <br/>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <a className='editable-text' onClick={() => this.props.onChange('target_encounter')({val: {id: "text"}})}>Add Target Encounter</a>
+          <br />
+        </div>
+      );
+    }
   }
 
   renderAssignToAttribute() {
@@ -481,6 +522,8 @@ class ConditionEnd extends Component<Props> {
 
   renderConditionOnset() {
     let state = ((this.props.state: any): ConditionEndState);
+    let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+    let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
     if (!state.condition_onset) {
       return (
         <div>
@@ -491,7 +534,7 @@ class ConditionEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Condition Onset: <RIEInput className='editable-text' value={state.condition_onset} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} />
+          Condition Onset: <RIESelect className='editable-text' value={{id: state.condition_onset, text: state.condition_onset}} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -547,9 +590,11 @@ class AllergyOnset extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): AllergyOnsetState);
+    let encounters = this.props.otherStates.filter((s) => {return s.type === "Encounter"});
+    let options = encounters.map((e) => {return {id: e.name, text: e.name}});
     return (
       <div>
-        Target Encounter: <RIEInput className='editable-text' value={state.target_encounter} propName={'target_encounter'} change={this.props.onChange('target_encounter')} />
+        Target Encounter: <RIESelect className='editable-text' value={{id: state.target_encounter, text: state.target_encounter}} propName={'target_encounter'} change={this.props.onChange('target_encounter')} options={options} />
         <br />
         {this.renderAssignToAttribute()}
         <div className='section'>
@@ -598,6 +643,8 @@ class AllergyEnd extends Component<Props> {
 
   renderAllergyOnset() {
     let state = ((this.props.state: any): AllergyEndState);
+    let allergyOnset = this.props.otherStates.filter((s) => {return s.type === "AllergyOnset"});
+    let options = allergyOnset.map((e) => {return {id: e.name, text: e.name}});
     if (!state.allergy_onset) {
       return (
         <div>
@@ -608,7 +655,7 @@ class AllergyEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Allergy Onset: <RIEInput className='editable-text' value={state.allergy_onset} propName={'allergy_onset'}  change={this.props.onChange('allergy_onset')} />
+          Allergy Onset: <RIESelect className='editable-text' value={{id: state.allergy_onset, text: state.allergy_onset}} propName={'allergy_onset'}  change={this.props.onChange('allergy_onset')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('allergy_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -700,22 +747,40 @@ class MedicationOrder extends Component<Props> {
   }
 
   renderReason() {
-    let state = ((this.props.state: any): MedicationOrderState);
+    let state = ((this.props.state: any): MedicationOrder);
     if (!state.reason) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "text"}})}>Add Reason</a>
+          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "Select Condition/Enter Attribute"}})}>Add Reason</a>
           <br />
         </div>
       );
     } else {
-      return (
-        <div>
-          Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
-          <br/>
-        </div>
-      );
+      let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+      let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+      let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
+      let allOptions = options.concat(inputAttribute);
+      let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
+      if (state.reason === "*Input Attribute*") {
+        let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        return (
+          <div>
+            Reason: {reason}
+            <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
+            <br/>
+            Attribute: {attribute}
+            <br/>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            Reason: {reason}
+            <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
+            <br/>
+          </div>
+        );
+      }
     }
   }
 
@@ -856,6 +921,8 @@ class MedicationEnd extends Component<Props> {
 
   renderMedicationOrder() {
     let state = ((this.props.state: any): MedicationEndState);
+    let medicationOrder = this.props.otherStates.filter((s) => {return s.type === "MedicationOrder"});
+    let options = medicationOrder.map((e) => {return {id: e.name, text: e.name}});
     if (!state.medication_order) {
       return (
         <div>
@@ -866,7 +933,7 @@ class MedicationEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Medication Order: <RIEInput className='editable-text' value={state.medication_order} propName={'medication_order'}  change={this.props.onChange('medication_order')} />
+          Medication Order: <RIESelect className='editable-text' value={{id: state.medication_order, text: state.medication_order}} propName={'medication_order'}  change={this.props.onChange('medication_order')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('medication_order')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -959,22 +1026,40 @@ class CarePlanStart extends Component<Props> {
   }
 
   renderReason() {
-    let state = ((this.props.state: any): CarePlanStartState);
+    let state = ((this.props.state: any): CarePlanStart);
     if (!state.reason) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "text"}})}>Add Reason</a>
+          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "Select Condition/Enter Attribute"}})}>Add Reason</a>
           <br />
         </div>
       );
     } else {
-      return (
-        <div>
-          Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
-          <br/>
-        </div>
-      );
+      let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+      let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+      let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
+      let allOptions = options.concat(inputAttribute);
+      let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
+      if (state.reason === "*Input Attribute*") {
+        let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        return (
+          <div>
+            Reason: {reason}
+            <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
+            <br/>
+            Attribute: {attribute}
+            <br/>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            Reason: {reason}
+            <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
+            <br/>
+          </div>
+        );
+      }
     }
   }
 
@@ -1039,6 +1124,8 @@ class CarePlanEnd extends Component<Props> {
 
   renderCarePlan() {
     let state = ((this.props.state: any): CarePlanEndState);
+    let careplans = this.props.otherStates.filter((s) => {return s.type === "CarePlanStart"});
+    let options = careplans.map((e) => {return {id: e.name, text: e.name}});
     if (!state.careplan) {
       return (
         <div>
@@ -1049,7 +1136,7 @@ class CarePlanEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Care Plan: <RIEInput className='editable-text' value={state.careplan} propName={'careplan'}  change={this.props.onChange('careplan')} />
+          Care Plan: <RIESelect className='editable-text' value={{id: state.careplan, text: state.careplan}} propName={'careplan'}  change={this.props.onChange('careplan')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('careplan')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -1120,22 +1207,40 @@ class Procedure extends Component<Props> {
   }
 
   renderReason() {
-    let state = ((this.props.state: any): ProcedureState);
+    let state = ((this.props.state: any): Procedure);
     if (!state.reason) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "text"}})}>Add Reason</a>
+          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "Select Condition/Enter Attribute"}})}>Add Reason</a>
           <br />
         </div>
       );
     } else {
-      return (
-        <div>
-          Reason: <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
-          <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
-          <br/>
-        </div>
-      );
+      let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+      let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+      let inputAttribute = [{id: "*Input Attribute*", text: "*Input Attribute*"}];
+      let allOptions = options.concat(inputAttribute);
+      let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
+      if (state.reason === "*Input Attribute*") {
+        let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        return (
+          <div>
+            Reason: {reason}
+            <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
+            <br/>
+            Attribute: {attribute}
+            <br/>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            Reason: {reason}
+            <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
+            <br/>
+          </div>
+        );
+      }
     }
   }
 
@@ -1579,6 +1684,8 @@ class Death extends Component<Props> {
 
   renderConditionOnset() {
     let state = ((this.props.state: any): DeathState);
+    let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
+    let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
     if (!state.condition_onset) {
       return (
         <div>
@@ -1589,7 +1696,7 @@ class Death extends Component<Props> {
     } else {
       return (
         <div>
-          Condition Onset: <RIEInput className='editable-text' value={state.condition_onset} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} />
+          Condition Onset: <RIESelect className='editable-text' value={{id: state.condition_onset, text: state.condition_onset}} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
