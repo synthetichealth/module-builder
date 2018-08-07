@@ -18,7 +18,9 @@ export type AgeConditional = {
 export type DateConditional = {
   condition_type: "Date",
   operator: '==' | '!=' | "<" | "<=" | ">" | ">=",
-  year: number
+  year?: number
+  month?: number
+  date?: DateInput
 }
 
 export type SocioeconomicStatusConditional = {

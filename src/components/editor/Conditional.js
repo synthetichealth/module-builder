@@ -136,13 +136,112 @@ class Date extends Component<Props> {
     let conditional = ((this.props.conditional: any): DateConditional);
     let options = [{id: '==' , text:'==' }, {id: '!=' , text:'!=' }, {id: "<" , text:"<" }, {id: "<=" , text:"<=" }, {id: ">" , text:">" }, {id: ">=", text:">="}];
     return (
-      <label> Date:
+      <label>
       <RIESelect className='editable-text' value={{id: conditional.operator, text: conditional.operator}} propName="operator" change={this.props.onChange('operator')} options={options} />
-      <RIENumber className='editable-text' value={conditional.year} propName='year' change={this.props.onChange('year')} />
+      {this.renderType()}
+      {this.renderWarning()}
       </label>
     );
   }
 
+  renderType() {
+    let conditional = ((this.props.conditional: any): DateConditional);
+    
+    if(conditional.month) {
+      let month = <RIENumber className='editable-text' value={conditional.month} propName='month' change={this.props.onChange('month')} />
+      return (
+        <div>
+          Month: 
+          {month}
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('month')({val: {id: null}}); this.props.onChange('date')({val: {id: null}})}}>Change to Year</a>
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('date.year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('date.month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('date.day')({val: {id: getTemplate('Type.Date.Day')}}); this.props.onChange('date.hour')({val: {id: getTemplate('Type.Date.Hour')}}); this.props.onChange('date.minute')({val: {id: getTemplate('Type.Date.Minute')}}); this.props.onChange('date.second')({val: {id: getTemplate('Type.Date.Second')}}); this.props.onChange('date.millisecond')({val: {id: getTemplate('Type.Date.Millisecond')}}); this.props.onChange('month')({val: {id: null}}); this.props.onChange('year')({val: {id: null}})}}>Change to Date</a>
+        </div>  
+      );
+    } else if (conditional.date) {
+      let yearInput = <RIENumber className='editable-text' value={conditional.date.year} propName='date.year' change={this.props.onChange('date.year')} />
+      let monthInput = <RIENumber className='editable-text' value={conditional.date.month} propName='date.month' change={this.props.onChange('date.month')} />
+      let dayInput = <RIENumber className='editable-text' value={conditional.date.day} propName='date.day' change={this.props.onChange('date.day')} />
+      let hourInput = <RIENumber className='editable-text' value={conditional.date.hour} propName='date.hour' change={this.props.onChange('date.hour')} />
+      let minuteInput = <RIENumber className='editable-text' value={conditional.date.minute} propName='date.minute' change={this.props.onChange('date.minute')} />
+      let secondInput = <RIENumber className='editable-text' value={conditional.date.second} propName='date.second' change={this.props.onChange('date.second')} />
+      let millisecondInput = <RIENumber className='editable-text' value={conditional.date.millisecond} propName='date.millisecond' change={this.props.onChange('date.millisecond')} />
+      
+      return (
+        <div>
+          Date:
+          <br />
+          {yearInput}/{monthInput}/{dayInput} {hourInput}:{minuteInput}:{secondInput}.{millisecondInput}
+          <br /> 
+          (yyyy/MM/dd HH:mm:ss.SSS)
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('month')({val: {id: null}}); this.props.onChange('date')({val: {id: null}})}}>Change to Year</a>
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('date')({val: {id: null}}); this.props.onChange('year')({val: {id: null}})}}>Change to Month</a>
+        </div>  
+      );
+      
+    } else { //year
+      let year = <RIENumber className='editable-text' value={conditional.year} propName='year' change={this.props.onChange('year')} />
+      return (
+        <div>
+          Year: 
+          {year}
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('year')({val: {id: null}}); this.props.onChange('date')({val: {id: null}})}}>Change to Month</a>
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('date.year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('date.month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('date.day')({val: {id: getTemplate('Type.Date.Day')}}); this.props.onChange('date.hour')({val: {id: getTemplate('Type.Date.Hour')}}); this.props.onChange('date.minute')({val: {id: getTemplate('Type.Date.Minute')}}); this.props.onChange('date.second')({val: {id: getTemplate('Type.Date.Second')}}); this.props.onChange('date.millisecond')({val: {id: getTemplate('Type.Date.Millisecond')}}); this.props.onChange('year')({val: {id: null}}); this.props.onChange('month')({val: {id: null}})}}>Change to Date</a>
+        </div>  
+      );
+    }
+  }
+
+  renderWarning(){
+    if (this.props.conditional.year < 1) {
+      return (
+        <label className='warning'>Invalid Year.</label>
+      );
+    } else if (this.props.conditional.month < 1 || this.props.conditional.month > 12) {
+      return (
+        <label className='warning'>Invalid Month. Must be between 1 and 12.</label>
+      );
+    } else if (this.props.conditional.date) {
+      if (this.props.conditional.date.year < 1) {
+        return (
+          <label className='warning'>Invalid Year</label>
+        );
+      } else if (this.props.conditional.date.month < 1 || this.props.conditional.date.month > 12) {
+        return (
+          <label className='warning'>Invalid Month. Must be between 1 and 12.</label>
+        );
+      } else if (this.props.conditional.date.day < 1 || this.props.conditional.date.day > 31) {
+        return (
+          <label className='warning'>Invalid Day. Must at least 1 and never greater than 31.</label>
+        );
+      } else if (this.props.conditional.date.hour < 0 || this.props.conditional.date.hour > 24) {
+        return (
+          <label className='warning'>Invalid Hour. Must be between 0 and 24.</label>
+        );
+      } else if (this.props.conditional.date.minute < 0 || this.props.conditional.date.minute > 60) {
+        return (
+          <label className='warning'>Invalid Minute. Must be between 0 and 60.</label>
+        );
+      } else if (this.props.conditional.date.second < 0 || this.props.conditional.date.second > 60) {
+        return (
+          <label className='warning'>Invalid Second. Must be between 0 and 60.</label>
+        );
+      } else if (this.props.conditional.date.millisecond < 0 || this.props.conditional.date.millisecond > 999) {
+        return (
+          <label className='warning'>Invalid Millisecond. Must be between 0 and 999.</label>
+        );
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 }
 
 class SocioeconomicStatus extends Component<Props> {
