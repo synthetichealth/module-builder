@@ -65,10 +65,14 @@ class DistributedTransition extends Component<Props> {
       );
     } else {
       remainder = 1 - (sum - distribution);
+      let remainderOption = null
+      if (sum != 1) {
+        remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: remainder})}>(Change to Remainder)</a>
+      }
       return (
         <label> Weight:
           <RIENumber className='editable-text' value={distribution} propName='distribution' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`[${index}].distribution`)} />
-          <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: remainder})}>(Change to Remainder)</a>
+          {remainderOption}
           <br />
           <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: {id: getTemplate('Attribute.NamedDistribution')}})}>Change to Named Distribution</a>
         </label>
