@@ -138,7 +138,7 @@ class LoadModule extends Component {
         if (this.state.Modules) {
           moduleList = (
           <div className='col-4 nopadding'>
-            <div>&ensp; On branch: {this.state.currentBranch}</div>
+            <div style={{backgroundColor: "#ddd"}}>&ensp;Branch: {this.state.currentBranch}</div>
             <ul className='LoadModule-list'>
               {this.state.Modules}
             </ul>
@@ -147,7 +147,7 @@ class LoadModule extends Component {
           if (this.state.Submodules) {
             submoduleList = (
               <div className='col-4 nopadding'>
-                <div>&ensp; In folder: {this.state.currentModule}</div>
+                <div style={{backgroundColor: "#ddd"}}>&ensp;Folder: {this.state.currentModule}</div>
                 <ul className='LoadModule-list'>
                   {this.state.Submodules}
                 </ul>
@@ -163,7 +163,7 @@ class LoadModule extends Component {
           {moduleList}
           {submoduleList}
         </div>  
-        ) 
+        )
 
     default:
       return;
@@ -173,20 +173,20 @@ class LoadModule extends Component {
   
   fetchBranchList() {
     fetch(`https://api.github.com/repos/synthetichealth/synthea/branches`)
-      .then(response => response.json())
-      .then(data => this.setState({
-        Branch: data.map((branch, i) => (
-          <li key={i}><button className='btn btn-link' onClick={() => {this.fetchModuleList(branch.name)}}>{branch.name}</button></li>
-        ))
-      }))
-      .catch(error => console.log('error: ', error));
+    .then(response => response.json())
+    .then(data => this.setState({
+      Branch: data.map((branch, i) => (
+        <li key={i}><button className='btn btn-link'onClick={() => {this.fetchModuleList(branch.name)}}>{branch.name}</button></li>
+      ))
+    }))
+    .catch(error => console.log('error: ', error)); 
   }
 
   fetchModuleList(branch) {
     this.setState({
       currentBranch: branch
     })
-    fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules?ref=` + branch)  
+    fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules?ref=` + branch)
       .then(response => response.json())
       .then(data => this.setState({
         Modules: data.map((name, i) => (
@@ -224,8 +224,10 @@ class LoadModule extends Component {
       .catch(error => console.log('error: ', error));
   }    
 
-  componentDidMount() {
-    this.fetchBranchList()
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.selectedOption === 'git' && prevState.selectedOption !== 'git') {
+      this.fetchBranchList()
+    }
   }
 
   renderWelcomeMessage = () => {
@@ -250,8 +252,7 @@ class LoadModule extends Component {
     return (
       <div>
         <div className={'modal ' +  classDetails} style={style}>
-          <div className="modal-dialog modal-lg" role="document">
-            <div className="modal-content" style={{width:"900px"}}>
+            <div className="modal-content" style={{width:"900px", marginLeft: 200, marginRight: 200, marginTop: 60}}>
               <div className="modal-header">
                 <h5 className="modal-title">{(!this.props.welcome ? 'Load Module' : 'Synthea Module Builder')}</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.props.onHide} style={{display: (this.props.welcome ? 'none' : '')}}>
@@ -280,7 +281,6 @@ class LoadModule extends Component {
                 </div>
               </div>
               {this.renderFooter()}
-            </div>
           </div>
         </div>
         <div className={`modal-backdrop ${classDetails}`} style={style}/>
