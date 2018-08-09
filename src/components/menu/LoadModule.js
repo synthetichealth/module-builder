@@ -222,6 +222,9 @@ class LoadModule extends Component {
       fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + name)  
         .then(response => response.text())
         .then(data => this.loadModule(data))
+        .then(this.setState ({
+          Modules: null
+        }))
         .catch(error => console.log('error: ', error));
     } else {
       fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + name + `?ref=` + this.state.currentBranch)  
@@ -239,6 +242,10 @@ class LoadModule extends Component {
     fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + this.state.currentModule + `/` + name)  
       .then(response => response.text())
       .then(data => this.loadModule(data))
+      .then(this.setState ({
+        Submodules: null,
+        Modules: null
+      }))
       .catch(error => console.log('error: ', error));
   }    
 
