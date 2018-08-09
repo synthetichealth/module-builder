@@ -343,6 +343,14 @@ export default {"allergic_rhinitis":{
     },
     "Allergic_Rhinitis_Symptom4_Ends": {
       "type": "Symptom",
+      "symptom": "Sneezing Fits",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Allergic_Rhinitis_Symptom5_Ends"
+    },
+    "Allergic_Rhinitis_Symptom5_Ends": {
+      "type": "Symptom",
       "symptom": "Ear Pressure",
       "exact": {
         "quantity": 0
@@ -3278,8 +3286,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "727316",
-          "display": "0.3 ML EPINEPHrine 0.5 MG/ML Auto-Injector"
+          "code": "1870230",
+          "display": "NDA020800 0.3 ML Epinephrine 1 MG/ML Auto-Injector"
         }
       ],
       "prescription": {
@@ -4861,8 +4869,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1091166",
-          "display": "Methylphenidate Hydrochloride 20 MG [Ritalin]"
+          "code": "1091392",
+          "display": "Methylphenidate Hydrochloride 20 MG Oral Tablet"
         }
       ],
       "distributed_transition": [
@@ -4884,8 +4892,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "617944",
-          "display": "Atomoxetine 100 MG [Strattera]"
+          "code": "608139",
+          "display": "atomoxetine 100 MG Oral Capsule"
         }
       ],
       "distributed_transition": [
@@ -5379,8 +5387,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1020137",
-          "display": "Dextromethorphan Hydrobromide 1 MG/ML"
+          "code": "1043400",
+          "display": "Acetaminophen 21.7 MG/ML / Dextromethorphan Hydrobromide 1 MG/ML / doxylamine succinate 0.417 MG/ML Oral Solution"
         }
       ],
       "direct_transition": "End_Doctor_Visit"
@@ -5392,8 +5400,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "608680",
-          "display": "Acetaminophen 160 MG"
+          "code": "313782",
+          "display": "Acetaminophen 325 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Doctor_Visit"
@@ -6911,8 +6919,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "575971",
-          "display": "oxaliplatin 5 MG/ML [Eloxatin]"
+          "code": "1736776",
+          "display": "10 ML oxaliplatin 5 MG/ML Injection"
         }
       ],
       "direct_transition": "Chemotherapy_Procedure"
@@ -7854,8 +7862,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1366342",
-          "display": "Levonorgestrel 0.00354 MG/HR [Norplant]"
+          "code": "1366343",
+          "display": "Levonorgestrel 0.00354 MG/HR Drug Implant"
         }
       ],
       "direct_transition": "Initial_Implant"
@@ -7866,8 +7874,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "646250",
-          "display": "Implanon 68 MG Drug Implant"
+          "code": "389221",
+          "display": "Etonogestrel 68 MG Drug Implant"
         }
       ],
       "direct_transition": "Initial_Implant"
@@ -7878,8 +7886,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1111011",
-          "display": "Nexplanon 68 MG Drug Implant"
+          "code": "389221",
+          "display": "Etonogestrel 68 MG Drug Implant"
         }
       ],
       "direct_transition": "Initial_Implant"
@@ -8024,8 +8032,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1000128",
-          "display": "1 ML Depo-Provera 150 MG/ML Injection"
+          "code": "1000126",
+          "display": "1 ML medroxyprogesterone acetate 150 MG/ML Injection"
         }
       ],
       "direct_transition": "Initial_Injection_By_Physician"
@@ -8036,8 +8044,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1000158",
-          "display": "0.65 ML depo-subQ provera 160 MG/ML Prefilled Syringe"
+          "code": "1000156",
+          "display": "0.65 ML medroxyprogesterone acetate 160 MG/ML Prefilled Syringe"
         }
       ],
       "direct_transition": "Initial_Injection_By_Physician"
@@ -9101,8 +9109,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1536586",
-          "display": "Xulane 150/35 MCG/Day Weekly Transdermal System"
+          "code": "1534809",
+          "display": "168 HR Ethinyl Estradiol 0.00146 MG/HR / norelgestromin 0.00625 MG/HR Transdermal System"
         }
       ],
       "direct_transition": "End_Consultation_Encounter"
@@ -10536,8 +10544,8 @@ export default {"allergic_rhinitis":{
             "codes": [
               {
                 "system": "RxNorm",
-                "code": "896188",
-                "display": "Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT [Advair]"
+                "code": "896209",
+                "display": "60 ACTUAT Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT Dry Powder Inhaler"
               }
             ]
           },
@@ -10555,8 +10563,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "896188",
-          "display": "Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT [Advair]"
+          "code": "896209",
+          "display": "60 ACTUAT Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT Dry Powder Inhaler"
         }
       ],
       "direct_transition": "Consider_Surgery"
@@ -12747,8 +12755,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "602735",
-          "display": "Galantamine 4 MG [Razadyne]"
+          "code": "310436",
+          "display": "Galantamine 4 MG Oral Tablet"
         }
       ],
       "direct_transition": "ModerateDecline"
@@ -12761,8 +12769,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "997221",
-          "display": "Donepezil hydrochloride 10 MG [Aricept]"
+          "code": "997223",
+          "display": "Donepezil hydrochloride 10 MG Oral Tablet"
         }
       ],
       "direct_transition": "ModerateDecline"
@@ -12930,8 +12938,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1602593",
-          "display": "Donepezil hydrochloride 10 MG / Memantine hydrochloride 28 MG [Namzaric]"
+          "code": "1599803",
+          "display": "24 HR Donepezil hydrochloride 10 MG / Memantine hydrochloride 28 MG Extended Release Oral Capsule"
         }
       ],
       "direct_transition": "End_ModeratelySevere_Encounter"
@@ -12943,8 +12951,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "996741",
-          "display": "Memantine hydrochloride 2 MG/ML [Namenda]"
+          "code": "996740",
+          "display": "Memantine hydrochloride 2 MG/ML Oral Solution"
         }
       ],
       "direct_transition": "End_ModeratelySevere_Encounter"
@@ -15633,8 +15641,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "849437",
-          "display": "Naproxen sodium 550 MG [Anaprox]"
+          "code": "198014",
+          "display": "Naproxen 500 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Diagnosis_Encounter"
@@ -15734,8 +15742,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "607015",
-          "display": "pregabalin 100 MG [Lyrica]"
+          "code": "483438",
+          "display": "pregabalin 100 MG Oral Capsule"
         }
       ],
       "direct_transition": "End_Episode_Encounter"
@@ -15748,8 +15756,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "596927",
-          "display": "DULoxetine 20 MG [Cymbalta]"
+          "code": "596926",
+          "display": "duloxetine 20 MG Delayed Release Oral Capsule"
         }
       ],
       "direct_transition": "End_Episode_Encounter"
@@ -16308,8 +16316,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "849437",
-          "display": "Naproxen sodium 550 MG [Anaprox]"
+          "code": "198014",
+          "display": "Naproxen 500 MG Oral Tablet"
         }
       ],
       "direct_transition": "Uric_Acid_Reducer"
@@ -16338,8 +16346,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "573839",
-          "display": "Allopurinol 100 MG [Zyloprim]"
+          "code": "197319",
+          "display": "Allopurinol 100 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Diagnosis_Encounter"
@@ -20896,8 +20904,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "849727",
-          "display": "Naproxen sodium 220 MG [Aleve]"
+          "code": "849574",
+          "display": "Naproxen sodium 220 MG Oral Tablet"
         }
       ],
       "direct_transition": "Corticosteroid"
@@ -21428,8 +21436,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "392151",
-          "display": "Amoxicillin 200 MG Oral Tablet"
+          "code": "308182",
+          "display": "Amoxicillin 250 MG Oral Capsule"
         }
       ],
       "prescription": {
@@ -22016,8 +22024,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "239981",
-          "display": "Chlorpheniramine 2 MG Chewable Tablet"
+          "code": "477045",
+          "display": "Chlorpheniramine Maleate 2 MG/ML Oral Solution"
         }
       ],
       "prescription": {
@@ -22031,8 +22039,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "389128",
-          "display": "Chlorpheniramine 8 MG Oral Tablet"
+          "code": "1363309",
+          "display": "Chlorpheniramine Maleate 4 MG Oral Tablet"
         }
       ],
       "prescription": {
@@ -26223,8 +26231,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1049544",
-          "display": "oxyCODONE Hydrochloride 15 MG [OxyCONTIN]"
+          "code": "1860154",
+          "display": "Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 MG Extended Release Oral Tablet"
         }
       ],
       "direct_transition": "End_Directed_Use_Encounter"
@@ -26261,8 +26269,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1049639",
-          "display": "Acetaminophen 325 MG / oxyCODONE Hydrochloride 5 MG [Percocet]"
+          "code": "1049221",
+          "display": "Acetaminophen 325 MG / Oxycodone Hydrochloride 5 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Directed_Use_Encounter"
@@ -26987,8 +26995,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "849727",
-          "display": "Naproxen sodium 220 MG [Aleve]"
+          "code": "849574",
+          "display": "Naproxen sodium 220 MG Oral Tablet"
         }
       ],
       "remarks": [
@@ -27309,8 +27317,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "904420",
-          "display": "Alendronic acid 10 MG [Fosamax]"
+          "code": "904419",
+          "display": "Alendronic acid 10 MG Oral Tablet"
         }
       ],
       "direct_transition": "Terminal"
@@ -29981,8 +29989,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "849437",
-          "display": "Naproxen sodium 550 MG [Anaprox]"
+          "code": "198014",
+          "display": "Naproxen 500 MG Oral Tablet"
         }
       ],
       "conditional_transition": [
@@ -30015,8 +30023,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "575020",
-          "display": "Methotrexate 10 MG [Trexall]"
+          "code": "105586",
+          "display": "Methotrexate 10 MG Oral Tablet"
         }
       ],
       "direct_transition": "Encounter_Ends_After_DMARD"
@@ -31577,8 +31585,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "824184",
-          "display": " Amoxicillin 250 MG / Clavulanate 125 MG [Augmentin]"
+          "code": "562251",
+          "display": "Amoxicillin 250 MG / Clavulanate 125 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Encounter"
@@ -31604,8 +31612,8 @@ export default {"allergic_rhinitis":{
                 "codes": [
                   {
                     "system": "RxNorm",
-                    "code": "824184",
-                    "display": " Amoxicillin 250 MG / Clavulanate 125 MG [Augmentin]"
+                    "code": "562251",
+                    "display": "Amoxicillin 250 MG / Clavulanate 125 MG Oral Tablet"
                   }
                 ]
               },
@@ -31651,8 +31659,8 @@ export default {"allergic_rhinitis":{
             "codes": [
               {
                 "system": "RxNorm",
-                "code": "824184",
-                "display": " Amoxicillin 250 MG / Clavulanate 125 MG [Augmentin]"
+                "code": "562251",
+                "display": "Amoxicillin 250 MG / Clavulanate 125 MG Oral Tablet"
               }
             ]
           },
@@ -32327,8 +32335,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "834060",
-          "display": "Penicillin V Potassium 250 MG"
+          "code": "834061",
+          "display": "Penicillin V Potassium 250 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Encounter"
@@ -32341,8 +32349,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "834101",
-          "display": "Penicillin V Potassium 500 MG"
+          "code": "834102",
+          "display": "Penicillin V Potassium 500 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Encounter"
@@ -33926,8 +33934,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "568530",
-          "display": "Nitrofurantoin 5 MG/ML [Furadantin]"
+          "code": "311989",
+          "display": "Nitrofurantoin 5 MG/ML Oral Suspension"
         }
       ],
       "direct_transition": "Prescribe_OTC_Painkiller_For_UTIs"
@@ -33942,8 +33950,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1094108",
-          "display": "Phenazopyridine hydrochloride 100 MG [Pyridium]"
+          "code": "1094107",
+          "display": "Phenazopyridine hydrochloride 100 MG Oral Tablet"
         }
       ],
       "direct_transition": "UTI_CarePlan"
@@ -34022,8 +34030,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1648767",
-          "display": "NITROFURANTOIN, MACROCRYSTALS 50 MG [Macrodantin]"
+          "code": "311995",
+          "display": "NITROFURANTOIN, MACROCRYSTALS 50 MG Oral Capsule"
         }
       ],
       "direct_transition": "End_Followup"
