@@ -138,8 +138,7 @@ class LoadModule extends Component {
         if (this.state.Modules) {
           moduleList = (
           <div className='col-4 nopadding'>
-            <div style={{backgroundColor: "#ddd"}}>&ensp;Branch: {this.state.currentBranch}</div>
-            <ul className='LoadModule-list'>
+            <ul id='module list' className='LoadModule-list'>
               {this.state.Modules}
             </ul>
           </div>
@@ -147,7 +146,6 @@ class LoadModule extends Component {
           if (this.state.Submodules) {
             submoduleList = (
               <div className='col-4 nopadding'>
-                <div style={{backgroundColor: "#ddd"}}>&ensp;Folder: {this.state.currentModule}</div>
                 <ul className='LoadModule-list'>
                   {this.state.Submodules}
                 </ul>
@@ -158,7 +156,7 @@ class LoadModule extends Component {
         return(
         <div className='row'>  
           <ul className='LoadModule-list'>
-            {this.state.Branch}  
+            {this.state.Branches}  
           </ul>
           {moduleList}
           {submoduleList}
@@ -170,15 +168,35 @@ class LoadModule extends Component {
 
     }
   }
+
+  changeColor(ID, type) {
+    document.getElementById(ID).style.backgroundColor = "#ddd";
+    let list = null
+    switch(type) {
+      case 'branch':
+        list = this.state.Branches
+        break;
+      case 'module':
+        list = this.state.Modules
+        break;
+    }
+    list.forEach((i) => {
+      if (i.props.id !== ID) {
+        document.getElementById(i.props.id).style.backgroundColor = "#eee";
+      }
+    }) 
+  }
   
   fetchBranchList() {
     fetch(`https://api.github.com/repos/synthetichealth/synthea/branches`)
     .then(response => response.json())
-    .then(data => this.setState({
-      Branch: data.map((branch, i) => (
-        <li key={i}><button className='btn btn-link'onClick={() => {this.fetchModuleList(branch.name)}}>{branch.name}</button></li>
-      ))
-    }))
+    .then(data => {
+      this.setState({
+        Branches: data.map((branch, i) => (
+          <li key={i} id={branch.name}><button className='btn btn-link' onClick={() => {this.changeColor(branch.name, 'branch');this.fetchModuleList(branch.name)}}>{branch.name}</button></li>
+        ))
+      })
+    })  
     .catch(error => console.log('error: ', error)); 
   }
 
@@ -190,7 +208,7 @@ class LoadModule extends Component {
       .then(response => response.json())
       .then(data => this.setState({
         Modules: data.map((name, i) => (
-          <li key={i}><button className='btn btn-link' onClick={() => {this.fetchModule(name.name)}}>{name.name}</button></li>
+          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'module');this.fetchModule(name.name)}}>{name.name}</button></li>
         ))
       }))
       .catch(error => console.log('error: ', error));
@@ -210,7 +228,7 @@ class LoadModule extends Component {
       .then(response => response.json())
       .then(data => this.setState({
         Submodules: data.map((name, i) => (
-          <li key={i}><button className='btn btn-link' onClick={() => {this.fetchSubmodule(name.name)}}>{name.name}</button></li>
+          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.fetchSubmodule(name.name)}}>{name.name}</button></li>
         ))
       }))
       .catch(error => console.log('error: ', error));
