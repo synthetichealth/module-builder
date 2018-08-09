@@ -53,12 +53,16 @@ class DistributedTransition extends Component<Props> {
     let remainder = 0;
     if(typeof distribution === 'object') {
       remainder = 1 - (sum - distribution.default);
+      let remainderOption = null
+      if (sum != 1) {
+        remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution.default`)({val: remainder})}>(Change to Remainder)</a>
+      }
       return (
         <label>
           Attribute: <RIEInput className='editable-text' value={distribution.attribute} propName='attribute' change={this.props.onChange(`[${index}].distribution.attribute`)} />
           <br />
           Default Weight: <RIENumber className='editable-text' value={distribution.default} propName='default' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`[${index}].distribution.default`)} />
-          <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: remainder})}>(Change to Remainder)</a>
+          {remainderOption}
           <br />
           <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: {id: getTemplate('Attribute.UnnamedDistribution')}})}>Change to Unnamed Distribution</a>
         </label>
