@@ -180,6 +180,9 @@ class LoadModule extends Component {
       case 'module':
         list = this.state.Modules
         break;
+      case 'folder':
+        list = this.state.Folders
+        break;  
     }
     list.forEach((i) => {
       if (i.props.id !== ID) {
@@ -212,7 +215,7 @@ class LoadModule extends Component {
         let modules = data.filter(name => name.name.includes(".json"))
         this.setState({
         Folders: folders.map((name, i) => (
-          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'module');this.fetchModule(name.name)}}>{name.name}/</button></li>
+          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'folder');this.fetchModule(name.name)}}>{name.name}/</button></li>
         )),
         Modules: modules.map((name, i) => (
           <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'module');this.fetchModule(name.name)}}>{name.name}</button></li>
