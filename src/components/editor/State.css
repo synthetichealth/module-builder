@@ -51,7 +51,7 @@ textarea {
   padding-right: .2em;
 }
 
-.remarks-text span {
+.remarks-text div {
   font-style: italic;
   text-decoration: underline !important;
   cursor: text;
@@ -69,12 +69,8 @@ span.editable-text:empty {
   color: #ff3300 !important;
 }
 
-span.remarks-text:empty:after {
-  content: 'Add Remarks';
-}
-
-span.remarks-text > :empty:after {
-  content: 'Add Remarks';
+span.remarks-text div:empty{
+  height:1.5em;
 }
 
 span.editable-text:empty:after {

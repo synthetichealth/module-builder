@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RIEStatefulBase from 'riek/lib/RIEStatefulBase';
+import { totalmem } from 'os';
 export default class TextArea extends RIEStatefulBase {
     keyDown = (event) => {
         if (event.keyCode === 27) { this.cancelEditing() }     // Escape
@@ -22,28 +23,23 @@ export default class TextArea extends RIEStatefulBase {
 
     renderNormalComponent = () => {
         const value = this.state.newValue || this.props.value
-        const spans_and_brs = []
-        var anySpan = false
-        let i = 0
-        value.split("\n").map(line => {
-            if(line.length > 0){
-                anySpan = true
-                spans_and_brs.push(<span key={i}>{line}</span>)
-            }
-          spans_and_brs.push(<br key={i+1} />)
-          i += 2
-        });
+        const spansAndBrs = []
 
-        spans_and_brs.pop() // remove last br tag
-        if(!anySpan){
-            spans_and_brs.length=0
-            spans_and_brs.unshift(<span key="placeholder">{''}</span>)
+        // The regex just replaces whitespace (tabs, newline, space) 
+        // to check if the remarks section only has whitespace in it.
+        if(!value.replace(/\s/g,"").length){
+            spansAndBrs.push(<div key="placeholder">{this.props.defaultText}</div>)
+        }else{
+            value.split("\n").forEach(line => {
+                spansAndBrs.push(<div key={spansAndBrs.length}>{line}</div>)       
+            });
         }
+
         return <span
             tabIndex="0"
             className={this.makeClassString()}
             onFocus={this.startEditing}
             onClick={this.startEditing}
-            {...this.props.defaultProps}>{spans_and_brs}</span>;
+            {...this.props.defaultProps}>{spansAndBrs}</span>;
     };
 }
