@@ -139,6 +139,7 @@ class LoadModule extends Component {
           moduleList = (
           <div className='col-4 nopadding'>
             <ul className='LoadModule-list'>
+              {this.state.Folders}
               {this.state.Modules}
             </ul>
           </div>
@@ -206,11 +207,18 @@ class LoadModule extends Component {
     })
     fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules?ref=` + branch)
       .then(response => response.json())
-      .then(data => this.setState({
-        Modules: data.map((name, i) => (
+      .then(data => {
+        let folders = data.filter(name => !name.name.includes(".json"))
+        let modules = data.filter(name => name.name.includes(".json"))
+        this.setState({
+        Folders: folders.map((name, i) => (
+          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'module');this.fetchModule(name.name)}}>{name.name}/</button></li>
+        )),
+        Modules: modules.map((name, i) => (
           <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'module');this.fetchModule(name.name)}}>{name.name}</button></li>
         ))
-      }))
+        })
+      })  
       .catch(error => console.log('error: ', error));
   }
 
