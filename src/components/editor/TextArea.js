@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RIEStatefulBase from 'riek/lib/RIEStatefulBase';
-import { totalmem } from 'os';
 export default class TextArea extends RIEStatefulBase {
     keyDown = (event) => {
         if (event.keyCode === 27) { this.cancelEditing() }     // Escape
