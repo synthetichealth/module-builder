@@ -7,12 +7,27 @@ export default class TextArea extends RIEStatefulBase {
     };
 
     renderEditingComponent = () => {
+        var toggle = false;
+
+        const uneditedRemarks = this.props.value.split("\n").reduce(((p,d,i)=>{
+            if(d.length>0){
+                toggle = true;
+              return [...p,d];
+            }else if(toggle){
+                toggle=false;
+                return [...p];
+            }else{
+                return [...p,d]
+
+            }
+          }),[]).join("\n");
+
         return <textarea
             rows={this.props.rows}
             cols={this.props.cols}
             disabled={this.state.loading}
             className={this.makeClassString()}
-            defaultValue={this.props.value}
+            defaultValue={uneditedRemarks}
             onInput={this.textChanged}
             onBlur={this.finishEditing}
             ref="input"
@@ -29,9 +44,22 @@ export default class TextArea extends RIEStatefulBase {
         if(!value.replace(/\s/g,"").length){
             spansAndBrs.push(<div key="placeholder">{this.props.defaultText}</div>)
         }else{
-            value.split("\n").forEach(line => {
-                spansAndBrs.push(<div key={spansAndBrs.length}>{line}</div>)       
+            let aggregateLine = "";
+            const lines = this.props.value.split("\n");
+            lines.forEach(line => {
+                if(line.length===0){
+                    // Empty lines get turned into new lines
+                    spansAndBrs.push(<div key={spansAndBrs.length}>{aggregateLine}</div>)
+                    aggregateLine = "";       
+                }
+                aggregateLine += line;      
             });
+
+            if(aggregateLine.length > 0){
+                // Push the final aggregate line
+                spansAndBrs.push(<div key={spansAndBrs.length}>{aggregateLine}</div>)
+            }
+
         }
 
         return <span

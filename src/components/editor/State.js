@@ -103,7 +103,20 @@ class StateEditor extends Component<Props> {
   }
 
   updateRemarks = (el:any) => {
-    const remarks = el.remarks? el.remarks.split("\n") : null;
+
+    // Need to make sure new lines get represented correctly
+    // when input from the remarks editor.
+    const editedRemarks = el.remarks.split("\n").reduce(((p,d,i)=>{
+      if(d.length>0){
+        return [...p,d,""];
+
+      }else{
+        return [...p,d];
+      }
+
+    }),[]);
+    console.log(editedRemarks);
+    let remarks = el.remarks? editedRemarks : null;
     this.props.onChange(`states.${this.props.state.name}.remarks`)({remarks:{id:remarks}});
   }
 
@@ -129,7 +142,7 @@ class StateEditor extends Component<Props> {
           <div className='Editor-panel-title'> 
             State Editor
           </div>
-          <h3><RIEInput className='editable-text' className='editable-text' propName={'name'} value={this.props.state.name} change={this.props.renameNode} /></h3>
+          <h3><RIEInput className='editable-text' className='editable-text' propName={'name'} value={this.props.state.name} change={this.renameNode} /> </h3>
           State Type: <RIESelect className='editable-text' className='editable-text' value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
           <hr/>
           <TextArea className='remarks-text' value={remarks} propName="remarks" change={this.updateRemarks} defaultText={"Add Remarks"}/>
