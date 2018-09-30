@@ -6121,7 +6121,7 @@ export default {"allergic_rhinitis":{
           "display": "Rectal polypectomy"
         }
       ],
-      "direct_transition": "End_Followup_Encounter_After_Adenoma_Removal"
+      "direct_transition": "Pain_Vital"
     },
     "End_Followup_Encounter_After_Adenoma_Removal": {
       "type": "EncounterEnd",
@@ -6668,7 +6668,7 @@ export default {"allergic_rhinitis":{
           "display": "Partial resection of colon"
         }
       ],
-      "direct_transition": "Partial_Colectomy_CarePlan"
+      "direct_transition": "Pain_Vital_3"
     },
     "Partial_Colectomy_CarePlan": {
       "type": "CarePlanStart",
@@ -6795,7 +6795,7 @@ export default {"allergic_rhinitis":{
           "display": "Construction of diverting colostomy"
         }
       ],
-      "direct_transition": "Diverting_Colostomy_CarePlan"
+      "direct_transition": "Pain_Vital_2"
     },
     "Diverting_Colostomy_CarePlan": {
       "type": "CarePlanStart",
@@ -6897,7 +6897,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
-      "direct_transition": "Chemotherapy_Drugs_I"
+      "direct_transition": "Pain_Vital_4"
     },
     "Chemotherapy_Drugs_I": {
       "type": "MedicationOrder",
@@ -7051,6 +7051,1527 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Record_CMP": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 29
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 60,
+            "high": 80
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "10834-0",
+              "display": "Globulin [Mass/volume] in Serum by calculation"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.1,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 140
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 60
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Record_CBC_Panel"
+    },
+    "Record_CBC_Panel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 4,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "Leukocytes [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*3/uL",
+          "range": {
+            "low": 0.5,
+            "high": 5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "Erythrocytes [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*6/uL",
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/​volume] in Blood"
+            }
+          ],
+          "unit": "g/dL",
+          "range": {
+            "low": 6,
+            "high": 15
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "4544-3",
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ],
+          "unit": "%",
+          "range": {
+            "low": 25,
+            "high": 35
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/​volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "target_encounter": "Wellness_Encounter",
+      "direct_transition": "Chemotherapy_Drugs_I"
+    },
+    "Pain_Vital": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 5,
+        "high": 8
+      },
+      "direct_transition": "End_Followup_Encounter_After_Adenoma_Removal"
+    },
+    "Pain_Vital_2": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 5,
+        "high": 10
+      },
+      "direct_transition": "Diverting_Colostomy_CarePlan"
+    },
+    "Pain_Vital_3": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 5,
+        "high": 10
+      },
+      "direct_transition": "Partial_Colectomy_CarePlan"
+    },
+    "Pain_Vital_4": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 2,
+        "high": 8
+      },
+      "direct_transition": "Record_CMP"
+    }
+  }
+}
+,
+"congestive_heart_failure":{
+  "name": "Congestive Heart Failure",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "age delay"
+    },
+    "CHF symptom onset 1": {
+      "type": "Symptom",
+      "symptom": "shortness of breath",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "CHF symptom onset 2"
+    },
+    "CHF symptom onset 2": {
+      "type": "Symptom",
+      "symptom": "swelling",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "CHF symptom onset 3"
+    },
+    "CHF symptom onset 3": {
+      "type": "Symptom",
+      "symptom": "exercise intolerance",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "CHF Condition Start"
+    },
+    "CHF Condition Start": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "chf",
+      "target_encounter": "CHF initial workup encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 88805009,
+          "display": "Chronic congestive heart failure (disorder)"
+        }
+      ],
+      "direct_transition": "CHF initial workup encounter"
+    },
+    "CHF initial workup encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "chf",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "BNP lab workup"
+    },
+    "inital workup imaging for CHF": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": "34552-0",
+        "display": "trans thoracic echocardiogram"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": 261179002,
+            "display": "thoracic"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "US",
+            "display": "Ultrasound"
+          },
+          "instances": [
+            {
+              "title": "Ultrasound Multiframe Image Storage",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.3.1",
+                "display": "Ultrasound Multiframe Image Storage"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "CHF careplan"
+    },
+    "BNP lab workup": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "pg/mL",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "42637-9",
+          "display": "Natriuretic peptide B"
+        }
+      ],
+      "direct_transition": "Record_MetabolicPanel",
+      "range": {
+        "low": 2,
+        "high": 100
+      }
+    },
+    "Record_MetabolicPanel": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "51990-0",
+          "display": "Basic Metabolic Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Creatinine",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        }
+      ],
+      "direct_transition": "initial encounter end"
+    },
+    "followup_CHF_encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "chf",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "inital workup imaging for CHF"
+    },
+    "CHF careplan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 735984001,
+          "display": "Heart failure self management plan"
+        }
+      ],
+      "direct_transition": "CHF Medication Start 1",
+      "reason": "chf",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 183063000,
+          "display": "low salt diet education"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 183301007,
+          "display": "physical exercise"
+        }
+      ]
+    },
+    "initial encounter end": {
+      "type": "EncounterEnd",
+      "direct_transition": "intra_encounter time gate"
+    },
+    "intra_encounter time gate": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 3,
+        "unit": "weeks"
+      },
+      "direct_transition": "followup_CHF_encounter"
+    },
+    "CHF Medication Start 1": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 866414,
+          "display": "24 HR metoprolol succinate 100 MG Extended Release Oral Tablet [Toprol]"
+        }
+      ],
+      "direct_transition": "CHF Medication Start 2",
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "refills": 12
+      }
+    },
+    "CHF Medication Start 2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 315971,
+          "display": "Lasix 40mg"
+        }
+      ],
+      "direct_transition": "end_followup_encounter",
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "refills": 10
+      }
+    },
+    "end_followup_encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Maintaining CHF"
+    },
+    "age delay": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 50,
+        "unit": "years"
+      },
+      "direct_transition": "chance of CHF"
+    },
+    "chance of CHF": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "years"
+      },
+      "distributed_transition": [
+        {
+          "transition": "chance of CHF",
+          "distribution": 0.99904
+        },
+        {
+          "transition": "CHF symptom onset 1",
+          "distribution": 0.00096
+        }
+      ]
+    },
+    "Maintaining CHF": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 6,
+        "unit": "months"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Potential CHF Flare",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "followup_CHF_encounter",
+            "within": {
+              "quantity": 1,
+              "unit": "years"
+            }
+          }
+        },
+        {
+          "transition": "followup_CHF_encounter"
+        }
+      ]
+    },
+    "Potential CHF Flare": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "acute inpatient CHF flare",
+          "distribution": 0.01
+        },
+        {
+          "transition": "Maintaining CHF",
+          "distribution": 0.99
+        }
+      ]
+    },
+    "acute inpatient CHF flare": {
+      "type": "Simple",
+      "direct_transition": "CHF ED Visit"
+    },
+    "CHF ED Visit": {
+      "type": "Encounter",
+      "encounter_class": "emergency",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for Problem"
+        }
+      ],
+      "direct_transition": "Record_CMP"
+    },
+    "CXR_ED": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": 399208008,
+        "display": "Plain chest X-ray (procedure)"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": 51185008,
+            "display": "Thoracic structure (body structure)"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "CR",
+            "display": "Computed Radiography"
+          },
+          "instances": [
+            {
+              "title": "Title of this image",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.1.1",
+                "display": "Digital X-Ray Image Storage – for Presentation"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "ED_End"
+    },
+    "ED_End": {
+      "type": "EncounterEnd",
+      "direct_transition": "Admit_Discharge Transition"
+    },
+    "Admit_Discharge Transition": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Vital Sign",
+                "vital_sign": "Systolic Blood Pressure",
+                "operator": "<",
+                "value": 0
+              },
+              {
+                "condition_type": "Vital Sign",
+                "vital_sign": "Sodium",
+                "operator": "<",
+                "value": 135
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Inpatient_admittance",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Potential CHF Flare",
+              "distribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    "Inpatient_admittance": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 308540004,
+          "display": "Inpatient stay (finding)"
+        }
+      ],
+      "direct_transition": "Inpatient CarePlan"
+    },
+    "Inpatient CarePlan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736353004,
+          "display": "Inpatient care plan (record artifact)"
+        }
+      ],
+      "direct_transition": "Lasix IV",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 385715006,
+          "display": "Cardiac care (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 386619000,
+          "display": "Low sodium diet (finding)"
+        }
+      ],
+      "goals": [
+        {
+          "addresses": [
+            "blood pressure"
+          ],
+          "text": "improved systolic function"
+        },
+        {
+          "addresses": [
+            "blood pressure"
+          ],
+          "text": "improved diastolic function"
+        },
+        {
+          "addresses": [
+            "text"
+          ],
+          "observation": {
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "59408-5",
+                "display": "oxygen saturation in arterial blood by pulse oximetry"
+              }
+            ],
+            "operator": ">",
+            "value": 85
+          }
+        }
+      ]
+    },
+    "Lasix IV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1719286,
+          "display": "10 ML Furosemide 10 MG/ML Injection"
+        }
+      ],
+      "reason": "chf",
+      "conditional_transition": [
+        {
+          "transition": "Inpatient 3D Echo",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "3decho",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "O2 Vitals"
+        }
+      ]
+    },
+    "Inpatient 3D Echo": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": 433236007,
+        "display": "Transthoracic echocardiography"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": 261179002,
+            "display": "Thoracic"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "US",
+            "display": "Ultrasound"
+          },
+          "instances": [
+            {
+              "title": "Transthoracic echocardiography",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.3.1",
+                "display": "Ultrasound Multiframe Image Storage"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "CXR_Inpt_daily"
+    },
+    "O2 Vitals": {
+      "type": "VitalSign",
+      "vital_sign": "Oxygen Saturation",
+      "unit": "%",
+      "direct_transition": "CXR_Inpt_daily",
+      "range": {
+        "low": 65,
+        "high": 85
+      }
+    },
+    "CXR_Inpt_daily": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": 399208008,
+        "display": "Plain chest X-ray"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": 51185008,
+            "display": "Thoracic structure"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "DX",
+            "display": "Digital Radiography"
+          },
+          "instances": [
+            {
+              "title": "Plain chest X-ray",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.1.1",
+                "display": "Digital X-Ray Image Storage – for Presentation"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "inpatient daily labs"
+    },
+    "Inpatient Daily Transition": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "days"
+      },
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Vital Sign",
+                "vital_sign": "Systolic Blood Pressure",
+                "operator": ">",
+                "value": 120
+              },
+              {
+                "condition_type": "Vital Sign",
+                "vital_sign": "Sodium",
+                "operator": ">",
+                "value": 135
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Inpatient Discharge",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Lasix IV",
+              "distribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    "Inpatient Discharge": {
+      "type": "Simple",
+      "direct_transition": "End Inpatient Care Plan"
+    },
+    "End Inpatient Care Plan": {
+      "type": "CarePlanEnd",
+      "direct_transition": "End Inpatient Encounter",
+      "careplan": "Inpatient CarePlan"
+    },
+    "End Inpatient Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Potential CHF Flare"
+    },
+    "inpatient daily labs": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "51990-0",
+          "display": "Basic Metabolic Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Creatinine",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        }
+      ],
+      "target_encounter": "Wellness_Encounter",
+      "direct_transition": "Inpatient Daily Transition"
+    },
+    "Record_CMP": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "vital_sign": "Creatinine"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 29
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/​volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 60,
+            "high": 80
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/​volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "10834-0",
+              "display": "Globulin [Mass/​volume] in Serum by calculation"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/​volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.1,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/​volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 140
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/​volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 60
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/​volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "CXR_ED"
     }
   }
 }
@@ -10064,7 +11585,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "LOINC",
           "code": "19926-5",
-          "display": "FEV1/​FVC"
+          "display": "FEV1/FVC"
         }
       ],
       "range": {
@@ -10180,7 +11701,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": ">=",
@@ -10200,7 +11721,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": ">=",
@@ -10224,7 +11745,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": ">=",
@@ -10252,7 +11773,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": "<",
@@ -10285,7 +11806,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": ">=",
@@ -10300,7 +11821,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": ">=",
@@ -10324,7 +11845,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": ">=",
@@ -10348,7 +11869,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": "<",
@@ -10391,7 +11912,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": ">=",
@@ -10409,7 +11930,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": ">=",
@@ -10427,7 +11948,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": ">=",
@@ -10445,7 +11966,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": "<",
@@ -10473,7 +11994,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "LOINC",
           "code": "19926-5",
-          "display": "FEV1/​FVC"
+          "display": "FEV1/FVC"
         }
       ],
       "direct_transition": "Loop_back_to_Living_with_COPD"
@@ -10493,7 +12014,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "LOINC",
           "code": "19926-5",
-          "display": "FEV1/​FVC"
+          "display": "FEV1/FVC"
         }
       ],
       "direct_transition": "Check_Medication"
@@ -10513,7 +12034,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "LOINC",
           "code": "19926-5",
-          "display": "FEV1/​FVC"
+          "display": "FEV1/FVC"
         }
       ],
       "direct_transition": "Check_Medication"
@@ -10530,7 +12051,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "LOINC",
           "code": "19926-5",
-          "display": "FEV1/​FVC"
+          "display": "FEV1/FVC"
         }
       ],
       "direct_transition": "Pulmonary_Rehab"
@@ -10589,7 +12110,7 @@ export default {"allergic_rhinitis":{
                   {
                     "system": "LOINC",
                     "code": "19926-5",
-                    "display": "FEV1/​FVC"
+                    "display": "FEV1/FVC"
                   }
                 ],
                 "operator": ">",
@@ -10665,7 +12186,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "19926-5",
-                "display": "FEV1/​FVC"
+                "display": "FEV1/FVC"
               }
             ],
             "operator": ">",
@@ -10859,7 +12380,7 @@ export default {"allergic_rhinitis":{
         }
       ]
     },
-    "Age <1": {
+    "Age Less Than 1": {
       "type": "Delay",
       "exact": {
         "quantity": 1,
@@ -10917,7 +12438,7 @@ export default {"allergic_rhinitis":{
           "transition": "Neonatal_screening",
           "condition": {
             "condition_type": "PriorState",
-            "name": "Age <1"
+            "name": "Age Less Than 1"
           }
         },
         {
@@ -11340,7 +12861,7 @@ export default {"allergic_rhinitis":{
       "type": "Simple",
       "distributed_transition": [
         {
-          "transition": "Age <1",
+          "transition": "Age Less Than 1",
           "distribution": 0.657
         },
         {
@@ -14358,6 +15879,685 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"dialysis":{
+  "name": "Dialysis",
+  "remarks": [
+    "Dialysis Encounter for patients with level 4 Chronic Kidney Disease (CKD)."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "CKD guard"
+    },
+    "3 day delay": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 3,
+        "unit": "days"
+      },
+      "direct_transition": "Dialysis_Encounter"
+    },
+    "Dialysis_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Dialysis"
+    },
+    "Dialysis": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "265764009",
+          "display": "Renal dialysis (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 2,
+        "high": 4,
+        "unit": "hours"
+      },
+      "direct_transition": "Dialysis weight record"
+    },
+    "end dialysis": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "3 day delay",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Physician Monthly Enc",
+            "within": {
+              "quantity": 30,
+              "unit": "days"
+            }
+          }
+        },
+        {
+          "transition": "Physician Monthly Enc"
+        }
+      ]
+    },
+    "Physician Monthly Enc": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Record_CMP"
+    },
+    "end encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "3 day delay"
+    },
+    "CKD guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "And",
+        "conditions": [
+          {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "is not nil"
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": ">=",
+            "value": 4
+          }
+        ]
+      },
+      "direct_transition": "3 day delay"
+    },
+    "Dialysis weight record": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "kg",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "74006-8",
+          "display": "Weight difference [Mass difference] --pre dialysis - post dialysis"
+        }
+      ],
+      "direct_transition": "Pain_Vital",
+      "range": {
+        "low": 1,
+        "high": 5
+      }
+    },
+    "Dialysis CarePlan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736690008,
+          "display": "Dialysis care plan (record artifact)"
+        }
+      ],
+      "direct_transition": "end encounter",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 183063000,
+          "display": "Low salt diet education (procedure)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 229152003,
+          "display": "Lower limb exercises (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 11816003,
+          "display": "Diet education (procedure)"
+        }
+      ]
+    },
+    "Record_CMP": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 29
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 60,
+            "high": 80
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "10834-0",
+              "display": "Globulin [Mass/volume] in Serum by calculation"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.1,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 140
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 60
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Record_Urinalysis"
+    },
+    "Record_Urinalysis": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167248002,
+            "display": "Urine smell ammoniacal (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 300828005,
+            "display": "Translucent (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 371254008,
+            "display": "Brown color (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167291007,
+            "display": "Urine ketone test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 250,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167277001,
+            "display": "Urine protein test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167297006,
+            "display": "Urine blood test = negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Dialysis CarePlan"
+    },
+    "Pain_Vital": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 2,
+        "high": 6
+      },
+      "direct_transition": "end dialysis"
+    }
+  }
+}
+,
 "ear_infections":{
   "name": "Ear Infections",
   "states": {
@@ -15629,7 +17829,7 @@ export default {"allergic_rhinitis":{
           "display": "Stress management"
         }
       ],
-      "direct_transition": "Strong_NSAID"
+      "direct_transition": "Pain_Vital"
     },
     "Strong_NSAID": {
       "type": "MedicationOrder",
@@ -15824,6 +18024,23 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Pain_Vital": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 5,
+        "high": 10
+      },
+      "direct_transition": "Strong_NSAID"
     }
   }
 }
@@ -16112,6 +18329,1320 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"gallstones":{
+  "name": "Gallstones",
+  "remarks": [
+    "Gallstones are stones formed within the gallbladder (or common bile duct) due to an imbalance in the chemical composition of bile.  They can lead to inflammation and other issues with the gall bladder, the main bile duct, and the pancreas.  This model considers the most common process for surgical intervention for gallstones (due to a sudden onset of acute cholecystitis).",
+    "",
+    "Known model limitations:",
+    "- This model assumes that all cholecystectomies are due to cholecystitis, which is not necessarily true.  Many cholecystectomies are performed due to chronic cholelithiasis.  Prevalence data for cholelithiasis versus cholecystitis has not been found in scientific literature.",
+    "- Other related disorders (e.g., acute cholangitis, pancreatitis, choledocholithiasis, gall bladder cancer, etc.) are not included.",
+    "- Subsequent or otherwise related procedures (e.g., ERCP) are not included.",
+    "- BMI is a known risk factor for gallstones but is not included due to a lack of published articles with gallstone prevalence distribution by BMI"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Male",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Female": {
+      "type": "Simple",
+      "remarks": [
+        "North American Indians have the highest reported rates of cholelithiasis, afflicting 64.1% of women and 29.5% of men. White Americans have an overall prevalence of 16.6% in women and 8.6% in men. Intermediate prevalence rates occur in Asian populations and Black Americans (13.9% of women; 5.3% of men)",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3343155/",
+        "The age-adjusted prevalence of gallstone disease (gallstones + cholecystectomy) among Mexican American men (7.2%) was 1.7 times that of Cuban American men and 1.8 times that of Puerto Rican men. The prevalence for Mexican American women (23.2%) was 1.5 times that of Cuban American women and 1.7 times that of Puerto Rican women.",
+        "https://www.ncbi.nlm.nih.gov/pubmed/2642879"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Native"
+          },
+          "distributions": [
+            {
+              "transition": "Female_Gallstone_Formation",
+              "distribution": 0.641
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.359
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "White"
+          },
+          "distributions": [
+            {
+              "transition": "Female_Gallstone_Formation",
+              "distribution": 0.166
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.834
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Female_Gallstone_Formation",
+              "distribution": 0.139
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.861
+            }
+          ],
+          "condition": {
+            "condition_type": "Race",
+            "race": "Black"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Asian"
+          },
+          "distributions": [
+            {
+              "transition": "Female_Gallstone_Formation",
+              "distribution": 0.139
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.861
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Hispanic"
+          },
+          "distributions": [
+            {
+              "transition": "Female_Gallstone_Formation",
+              "distribution": 0.232
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.768
+            }
+          ]
+        }
+      ]
+    },
+    "Male": {
+      "type": "Simple",
+      "remarks": [
+        "North American Indians have the highest reported rates of cholelithiasis, afflicting 64.1% of women and 29.5% of men. White Americans have an overall prevalence of 16.6% in women and 8.6% in men. Intermediate prevalence rates occur in Asian populations and Black Americans (13.9% of women; 5.3% of men)",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3343155/",
+        "The age-adjusted prevalence of gallstone disease (gallstones + cholecystectomy) among Mexican American men (7.2%) was 1.7 times that of Cuban American men and 1.8 times that of Puerto Rican men. The prevalence for Mexican American women (23.2%) was 1.5 times that of Cuban American women and 1.7 times that of Puerto Rican women.",
+        "https://www.ncbi.nlm.nih.gov/pubmed/2642879"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Native"
+          },
+          "distributions": [
+            {
+              "transition": "Male_Gallstone_Formation",
+              "distribution": 0.295
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.705
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Male_Gallstone_Formation",
+              "distribution": 0.0866
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9134
+            }
+          ],
+          "condition": {
+            "condition_type": "Race",
+            "race": "White"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Black"
+          },
+          "distributions": [
+            {
+              "transition": "Male_Gallstone_Formation",
+              "distribution": 0.053
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.947
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Asian"
+          },
+          "distributions": [
+            {
+              "transition": "Male_Gallstone_Formation",
+              "distribution": 0.053
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.947
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Hispanic"
+          },
+          "distributions": [
+            {
+              "transition": "Male_Gallstone_Formation",
+              "distribution": 0.072
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.928
+            }
+          ]
+        }
+      ]
+    },
+    "Female_Gallstone_Formation": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Age_20-29",
+          "distribution": 0.0718
+        },
+        {
+          "transition": "Age_30-39",
+          "distribution": 0.1127
+        },
+        {
+          "transition": "Age_40-49",
+          "distribution": 0.1735
+        },
+        {
+          "transition": "Age_50-59",
+          "distribution": 0.2763
+        },
+        {
+          "transition": "Age_60-74",
+          "distribution": 0.3657
+        }
+      ],
+      "remarks": [
+        "Distribution of gallbladder disease prevalence by sex and age from Table 1: https://www.gastrojournal.org/article/S0016-5085(99)70456-7/pdf",
+        "(Age prevalence percentages were converted to a proportion of the total prevalence, given the race and sex distribution already in place)"
+      ]
+    },
+    "Male_Gallstone_Formation": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Age_20-29",
+          "distribution": 0.0274
+        },
+        {
+          "transition": "Age_30-39",
+          "distribution": 0.04
+        },
+        {
+          "transition": "Age_40-49",
+          "distribution": 0.1537
+        },
+        {
+          "transition": "Age_50-59",
+          "distribution": 0.2463
+        },
+        {
+          "transition": "Age_60-74",
+          "distribution": 0.5326
+        }
+      ],
+      "remarks": [
+        "Distribution of gallbladder disease prevalence by sex and age from Table 1: https://www.gastrojournal.org/article/S0016-5085(99)70456-7/pdf",
+        "(Age prevalence percentages were converted to a proportion of the total prevalence, given the race and sex distribution already in place)"
+      ]
+    },
+    "Age_20-29": {
+      "type": "Delay",
+      "direct_transition": "Gallstones",
+      "range": {
+        "low": 20,
+        "high": 29,
+        "unit": "years"
+      }
+    },
+    "Age_30-39": {
+      "type": "Delay",
+      "direct_transition": "Gallstones",
+      "range": {
+        "low": 30,
+        "high": 39,
+        "unit": "years"
+      }
+    },
+    "Age_40-49": {
+      "type": "Delay",
+      "direct_transition": "Gallstones",
+      "range": {
+        "low": 40,
+        "high": 49,
+        "unit": "days"
+      }
+    },
+    "Age_50-59": {
+      "type": "Delay",
+      "direct_transition": "Gallstones",
+      "range": {
+        "low": 50,
+        "high": 59,
+        "unit": "years"
+      }
+    },
+    "Age_60-74": {
+      "type": "Delay",
+      "direct_transition": "Gallstones",
+      "range": {
+        "low": 60,
+        "high": 74,
+        "unit": "years"
+      }
+    },
+    "Acute_Cholecystitis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cholecystitis_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 65275009,
+          "display": "Acute Cholecystitis"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Cholecystitis_Encounter",
+          "distribution": 0.994
+        },
+        {
+          "transition": "Death_from_Acute_Cholecystitis",
+          "distribution": 0.006
+        }
+      ],
+      "remarks": [
+        "Fortunately, cholecystitis carries a relatively low death rate of 0.6%.",
+        "https://link.springer.com/article/10.1007/s11894-005-0051-8"
+      ]
+    },
+    "Gallstones": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cholecystitis_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 235919008,
+          "display": "Cholelithiasis"
+        }
+      ],
+      "remarks": [
+        "Up to 80% will never experience biliary pain or complications such as acute cholecystitis, cholangitis, or pancreatitis",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3343155/"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Symptom_Onset_Delay",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.8
+        }
+      ]
+    },
+    "Cholecystitis_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "emergency",
+      "reason": "Acute_Cholecystitis",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 50849002,
+          "display": "Emergency Room Admission"
+        }
+      ],
+      "remarks": [
+        "The ratio of LC performed increased from 83% in 1998 to 93% in 2005; 12% of cases were attempted laparoscopically but converted to OC.",
+        "https://www.ncbi.nlm.nih.gov/pubmed/18656637"
+      ],
+      "direct_transition": "Heparin"
+    },
+    "Cholecystitis_Encounter_End": {
+      "type": "EncounterEnd",
+      "direct_transition": "Home_Recovery",
+      "discharge_disposition": {
+        "system": "NUBC",
+        "code": "01",
+        "display": "Discharged to home care or self care (routine discharge)"
+      }
+    },
+    "Symptom_Onset_Delay": {
+      "type": "Delay",
+      "direct_transition": "Chole_Symptom1",
+      "range": {
+        "low": 0,
+        "high": 20,
+        "unit": "years"
+      }
+    },
+    "Chole_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Upper Abdominal Pain",
+      "cause": "Acute_Cholecystitis",
+      "direct_transition": "Chole_Symptom2",
+      "range": {
+        "low": 50,
+        "high": 150
+      }
+    },
+    "Chole_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "cause": "Acute_Cholecystitis",
+      "direct_transition": "Chole_Symptom3",
+      "range": {
+        "low": 0,
+        "high": 50
+      }
+    },
+    "Chole_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "cause": "Acute_Cholecystitis",
+      "direct_transition": "Chole_Symptom4",
+      "range": {
+        "low": 0,
+        "high": 50
+      }
+    },
+    "Chole_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Jaundice",
+      "cause": "Acute_Cholecystitis",
+      "direct_transition": "Symptom_Period",
+      "range": {
+        "low": 0,
+        "high": 50
+      }
+    },
+    "Chole_Symptom1_Ends": {
+      "type": "Symptom",
+      "symptom": "Upper Abdominal Pain",
+      "cause": "Acute_Cholecystitis",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Chole_Symptom2_Ends"
+    },
+    "Chole_Symptom2_Ends": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "cause": "Acute_Cholecystitis",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Chole_Symptom3_Ends"
+    },
+    "Chole_Symptom3_Ends": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "cause": "Acute_Cholecystitis",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Chole_Symptom4_Ends"
+    },
+    "Symptom_Period": {
+      "type": "Delay",
+      "direct_transition": "Acute_Cholecystitis",
+      "range": {
+        "low": 1,
+        "high": 3,
+        "unit": "days"
+      }
+    },
+    "Laparoscopic_Cholecystectomy": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 45595009,
+          "display": "Laparoscopic Removal of Gall Bladder"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 240,
+        "unit": "minutes"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Open_Cholecystectomy",
+          "distribution": 0.12
+        },
+        {
+          "transition": "Chole_Symptom1_Ends",
+          "distribution": 0.87941
+        },
+        {
+          "transition": "Death_after_Cholecystectomy",
+          "distribution": 0.00059
+        }
+      ],
+      "remarks": [
+        "The ratio of LC performed increased from 83% in 1998 to 93% in 2005; 12% of cases were attempted laparoscopically but converted to OC.",
+        "https://www.ncbi.nlm.nih.gov/pubmed/18656637",
+        "0.059% 30-day mortality rate for laparoscopic cholecystectomy from https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4333785/"
+      ]
+    },
+    "Laparoscopic_Recovery": {
+      "type": "Delay",
+      "direct_transition": "Saline_End",
+      "range": {
+        "low": 2,
+        "high": 24,
+        "unit": "hours"
+      }
+    },
+    "Open_Cholecystectomy": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 38102005,
+          "display": "Open Removal of Gall Bladder"
+        }
+      ],
+      "duration": {
+        "low": 120,
+        "high": 300,
+        "unit": "minutes"
+      },
+      "remarks": [
+        "0.847% 30-day mortality rate for open cholecystectomy from https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4333785/",
+        "Procedure duration from https://www.dovemed.com/common-procedures/procedures-surgical/gallbladder-removal-by-open-technique-open-cholecystectomy/"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Chole_Symptom1_Ends",
+          "distribution": 0.99153
+        },
+        {
+          "transition": "Death_after_Cholecystectomy",
+          "distribution": 0.00847
+        }
+      ]
+    },
+    "Open_Recovery": {
+      "type": "Delay",
+      "direct_transition": "Saline_End",
+      "range": {
+        "low": 3,
+        "high": 7,
+        "unit": "days"
+      },
+      "remarks": [
+        "Recovery time from https://www.dovemed.com/common-procedures/procedures-surgical/gallbladder-removal-by-open-technique-open-cholecystectomy/"
+      ]
+    },
+    "Death_from_Acute_Cholecystitis": {
+      "type": "Death",
+      "direct_transition": "Terminal",
+      "condition_onset": "Acute_Cholecystitis",
+      "range": {
+        "low": 5,
+        "high": 30,
+        "unit": "days"
+      },
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 91302008,
+          "display": "Death due to sepsis"
+        }
+      ]
+    },
+    "Death_after_Cholecystectomy": {
+      "type": "Death",
+      "direct_transition": "Chole_Symptom1_Ends",
+      "range": {
+        "low": 0,
+        "high": 30,
+        "unit": "days"
+      },
+      "condition_onset": "Acute_Cholecystitis",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 385486001,
+          "display": "Postoperative complication"
+        }
+      ]
+    },
+    "Prescribe_Opioids": {
+      "type": "CallSubmodule",
+      "submodule": "medications/moderate_opioid_pain_reliever",
+      "direct_transition": "Cholecystitis_Encounter_End"
+    },
+    "LC_Postoperative_Follow-up": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185349003,
+          "display": "Encounter for 'check-up'"
+        }
+      ],
+      "direct_transition": "End_Postoperative_Follow-up",
+      "reason": "Laparoscopic_Cholecystectomy"
+    },
+    "OC_Postoperative_Follow_up": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185349003,
+          "display": "Encounter for 'check-up'"
+        }
+      ],
+      "reason": "Open_Cholecystectomy",
+      "direct_transition": "End_Postoperative_Follow-up"
+    },
+    "End_Postoperative_Follow-up": {
+      "type": "EncounterEnd",
+      "direct_transition": "Continue_Low_Fat_Diet",
+      "discharge_disposition": {
+        "system": "NUBC",
+        "code": "01",
+        "display": "Discharged to home care or self care (routine discharge)"
+      }
+    },
+    "Ready_for_Surgery": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Laparoscopic_Cholecystectomy",
+          "distribution": 0.93
+        },
+        {
+          "transition": "Open_Cholecystectomy",
+          "distribution": 0.07
+        }
+      ]
+    },
+    "Saline": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313002,
+          "display": "Sodium Chloride 9 MG/ML Injectable Solution"
+        }
+      ],
+      "direct_transition": "Antiemetic"
+    },
+    "Antiemetic": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1740467,
+          "display": "2 ML Ondansetron 2 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Antiemetic_End",
+      "remarks": [
+        "Based on the safety and efficacy of ondansetron, it may be used as a first-line agent for relief of nausea or vomiting for most patient populations in the ED.",
+        "https://www.ncbi.nlm.nih.gov/pubmed/20022195"
+      ]
+    },
+    "Morphine": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1732136,
+          "display": "1 ML Morphine Sulfate 5 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Delay_for_Surgical_Appointment"
+    },
+    "Gall_Bladder_Imaging": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": 426701000119108,
+        "display": "Ultrasonography of abdomen, right upper quadrant and epigastrium"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": 50519007,
+            "display": "Structure of right upper quadrant of abdomen"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "US",
+            "display": "Ultrasound"
+          },
+          "instances": [
+            {
+              "title": "Title of this image",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.6.1",
+                "display": "Ultrasound Image Storage"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Morphine"
+    },
+    "Delay_for_Surgical_Appointment": {
+      "type": "Delay",
+      "range": {
+        "low": 1,
+        "high": 4,
+        "unit": "hours"
+      },
+      "direct_transition": "Morphine_End"
+    },
+    "Postoperative_Care_Plan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 133899007,
+          "display": "Postoperative care"
+        }
+      ],
+      "direct_transition": "Prescribe_Opioids",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 436861000124104,
+          "display": "Decreased fat diet"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 225317005,
+          "display": "Restriction of movement"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 225358003,
+          "display": "Wound care"
+        }
+      ]
+    },
+    "Postoperative_Care_Plan_Ends": {
+      "type": "CarePlanEnd",
+      "direct_transition": "Terminal",
+      "careplan": "Postoperative_Care_Plan"
+    },
+    "Continue_Low_Fat_Diet": {
+      "type": "Delay",
+      "direct_transition": "Postoperative_Care_Plan_Ends",
+      "range": {
+        "low": 1,
+        "high": 3,
+        "unit": "weeks"
+      }
+    },
+    "Comprehensive_Metabolic_Panel": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "42719-5",
+              "display": "Total Bilirubin (Elevated)"
+            }
+          ],
+          "range": {
+            "low": 1.2,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "IU/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "ALT (Elevated)"
+            }
+          ],
+          "range": {
+            "low": 100,
+            "high": 200
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "IU/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "AST (Elevated)"
+            }
+          ],
+          "range": {
+            "low": 100,
+            "high": 200
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2345-7",
+              "display": "Glucose"
+            }
+          ],
+          "vital_sign": "Glucose"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "3094-0",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "vital_sign": "Urea Nitrogen"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2160-0",
+              "display": "Creatinine"
+            }
+          ],
+          "vital_sign": "Creatinine"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "17861-6",
+              "display": "Calcium"
+            }
+          ],
+          "vital_sign": "Calcium"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mmol/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2951-2",
+              "display": "Sodium"
+            }
+          ],
+          "vital_sign": "Sodium"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mmol/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2823-3",
+              "display": "Potassium"
+            }
+          ],
+          "vital_sign": "Potassium"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mmol/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2075-0",
+              "display": "Chloride"
+            }
+          ],
+          "vital_sign": "Chloride"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mmol/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2028-9",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "vital_sign": "Carbon Dioxide"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mmol/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33037-3",
+              "display": "Anion Gap"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 15
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein"
+            }
+          ],
+          "range": {
+            "low": 6.2,
+            "high": 8.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin"
+            }
+          ],
+          "range": {
+            "low": 3.4,
+            "high": 5.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "10834-0",
+              "display": "Globulin"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "IU/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline Phosphatase"
+            }
+          ],
+          "range": {
+            "low": 30,
+            "high": 115
+          }
+        }
+      ],
+      "direct_transition": "RUQ_Murphy_Sign",
+      "remarks": [
+        "Expected aberrant values:",
+        "Total Bilirubin (normal 0 - 1.2)",
+        "ALT (normal 7 - 40)",
+        "AST (normal 11 - 40)"
+      ]
+    },
+    "Complete_Blood_Count": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "69742-5",
+          "display": "CBC W Differential panel, method unspecified - Blood"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "K/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "26464-8",
+              "display": "White Blood Cell (Elevated)"
+            }
+          ],
+          "range": {
+            "low": 11,
+            "high": 15
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "M/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "26453-1",
+              "display": "Red Blood Cell"
+            }
+          ],
+          "range": {
+            "low": 4.5,
+            "high": 5.9
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin"
+            }
+          ],
+          "range": {
+            "low": 13.8,
+            "high": 17.4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20570-8",
+              "display": "Hematocrit"
+            }
+          ],
+          "range": {
+            "low": 41,
+            "high": 51
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "30428-7",
+              "display": "MCV"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 96
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "30385-9",
+              "display": "RBC Distribution Width"
+            }
+          ],
+          "range": {
+            "low": 11.6,
+            "high": 14.6
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "K/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "26515-7",
+              "display": "Platelet Count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        }
+      ],
+      "direct_transition": "Comprehensive_Metabolic_Panel",
+      "remarks": [
+        "Expected aberrant values:",
+        "WBC (normal 4.4 - 11.3)"
+      ]
+    },
+    "RUQ_Murphy_Sign": {
+      "type": "Observation",
+      "category": "exam",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "80271-0",
+          "display": "Physical findings of Abdomen by Palpation"
+        }
+      ],
+      "direct_transition": "ECG",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 53566005,
+        "display": "Positive Murphy's Sign"
+      }
+    },
+    "Chole_Symptom4_Ends": {
+      "type": "Symptom",
+      "symptom": "Jaundice",
+      "cause": "Acute_Cholecystitis",
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "Gallstones_Removed"
+    },
+    "Home_Recovery": {
+      "type": "Delay",
+      "range": {
+        "low": 14,
+        "high": 21,
+        "unit": "days"
+      },
+      "conditional_transition": [
+        {
+          "transition": "OC_Postoperative_Follow_up",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Open_Cholecystectomy"
+          }
+        },
+        {
+          "transition": "LC_Postoperative_Follow-up"
+        }
+      ]
+    },
+    "Penicillin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1659149,
+          "display": "Piperacillin 4000 MG / tazobactam 500 MG Injection"
+        }
+      ],
+      "direct_transition": "Penicillin_End",
+      "remarks": [
+        "Assuming the patient is not allergic to Penicillin, piperacillin is recommended for acute cholecystitis:",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2784497/"
+      ]
+    },
+    "Cefotaxime": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1656318,
+          "display": "Cefotaxime 2000 MG Injection"
+        }
+      ],
+      "remarks": [
+        "For patients allergic to penicillin, a 3rd-gen cephalosporin-based antibiotic is recommended for acute cholecystitis:",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2784497/"
+      ],
+      "direct_transition": "Cefotaxime_End"
+    },
+    "Anesthesia": {
+      "type": "CallSubmodule",
+      "submodule": "surgery/general_anesthesia",
+      "direct_transition": "Ready_for_Surgery"
+    },
+    "ECG": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 29303009,
+          "display": "Electrocardiographic procedure"
+        }
+      ],
+      "duration": {
+        "low": 5,
+        "high": 10,
+        "unit": "minutes"
+      },
+      "direct_transition": "Gall_Bladder_Imaging"
+    },
+    "Heparin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 314659,
+          "display": "heparin sodium, porcine"
+        }
+      ],
+      "direct_transition": "Heparin_End"
+    },
+    "Gallstones_Removed": {
+      "type": "ConditionEnd",
+      "condition_onset": "Gallstones",
+      "direct_transition": "Acute_Cholecystitis_Ends"
+    },
+    "Acute_Cholecystitis_Ends": {
+      "type": "ConditionEnd",
+      "conditional_transition": [
+        {
+          "transition": "Open_Recovery",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Open_Cholecystectomy"
+          }
+        },
+        {
+          "transition": "Laparoscopic_Recovery"
+        }
+      ],
+      "condition_onset": "Acute_Cholecystitis"
+    },
+    "Cefotaxime_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Anesthesia",
+      "medication_order": "Cefotaxime"
+    },
+    "Penicillin_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Anesthesia",
+      "medication_order": "Penicillin"
+    },
+    "Saline_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Postoperative_Care_Plan",
+      "medication_order": "Saline"
+    },
+    "Morphine_End": {
+      "type": "MedicationEnd",
+      "conditional_transition": [
+        {
+          "transition": "Cefotaxime",
+          "condition": {
+            "condition_type": "Active Condition",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": 91936005,
+                "display": "Allergy to Penicillin"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Penicillin"
+        }
+      ],
+      "medication_order": "Morphine"
+    },
+    "Heparin_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Saline",
+      "medication_order": "Heparin"
+    },
+    "Antiemetic_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Complete_Blood_Count",
+      "medication_order": "Antiemetic"
+    }
+  }
+}
+,
 "gout":{
   "name": "Gout",
   "remarks": [
@@ -16244,19 +19775,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "gout_careplan",
-            "operator": "is nil"
-          },
-          "transition": "Gout_CarePlan"
-        },
-        {
-          "transition": "Gout_Nonopioid_Pain_Medication"
-        }
-      ]
+      "direct_transition": "Pain_Vital"
     },
     "Gout_CarePlan": {
       "type": "CarePlanStart",
@@ -16399,6 +19918,35 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Pain_Vital": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 8
+      },
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "gout_careplan",
+            "operator": "is nil"
+          },
+          "transition": "Gout_CarePlan"
+        },
+        {
+          "transition": "Gout_Nonopioid_Pain_Medication"
+        }
+      ]
     }
   }
 }
@@ -16823,7 +20371,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "LOINC",
           "code": "46240-8",
-          "display": "History of Hospitalizations+​Outpatient visits"
+          "display": "History of Hospitalizations+Outpatient visits"
         }
       ],
       "range": {
@@ -16842,6 +20390,217 @@ export default {"allergic_rhinitis":{
       "attribute": "homeless",
       "value": false,
       "direct_transition": "Potential_Homelessness"
+    }
+  }
+}
+,
+"hypothyroidism":{
+  "name": "Primary atrophic hypothyroidism",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Age delay"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Age delay": {
+      "type": "Delay",
+      "range": {
+        "low": 50,
+        "high": 75,
+        "unit": "years"
+      },
+      "remarks": [
+        "common onset of primary atrophic hypothyroidism does not occer till after 50 years of age.",
+        ""
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Hypothyroid symptom",
+              "distribution": 0.048
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.952
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Hypothyroid symptom",
+              "distribution": 0.009
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.991
+            }
+          ]
+        }
+      ]
+    },
+    "Hypothyroid symptoms": {
+      "type": "Symptom",
+      "symptom": "fatigue",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Hypothyroidism followup encounter"
+    },
+    "Hypothyroid Condition Onset": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hypothyroidism",
+      "target_encounter": "Hypothyroidism followup encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 83664006,
+          "display": "Idiopathic atrophic hypothyroidism"
+        }
+      ],
+      "direct_transition": "Hypothyroidism Encounter Workup"
+    },
+    "Hypothyroidism Encounter Workup": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "hypothyroidism",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for Problem"
+        }
+      ],
+      "direct_transition": "fT4 panel results"
+    },
+    "Hypothyroid symptom": {
+      "type": "Symptom",
+      "symptom": "cold intolerance",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Hypothyroidism"
+    },
+    "Hypothyroidism": {
+      "type": "Symptom",
+      "symptom": "decreased appetite",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "hypothyroidism"
+    },
+    "hypothyroidism": {
+      "type": "Symptom",
+      "symptom": "weight gain",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Hypothyroid Condition Onset"
+    },
+    "Hypothyroidism followup encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "hypothyroidism",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for Problem"
+        }
+      ],
+      "direct_transition": "Synthroid Medication Order"
+    },
+    "encounter time delay": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "weeks"
+      },
+      "direct_transition": "Hypothyroid symptoms"
+    },
+    "encounter end": {
+      "type": "EncounterEnd",
+      "direct_transition": "encounter time delay"
+    },
+    "fT4 panel results": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ng/dl",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "3024-7",
+          "display": "Thyroxine (T4) free [Mass/volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "TSH panel result",
+      "range": {
+        "low": 0.1,
+        "high": 0.4
+      }
+    },
+    "TSH panel result": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "m[IU]/L",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "3016-3",
+          "display": "Thyrotropin [Units/volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "encounter end",
+      "range": {
+        "low": 5,
+        "high": 2
+      }
+    },
+    "Synthroid Medication Order": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 966222,
+          "display": "Levothyroxine Sodium 0.075 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "end encounter",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 60,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 60,
+          "unit": "days"
+        },
+        "refills": 6
+      }
+    },
+    "end encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   }
 }
@@ -19946,7 +23705,7 @@ export default {"allergic_rhinitis":{
           "display": "Emergency Room Admission"
         }
       ],
-      "direct_transition": "Chest X-Ray"
+      "direct_transition": "Pain_Vital"
     },
     "Chest X-Ray": {
       "type": "Procedure",
@@ -20535,7 +24294,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
-      "direct_transition": "SCLC Chemotheraphy I"
+      "direct_transition": "Record_CMP_2"
     },
     "SCLC Chemotheraphy I": {
       "type": "MedicationOrder",
@@ -20603,7 +24362,7 @@ export default {"allergic_rhinitis":{
         "high": 4,
         "unit": "hours"
       },
-      "direct_transition": "End_SCLC_Treatment_Encounter"
+      "direct_transition": "Pain_Vital_2"
     },
     "End_SCLC_Treatment_Encounter": {
       "type": "EncounterEnd",
@@ -20641,7 +24400,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
-      "direct_transition": "NSCLC Chemotheraphy I"
+      "direct_transition": "Record_CMP"
     },
     "NSCLC Chemotheraphy I": {
       "type": "MedicationOrder",
@@ -20710,7 +24469,7 @@ export default {"allergic_rhinitis":{
         "high": 4,
         "unit": "hours"
       },
-      "direct_transition": "End_NSCLC_Treatment_Encounter"
+      "direct_transition": "Pain_Vital_3"
     },
     "End_NSCLC_Treatment_Encounter": {
       "type": "EncounterEnd",
@@ -20733,6 +24492,1537 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Record_CMP": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 29
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 60,
+            "high": 80
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "10834-0",
+              "display": "Globulin [Mass/volume] in Serum by calculation"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.1,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 140
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 60
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Record_Urinalysis"
+    },
+    "Record_CMP_2": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 29
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 60,
+            "high": 80
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "10834-0",
+              "display": "Globulin [Mass/volume] in Serum by calculation"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.1,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 140
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 60
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Record_Urinalysis_3"
+    },
+    "Hearing Test": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 398171003,
+          "display": "Hearing examination (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "NSCLC Chemotheraphy I"
+    },
+    "Hearing_Test": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 398171003,
+          "display": "Hearing examination (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "SCLC Chemotheraphy I"
+    },
+    "Chest CT": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": 16335031000119104,
+        "display": "High resolution computed tomography of chest without contrast (procedure)"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": 51185008,
+            "display": "Thoracic structure (body structure)"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "CT",
+            "display": "Computed Tomography"
+          },
+          "instances": [
+            {
+              "title": "CT Image Storage",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.2",
+                "display": "CT Image Storage"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "End_SCLC_Treatment_Encounter"
+    },
+    "Chest_CT": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": 16335031000119104,
+        "display": "High resolution computed tomography of chest without contrast (procedure)"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": 51185008,
+            "display": "Thoracic structure (body structure)"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "CT",
+            "display": "Computed Tomography"
+          },
+          "instances": [
+            {
+              "title": "CT Image Storage",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.2",
+                "display": "CT Image Storage"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "End_NSCLC_Treatment_Encounter"
+    },
+    "Record_Urinalysis_3": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167248002,
+            "display": "Urine smell ammoniacal (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 300828005,
+            "display": "Translucent (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 371254008,
+            "display": "Brown color (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167291007,
+            "display": "Urine ketone test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 250,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167277001,
+            "display": "Urine protein test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167297006,
+            "display": "Urine blood test = negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Record_CBC_Panel"
+    },
+    "Record_Urinalysis": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167248002,
+            "display": "Urine smell ammoniacal (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 300828005,
+            "display": "Translucent (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 371254008,
+            "display": "Brown color (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167291007,
+            "display": "Urine ketone test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 250,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167277001,
+            "display": "Urine protein test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167297006,
+            "display": "Urine blood test = negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Record_CBC_Panel_2"
+    },
+    "Record_CBC_Panel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 4,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "Leukocytes [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*3/uL",
+          "range": {
+            "low": 0.5,
+            "high": 5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "Erythrocytes [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*6/uL",
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/​volume] in Blood"
+            }
+          ],
+          "unit": "g/dL",
+          "range": {
+            "low": 12,
+            "high": 17.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "4544-3",
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ],
+          "unit": "%",
+          "range": {
+            "low": 35,
+            "high": 50
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/​volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "target_encounter": "Wellness_Encounter",
+      "direct_transition": "Hearing_Test"
+    },
+    "Record_CBC_Panel_2": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 4,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "Leukocytes [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*3/uL",
+          "range": {
+            "low": 0.5,
+            "high": 5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "Erythrocytes [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*6/uL",
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/​volume] in Blood"
+            }
+          ],
+          "unit": "g/dL",
+          "range": {
+            "low": 12,
+            "high": 17.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "4544-3",
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ],
+          "unit": "%",
+          "range": {
+            "low": 35,
+            "high": 50
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/​volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "target_encounter": "Wellness_Encounter",
+      "direct_transition": "Hearing Test"
+    },
+    "Pain_Vital": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 8
+      },
+      "direct_transition": "Chest X-Ray"
+    },
+    "Pain_Vital_2": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 10
+      },
+      "direct_transition": "Chest CT"
+    },
+    "Pain_Vital_3": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 10
+      },
+      "direct_transition": "Chest_CT"
     }
   }
 }
@@ -21038,6 +26328,88 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    }
+  }
+}
+,
+"mTBI":{
+  "name": "Veteran mild TBI ",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "veteran delay"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "veteran delay": {
+      "type": "Delay",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Loss of Consciousness",
+              "distribution": 0.0094
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9906
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Terminal",
+              "distribution": 1
+            }
+          ]
+        }
+      ],
+      "range": {
+        "low": 18,
+        "high": 21,
+        "unit": "years"
+      }
+    },
+    "Loss of Consciousness": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "mTBI",
+      "target_encounter": "Wellness Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 127295002,
+          "display": "Traumatic brain injury (disorder)"
+        }
+      ],
+      "direct_transition": "Wellness Encounter"
+    },
+    "Wellness Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "mTBI",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom (procedure)"
+        }
+      ],
+      "direct_transition": "end encounter",
+      "wellness": true
+    },
+    "end encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   }
 }
@@ -22704,23 +28076,47 @@ export default {"allergic_rhinitis":{
             "condition_type": "And",
             "conditions": [
               {
-                "condition_type": "Age",
-                "operator": ">=",
-                "quantity": 18,
-                "unit": "years"
-              },
-              {
                 "condition_type": "Attribute",
                 "attribute": "hypertension",
                 "operator": "==",
                 "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension_dx",
+                "operator": "is nil"
               }
             ]
           },
           "transition": "Diagnose_Hypertension"
         },
         {
-          "transition": "Check_Diabetes"
+          "transition": "Check_Hypertension_BP",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension_dx",
+                "operator": "is not nil"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Check_Diabetes",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension",
+            "operator": "!=",
+            "value": true
+          }
         }
       ]
     },
@@ -22733,7 +28129,8 @@ export default {"allergic_rhinitis":{
           "display": "Hypertension"
         }
       ],
-      "direct_transition": "Check_Diabetes"
+      "assign_to_attribute": "hypertension_dx",
+      "direct_transition": "Check_Hypertension_BP"
     },
     "Check_Diabetes": {
       "type": "Simple",
@@ -22774,6 +28171,119 @@ export default {"allergic_rhinitis":{
       ],
       "unit": "%",
       "direct_transition": "Blood_Sugar_Check"
+    },
+    "Blood_Sugar_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Hyperglycemia",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Glucose",
+            "operator": ">=",
+            "value": 130
+          }
+        },
+        {
+          "transition": "Triglyceride_Check"
+        }
+      ]
+    },
+    "Hyperglycemia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hyperglycemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 80394007,
+          "display": "Hyperglycemia (disorder)"
+        }
+      ],
+      "direct_transition": "Triglyceride_Check"
+    },
+    "Triglyceride_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Hypertriglyceridemia",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Triglycerides",
+            "operator": ">=",
+            "value": 150
+          }
+        },
+        {
+          "transition": "Metabolic_Check"
+        }
+      ]
+    },
+    "Hypertriglyceridemia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hypertriglyceridemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 302870006,
+          "display": "Hypertriglyceridemia (disorder)"
+        }
+      ],
+      "direct_transition": "Metabolic_Check"
+    },
+    "Metabolic_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Metabolic_Syndrome",
+          "condition": {
+            "condition_type": "At Least",
+            "minimum": 3,
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "obesity",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hyperglycemia",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertriglyceridemia",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Vital Sign",
+                "vital_sign": "HDL",
+                "operator": "<",
+                "value": 50
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Diagnosis"
+        }
+      ]
+    },
+    "Metabolic_Syndrome": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "metabolic_syndrome",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 237602007,
+          "display": "Metabolic syndrome X (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis"
     },
     "Diagnosis": {
       "type": "Simple",
@@ -23424,7 +28934,7 @@ export default {"allergic_rhinitis":{
     },
     "Check_Complications": {
       "type": "Simple",
-      "direct_transition": "Check_Nephropathy"
+      "direct_transition": "check CKD"
     },
     "Check_Nephropathy": {
       "type": "Simple",
@@ -23672,8 +29182,9 @@ export default {"allergic_rhinitis":{
             "conditions": [
               {
                 "condition_type": "Attribute",
-                "attribute": "end_stage_renal_disease",
-                "operator": "is not nil"
+                "attribute": "ckd",
+                "operator": "==",
+                "value": 5
               },
               {
                 "condition_type": "Not",
@@ -23729,7 +29240,7 @@ export default {"allergic_rhinitis":{
           "display": "End stage renal disease (disorder)"
         }
       ],
-      "direct_transition": "Check_Retinopathy"
+      "direct_transition": "Record_MetabolicPanel_5"
     },
     "End_End_Stage_Renal_Disease": {
       "type": "ConditionEnd",
@@ -24218,44 +29729,7 @@ export default {"allergic_rhinitis":{
     },
     "Consider_Procedures": {
       "type": "Simple",
-      "direct_transition": "Potential_Dialysis"
-    },
-    "Potential_Dialysis": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active Condition",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "46177005",
-                "display": "End stage renal disease (disorder)"
-              }
-            ]
-          },
-          "transition": "Dialysis"
-        },
-        {
-          "transition": "Potential_Amputation"
-        }
-      ]
-    },
-    "Dialysis": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "265764009",
-          "display": "Renal dialysis (procedure)"
-        }
-      ],
-      "direct_transition": "Potential_Amputation",
-      "duration": {
-        "low": 3,
-        "high": 4,
-        "unit": "hours"
-      }
+      "direct_transition": "Potential_Amputation"
     },
     "Potential_Amputation": {
       "type": "Simple",
@@ -24747,74 +30221,256 @@ export default {"allergic_rhinitis":{
     },
     "Living_With_Diabetes": {
       "type": "Simple",
+      "direct_transition": "Wellness_Encounter"
+    },
+    "Hypertension_Medication_Low": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 316052,
+          "display": "Hydrochlorothiazide 6.25 MG"
+        }
+      ],
+      "direct_transition": "Check_Diabetes",
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx"
+    },
+    "Hypertension_Medication_High": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 316049,
+          "display": "Hydrochlorothiazide 25 MG"
+        }
+      ],
+      "direct_transition": "Check_Diabetes",
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx"
+    },
+    "End_Hypertension_Medication": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "hypertension_medication",
       "conditional_transition": [
         {
+          "transition": "Hypertension_Medication_Low",
           "condition": {
-            "condition_type": "Active Condition",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "46177005",
-                "display": "End stage renal disease (disorder)"
-              }
-            ]
-          },
-          "transition": "Delay_Before_Next_Dialysis_Encounter"
+            "condition_type": "Vital Sign",
+            "vital_sign": "Systolic Blood Pressure",
+            "operator": "<",
+            "value": 160
+          }
         },
         {
-          "transition": "Followup_Encounter_After_Diagnosis"
+          "transition": "Hypertension_Medication_High",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Systolic Blood Pressure",
+            "operator": ">=",
+            "value": 160
+          }
         }
       ]
     },
-    "Followup_Encounter_After_Diagnosis": {
-      "type": "Encounter",
-      "wellness": true,
-      "direct_transition": "Record_HA1C"
-    },
-    "Delay_Before_Next_Dialysis_Encounter": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 3,
-        "unit": "days"
-      },
-      "direct_transition": "Dialysis_Encounter"
-    },
-    "Dialysis_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
+    "Check_Hypertension_BP": {
+      "type": "Simple",
+      "conditional_transition": [
         {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
+          "transition": "Check_Low_Dose",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Systolic Blood Pressure",
+            "operator": "<",
+            "value": 160
+          }
+        },
+        {
+          "transition": "Check_High_Dose",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Systolic Blood Pressure",
+            "operator": ">=",
+            "value": 160
+          }
         }
-      ],
-      "reason": "Diagnose_End_Stage_Renal_Disease",
-      "direct_transition": "Record_HA1C"
+      ]
     },
-    "Obesity": {
+    "Check_Low_Dose": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Check_Diabetes",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 316052,
+                "display": "Hydrochlorothiazide 6.25 MG"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Check_Diabetes",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 316049,
+                "display": "Hydrochlorothiazide 25 MG"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Hypertension_Medication_Low",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension",
+            "operator": "==",
+            "value": true
+          }
+        }
+      ]
+    },
+    "Check_High_Dose": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Check_Diabetes",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 316049,
+                "display": "Hydrochlorothiazide 25 MG"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "End_Hypertension_Medication",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 316052,
+                "display": "Hydrochlorothiazide 6.25 MG"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Hypertension_Medication_High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension",
+            "operator": "==",
+            "value": true
+          }
+        }
+      ]
+    },
+    "check CKD": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CKD1 Diagnosis",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "CKD2 Diagnosis",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "CKD3 Diagnosis",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "transition": "CKD4 Diagnosis",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 4
+          }
+        },
+        {
+          "transition": "Check_Nephropathy"
+        }
+      ]
+    },
+    "CKD1 Diagnosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "obesity",
+      "assign_to_attribute": "",
+      "target_encounter": "",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": 162864005,
-          "display": "Body mass index 30+ - obesity (finding)"
+          "code": 431855005,
+          "display": "Chronic kidney disease stage 1 (disorder)"
         }
       ],
-      "direct_transition": "Wellness_Encounter"
+      "direct_transition": "Record_MetabolicPanel"
     },
-    "Severe Obesity": {
+    "CKD2 Diagnosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "obesity",
+      "assign_to_attribute": "",
+      "target_encounter": "",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": 408512008,
-          "display": "Body mass index 40+ - severely obese (finding)"
+          "code": 431856006,
+          "display": "Chronic kidney disease stage 2 (disorder)"
         }
       ],
-      "direct_transition": "Wellness_Encounter"
+      "direct_transition": "Record_MetabolicPanel_2"
+    },
+    "CKD3 Diagnosis": {
+      "type": "ConditionOnset",
+      "target_encounter": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 433144002,
+          "display": "Chronic kidney disease stage 3 (disorder)"
+        }
+      ],
+      "direct_transition": "Record_MetabolicPanel_3",
+      "assign_to_attribute": "text"
+    },
+    "CKD4 Diagnosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 431857002,
+          "display": "Chronic kidney disease stage 4 (disorder)"
+        }
+      ],
+      "direct_transition": "Record_MetabolicPanel_4"
     },
     "Obese_Check": {
       "type": "Simple",
@@ -24842,118 +30498,1782 @@ export default {"allergic_rhinitis":{
         }
       ]
     },
-    "Blood_Sugar_Check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Hyperglycemia",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Glucose",
-            "operator": ">=",
-            "value": 130
-          }
-        },
-        {
-          "transition": "Triglyceride_Check"
-        }
-      ]
-    },
-    "Hyperglycemia": {
+    "Obesity": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "hyperglycemia",
+      "target_encounter": "",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": 80394007,
-          "display": "Hyperglycemia (disorder)"
+          "code": 162864005,
+          "display": "Body mass index 30+ - obesity (finding)"
         }
       ],
-      "direct_transition": "Triglyceride_Check"
+      "direct_transition": "Wellness_Encounter",
+      "assign_to_attribute": "obesity"
     },
-    "Triglyceride_Check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Hypertriglyceridemia",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Triglycerides",
-            "operator": ">=",
-            "value": 150
-          }
-        },
-        {
-          "transition": "Metabolic_Check"
-        }
-      ]
-    },
-    "Hypertriglyceridemia": {
+    "Severe Obesity": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "hypertriglyceridemia",
+      "assign_to_attribute": "obesity",
+      "target_encounter": "",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": 302870006,
-          "display": "Hypertriglyceridemia (disorder)"
+          "code": 408512008,
+          "display": "Body mass index 40+ - severely obese (finding)"
         }
       ],
-      "direct_transition": "Metabolic_Check"
+      "direct_transition": "Wellness_Encounter"
     },
-    "Metabolic_Check": {
-      "type": "Simple",
-      "conditional_transition": [
+    "Record_MetabolicPanel": {
+      "type": "DiagnosticReport",
+      "codes": [
         {
-          "transition": "Metabolic_Syndrome",
-          "condition": {
-            "condition_type": "At Least",
-            "minimum": 3,
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "obesity",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertension",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hyperglycemia",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertriglyceridemia",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Vital Sign",
-                "vital_sign": "HDL",
-                "operator": "<",
-                "value": 50
-              }
-            ]
+          "system": "LOINC",
+          "code": "24321-2",
+          "display": "Basic Metabolic 2000 Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 1.4,
+            "high": 1.8
           }
         },
         {
-          "transition": "Diagnosis"
-        }
-      ]
-    },
-    "Metabolic_Syndrome": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "metabolic_syndrome",
-      "codes": [
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
         {
-          "system": "SNOMED-CT",
-          "code": 237602007,
-          "display": "Metabolic syndrome X (disorder)"
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 90,
+            "high": 150
+          }
         }
       ],
-      "direct_transition": "Diagnosis"
+      "direct_transition": "Record_Urinalysis_4"
+    },
+    "Record_MetabolicPanel_2": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24321-2",
+          "display": "Basic Metabolic 2000 Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 1.8,
+            "high": 2.1
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 60,
+            "high": 89
+          }
+        }
+      ],
+      "direct_transition": "Record_Urinalysis_6"
+    },
+    "Record_MetabolicPanel_3": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24321-2",
+          "display": "Basic Metabolic 2000 Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 1.9,
+            "high": 2.1
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 30,
+            "high": 59
+          }
+        }
+      ],
+      "direct_transition": "Record_Urinalysis_5"
+    },
+    "Record_MetabolicPanel_4": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24321-2",
+          "display": "Basic Metabolic 2000 Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.2,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 15,
+            "high": 29
+          }
+        }
+      ],
+      "direct_transition": "Record_Urinalysis"
+    },
+    "Record_MetabolicPanel_5": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24321-2",
+          "display": "Basic Metabolic 2000 Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 14
+          }
+        }
+      ],
+      "direct_transition": "Check_Retinopathy"
+    },
+    "Record_Urinalysis": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167248002,
+            "display": "Urine smell ammoniacal (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 300828005,
+            "display": "Translucent (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 371254008,
+            "display": "Brown color (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167291007,
+            "display": "Urine ketone test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 250,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167277001,
+            "display": "Urine protein test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167297006,
+            "display": "Urine blood test = negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Check_Nephropathy"
+    },
+    "Record_Urinalysis_4": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167248002,
+            "display": "Urine smell ammoniacal (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 300828005,
+            "display": "Translucent (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 371254008,
+            "display": "Brown color (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167288007,
+            "display": "Urine ketone test = trace (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 50,
+            "high": 150
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167275009,
+            "display": "Urine protein test = + (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167297006,
+            "display": "Urine blood test = negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Check_Nephropathy"
+    },
+    "Record_Urinalysis_5": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167248002,
+            "display": "Urine smell ammoniacal (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 300828005,
+            "display": "Translucent (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 371254008,
+            "display": "Brown color (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167290008,
+            "display": "Urine ketone test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 200,
+            "high": 400
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167276005,
+            "display": "Urine protein test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167297006,
+            "display": "Urine blood test = negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Check_Nephropathy"
+    },
+    "Record_Urinalysis_6": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167248002,
+            "display": "Urine smell ammoniacal (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 300828005,
+            "display": "Translucent (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 371254008,
+            "display": "Brown color (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167289004,
+            "display": "Urine ketone test = + (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/​volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 350
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167276005,
+            "display": "Urine protein test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167297006,
+            "display": "Urine blood test = negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Check_Nephropathy"
     }
   }
 }
@@ -24968,7 +32288,7 @@ export default {"allergic_rhinitis":{
     },
     "Initial_Kidney_Health": {
       "type": "SetAttribute",
-      "attribute": "diabetic_kidney_damage",
+      "attribute": "ckd",
       "value": 0,
       "direct_transition": "Initial_Eye_Health"
     },
@@ -24996,202 +32316,72 @@ export default {"allergic_rhinitis":{
     },
     "Chance_to_Onset_Hypertension": {
       "type": "Simple",
-      "distributed_transition": [
-        {
-          "distribution": 0.296,
-          "transition": "Onset_Hypertension"
-        },
-        {
-          "distribution": 0.704,
-          "transition": "No_Hypertension"
-        }
-      ],
       "remarks": [
         "probability: 0.296 # (1.0==100%) http://www.cdc.gov/MMWr/preview/mmwrhtml/su6203a24.htm#Tab"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Veteran",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Non_Veteran",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is nil"
+          }
+        }
       ]
     },
     "Onset_Hypertension": {
       "type": "SetAttribute",
       "attribute": "hypertension",
       "value": true,
-      "direct_transition": "Diabetes_Prevalence"
+      "conditional_transition": [
+        {
+          "transition": "Non_Veteran_Diabetes_Prevalence",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Veteran_Diabetes_Prevalence",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          }
+        }
+      ]
     },
     "No_Hypertension": {
       "type": "SetAttribute",
       "attribute": "hypertension",
       "value": false,
-      "direct_transition": "Diabetes_Prevalence"
-    },
-    "Diabetes_Prevalence": {
-      "type": "Simple",
-      "remarks": [
-        "diabetes prevalence %s based on the following",
-        "http://www.mass.gov/eohhs/gov/departments/dph/programs/community-health/diabetes/facts/diabetes-statistics.html",
-        "prediabetes prevalence is ~38 % overall and similar among most races but slightly lower among Native americans",
-        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3830901/",
-        "http://www.diabetes.org/living-with-diabetes/treatment-and-care/high-risk-populations/treatment-american-indians.html",
-        "It is estimated that 27.8% of people with diabetes are undiagnosed",
-        "https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf",
-        "therefore the diabetes %s are all scaled up by a factor of 1.278, ",
-        "so that the total % of people that eventually get diabetes is higher, but the current population with diabetes should be around 8.8%",
-        "because there is a delay before diabetes onsets",
-        "similarly the prediabetes #s are scaled up (but by a little less) so the current prediabetic % at any time is ~38%"
-      ],
-      "complex_transition": [
+      "conditional_transition": [
         {
+          "transition": "Non_Veteran_Diabetes_Prevalence",
           "condition": {
-            "condition_type": "Race",
-            "race": "White"
-          },
-          "distributions": [
-            {
-              "distribution": 0.083,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.065 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.467,
-              "transition": "No_Diabetes"
-            }
-          ]
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is nil"
+          }
         },
         {
+          "transition": "Veteran_Diabetes_Prevalence",
           "condition": {
-            "condition_type": "Race",
-            "race": "Hispanic"
-          },
-          "distributions": [
-            {
-              "distribution": 0.1815,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.142 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.3685,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Black"
-          },
-          "distributions": [
-            {
-              "distribution": 0.1636,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.128 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.3864,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Asian"
-          },
-          "distributions": [
-            {
-              "distribution": 0.2045,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.16 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.3455,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Race",
-            "race": "Native"
-          },
-          "distributions": [
-            {
-              "distribution": 0.1828,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.143 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.36,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.30 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.4572,
-              "transition": "No_Diabetes"
-            }
-          ]
-        },
-        {
-          "remarks": [
-            "for Other races, just fall back to overall state %s"
-          ],
-          "distributions": [
-            {
-              "distribution": 0.1022,
-              "transition": "Eventual_Diabetes",
-              "remarks": [
-                "0.08 * 1.278"
-              ]
-            },
-            {
-              "distribution": 0.45,
-              "transition": "Eventual_Prediabetes",
-              "remarks": [
-                "0.38 * 1.2"
-              ]
-            },
-            {
-              "distribution": 0.4478,
-              "transition": "No_Diabetes"
-            }
-          ]
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil",
+            "value": 0
+          }
         }
       ]
     },
@@ -25329,15 +32519,39 @@ export default {"allergic_rhinitis":{
       "complex_transition": [
         {
           "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "veteran",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "ckd",
+                "operator": "==",
+                "value": 0
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "distribution": 0.99,
+              "transition": "Retinopathy_Progression"
+            },
+            {
+              "distribution": 0.01,
+              "transition": "Set_CKD_1 Damage"
+            }
+          ]
+        },
+        {
+          "condition": {
             "condition_type": "Attribute",
-            "attribute": "diabetic_kidney_damage",
+            "attribute": "ckd",
             "operator": "==",
             "value": 0
           },
-          "remarks": [
-            "we want ~ 35% of patients to hit mild kidney disease",
-            "assuming roughly 20 yrs, 0.18% / month ~~> 35% over 20 yrs "
-          ],
           "distributions": [
             {
               "distribution": 0.9982,
@@ -25345,259 +32559,111 @@ export default {"allergic_rhinitis":{
             },
             {
               "distribution": 0.0018,
-              "transition": "Set_Mild_Kidney_Damage"
+              "transition": "Set_CKD_1 Damage"
             }
           ]
         },
         {
           "condition": {
             "condition_type": "Attribute",
-            "attribute": "diabetic_kidney_damage",
+            "attribute": "ckd",
             "operator": "==",
             "value": 1
           },
-          "remarks": [
-            "moderate damage == microalbuminuria",
-            "we want ~ 28.8% of patients to hit moderate, with ~35% hitting mild",
-            "so 28.8% / 35% == 82%.  1.35% / month ~~> 83% over 10 yrs",
-            "10 yrs because kidney damage accelerates as is it increases -",
-            "http://www.edren.org/pages/edreninfo/ckd-chronic-renal-failure-and-its-progression.php"
-          ],
           "distributions": [
             {
               "distribution": 0.9865,
-              "transition": "Set_Mild_Kidney_Damage"
+              "transition": "Set_CKD_1 Damage"
             },
             {
               "distribution": 0.0135,
-              "transition": "Set_Moderate_Kidney_Damage"
+              "transition": "Set_CKD_2 Damage"
             }
           ]
         },
         {
           "condition": {
             "condition_type": "Attribute",
-            "attribute": "diabetic_kidney_damage",
+            "attribute": "ckd",
             "operator": "==",
             "value": 2
           },
-          "remarks": [
-            "limited data on prevalence of proteinuria, so we assume roughly 14%",
-            "(midway between the 28.8% of microalbuminuria and end-stage)",
-            "so we want ~ 50% of patients with moderate damage to progress to severe"
-          ],
           "distributions": [
             {
               "distribution": 0.994,
-              "transition": "Set_Moderate_Kidney_Damage"
+              "transition": "Set_CKD_2 Damage"
             },
             {
               "distribution": 0.006,
-              "transition": "Set_Severe_Kidney_Damage"
+              "transition": "Set_CKD_3 Damage"
             }
           ]
         },
         {
           "condition": {
             "condition_type": "Attribute",
-            "attribute": "diabetic_kidney_damage",
+            "attribute": "ckd",
             "operator": "==",
             "value": 3
           },
-          "remarks": [
-            "Prevalence of end_stage_renal_disease is 0.78%",
-            "where ~14% make it to severe, so we want 0.78/14 = ~ 6% of patients to progress to end-stage"
-          ],
           "distributions": [
             {
               "distribution": 0.9994,
-              "transition": "Set_Severe_Kidney_Damage"
+              "transition": "Set_CKD_3 Damage"
             },
             {
               "distribution": 0.0006,
-              "transition": "Set_End_Stage_Kidney_Damage"
+              "transition": "Set_CKD_4 Damage"
             }
           ]
         },
         {
           "condition": {
             "condition_type": "Attribute",
-            "attribute": "diabetic_kidney_damage",
+            "attribute": "ckd",
             "operator": "==",
             "value": 4
           },
-          "transition": "Set_End_Stage_Kidney_Damage"
+          "distributions": [
+            {
+              "distribution": 0.9994,
+              "transition": "Set_CKD_4 Damage"
+            },
+            {
+              "distribution": 0.0006,
+              "transition": "Expected_Lifespan_for_ESRD"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 5
+          },
+          "distributions": [],
+          "transition": "Expected_Lifespan_for_ESRD"
         }
       ]
-    },
-    "Set_Mild_Kidney_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_kidney_damage",
-      "value": 1,
-      "direct_transition": "Set_Nephropathy"
     },
     "Set_Nephropathy": {
       "type": "SetAttribute",
       "attribute": "nephropathy",
       "value": true,
-      "direct_transition": "Mild_Kidney_Damage_Symptom_1"
-    },
-    "Mild_Kidney_Damage_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "Mild_Kidney_Damage_Symptom_2"
-    },
-    "Mild_Kidney_Damage_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "Mild_Kidney_Damage_Symptom_3"
-    },
-    "Mild_Kidney_Damage_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "Mild_Kidney_Damage_Symptom_4"
-    },
-    "Mild_Kidney_Damage_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "Set_Moderate_Kidney_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_kidney_damage",
-      "value": 2,
-      "direct_transition": "Set_Microalbuminuria"
+      "direct_transition": "CKD1_Symptom_1"
     },
     "Set_Microalbuminuria": {
       "type": "SetAttribute",
       "attribute": "microalbuminuria",
       "value": true,
-      "direct_transition": "Moderate_Kidney_Damage_Symptom_1"
-    },
-    "Moderate_Kidney_Damage_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Moderate_Kidney_Damage_Symptom_2"
-    },
-    "Moderate_Kidney_Damage_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Moderate_Kidney_Damage_Symptom_3"
-    },
-    "Moderate_Kidney_Damage_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Moderate_Kidney_Damage_Symptom_4"
-    },
-    "Moderate_Kidney_Damage_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "Set_Severe_Kidney_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_kidney_damage",
-      "value": 3,
-      "direct_transition": "Set_Proteinuria"
+      "direct_transition": "CKD2_Symptom_1"
     },
     "Set_Proteinuria": {
       "type": "SetAttribute",
       "attribute": "proteinuria",
       "value": true,
-      "direct_transition": "Severe_Kidney_Damage_Symptom_1"
-    },
-    "Severe_Kidney_Damage_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "Severe_Kidney_Damage_Symptom_2"
-    },
-    "Severe_Kidney_Damage_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "Severe_Kidney_Damage_Symptom_3"
-    },
-    "Severe_Kidney_Damage_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "Severe_Kidney_Damage_Symptom_4"
-    },
-    "Severe_Kidney_Damage_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "Set_End_Stage_Kidney_Damage": {
-      "type": "SetAttribute",
-      "attribute": "diabetic_kidney_damage",
-      "value": 4,
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "end_stage_renal_disease",
-            "operator": "==",
-            "value": true
-          },
-          "transition": "End_Stage_Kidney_Damage_Symptom_1"
-        },
-        {
-          "transition": "Set_End_Stage_Renal_Disease"
-        }
-      ]
-    },
-    "Set_End_Stage_Renal_Disease": {
-      "type": "SetAttribute",
-      "attribute": "end_stage_renal_disease",
-      "value": true,
-      "direct_transition": "Expected_Lifespan_for_ESRD"
+      "direct_transition": "CKD3_Symptom_1"
     },
     "Expected_Lifespan_for_ESRD": {
       "type": "Death",
@@ -25617,47 +32683,7 @@ export default {"allergic_rhinitis":{
         "Life expectency depends on many factors, but for patients > 40 it's generally less than 10 years with dialysis",
         "http://link.springer.com/article/10.1007/s00467-016-3383-8 (Table 2"
       ],
-      "direct_transition": "End_Stage_Kidney_Damage_Symptom_1"
-    },
-    "End_Stage_Kidney_Damage_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "remarks": [
-        "Without intervention, 20-40 percent of patients with type 2 diabetes/microalbuminuria, will evolve to macroalbuminuria.",
-        "Shlipak, Michael. 'Clinical Evidence Handbook: Diabetic Nephropathy: Preventing Progression - American Family Physician'. www.aafp.org."
-      ],
-      "direct_transition": "End_Stage_Kidney_Damage_Symptom_2"
-    },
-    "End_Stage_Kidney_Damage_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "End_Stage_Kidney_Damage_Symptom_3"
-    },
-    "End_Stage_Kidney_Damage_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "End_Stage_Kidney_Damage_Symptom_4"
-    },
-    "End_Stage_Kidney_Damage_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
+      "direct_transition": "Set_CKD_5 Damage"
     },
     "Retinopathy_Progression": {
       "type": "Simple",
@@ -25988,6 +33014,440 @@ export default {"allergic_rhinitis":{
     "Loop_back_to_Start": {
       "type": "Simple",
       "direct_transition": "Diabetes_Progression"
+    },
+    "Veteran": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Onset_Hypertension",
+          "distribution": 0.306
+        },
+        {
+          "transition": "No_Hypertension",
+          "distribution": 0.694
+        }
+      ]
+    },
+    "Non_Veteran": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Onset_Hypertension",
+          "distribution": 0.296
+        },
+        {
+          "transition": "No_Hypertension",
+          "distribution": 0.704
+        }
+      ]
+    },
+    "Non_Veteran_Diabetes_Prevalence": {
+      "type": "Simple",
+      "remarks": [
+        "diabetes prevalence %s based on the following",
+        "http://www.mass.gov/eohhs/gov/departments/dph/programs/community-health/diabetes/facts/diabetes-statistics.html",
+        "prediabetes prevalence is ~38 % overall and similar among most races but slightly lower among Native americans",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3830901/",
+        "http://www.diabetes.org/living-with-diabetes/treatment-and-care/high-risk-populations/treatment-american-indians.html",
+        "It is estimated that 27.8% of people with diabetes are undiagnosed",
+        "https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf",
+        "therefore the diabetes %s are all scaled up by a factor of 1.278, ",
+        "so that the total % of people that eventually get diabetes is higher, but the current population with diabetes should be around 8.8%",
+        "because there is a delay before diabetes onsets",
+        "similarly the prediabetes #s are scaled up (but by a little less) so the current prediabetic % at any time is ~38%"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "White"
+          },
+          "distributions": [
+            {
+              "distribution": 0.083,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.065 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.45,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.38 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.467,
+              "transition": "No_Diabetes"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Hispanic"
+          },
+          "distributions": [
+            {
+              "distribution": 0.1815,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.142 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.45,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.38 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.3685,
+              "transition": "No_Diabetes"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Black"
+          },
+          "distributions": [
+            {
+              "distribution": 0.1636,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.128 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.45,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.38 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.3864,
+              "transition": "No_Diabetes"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Asian"
+          },
+          "distributions": [
+            {
+              "distribution": 0.2045,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.16 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.45,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.38 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.3455,
+              "transition": "No_Diabetes"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Native"
+          },
+          "distributions": [
+            {
+              "distribution": 0.1828,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.143 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.36,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.30 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.4572,
+              "transition": "No_Diabetes"
+            }
+          ]
+        },
+        {
+          "remarks": [
+            "for Other races, just fall back to overall state %s"
+          ],
+          "distributions": [
+            {
+              "distribution": 0.1022,
+              "transition": "Eventual_Diabetes",
+              "remarks": [
+                "0.08 * 1.278"
+              ]
+            },
+            {
+              "distribution": 0.45,
+              "transition": "Eventual_Prediabetes",
+              "remarks": [
+                "0.38 * 1.2"
+              ]
+            },
+            {
+              "distribution": 0.4478,
+              "transition": "No_Diabetes"
+            }
+          ]
+        }
+      ]
+    },
+    "Veteran_Diabetes_Prevalence": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Eventual_Diabetes",
+          "distribution": 0.25
+        },
+        {
+          "transition": "Eventual_Prediabetes",
+          "distribution": 0.45
+        },
+        {
+          "transition": "No_Diabetes",
+          "distribution": 0.3
+        }
+      ]
+    },
+    "Set_CKD_1 Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "direct_transition": "Set_Nephropathy",
+      "value": 1
+    },
+    "Set_CKD_2 Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "direct_transition": "Set_Microalbuminuria",
+      "value": 2
+    },
+    "Set_CKD_3 Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "value": 3,
+      "direct_transition": "Set_Proteinuria"
+    },
+    "Set_CKD_4 Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "value": 4,
+      "direct_transition": "CKD4_Symptom_1"
+    },
+    "Set_CKD_5 Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "direct_transition": "CKD5_Symptom_1",
+      "value": 5
+    },
+    "CKD1_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Hunger",
+      "range": {
+        "low": 1,
+        "high": 100
+      },
+      "direct_transition": "CKD1_Symptom_2"
+    },
+    "CKD2_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Hunger",
+      "range": {
+        "low": 20,
+        "high": 100
+      },
+      "direct_transition": "CKD2_Symptom_2"
+    },
+    "CKD2_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 20,
+        "high": 100
+      },
+      "direct_transition": "CKD2_Symptom_3"
+    },
+    "CKD2_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "range": {
+        "low": 20,
+        "high": 100
+      },
+      "direct_transition": "CKD2_Symptom_4"
+    },
+    "CKD2_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Thirst",
+      "range": {
+        "low": 20,
+        "high": 100
+      },
+      "direct_transition": "Retinopathy_Progression"
+    },
+    "CKD1_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 1,
+        "high": 100
+      },
+      "direct_transition": "CKD1_Symptom_3"
+    },
+    "CKD1_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "range": {
+        "low": 1,
+        "high": 100
+      },
+      "direct_transition": "CKD1_Symptom_4"
+    },
+    "CKD1_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Thirst",
+      "range": {
+        "low": 1,
+        "high": 100
+      },
+      "direct_transition": "Retinopathy_Progression"
+    },
+    "CKD3_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Hunger",
+      "range": {
+        "low": 40,
+        "high": 100
+      },
+      "direct_transition": "CKD3_Symptom_2"
+    },
+    "CKD3_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 40,
+        "high": 100
+      },
+      "direct_transition": "CKD3_Symptom_3"
+    },
+    "CKD3_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "range": {
+        "low": 40,
+        "high": 100
+      },
+      "direct_transition": "CKD3_Symptom_4"
+    },
+    "CKD3_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Thirst",
+      "range": {
+        "low": 40,
+        "high": 100
+      },
+      "direct_transition": "Retinopathy_Progression"
+    },
+    "CKD5_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Hunger",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "remarks": [
+        "Without intervention, 20-40 percent of patients with type 2 diabetes/microalbuminuria, will evolve to macroalbuminuria.",
+        "Shlipak, Michael. 'Clinical Evidence Handbook: Diabetic Nephropathy: Preventing Progression - American Family Physician'. www.aafp.org."
+      ],
+      "direct_transition": "CKD5_Symptom_2"
+    },
+    "CKD5_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "CKD5_Symptom_3"
+    },
+    "CKD5_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "CKD5_Symptom_4"
+    },
+    "CKD5_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Thirst",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "Retinopathy_Progression"
+    },
+    "CKD4_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Hunger",
+      "cause": "",
+      "direct_transition": "CKD4_Symptom_2",
+      "range": {
+        "low": 45,
+        "high": 2
+      }
+    },
+    "CKD4_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "cause": "",
+      "direct_transition": "CKD4_Symptom_3",
+      "range": {
+        "low": 45,
+        "high": 100
+      }
+    },
+    "CKD4_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "cause": "",
+      "direct_transition": "CKD4_Symptom_4",
+      "range": {
+        "low": 45,
+        "high": 100
+      }
+    },
+    "CKD4_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Thirst",
+      "cause": "",
+      "direct_transition": "Retinopathy_Progression",
+      "range": {
+        "low": 45,
+        "high": 100
+      }
     }
   }
 }
@@ -26109,21 +33569,18 @@ export default {"allergic_rhinitis":{
         },
         {
           "condition": {
-            "condition_type": "Socioeconomic Status",
-            "category": "Low"
+            "condition_type": "Attribute",
+            "attribute": "ptsd",
+            "operator": "is not nil"
           },
           "distributions": [
             {
-              "distribution": 0.0001,
-              "transition": "Enter_Directed_Use"
+              "transition": "Enter_Directed_Use",
+              "distribution": 0.5
             },
             {
-              "distribution": 0.000008,
-              "transition": "Misuse"
-            },
-            {
-              "distribution": 0.999892,
-              "transition": "General_Population"
+              "transition": "General_Population",
+              "distribution": 0.5
             }
           ]
         }
@@ -26146,6 +33603,10 @@ export default {"allergic_rhinitis":{
         {
           "distribution": 0.334,
           "transition": "Enter_Directed_Use_Condition3"
+        },
+        {
+          "transition": "Initial",
+          "distribution": 1
         }
       ]
     },
@@ -26172,7 +33633,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter Inpatient"
         }
       ],
-      "direct_transition": "Enter_Directed_Use_Procedure1"
+      "direct_transition": "Pain_Vital_3"
     },
     "Enter_Directed_Use_Procedure1": {
       "type": "Procedure",
@@ -26222,7 +33683,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter Inpatient"
         }
       ],
-      "direct_transition": "Directed_Use_Prescription2"
+      "direct_transition": "Pain_Vital_2"
     },
     "Directed_Use_Prescription2": {
       "type": "MedicationOrder",
@@ -26260,7 +33721,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter Inpatient"
         }
       ],
-      "direct_transition": "Directed_Use_Prescription3"
+      "direct_transition": "Pain_Vital"
     },
     "Directed_Use_Prescription3": {
       "type": "MedicationOrder",
@@ -26374,13 +33835,17 @@ export default {"allergic_rhinitis":{
           "remarks": [
             "0.02 --> 0.13187"
           ],
-          "transition": "Active_Addiction"
+          "transition": "Active_Addiction_Symptom_Onset"
         },
         {
           "distribution": 0.681862,
           "transition": "Misuse"
         }
       ]
+    },
+    "Active_Addiction_Symptom_Onset": {
+      "type": "Simple",
+      "direct_transition": "Opioid_Addiction_Symptom1"
     },
     "Opioid_Addiction_Symptom1": {
       "type": "Symptom",
@@ -26537,7 +34002,7 @@ export default {"allergic_rhinitis":{
           "display": "Drug rehabilitation and detoxification"
         }
       ],
-      "direct_transition": "End_Addiction_Treatment_Encounter"
+      "direct_transition": "Pain_Vital_4"
     },
     "End_Addiction_Treatment_Encounter": {
       "type": "EncounterEnd",
@@ -26570,8 +34035,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "266707007",
-          "display": "Drug addiction therapy"
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
         }
       ],
       "direct_transition": "End_Recovery_Management_Encounter"
@@ -26734,8 +34199,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "266707007",
-          "display": "Drug addiction therapy"
+          "code": 734163000,
+          "display": "Care plan (record artifact)"
         }
       ],
       "activities": [
@@ -26748,6 +34213,11 @@ export default {"allergic_rhinitis":{
           "system": "SNOMED-CT",
           "code": "61480009",
           "display": "Drug detoxification"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 266707007,
+          "display": "Drug addiction therapy"
         }
       ],
       "direct_transition": "End_Addiction_Overdose_Encounter"
@@ -26769,6 +34239,74 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Pain_Vital": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 8
+      },
+      "direct_transition": "Directed_Use_Prescription3"
+    },
+    "Pain_Vital_2": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 5,
+        "high": 9
+      },
+      "direct_transition": "Directed_Use_Prescription2"
+    },
+    "Pain_Vital_3": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 3,
+        "high": 8
+      },
+      "direct_transition": "Enter_Directed_Use_Procedure1"
+    },
+    "Pain_Vital_4": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 2,
+        "high": 8
+      },
+      "direct_transition": "End_Addiction_Treatment_Encounter"
     }
   }
 }
@@ -26798,103 +34336,10 @@ export default {"allergic_rhinitis":{
         " | Osteoarthritis |   0.34000  |    2:1    | ",
         " ------------------------------------------- "
       ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          },
-          "distributions": [
-            {
-              "distribution": 0.113,
-              "transition": "Delay_Until_Symptoms"
-            },
-            {
-              "distribution": 0.887,
-              "transition": "Terminal"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "F"
-          },
-          "distributions": [
-            {
-              "distribution": 0.2267,
-              "transition": "Delay_Until_Symptoms"
-            },
-            {
-              "distribution": 0.7733,
-              "transition": "Terminal"
-            }
-          ]
-        }
-      ]
-    },
-    "Delay_Until_Symptoms": {
-      "type": "Delay",
-      "range": {
-        "low": 10,
-        "high": 40,
-        "unit": "years"
-      },
-      "direct_transition": "OA_Symptom1"
-    },
-    "OA_Symptom1": {
-      "type": "Symptom",
-      "symptom": "Joint Pain",
-      "range": {
-        "low": 0,
-        "high": 20
-      },
-      "direct_transition": "OA_Symptom2"
-    },
-    "OA_Symptom2": {
-      "type": "Symptom",
-      "symptom": "Joint Stiffness",
-      "range": {
-        "low": 0,
-        "high": 20
-      },
-      "direct_transition": "Delay_Until_Arthritis"
-    },
-    "Delay_Until_Arthritis": {
-      "type": "Delay",
-      "range": {
-        "low": 15,
-        "high": 40,
-        "unit": "years"
-      },
-      "direct_transition": "OA_Symptom1_Advances"
-    },
-    "OA_Symptom1_Advances": {
-      "type": "Symptom",
-      "symptom": "Joint Pain",
-      "range": {
-        "low": 0,
-        "high": 50
-      },
-      "direct_transition": "OA_Symptom2_Advances"
-    },
-    "OA_Symptom2_Advances": {
-      "type": "Symptom",
-      "symptom": "Joint Stiffness",
-      "range": {
-        "low": 0,
-        "high": 50
-      },
-      "direct_transition": "Osteoarthritis"
+      "direct_transition": "Delay_Pre_Arthritis"
     },
     "Osteoarthritis": {
       "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " OSTEOARTHRITIS                                                       ",
-        "======================================================================",
-        "Source: http://www.cdc.gov/arthritis/basics/osteoarthritis.htm"
-      ],
       "distributed_transition": [
         {
           "distribution": 0.234,
@@ -26908,6 +34353,12 @@ export default {"allergic_rhinitis":{
           "distribution": 0.205,
           "transition": "OA_Of_The_Hip"
         }
+      ],
+      "remarks": [
+        "======================================================================",
+        " OSTEOARTHRITIS                                                       ",
+        "======================================================================",
+        "Source: http://www.cdc.gov/arthritis/basics/osteoarthritis.htm"
       ]
     },
     "OA_Of_The_Hand": {
@@ -26960,7 +34411,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
-      "direct_transition": "OA_CarePlan"
+      "direct_transition": "Pain Vital"
     },
     "OA_CarePlan": {
       "type": "CarePlanStart",
@@ -27070,9 +34521,113 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "OA_Symptom1_Ends"
     },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Veteran": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Vietnam_War"
+          },
+          "distributions": [
+            {
+              "transition": "Delay_Until_Symptoms",
+              "distribution": 0.2
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.8
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Early_Gulf_War"
+          },
+          "distributions": [
+            {
+              "transition": "Delay_Until_Symptoms",
+              "distribution": 0.2642
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.7358
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Late_Gulf_War"
+          },
+          "distributions": [
+            {
+              "transition": "Delay_Until_Symptoms",
+              "distribution": 0.22
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.78
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "Non_Veteran"
+        }
+      ]
+    },
+    "Non_Veteran": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Delay_Until_Symptoms",
+              "distribution": 0.21
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.79
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Delay_Until_Symptoms",
+              "distribution": 0.2267
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.7733
+            }
+          ]
+        }
+      ]
+    },
     "OA_Symptom1_Ends": {
       "type": "Symptom",
       "symptom": "Joint Pain",
+      "cause": "",
       "exact": {
         "quantity": 0
       },
@@ -27081,13 +34636,111 @@ export default {"allergic_rhinitis":{
     "OA_Symptom2_Ends": {
       "type": "Symptom",
       "symptom": "Joint Stiffness",
+      "cause": "",
       "exact": {
         "quantity": 0
       },
       "direct_transition": "Terminal"
     },
-    "Terminal": {
-      "type": "Terminal"
+    "Delay_Until_Symptoms": {
+      "type": "Delay",
+      "direct_transition": "OA_Symptom1",
+      "range": {
+        "low": 0,
+        "high": 15,
+        "unit": "years"
+      }
+    },
+    "OA_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "cause": "",
+      "direct_transition": "OA_Symptom2",
+      "range": {
+        "low": 0,
+        "high": 20
+      }
+    },
+    "OA_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "cause": "",
+      "direct_transition": "Delay_Until_Arthritis",
+      "range": {
+        "low": 0,
+        "high": 20
+      }
+    },
+    "Delay_Pre_Arthritis": {
+      "type": "Delay",
+      "conditional_transition": [
+        {
+          "transition": "Veteran",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Non_Veteran",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is nil"
+          }
+        }
+      ],
+      "exact": {
+        "quantity": 25,
+        "unit": "years"
+      }
+    },
+    "Delay_Until_Arthritis": {
+      "type": "Delay",
+      "direct_transition": "OA_Symptom1_Advances",
+      "range": {
+        "low": 5,
+        "high": 30,
+        "unit": "years"
+      }
+    },
+    "OA_Symptom1_Advances": {
+      "type": "Symptom",
+      "symptom": "Joint Pain",
+      "cause": "",
+      "direct_transition": "OA_Symptom2_Advances",
+      "range": {
+        "low": 0,
+        "high": 50
+      }
+    },
+    "OA_Symptom2_Advances": {
+      "type": "Symptom",
+      "symptom": "Joint Stiffness",
+      "cause": "",
+      "direct_transition": "Osteoarthritis",
+      "range": {
+        "low": 0,
+        "high": 50
+      }
+    },
+    "Pain Vital": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "direct_transition": "OA_CarePlan",
+      "range": {
+        "low": 5,
+        "high": 10
+      }
     }
   }
 }
@@ -27841,7 +35494,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "104326007",
-          "display": "Measurement of Varicella-zoster virus antibody "
+          "display": "Measurement of Varicella-zoster virus antibody"
         }
       ],
       "direct_transition": "Tuberculosis_Test"
@@ -32363,7 +40016,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "117015009",
-          "display": "Throat culture (procedure) "
+          "display": "Throat culture (procedure)"
         }
       ],
       "conditional_transition": [
@@ -32501,6 +40154,342 @@ export default {"allergic_rhinitis":{
       "type": "MedicationEnd",
       "referenced_by_attribute": "Sore Throat Antibiotic",
       "direct_transition": "Potential_Infection"
+    }
+  }
+}
+,
+"surgery/general_anesthesia":{
+  "name": "General Anesthesia",
+  "remarks": [
+    "Prior to surgery, patients are commonly placed under general anesthesia. This model attempts to capture the most common case for general anesthesia, based in part on this discussion of the most common case:",
+    "https://www.reddit.com/r/askscience/comments/1v1ei5/most_descriptions_of_general_anesthesia_as_used/",
+    "",
+    "This article may be helpful for future efforts, but it is not open access: https://www.nejm.org/doi/full/10.1056/Nejmra0808281",
+    "",
+    "This article was helpful in determining current clinical guidelines for surgery, though it did not focus on general anesthesia: https://journals.lww.com/anesthesia-analgesia/Fulltext/2014/01000/Consensus_Guidelines_for_the_Management_of.13.aspx",
+    "",
+    "Known model limitations:",
+    "- Anesthesiology is a complex, complicated field with many edge cases. A patient's medication 'cocktail' will differ based on facility limitations, the type of surgery, and age/weight/allergies of the patient.  Greater variability in this model would help it to reflect reality.",
+    "- This assumes the patient is undergoing surgery in the 21st century (after propofol gained wide use) - historical anesthesia techniques are not modeled",
+    "- New anesthetics are actively being tested and used: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3642742/"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Antiemetic"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Induction_Medication": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1808217,
+          "display": "100 ML Propofol 10 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Induction_Medication_End",
+      "remarks": [
+        "TODO: look into Phenobarbital (can cause apnea), Etomidate (risk of nausea), Ketamine (increased secretions, risk of laryngospasm and hallucinations), Dexmedetomidine",
+        "https://www.ncbi.nlm.nih.gov/books/NBK493199/"
+      ]
+    },
+    "Intubation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 52765003,
+          "display": "Intubation"
+        }
+      ],
+      "duration": {
+        "low": 5,
+        "high": 10,
+        "unit": "minutes"
+      },
+      "direct_transition": "Volatile_Anesthetic"
+    },
+    "Midazolam": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 311700,
+          "display": "Midazolam 1 MG/ML Injectable Solution"
+        }
+      ],
+      "direct_transition": "Midazolam_End"
+    },
+    "Anxiolytic": {
+      "type": "Simple",
+      "remarks": [
+        "Benzodiazepines (e.g. Midazolam, Diazepam, Lorazepam) are administered to reduce anxiety and inhibit the formation of memories",
+        "94% of patients receive Midazolam",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5509245/"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Midazolam",
+          "distribution": 0.94
+        },
+        {
+          "transition": "Diazepam",
+          "distribution": 0.03
+        },
+        {
+          "transition": "Lorazepam",
+          "distribution": 0.03
+        }
+      ]
+    },
+    "Diazepam": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 309845,
+          "display": "Diazepam 5 MG/ML Injectable Solution"
+        }
+      ],
+      "direct_transition": "Diazepam_End"
+    },
+    "Lorazepam": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 238100,
+          "display": "Lorazepam 2 MG/ML Injectable Solution"
+        }
+      ],
+      "direct_transition": "Lorazepam_End"
+    },
+    "Antiemetic": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1740467,
+          "display": "2 ML Ondansetron 2 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Antiemetic_End",
+      "remarks": [
+        "4mg is the most common dose for Ondansetron and virtually all anesthesia patients receive it prior to general anesthesia.",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5509245/"
+      ]
+    },
+    "Paralytic": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1234995,
+          "display": "Rocuronium bromide 10 MG/ML Injectable Solution"
+        }
+      ],
+      "direct_transition": "Paralytic_End",
+      "remarks": [
+        "Paralytics are administered to prevent patients from moving around during surgery and to assist in intubation.",
+        "Succinylcholine, Rocuronium, and Vecuronium are possible paralytics but Succinylcholine has considerable side effects. ",
+        "Source: http://go.galegroup.com/ps/anonymous?id=GALE%7CA470367351",
+        "",
+        "In one study of general anesthetics, Rocuronium was used in 96.7% of cases",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5500064/"
+      ]
+    },
+    "Fentanyl": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 4337,
+          "display": "Fentanyl"
+        }
+      ],
+      "direct_transition": "Fentanyl_End"
+    },
+    "Analgesic": {
+      "type": "Simple",
+      "remarks": [
+        "Fentanyl, alfentanil, sufentanil, remifentanil are all used.",
+        "TODO: determine actual prevalence of usage.  Many studies mentioned remifentanil so it is given the highest prevalence in this model."
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Remifentanil",
+          "distribution": 0.4
+        },
+        {
+          "transition": "Fentanyl",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Alfentanil",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Sufentanil",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "Remifentanil": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 73032,
+          "display": "Remifentanil"
+        }
+      ],
+      "direct_transition": "Remifentanil_End"
+    },
+    "Alfentanil": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 480,
+          "display": "Alfentanil"
+        }
+      ],
+      "direct_transition": "Alfentanil_End"
+    },
+    "Sufentanil": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 56795,
+          "display": "Sufentanil"
+        }
+      ],
+      "direct_transition": "Sufentanil_End"
+    },
+    "Isoflurane": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 542347,
+          "display": "Isoflurane 999 MG/ML Inhalant Solution"
+        }
+      ],
+      "direct_transition": "Isoflurane_End"
+    },
+    "Volatile_Anesthetic": {
+      "type": "Simple",
+      "remarks": [
+        "Isoflurane, Sevoflurane, and Desflurane are all used. Isoflurane is the least expensive. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5735481/",
+        "TODO: Isoflurane seems to be the most common choice in the literature, but I haven't found explicit drug utilization studies.",
+        "TODO: Halothane was used historically https://www.ncbi.nlm.nih.gov/books/NBK493199/",
+        "TODO: this article may be useful but it's not open-access: https://onlinelibrary.wiley.com/doi/full/10.1592/phco.2005.25.12.1773"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Isoflurane",
+          "distribution": 0.7
+        },
+        {
+          "transition": "Desflurane",
+          "distribution": 0.15
+        },
+        {
+          "transition": "Sevoflurane",
+          "distribution": 0.15
+        }
+      ]
+    },
+    "Desflurane": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200252,
+          "display": "desflurane 990 MG/ML Inhalant Solution"
+        }
+      ],
+      "direct_transition": "Desflurane_End"
+    },
+    "Sevoflurane": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200243,
+          "display": "sevoflurane 1000 MG/ML Inhalant Solution"
+        }
+      ],
+      "direct_transition": "Sevoflurane_End"
+    },
+    "Midazolam_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Induction_Medication",
+      "medication_order": "Midazolam"
+    },
+    "Diazepam_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Induction_Medication",
+      "medication_order": "Diazepam"
+    },
+    "Lorazepam_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Induction_Medication",
+      "medication_order": "Lorazepam"
+    },
+    "Antiemetic_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Anxiolytic",
+      "medication_order": "Antiemetic"
+    },
+    "Induction_Medication_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Paralytic",
+      "medication_order": "Induction_Medication"
+    },
+    "Paralytic_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Intubation",
+      "medication_order": "Paralytic"
+    },
+    "Isoflurane_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Analgesic",
+      "medication_order": "Isoflurane"
+    },
+    "Desflurane_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Analgesic",
+      "medication_order": "Desflurane"
+    },
+    "Sevoflurane_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Analgesic",
+      "medication_order": "Sevoflurane"
+    },
+    "Fentanyl_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Terminal",
+      "medication_order": "Fentanyl"
+    },
+    "Remifentanil_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Terminal",
+      "medication_order": "Remifentanil"
+    },
+    "Alfentanil_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Terminal",
+      "medication_order": "Alfentanil"
+    },
+    "Sufentanil_End": {
+      "type": "MedicationEnd",
+      "direct_transition": "Terminal",
+      "medication_order": "Sufentanil"
     }
   }
 }
@@ -34175,6 +42164,6605 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"veteran":{
+  "name": "Veteran",
+  "remarks": [
+    "Sources:",
+    "[1] https://factfinder.census.gov/bkmk/table/1.0/en/ACS/16_1YR/B21002",
+    "[2] https://www.benefits.va.gov/pension/wartimeperiod.asp",
+    "",
+    "Relevant conflicts",
+    "    World War II (December 7, 1941 -> December 31, 1946)",
+    "    Korean conflict (June 27, 1950 -> January 31, 1955)",
+    "    Vietnam era (February 28, 1961 -> May 7, 1975)",
+    "    Gulf War (August 2, 1990 -> through a future date to be set by law or Presidential Proclamation)",
+    "",
+    "Per [1] , only about 3% of living veterans in 2016 were involved in more than 1 of these conflict, so for simplicity we assume a veteran was only involved in 1.",
+    "",
+    "%s are based on age breakdown in the 2015 census estimates. Ex, 57% of men over 75 are veterans and 43% of men over 75 are non-veterans; 2 % of women over 75 are veterans and 98% of women over 75 are non-vets. WW2 ended ~75 years ago so we plug those numbers in for WW2",
+    "",
+    "",
+    "Not quite tabular but added here for reference:",
+    "Population Group    Total population    Vet/Nonvet %",
+    "Estimate; Total:    241816698    ",
+    "Estimate; Total: - Veteran    20108332    8.32%",
+    "Estimate; Total: - Nonveteran    221708366    91.68%",
+    "Estimate; Total: - Male:    117201081    ",
+    "Estimate; Total: - Male: - Veteran    18529804    15.81%",
+    "Estimate; Total: - Male: - Nonveteran    98671277    84.19%",
+    "Estimate; Total: - Male: - 18 to 34 years:    37029758    ",
+    "Estimate; Total: - Male: - 18 to 34 years: - Veteran    1390821    3.76%",
+    "Estimate; Total: - Male: - 18 to 34 years: - Nonveteran    35638937    96.24%",
+    "Estimate; Total: - Male: - 35 to 54 years:    41636969    ",
+    "Estimate; Total: - Male: - 35 to 54 years: - Veteran    4215934    10.13%",
+    "Estimate; Total: - Male: - 35 to 54 years: - Nonveteran    37421035    89.87%",
+    "Estimate; Total: - Male: - 55 to 64 years:    18994676    ",
+    "Estimate; Total: - Male: - 55 to 64 years: - Veteran    3835781    20.19%",
+    "Estimate; Total: - Male: - 55 to 64 years: - Nonveteran    15158895    79.81%",
+    "Estimate; Total: - Male: - 65 to 74 years:    11743784    ",
+    "Estimate; Total: - Male: - 65 to 74 years: - Veteran    4635676    39.47%",
+    "Estimate; Total: - Male: - 65 to 74 years: - Nonveteran    7108108    60.53%",
+    "Estimate; Total: - Male: - 75 years and over:    7795894    ",
+    "Estimate; Total: - Male: - 75 years and over: - Veteran    4451592    57.10%",
+    "Estimate; Total: - Male: - 75 years and over: - Nonveteran    3344302    42.90%",
+    "Estimate; Total: - Female:    124615617    ",
+    "Estimate; Total: - Female: - Veteran    1578528    1.27%",
+    "Estimate; Total: - Female: - Nonveteran    123037089    98.73%",
+    "Estimate; Total: - Female: - 18 to 34 years:    36457348    ",
+    "Estimate; Total: - Female: - 18 to 34 years: - Veteran    319891    0.88%",
+    "Estimate; Total: - Female: - 18 to 34 years: - Nonveteran    36137457    99.12%",
+    "Estimate; Total: - Female: - 35 to 54 years:    42664110    ",
+    "Estimate; Total: - Female: - 35 to 54 years: - Veteran    687067    1.61%",
+    "Estimate; Total: - Female: - 35 to 54 years: - Nonveteran    41977043    98.39%",
+    "Estimate; Total: - Female: - 55 to 64 years:    20418360    ",
+    "Estimate; Total: - Female: - 55 to 64 years: - Veteran    301390    1.48%",
+    "Estimate; Total: - Female: - 55 to 64 years: - Nonveteran    20116970    98.52%",
+    "Estimate; Total: - Female: - 65 to 74 years:    13391383    ",
+    "Estimate; Total: - Female: - 65 to 74 years: - Veteran    124498    0.93%",
+    "Estimate; Total: - Female: - 65 to 74 years: - Nonveteran    13266885    99.07%",
+    "Estimate; Total: - Female: - 75 years and over:    11684416    ",
+    "Estimate; Total: - Female: - 75 years and over: - Veteran    145682    1.25%",
+    "Estimate; Total: - Female: - 75 years and over: - Nonveteran    11538734    98.75%",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Wait_Until_18"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Wait_Until_18": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 18,
+        "unit": "years"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Late_Gulf_War",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">",
+            "year": 2001
+          }
+        },
+        {
+          "transition": "Early_Gulf_War",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">",
+            "year": 1990
+          }
+        },
+        {
+          "transition": "Between_VW_and_GW",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">",
+            "year": 1975
+          }
+        },
+        {
+          "transition": "Vietnam_War",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">",
+            "year": 1961,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Between_KW_and_VW",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">",
+            "year": 1955
+          }
+        },
+        {
+          "transition": "Korean_War",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">",
+            "year": 1950
+          }
+        },
+        {
+          "transition": "Between_WW2_and_KW",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">",
+            "year": 1946
+          }
+        },
+        {
+          "transition": "WW2",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">",
+            "year": 1941
+          }
+        },
+        {
+          "transition": "Pre_WW2"
+        }
+      ]
+    },
+    "Pre_WW2": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran_population_override",
+            "operator": "is not nil"
+          },
+          "transition": "Set_Veteran_Pre_WW2"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Pre_WW2",
+              "distribution": 0.57
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.43
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Pre_WW2",
+              "distribution": 0.0125
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9875
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        }
+      ],
+      "remarks": [
+        "Using the same weights as WW2. There will be so few patients from pre-WW2 (minimum age 77) in the general population that the #s aren't critical"
+      ]
+    },
+    "Set_Veteran_Pre_WW2": {
+      "type": "SetAttribute",
+      "attribute": "veteran",
+      "value": "Pre_WW2",
+      "direct_transition": "Terminal"
+    },
+    "WW2": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran_population_override",
+            "operator": "is not nil"
+          },
+          "transition": "Set_Veteran_WW2"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_WW2",
+              "distribution": 0.57
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.43
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_WW2",
+              "distribution": 0.0125
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9875
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        }
+      ]
+    },
+    "Set_Veteran_WW2": {
+      "type": "SetAttribute",
+      "attribute": "veteran",
+      "value": "WW2",
+      "direct_transition": "Terminal"
+    },
+    "Between_WW2_and_KW": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran_population_override",
+            "operator": "is not nil"
+          },
+          "transition": "Set_Veteran_Between_WW2_and_KW"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Between_WW2_and_KW",
+              "distribution": 0.3947
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.6053
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Between_WW2_and_KW",
+              "distribution": 0.0093
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9907
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "Looking at age 65-74 in the dataset"
+      ]
+    },
+    "Set_Veteran_Between_WW2_and_KW": {
+      "type": "SetAttribute",
+      "attribute": "veteran",
+      "value": "Between_WW2_and_KW",
+      "direct_transition": "Terminal"
+    },
+    "Korean_War": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran_population_override",
+            "operator": "is not nil"
+          },
+          "transition": "Set_Veteran_Korean_War"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Korean_War",
+              "distribution": 0.2019
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.7981
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Korean_War",
+              "distribution": 0.0148
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9852
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "Looking at age 55-64 in the dataset, same as Between KW and VW"
+      ]
+    },
+    "Set_Veteran_Korean_War": {
+      "type": "SetAttribute",
+      "attribute": "veteran",
+      "value": "Korean_War",
+      "direct_transition": "Terminal"
+    },
+    "Between_KW_and_VW": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran_population_override",
+            "operator": "is not nil"
+          },
+          "transition": "Set_Veteran_Between_KW_and_VW"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Between_KW_and_VW",
+              "distribution": 0.2019
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.7981
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Between_KW_and_VW",
+              "distribution": 0.0148
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9852
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "Looking at age 55-64 in the dataset"
+      ]
+    },
+    "Set_Veteran_Between_KW_and_VW": {
+      "type": "SetAttribute",
+      "attribute": "veteran",
+      "value": "Between_KW_and_VW",
+      "direct_transition": "Terminal"
+    },
+    "Vietnam_War": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran_population_override",
+            "operator": "is not nil"
+          },
+          "transition": "Set_Veteran_Vietnam_War"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Vietnam_War",
+              "distribution": 0.1013
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.8987
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Vietnam_War",
+              "distribution": 0.0161
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9839
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "Looking at the 35-54 range in the dataset, same as Between VW and GW"
+      ]
+    },
+    "Set_Veteran_Vietnam_War": {
+      "type": "SetAttribute",
+      "attribute": "veteran",
+      "value": "Vietnam_War",
+      "direct_transition": "Terminal"
+    },
+    "Between_VW_and_GW": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran_population_override",
+            "operator": "is not nil"
+          },
+          "transition": "Set_Veteran_Between_VW_and_GW"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Between_VW_and_GW",
+              "distribution": 0.1013
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.8987
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Between_VW_and_GW",
+              "distribution": 0.0161
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9839
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "Looking at the 35-54 range in the dataset"
+      ]
+    },
+    "Set_Veteran_Between_VW_and_GW": {
+      "type": "SetAttribute",
+      "attribute": "veteran",
+      "value": "Between_VW_and_GW",
+      "direct_transition": "Terminal"
+    },
+    "Early_Gulf_War": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran_population_override",
+            "operator": "is not nil"
+          },
+          "transition": "Set_Veteran_Early_Gulf_War"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Early_Gulf_War",
+              "distribution": 0.0376
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9624
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Early_Gulf_War",
+              "distribution": 0.0088
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9912
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "Looking at the 18-34 range in the dataset, same as Late Gulf War"
+      ]
+    },
+    "Set_Veteran_Early_Gulf_War": {
+      "type": "SetAttribute",
+      "attribute": "veteran",
+      "value": "Early_Gulf_War",
+      "direct_transition": "Terminal"
+    },
+    "Late_Gulf_War": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran_population_override",
+            "operator": "is not nil"
+          },
+          "transition": "Set_Veteran_Late_Gulf_War"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Late_Gulf_War",
+              "distribution": 0.0376
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9624
+            }
+          ],
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Set_Veteran_Late_Gulf_War",
+              "distribution": 0.0088
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9912
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "Looking at the 18-34 range in the dataset"
+      ]
+    },
+    "Set_Veteran_Late_Gulf_War": {
+      "type": "SetAttribute",
+      "attribute": "veteran",
+      "value": "Late_Gulf_War",
+      "direct_transition": "Terminal"
+    }
+  }
+}
+,
+"veteran_hyperlipidemia":{
+  "name": "Veteran Hyperlipidemia",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "age guard"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "age guard": {
+      "type": "Delay",
+      "direct_transition": "veteran guard",
+      "range": {
+        "low": 40,
+        "high": 80,
+        "unit": "years"
+      }
+    },
+    "veteran guard": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Hyperlipidemia symptom onset 1",
+              "distribution": 0.397
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.603
+            }
+          ]
+        }
+      ]
+    },
+    "initial encounter end": {
+      "type": "EncounterEnd",
+      "direct_transition": "intra_encounter time gate"
+    },
+    "intra_encounter time gate": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 3,
+        "unit": "weeks"
+      },
+      "direct_transition": "followup_hyperlipidemia_encounter"
+    },
+    "followup encounter end": {
+      "type": "EncounterEnd",
+      "direct_transition": "Time Delay"
+    },
+    "Hyperlipidemia symptom onset 1": {
+      "type": "Symptom",
+      "symptom": "weight gain",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Hyperlipidemia Condition Start"
+    },
+    "Hyperlipidemia Condition Start": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hyperlipidemia",
+      "target_encounter": "Hyperlipidemia initial workup encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 55822004,
+          "display": "Hyperlipidemia"
+        }
+      ],
+      "direct_transition": "Hyperlipidemia initial workup encounter"
+    },
+    "Hyperlipidemia initial workup encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "hyperlipidemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom"
+        }
+      ],
+      "direct_transition": "Record_LipidPanel",
+      "wellness": true
+    },
+    "Record_LipidPanel": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "57698-3",
+          "display": "Lipid Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Total Cholesterol",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2093-3",
+              "display": "Total Cholesterol"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 205,
+            "high": 305
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2571-8",
+              "display": "Triglycerides"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 100,
+            "high": 400
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "18262-6",
+              "display": "Low Density Lipoprotein Cholesterol"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 101,
+            "high": 200
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2085-9",
+              "display": "High Density Lipoprotein Cholesterol"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 20,
+            "high": 65
+          }
+        }
+      ],
+      "direct_transition": "Record_CMP"
+    },
+    "followup_hyperlipidemia_encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "hyperlipidemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 390906007,
+          "display": "Follow-up encounter"
+        }
+      ],
+      "direct_transition": "hyperlipidemia careplan"
+    },
+    "hyperlipidemia careplan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736285004,
+          "display": "Hyperlipidemia clinical management plan"
+        }
+      ],
+      "direct_transition": "Hyperlipidemia medication start",
+      "reason": "hyperlipidemia",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 183063000,
+          "display": "low salt diet education"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 183301007,
+          "display": "physical exercise"
+        }
+      ]
+    },
+    "Hyperlipidemia medication start": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 316672,
+          "display": "Simvistatin 10 MG"
+        }
+      ],
+      "direct_transition": "followup encounter end",
+      "reason": "hyperlipidemia",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "refills": 10
+      },
+      "assign_to_attribute": "statin_initial"
+    },
+    "Record_CMP": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 65,
+            "high": 90
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 60,
+            "high": 80
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "10834-0",
+              "display": "Globulin [Mass/volume] in Serum by calculation"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.1,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 140
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 60
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "initial encounter end"
+    },
+    "Time Delay": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "years"
+      },
+      "direct_transition": "annual_hyperlipidemia_assessment"
+    },
+    "annual_hyperlipidemia_assessment": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "hyperlipidemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 390906007,
+          "display": "Follow-up encounter"
+        }
+      ],
+      "direct_transition": "Record_CMP_2"
+    },
+    "Record_CMP_2": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 65,
+            "high": 90
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 60,
+            "high": 80
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "10834-0",
+              "display": "Globulin [Mass/volume] in Serum by calculation"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.1,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 140
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 60
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Record_LipidPanel_2"
+    },
+    "Record_LipidPanel_2": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "57698-3",
+          "display": "Lipid Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2093-3",
+              "display": "Total Cholesterol"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 150,
+            "high": 210
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2571-8",
+              "display": "Triglycerides"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 100,
+            "high": 200
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "18262-6",
+              "display": "Low Density Lipoprotein Cholesterol"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 80,
+            "high": 150
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2085-9",
+              "display": "High Density Lipoprotein Cholesterol"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 30,
+            "high": 80
+          }
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "end old statin",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "statin_initial",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Hyperlipidemia_medication_renewal"
+        }
+      ]
+    },
+    "end encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Time Delay"
+    },
+    "end old statin": {
+      "type": "MedicationEnd",
+      "direct_transition": "Hyperlipidemia_medication_renewal",
+      "referenced_by_attribute": "statin_initial"
+    },
+    "Hyperlipidemia_medication_renewal": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 316672,
+          "display": "Simvistatin 10 MG"
+        }
+      ],
+      "reason": "hyperlipidemia",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "refills": 12
+      },
+      "assign_to_attribute": "statin_renewal",
+      "direct_transition": "end encounter"
+    }
+  }
+}
+,
+"veteran_lung_cancer":{
+  "name": "Veteran Lung Cancer",
+  "remarks": [
+    "Most of the data for this module was synthesized from two primary sources:",
+    "1. The comprehensive pages starting at http://www.cancer.org/cancer/lungcancer/index",
+    "2. The Cancer Care Ontario Pathway Maps at https://www.cancercare.on.ca/ocs/qpi/dispathmgmt/pathways/lung_cancer_pathway_map/",
+    "Some data statistics came from:",
+    "3. The American Lung Association Lung Cancer Fact Sheet @ http://www.lung.org/lung-health-and-diseases/lung-disease-lookup/lung-cancer/learn-about-lung-cancer/lung-cancer-fact-sheet.html",
+    "4. https://www.verywell.com/what-percentage-of-smokers-get-lung-cancer-2248868",
+    "5. Life Expectancies: http://www.healthcommunities.com/lung-cancer/prognosis.shtml"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Veteran_Guard"
+    },
+    "Ages_45_65": {
+      "type": "Delay",
+      "range": {
+        "low": 45,
+        "high": 65,
+        "unit": "years"
+      },
+      "direct_transition": "smoking_status",
+      "remarks": [
+        "Lung cancer mainly occurs in older people. About 2 out of 3 people diagnosed with lung cancer are 65 or older, while less than 2% are younger than 45. The average age at the time of diagnosis is about 70.",
+        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-key-statistics"
+      ]
+    },
+    "Onset_Lung_Cancer": {
+      "type": "SetAttribute",
+      "attribute": "lung_cancer",
+      "value": true,
+      "direct_transition": "Init_Lung_Cancer_Counter"
+    },
+    "Init_Lung_Cancer_Counter": {
+      "type": "SetAttribute",
+      "attribute": "lung_cancer_nondiagnosis_counter",
+      "value": 0,
+      "direct_transition": "Undiagnosed_Lung_Cancer"
+    },
+    "Undiagnosed_Lung_Cancer": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "months"
+      },
+      "distributed_transition": [
+        {
+          "distribution": {
+            "attribute": "probability_of_lung_cancer_treatment",
+            "default": 0.2
+          },
+          "transition": "Cough"
+        },
+        {
+          "distribution": {
+            "attribute": "probability_of_no_lung_cancer_treatment",
+            "default": 0.8
+          },
+          "transition": "Increment_Counter"
+        }
+      ]
+    },
+    "Increment_Counter": {
+      "type": "Counter",
+      "action": "increment",
+      "attribute": "lung_cancer_nondiagnosis_counter",
+      "direct_transition": "Undiagnosed_Lung_Cancer"
+    },
+    "Cough": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "Chest Pain"
+    },
+    "Chest Pain": {
+      "type": "Symptom",
+      "symptom": "Chest Pain",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "Suspected Lung Cancer"
+    },
+    "Suspected Lung Cancer": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter I",
+      "assign_to_attribute": "Suspected Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "162573006",
+          "display": "Suspected lung cancer (situation)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter I"
+    },
+    "Diagnosis Encounter I": {
+      "type": "Encounter",
+      "encounter_class": "emergency",
+      "reason": "Suspected Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "50849002",
+          "display": "Emergency Room Admission"
+        }
+      ],
+      "direct_transition": "Chest X-Ray"
+    },
+    "Chest X-Ray": {
+      "type": "Procedure",
+      "target_encounter": "Diagnosis Encounter I",
+      "reason": "Suspected Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "399208008",
+          "display": "Plain chest X-ray (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 10,
+        "high": 25,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Diagnosis_Encounter_I"
+    },
+    "End_Diagnosis_Encounter_I": {
+      "type": "EncounterEnd",
+      "direct_transition": "Schedule Follow Up I"
+    },
+    "Schedule Follow Up I": {
+      "type": "Delay",
+      "range": {
+        "low": 2,
+        "high": 9,
+        "unit": "days"
+      },
+      "direct_transition": "Diagnosis Encounter II"
+    },
+    "Diagnosis Encounter II": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "reason": "Suspected Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "185347001",
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Chest CT Scan"
+    },
+    "Chest CT Scan": {
+      "type": "Procedure",
+      "target_encounter": "Diagnosis Encounter II",
+      "reason": "Suspected Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "418891003",
+          "display": "Computed tomography of chest and abdomen"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Diagnosis_Encounter_II"
+    },
+    "End_Diagnosis_Encounter_II": {
+      "type": "EncounterEnd",
+      "direct_transition": "Schedule Follow Up II"
+    },
+    "Schedule Follow Up II": {
+      "type": "Delay",
+      "range": {
+        "low": 1,
+        "high": 9,
+        "unit": "days"
+      },
+      "distributed_transition": [
+        {
+          "distribution": 0.85,
+          "transition": "Non-Small Cell Lung Cancer"
+        },
+        {
+          "distribution": 0.15,
+          "transition": "Small Cell Lung Cancer"
+        }
+      ],
+      "remarks": [
+        "About 85% of lung cancers are non-small cell lung cancers.",
+        "About 10%-15% of lung cancers are small cell lung cancers.",
+        "http://www.cancer.org/cancer/lungcancer/index"
+      ]
+    },
+    "Non-Small Cell Lung Cancer": {
+      "type": "SetAttribute",
+      "attribute": "Lung Cancer Type",
+      "value": "NSCLC",
+      "direct_transition": "NSCLC"
+    },
+    "NSCLC": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter III",
+      "assign_to_attribute": "Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "254637007",
+          "display": "Non-small cell lung cancer (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter III"
+    },
+    "Small Cell Lung Cancer": {
+      "type": "SetAttribute",
+      "attribute": "Lung Cancer Type",
+      "value": "SCLC",
+      "direct_transition": "SCLC"
+    },
+    "SCLC": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter III",
+      "assign_to_attribute": "Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "254632001",
+          "display": "Small cell carcinoma of lung (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter III"
+    },
+    "Diagnosis Encounter III": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "reason": "Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "185347001",
+          "display": "Encounter for problem"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "distribution": 0.25,
+          "transition": "Sputum Cytology (Phelgm)"
+        },
+        {
+          "distribution": 0.25,
+          "transition": "Thoracentesis (Fluid)"
+        },
+        {
+          "distribution": 0.25,
+          "transition": "Needle Biopsy (Cells)"
+        },
+        {
+          "distribution": 0.25,
+          "transition": "Bronchoscopy (Tube)"
+        }
+      ]
+    },
+    "Sputum Cytology (Phelgm)": {
+      "type": "Procedure",
+      "target_encounter": "Diagnosis Encounter III",
+      "reason": "Suspected Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "167995008",
+          "display": "Sputum microscopy (procedure)"
+        }
+      ],
+      "direct_transition": "End_Diagnosis_Encounter_III"
+    },
+    "Thoracentesis (Fluid)": {
+      "type": "Procedure",
+      "target_encounter": "Diagnosis Encounter III",
+      "reason": "Suspected Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "91602002",
+          "display": "Thoracentesis (procedure)"
+        }
+      ],
+      "direct_transition": "End_Diagnosis_Encounter_III"
+    },
+    "Needle Biopsy (Cells)": {
+      "type": "Procedure",
+      "target_encounter": "Diagnosis Encounter III",
+      "reason": "Suspected Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "432231006",
+          "display": "Fine needle aspiration biopsy of lung (procedure)"
+        }
+      ],
+      "direct_transition": "End_Diagnosis_Encounter_III"
+    },
+    "Bronchoscopy (Tube)": {
+      "type": "Procedure",
+      "target_encounter": "Diagnosis Encounter III",
+      "reason": "Suspected Lung Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "173160006",
+          "display": "Diagnostic fiberoptic bronchoscopy (procedure)"
+        }
+      ],
+      "direct_transition": "End_Diagnosis_Encounter_III"
+    },
+    "End_Diagnosis_Encounter_III": {
+      "type": "EncounterEnd",
+      "direct_transition": "Schedule Follow Up III"
+    },
+    "Schedule Follow Up III": {
+      "type": "Delay",
+      "range": {
+        "low": 1,
+        "high": 3,
+        "unit": "days"
+      },
+      "remarks": [
+        "See Stage Distribution (%) 2006-2012, Case Counts and Percentages",
+        "http://seer.cancer.gov/csr/1975_2013/browse_csr.php?sectionSEL=15&pageSEL=sect_15_table.14.html",
+        "http://seer.cancer.gov/csr/1975_2013/browse_csr.php?sectionSEL=15&pageSEL=sect_15_table.13.html",
+        "only 15 percent of lung cancer cases are diagnosed at an early stage.",
+        "http://www.lung.org/lung-health-and-diseases/lung-disease-lookup/lung-cancer/learn-about-lung-cancer/lung-cancer-fact-sheet.html",
+        "updated remarks 2017-08-31:",
+        "http://oregon.providence.org/our-services/a/ask-a-providence-expert/forms-and-information/ask-an-expert-lung-cancer-growth-and-spread/",
+        "It takes at least 30 divisions of one cancer cell to create a tumor that is 1 centimeter in size (about half an inch).",
+        "That is the smallest size likely to be seen on an X-ray. It takes about three to six months for most lung cancers to double their size. ",
+        "Therefore, it could take several years for a typical lung cancer to reach a size at which it could be diagnosed on a chest X-ray. "
+      ],
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "lung_cancer_nondiagnosis_counter",
+            "operator": "<=",
+            "value": 36
+          },
+          "transition": "Stage I"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "lung_cancer_nondiagnosis_counter",
+            "operator": "<=",
+            "value": 72
+          },
+          "transition": "Stage II"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "lung_cancer_nondiagnosis_counter",
+            "operator": "<=",
+            "value": 108
+          },
+          "transition": "Stage III"
+        },
+        {
+          "transition": "Stage IV"
+        }
+      ]
+    },
+    "Stage I": {
+      "type": "Death",
+      "range": {
+        "low": 2,
+        "high": 6,
+        "unit": "years"
+      },
+      "referenced_by_attribute": "Lung Cancer",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Lung Cancer Type",
+            "operator": "==",
+            "value": "SCLC"
+          },
+          "transition": "SCLC I"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Lung Cancer Type",
+            "operator": "==",
+            "value": "NSCLC"
+          },
+          "transition": "NSCLC I"
+        }
+      ]
+    },
+    "Stage II": {
+      "type": "Death",
+      "range": {
+        "low": 16,
+        "high": 28,
+        "unit": "months"
+      },
+      "referenced_by_attribute": "Lung Cancer",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Lung Cancer Type",
+            "operator": "==",
+            "value": "SCLC"
+          },
+          "transition": "SCLC II"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Lung Cancer Type",
+            "operator": "==",
+            "value": "NSCLC"
+          },
+          "transition": "NSCLC II"
+        }
+      ]
+    },
+    "Stage III": {
+      "type": "Death",
+      "range": {
+        "low": 9,
+        "high": 18,
+        "unit": "months"
+      },
+      "referenced_by_attribute": "Lung Cancer",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Lung Cancer Type",
+            "operator": "==",
+            "value": "SCLC"
+          },
+          "transition": "SCLC III"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Lung Cancer Type",
+            "operator": "==",
+            "value": "NSCLC"
+          },
+          "transition": "NSCLC III"
+        }
+      ]
+    },
+    "Stage IV": {
+      "type": "Death",
+      "range": {
+        "low": 6,
+        "high": 10,
+        "unit": "months"
+      },
+      "referenced_by_attribute": "Lung Cancer",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Lung Cancer Type",
+            "operator": "==",
+            "value": "SCLC"
+          },
+          "transition": "SCLC IV"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Lung Cancer Type",
+            "operator": "==",
+            "value": "NSCLC"
+          },
+          "transition": "NSCLC IV"
+        }
+      ]
+    },
+    "NSCLC I": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter IV",
+      "assign_to_attribute": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "424132000",
+          "display": "Non-small cell carcinoma of lung, TNM stage 1 (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter IV"
+    },
+    "NSCLC II": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter IV",
+      "assign_to_attribute": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "425048006",
+          "display": "Non-small cell carcinoma of lung, TNM stage 2 (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter IV"
+    },
+    "NSCLC III": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter IV",
+      "assign_to_attribute": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "422968005",
+          "display": "Non-small cell carcinoma of lung, TNM stage 3 (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter IV"
+    },
+    "NSCLC IV": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter IV",
+      "assign_to_attribute": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "423121009",
+          "display": "Non-small cell carcinoma of lung, TNM stage 4 (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter IV"
+    },
+    "SCLC I": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter IV",
+      "assign_to_attribute": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "67811000119102",
+          "display": "Primary small cell malignant neoplasm of lung, TNM stage 1 (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter IV"
+    },
+    "SCLC II": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter IV",
+      "assign_to_attribute": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "67821000119109",
+          "display": "Primary small cell malignant neoplasm of lung, TNM stage 2 (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter IV"
+    },
+    "SCLC III": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter IV",
+      "assign_to_attribute": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "67831000119107",
+          "display": "Primary small cell malignant neoplasm of lung, TNM stage 3 (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter IV"
+    },
+    "SCLC IV": {
+      "type": "ConditionOnset",
+      "target_encounter": "Diagnosis Encounter IV",
+      "assign_to_attribute": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "67841000119103",
+          "display": "Primary small cell malignant neoplasm of lung, TNM stage 4 (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis Encounter IV"
+    },
+    "Diagnosis Encounter IV": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "reason": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "185347001",
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Lung_Cancer_CarePlan"
+    },
+    "Lung_Cancer_CarePlan": {
+      "type": "CarePlanStart",
+      "target_encounter": "Diagnosis Encounter IV",
+      "reason": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "182964004",
+          "display": "Terminal care"
+        }
+      ],
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": "133918004",
+          "display": "Comfort measures"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "408957008",
+          "display": "Chronic pain control management"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "243072006",
+          "display": "Cancer education"
+        }
+      ],
+      "direct_transition": "MRI Brain"
+    },
+    "MRI Brain": {
+      "type": "Procedure",
+      "target_encounter": "Diagnosis Encounter IV",
+      "reason": "Lung Cancer Condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "698354004",
+          "display": "Magnetic resonance imaging for measurement of brain volume (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 120,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Diagnosis_Encounter_IV"
+    },
+    "End_Diagnosis_Encounter_IV": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Lung Cancer Type",
+            "operator": "==",
+            "value": "SCLC"
+          },
+          "transition": "SCLC Treatment Path"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Lung Cancer Type",
+            "operator": "==",
+            "value": "NSCLC"
+          },
+          "transition": "NSCLC Treatment Path"
+        }
+      ]
+    },
+    "SCLC Treatment Path": {
+      "type": "Simple",
+      "direct_transition": "SCLC Treatment Encounter"
+    },
+    "SCLC Treatment Encounter": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "Lung Cancer Condition",
+      "remarks": [
+        "TODO: This inpatient encounter should last 5 days, not the standard 15 minutes."
+      ],
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "185347001",
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "SCLC Chemotheraphy I"
+    },
+    "SCLC Chemotheraphy I": {
+      "type": "MedicationOrder",
+      "target_encounter": "SCLC Treatment Encounter",
+      "reason": "Lung Cancer Condition",
+      "assign_to_attribute": "chemotherapy1",
+      "remarks": [
+        "SCLC is generally treated with combinations of chemotherapy drugs. The combinations most often used are: Cisplatin and etoposide",
+        "http://www.cancer.org/cancer/lungcancer-smallcell/detailedguide/small-cell-lung-cancer-treating-chemotherapy"
+      ],
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "1736854",
+          "display": "Cisplatin 50 MG Injection"
+        }
+      ],
+      "direct_transition": "SCLC Chemotheraphy IB"
+    },
+    "SCLC Chemotheraphy IB": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "chemotherapy1",
+      "direct_transition": "SCLC Chemotheraphy II"
+    },
+    "SCLC Chemotheraphy II": {
+      "type": "MedicationOrder",
+      "target_encounter": "SCLC Treatment Encounter",
+      "reason": "Lung Cancer Condition",
+      "assign_to_attribute": "chemotherapy2",
+      "remarks": [
+        "SCLC is generally treated with combinations of chemotherapy drugs. The combinations most often used are: Cisplatin and etoposide",
+        "http://www.cancer.org/cancer/lungcancer-smallcell/detailedguide/small-cell-lung-cancer-treating-chemotherapy"
+      ],
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "1734340",
+          "display": "Etoposide 100 MG Injection"
+        }
+      ],
+      "direct_transition": "SCLC Chemotheraphy IIB"
+    },
+    "SCLC Chemotheraphy IIB": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "chemotherapy2",
+      "direct_transition": "SCLC Radiation"
+    },
+    "SCLC Radiation": {
+      "type": "Procedure",
+      "target_encounter": "SCLC Treatment Encounter",
+      "reason": "Lung Cancer Condition",
+      "remarks": [
+        "The type of radiation therapy most often used to treat SCLC is called external beam radiation therapy (EBRT).",
+        "http://www.cancer.org/cancer/lungcancer-smallcell/detailedguide/small-cell-lung-cancer-treating-radiation-therapy"
+      ],
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "703423002",
+          "display": "Combined chemotherapy and radiation therapy (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 0.5,
+        "high": 4,
+        "unit": "hours"
+      },
+      "direct_transition": "End_SCLC_Treatment_Encounter"
+    },
+    "End_SCLC_Treatment_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "SCLC Treatment Delay"
+    },
+    "SCLC Treatment Delay": {
+      "type": "Delay",
+      "range": {
+        "low": 21,
+        "high": 28,
+        "unit": "days"
+      },
+      "remarks": [
+        "Doctors give chemo in cycles, with a period of treatment (usually 1 to 3 days) followed by a rest period to allow your body time to recover. Each cycle generally lasts about 3 to 4 weeks",
+        "http://www.cancer.org/cancer/lungcancer-smallcell/detailedguide/small-cell-lung-cancer-treating-chemotherapy",
+        "Most often, radiation as part of the initial treatment for SCLC is given once or twice daily, 5 days a week, for 3 to 7 weeks.",
+        "http://www.cancer.org/cancer/lungcancer-smallcell/detailedguide/small-cell-lung-cancer-treating-radiation-therapy"
+      ],
+      "direct_transition": "SCLC Treatment Path"
+    },
+    "NSCLC Treatment Path": {
+      "type": "Simple",
+      "direct_transition": "NSCLC Treatment Encounter"
+    },
+    "NSCLC Treatment Encounter": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "remarks": [
+        "TODO: This inpatient encounter should last 5 days, not the standard 15 minutes."
+      ],
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "185347001",
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "NSCLC Chemotheraphy I"
+    },
+    "NSCLC Chemotheraphy I": {
+      "type": "MedicationOrder",
+      "target_encounter": "NSCLC Treatment Encounter",
+      "reason": "Lung Cancer Condition",
+      "assign_to_attribute": "chemotherapy1",
+      "remarks": [
+        "Most often, treatment for NSCLC uses a combination of 2 chemo drugs.",
+        "If a combination is used, it often includes cisplatin or carboplatin plus one other drug",
+        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-treating-chemotherapy"
+      ],
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "1736854",
+          "display": "Cisplatin 50 MG Injection"
+        }
+      ],
+      "direct_transition": "NSCLC Chemotheraphy IB"
+    },
+    "NSCLC Chemotheraphy IB": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "chemotherapy1",
+      "direct_transition": "NSCLC Chemotheraphy II"
+    },
+    "NSCLC Chemotheraphy II": {
+      "type": "MedicationOrder",
+      "target_encounter": "NSCLC Treatment Encounter",
+      "reason": "Lung Cancer Condition",
+      "assign_to_attribute": "chemotherapy2",
+      "remarks": [
+        "The chemo drugs most often used for NSCLC include ... Paclitaxel (Taxol)",
+        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-treating-chemotherapy"
+      ],
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "583214",
+          "display": "PACLitaxel 100 MG Injection"
+        }
+      ],
+      "direct_transition": "NSCLC Chemotheraphy IIB"
+    },
+    "NSCLC Chemotheraphy IIB": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "chemotherapy2",
+      "direct_transition": "NSCLC Radiation"
+    },
+    "NSCLC Radiation": {
+      "type": "Procedure",
+      "target_encounter": "NSCLC Treatment Encounter",
+      "reason": "Lung Cancer Condition",
+      "remarks": [
+        "External beam radiation therapy (EBRT) focuses radiation from outside the body on the cancer. This is the type of radiation therapy most often used to treat NSCLC or its spread to other organs.",
+        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-treating-radiation-therapy"
+      ],
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "703423002",
+          "display": "Combined chemotherapy and radiation therapy (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 0.5,
+        "high": 4,
+        "unit": "hours"
+      },
+      "direct_transition": "End_NSCLC_Treatment_Encounter"
+    },
+    "End_NSCLC_Treatment_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "NSCLC Treatment Delay"
+    },
+    "NSCLC Treatment Delay": {
+      "type": "Delay",
+      "range": {
+        "low": 28,
+        "high": 35,
+        "unit": "days"
+      },
+      "remarks": [
+        "Doctors give chemo in cycles, with a period of treatment (usually 1 to 3 days) followed by a rest period to allow the body time to recover. Some chemo drugs, though, are given every day. Chemo cycles generally last about 3 to 4 weeks.",
+        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-treating-radiation-therapy",
+        "Most often, radiation treatments to the lungs are given 5 days a week for 5 to 7 weeks",
+        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-treating-radiation-therapy"
+      ],
+      "direct_transition": "NSCLC Treatment Path"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Veteran_Guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Attribute",
+        "attribute": "veteran",
+        "operator": "is not nil"
+      },
+      "direct_transition": "Ages_45_65"
+    },
+    "smoking_status": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "veteran_smoker",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "smoker",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "veteran_non_smoker",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "smoker",
+            "operator": "is nil"
+          }
+        }
+      ]
+    },
+    "veteran_smoker": {
+      "type": "Simple",
+      "direct_transition": "smoker_Lung Cancer Probabilities"
+    },
+    "veteran_non_smoker": {
+      "type": "Simple",
+      "direct_transition": "non_smoker_Lung Cancer Probabilities"
+    },
+    "non_smoker_Lung Cancer Probabilities": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "distribution": {
+            "attribute": "probability_of_lung_cancer",
+            "default": 0.0645
+          },
+          "transition": "Onset_Lung_Cancer"
+        },
+        {
+          "distribution": {
+            "attribute": "probability_of_no_lung_cancer",
+            "default": 0.93355
+          },
+          "transition": "Terminal"
+        }
+      ],
+      "remarks": [
+        "Overall, the chance that a man will develop lung cancer in his lifetime is about 1 in 14; for a woman, the risk is about 1 in 17.",
+        "http://www.cancer.org/cancer/lungcancer-non-smallcell/detailedguide/non-small-cell-lung-cancer-key-statistics",
+        "Men who smoke are 23 times more likely to develop lung cancer. Women are 13 times more likely, compared to never smokers.",
+        "http://www.lung.org/lung-health-and-diseases/lung-disease-lookup/lung-cancer/learn-about-lung-cancer/lung-cancer-fact-sheet.html",
+        "In a 2006 European study, the risk of developing lung cancer was: 0.2 percent for men who never smoked (0.4% for women); 5.5 percent of male former smokers (2.6% in women); 15.9 percent of current male smokers (9.5% for women); 24.4 percent for male “heavy smokers” defined as smoking more than 5 cigarettes per day (18.5 percent for women)",
+        "https://www.verywell.com/what-percentage-of-smokers-get-lung-cancer-2248868"
+      ]
+    },
+    "smoker_Lung Cancer Probabilities": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Onset_Lung_Cancer",
+          "distribution": 0.3
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.7
+        }
+      ]
+    }
+  }
+}
+,
+"veteran_mdd":{
+  "name": "Veteran MDD",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "age guard"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Female": {
+      "type": "Simple",
+      "remarks": [
+        "Females suffer depression at rates 2x than males (www.americanhealthrankings.com), cited by VA",
+        "Age related and War Era related distributions of MDD provided by "
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Late_Gulf_War"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.15
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.85
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Early_Gulf_War"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.25
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.75
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Between_VW_and_GW"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.23
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.77
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Vietnam_War"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.16
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.84
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "vetreran",
+            "operator": "==",
+            "value": "Between_KW_and_VW"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.15
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.85
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Korean_War"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.06
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.94
+            }
+          ]
+        }
+      ]
+    },
+    "Male": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Late_Gulf_War"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.156
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.844
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.155
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.845
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Early_Gulf_War"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Between_VW_and_GW"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.225
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.775
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Vietnam_War"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.09
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.91
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Between_KW_and_VW"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.07
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.93
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Korean_War"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.05
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.95
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "Between_WW2_and_KW"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.03
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.97
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "==",
+            "value": "WW2"
+          },
+          "distributions": [
+            {
+              "transition": "MDD Episode",
+              "distribution": 0.02
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.98
+            }
+          ]
+        }
+      ]
+    },
+    "Veteran": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Male",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        }
+      ]
+    },
+    "Non_Veteran": {
+      "type": "Simple",
+      "direct_transition": "Terminal"
+    },
+    "end_Psych_encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "therapy_delay"
+    },
+    "end re_evaluation_medication": {
+      "type": "MedicationEnd",
+      "direct_transition": "MDD Medication Order",
+      "referenced_by_attribute": "ssri"
+    },
+    "MDD Episode": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "mdd",
+      "target_encounter": "MDD_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 36923009,
+          "display": "Major depression, single episode"
+        }
+      ],
+      "direct_transition": "Time Gate"
+    },
+    "Time Gate": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 6,
+        "unit": "weeks"
+      },
+      "direct_transition": "MDD_Encounter"
+    },
+    "MDD_Initial_Careplan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 718347000,
+          "display": "Mental health care plan"
+        }
+      ],
+      "assign_to_attribute": "MDD care plan",
+      "reason": "mdd",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 79094001,
+          "display": "Initial psychiatric interview with mental status and evaluation"
+        }
+      ],
+      "direct_transition": "end_MDD_Encounter"
+    },
+    "end_MDD_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Initial_Psychiatric_MDD_Encounter",
+      "discharge_disposition": {
+        "system": "NUBC",
+        "code": "01",
+        "display": "Discharged home safe"
+      }
+    },
+    "Initial_Psychiatric_MDD_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 79094001,
+          "display": "Initial Psychiatric Interview with mental status evaluation"
+        }
+      ],
+      "reason": "mdd",
+      "distributed_transition": [
+        {
+          "transition": "Positive_PHQ9",
+          "distribution": 0.9
+        },
+        {
+          "transition": "Negative_PHQ9",
+          "distribution": 0.1
+        }
+      ]
+    },
+    "MDD Diagnosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "mdd_psych",
+      "target_encounter": "Initial_Psychiatric_MDD_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 370143000,
+          "display": "Major depression disorder"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Change_Dx_Not_MDD",
+          "distribution": 0.1
+        },
+        {
+          "transition": "MDD_Careplan_Psych",
+          "distribution": 0.2
+        },
+        {
+          "transition": "MDD_Careplan_Psych_and_Rx",
+          "distribution": 0.4
+        },
+        {
+          "transition": "MDD_Careplan_Rx_ONLY",
+          "distribution": 0.3
+        }
+      ]
+    },
+    "Change_Dx_Not_MDD": {
+      "type": "ConditionEnd",
+      "direct_transition": "end_MDD_Re_evaluation Encounter",
+      "referenced_by_attribute": "mdd"
+    },
+    "end_MDD_Re_evaluation Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "MDD_Careplan_Psych_and_Rx": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736254008,
+          "display": "Psychiatry care plan"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "end re_evaluation_medication",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ssri",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "MDD Medication Order",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ssri",
+            "operator": "is nil"
+          }
+        }
+      ],
+      "reason": "mdd_psych",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 88848003,
+          "display": "Psychiatric Follow-up"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 385724002,
+          "display": "Coping Support Management"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 225337009,
+          "display": "Suicide Risk Assessment"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 425680009,
+          "display": "Cognitive behavioral therapy by multidisciplinary team"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 304822001,
+          "display": "Psychodynamic Interpersonal Therapy"
+        }
+      ]
+    },
+    "MDD_Careplan_Psych": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736254008,
+          "display": "Psychiatry care plan"
+        }
+      ],
+      "direct_transition": "end_Psych_encounter",
+      "reason": "mdd_psych",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 385724002,
+          "display": "Coping Support Management"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 88848003,
+          "display": "Psychiatric Follow-up"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 225337009,
+          "display": "Suicide Risk Assessment"
+        }
+      ]
+    },
+    "MDD_Re_evaluation Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "mdd_psych",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 390906007,
+          "display": "Follow-up encounter"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "negative_re_eval_phq9",
+          "distribution": 0.5
+        },
+        {
+          "transition": "positive_re_eval_phq9",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "MDD Medication Order": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 406022,
+          "display": "Fluoxetine 25MG"
+        }
+      ],
+      "assign_to_attribute": "ssri",
+      "reason": "mdd",
+      "distributed_transition": [
+        {
+          "transition": "end_Psych_encounter",
+          "distribution": 0.5
+        },
+        {
+          "transition": "MDD Chronic Pain Med",
+          "distribution": 0.5
+        }
+      ],
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 60,
+          "unit": "days"
+        },
+        "refills": 12
+      }
+    },
+    "MDD_Careplan_Rx_ONLY": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 737434004,
+          "display": "Major depressive disorder clinical management plan"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "end re_evaluation_medication",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ssri",
+            "operator": "is not nil",
+            "value": 0
+          }
+        },
+        {
+          "transition": "MDD Medication Order",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ssri",
+            "operator": "is nil"
+          }
+        }
+      ],
+      "reason": "mdd_psych"
+    },
+    "Positive_PHQ9": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 112001000119100,
+          "display": "positive screening for PHQ-9"
+        }
+      ],
+      "direct_transition": "MDD Diagnosis",
+      "reason": "mdd"
+    },
+    "Negative_PHQ9": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 112011000119102,
+          "display": "negative screening for PHQ9"
+        }
+      ],
+      "direct_transition": "Change_Dx_Not_MDD",
+      "reason": "mdd"
+    },
+    "positive_re_eval_phq9": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 112001000119100,
+          "display": "positive screening for depression on phq9"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "MDD_Careplan_Psych_and_Rx",
+          "distribution": 0.3
+        },
+        {
+          "transition": "MDD_Careplan_Psych",
+          "distribution": 0.3
+        },
+        {
+          "transition": "MDD_Careplan_Rx_ONLY",
+          "distribution": 0.4
+        }
+      ]
+    },
+    "negative_re_eval_phq9": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 112011000119102,
+          "display": "negative screening for depression on phq9"
+        }
+      ],
+      "direct_transition": "Change_Dx_Not_MDD"
+    },
+    "MDD Chronic Pain Med": {
+      "type": "CallSubmodule",
+      "submodule": "medications/moderate_opioid_pain_reliever",
+      "direct_transition": "end_Psych_encounter"
+    },
+    "age guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">",
+        "quantity": 18,
+        "unit": "years"
+      },
+      "direct_transition": "veteran guard"
+    },
+    "veteran guard": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Veteran",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Non_Veteran",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is nil"
+          }
+        }
+      ]
+    },
+    "MDD_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "mdd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom (procedure)"
+        }
+      ],
+      "direct_transition": "MDD_Initial_Careplan"
+    },
+    "therapy_delay": {
+      "type": "Delay",
+      "range": {
+        "low": 5,
+        "high": 14,
+        "unit": "days"
+      },
+      "direct_transition": "Therapy_Visit"
+    },
+    "Therapy_Visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "mdd_psych",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Therapy_Note"
+    },
+    "Therapy_Note": {
+      "type": "Observation",
+      "category": "therapy",
+      "unit": "{nominal}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75443-2",
+          "display": "Mental health Outpatient Note"
+        }
+      ],
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "end therapy visit"
+    },
+    "end therapy visit": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "therapy_delay",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "MDD_Re_evaluation Encounter",
+            "within": {
+              "quantity": 3,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "MDD_Re_evaluation Encounter"
+        }
+      ]
+    }
+  }
+}
+,
+"veteran_prostate_cancer":{
+  "name": "Veteran Prostate Cancer",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "age_guard"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "veteran_status": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "male_guard",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is nil"
+          }
+        }
+      ]
+    },
+    "age_guard": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 60,
+        "unit": "years"
+      },
+      "direct_transition": "veteran_status"
+    },
+    "annual_wellness_visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [],
+      "direct_transition": "wellness_procedure",
+      "wellness": true
+    },
+    "male_guard": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "annual_wellness_visit",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        },
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        }
+      ]
+    },
+    "wellness_procedure": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 410006001,
+          "display": "Digital examination of rectum"
+        }
+      ],
+      "duration": {
+        "low": 2,
+        "high": 5,
+        "unit": "minutes"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Prostate Cancer Symptom 2",
+          "distribution": 0.6
+        },
+        {
+          "transition": "normal_DRE",
+          "distribution": 0.4
+        }
+      ]
+    },
+    "detect_abnormal results": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ng/mL",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "2857-1",
+          "display": "Prostate specific Ag [Mass/volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "end_wellness_visit",
+      "range": {
+        "low": 4.5,
+        "high": 7.7
+      }
+    },
+    "end_wellness_visit": {
+      "type": "EncounterEnd",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "2857-1",
+                "display": "Prostate specific Ag [Mass/volume] in Serum or Plasma"
+              }
+            ],
+            "operator": "<=",
+            "value": 4
+          },
+          "distributions": [
+            {
+              "transition": "wellness_visit_time_delay",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "2857-1",
+                "display": "Prostate specific Ag [Mass/volume] in Serum or Plasma"
+              }
+            ],
+            "operator": ">=",
+            "value": 4.1
+          },
+          "distributions": [
+            {
+              "transition": "Prostate Cancer Symptom",
+              "distribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    "detect_normal results": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ng/mL",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "2857-1",
+          "display": "Prostate specific Ag [Mass/volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "end_wellness_visit",
+      "range": {
+        "low": 0.5,
+        "high": 4
+      }
+    },
+    "abnormal_DRE": {
+      "type": "Observation",
+      "category": "exam",
+      "unit": "{nominal}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "32465-7",
+          "display": "Physical findings of Prostate"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "detect_abnormal results",
+          "distribution": 0.29
+        },
+        {
+          "transition": "detect_normal results",
+          "distribution": 0.71
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 275302008,
+        "display": "Prostate enlarged on PR"
+      }
+    },
+    "normal_DRE": {
+      "type": "Observation",
+      "category": "exam",
+      "unit": "{nominal}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "32465-7",
+          "display": "Physical findings of Prostate"
+        }
+      ],
+      "direct_transition": "detect_normal results",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 300531004,
+        "display": "Normal size prostate"
+      }
+    },
+    "wellness_visit_time_delay": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "years"
+      },
+      "direct_transition": "male_guard"
+    },
+    "biopsy_visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom"
+        }
+      ],
+      "direct_transition": "biopsy procedure"
+    },
+    "biopsy procedure": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 65575008,
+          "display": "Biopsy of prostate"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "distributed_transition": [
+        {
+          "transition": "biopsy_results_abnormal",
+          "distribution": 0.5
+        },
+        {
+          "transition": "biopsy_results_normal",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "biopsy_results_abnormal": {
+      "type": "Observation",
+      "category": "procedure",
+      "unit": "{nominal}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "46288-7",
+          "display": "US Guidance for biopsy of Prostate"
+        }
+      ],
+      "direct_transition": "Prostate_Cancer",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 165132006,
+        "display": "Surgical biopsy result abnormal"
+      }
+    },
+    "biopsy_results_normal": {
+      "type": "Observation",
+      "category": "procedure",
+      "unit": "{nominal}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "46288-7",
+          "display": "US Guidance for biopsy of Prostate"
+        }
+      ],
+      "direct_transition": "biopsy_visit_end",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 165131004,
+        "display": "Surgical biopsy result normal"
+      }
+    },
+    "biopsy_visit_end": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Prostate Symtpom 3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "prostate_cancer",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "wellness_visit_time_delay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "prostate_cancer",
+            "operator": "is nil"
+          }
+        }
+      ]
+    },
+    "Prostate_Cancer": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "prostate_cancer",
+      "target_encounter": "Prostate_Cancer_Therapy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 126906006,
+          "display": "Neoplasm of prostate"
+        }
+      ],
+      "direct_transition": "biopsy_visit_end"
+    },
+    "Aggressive_Therapy_Careplan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736252007,
+          "display": "Cancer care plan"
+        }
+      ],
+      "direct_transition": "In Situ Prostate Cancer",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 408580007,
+          "display": "Physical activity target light exercise"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 229578001,
+          "display": "Ice bath treatment"
+        }
+      ],
+      "reason": "prostate_cancer"
+    },
+    "Watchful_Waiting_Careplan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736252007,
+          "display": "Cancer care plan"
+        }
+      ],
+      "direct_transition": "Stage 4 Prostate Cancer",
+      "assign_to_attribute": "watchful_waiting",
+      "reason": "prostate_cancer"
+    },
+    "Chemotherapy_Hormone Order": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1860480,
+          "display": "1 ML DOCEtaxel 20 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Chemotherapy_Hormone Order2"
+    },
+    "Prostatectomy": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 90470006,
+          "display": "Prostatectomy"
+        }
+      ],
+      "duration": {
+        "low": 4,
+        "high": 6,
+        "unit": "hours"
+      },
+      "direct_transition": "end_chemo_med",
+      "reason": "prostate_cancer"
+    },
+    "end_cancer_therapy encounter": {
+      "type": "EncounterEnd",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "watchful_waiting",
+            "operator": "is nil"
+          },
+          "distributions": [
+            {
+              "transition": "watchful_waiting_guard",
+              "distribution": 0.95
+            },
+            {
+              "transition": "eventual_death",
+              "distribution": 0.05
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "watchful_waiting",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "eventual_death",
+              "distribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    "watchful_waiting_guard": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 3,
+        "unit": "months"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Prostate_Cancer_Therapy",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Prostatectomy",
+            "within": {
+              "quantity": 120,
+              "unit": "days"
+            }
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "eventual_death": {
+      "type": "Death",
+      "direct_transition": "Terminal",
+      "range": {
+        "low": 1,
+        "high": 5,
+        "unit": "years"
+      },
+      "condition_onset": "Prostate_Cancer"
+    },
+    "Prostate Cancer Symptom": {
+      "type": "Symptom",
+      "symptom": "difficulty with urination",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "biopsy_visit"
+    },
+    "Prostate Cancer Symptom 2": {
+      "type": "Symptom",
+      "symptom": "blood in urine",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "abnormal_DRE"
+    },
+    "Prostate Symtpom 3": {
+      "type": "Symptom",
+      "symptom": "urinary frequency",
+      "cause": "",
+      "exact": {
+        "quantity": 20
+      },
+      "direct_transition": "Prostate_Cancer_Therapy"
+    },
+    "end_chemo_med": {
+      "type": "MedicationEnd",
+      "direct_transition": "end_cancer_therapy encounter"
+    },
+    "Chemotherapy_Hormone Order2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 752899,
+          "display": "0.25 ML Leuprolide Acetate 30 MG/ML Prefilled Syringe"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "end_chemo_med",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Prostatectomy"
+          }
+        },
+        {
+          "transition": "Prostatectomy"
+        }
+      ]
+    },
+    "Prostate_Cancer_Therapy": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "prostate_cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Aggressive_Therapy_Careplan",
+          "distribution": 0.91
+        },
+        {
+          "transition": "Watchful_Waiting_Careplan",
+          "distribution": 0.09
+        }
+      ]
+    },
+    "Stage 4 Prostate Cancer": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Prostate_Cancer_Therapy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 314994000,
+          "display": "Metastasis from malignant tumor of prostate (disorder)"
+        }
+      ],
+      "direct_transition": "end_cancer_therapy encounter"
+    },
+    "In Situ Prostate Cancer": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Prostate_Cancer_Therapy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 92691004,
+          "display": "Carcinoma in situ of prostate (disorder)"
+        }
+      ],
+      "direct_transition": "Record_CMP"
+    },
+    "Record_CMP": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 29
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 60,
+            "high": 80
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "10834-0",
+              "display": "Globulin [Mass/volume] in Serum by calculation"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 3.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.1,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 140
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 60
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Record_Urinalysis"
+    },
+    "Record_Urinalysis": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 690701000119101,
+            "display": "Foul smelling urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 720003003,
+            "display": "Reddish color urine"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167291007,
+            "display": "Urine ketone test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 250,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167277001,
+            "display": "Urine protein test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 34436003,
+            "display": "Blood in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Record_CBC_Panel"
+    },
+    "Record_CBC_Panel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 4,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "Leukocytes [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*3/uL",
+          "range": {
+            "low": 0.5,
+            "high": 5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "Erythrocytes [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*6/uL",
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/​volume] in Blood"
+            }
+          ],
+          "unit": "g/dL",
+          "range": {
+            "low": 12,
+            "high": 17.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "4544-3",
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ],
+          "unit": "%",
+          "range": {
+            "low": 35,
+            "high": 50
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/​volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/​volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "target_encounter": "Wellness_Encounter",
+      "direct_transition": "Chemotherapy_Hormone Order"
+    }
+  }
+}
+,
+"veteran_ptsd":{
+  "name": "Veteran PTSD",
+  "remarks": [
+    "Post Traumatic Stress Disorder is one of the top disease conditions (by prevalence), disproportionately affecting veterans.  A majority of the guidelines detailed here in this module "
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "age guard"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Female": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Onset_age_21_to_29_Female",
+          "distribution": 0.0315
+        },
+        {
+          "transition": "Onset_age_30_to_39_Female",
+          "distribution": 0.0245
+        },
+        {
+          "transition": "Onset_age_40_to_49_Female",
+          "distribution": 0.0252
+        },
+        {
+          "transition": "Onset_age_50_to_59_Female",
+          "distribution": 0.014
+        },
+        {
+          "transition": "Onset_age_60_to_99_Female",
+          "distribution": 0.0084
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.8964
+        }
+      ],
+      "remarks": [
+        "The prevalence data presented here come from the seminal report on VHA health care delivery systems and management processes.  It can be accessed here: https://www.va.gov/opa/choiceact/documents/assessments/integrated_report.pdf",
+        ""
+      ]
+    },
+    "Male": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Onset_age_21_to_29_Male",
+          "distribution": 0.049
+        },
+        {
+          "transition": "Onset_age_30_to_39_Male",
+          "distribution": 0.0385
+        },
+        {
+          "transition": "Onset_age_40_to_49_Male",
+          "distribution": 0.0266
+        },
+        {
+          "transition": "Onset_age_50_to_59_Male",
+          "distribution": 0.014
+        },
+        {
+          "transition": "Onset_age_60_to_99_Male",
+          "distribution": 0.007
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.8649
+        }
+      ],
+      "remarks": [
+        "The prevalence data presented here come from the seminal report on VHA health care delivery systems and management processes.  It can be accessed here: https://www.va.gov/opa/choiceact/documents/assessments/integrated_report.pdf"
+      ]
+    },
+    "Veteran": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Male",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        }
+      ]
+    },
+    "Non_Veteran": {
+      "type": "Simple",
+      "direct_transition": "Terminal"
+    },
+    "Onset_age_30_to_39_Male": {
+      "type": "Delay",
+      "direct_transition": "PTSD Episode",
+      "range": {
+        "low": 9,
+        "high": 18,
+        "unit": "years"
+      }
+    },
+    "Onset_age_30_to_39_Female": {
+      "type": "Delay",
+      "direct_transition": "PTSD Episode",
+      "range": {
+        "low": 9,
+        "high": 18,
+        "unit": "years"
+      }
+    },
+    "Onset_age_40_to_49_Male": {
+      "type": "Delay",
+      "direct_transition": "PTSD Episode",
+      "range": {
+        "low": 19,
+        "high": 28,
+        "unit": "years"
+      }
+    },
+    "Onset_age_40_to_49_Female": {
+      "type": "Delay",
+      "direct_transition": "PTSD Episode",
+      "range": {
+        "low": 19,
+        "high": 28,
+        "unit": "years"
+      }
+    },
+    "Onset_age_50_to_59_Female": {
+      "type": "Delay",
+      "direct_transition": "PTSD Episode",
+      "range": {
+        "low": 29,
+        "high": 38,
+        "unit": "years"
+      }
+    },
+    "Onset_age_50_to_59_Male": {
+      "type": "Delay",
+      "direct_transition": "PTSD Episode",
+      "range": {
+        "low": 29,
+        "high": 38,
+        "unit": "years"
+      }
+    },
+    "PTSD Episode": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "ptsd",
+      "target_encounter": "PTSD_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 47505003,
+          "display": "Posttraumatic stress disorder"
+        }
+      ],
+      "direct_transition": "PTSD_Encounter"
+    },
+    "PTSD_Initial_Careplan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736254008,
+          "display": "Psychiatry care plan"
+        }
+      ],
+      "reason": "ptsd",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 79094001,
+          "display": "Initial psychiatric interview with mental status and evaluation"
+        }
+      ],
+      "direct_transition": "end_PTSD_Encounter"
+    },
+    "Initial_Psychiatric_PTSD_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 79094001,
+          "display": "Initial Psychiatric Interview with mental status evaluation"
+        }
+      ],
+      "reason": "ptsd",
+      "direct_transition": "PHQ2_Q9 Assessment"
+    },
+    "PTSD_Careplan_Psych_and_Rx": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 718347000,
+          "display": "Mental health care plan (record artifact)"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "end re_evaluation_medication",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "SSRI",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "PTSD Medication Order",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "SSRI",
+            "operator": "is nil",
+            "value": "Vicodin"
+          }
+        }
+      ],
+      "reason": "ptsd",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 385724002,
+          "display": "Coping Support Management"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 406185000,
+          "display": "Trauma Therapy"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 88848003,
+          "display": "Psychiatric Follow-up"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 225337009,
+          "display": "Suicide Risk Assessment"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 76168009,
+          "display": "Group psychotherapy (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 719858009,
+          "display": "Telehealth monitoring (regime/therapy)"
+        }
+      ],
+      "assign_to_attribute": "ptsd_careplan",
+      "remarks": [
+        "overall care plan recommendation provided in consultation with Drs Jodie Trafton and Brian Marx, SMEs for PTSD within the VA",
+        ""
+      ]
+    },
+    "PTSD_Careplan_Psych": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 718347000,
+          "display": "Mental health care plan (record artifact)"
+        }
+      ],
+      "direct_transition": "end_Psych_encounter",
+      "reason": "ptsd",
+      "assign_to_attribute": "ptsd_careplan",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 406185000,
+          "display": "Trauma Therapy"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 225337009,
+          "display": "Suicide Risk Assessment"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 385724002,
+          "display": "Coping Support Management"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 88848003,
+          "display": "Psychiatric Follow-up"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 76168009,
+          "display": "Group psychotherapy (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 719858009,
+          "display": "Telehealth monitoring (regime/therapy)"
+        }
+      ]
+    },
+    "Change_Dx_Not_PTSD": {
+      "type": "ConditionEnd",
+      "direct_transition": "Pain_Vital_3",
+      "referenced_by_attribute": "ptsd"
+    },
+    "PTSD_Careplan_Rx_ONLY": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 718347000,
+          "display": "Mental health care plan (record artifact)"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "end re_evaluation_medication",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "SSRI",
+            "operator": "is not nil",
+            "value": "Vicodin"
+          }
+        },
+        {
+          "transition": "PTSD Medication Order",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "SSRI",
+            "operator": "is nil"
+          }
+        }
+      ],
+      "reason": "ptsd",
+      "assign_to_attribute": "ptsd_careplan"
+    },
+    "PTSD Diagnosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Initial_Psychiatric_PTSD_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 47505003,
+          "display": "Posttraumatic stress disorder"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Change_Dx_Not_PTSD",
+          "distribution": 0.1
+        },
+        {
+          "transition": "PTSD_Careplan_Psych",
+          "distribution": 0.2
+        },
+        {
+          "transition": "PTSD_Careplan_Psych_and_Rx",
+          "distribution": 0.4
+        },
+        {
+          "transition": "PTSD_Careplan_Rx_ONLY",
+          "distribution": 0.3
+        }
+      ],
+      "remarks": [
+        "estimate of percents of patients falling into larger categories of treatment models (e.g. Rx only, Rx + Psychology or Psych only) provided by Jodie Trafton, PhD.",
+        ""
+      ]
+    },
+    "end_PTSD_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "time gate",
+      "discharge_disposition": {
+        "system": "NUBC",
+        "code": "01",
+        "display": "Discharged home safe"
+      }
+    },
+    "Evaluation Gate delay": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "weeks"
+      },
+      "direct_transition": "PTSD_Re_evaluation Encounter"
+    },
+    "PTSD_Re_evaluation Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 47505003,
+          "display": "posttraumatic stress disorder"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Change_Dx_Not_PTSD",
+          "distribution": 0.48
+        },
+        {
+          "transition": "PTSD_Careplan_Psych",
+          "distribution": 0.15
+        },
+        {
+          "transition": "PTSD_Careplan_Rx_ONLY",
+          "distribution": 0.2
+        },
+        {
+          "transition": "PTSD_Careplan_Psych_and_Rx",
+          "distribution": 0.15
+        },
+        {
+          "transition": "Inpatient Suicide Assessment",
+          "distribution": 0.02
+        }
+      ],
+      "reason": "ptsd"
+    },
+    "end_Psych_encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "therapy delay"
+    },
+    "PTSD Medication Order": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 328670,
+          "display": "Sertraline 100MG"
+        }
+      ],
+      "assign_to_attribute": "SSRI",
+      "reason": "ptsd",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "distributed_transition": [
+        {
+          "transition": "Pain_Vital_4",
+          "distribution": 0.5
+        },
+        {
+          "transition": "PTSD Chronic Pain Med",
+          "distribution": 0.5
+        }
+      ],
+      "remarks": [
+        "most common Rx ordered tied to mental health conditions like PTSD are SSRIs (per VA CDW data analysis)",
+        ""
+      ]
+    },
+    "end re_evaluation_medication": {
+      "type": "MedicationEnd",
+      "direct_transition": "PTSD Medication Order",
+      "medication_order": "",
+      "referenced_by_attribute": "SSRI"
+    },
+    "end_PTSD_Re_evaluation_Encounter": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "end_follow_up_careplan",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ptsd_careplan",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "age guard": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 21,
+        "unit": "years"
+      },
+      "remarks": [
+        "model attempt to wait for war exposure to provide traumatic instance.  Most veterans exposed to at least 1 tour in a war-time scenario become veterans after 21 years age"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "mTBI check",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Non_Veteran",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is nil"
+          }
+        }
+      ]
+    },
+    "PTSD Chronic Pain Med": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 856980,
+          "display": "Acetaminophen/Hydrocodone"
+        }
+      ],
+      "direct_transition": "Pain_Vital",
+      "reason": "ptsd",
+      "remarks": [
+        "per Dr Trafton and other sources"
+      ]
+    },
+    "end_follow_up_careplan": {
+      "type": "CarePlanEnd",
+      "direct_transition": "Terminal",
+      "referenced_by_attribute": "ptsd_careplan"
+    },
+    "time gate": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 2,
+        "unit": "weeks"
+      },
+      "direct_transition": "Initial_Psychiatric_PTSD_Encounter",
+      "remarks": [
+        "estimate provided by Jodie Trafton, PhD",
+        ""
+      ]
+    },
+    "Columbia Suicide Risk Assessment": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 225337009,
+          "display": "Suicide risk assessment (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "reason": "ptsd",
+      "distributed_transition": [
+        {
+          "transition": "PTSD Diagnosis",
+          "distribution": 0.98
+        },
+        {
+          "transition": "At Risk for suicide",
+          "distribution": 0.02
+        }
+      ],
+      "remarks": [
+        "per new VA protocol identified by Jodie Trafton, PhD",
+        ""
+      ]
+    },
+    "PHQ2_Q9 Assessment": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 715252007,
+          "display": "Depression screening using Patient Health Questionnaire Nine Item score (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "reason": "ptsd",
+      "distributed_transition": [
+        {
+          "transition": "Columbia Suicide Risk Assessment",
+          "distribution": 0.9
+        },
+        {
+          "transition": "Change_Dx_Not_PTSD",
+          "distribution": 0.1
+        }
+      ],
+      "remarks": [
+        "estimate of 10% of patients who initially screened positive for PTSD to not ultimately screen in by a mental health expert, provided in consultation with Jodie Trafton, PhD",
+        ""
+      ]
+    },
+    "At Risk for suicide": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "suicide_risk",
+      "target_encounter": "Initial_Psychiatric_PTSD_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 225444004,
+          "display": "At risk for suicide (finding)"
+        }
+      ],
+      "direct_transition": "Inpatient Suicide Assessment"
+    },
+    "Inpatient Suicide Assessment": {
+      "type": "Encounter",
+      "encounter_class": "emergency",
+      "reason": "suicide_risk",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Inpatient Suicide Risk Assessment"
+    },
+    "Inpatient_admission": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 183801001,
+          "display": "Inpatient stay 3 days"
+        }
+      ],
+      "direct_transition": "Pain_Vital_2",
+      "reason": "suicide_risk"
+    },
+    "Inpatient Suicide Risk Assessment": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 225337009,
+          "display": "Suicide risk assessment (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "reason": "ptsd",
+      "direct_transition": "emergency_encounter end"
+    },
+    "emergency_encounter end": {
+      "type": "EncounterEnd",
+      "direct_transition": "Inpatient_admission"
+    },
+    "Inpatient Suicide Care Plan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736353004,
+          "display": "Inpatient care plan (record artifact)"
+        }
+      ],
+      "direct_transition": "time delay",
+      "reason": "suicide_risk",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 183402001,
+          "display": "Potential suicide care (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 183401008,
+          "display": "Anti-suicide psychotherapy (regime/therapy)"
+        }
+      ]
+    },
+    "time delay": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 3,
+        "unit": "days"
+      },
+      "direct_transition": "Inpatient Suicide Care Plan_2"
+    },
+    "Inpatient Suicide Care Plan_2": {
+      "type": "CarePlanEnd",
+      "direct_transition": "PTSD_Re_evaluation Encounter",
+      "careplan": "Inpatient Suicide Care Plan"
+    },
+    "Onset_age_21_to_29_Male": {
+      "type": "Delay",
+      "direct_transition": "PTSD Episode",
+      "range": {
+        "low": 0,
+        "high": 9,
+        "unit": "years"
+      }
+    },
+    "Onset_age_60_to_99_Male": {
+      "type": "Delay",
+      "direct_transition": "PTSD Episode",
+      "range": {
+        "low": 39,
+        "high": 68,
+        "unit": "years"
+      }
+    },
+    "Onset_age_21_to_29_Female": {
+      "type": "Delay",
+      "direct_transition": "PTSD Episode",
+      "range": {
+        "low": 0,
+        "high": 9,
+        "unit": "years"
+      }
+    },
+    "Onset_age_60_to_99_Female": {
+      "type": "Delay",
+      "direct_transition": "PTSD Episode",
+      "range": {
+        "low": 39,
+        "high": 68,
+        "unit": "years"
+      }
+    },
+    "PTSD_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "ptsd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom"
+        }
+      ],
+      "direct_transition": "PC-PTSD Screen"
+    },
+    "Telehealth_Visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "ptsd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185317003,
+          "display": "Telephone encounter (procedure)"
+        }
+      ],
+      "direct_transition": "Telehealth_Observations",
+      "remarks": [
+        "careplan to include regular telephone psychotherapy.  workflow recommendation provided by Brian Marx, PhD, SME for PTSD within VA",
+        ""
+      ]
+    },
+    "therapy delay": {
+      "type": "Delay",
+      "direct_transition": "Therapy_Visit",
+      "range": {
+        "low": 5,
+        "high": 14,
+        "unit": "days"
+      }
+    },
+    "Therapy_Visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "ptsd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Therapy Note"
+    },
+    "telehealth delay": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "weeks"
+      },
+      "direct_transition": "Telehealth_Visit"
+    },
+    "Telehealth_Observations": {
+      "type": "Observation",
+      "category": "therapy",
+      "unit": "{nominal}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "84215-3",
+          "display": "Mental health Telehealth Note"
+        }
+      ],
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "end telehealth"
+    },
+    "Therapy Note": {
+      "type": "Observation",
+      "category": "therapy",
+      "unit": "{nominal}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75443-2",
+          "display": "Mental health Outpatient Note"
+        }
+      ],
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "end therapy visit"
+    },
+    "end therapy visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "telehealth delay"
+    },
+    "end telehealth": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "therapy delay",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "PTSD_Re_evaluation Encounter",
+            "within": {
+              "quantity": 6,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Evaluation Gate delay"
+        }
+      ]
+    },
+    "PHQ2_Q9_Assessment": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 715252007,
+          "display": "Depression screening using Patient Health Questionnaire Nine Item score (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "reason": "ptsd",
+      "direct_transition": "Columbia_Suicide_Risk_Assessment",
+      "remarks": [
+        "per new VA protocol identified by Jodie Trafton, PhD",
+        ""
+      ]
+    },
+    "Columbia_Suicide_Risk_Assessment": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 225337009,
+          "display": "Suicide risk assessment (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "reason": "ptsd",
+      "direct_transition": "PTSD_Initial_Careplan",
+      "remarks": [
+        "per new VA protocol identified by Jodie Trafton, PhD"
+      ]
+    },
+    "mTBI check": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "mTBI",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "PTSD Episode",
+              "distribution": 0.439
+            },
+            {
+              "transition": "Veteran",
+              "distribution": 0.561
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Veteran",
+              "distribution": 1
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "Strong comorbidity relationship between mTBI and PTSD:",
+        "",
+        "https://www.ncbi.nlm.nih.gov/books/NBK326723/",
+        "",
+        ""
+      ]
+    },
+    "Pain_Vital": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 8
+      },
+      "direct_transition": "end_Psych_encounter"
+    },
+    "Pain_Vital_2": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 4,
+        "high": 8
+      },
+      "direct_transition": "Inpatient Suicide Care Plan"
+    },
+    "Pain_Vital_3": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 3
+      },
+      "direct_transition": "end_PTSD_Re_evaluation_Encounter"
+    },
+    "Pain_Vital_4": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "range": {
+        "low": 1,
+        "high": 4
+      },
+      "direct_transition": "end_Psych_encounter"
+    },
+    "PC-PTSD Screen": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 385892002,
+          "display": "Mental health screening (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 2,
+        "high": 10,
+        "unit": "minutes"
+      },
+      "direct_transition": "PHQ2_Q9_Assessment",
+      "remarks": [
+        "workflow approach provided by Brian "
+      ]
+    }
+  }
+}
+,
+"veteran_self_harm":{
+  "name": "Veteran Self Harm",
+  "remarks": [
+    "In the U.S., suicides occur at a rate of 12.93/100k people. However, suicide attempts occur \nat approximately 12x this rate. Veteran Incident rates are 21% more frequent than the US general population.\n\n\n\n"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "remarks": [
+        ""
+      ],
+      "direct_transition": "Veteran Guard"
+    },
+    "Attempts_Suicide": {
+      "type": "Simple",
+      "remarks": [
+        "It's difficult to find accurate statistics for how many people actually attempt suicide since ",
+        "those who attempt suicide often don't seek medical attention afterwards. Therefore, the attempts ",
+        "modeled in this module are considered severe enough to merit medical attention.",
+        "Males COMPLETE suicide 3.5x as often as females do. Suicides have a 7% completion rate overall."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "distribution": 0.0546,
+              "transition": "Fatal_Attempt"
+            },
+            {
+              "distribution": 0.9454,
+              "transition": "VA Hotline Call"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "distribution": 0.0156,
+              "transition": "Fatal_Attempt"
+            },
+            {
+              "distribution": 0.9844,
+              "transition": "VA Hotline Call"
+            }
+          ]
+        }
+      ]
+    },
+    "Attempt_By_Poisoning": {
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Attempted_Suicide",
+      "assign_to_attribute": "suicide_attempt",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "86849004",
+          "display": "Suicidal deliberate poisoning"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Attempted_Suicide"
+    },
+    "Attempt_By_Cutting": {
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Attempted_Suicide",
+      "assign_to_attribute": "suicide_attempt",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "287185009",
+          "display": "Attempted suicide - cut/stab"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Attempted_Suicide"
+    },
+    "Attempt_By_Suffocation": {
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Attempted_Suicide",
+      "assign_to_attribute": "suicide_attempt",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "287182007",
+          "display": "Attempted suicide - suffocation"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Attempted_Suicide"
+    },
+    "ED_Visit_For_Attempted_Suicide": {
+      "type": "Encounter",
+      "encounter_class": "emergency",
+      "reason": "suicide_attempt",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "50849002",
+          "display": "Emergency room admission"
+        }
+      ],
+      "direct_transition": "Psychiatric_Evaluation"
+    },
+    "Psychiatric_Evaluation": {
+      "type": "Procedure",
+      "target_encounter": "ED_Visit_For_Attempted_Suicide",
+      "reason": "suicide_attempt",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "90407005",
+          "display": "Evaluation of psychiatric state of patient"
+        }
+      ],
+      "direct_transition": "Short_Hospital_Stay"
+    },
+    "Short_Hospital_Stay": {
+      "type": "Procedure",
+      "target_encounter": "ED_Visit_For_Attempted_Suicide",
+      "reason": "suicide_attempt",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "74857009",
+          "display": "Hospital admission, short-term, 24 hours"
+        }
+      ],
+      "duration": {
+        "low": 24,
+        "high": 72,
+        "unit": "hours"
+      },
+      "direct_transition": "End_Attempted_Suicide_Observation_Period"
+    },
+    "End_Attempted_Suicide_Observation_Period": {
+      "type": "EncounterEnd",
+      "direct_transition": "End_Suicide_Attempt"
+    },
+    "End_Suicide_Attempt": {
+      "type": "ConditionEnd",
+      "referenced_by_attribute": "suicide_attempt",
+      "direct_transition": "Delay_Until_Outpatient_Followup"
+    },
+    "Delay_Until_Outpatient_Followup": {
+      "type": "Delay",
+      "range": {
+        "low": 3,
+        "high": 7,
+        "unit": "days"
+      },
+      "direct_transition": "Attempted_Suicide_Followup"
+    },
+    "Attempted_Suicide_Followup": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "suicide_attempt",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "185347001",
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Suicide_CarePlan_Selector"
+    },
+    "Suicide_CarePlan_Selector": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "suicide_careplan",
+            "operator": "is nil"
+          },
+          "transition": "Suicide_CarePlan"
+        },
+        {
+          "transition": "Followup_Psychiatric_Evaluation"
+        }
+      ]
+    },
+    "Suicide_CarePlan": {
+      "type": "CarePlanStart",
+      "target_encounter": "Attempted_Suicide_Followup",
+      "assign_to_attribute": "suicide_careplan",
+      "reason": "suicide_attempt",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "183401008",
+          "display": "Anti-suicide psychotherapy"
+        }
+      ],
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": "784051000000106",
+          "display": "Depression care management"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "415665002",
+          "display": "Suicide prevention"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "10029008",
+          "display": "Suicide precautions"
+        }
+      ],
+      "direct_transition": "Followup_Psychiatric_Evaluation"
+    },
+    "Followup_Psychiatric_Evaluation": {
+      "type": "Procedure",
+      "target_encounter": "Attempted_Suicide_Followup",
+      "reason": "suicide_attempt",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "88848003",
+          "display": "Psychiatric follow-up"
+        }
+      ],
+      "direct_transition": "End_Followup_Encounter"
+    },
+    "End_Followup_Encounter": {
+      "type": "EncounterEnd",
+      "remarks": [
+        "From the Harvard University study on suicide attempts: ",
+        " 7% are fatal ",
+        "70% do not attempt suicide again ",
+        "23% reattempt at some point "
+      ],
+      "distributed_transition": [
+        {
+          "distribution": 0.753,
+          "transition": "Terminal"
+        },
+        {
+          "distribution": 0.247,
+          "transition": "Delay_Until_Next_Attempt"
+        }
+      ]
+    },
+    "Delay_Until_Next_Attempt": {
+      "type": "Delay",
+      "remarks": [
+        "It's unclear what a typical amount of time is between suicide attempts. Leaving  this as ",
+        "a broad range from 0.5 - 3 years."
+      ],
+      "range": {
+        "low": 6,
+        "high": 36,
+        "unit": "months"
+      },
+      "direct_transition": "Attempts_Suicide"
+    },
+    "Fatal_Attempt": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " FATAL                                                                ",
+        "======================================================================",
+        "The most common methods of fatal suicide are: ",
+        "49.9% by firearms ",
+        "26.7% by suffocation or hanging (includes CO from motor vehicles)",
+        "15.9% by poisoning ",
+        " 7.5% by other means (vehicular, drowning, falls, etc.)"
+      ],
+      "distributed_transition": [
+        {
+          "distribution": 0.499,
+          "transition": "Suicide_By_Firearm"
+        },
+        {
+          "distribution": 0.267,
+          "transition": "Suicide_By_Suffocation"
+        },
+        {
+          "distribution": 0.159,
+          "transition": "Suicide_By_Poisoning"
+        },
+        {
+          "distribution": 0.075,
+          "transition": "Suicide_By_Other_Means"
+        }
+      ]
+    },
+    "Suicide_By_Firearm": {
+      "type": "ConditionOnset",
+      "target_encounter": "Autopsy_Encounter",
+      "assign_to_attribute": "suicide",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "287193009",
+          "display": "Suicide - firearms"
+        }
+      ],
+      "direct_transition": "Death"
+    },
+    "Suicide_By_Suffocation": {
+      "type": "ConditionOnset",
+      "target_encounter": "Autopsy_Encounter",
+      "assign_to_attribute": "suicide",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "287191006",
+          "display": "Suicide - suffocation"
+        }
+      ],
+      "direct_transition": "Death"
+    },
+    "Suicide_By_Poisoning": {
+      "type": "ConditionOnset",
+      "target_encounter": "Autopsy_Encounter",
+      "assign_to_attribute": "suicide",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "86849004",
+          "display": "Suicidal deliberate poisoning"
+        }
+      ],
+      "direct_transition": "Death"
+    },
+    "Suicide_By_Other_Means": {
+      "type": "ConditionOnset",
+      "target_encounter": "Autopsy_Encounter",
+      "assign_to_attribute": "suicide",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "44301001",
+          "display": "Suicide"
+        }
+      ],
+      "direct_transition": "Death"
+    },
+    "Death": {
+      "type": "Death",
+      "referenced_by_attribute": "suicide",
+      "direct_transition": "Autopsy_Encounter"
+    },
+    "Autopsy_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "suicide",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "185347001",
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Autopsy_Examination"
+    },
+    "Autopsy_Examination": {
+      "type": "Procedure",
+      "target_encounter": "Autopsy_Encounter",
+      "reason": "suicide",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "29240004",
+          "display": "Autopsy examination"
+        }
+      ],
+      "direct_transition": "End_Suicide"
+    },
+    "End_Suicide": {
+      "type": "ConditionEnd",
+      "referenced_by_attribute": "suicide",
+      "direct_transition": "Terminal"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Delay 55 to 74 years old": {
+      "type": "Delay",
+      "range": {
+        "low": 37,
+        "high": 56,
+        "unit": "years"
+      },
+      "direct_transition": "Attempts_Suicide"
+    },
+    "Delay 35 to 54 years old": {
+      "type": "Delay",
+      "range": {
+        "low": 17,
+        "high": 36,
+        "unit": "years"
+      },
+      "direct_transition": "Attempts_Suicide"
+    },
+    "Delay 75 to 110 years old": {
+      "type": "Delay",
+      "range": {
+        "low": 57,
+        "high": 92,
+        "unit": "years"
+      },
+      "direct_transition": "Attempts_Suicide"
+    },
+    "Delay 18 to 34 years old": {
+      "type": "Delay",
+      "range": {
+        "low": 0,
+        "high": 16,
+        "unit": "years"
+      },
+      "direct_transition": "Attempts_Suicide"
+    },
+    "MH & SUD Comorbidty Check": {
+      "type": "CallSubmodule",
+      "submodule": "veterans/veteran_suicide_probabilities",
+      "distributed_transition": [
+        {
+          "transition": "Comorbidity Check",
+          "distribution": {
+            "attribute": "probability_of_suicide",
+            "default": 0.0045
+          }
+        },
+        {
+          "transition": "Terminal",
+          "distribution": {
+            "attribute": "probability_of_no_suicide",
+            "default": 0.9955
+          }
+        }
+      ]
+    },
+    "Comorbidity Check": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Delay 18 to 34 years old",
+              "distribution": 0.3122
+            },
+            {
+              "transition": "Delay 35 to 54 years old",
+              "distribution": 0.25343
+            },
+            {
+              "transition": "Delay 55 to 74 years old",
+              "distribution": 0.17982
+            },
+            {
+              "transition": "Delay 75 to 110 years old",
+              "distribution": 0.25455
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Delay 18 to 34 years old",
+              "distribution": 0.280155642
+            },
+            {
+              "transition": "Delay 35 to 54 years old",
+              "distribution": 0.449416342
+            },
+            {
+              "transition": "Delay 55 to 74 years old",
+              "distribution": 0.270428016
+            }
+          ]
+        }
+      ]
+    },
+    "VA Hotline Call": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "VA Hotline Encounter",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Non_Fatal_Attempt",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "Non_Fatal_Attempt": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "distribution": 0.64,
+          "transition": "Attempt_By_Poisoning"
+        },
+        {
+          "distribution": 0.19,
+          "transition": "Attempt_By_Cutting"
+        },
+        {
+          "distribution": 0.17,
+          "transition": "Attempt_By_Suffocation"
+        }
+      ],
+      "remarks": [
+        "======================================================================",
+        " NON-FATAL                                                            ",
+        "======================================================================",
+        "Most commonly this is from poisoning (overdose), suffocation, or cutting. Less than 1% of all ",
+        "non-fatal attempts involve firearms, so omitting that option altogether. The distributions here ",
+        "are based on the Harvard University study, see: ",
+        "https://www.hsph.harvard.edu/means-matter/basic-suicide-facts/how/",
+        ""
+      ]
+    },
+    "VA Hotline Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185317003,
+          "display": "Telephone encounter (procedure)"
+        }
+      ],
+      "direct_transition": "Hotline Mental Health Note"
+    },
+    "end telehealth": {
+      "type": "EncounterEnd",
+      "distributed_transition": [
+        {
+          "transition": "Terminal",
+          "distribution": 0.8
+        },
+        {
+          "transition": "Non_Fatal_Attempt",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "Hotline Mental Health Note": {
+      "type": "Observation",
+      "category": "therapy",
+      "unit": "{nominal}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "87626-8",
+          "display": "Suicide prevention note"
+        }
+      ],
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "end telehealth"
+    },
+    "Veteran Guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Attribute",
+        "attribute": "veteran",
+        "operator": "is not nil"
+      },
+      "direct_transition": "MH & SUD Comorbidty Check"
+    }
+  }
+}
+,
+"veteran_substance_abuse_conditions":{
+  "name": "Veteran Substance Abuse Conditions",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Age_Guard"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Veteran_Status": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Attribute",
+        "attribute": "veteran",
+        "operator": "is not nil"
+      },
+      "direct_transition": "Smoking Check"
+    },
+    "smoker": {
+      "type": "SetAttribute",
+      "attribute": "smoking",
+      "value": true,
+      "direct_transition": "Alcohol Check"
+    },
+    "non_smoker": {
+      "type": "SetAttribute",
+      "attribute": "smoking",
+      "direct_transition": "Alcohol Check"
+    },
+    "Age_Guard": {
+      "type": "Delay",
+      "direct_transition": "Veteran_Status",
+      "range": {
+        "low": 18,
+        "high": 65,
+        "unit": "years"
+      }
+    },
+    "Smoking Check": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "smoker",
+              "distribution": 0.2
+            },
+            {
+              "transition": "non_smoker",
+              "distribution": 0.8
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "smoker",
+              "distribution": 0.241
+            },
+            {
+              "transition": "non_smoker",
+              "distribution": 0.759
+            }
+          ]
+        }
+      ]
+    },
+    "Alcohol Check": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Alcohol Dependence",
+              "distribution": 0.152
+            },
+            {
+              "transition": "No Alcohol Dependence",
+              "distribution": 0.848
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Alcohol Dependence",
+              "distribution": 0.175
+            },
+            {
+              "transition": "No Alcohol Dependence",
+              "distribution": 0.825
+            }
+          ]
+        }
+      ]
+    },
+    "Alcohol Dependence": {
+      "type": "SetAttribute",
+      "attribute": "alcoholism",
+      "value": true,
+      "direct_transition": "Opioid Abuse check"
+    },
+    "No Alcohol Dependence": {
+      "type": "SetAttribute",
+      "attribute": "alcoholism",
+      "direct_transition": "Opioid Abuse check"
+    },
+    "Opioid Abuse check": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Opioid Dependance",
+          "distribution": 0.13
+        },
+        {
+          "transition": "No Opioid Dependence",
+          "distribution": 0.87
+        }
+      ]
+    },
+    "Opioid Dependance": {
+      "type": "SetAttribute",
+      "attribute": "opioid_addiction",
+      "direct_transition": "Terminal",
+      "value": true
+    },
+    "No Opioid Dependence": {
+      "type": "SetAttribute",
+      "attribute": "opioid_addiction",
+      "direct_transition": "Terminal"
+    }
+  }
+}
+,
+"veteran_substance_abuse_treatment":{
+  "name": "Veteran Substance Abuse Treatment",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Veteran Guard"
+    },
+    "Smoking_Condition": {
+      "type": "ConditionOnset",
+      "target_encounter": "Wellness Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 449868002,
+          "display": "Smokes tobacco daily"
+        }
+      ],
+      "direct_transition": "Smoking_Careplan"
+    },
+    "Smoking_Careplan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 734163000,
+          "display": "Care Plan"
+        }
+      ],
+      "reason": "Smoking_Condition",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 710081004,
+          "display": "smoking cessation therapy"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Smoking Medication",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "smoking_medication",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Alcohol Check"
+        }
+      ]
+    },
+    "Smoking Medication": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 198031,
+          "display": "24hr nicotine transdermal patch"
+        }
+      ],
+      "direct_transition": "Alcohol Check",
+      "reason": "Smoking_Condition",
+      "assign_to_attribute": "smoking_medication"
+    },
+    "Alcohol Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Alcohol Diagnosis",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "alcoholism",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "SUD check"
+        }
+      ]
+    },
+    "Alcohol Diagnosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 7200002,
+          "display": "Alcoholism"
+        }
+      ],
+      "direct_transition": "Alcoholism_Care_Plan"
+    },
+    "Wellness Encounter": {
+      "type": "Encounter",
+      "direct_transition": "Smoking_Check",
+      "wellness": true
+    },
+    "encounter_end": {
+      "type": "EncounterEnd",
+      "direct_transition": "smoking post treatment"
+    },
+    "smoking symptom post treatment": {
+      "type": "SetAttribute",
+      "attribute": "smoking",
+      "direct_transition": "alcoholism post treatment"
+    },
+    "alcoholism post treatment": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "alcoholism symptom post treatment",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Loop_Back_To_Encounter",
+          "distribution": 0.95
+        }
+      ]
+    },
+    "smoking post treatment": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "alcoholism post treatment",
+          "distribution": 0.95
+        },
+        {
+          "transition": "smoking symptom post treatment",
+          "distribution": 0.05
+        }
+      ]
+    },
+    "alcoholism symptom post treatment": {
+      "type": "SetAttribute",
+      "attribute": "alcoholism",
+      "direct_transition": "Loop_Back_To_Encounter"
+    },
+    "Opioid Addiction Care Plan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 734163000,
+          "display": "Care Plan"
+        }
+      ],
+      "direct_transition": "Opioid Abuse Diagnosis",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 313071005,
+          "display": "Counseling for substance abuse (procedure)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 408935001,
+          "display": "Substance abuse prevention education (procedure)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 408936000,
+          "display": "Substance abuse prevention management (procedure)"
+        }
+      ]
+    },
+    "Veteran Guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">",
+        "quantity": 18,
+        "unit": "years"
+      },
+      "direct_transition": "Wellness Encounter"
+    },
+    "SUD check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Opioid Addiction Care Plan",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "opioid_addiction",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "encounter_end"
+        }
+      ]
+    },
+    "Opioid Abuse Diagnosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 5602001,
+          "display": "Opioid abuse (disorder)"
+        }
+      ],
+      "direct_transition": "encounter_end"
+    },
+    "Smoking_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Smoking_Condition",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "smoking",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Alcohol Check"
+        }
+      ]
+    },
+    "Alcoholism_Care_Plan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 734163000,
+          "display": "Care Plan"
+        }
+      ],
+      "direct_transition": "SUD check",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 24165007,
+          "display": "Alcoholism counseling"
+        }
+      ]
+    },
+    "Loop_Back_To_Encounter": {
+      "type": "Simple",
+      "direct_transition": "Wellness Encounter",
+      "remarks": [
+        "Added this state just so that only one path goes back up to the top"
+      ]
+    }
+  }
+}
+,
+"veterans/veteran_suicide_probabilities":{
+  "name": "Veteran Suicide Probabilities",
+  "remarks": [
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Veteran check"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Veteran": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "PTSD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ptsd",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "SUD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "opioid_addiction",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "MDD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "mdd",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Baseline"
+        }
+      ]
+    },
+    "PTSD": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.006,
+      "remarks": [
+        "50 deaths / 100k * 12 attempts / completion == 600 attempts / 100k == .006 == .6 % lifetime probability"
+      ]
+    },
+    "SUD": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.0144,
+      "remarks": [
+        "120 deaths / 100k * 12 attempts / completion == 1440 attempts / 100k == .0144 == 1.44 % lifetime probability"
+      ]
+    },
+    "Veteran check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          },
+          "transition": "Veteran"
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "MDD": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.0072,
+      "remarks": [
+        "60 deaths / 100k * 12 attempts / completion == 720 attempts / 100k == .0072 == .72 % lifetime probability"
+      ]
+    },
+    "Baseline": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.003072,
+      "remarks": [
+        "25.6 deaths / 100k * 12 attempts / completion == 307.2 attempts / 100k == .003072 == .3 % lifetime probability"
+      ]
+    }
+  }
+}
+,
 "wellness_encounters":{
   "name": "Wellness Encounters",
   "remarks": [
@@ -34203,7 +48791,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "unit": "cm",
-      "direct_transition": "Record_Weight"
+      "direct_transition": "Record_Pain"
     },
     "Record_Weight": {
       "type": "Observation",
@@ -34477,7 +49065,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "unit": "mg/g",
-      "direct_transition": "Lab_EGFR"
+      "direct_transition": "check_CBC"
     },
     "Record_EGFR": {
       "type": "Observation",
@@ -34595,43 +49183,7 @@ export default {"allergic_rhinitis":{
           "transition": "Record_ACR"
         },
         {
-          "transition": "Lab_EGFR"
-        }
-      ]
-    },
-    "Lab_EGFR": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "44054006",
-                    "display": "Diabetes"
-                  }
-                ]
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "38341003",
-                    "display": "Hypertension"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "Record_EGFR"
-        },
-        {
-          "transition": "Smoker_Status_Observation"
+          "transition": "check_CBC"
         }
       ]
     },
@@ -34712,6 +49264,259 @@ export default {"allergic_rhinitis":{
         "system": "SNOMED-CT",
         "code": 266919005,
         "display": "Never smoker"
+      }
+    },
+    "check_CBC": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "check_eGFR",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Record_CBC_Panel",
+            "within": {
+              "quantity": 5,
+              "unit": "years"
+            }
+          }
+        },
+        {
+          "transition": "Record_CBC_Panel"
+        }
+      ]
+    },
+    "check_eGFR": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "44054006",
+                    "display": "Diabetes"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "38341003",
+                    "display": "Hypertension"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "Record_EGFR"
+        },
+        {
+          "transition": "Smoker_Status_Observation"
+        }
+      ]
+    },
+    "Record_CBC_Panel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 4,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*3/uL",
+          "range": {
+            "low": 3.5,
+            "high": 10.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*6/uL",
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "unit": "g/dL",
+          "range": {
+            "low": 12,
+            "high": 17.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "4544-3",
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ],
+          "unit": "%",
+          "range": {
+            "low": 35,
+            "high": 50
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "target_encounter": "Wellness_Encounter",
+      "direct_transition": "check_eGFR"
+    },
+    "Record_Pain": {
+      "type": "Observation",
+      "target_encounter": "Wellness_Encounter",
+      "category": "vital-signs",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72514-3",
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+        }
+      ],
+      "unit": "{score}",
+      "direct_transition": "Record_Weight",
+      "range": {
+        "low": 0,
+        "high": 4
       }
     }
   }
