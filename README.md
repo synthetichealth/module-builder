@@ -1,25 +1,83 @@
-This project is an editor for building Generic Module Framework modules for the Synthea project.
+# Synthea<sup>TM</sup> Module Builder
 
-You can run it with `yarn start`
+The Synthea<sup>TM</sup> Module Builder is a visual editor for creating and modifying  [Synthea<sup>TM</sup> Patient Generator](https://synthetichealth.github.io/module-builder) modules using the
+[Synthea<sup>TM</sup> Generic Module Framework](https://github.com/synthetichealth/synthea/wiki/Generic-Module-Framework).
+It supports the entire Generic Module Framework specification and allows users to create full-featured modules
+without needing to directly edit JSON files.  It is preloaded with all modules contained within the current
+[Synthea<sup>TM</sup> Github Repository](https://github.com/synthetichealth/synthea).  Users can either edit these modules
+or create new ones to extend the capabilities of Synthea<sup>TM</sup>.
+ 
+## Getting Started
 
-Currently supports:
-  - Basic States
-  - Direct Transitions
-  - Distributed Transitions
+Users are encouraged to use the hosted version of the Module Builder: 
 
-Demo application is available at https://synthetichealth.github.io/module-builder/
+https://synthetichealth.github.io/module-builder/
 
-## Synchronizing Generic Modules in Synthea
+If you are new to authoring Synthea<sup>TM</sup> modules, please review the [Generic Module Framework (GMF) Documentation](https://github.com/synthetichealth/synthea/wiki/Generic-Module-Framework).
+Some familiarity with the GMF is required before beginning the authoring process.
+
+## Local Installation
+
+Local installation typically is not necessary, unless you plan on contributing improvements the Module Builder itself.
+It is written in Javascript using React and requires [Node.js](https://nodejs.org/) to run locally. Once Node.js is installed,
+run the following commands to run a local copy of the Module Builder:
+
+```sh
+npm install
+npm start
+```
+
+This will start a local copy running at `http://localhost:3000/`
+
+## Saving Modules
+
+Modules created and edited through the Module Builder must be downloaded and saved as a JSON file.
+The Module Builder currently does not persist local changes across browser sessions, so do not close or navigate
+away from the page without first saving your work as a local file first.  Click the `Download` button at the
+top of the interface, and you can either copy the JSON in the modal text box, or click the `Download` button on the bottom
+of the modal to save as a local file.
+
+Once saved as a JSON file (using the `.json` extension), you can use the module within your own local installation of Synthea.
+See the [Generic Module Framework](https://github.com/synthetichealth/synthea/wiki/Generic-Module-Framework#relevant-files-and-paths) for information on where to place the file.
+
+## Developer Tasks
+
+The following information is only relevant to developers improving the Module Builder itself.
+
+
+### Synchronizing Generic Modules in Synthea
 
 This application currently embeds all generic modules within the application.  In order to 
 update these modules to match the most recent ones available in the Synthea repository,
 run the `build-modules` script, pointing to the modules directory within a local copy of `Synthea`.
 
 ```sh
-  npm run build-modules ../synthea/src/main/resources/modules # Point to the modules directory of synthea
-  git status # This should have changed ./src/data/modules.js
-  npm test # Run tests to ensure the new modules file valid
+npm run build-modules ../synthea/src/main/resources/modules # Point to the modules directory of synthea
+git status # This should have changed ./src/data/modules.js
+npm test # Run tests to ensure the new modules file valid
 ```
+
+### Running Tests
+
+To run tests on the Module Builder, execute the following command: 
+
+```sh
+npm test
+```
+
+### Deploying Updated Version of Synthea
+
+If you have administrative access to the Generic Module Builder repository, you can deploy updates to 
+the [Module Builder site](https://synthetichealth.github.io/module-builder/).  Before deploying,
+you should consider synchronizing the modules in the repository and must run the tests.
+
+```sh
+npm run deploy
+```
+
+This updates the `gh-pages` branch on the repository with the new build, and changes will be reflected on the
+site within a few minutes.
+
 
 # License
 
