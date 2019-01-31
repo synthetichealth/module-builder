@@ -3025,7 +3025,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "Acute_Allergic_Reaction"
@@ -3345,6 +3345,912 @@ export default {"allergic_rhinitis":{
       ],
       "submodule": "allergies/immunotherapy",
       "direct_transition": "Living_With_Allergies"
+    }
+  }
+}
+,
+"anemia/anemia_sub":{
+  "name": "anemia_sub",
+  "remarks": [
+    "Anemia"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Anemia"
+    },
+    "Anemia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "anemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 271737000,
+          "display": "Anemia (disorder)"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Male",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Review_Of_Systems": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 415300000,
+          "display": "Review of systems (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 10,
+        "high": 20,
+        "unit": "minutes"
+      },
+      "direct_transition": "Medication_Reconciliation",
+      "remarks": [
+        "Future model: This should be a submodule that records social habits, nutrition, alcohol consumption."
+      ]
+    },
+    "Brief_Examination": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 162676008,
+          "display": "Brief general examination (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 10,
+        "high": 20,
+        "unit": "minutes"
+      },
+      "remarks": [
+        "Remarks:",
+        "- Percent of severe patients estimated (needs verification)",
+        ""
+      ],
+      "conditional_transition": [
+        {
+          "transition": "End_Initial_Encounter",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Observation",
+                "codes": [
+                  {
+                    "system": "LOINC",
+                    "code": "20570-8",
+                    "display": "Hematocrit"
+                  }
+                ],
+                "operator": "<=",
+                "value": 33
+              },
+              {
+                "condition_type": "Gender",
+                "gender": "F"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "End_Initial_Encounter",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Gender",
+                "gender": "M"
+              },
+              {
+                "condition_type": "Observation",
+                "codes": [
+                  {
+                    "system": "LOINC",
+                    "code": "20570-8",
+                    "display": "Hematocrit"
+                  }
+                ],
+                "operator": "<=",
+                "value": 30
+              }
+            ]
+          }
+        },
+        {
+          "transition": "PLACEHOLDER_Collect_Social_Habits"
+        }
+      ]
+    },
+    "End_Initial_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Inpatient_Encounter"
+    },
+    "Inpatient_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "anemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Recheck_Blood_Counts"
+    },
+    "Recheck_Blood_Counts": {
+      "type": "Simple",
+      "direct_transition": "Consult/Referral_to_Experts"
+    },
+    "Male": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Blood_Panel_M_Severe",
+          "distribution": 0.07
+        },
+        {
+          "transition": "Blood_Panel_M_Routine",
+          "distribution": 0.93
+        }
+      ]
+    },
+    "Female": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Blood_Panel_F_Severe",
+          "distribution": 0.07
+        },
+        {
+          "transition": "Blood_Panel_F_Routine",
+          "distribution": 0.93
+        }
+      ]
+    },
+    "Blood_Panel_F_Routine": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 2,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24360-0",
+          "display": "Hemoglobin and Hematocrit panel - Blood"
+        }
+      ],
+      "direct_transition": "Peripheral_Blood_Smear",
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 11,
+            "high": 11.9
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20570-8",
+              "display": "Hematocrit [Volume Fraction] of Blood"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        }
+      ]
+    },
+    "Blood_Panel_M_Routine": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 2,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24360-0",
+          "display": "Hemoglobin and Hematocrit panel - Blood"
+        }
+      ],
+      "direct_transition": "Peripheral_Blood_Smear",
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 10,
+            "high": 11.9
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20570-8",
+              "display": "Hematocrit [Volume Fraction] of Blood"
+            }
+          ],
+          "range": {
+            "low": 30.1,
+            "high": 35
+          }
+        }
+      ]
+    },
+    "Blood_Panel_M_Severe": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 2,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24360-0",
+          "display": "Hemoglobin and Hematocrit panel - Blood"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 6.7,
+            "high": 10
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20570-8",
+              "display": "Hematocrit [Volume Fraction] of Blood"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 30
+          }
+        }
+      ],
+      "direct_transition": "Peripheral_Blood_Smear"
+    },
+    "Blood_Panel_F_Severe": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 2,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24360-0",
+          "display": "Hemoglobin and Hematocrit panel - Blood"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 7,
+            "high": 10.9
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20570-8",
+              "display": "Hematocrit [Volume Fraction] of Blood"
+            }
+          ],
+          "range": {
+            "low": 21,
+            "high": 32.9
+          }
+        }
+      ],
+      "direct_transition": "Peripheral_Blood_Smear"
+    },
+    "Transfusion": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 180207008,
+          "display": "Intravenous blood transfusion of packed cells (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "PLACEHOLDER_Do_Other_Severe_Anemia_Things"
+    },
+    "Peripheral_Blood_Smear": {
+      "type": "Simple",
+      "direct_transition": "Review_Of_Systems"
+    },
+    "Medication_Reconciliation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 430193006,
+          "display": "Medication Reconciliation (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 5,
+        "high": 20,
+        "unit": "minutes"
+      },
+      "direct_transition": "Brief_Examination"
+    },
+    "PLACEHOLDER_Collect_Social_Habits": {
+      "type": "Simple",
+      "direct_transition": "PLACEHOLDER_Collect_Nutrition",
+      "remarks": [
+        "Done in review of systems."
+      ]
+    },
+    "PLACEHOLDER_Collect_Nutrition": {
+      "type": "Simple",
+      "direct_transition": "Administer_Medications",
+      "remarks": [
+        "Done in review of systems"
+      ]
+    },
+    "Administer_Medications": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Iron_Supplement",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Vitamin B12 Booster",
+          "distribution": 0.1
+        },
+        {
+          "transition": "PLACEHOLDER_Do_Other_Anemia_Things",
+          "distribution": 0.8
+        }
+      ]
+    },
+    "Iron_Supplement": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310325,
+          "display": "ferrous sulfate 325 MG Oral Tablet"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Vitamin B12 Booster",
+          "distribution": 0.1
+        },
+        {
+          "transition": "PLACEHOLDER_Do_Other_Anemia_Things",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "Vitamin B12 Booster": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2001499,
+          "display": "Vitamin B 12 5 MG/ML Injectable Solution"
+        }
+      ],
+      "direct_transition": "PLACEHOLDER_Do_Other_Anemia_Things"
+    },
+    "Consult/Referral_to_Experts": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Gender",
+                "gender": "M"
+              },
+              {
+                "condition_type": "Observation",
+                "codes": [
+                  {
+                    "system": "LOINC",
+                    "code": "20570-8",
+                    "display": "Hematrocrit"
+                  }
+                ],
+                "operator": "<",
+                "value": 30
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "Transfusion"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Gender",
+                "gender": "F"
+              },
+              {
+                "condition_type": "Observation",
+                "codes": [
+                  {
+                    "system": "LOINC",
+                    "code": "20570-8",
+                    "display": "Hematrocrit"
+                  }
+                ],
+                "operator": "<",
+                "value": 30
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "Transfusion"
+        }
+      ]
+    },
+    "PLACEHOLDER_Do_Other_Severe_Anemia_Things": {
+      "type": "Simple",
+      "direct_transition": "Administer_Medications"
+    },
+    "PLACEHOLDER_Do_Other_Anemia_Things": {
+      "type": "Simple",
+      "direct_transition": "Terminal"
+    }
+  }
+}
+,
+"anemia___unknown_etiology":{
+  "name": "Anemia - Unknown Etiology",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "White_Males",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Gender",
+                "gender": "M"
+              },
+              {
+                "condition_type": "Race",
+                "race": "White"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "White_Females",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Gender",
+                "gender": "F"
+              },
+              {
+                "condition_type": "Race",
+                "race": "White"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Black_Males",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Gender",
+                "gender": "M"
+              },
+              {
+                "condition_type": "Race",
+                "race": "Black"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Black_Females",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Gender",
+                "gender": "F"
+              },
+              {
+                "condition_type": "Race",
+                "race": "Black"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Hispanic_Males",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Gender",
+                "gender": "M"
+              },
+              {
+                "condition_type": "Race",
+                "race": "Hispanic"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Hispanic_Females",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Gender",
+                "gender": "F"
+              },
+              {
+                "condition_type": "Race",
+                "race": "Hispanic"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "White_Males": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "distribution": 0.0031,
+          "transition": "Delay_0_14"
+        },
+        {
+          "distribution": 0.0031,
+          "transition": "Delay_15-49"
+        },
+        {
+          "distribution": 0.0215,
+          "transition": "Delay_50_79"
+        },
+        {
+          "distribution": 0.0209,
+          "transition": "Delay_80_85"
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9514
+        }
+      ]
+    },
+    "White_Females": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Delay_0_14",
+          "distribution": 0.0033
+        },
+        {
+          "distribution": 0.025,
+          "transition": "Delay_15-49"
+        },
+        {
+          "distribution": 0.0216,
+          "transition": "Delay_50_79"
+        },
+        {
+          "transition": "Delay_80_85",
+          "distribution": 0.0142
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9359
+        }
+      ]
+    },
+    "Black_Males": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "distribution": 0.0218,
+          "transition": "Delay_0_14"
+        },
+        {
+          "distribution": 0.0198,
+          "transition": "Delay_15-49"
+        },
+        {
+          "transition": "Delay_50_79",
+          "distribution": 0.0422
+        },
+        {
+          "distribution": 0.0056,
+          "transition": "Delay_80_85"
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9106
+        }
+      ]
+    },
+    "Black_Females": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Delay_0_14",
+          "distribution": 0.0351
+        },
+        {
+          "transition": "Delay_15-49",
+          "distribution": 0.1309
+        },
+        {
+          "distribution": 0.0586,
+          "transition": "Delay_50_79"
+        },
+        {
+          "distribution": 0.0093,
+          "transition": "Delay_80_85"
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.7661
+        }
+      ]
+    },
+    "Hispanic_Males": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "distribution": 0.007,
+          "transition": "Delay_0_14"
+        },
+        {
+          "distribution": 0.003,
+          "transition": "Delay_15-49"
+        },
+        {
+          "distribution": 0.0124,
+          "transition": "Delay_50_79"
+        },
+        {
+          "distribution": 0.0024,
+          "transition": "Delay_80_85"
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9752
+        }
+      ]
+    },
+    "Hispanic_Females": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "distribution": 0.0116,
+          "transition": "Delay_0_14"
+        },
+        {
+          "distribution": 0.0552,
+          "transition": "Delay_15-49"
+        },
+        {
+          "distribution": 0.0217,
+          "transition": "Delay_50_79"
+        },
+        {
+          "distribution": 0.004,
+          "transition": "Delay_80_85"
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9075
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Fatigue": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "cause": "",
+      "direct_transition": "Anemia Encounter",
+      "exact": {
+        "quantity": 1
+      }
+    },
+    "SOB": {
+      "type": "Symptom",
+      "symptom": "Shortness of breath",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Next_Symptom_2"
+    },
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
+      "direct_transition": "End_Encounter"
+    },
+    "Delay_0_14": {
+      "type": "Delay",
+      "direct_transition": "Anemia_Risk_Group",
+      "range": {
+        "low": 0,
+        "high": 14,
+        "unit": "years"
+      }
+    },
+    "Delay_15-49": {
+      "type": "Delay",
+      "direct_transition": "Anemia_Risk_Group",
+      "range": {
+        "low": 15,
+        "high": 49,
+        "unit": "years"
+      }
+    },
+    "Delay_50_79": {
+      "type": "Delay",
+      "direct_transition": "Anemia_Risk_Group",
+      "range": {
+        "low": 50,
+        "high": 79,
+        "unit": "years"
+      }
+    },
+    "Delay_80_85": {
+      "type": "Delay",
+      "direct_transition": "Anemia_Risk_Group",
+      "range": {
+        "low": 80,
+        "high": 85,
+        "unit": "years"
+      }
+    },
+    "Tachycardia": {
+      "type": "Symptom",
+      "symptom": "Tachycardia",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Next_Symptom_1"
+    },
+    "Anemia_Risk_Group": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Tachycardia",
+          "distribution": 0.15
+        },
+        {
+          "transition": "Next_Symptom_1",
+          "distribution": 0.85
+        }
+      ]
+    },
+    "Anemia Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "anemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "185347001",
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Anemia_Submodule"
+    },
+    "Next_Symptom_1": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "SOB",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Next_Symptom_2",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "Next_Symptom_2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Fatigue",
+          "distribution": 0.15
+        },
+        {
+          "transition": "Anemia Encounter",
+          "distribution": 0.85
+        }
+      ]
+    },
+    "End_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   }
 }
@@ -13566,7 +14472,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": 50849002,
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "conditional_transition": [
@@ -21000,7 +21906,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "distributed_transition": [
@@ -21189,7 +22095,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "Gunshot_Wound"
@@ -21354,7 +22260,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "distributed_transition": [
@@ -21526,7 +22432,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "Whiplash"
@@ -21609,7 +22515,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "Broken_Bone"
@@ -22298,7 +23204,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "Burn"
@@ -22544,7 +23450,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "Laceration"
@@ -22753,7 +23659,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "distributed_transition": [
@@ -22867,7 +23773,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "distributed_transition": [
@@ -38247,7 +39153,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "Psychiatric_Evaluation"
@@ -47778,7 +48684,7 @@ export default {"allergic_rhinitis":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency room admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "Psychiatric_Evaluation"
