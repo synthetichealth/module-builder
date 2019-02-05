@@ -276,6 +276,7 @@ export type SymptomState = {
   type: 'Symptom',
   symptom: string,
   cause: string,
+  probability: number,
   exact?: {
     quantity: number
   },

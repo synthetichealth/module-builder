@@ -482,6 +482,7 @@ const StateTemplates = {
     type: "Symptom",
     symptom: "",
     cause: "",
+    probability: 1.0,
     exact: {...AttributeTemplates.Exact}
   },
 

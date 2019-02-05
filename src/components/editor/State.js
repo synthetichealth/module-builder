@@ -127,7 +127,7 @@ class StateEditor extends Component<Props> {
     const transitionType = (this.props.state.transition||{}).type;
     return (
         <div className="State">
-          <div className='Editor-panel-title'> 
+          <div className='Editor-panel-title'>
             State Editor
           </div>
           <h3><RIEInput className='editable-text' className='editable-text' propName={'name'} value={this.props.state.name} change={this.props.renameNode} /></h3>
@@ -154,7 +154,7 @@ class StateEditor extends Component<Props> {
           </div>
           <br/>
           <a onClick={this.props.helpFunction(EditTutorial)}>Help</a>
-       
+
 
         </div>
     )
@@ -357,7 +357,7 @@ class Encounter extends Component<Props> {
         </div>
       );
     }
-    
+
   }
 
   renderWellness() {
@@ -1566,10 +1566,36 @@ class Symptom extends Component<Props> {
       <div>
         Symptom: <RIEInput className='editable-text' value={state.symptom} propName={'symptom'} change={this.props.onChange('symptom')} />
         <br/>
+        {this.renderProbability()}
         {this.renderCause()}
         {this.renderExactOrRange()}
       </div>
     );
+  }
+
+  renderProbability() {
+    let state = ((this.props.state: any): SymptomState);
+    if (!state.probability) {
+      return (
+        <div>
+          Probability: <RIENumber className='editable-text' value={1} propName={'probability'} editProps={{step: .01, min: 0, max: 1}} change={this.props.onChange('probability')} format={this.formatAsPercentage} validate={this.checkInRange} classInvalid="invalid" />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          Probability: <RIENumber className='editable-text' value={state.probability} propName={'probability'} editProps={{step: .01, min: 0, max: 1}} change={this.props.onChange('probability')} format={this.formatAsPercentage} validate={this.checkInRange} classInvalid="invalid"/>
+        </div>
+      );
+    }
+  }
+
+  checkInRange(num: number) {
+    return ((num >= 0) && (num <= 1));
+  }
+
+  formatAsPercentage(num: number) {
+    return (num * 100) + "%";
   }
 
   renderCause() {

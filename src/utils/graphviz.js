@@ -272,12 +272,17 @@ const stateDescription = (state) =>{
       break;
     case 'Symptom':
      let s = state['symptom']
+     let p = state['probability']
       if(state.range !== undefined){
         let r = state['range']
         details = `${s}: ${r['low']} - ${r['high']}`
       } else if (state.exact !== undefined) {
         let e = state['exact']
         details = `${s}: ${e['quantity']}`
+      }
+      if (p && p < 1.0 && p > 0) {
+        let pct = p*100;
+        details += ` (${pct}%)`
       }
       break;
     case 'Observation':
@@ -301,7 +306,7 @@ const stateDescription = (state) =>{
         details = `Record value ${v['system']}[${v['code']}]: ${v['display']}\\l`
       }
       break;
-      
+
     case 'ImagingStudy':
       let series = state['series'];
       if (series.length > 0) {
@@ -488,7 +493,7 @@ const logicDetails = logic => {
     case 'Date':
       if (logic.year !== undefined) {
         return `Year is \\${logic['operator']} ${logic['year']}\\l`
-      } else if (logic.month !== undefined) { 
+      } else if (logic.month !== undefined) {
         return `Month is \\${logic['operator']} ${logic['month']}\\l`
       } else if (logic.date !== undefined) {
         let d = logic['date']
@@ -517,8 +522,8 @@ const logicDetails = logic => {
         }
       } else {
         return `Observation ${obs} \\${logic['operator']}\\l`
-      }  
-      
+      }
+
     case 'Vital Sign':
       return `Vital Sign ${logic['vital_sign']} \\${logic['operator']} ${logic['value']}\\l`
     case 'Active Condition':
