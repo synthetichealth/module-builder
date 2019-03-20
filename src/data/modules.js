@@ -8828,7 +8828,6 @@ export default {"allergic_rhinitis":{
     "CHF ED Visit": {
       "type": "Encounter",
       "encounter_class": "emergency",
-      "reason": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -8894,7 +8893,6 @@ export default {"allergic_rhinitis":{
     "Inpatient_admittance": {
       "type": "Encounter",
       "encounter_class": "inpatient",
-      "reason": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -9012,7 +9010,7 @@ export default {"allergic_rhinitis":{
           ]
         }
       ],
-      "direct_transition": "CXR_Inpt_daily"
+      "direct_transition": "Set 3D Echo"
     },
     "O2 Vitals": {
       "type": "VitalSign",
@@ -9071,7 +9069,7 @@ export default {"allergic_rhinitis":{
     },
     "End Inpatient Care Plan": {
       "type": "CarePlanEnd",
-      "direct_transition": "End Inpatient Encounter",
+      "direct_transition": "Reset 3D Echo",
       "careplan": "Inpatient CarePlan"
     },
     "End Inpatient Encounter": {
@@ -9833,6 +9831,17 @@ export default {"allergic_rhinitis":{
       ],
       "direct_transition": "Daily self-measurement",
       "reason": "chf"
+    },
+    "Set 3D Echo": {
+      "type": "SetAttribute",
+      "attribute": "3decho",
+      "direct_transition": "CXR_Inpt_daily",
+      "value": true
+    },
+    "Reset 3D Echo": {
+      "type": "SetAttribute",
+      "attribute": "3decho",
+      "direct_transition": "End Inpatient Encounter"
     }
   }
 }
@@ -13603,6 +13612,7 @@ export default {"allergic_rhinitis":{
     "Cystic_Fibrosis": {
       "type": "ConditionOnset",
       "target_encounter": "Fibrosis_Screening",
+      "assign_to_attribute": "Cystic_Fibrosis",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -13785,7 +13795,6 @@ export default {"allergic_rhinitis":{
     },
     "Meconium Ileus": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Fibrosis_Screening",
       "codes": [
         {
@@ -13820,7 +13829,6 @@ export default {"allergic_rhinitis":{
     },
     "Male_Infertility": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Fibrosis_Screening",
       "codes": [
         {
@@ -13833,7 +13841,6 @@ export default {"allergic_rhinitis":{
     },
     "Female_Infertility": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Fibrosis_Screening",
       "codes": [
         {
@@ -14152,7 +14159,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "direct_transition": "Prescribe_Mucus_Thinner",
-      "reason": "Cystic Fibrosis",
+      "reason": "Cystic_Fibrosis",
       "remarks": [
         "https://www.cff.org/About-Us/Media-Center/Press-Releases/The-Cystic-Fibrosis-Foundation-Applauds-FDA-Approval-of-Kalydeco/"
       ]
@@ -14348,7 +14355,6 @@ export default {"allergic_rhinitis":{
     },
     "Develop_Diabetes": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Quarterly_Checkup",
       "codes": [
         {
@@ -14645,7 +14651,6 @@ export default {"allergic_rhinitis":{
     },
     "Develop_Infection_1": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Quarterly_Checkup",
       "codes": [
         {
@@ -14658,7 +14663,6 @@ export default {"allergic_rhinitis":{
     },
     "Develop_Infection_2": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Quarterly_Checkup",
       "codes": [
         {
@@ -15169,7 +15173,6 @@ export default {"allergic_rhinitis":{
     "Lung_Transplant_Wait": {
       "type": "Encounter",
       "encounter_class": "inpatient",
-      "reason": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -15657,7 +15660,7 @@ export default {"allergic_rhinitis":{
         {
           "condition": {
             "condition_type": "Attribute",
-            "attribute": "Alzheimer’s Medication",
+            "attribute": "Alzheimer's Medication",
             "operator": "is not nil"
           },
           "transition": "EndFirstPrescription"
@@ -17161,7 +17164,6 @@ export default {"allergic_rhinitis":{
     "Dialysis_Encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -17209,7 +17211,6 @@ export default {"allergic_rhinitis":{
     "Physician Monthly Enc": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -19891,7 +19892,7 @@ export default {"allergic_rhinitis":{
       "range": {
         "low": 40,
         "high": 49,
-        "unit": "days"
+        "unit": "years"
       }
     },
     "Age_50-59": {
@@ -19914,7 +19915,6 @@ export default {"allergic_rhinitis":{
     },
     "Acute_Cholecystitis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cholecystitis_Encounter",
       "codes": [
         {
@@ -19940,7 +19940,6 @@ export default {"allergic_rhinitis":{
     },
     "Gallstones": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cholecystitis_Encounter",
       "codes": [
         {
@@ -31683,8 +31682,6 @@ export default {"allergic_rhinitis":{
     },
     "CKD1 Diagnosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
-      "target_encounter": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -31696,8 +31693,6 @@ export default {"allergic_rhinitis":{
     },
     "CKD2 Diagnosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
-      "target_encounter": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -31709,7 +31704,6 @@ export default {"allergic_rhinitis":{
     },
     "CKD3 Diagnosis": {
       "type": "ConditionOnset",
-      "target_encounter": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -31722,8 +31716,6 @@ export default {"allergic_rhinitis":{
     },
     "CKD4 Diagnosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
-      "target_encounter": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -38730,7 +38722,6 @@ export default {"allergic_rhinitis":{
     "Hypothyroidism encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -42833,7 +42824,6 @@ export default {"allergic_rhinitis":{
     "Pre_Procedure_Encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -42874,7 +42864,6 @@ export default {"allergic_rhinitis":{
     "Post_Procedure_Encounter": {
       "type": "Encounter",
       "encounter_class": "inpatient",
-      "reason": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -47185,7 +47174,6 @@ export default {"allergic_rhinitis":{
     },
     "Stage 4 Prostate Cancer": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Prostate_Cancer_Therapy",
       "codes": [
         {
@@ -47198,7 +47186,6 @@ export default {"allergic_rhinitis":{
     },
     "In Situ Prostate Cancer": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Prostate_Cancer_Therapy",
       "codes": [
         {
@@ -48253,7 +48240,6 @@ export default {"allergic_rhinitis":{
     },
     "PTSD Diagnosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Initial_Psychiatric_PTSD_Encounter",
       "codes": [
         {
@@ -49468,7 +49454,6 @@ export default {"allergic_rhinitis":{
     "VA Hotline Encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -49757,7 +49742,6 @@ export default {"allergic_rhinitis":{
     },
     "Alcohol Diagnosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "",
       "codes": [
         {
@@ -49869,7 +49853,6 @@ export default {"allergic_rhinitis":{
     },
     "Opioid Abuse Diagnosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "",
       "codes": [
         {
