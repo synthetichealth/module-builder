@@ -741,7 +741,7 @@ class MedicationOrder extends Component<Props> {
     let state = ((this.props.state: any): MedicationOrder);
     return (
       <div>
-        <input type="checkbox" checked={state.create_administration} onChange={() => this.props.onChange('create_administration')({val: {id: !state.create_administration}})} /> Create a companion MedicationAdministration
+        <input type="checkbox" checked={state.administration} onChange={() => this.props.onChange('administration')({ val: { id: !state.administration } })} /> Administration of the medication.
       </div>
     );
   }

@@ -420,8 +420,8 @@ const stateDescription = (state) =>{
   if(state.assign_to_attribute){
     details = details + `Assign to Attribute: '${state['assign_to_attribute']}'\\l`
   }
-  if(state.create_administration){
-    details = details + `Companion MedicationAdministration will be created\\l`
+  if(state.administration){
+    details = details + `Medication is administered\\l`
   }
   if(state.referenced_by_attribute){
     details = details + `Referenced By Attribute: '${state['referenced_by_attribute']}'\\l`
