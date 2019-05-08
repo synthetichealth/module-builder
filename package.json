@@ -37,7 +37,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build-modules": "node scripts/build-modules.js"
+    "build-modules": "node scripts/build-modules.js",
+    "reformat-modules": "node scripts/reformat-modules.js"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
