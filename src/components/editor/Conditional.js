@@ -514,15 +514,18 @@ class And extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): AndConditional);
+    let canDelete = conditional.conditions.filter(e => e).length > 2; // TODO: why are there still `undefined` in the array?
     return (
       <label> And:
         {conditional.conditions.map((cond, i) => {
           return (
             <div className="section"  key={i}>
               <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+              {canDelete && <a className="editable-text delete-button" onClick={() => this.props.onChange(`conditions.${i}`)({val: {id: null}})}>remove</a> }
             </div>
           )
         })}
+        <a className='editable-text add-button' onClick={() => this.props.onChange(`conditions.${conditional.conditions.length}`)({val: {id: getTemplate('Type.Condition.Gender')}})}>+</a>
       </label>
     );
   }
@@ -533,15 +536,18 @@ class Or extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): OrConditional);
+    let canDelete = conditional.conditions.filter(e => e).length > 2; // TODO: why are there still `undefined` in the array?
     return (
       <label> Or:
         {conditional.conditions.map((cond, i) => {
           return (
               <div className="section" key={i}>
                 <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+                {canDelete && <a className="editable-text delete-button" onClick={() => this.props.onChange(`conditions.${i}`)({val: {id: null}})}>remove</a> }
               </div>
           )
         })}
+        <a className='editable-text add-button' onClick={() => this.props.onChange(`conditions.${conditional.conditions.length}`)({val: {id: getTemplate('Type.Condition.Gender')}})}>+</a>
       </label>
     );
   }
@@ -552,6 +558,7 @@ class AtLeast extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): AtLeastConditional);
+    let canDelete = conditional.conditions.filter(e => e).length > 2; // TODO: why are there still `undefined` in the array?
     return (
       <label> At Least
         <RIENumber className='editable-text' value={conditional.minimum||0} propName='minimum' change={this.props.onChange('minimum')} />:
@@ -559,9 +566,11 @@ class AtLeast extends Component<Props> {
           return (
             <div className="section" key={i}>
               <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+              {canDelete && <a className="editable-text delete-button" onClick={() => this.props.onChange(`conditions.${i}`)({val: {id: null}})}>remove</a> }
             </div>
           )
         })}
+        <a className='editable-text add-button' onClick={() => this.props.onChange(`conditions.${conditional.conditions.length}`)({val: {id: getTemplate('Type.Condition.Gender')}})}>+</a>
       </label>
     );
   }
@@ -572,6 +581,7 @@ class AtMost extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): AtMostConditional);
+    let canDelete = conditional.conditions.filter(e => e).length > 2; // TODO: why are there still `undefined` in the array?
     return (
       <label> At Most
         <RIENumber className='editable-text' value={conditional.maximum||0} propName='maximum' change={this.props.onChange('maximum')} />:
@@ -580,9 +590,11 @@ class AtMost extends Component<Props> {
           return (
             <div className="section" key={i}>
               <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+              {canDelete && <a className="editable-text delete-button" onClick={() => this.props.onChange(`conditions.${i}`)({val: {id: null}})}>remove</a> }
             </div>
           )
         })}
+        <a className='editable-text add-button' onClick={() => this.props.onChange(`conditions.${conditional.conditions.length}`)({val: {id: getTemplate('Type.Condition.Gender')}})}>+</a>
       </label>
     );
   }
