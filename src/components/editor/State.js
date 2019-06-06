@@ -12,7 +12,7 @@ import ConditionalEditor from './Conditional';
 import Transition from './Transition';
 import { getTemplate } from '../../templates/Templates';
 import { BasicTutorial, EditTutorial } from '../../templates/Tutorial';
-
+import { Decimal } from 'decimal.js-light';
 
 import './State.css';
 
@@ -1595,7 +1595,9 @@ class Symptom extends Component<Props> {
   }
 
   formatAsPercentage(num: number) {
-    return (num * 100) + "%";
+    const y = new Decimal(num);
+    const places = Math.max(y.decimalPlaces() - 2,1);
+    return (y*100).toFixed(places).toString() + "%";
   }
 
   renderCause() {
