@@ -125,7 +125,6 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
         if(typeof t.distribution === 'object'){
           distLabel = `p(${t.distribution.attribute})`
           if(t.distribution.default){
-            // let pct = t.distribution.default * 100
             let pct = formatAsPercentage(t.distribution.default)
             distLabel += `, default ${pct}`
           }
@@ -190,8 +189,16 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
         } else {
           t.distributions.forEach( dist => {
             if(module.states[dist.transition]){
-              let pct = formatAsPercentage(dist.distribution)
-
+              let pct = ""
+              if(typeof dist.distribution === 'object'){
+                if(dist.distribution.default){
+                  pct = formatAsPercentage(dist.distribution.default)
+                } else {
+                  pct = "na"
+                }
+              } else {
+                pct = formatAsPercentage(dist.distribution)
+              }
               let nodes = `  "${escapedName}" -> "${dist.transition}"`
               if(selectedState && dist.transition === selectedState.name){
                 nodeHighlighted[nodes] = 'standard'

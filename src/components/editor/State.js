@@ -1405,8 +1405,6 @@ class Observation extends Component<Props> {
   }
 
   renderToggles(currentItem) {
-    console.log(currentItem);
-
     let toggles = [];
 
     if (currentItem !== 'exact') {
