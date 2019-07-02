@@ -3369,22 +3369,7 @@ export default {"allergic_rhinitis":{
           "display": "Anemia (disorder)"
         }
       ],
-      "conditional_transition": [
-        {
-          "transition": "Female",
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "F"
-          }
-        },
-        {
-          "transition": "Male",
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          }
-        }
-      ]
+      "direct_transition": "Anemia_Encounter"
     },
     "Terminal": {
       "type": "Terminal"
@@ -3403,7 +3388,7 @@ export default {"allergic_rhinitis":{
         "high": 20,
         "unit": "minutes"
       },
-      "direct_transition": "Medication_Reconciliation",
+      "direct_transition": "Collect_Social_and_Nutrition_History",
       "remarks": [
         "Future model: This should be a submodule that records social habits, nutrition, alcohol consumption."
       ]
@@ -3443,7 +3428,7 @@ export default {"allergic_rhinitis":{
                   }
                 ],
                 "operator": "<=",
-                "value": 33
+                "value": 28
               },
               {
                 "condition_type": "Gender",
@@ -3471,21 +3456,165 @@ export default {"allergic_rhinitis":{
                   }
                 ],
                 "operator": "<=",
-                "value": 30
+                "value": 27
               }
             ]
           }
         },
         {
-          "transition": "PLACEHOLDER_Collect_Social_Habits"
+          "transition": "Administer_Medications_2"
         }
       ]
     },
     "End_Initial_Encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "Inpatient_Encounter"
+      "direct_transition": "Delay"
     },
-    "Inpatient_Encounter": {
+    "Male": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "CBC_Panel_M_Severe",
+          "distribution": 0.07
+        },
+        {
+          "transition": "CBC_Panel_M_Routine",
+          "distribution": 0.93
+        }
+      ]
+    },
+    "Female": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "pregnant",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "CBC_Panel_F_Severe",
+              "distribution": 0.28
+            },
+            {
+              "transition": "CBC_Panel_F_Routine",
+              "distribution": 0.72
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "CBC_Panel_F_Severe",
+              "distribution": 0.07
+            },
+            {
+              "transition": "CBC_Panel_F_Routine",
+              "distribution": 0.93
+            }
+          ]
+        }
+      ]
+    },
+    "Transfusion": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 180207008,
+          "display": "Intravenous blood transfusion of packed cells (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Transfusion_Encounter"
+    },
+    "Peripheral_Blood_Smear": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 14768001,
+          "display": "Peripheral blood smear interpretation"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Review_Of_Systems"
+    },
+    "Medication_Reconciliation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 430193006,
+          "display": "Medication Reconciliation (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 5,
+        "high": 20,
+        "unit": "minutes"
+      },
+      "direct_transition": "Brief_Examination"
+    },
+    "Administer_Medications": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Iron_Supplement",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Vitamin B12 Booster",
+          "distribution": 0.1
+        },
+        {
+          "transition": "End_Consult_Referral to_Experts_Encounter",
+          "distribution": 0.8
+        }
+      ]
+    },
+    "Iron_Supplement": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310325,
+          "display": "ferrous sulfate 325 MG Oral Tablet"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Vitamin B12 Booster",
+          "distribution": 0.1
+        },
+        {
+          "transition": "End_Consult_Referral to_Experts_Encounter",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "Vitamin B12 Booster": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2001499,
+          "display": "Vitamin B 12 5 MG/ML Injectable Solution"
+        }
+      ],
+      "direct_transition": "End_Consult_Referral to_Experts_Encounter"
+    },
+    "Transfusion_Encounter": {
       "type": "Encounter",
       "encounter_class": "inpatient",
       "reason": "anemia",
@@ -3496,46 +3625,96 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem (procedure)"
         }
       ],
-      "direct_transition": "Recheck_Blood_Counts"
+      "direct_transition": "Transfusion"
     },
-    "Recheck_Blood_Counts": {
-      "type": "Simple",
-      "direct_transition": "Consult/Referral_to_Experts"
+    "Anemia_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Male",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        }
+      ],
+      "reason": "anemia"
     },
-    "Male": {
+    "Administer_Medications_2": {
       "type": "Simple",
       "distributed_transition": [
         {
-          "transition": "Blood_Panel_M_Severe",
-          "distribution": 0.07
+          "transition": "Iron_Supplement_2",
+          "distribution": 0.1
         },
         {
-          "transition": "Blood_Panel_M_Routine",
-          "distribution": 0.93
+          "transition": "Vitamin_B12_Booster",
+          "distribution": 0.1
+        },
+        {
+          "transition": "End_Anemia_Encounter",
+          "distribution": 0.8
         }
       ]
     },
-    "Female": {
-      "type": "Simple",
+    "Iron_Supplement_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310325,
+          "display": "ferrous sulfate 325 MG Oral Tablet"
+        }
+      ],
       "distributed_transition": [
         {
-          "transition": "Blood_Panel_F_Severe",
-          "distribution": 0.07
+          "transition": "Vitamin_B12_Booster",
+          "distribution": 0.1
         },
         {
-          "transition": "Blood_Panel_F_Routine",
-          "distribution": 0.93
+          "transition": "End_Anemia_Encounter",
+          "distribution": 0.9
         }
       ]
     },
-    "Blood_Panel_F_Routine": {
+    "Vitamin_B12_Booster": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2001499,
+          "display": "Vitamin B 12 5 MG/ML Injectable Solution"
+        }
+      ],
+      "direct_transition": "End_Anemia_Encounter"
+    },
+    "End_Anemia_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "CBC_Panel_F_Routine": {
       "type": "DiagnosticReport",
-      "number_of_observations": 2,
+      "number_of_observations": 11,
       "codes": [
         {
           "system": "LOINC",
-          "code": "24360-0",
-          "display": "Hemoglobin and Hematocrit panel - Blood"
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
         }
       ],
       "direct_transition": "Peripheral_Blood_Smear",
@@ -3569,17 +3748,510 @@ export default {"allergic_rhinitis":{
             "low": 33,
             "high": 36
           }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "WBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 10.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*6/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "RBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
         }
       ]
     },
-    "Blood_Panel_M_Routine": {
+    "CBC_Panel_M_Severe": {
       "type": "DiagnosticReport",
-      "number_of_observations": 2,
+      "number_of_observations": 11,
       "codes": [
         {
           "system": "LOINC",
-          "code": "24360-0",
-          "display": "Hemoglobin and Hematocrit panel - Blood"
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 6.7,
+            "high": 10
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20570-8",
+              "display": "Hematocrit [Volume Fraction] of Blood"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 30
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "WBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 10.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*6/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "RBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "direct_transition": "Peripheral_Blood_Smear"
+    },
+    "CBC_Panel_F_Severe": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 11,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 7,
+            "high": 10.9
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20570-8",
+              "display": "Hematocrit [Volume Fraction] of Blood"
+            }
+          ],
+          "range": {
+            "low": 21,
+            "high": 32.9
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "WBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 10.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*6/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "RBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "direct_transition": "Peripheral_Blood_Smear"
+    },
+    "CBC_Panel_M_Routine": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 11,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
         }
       ],
       "direct_transition": "Peripheral_Blood_Smear",
@@ -3613,12 +4285,197 @@ export default {"allergic_rhinitis":{
             "low": 30.1,
             "high": 35
           }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "WBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 10.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*6/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "RBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
         }
       ]
     },
-    "Blood_Panel_M_Severe": {
+    "End Transfusion_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Delay_One_Day"
+    },
+    "Consult_Referral_to_Experts_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Anemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Blood_Panel_F_Routine",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Blood_Panel_M_Routine",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        }
+      ]
+    },
+    "End_Consult_Referral to_Experts_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "Collect_Social_and_Nutrition_History": {
+      "type": "Simple",
+      "remarks": [
+        "Done in review of systems.  Document alcohol and tobacco use."
+      ],
+      "direct_transition": "Medication_Reconciliation"
+    },
+    "Delay": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "hours"
+      },
+      "direct_transition": "Transfusion_Encounter"
+    },
+    "Blood_Panel_M_Routine": {
       "type": "DiagnosticReport",
-      "number_of_observations": 2,
       "codes": [
         {
           "system": "LOINC",
@@ -3638,8 +4495,8 @@ export default {"allergic_rhinitis":{
             }
           ],
           "range": {
-            "low": 6.7,
-            "high": 10
+            "low": 10,
+            "high": 11.9
           }
         },
         {
@@ -3653,217 +4510,63 @@ export default {"allergic_rhinitis":{
             }
           ],
           "range": {
-            "low": 20,
-            "high": 30
+            "low": 30.1,
+            "high": 35
           }
         }
       ],
-      "direct_transition": "Peripheral_Blood_Smear"
-    },
-    "Blood_Panel_F_Severe": {
-      "type": "DiagnosticReport",
-      "number_of_observations": 2,
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "24360-0",
-          "display": "Hemoglobin and Hematocrit panel - Blood"
-        }
-      ],
-      "observations": [
-        {
-          "category": "laboratory",
-          "unit": "g/dL",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "718-7",
-              "display": "Hemoglobin [Mass/volume] in Blood"
-            }
-          ],
-          "range": {
-            "low": 7,
-            "high": 10.9
-          }
-        },
-        {
-          "category": "laboratory",
-          "unit": "%",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "20570-8",
-              "display": "Hematocrit [Volume Fraction] of Blood"
-            }
-          ],
-          "range": {
-            "low": 21,
-            "high": 32.9
-          }
-        }
-      ],
-      "direct_transition": "Peripheral_Blood_Smear"
-    },
-    "Transfusion": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 180207008,
-          "display": "Intravenous blood transfusion of packed cells (procedure)"
-        }
-      ],
-      "duration": {
-        "low": 20,
-        "high": 60,
-        "unit": "minutes"
-      },
-      "direct_transition": "PLACEHOLDER_Do_Other_Severe_Anemia_Things"
-    },
-    "Peripheral_Blood_Smear": {
-      "type": "Simple",
-      "direct_transition": "Review_Of_Systems"
-    },
-    "Medication_Reconciliation": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 430193006,
-          "display": "Medication Reconciliation (procedure)"
-        }
-      ],
-      "duration": {
-        "low": 5,
-        "high": 20,
-        "unit": "minutes"
-      },
-      "direct_transition": "Brief_Examination"
-    },
-    "PLACEHOLDER_Collect_Social_Habits": {
-      "type": "Simple",
-      "direct_transition": "PLACEHOLDER_Collect_Nutrition",
-      "remarks": [
-        "Done in review of systems."
-      ]
-    },
-    "PLACEHOLDER_Collect_Nutrition": {
-      "type": "Simple",
-      "direct_transition": "Administer_Medications",
-      "remarks": [
-        "Done in review of systems"
-      ]
-    },
-    "Administer_Medications": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Iron_Supplement",
-          "distribution": 0.1
-        },
-        {
-          "transition": "Vitamin B12 Booster",
-          "distribution": 0.1
-        },
-        {
-          "transition": "PLACEHOLDER_Do_Other_Anemia_Things",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Iron_Supplement": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 310325,
-          "display": "ferrous sulfate 325 MG Oral Tablet"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "transition": "Vitamin B12 Booster",
-          "distribution": 0.1
-        },
-        {
-          "transition": "PLACEHOLDER_Do_Other_Anemia_Things",
-          "distribution": 0.9
-        }
-      ]
-    },
-    "Vitamin B12 Booster": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 2001499,
-          "display": "Vitamin B 12 5 MG/ML Injectable Solution"
-        }
-      ],
-      "direct_transition": "PLACEHOLDER_Do_Other_Anemia_Things"
-    },
-    "Consult/Referral_to_Experts": {
-      "type": "Simple",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Gender",
-                "gender": "M"
-              },
-              {
-                "condition_type": "Observation",
-                "codes": [
-                  {
-                    "system": "LOINC",
-                    "code": "20570-8",
-                    "display": "Hematrocrit"
-                  }
-                ],
-                "operator": "<",
-                "value": 30
-              }
-            ]
-          },
-          "distributions": [],
-          "transition": "Transfusion"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Gender",
-                "gender": "F"
-              },
-              {
-                "condition_type": "Observation",
-                "codes": [
-                  {
-                    "system": "LOINC",
-                    "code": "20570-8",
-                    "display": "Hematrocrit"
-                  }
-                ],
-                "operator": "<",
-                "value": 30
-              }
-            ]
-          },
-          "distributions": [],
-          "transition": "Transfusion"
-        }
-      ]
-    },
-    "PLACEHOLDER_Do_Other_Severe_Anemia_Things": {
-      "type": "Simple",
       "direct_transition": "Administer_Medications"
     },
-    "PLACEHOLDER_Do_Other_Anemia_Things": {
-      "type": "Simple",
-      "direct_transition": "Terminal"
+    "Blood_Panel_F_Routine": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24360-0",
+          "display": "Hemoglobin and Hematocrit panel - Blood"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 11,
+            "high": 11.9
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20570-8",
+              "display": "Hematocrit [Volume Fraction] of Blood"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        }
+      ],
+      "direct_transition": "Administer_Medications"
+    },
+    "Delay_One_Day": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "days"
+      },
+      "direct_transition": "Consult_Referral_to_Experts_Encounter"
     }
   }
 }
@@ -4132,7 +4835,7 @@ export default {"allergic_rhinitis":{
       "type": "Symptom",
       "symptom": "Fatigue",
       "cause": "",
-      "direct_transition": "Anemia Encounter",
+      "direct_transition": "Check_Anemia_Exist",
       "exact": {
         "quantity": 1
       }
@@ -4149,7 +4852,7 @@ export default {"allergic_rhinitis":{
     "Anemia_Submodule": {
       "type": "CallSubmodule",
       "submodule": "anemia/anemia_sub",
-      "direct_transition": "End_Encounter"
+      "direct_transition": "Anemia_End"
     },
     "Delay_0_14": {
       "type": "Delay",
@@ -4209,19 +4912,6 @@ export default {"allergic_rhinitis":{
         }
       ]
     },
-    "Anemia Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "anemia",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "185347001",
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "Anemia_Submodule"
-    },
     "Next_Symptom_1": {
       "type": "Simple",
       "distributed_transition": [
@@ -4243,14 +4933,31 @@ export default {"allergic_rhinitis":{
           "distribution": 0.15
         },
         {
-          "transition": "Anemia Encounter",
+          "transition": "Check_Anemia_Exist",
           "distribution": 0.85
         }
       ]
     },
-    "End_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Anemia_End": {
+      "type": "ConditionEnd",
+      "direct_transition": "Terminal",
+      "referenced_by_attribute": "anemia"
     }
   }
 }
@@ -5904,6 +6611,5132 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"breast_cancer/chemotherapy_breast":{
+  "name": "chemotherapy_breast",
+  "remarks": [
+    "This module consists of the different chemo drugs and goes through the adjuvant chemo cycle after surgery. "
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Set chemo counter"
+    },
+    "Cyclophosphamide": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1734919,
+          "display": "Cyclophosphamide 1000 MG Injection"
+        }
+      ],
+      "direct_transition": "Adjuvant Chemotherapy Procedure",
+      "assign_to_attribute": "chemoMed",
+      "reason": "breast_cancer_condition"
+    },
+    "Anthracyclines": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Doxorubicin",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Epirubicin",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Carboplatin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 597195,
+          "display": "Carboplatin 10 MG/ML Injectable Solution"
+        }
+      ],
+      "direct_transition": "Adjuvant Chemotherapy Procedure",
+      "assign_to_attribute": "chemoMed",
+      "reason": "breast_cancer_condition"
+    },
+    "Taxanes": {
+      "type": "Simple",
+      "direct_transition": "Paclitaxel"
+    },
+    "5-fluorouracil": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1791701,
+          "display": "10 ML Fluorouracil 50 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Adjuvant Chemotherapy Procedure",
+      "assign_to_attribute": "chemoMed",
+      "reason": "breast_cancer_condition"
+    },
+    "Doxorubicin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1790099,
+          "display": "10 ML Doxorubicin Hydrochloride 2 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Adjuvant Chemotherapy Procedure",
+      "remarks": [
+        "- Doxorubicin (Adriamycin)",
+        "- Epriubicin (Ellence) ",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/chemotherapy-for-breast-cancer.html"
+      ],
+      "assign_to_attribute": "chemoMed",
+      "reason": "breast_cancer_condition"
+    },
+    "Epirubicin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1732186,
+          "display": "100 ML Epirubicin Hydrochloride 2 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Adjuvant Chemotherapy Procedure",
+      "assign_to_attribute": "chemoMed",
+      "reason": "breast_cancer_condition"
+    },
+    "Paclitaxel": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 583214,
+          "display": "Paclitaxel 100 MG Injection"
+        }
+      ],
+      "direct_transition": "Adjuvant Chemotherapy Procedure",
+      "assign_to_attribute": "chemoMed",
+      "reason": "breast_cancer_condition"
+    },
+    "Adjuvant Chemotherapy Procedure": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 367336001,
+          "display": "Chemotherapy (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 0,
+        "high": 2,
+        "unit": "hours"
+      },
+      "direct_transition": "End Current Adjuvant Chemo Medication"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "End Current Chemo Treatment": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Increment Chemo Counter",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_chemoCount",
+            "operator": "<",
+            "value": 7
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Increment Chemo Counter": {
+      "type": "Counter",
+      "attribute": "breast_cancer_chemoCount",
+      "action": "increment",
+      "direct_transition": "Delay Until Next Cycle (3 Weeks)"
+    },
+    "Start New Cycle": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "Breast Cancer",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Choose Chemo Drug"
+    },
+    "Set chemo counter": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_chemoCount",
+      "value": 0,
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/chemotherapy-for-breast-cancer.html",
+        "",
+        "Which chemotherapy drugs are used for breast cancer?",
+        "In most cases (especially as adjuvant or neoadjuvant treatment), chemo is most effective when combinations of drugs are used. Today, doctors use many different combinations, and it's not clear that any single combination is clearly the best.",
+        "",
+        "The most common drugs used for adjuvant and neoadjuvant chemo include:",
+        "Anthracyclines, such as doxorubicin (Adriamycin) and epirubicin (Ellence)",
+        "Taxanes, such as paclitaxel (Taxol) and docetaxel (Taxotere)",
+        "5-fluorouracil (5-FU)",
+        "Cyclophosphamide (Cytoxan)",
+        "Carboplatin (Paraplatin)",
+        "Most often, combinations of 2 or 3 of these drugs are used."
+      ],
+      "direct_transition": "Choose Chemo Drug"
+    },
+    "Delay Until Next Cycle (3 Weeks)": {
+      "type": "Delay",
+      "direct_transition": "Start New Cycle",
+      "range": {
+        "low": 19,
+        "high": 23,
+        "unit": "days"
+      }
+    },
+    "Choose Chemo Drug": {
+      "type": "Simple",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/chemotherapy-for-breast-cancer.html",
+        "",
+        "Which chemotherapy drugs are used for breast cancer?",
+        "In most cases (especially as adjuvant or neoadjuvant treatment), chemo is most effective when combinations of drugs are used. Today, doctors use many different combinations, and it's not clear that any single combination is clearly the best.",
+        "",
+        "The most common drugs used for adjuvant and neoadjuvant chemo include:",
+        "Anthracyclines, such as doxorubicin (Adriamycin) and epirubicin (Ellence)",
+        "Taxanes, such as paclitaxel (Taxol) and docetaxel (Taxotere)",
+        "5-fluorouracil (5-FU)",
+        "Cyclophosphamide (Cytoxan)",
+        "Carboplatin (Paraplatin)",
+        "Most often, combinations of 2 or 3 of these drugs are used."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Cyclophosphamide"
+          },
+          "distributions": [
+            {
+              "transition": "Cyclophosphamide",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Doxorubicin"
+          },
+          "distributions": [
+            {
+              "transition": "Doxorubicin",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Epirubicin"
+          },
+          "distributions": [
+            {
+              "transition": "Epirubicin",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Carboplatin",
+              "distribution": 1
+            }
+          ],
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Carboplatin"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Paclitaxel"
+          },
+          "distributions": [
+            {
+              "transition": "Paclitaxel",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "PriorState",
+            "name": ""
+          },
+          "distributions": [
+            {
+              "transition": "5-fluorouracil",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Cyclophosphamide",
+              "distribution": 0.3
+            },
+            {
+              "transition": "Anthracyclines",
+              "distribution": 0.3
+            },
+            {
+              "transition": "Carboplatin",
+              "distribution": 0.05
+            },
+            {
+              "transition": "Taxanes",
+              "distribution": 0.3
+            },
+            {
+              "transition": "5-fluorouracil",
+              "distribution": 0.05
+            }
+          ]
+        }
+      ]
+    },
+    "End Current Adjuvant Chemo Medication": {
+      "type": "MedicationEnd",
+      "direct_transition": "End Current Chemo Treatment",
+      "referenced_by_attribute": "chemoMed"
+    }
+  }
+}
+,
+"breast_cancer/hormone_diagnosis":{
+  "name": "Hormone_Diagnosis",
+  "remarks": [
+    "This module checks for HER2 and then assigns either HER2 positive/negative. This follows suit for ER and PR. Finally, it accounts for the Triple negative factor at the end. "
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Human_Epidermal_Growth_Factor_Receptor_2__HER2__Detection___Fluorescence_in_situ_Hybridization__FISH_"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Human_Epidermal_Growth_Factor_Receptor_2__HER2__Detection___Fluorescence_in_situ_Hybridization__FISH_": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 434363004,
+          "display": "Human epidermal growth factor receptor 2 gene detection by fluorescence in situ hybridization (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 1,
+        "high": 2,
+        "unit": "days"
+      },
+      "remarks": [
+        "Fluorescence in situ hybridization (FISH), which detects the number of HER2 genes in the cancer cells:",
+        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html",
+        "",
+        "FISH results are usually available from the lab within a few days:",
+        "https://www.verywellhealth.com/fish-test-2252457"
+      ],
+      "direct_transition": "Human_Epidermal_Growth_Factor_Receptor_2_HER2_Detection_Immunochemistry",
+      "reason": "breast_cancer_condition"
+    },
+    "HER2_negative": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85319-2",
+          "display": "HER2 [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "direct_transition": "HER2 ratio less than 1point8"
+    },
+    "HER2_positive": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85319-2",
+          "display": "HER2 [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      },
+      "direct_transition": "HER2_ratio_greater_than_2point2"
+    },
+    "Tumor_Biopsy_to_Test_Estrogen_Receptor_Status": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "ER_negative",
+          "distribution": 0.2
+        },
+        {
+          "transition": "ER_positive",
+          "distribution": 0.8
+        }
+      ],
+      "remarks": [
+        "About 80% of all breast cancers are “ER-positive.” That means the cancer cells grow in response to the hormone estrogen.:",
+        "https://www.webmd.com/breast-cancer/breast-cancer-types-er-positive-her2-positive#1"
+      ]
+    },
+    "ER_negative": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85337-4",
+          "display": "Estrogen receptor Ag [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "direct_transition": "ER-"
+    },
+    "ER_positive": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85337-4",
+          "display": "Estrogen receptor Ag [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      },
+      "direct_transition": "ER+"
+    },
+    "Tumor_Biopsy_to_Test_Progesterone_Receptor_Status": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "PR_negative",
+          "distribution": 0.35
+        },
+        {
+          "transition": "PR_positive",
+          "distribution": 0.65
+        }
+      ],
+      "remarks": [
+        "About 80% of all breast cancers are “ER-positive.” That means the cancer cells grow in response to the hormone estrogen. About 65% of these are also “PR-positive.” They grow in response to another hormone, progesterone.:",
+        "https://www.webmd.com/breast-cancer/breast-cancer-types-er-positive-her2-positive#1"
+      ]
+    },
+    "PR_negative": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85339-0",
+          "display": "Progesterone receptor Ag [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "direct_transition": "PR-"
+    },
+    "PR_positive": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85339-0",
+          "display": "Progesterone receptor Ag [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      },
+      "direct_transition": "PR+"
+    },
+    "Overall_Receptor_Analysis": {
+      "type": "Simple",
+      "remarks": [
+        "If all hormones are negative transition to triple negative"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Hormone Receptor Negative",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_ER",
+                "operator": "==",
+                "value": "ER-negative"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_PR",
+                "operator": "==",
+                "value": "PR-negative"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Hormone Receptor Positive",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_ER",
+                "operator": "==",
+                "value": "ER-positive"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_PR",
+                "operator": "==",
+                "value": "PR-positive"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "HER2-": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_HER2",
+      "direct_transition": "Tumor_Biopsy_to_Test_Estrogen_Receptor_Status",
+      "value": "HER2-negative"
+    },
+    "HER2+": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_HER2",
+      "value": "HER2-positive",
+      "direct_transition": "Tumor_Biopsy_to_Test_Estrogen_Receptor_Status"
+    },
+    "ER-": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_ER",
+      "direct_transition": "Tumor_Biopsy_to_Test_Progesterone_Receptor_Status",
+      "value": "ER-negative"
+    },
+    "ER+": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_ER",
+      "direct_transition": "Tumor_Biopsy_to_Test_Progesterone_Receptor_Status",
+      "value": "ER-positive"
+    },
+    "PR-": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_PR",
+      "direct_transition": "Overall_Receptor_Analysis",
+      "value": "PR-negative"
+    },
+    "PR+": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_PR",
+      "direct_transition": "Overall_Receptor_Analysis",
+      "value": "PR-positive"
+    },
+    "Triple_Negative": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21924-6",
+          "display": "Tumor marker Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "direct_transition": "Triple_Negative_Patient",
+      "remarks": [
+        "In women with triple-negative breast cancer, the malignant cells do not contain receptors for estrogen, progesterone or HER2. Breast cancer that is ER-, PR- and HER2-negative cannot be treated with hormone therapy or medications that work by blocking HER2, such as trastuzumab."
+      ]
+    },
+    "Hormone Receptor Positive": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "10480-2",
+          "display": "Estrogen+Progesterone receptor Ag [Presence] in Tissue by Immune stain"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      },
+      "remarks": [
+        "Hormone receptor-positive (estrogen receptor-positive (ER-positive)/progesterone receptor-positive (PR-positive)) tumors express (have a lot of) hormone receptors.:",
+        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html"
+      ]
+    },
+    "Hormone Receptor Negative": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": 417181009,
+          "display": "Estrogen+Progesterone receptor Ag [Presence] in Tissue by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Triple_Negative",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_HER2",
+            "operator": "==",
+            "value": "HER2-negative"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ],
+      "remarks": [
+        "Hormone receptor-negative (estrogen receptor-negative (ER-negative)/progesterone receptor-negative (PR- negative)) tumors do not express (have few or no) hormone receptors.:",
+        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html"
+      ]
+    },
+    "Human_Epidermal_Growth_Factor_Receptor_2_HER2_Detection_Immunochemistry": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 433114000,
+          "display": "Human epidermal growth factor receptor 2 gene detection by immunohistochemistry (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 2,
+        "high": 4,
+        "unit": "hours"
+      },
+      "remarks": [
+        "Immunohistochemistry (IHC), which detects the number of HER2 protein receptors in the cancer cells:",
+        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html",
+        "",
+        "In about 20% of breast cancers, the cells make too much of a protein known as HER2. These cancers tend to be aggressive and fast-growing:",
+        "https://www.webmd.com/breast-cancer/breast-cancer-types-er-positive-her2-positive#1",
+        "",
+        "All antibody-antigen interactions investigated in this study, both the primary antibody binding to its target and the secondary antibody binding to the primary, require several hours to reach equilibrium at the concentrations used:",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3878317/"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "HER2_negative",
+          "distribution": 0.8
+        },
+        {
+          "transition": "HER2_positive",
+          "distribution": 0.2
+        }
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Triple_Negative_Patient": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_triple_negative",
+      "direct_transition": "Terminal",
+      "value": true
+    },
+    "HER2 ratio less than 1point8": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ratio",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85318-4",
+          "display": "HER2 [Presence] in Breast cancer specimen by FISH"
+        }
+      ],
+      "direct_transition": "HER2-",
+      "remarks": [
+        "Title of the article: HER2 Evaluation and Its Impact on Breast Cancer Treatment Decisions",
+        "",
+        "https://wwwncbinlmnihgov/pmc/articles/PMC3225235/"
+      ],
+      "exact": {
+        "quantity": "less than 1.8"
+      }
+    },
+    "HER2_ratio_greater_than_2point2": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ratio",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85318-4",
+          "display": "HER2 [Presence] in Breast cancer specimen by FISH"
+        }
+      ],
+      "direct_transition": "HER2+",
+      "remarks": [
+        "Title of the article: HER2 Evaluation and Its Impact on Breast Cancer Treatment Decisions",
+        "",
+        "https://wwwncbinlmnihgov/pmc/articles/PMC3225235/"
+      ],
+      "exact": {
+        "quantity": "greater than 2.2"
+      }
+    }
+  }
+}
+,
+"breast_cancer/hormonetherapy_breast":{
+  "name": "hormonetherapy_breast",
+  "remarks": [
+    "This module has ER/PR and HER2 treatments depending on whether each receptor is positive or negative. There is also treatment for if ER/PR are both positive. "
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "ER-encounter"
+    },
+    "Fulvestrant": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 727762,
+          "display": "5 ML fulvestrant 50 MG/ML Prefilled Syringe"
+        }
+      ],
+      "direct_transition": "ER_medication_end",
+      "assign_to_attribute": "ER_medication",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/hormone-therapy-for-breast-cancer.html",
+        "",
+        "Fulvestrant (Faslodex)",
+        "Fulvestrant is a drug that blocks and damages estrogen receptors.This drug is not a SERM – it acts like an anti-estrogen throughout the body. It is also known as a selective estrogen receptor degrader (SERD).",
+        "",
+        "Fulvestrant is used to treat metastatic breast cancer, most often after other hormone drugs (like tamoxifen and often an aromatase inhibitor) have stopped working.",
+        "",
+        "It is given by injections into the buttocks. For the first month, the shots are given 2 weeks apart. After that, they are given once a month. Common short-term side effects can include:",
+        "",
+        "Hot flashes and/or night sweats",
+        "Headache",
+        "Mild nausea",
+        "Bone pain",
+        "Injection site pain",
+        "Because fulvestrant blocks estrogen, in theory it could cause weakened bones (osteoporosis) if taken for a long time. Fulvestrant is currently approved only for use in post-menopausal women. It is sometimes used “off-label” in pre-menopausal women, often combined with a luteinizing-hormone releasing hormone (LHRH) agonist to turn off the ovaries (see the section on Ovarian Ablation below)."
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Aromatase Inhibitors (AI)": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_aromatase_inhibitors",
+      "distributed_transition": [
+        {
+          "transition": "Letrozole",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Anastrozole",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Exemestane",
+          "distribution": 0.34
+        }
+      ],
+      "value": true,
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/hormone-therapy-for-breast-cancer.html",
+        "",
+        "Aromatase inhibitors (AIs)",
+        "Aromatase inhibitors (AIs) are drugs that stop estrogen production. Before menopause, most estrogen is made by the ovaries. But for women whose ovaries aren’t working, either due to menopause or certain treatments, a small amount of estrogen is still made in the fat tissue by an enzyme (called aromatase). AIs work by blocking aromatase from making estrogen.",
+        "",
+        "These drugs are useful in women who are past menopause, although they can also be used in premenopausal women in combination with ovarian suppression (see below).",
+        "",
+        "There are 3 AIs that seem to work about equally well in treating breast cancer:",
+        "",
+        "Letrozole (Femara)",
+        "Anastrozole (Arimidex)",
+        "Exemestane (Aromasin)",
+        "These drugs are pills taken daily.",
+        "",
+        "Use in adjuvant therapy: After surgery, taking an AI, either alone or after tamoxifen, has been shown to work better than taking just tamoxifen for 5 years to reduce the risk of the cancer coming back .",
+        "",
+        "Schedules that are known to be helpful include:",
+        "",
+        "Tamoxifen for 2 to 3 years, followed by an AI to complete 5 years of treatment",
+        "An AI for 2 to 3 years followed by Tamoxifen to complete 5 years of treatment",
+        "Tamoxifen for 5 years, followed by an AI for 5 years",
+        "An AI for 5 years",
+        "Tamoxifen for 5 to 10 years (if you are unable to take an AI)",
+        "For most post-menopausal women whose cancers are hormone receptor-positive, most doctors recommend taking an AI at some point during adjuvant therapy. Right now, standard treatment is to take these drugs for about 5 years, or to alternate with tamoxifen for a total of at least 5 years, or to take in sequence with tamoxifen for at least 3 years. Studies are now being done to see if taking an AI for more than 5 years would be more helpful. Tamoxifen is an option for some women who cannot take an AI. Taking tamoxifen for 10 years is considered more effective than taking it for 5 years, but you and your doctor will decide the best schedule of treatment for you.",
+        "",
+        "If you have early-stage breast cancer and had not gone through menopause when you were first diagnosed, your doctor might recommend taking tamoxifen first, and then taking an AI later if you go through menopause during treatment. Another option is taking a drug called a luteinizing hormone-releasing hormone (LHRH) analog, which turns off the ovaries, along with an AI. An AI should not be taken alone for breast cancer treatment in pre-menopausal women because it is unsafe and can increase hormone levels.",
+        "",
+        "Use in cancer that comes back or has spread: AIs can also be used to treat more advanced hormone-positive breast cancers, especially in post-menopausal women. They are often continued for as long as they are helpful.",
+        "",
+        "Possible side effects: The AIs tend to have fewer serious side effects than tamoxifen. They don't cause uterine cancers and very rarely cause blood clots. They can, however, cause muscle pain and joint stiffness and/or pain. The joint pain may be similar to a feeling of having arthritis in many different joints at one time. Switching to a different AI may improve this side effect, but it has led some women to stop treatment. If this happens, most doctors recommend using tamoxifen to complete 5 to 10 years of hormone treatment.",
+        "",
+        "Because AIs drastically lower the estrogen level in women after menopause, they can also cause bone thinning, sometimes leading to osteoporosis and even fractures. If you are taking an AI, your bone density may be tested and you may also be given drugs, such as bisphosphonates or denosumab (Xgeva, Prolia), to strengthen your bones.",
+        "",
+        ""
+      ]
+    },
+    "Letrozole": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200064,
+          "display": "letrozole 2.5 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_medication_end",
+      "assign_to_attribute": "ER_medication",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 7,
+          "unit": "years"
+        }
+      },
+      "reason": "breast_cancer_condition"
+    },
+    "Anastrozole": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 199224,
+          "display": "anastrozole 1 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_medication_end",
+      "assign_to_attribute": "ER_medication",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 7,
+          "unit": "years"
+        }
+      },
+      "reason": "breast_cancer_condition"
+    },
+    "Exemestane": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310261,
+          "display": "exemestane 25 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_medication_end",
+      "assign_to_attribute": "ER_medication",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 7,
+          "unit": "years"
+        }
+      },
+      "reason": "breast_cancer_condition"
+    },
+    "ER-Treatments": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Estrogen Blocking Receptors",
+          "distribution": 0.6
+        },
+        {
+          "transition": "Fulvestrant",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Aromatase Inhibitors (AI)",
+          "distribution": 0.3
+        }
+      ],
+      "remarks": [
+        "https://www.breastcancer.org/research-news/5-more-years-of-ais-no-better-than-2-more",
+        ""
+      ]
+    },
+    "HER2-Treatment": {
+      "type": "Simple",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/targeted-therapy-for-breast-cancer.html",
+        "",
+        "For about 1 in 5 women with breast cancer, the cancer cells have too much of a growth-promoting protein known as HER2/neu (or just HER2) on their surface. These cancers, known as HER2-positive breast cancers, tend to grow and spread more aggressively. A number of drugs have been developed that target this protein:",
+        "",
+        "Trastuzumab (Herceptin): This is a monoclonal antibody, which is a man-made version of a very specific immune system protein. It is often given along with chemo, but it might also be used alone (especially if chemo alone has already been tried). Trastuzumab can be used to treat both early- and late-stage breast cancer. When started before or after surgery to treat early breast cancer, this drug is usually given for a total of 6 months to a year. For advanced breast cancer, treatment is often given for as long as the drug is helpful. This drug is given into a vein (IV) and is infused over 30-90 minutes. Another type of trastuzumab called trastuzumab and hyaluronidase-oysk injection (Herceptin Hylecta) is also available. It is given as a subcutaneous (under the skin) shot that takes about 2 to 5 minutes to inject.",
+        "Pertuzumab (Perjeta): This monoclonal antibody can be given with trastuzumab and chemo, either before surgery to treat early-stage breast cancer, or to treat advanced breast cancer. This drug is given into a vein (IV).",
+        "Ado-trastuzumab emtansine (Kadcyla, also known as TDM-1): This is a monoclonal antibody attached to a chemotherapy drug. It is used by itself to treat advanced breast cancer in women who have already been treated with trastuzumab and chemo. This drug is also given in a vein (IV).",
+        "Lapatinib (Tykerb): This is a kinase inhibitor. It is a pill taken daily. Lapatinib is used to treat advanced breast cancer, and might be used along with certain chemotherapy drugs, trastuzumab, or hormone therapy drugs.",
+        "Neratinib (Nerlynx): This is another kinase inhibitor. It is a pill that is taken daily. Neratinib is used to treat early-stage breast cancer after a woman has completed one year of trastuzumab and is usually given for one year. Some clinical trials show that it may also be effective in advanced breast cancer, as well.",
+        "Side effects of targeted therapy for HER2-positive breast cancer",
+        "The side effects of these drugs are often mild, but some can be serious. Discuss what you can expect with your doctor.",
+        "",
+        "Some women develop heart damage during or after treatment with trastuzumab, pertuzumab, or ado-trastuzumab emtansine. This can lead to congestive heart failure. For most (but not all) women, this effect lasts a short time and gets better when the drug is stopped. The risk of heart problems is higher when these drugs are given with certain chemo drugs that also can cause heart damage, such as doxorubicin (Adriamycin) and epirubicin (Ellence). Because these drugs can cause heart damage, doctors often check your heart function (with an echocardiogram or a MUGA scan) before treatment, and again while you are taking the drug. Let your doctor know if you develop symptoms such as shortness of breath, leg swelling, and severe fatigue.",
+        "",
+        "Lapatinib and neratinib can cause severe diarrhea, so it’s very important to let your health care team know about any changes in bowel habits as soon as they happen. Lapatinib can also cause hand-foot syndrome, in which the hands and feet become sore and red, and may blister and peel. Pertuzumab can also cause diarrhea.  ",
+        "",
+        "If you are pregnant, you should not take these drugs. They can harm and even cause death to the fetus. If you could become pregnant, talk to your doctor about using effective birth control while taking these drugs.",
+        "",
+        "Targeted therapy for hormone receptor-positive breast cancer",
+        "About 2 of 3 breast cancers are hormone receptor-positive (ER-positive or PR-positive). For women with these cancers, treatment with hormone therapy is often helpful. Certain targeted therapy drugs can make hormone therapy even more effective, although these targeted drugs might also add to the side effects."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_HER2",
+            "operator": "==",
+            "value": "HER2-positive"
+          },
+          "distributions": [
+            {
+              "transition": "Trastuzumab_her2",
+              "distribution": 0.9
+            },
+            {
+              "transition": "Ado_trastuzumab_emtansine",
+              "distribution": 0.03
+            },
+            {
+              "transition": "Lapatinib",
+              "distribution": 0.03
+            },
+            {
+              "transition": "Neratinib",
+              "distribution": 0.04
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 1,
+              "transition": "Hormone_Receptor_Positive_Treatments"
+            }
+          ]
+        }
+      ]
+    },
+    "Ado_trastuzumab_emtansine": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1658084,
+          "display": "ado-trastuzumab emtansine 100 MG Injection"
+        }
+      ],
+      "direct_transition": "HER2_medication_end",
+      "assign_to_attribute": "HER2_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "Lapatinib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 672149,
+          "display": "lapatinib 250 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "HER2_medication_end",
+      "assign_to_attribute": "HER2_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "Neratinib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1940648,
+          "display": "neratinib 40 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "HER2_medication_end",
+      "assign_to_attribute": "HER2_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "Trastuzumab_her2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2119714,
+          "display": "5 ML hyaluronidase-oysk 2000 UNT/ML / trastuzumab 120 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "HER2_medication_end",
+      "assign_to_attribute": "HER2_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "CDK4/6 Inhibitors": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Abemaciclib",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Palbociclib",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Ribociclib",
+          "distribution": 0.34
+        }
+      ],
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/targeted-therapy-for-breast-cancer.html",
+        "",
+        "CDK4/6 inhibitors",
+        "Palbociclib (Ibrance), ribociclib (Kisqali), and abemaciclib (Verzenio) are drugs that block proteins in the cell called cyclin-dependent kinases (CDKs), particularly CDK4 and CDK6. Blocking these proteins in hormone receptor-positive breast cancer cells helps stop the cells from dividing. This can slow cancer growth.",
+        "",
+        "These drugs are approved for women with advanced hormone receptor-positive, HER2-negative breast cancer and are taken as pills, typically once or twice a day.",
+        "",
+        "There are different ways to use these drugs.",
+        "",
+        "Any of the three drugs can be given along with an aromatase inhibitor (such as letrozole) or fulvestrant to women who have gone through menopause.",
+        "Palbociclib or abemaciclib can be given with fulvestrant to women who are still having regular periods (premenopausal) or are almost in menopause (perimenopausal). These women, however, must also be on medicines, such as luteinizing hormone-releasing hormone (LHRH) analogs, that stop the ovaries from making estrogen.",
+        "Ribociclib can be given with an aromatase inhibitor to women who have not gone through menopause. Again, these women must also be on medicines that suppress the ovaries, such as a luteinizing hormone-releasing hormone (LHRH) analogs. ",
+        "Abemaciclib can also be used by itself in women who have previously been treated with hormone therapy and chemotherapy.",
+        "",
+        "Side effects of these drugs tend to be mild. The most common side effects are low blood cell counts and fatigue. Nausea and vomiting, mouth sores, hair loss, diarrhea, and headache are less common side effects. Very low white blood cell counts can increase the risk of serious infection.",
+        "",
+        ""
+      ]
+    },
+    "Abemaciclib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1946831,
+          "display": "abemaciclib 100 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_PR_medication_end",
+      "assign_to_attribute": "ER_PR_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "Palbociclib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1601380,
+          "display": "palbociclib 100 MG Oral Capsule"
+        }
+      ],
+      "direct_transition": "ER_PR_medication_end",
+      "assign_to_attribute": "ER_PR_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "Ribociclib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1873983,
+          "display": "ribociclib 200 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_PR_medication_end",
+      "assign_to_attribute": "ER_PR_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "ER-encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "ER-Treatments",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_PR",
+                "operator": "==",
+                "value": "PR-positive"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_ER",
+                "operator": "==",
+                "value": "ER-positive"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Upper Stage Treatment"
+        }
+      ]
+    },
+    "Upper Stage Treatment": {
+      "type": "Simple",
+      "direct_transition": "HER2-Treatment"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "end_encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "Hormone_Receptor_Positive_Treatments": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CDK4/6 Inhibitors",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_ER",
+                "operator": "==",
+                "value": "ER-positive"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_PR",
+                "operator": "==",
+                "value": "PR-positive"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "end_encounter"
+        }
+      ]
+    },
+    "Tamoxifen": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 198240,
+          "display": "Tamoxifen 10 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_medication_end",
+      "assign_to_attribute": "ER_medication",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "years"
+        }
+      },
+      "reason": "breast_cancer_condition"
+    },
+    "Estrogen Blocking Receptors": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_tamoxifen",
+      "direct_transition": "Tamoxifen",
+      "value": true,
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/hormone-therapy-for-breast-cancer.html",
+        "",
+        "Tamoxifen",
+        "This drug blocks estrogen receptors on breast cancer cells. It stops estrogen from connecting to the cancer cells and telling them to grow and divide. While tamoxifen acts like an anti-estrogen in breast cells, it acts like an estrogen in other tissues, like the uterus and the bones. Because of this, it is called a selective estrogen receptor modulator (SERM).",
+        "",
+        "Tamoxifen can be used in several ways:",
+        "",
+        "For women with hormone receptor-positive breast cancer treated with surgery, tamoxifen can help lower the chances of the cancer coming back and raise the chances of living longer. It can also lower the risk of getting a new cancer in the other breast. Tamoxifen can be started either after surgery (adjuvant therapy) or before surgery (neoadjuvant therapy) and is usually taken for 5 to 10 years. For early- stage breast cancer, this drug is mainly used for women who have not yet gone through menopause. (If you have gone through menopause, aromatase inhibitors are usually used instead.)",
+        "For women who have been treated for ductal carcinoma in situ (DCIS) that is hormone receptor-positive, taking tamoxifen for 5 years lowers the chance of the DCIS coming back. It also lowers the chance of getting an invasive breast cancer.",
+        "For women with hormone-positive breast cancer that has spread to other parts of the body, tamoxifen can often help slow or stop the growth of the cancer, and might even shrink some tumors.",
+        "In women at high risk of breast cancer, tamoxifen can be used to help lower the risk of developing breast cancer.",
+        "Toremifene (Fareston) is another SERM that works in a similar way, but it is used less often and is only approved to treat metastatic breast cancer. It is not likely to work if tamoxifen has already been used and has stopped working. These drugs are taken by mouth as a pill. The most common side effects of tamoxifen and toremifene are:",
+        "",
+        "Hot flashes",
+        "Vaginal dryness or discharge",
+        "Mood swings",
+        "Some women with cancer spread to the bones may have a tumor flare with pain and swelling in the muscles and bones. This usually decreases quickly, but in some rare cases a woman may also develop a high calcium level in the blood that is hard to control. If this happens, the treatment may need to be stopped for a time.",
+        "",
+        "Rare, but more serious side effects are also possible:",
+        "",
+        "If a woman has gone through menopause, these drugs can increase her risk of developing uterine cancer . Tell your doctor right away about any unusual vaginal bleeding (a common symptom of both of these cancers). Most uterine bleeding is not from cancer, but this symptom always needs prompt attention.",
+        "Blood clots are another uncommon, but serious side effect. They usually form in the legs (called deep vein thrombosis or DVT), but sometimes a piece of clot may break off and end up blocking an artery in the lungs (pulmonary embolism or PE). Call your doctor or nurse right away if you develop pain, redness, or swelling in your lower leg (calf), shortness of breath, or chest pain, because these can be symptoms of a DVT or PE.",
+        "Rarely, tamoxifen has been associated with strokes in post-menopausal women, so tell your doctor if you have severe headaches, confusion, or trouble speaking or moving.",
+        "Depending on a woman's menopausal status, tamoxifen can have different effects on the bones. In pre-menopausal women, tamoxifen can cause some bone thinning, but in post-menopausal women it is often good to strengthen bone. The benefits of taking these drugs outweigh the risks for almost all women with hormone receptor-positive breast cancer.",
+        "",
+        ""
+      ]
+    },
+    "ER_medication_end": {
+      "type": "MedicationEnd",
+      "direct_transition": "Upper Stage Treatment",
+      "referenced_by_attribute": "ER_medication"
+    },
+    "HER2_medication_end": {
+      "type": "MedicationEnd",
+      "direct_transition": "Hormone_Receptor_Positive_Treatments",
+      "referenced_by_attribute": "HER2_medication"
+    },
+    "ER_PR_medication_end": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "ER_PR_medication",
+      "direct_transition": "end_encounter"
+    }
+  }
+}
+,
+"breast_cancer/surgery_therapy_breast":{
+  "name": "Surgery_Therapy_Breast",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Surgery encounter"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Mastectomy": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 69031006,
+          "display": "Excision of breast tissue (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 2,
+        "high": 3,
+        "unit": "hours"
+      },
+      "remarks": [
+        "https://www.breastcancer.org/treatment/surgery/mastectomy/expectations",
+        "",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/surgery-for-breast-cancer.html",
+        "",
+        "Surgery to remove breast cancer",
+        "There are two main types of surgery to remove breast cancer:",
+        "",
+        "Breast-conserving surgery (also called a lumpectomy, quadrantectomy, partial mastectomy, or segmental mastectomy) – A surgery in which only the part of the breast containing the cancer is removed. The goal is to remove the cancer as well as some surrounding normal tissue. How much of the breast is removed depends on the size and location of the tumor and other factors.",
+        "Mastectomy – A surgery in which the entire breast is removed, including all of the breast tissue and sometimes other nearby tissues. There are several different types of mastectomies. Some women may also get a double mastectomy, in which both breasts are removed.",
+        "Choosing between breast-conserving surgery and mastectomy",
+        "Many women with early-stage cancers can choose between breast-conserving surgery (BCS) and mastectomy. The main advantage of BCS is that a woman keeps most of her breast. But in most cases she will also need radiation. Women who have mastectomy for early stage cancers are less likely to need radiation.",
+        "",
+        "For some women, mastectomy may be a better option, because of the type of breast cancer, the large size of the tumor, previous treatment history, or certain other factors.",
+        "",
+        "Some women might be worried that having a less extensive surgery might raise their risk of the cancer coming back. But the fact is, in most cases, mastectomy does not give you any better chance of long-term survival or a better outcome from treatment. Studies following thousands of women for more than 20 years show that when BCS can be done along with radiation, having a mastectomy instead does not provide any better chance of survival."
+      ],
+      "direct_transition": "End Surgery encounter",
+      "reason": "breast_cancer_condition"
+    },
+    "Breast-conserving surgery (BCS)": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 392021009,
+          "display": "Lumpectomy of breast (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "remarks": [
+        "https://www.breastcancer.org/treatment/surgery/lumpectomy/expectations",
+        "",
+        "https://www.breastcancer.org/treatment/surgery/mastectomy/expectations",
+        "",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/surgery-for-breast-cancer.html",
+        "",
+        "Surgery to remove breast cancer",
+        "There are two main types of surgery to remove breast cancer:",
+        "",
+        "Breast-conserving surgery (also called a lumpectomy, quadrantectomy, partial mastectomy, or segmental mastectomy) – A surgery in which only the part of the breast containing the cancer is removed. The goal is to remove the cancer as well as some surrounding normal tissue. How much of the breast is removed depends on the size and location of the tumor and other factors.",
+        "Mastectomy – A surgery in which the entire breast is removed, including all of the breast tissue and sometimes other nearby tissues. There are several different types of mastectomies. Some women may also get a double mastectomy, in which both breasts are removed.",
+        "Choosing between breast-conserving surgery and mastectomy",
+        "Many women with early-stage cancers can choose between breast-conserving surgery (BCS) and mastectomy. The main advantage of BCS is that a woman keeps most of her breast. But in most cases she will also need radiation. Women who have mastectomy for early stage cancers are less likely to need radiation.",
+        "",
+        "For some women, mastectomy may be a better option, because of the type of breast cancer, the large size of the tumor, previous treatment history, or certain other factors.",
+        "",
+        "Some women might be worried that having a less extensive surgery might raise their risk of the cancer coming back. But the fact is, in most cases, mastectomy does not give you any better chance of long-term survival or a better outcome from treatment. Studies following thousands of women for more than 20 years show that when BCS can be done along with radiation, having a mastectomy instead does not provide any better chance of survival."
+      ],
+      "direct_transition": "BCS end surgery",
+      "reason": "breast_cancer_condition"
+    },
+    "External Beam Radiation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 33195004,
+          "display": "Teleradiotherapy procedure (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Current Radiation Visit",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/radiation-for-breast-cancer.html"
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Hypofractionated radiation therapy": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 385798007,
+          "display": "Radiation therapy care (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Current Radiation Visit",
+      "remarks": [
+        "https://www.breastcancer.org/research-news/accelerated-whole-breast-radiation-new-standard"
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Intraoperative radiation therapy (IORT)": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 108290001,
+          "display": "Radiation oncology AND/OR radiotherapy (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Current Radiation Visit",
+      "remarks": [
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5493441/",
+        "https://uihc.org/health-topics/intraoperative-radiation-therapy-iort"
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Brachytherapy": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "SCTID: 447759004",
+          "display": "Brachytherapy of breast (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 50,
+        "unit": "minutes"
+      },
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/radiation-for-breast-cancer.html",
+        "https://www.mayoclinic.org/tests-procedures/brachytherapy/about/pac-20385159"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Interstitial Brachytherapy",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Intracavitary brachytherapy",
+          "distribution": 0.5
+        }
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Interstitial Brachytherapy": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 113120007,
+          "display": "Interstitial brachytherapy (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Brachytherapy Implant",
+      "remarks": [
+        "https://www.mayoclinic.org/tests-procedures/brachytherapy/about/pac-20385159"
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Intracavitary brachytherapy": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 384692006,
+          "display": "Intracavitary brachytherapy (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "remarks": [
+        "https://www.mayoclinic.org/tests-procedures/brachytherapy/about/pac-20385159"
+      ],
+      "direct_transition": "End Brachytherapy Implant",
+      "reason": "breast_cancer_condition"
+    },
+    "chemo": {
+      "type": "CallSubmodule",
+      "submodule": "breast_cancer/chemotherapy_breast",
+      "conditional_transition": [
+        {
+          "transition": "External Beam Radiation",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_triple_negative",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "End Breast Surgery"
+        }
+      ],
+      "remarks": [
+        "https://www.breastcancer.org/research-news/20110925b"
+      ]
+    },
+    "Advanced_drugs": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Denosumab"
+          },
+          "distributions": [
+            {
+              "transition": "Denosumab",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Zoledronic_Acid",
+              "distribution": 1
+            }
+          ],
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Zoledronic_Acid"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Denosumab",
+              "distribution": 0.34
+            },
+            {
+              "transition": "Zoledronic_Acid",
+              "distribution": 0.33
+            },
+            {
+              "transition": "Pamidronate",
+              "distribution": 0.33
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "https://www.breastcancer.org/research-news/prolia-reduces-recurrence-risk-for-some"
+      ]
+    },
+    "Zoledronic_Acid": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1114085,
+          "display": "100 ML zoledronic acid 0.04 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Advanced Drugs IV Injection",
+      "assign_to_attribute": "adv_drug",
+      "reason": "breast_cancer_condition"
+    },
+    "Denosumab": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 993452,
+          "display": "1 ML denosumab 60 MG/ML Prefilled Syringe"
+        }
+      ],
+      "direct_transition": "Advanced Drugs IV Injection",
+      "assign_to_attribute": "adv_drug",
+      "reason": "breast_cancer_condition"
+    },
+    "Pamidronate": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1737449,
+          "display": "10 ML Pamidronate Disodium 3 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Pamidronate IV Injection",
+      "assign_to_attribute": "adv_drug",
+      "reason": "breast_cancer_condition"
+    },
+    "Breast_Surgery": {
+      "type": "Simple",
+      "remarks": [
+        "https://www.cooperhealth.org/services/radiation-oncology/questions-you-may-have-about-radiation-therapy"
+      ],
+      "direct_transition": "Initialize Breast Surgery Treatment Counter"
+    },
+    "Sentinel_Lymph_Node_Biopsy__SLNB_": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 396487001,
+          "display": "Sentinel lymph node biopsy (procedure)"
+        }
+      ],
+      "direct_transition": "Excision_Of_Sentinel_Lymph_Node",
+      "duration": {
+        "low": 40,
+        "high": 50,
+        "unit": "minutes"
+      },
+      "reason": "breast_cancer_condition"
+    },
+    "Axillary_Lymph_Node_Dissection__ALND_": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 234262008,
+          "display": "Excision of axillary lymph node (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 40,
+        "high": 50,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Lymph_Node_Surgery",
+      "reason": "breast_cancer_condition"
+    },
+    "End Breast Surgery": {
+      "type": "Simple",
+      "direct_transition": "Delay After Treatment"
+    },
+    "Lymph_Node Surgery": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Sentinel_Lymph_Node_Biopsy__SLNB_",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Axillary_Lymph_Node_Dissection__ALND_",
+          "distribution": 0.5
+        }
+      ],
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/surgery-for-breast-cancer.html",
+        "",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/surgery-for-breast-cancer/lymph-node-surgery-for-breast-cancer.html",
+        "",
+        "Surgery to remove nearby lymph nodes",
+        "To find out if the breast cancer has spread to axillary (underarm) lymph nodes, one or more of these lymph nodes will be removed and looked at under the microscope. This is an important part of figuring out the stage (extent) of the cancer. Lymph nodes may be removed either as part of the surgery to remove the breast cancer or as a separate operation.",
+        "",
+        "The two main types of surgery to remove lymph nodes are:",
+        "",
+        "Sentinel lymph node biopsy (SLNB) – A procedure in which the surgeon removes only the lymph node(s) under the arm to which the cancer would likely spread first. Removing only one or a few lymph nodes lowers the risk of side effects from the surgery.",
+        "Axillary lymph node dissection (ALND) – A procedure in which the surgeon removes many (usually less than 20) lymph nodes from under the arm. ALND is not done as often as it was in the past, but it might still be the best way to look at the lymph nodes in some situations.",
+        "To learn more about these procedures and when they might be done, see Lymph Node Surgery for Breast Cancer. ",
+        "",
+        ""
+      ]
+    },
+    "End_Lymph_Node_Surgery": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "External Beam Radiation",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_T",
+            "operator": "==",
+            "value": "T0"
+          }
+        },
+        {
+          "transition": "Breast_Surgery"
+        }
+      ]
+    },
+    "Surgery encounter": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "End_Lymph_Node_Surgery",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_N",
+            "operator": "==",
+            "value": "N0"
+          }
+        },
+        {
+          "transition": "Lymph_Node Surgery"
+        }
+      ]
+    },
+    "End Surgery encounter": {
+      "type": "EncounterEnd",
+      "remarks": [
+        "https://www.breastcancer.org/treatment/surgery/mastectomy/expectations"
+      ],
+      "direct_transition": "Delay after Mastectomy"
+    },
+    "BCS end surgery": {
+      "type": "EncounterEnd",
+      "remarks": [
+        "https://www.breastcancer.org/treatment/surgery/lumpectomy/expectations"
+      ],
+      "direct_transition": "Delay After BCS"
+    },
+    "Delay After BCS": {
+      "type": "Delay",
+      "remarks": [
+        "https://www.breastcancer.org/treatment/surgery/lumpectomy/expectations"
+      ],
+      "range": {
+        "low": 5,
+        "high": 14,
+        "unit": "days"
+      },
+      "direct_transition": "BCS Follow-Up Treatment"
+    },
+    "Delay after Mastectomy": {
+      "type": "Delay",
+      "remarks": [
+        "https://www.breastcancer.org/treatment/surgery/mastectomy/expectations"
+      ],
+      "range": {
+        "low": 5,
+        "high": 14,
+        "unit": "days"
+      },
+      "direct_transition": "Mastectomy Follow-Up Therapy"
+    },
+    "Mastectomy Follow-Up Therapy": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_triple_negative",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "chemo"
+        },
+        {
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "21908-9",
+                "display": "Stage group.clinical Cancer"
+              }
+            ],
+            "operator": "==",
+            "value_code": {
+              "system": "SNOMED-CT",
+              "code": 258215001,
+              "display": "Stage 1 (qualifier value)"
+            }
+          },
+          "distributions": [
+            {
+              "distribution": 1,
+              "transition": "External Beam Radiation"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "21908-9",
+                "display": "Stage group.clinical Cancer"
+              }
+            ],
+            "operator": "==",
+            "value_code": {
+              "system": "SNOMED-CT",
+              "code": 258228008,
+              "display": "Stage 4 (qualifier value)"
+            }
+          },
+          "distributions": [
+            {
+              "distribution": 0.01,
+              "transition": "External Beam Radiation"
+            },
+            {
+              "distribution": 0.33,
+              "transition": "chemo"
+            },
+            {
+              "distribution": 0.66,
+              "transition": "Advanced_drugs"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.5,
+              "transition": "External Beam Radiation"
+            },
+            {
+              "distribution": 0.5,
+              "transition": "chemo"
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "https://www.breastcancer.org/treatment/surgery/mastectomy/expectations",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4493381/",
+        "",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/radiation-for-breast-cancer.html",
+        "",
+        "Radiation for Breast Cancer",
+        "Some women with breast cancer will need radiation, often in addition to other treatments. The need for radiation depends on what type of surgery you had, whether your cancer has spread to the lymph nodes or somewhere else in your body, and in some cases, your age. Tumors that are large or involve the skin might also need radiation. You could have just one type of radiation, or a combination of different types.",
+        "",
+        "Radiation therapy is treatment with high-energy rays (such as x-rays) or particles that destroy cancer cells. Two main types of radiation therapy can be used to treat breast cancer:",
+        "",
+        "External beam radiation: This type of radiation comes from a machine outside the body.",
+        "Internal radiation (brachytherapy): For this treatment, a radioactive source is put inside the body for a short time.",
+        "When might radiation therapy be used?",
+        "Not all women with breast cancer need radiation therapy, but it may be used in several situations:",
+        "",
+        "After breast-conserving surgery (BCS), to help lower the chance that the cancer will come back in the breast or nearby lymph nodes.",
+        "After a mastectomy, especially if the cancer was larger than 5 cm (about 2 inches), or if cancer is found in the lymph nodes.",
+        "If cancer has spread to other parts of the body, such as the bones or brain.",
+        "External beam radiation",
+        "This is the most common type of radiation therapy for women with breast cancer. A machine focuses the radiation on the area affected by the cancer.",
+        "",
+        "Which areas need radiation depends on whether you had a mastectomy or breast-conserving surgery (BCS) and whether or not the cancer has reached nearby lymph nodes.",
+        "",
+        "If you had a mastectomy and no lymph nodes had cancer, radiation is focused on the chest wall, the mastectomy scar, and the places where any drains exited the body after surgery.",
+        "If you had BCS, you will most likely have radiation to the entire breast (called whole breast radiation), and an extra boost of radiation to the area in the breast where the cancer was removed (called the tumor bed) to help prevent it from coming back in that area. The boost is often given after the treatments to the whole breast have ended. It uses the same machine, with lower amounts of radiation, but the beams are aimed at the tumor bed. Most women don’t notice different side effects from boost radiation than from whole breast radiation.",
+        "If cancer was found in the lymph nodes under the arm (axillary lymph nodes), this area may be given radiation, as well. In some cases, the area treated might also include the nodes above the collarbone (supraclavicular lymph nodes) and the nodes beneath the breast bone in the center of the chest (internal mammary lymph nodes).",
+        "When will I get radiation therapy?",
+        "If you will need external radiation therapy after surgery, it is usually not started until your surgery site has healed , which is often a month or longer. If you are getting chemotherapy as well, radiation treatments are usually delayed until chemotherapy is complete.",
+        "",
+        "Preparing for external beam radiation therapy",
+        "Before your treatment starts, the radiation team will carefully figure out the correct angles for aiming the radiation beams and the proper dose of radiation. They will make some ink marks or small tattoos on your skin to focus the radiation on the right area. Check with your health care team whether the marks they use will be permanent.",
+        "",
+        "External radiation therapy is much like getting an x-ray, but the radiation is stronger. The procedure itself is painless. Each treatment lasts only a few minutes, but the setup time—getting you into place for treatment—usually takes longer.",
+        "",
+        "Types and schedules of external beam radiation",
+        "The traditional schedule for getting whole breast radiation has been 5 days a week (Monday through Friday) for about 5 to 6 weeks. But many doctors are now using accelerated breast irradiation in select patients to give larger doses over a shorter time. There are several different types of accelerated breast irradiation:",
+        "",
+        "Hypofractionated radiation therapy: In this approach, radiation is given in larger doses using fewer treatments – typically for only 3 weeks. In women treated with breast-conserving surgery (BCS) and without cancer spread to underarm lymph nodes, this schedule has been shown to be just as good at keeping the cancer from coming back in the same breast as giving the radiation over 5 weeks. It might also lead to fewer short-term side effects.",
+        "Intraoperative radiation therapy (IORT): In this approach, a single large dose of radiation is given in the operating room right after BCS (before the breast incision is closed). IORT requires special equipment and is not widely available.",
+        "3D-conformal radiotherapy: In this technique, the radiation is given with special machines so that it is better aimed at the area where the tumor was removed (tumor bed). This allows more of the healthy breast to be spared. Treatments are given twice a day for 5 days. Because only part of the breast is treated, this is considered to be a form of accelerated partial breast irradiation. (Other forms of accelerated partial breast irradiation are described under Brachytherapy.)",
+        "Since more research is needed to know if all of the newer methods will have the same long-term results as standard radiation, not all doctors use them. Women who are interested in these approaches may want to ask their doctor about taking part in clinical trials of accelerated breast irradiation going on now.",
+        "",
+        "Possible side effects of external radiation",
+        "The main short-term side effects of external beam radiation therapy to the breast are:",
+        "",
+        "Swelling in the breast",
+        "Skin changes in the treated area similar to a sunburn (redness, skin peeling, darkening of the skin)",
+        "Fatigue",
+        "Your health care team may advise you to avoid exposing the treated skin to the sun because it could make the skin changes worse. Most skin changes get better within a few months. Changes to the breast tissue usually go away in 6 to 12 months, but it can take longer.",
+        "",
+        "External beam radiation therapy can also cause side effects later on:",
+        "",
+        "Some women may find that radiation therapy causes the breast to become smaller and firmer.",
+        "Radiation may affect your options for breast reconstruction later on. It can also raise the risk of problems if it’s given after reconstruction, especially tissue flap procedures.",
+        "Women who have had breast radiation may have problems breastfeeding later on.",
+        "Radiation to the breast can sometimes damage some of the nerves to the arm. This is called brachial plexopathy and can lead to numbness, pain, and weakness in the shoulder, arm, and hand.",
+        "Radiation to the underarm lymph nodes can cause lymphedema, a type of pain and swelling in the arm or chest.",
+        "In rare cases, radiation therapy may weaken the ribs, which could lead to a fracture.",
+        "In the past, parts of the lungs and heart were more likely to get some radiation, which could lead to long-term damage of these organs in some women. Modern radiation therapy equipment allows doctors to better focus the radiation beams, so these problems are rare today.",
+        "A very rare complication of radiation to the breast is the development of another cancer called an angiosarcoma.",
+        "Brachytherapy",
+        "Brachytherapy, also known as internal radiation, is another way to deliver radiation therapy. Instead of aiming radiation beams from outside the body, a device containing radioactive seeds or pellets is placed into the breast tissue for a short time in the area where the cancer had been removed.",
+        "",
+        "For women who had breast-conserving surgery (BCS), brachytherapy can be used along with external beam radiation as a way to add an extra boost of radiation to the tumor site. It may also be used by itself (instead of radiation to the whole breast) as a form of accelerated partial breast irradiation. Tumor size, location, and other factors may limit who can get brachytherapy.",
+        "",
+        "Types of brachytherapy",
+        "There are different types of brachytherapy:",
+        "",
+        "Interstitial brachytherapy: In this approach, several small, hollow tubes called catheters are inserted into the breast around the area where the cancer was removed and are left in place for several days. Radioactive pellets are inserted into the catheters for short periods of time each day and then removed. This method of brachytherapy has been around longer (and has more evidence to support it), but it is not used as much anymore.",
+        "Intracavitary brachytherapy: This is the most common type of brachytherapy for women with breast cancer. A device is put into the space left from BCS and is left in place until treatment is complete. There are several different devices available (including MammoSite, SAVI, Axxent, and Contura), most of which require surgical training for proper placement . They all go into the breast as a small catheter (tube). The end of the device inside the breast is then expanded so that it stays securely in place for the entire treatment. The other end of the catheter sticks out of the breast. For each treatment, one or more sources of radiation (often pellets) are placed down through the tube and into the device for a short time and then removed. Treatments are typically given twice a day for 5 days as an outpatient. After the last treatment, the device is collapsed down again and removed.",
+        "Early studies of intracavitary brachytherapy as the only radiation after BCS have had promising results as far as having at least equal cancer control compared with standard whole breast radiation, but may have more complications including poor cosmetic results. Studies of this treatment are being done and more follow-up is needed.  ",
+        "",
+        "Possible side effects of intracavitary brachytherapy",
+        "As with external beam radiation, intracavitary brachytherapy can have side effects, including:",
+        "",
+        "Redness at the treatment site",
+        "Bruising at the treatment site",
+        "Breast pain",
+        "Infection",
+        "Damage to fatty tissue in the breast",
+        "Weakness and fracture of the ribs in rare cases",
+        "Fluid collecting in the breast (seroma) ",
+        " "
+      ]
+    },
+    "BCS Follow-Up Treatment": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_triple_negative",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "chemo"
+        },
+        {
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "21908-9",
+                "display": "Stage group.clinical Cancer"
+              }
+            ],
+            "operator": "==",
+            "value_code": {
+              "system": "SNOMED-CT",
+              "code": 258215001,
+              "display": "Stage 1 (qualifier value)"
+            }
+          },
+          "distributions": [
+            {
+              "distribution": 0.4,
+              "transition": "External Beam Radiation"
+            },
+            {
+              "distribution": 0.1,
+              "transition": "Intraoperative radiation therapy (IORT)"
+            },
+            {
+              "distribution": 0.4,
+              "transition": "Hypofractionated radiation therapy"
+            },
+            {
+              "distribution": 0.1,
+              "transition": "Brachytherapy"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "21908-9",
+                "display": "Stage group.clinical Cancer"
+              }
+            ],
+            "operator": "==",
+            "value_code": {
+              "system": "SNOMED-CT",
+              "code": 258228008,
+              "display": "Stage 4 (qualifier value)"
+            }
+          },
+          "distributions": [
+            {
+              "distribution": 0.02,
+              "transition": "External Beam Radiation"
+            },
+            {
+              "distribution": 0.04,
+              "transition": "Hypofractionated radiation therapy"
+            },
+            {
+              "distribution": 0.04,
+              "transition": "Intraoperative radiation therapy (IORT)"
+            },
+            {
+              "distribution": 0.1,
+              "transition": "Brachytherapy"
+            },
+            {
+              "distribution": 0.1,
+              "transition": "chemo"
+            },
+            {
+              "distribution": 0.7,
+              "transition": "Advanced_drugs"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.3,
+              "transition": "External Beam Radiation"
+            },
+            {
+              "distribution": 0.3,
+              "transition": "Hypofractionated radiation therapy"
+            },
+            {
+              "distribution": 0.1,
+              "transition": "Intraoperative radiation therapy (IORT)"
+            },
+            {
+              "distribution": 0.1,
+              "transition": "Brachytherapy"
+            },
+            {
+              "distribution": 0.2,
+              "transition": "chemo"
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "https://www.breastcancer.org/treatment/surgery/lumpectomy/expectations",
+        "",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/radiation-for-breast-cancer.html",
+        "",
+        "Radiation for Breast Cancer",
+        "Some women with breast cancer will need radiation, often in addition to other treatments. The need for radiation depends on what type of surgery you had, whether your cancer has spread to the lymph nodes or somewhere else in your body, and in some cases, your age. Tumors that are large or involve the skin might also need radiation. You could have just one type of radiation, or a combination of different types.",
+        "",
+        "Radiation therapy is treatment with high-energy rays (such as x-rays) or particles that destroy cancer cells. Two main types of radiation therapy can be used to treat breast cancer:",
+        "",
+        "External beam radiation: This type of radiation comes from a machine outside the body.",
+        "Internal radiation (brachytherapy): For this treatment, a radioactive source is put inside the body for a short time.",
+        "When might radiation therapy be used?",
+        "Not all women with breast cancer need radiation therapy, but it may be used in several situations:",
+        "",
+        "After breast-conserving surgery (BCS), to help lower the chance that the cancer will come back in the breast or nearby lymph nodes.",
+        "After a mastectomy, especially if the cancer was larger than 5 cm (about 2 inches), or if cancer is found in the lymph nodes.",
+        "If cancer has spread to other parts of the body, such as the bones or brain.",
+        "External beam radiation",
+        "This is the most common type of radiation therapy for women with breast cancer. A machine focuses the radiation on the area affected by the cancer.",
+        "",
+        "Which areas need radiation depends on whether you had a mastectomy or breast-conserving surgery (BCS) and whether or not the cancer has reached nearby lymph nodes.",
+        "",
+        "If you had a mastectomy and no lymph nodes had cancer, radiation is focused on the chest wall, the mastectomy scar, and the places where any drains exited the body after surgery.",
+        "If you had BCS, you will most likely have radiation to the entire breast (called whole breast radiation), and an extra boost of radiation to the area in the breast where the cancer was removed (called the tumor bed) to help prevent it from coming back in that area. The boost is often given after the treatments to the whole breast have ended. It uses the same machine, with lower amounts of radiation, but the beams are aimed at the tumor bed. Most women don’t notice different side effects from boost radiation than from whole breast radiation.",
+        "If cancer was found in the lymph nodes under the arm (axillary lymph nodes), this area may be given radiation, as well. In some cases, the area treated might also include the nodes above the collarbone (supraclavicular lymph nodes) and the nodes beneath the breast bone in the center of the chest (internal mammary lymph nodes).",
+        "When will I get radiation therapy?",
+        "If you will need external radiation therapy after surgery, it is usually not started until your surgery site has healed , which is often a month or longer. If you are getting chemotherapy as well, radiation treatments are usually delayed until chemotherapy is complete.",
+        "",
+        "Preparing for external beam radiation therapy",
+        "Before your treatment starts, the radiation team will carefully figure out the correct angles for aiming the radiation beams and the proper dose of radiation. They will make some ink marks or small tattoos on your skin to focus the radiation on the right area. Check with your health care team whether the marks they use will be permanent.",
+        "",
+        "External radiation therapy is much like getting an x-ray, but the radiation is stronger. The procedure itself is painless. Each treatment lasts only a few minutes, but the setup time—getting you into place for treatment—usually takes longer.",
+        "",
+        "Types and schedules of external beam radiation",
+        "The traditional schedule for getting whole breast radiation has been 5 days a week (Monday through Friday) for about 5 to 6 weeks. But many doctors are now using accelerated breast irradiation in select patients to give larger doses over a shorter time. There are several different types of accelerated breast irradiation:",
+        "",
+        "Hypofractionated radiation therapy: In this approach, radiation is given in larger doses using fewer treatments – typically for only 3 weeks. In women treated with breast-conserving surgery (BCS) and without cancer spread to underarm lymph nodes, this schedule has been shown to be just as good at keeping the cancer from coming back in the same breast as giving the radiation over 5 weeks. It might also lead to fewer short-term side effects.",
+        "Intraoperative radiation therapy (IORT): In this approach, a single large dose of radiation is given in the operating room right after BCS (before the breast incision is closed). IORT requires special equipment and is not widely available.",
+        "3D-conformal radiotherapy: In this technique, the radiation is given with special machines so that it is better aimed at the area where the tumor was removed (tumor bed). This allows more of the healthy breast to be spared. Treatments are given twice a day for 5 days. Because only part of the breast is treated, this is considered to be a form of accelerated partial breast irradiation. (Other forms of accelerated partial breast irradiation are described under Brachytherapy.)",
+        "Since more research is needed to know if all of the newer methods will have the same long-term results as standard radiation, not all doctors use them. Women who are interested in these approaches may want to ask their doctor about taking part in clinical trials of accelerated breast irradiation going on now.",
+        "",
+        "Possible side effects of external radiation",
+        "The main short-term side effects of external beam radiation therapy to the breast are:",
+        "",
+        "Swelling in the breast",
+        "Skin changes in the treated area similar to a sunburn (redness, skin peeling, darkening of the skin)",
+        "Fatigue",
+        "Your health care team may advise you to avoid exposing the treated skin to the sun because it could make the skin changes worse. Most skin changes get better within a few months. Changes to the breast tissue usually go away in 6 to 12 months, but it can take longer.",
+        "",
+        "External beam radiation therapy can also cause side effects later on:",
+        "",
+        "Some women may find that radiation therapy causes the breast to become smaller and firmer.",
+        "Radiation may affect your options for breast reconstruction later on. It can also raise the risk of problems if it’s given after reconstruction, especially tissue flap procedures.",
+        "Women who have had breast radiation may have problems breastfeeding later on.",
+        "Radiation to the breast can sometimes damage some of the nerves to the arm. This is called brachial plexopathy and can lead to numbness, pain, and weakness in the shoulder, arm, and hand.",
+        "Radiation to the underarm lymph nodes can cause lymphedema, a type of pain and swelling in the arm or chest.",
+        "In rare cases, radiation therapy may weaken the ribs, which could lead to a fracture.",
+        "In the past, parts of the lungs and heart were more likely to get some radiation, which could lead to long-term damage of these organs in some women. Modern radiation therapy equipment allows doctors to better focus the radiation beams, so these problems are rare today.",
+        "A very rare complication of radiation to the breast is the development of another cancer called an angiosarcoma.",
+        "Brachytherapy",
+        "Brachytherapy, also known as internal radiation, is another way to deliver radiation therapy. Instead of aiming radiation beams from outside the body, a device containing radioactive seeds or pellets is placed into the breast tissue for a short time in the area where the cancer had been removed.",
+        "",
+        "For women who had breast-conserving surgery (BCS), brachytherapy can be used along with external beam radiation as a way to add an extra boost of radiation to the tumor site. It may also be used by itself (instead of radiation to the whole breast) as a form of accelerated partial breast irradiation. Tumor size, location, and other factors may limit who can get brachytherapy.",
+        "",
+        "Types of brachytherapy",
+        "There are different types of brachytherapy:",
+        "",
+        "Interstitial brachytherapy: In this approach, several small, hollow tubes called catheters are inserted into the breast around the area where the cancer was removed and are left in place for several days. Radioactive pellets are inserted into the catheters for short periods of time each day and then removed. This method of brachytherapy has been around longer (and has more evidence to support it), but it is not used as much anymore.",
+        "Intracavitary brachytherapy: This is the most common type of brachytherapy for women with breast cancer. A device is put into the space left from BCS and is left in place until treatment is complete. There are several different devices available (including MammoSite, SAVI, Axxent, and Contura), most of which require surgical training for proper placement . They all go into the breast as a small catheter (tube). The end of the device inside the breast is then expanded so that it stays securely in place for the entire treatment. The other end of the catheter sticks out of the breast. For each treatment, one or more sources of radiation (often pellets) are placed down through the tube and into the device for a short time and then removed. Treatments are typically given twice a day for 5 days as an outpatient. After the last treatment, the device is collapsed down again and removed.",
+        "Early studies of intracavitary brachytherapy as the only radiation after BCS have had promising results as far as having at least equal cancer control compared with standard whole breast radiation, but may have more complications including poor cosmetic results. Studies of this treatment are being done and more follow-up is needed.  ",
+        "",
+        "Possible side effects of intracavitary brachytherapy",
+        "As with external beam radiation, intracavitary brachytherapy can have side effects, including:",
+        "",
+        "Redness at the treatment site",
+        "Bruising at the treatment site",
+        "Breast pain",
+        "Infection",
+        "Damage to fatty tissue in the breast",
+        "Weakness and fracture of the ribs in rare cases",
+        "Fluid collecting in the breast (seroma) ",
+        " "
+      ]
+    },
+    "Pamidronate IV Injection": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 43060002,
+          "display": "Intravenous injection (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 2,
+        "high": 24,
+        "unit": "hours"
+      },
+      "direct_transition": "End Pamidronate Infusion Encounter",
+      "reason": "breast_cancer_condition"
+    },
+    "End Pamidronate Infusion Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "End Pamidronate Medication"
+    },
+    "Advanced Drugs IV Injection": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 43060002,
+          "display": "Intravenous injection (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 120,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Advanced Drug Medication",
+      "reason": "breast_cancer_condition"
+    },
+    "End Current Advanced Drug Infusion": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Increment treatment counter",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_treat_count",
+            "operator": "<",
+            "value": 7
+          }
+        },
+        {
+          "transition": "End Breast Surgery"
+        }
+      ]
+    },
+    "End Advanced Drug Medication": {
+      "type": "MedicationEnd",
+      "direct_transition": "End Current Advanced Drug Infusion",
+      "referenced_by_attribute": "adv_drug"
+    },
+    "End Pamidronate Medication": {
+      "type": "MedicationEnd",
+      "direct_transition": "End Breast Surgery",
+      "referenced_by_attribute": "adv_drug"
+    },
+    "Increment treatment counter": {
+      "type": "Counter",
+      "attribute": "breast_cancer_treat_count",
+      "action": "increment",
+      "direct_transition": "6 Month Delay"
+    },
+    "6 Month Delay": {
+      "type": "Delay",
+      "direct_transition": "Start New Advanced Drug Cycle",
+      "range": {
+        "low": 5,
+        "high": 7,
+        "unit": "months"
+      },
+      "remarks": [
+        "Prolia (chemical name: denosumab) is a targeted therapy used to treat bone loss in women taking aromatase inhibitors as part of their breast cancer treatment. Prolia is given as an injection under the skin every 6 months at a dose of 60 mg:",
+        "https://www.breastcancer.org/research-news/prolia-reduces-recurrence-risk-for-some"
+      ]
+    },
+    "Start New Advanced Drug Cycle": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Advanced_drugs"
+    },
+    "Delay After Treatment": {
+      "type": "Delay",
+      "direct_transition": "Terminal",
+      "range": {
+        "low": 2,
+        "high": 7,
+        "unit": "days"
+      }
+    },
+    "Radiation_Buffer_After_Brachytherapy": {
+      "type": "Delay",
+      "range": {
+        "low": 2,
+        "high": 8,
+        "unit": "weeks"
+      },
+      "direct_transition": "End Breast Surgery"
+    },
+    "End Brachytherapy Implant": {
+      "type": "EncounterEnd",
+      "direct_transition": "Radiation_Buffer_After_Brachytherapy"
+    },
+    "End Current Radiation Visit": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Increment Radiation Treatment Count",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_treat_count",
+            "operator": "<",
+            "value": 33
+          }
+        },
+        {
+          "transition": "End Breast Surgery"
+        }
+      ]
+    },
+    "Increment Radiation Treatment Count": {
+      "type": "Counter",
+      "attribute": "breast_cancer_treat_count",
+      "action": "increment",
+      "direct_transition": "Delay Until Next Cycle"
+    },
+    "Delay Until Next Cycle": {
+      "type": "Delay",
+      "direct_transition": "Next Day Radiation Treatment",
+      "range": {
+        "low": 24,
+        "high": 36,
+        "unit": "hours"
+      }
+    },
+    "Next Day Radiation Treatment": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "External Beam Radiation",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "External Beam Radiation"
+          }
+        },
+        {
+          "transition": "Intraoperative radiation therapy (IORT)",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Intraoperative radiation therapy (IORT)"
+          }
+        },
+        {
+          "transition": "Hypofractionated radiation therapy",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Hypofractionated radiation therapy"
+          }
+        }
+      ]
+    },
+    "Excision_Of_Sentinel_Lymph_Node": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 443497002,
+          "display": "Excision of sentinel lymph node (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 40,
+        "high": 50,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Lymph_Node_Surgery",
+      "reason": "breast_cancer_condition"
+    },
+    "Initialize Breast Surgery Treatment Counter": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_treat_count",
+      "distributed_transition": [
+        {
+          "transition": "Breast-conserving surgery (BCS)",
+          "distribution": 0.6
+        },
+        {
+          "transition": "Mastectomy",
+          "distribution": 0.4
+        }
+      ],
+      "remarks": [
+        "https://www.cooperhealth.org/services/radiation-oncology/questions-you-may-have-about-radiation-therapy"
+      ],
+      "value": 0
+    }
+  }
+}
+,
+"breast_cancer/tnm_diagnosis":{
+  "name": "TNM_Diagnosis",
+  "remarks": [
+    "This module goes through and diagnoses which T, N, and M stage a person would encounter through the screening. "
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "M Marker"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "M Marker": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "No Evidence of Distant Metastasis ",
+          "distribution": 0.94
+        },
+        {
+          "transition": "Distant Metastases Detected",
+          "distribution": 0.06
+        }
+      ],
+      "remarks": [
+        "About 6% of women have metastatic cancer when they are first diagnosed with breast cancer:",
+        "https://www.cancer.net/cancer-types/breast-cancer/statistics"
+      ]
+    },
+    "N Marker": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_Location",
+            "operator": "==",
+            "value": "local"
+          },
+          "distributions": [],
+          "transition": "No Regional Lymph Node Metastasis"
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.34,
+              "transition": "Micrometastasis in 1 - 3 Lymph Nodes"
+            },
+            {
+              "distribution": 0.33,
+              "transition": "Macrometastases in 4 - 9 Lymph Nodes"
+            },
+            {
+              "distribution": 0.33,
+              "transition": "Macrometastases in 10+ Lymph Nodes"
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_M",
+            "operator": "==",
+            "value": "M1"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Micrometastasis in 1 - 3 Lymph Nodes",
+              "distribution": 0.6
+            },
+            {
+              "transition": "Macrometastases in 4 - 9 Lymph Nodes",
+              "distribution": 0.3
+            },
+            {
+              "transition": "Macrometastases in 10+ Lymph Nodes",
+              "distribution": 0.10000000000000009
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_Location",
+            "operator": "==",
+            "value": "regional"
+          }
+        }
+      ],
+      "remarks": [
+        "Lymph node status shows whether or not the lymph nodes in the underarm area (axillary lymph nodes) contain cancer:",
+        "Lymph node-negative means the axillary lymph nodes do not contain cancer.",
+        "Lymph node-positive means the axillary lymph nodes contain cancer.",
+        "Prognosis is better when cancer has not spread to the lymph nodes (lymph node-negative) [13].",
+        "The more lymph nodes that contain cancer, the poorer prognosis tends to be [13].",
+        "The number of positive nodes guides treatment and helps predict prognosis (chances for survival).",
+        "See Figure 4.4 for an illustration of the breast and lymph nodes.",
+        "https://ww5.komen.org/BreastCancer/LymphNodeStatusandStaging.html"
+      ]
+    },
+    "T4": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_T",
+      "direct_transition": "T4_Diagnosed",
+      "value": "T4",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "N1": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_N",
+      "direct_transition": "N1_Diagnosed",
+      "value": "N1"
+    },
+    "N2": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_N",
+      "direct_transition": "N2_Diagnosed",
+      "value": "N2"
+    },
+    "N3": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_N",
+      "direct_transition": "N3_Diagnosed",
+      "value": "N3"
+    },
+    "Distant Breast Cancer": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_Location",
+      "direct_transition": "Tumor Size Any",
+      "value": "distant"
+    },
+    "Regional Breast Cancer": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_Location",
+      "distributed_transition": [
+        {
+          "transition": "Tumor Size Less than 2 cm",
+          "distribution": 0.3011
+        },
+        {
+          "transition": "Tumor Size 2 -5 cm",
+          "distribution": 0.5053
+        },
+        {
+          "transition": "Tumor Size Greater Than 5 cm",
+          "distribution": 0.1398
+        },
+        {
+          "transition": "No Evidence of Primary Tumor in Breast",
+          "distribution": 0.0538
+        }
+      ],
+      "remarks": [
+        "Adjusted Tumor Data for Regional Breast Cancer:",
+        "https://onlinelibrary.wiley.com/doi/full/10.1002/cncr.21285"
+      ],
+      "value": "regional"
+    },
+    "Local Breast Cancer": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_Location",
+      "distributed_transition": [
+        {
+          "transition": "Tumor Size Less than 2 cm",
+          "distribution": 0.7052
+        },
+        {
+          "transition": "Tumor Size 2 -5 cm",
+          "distribution": 0.2632
+        },
+        {
+          "transition": "Tumor Size Greater Than 5 cm",
+          "distribution": 0.0316
+        }
+      ],
+      "remarks": [
+        "Adjusted Tumor Data for Local Breast Cancer:",
+        "https://onlinelibrary.wiley.com/doi/full/10.1002/cncr.21285"
+      ],
+      "value": "local"
+    },
+    "M1_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21907-1",
+          "display": "Distant metastases.clinical [Class] Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 55440008,
+        "display": "M1 category (finding)"
+      },
+      "direct_transition": "Distant Breast Cancer"
+    },
+    "M0_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21907-1",
+          "display": "Distant metastases.clinical [Class] Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 30893008,
+        "display": "M0 category (finding)"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Local Breast Cancer",
+          "distribution": 0.62
+        },
+        {
+          "transition": "Regional Breast Cancer",
+          "distribution": 0.38
+        }
+      ],
+      "remarks": [
+        "If the cancer is located only in the breast, the 5-year survival rate of women with breast cancer is 99%. Sixty-two percent (62%) of cases are diagnosed at this stage:",
+        "https://www.cancer.net/cancer-types/breast-cancer/statistics"
+      ]
+    },
+    "T0_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21905-5",
+          "display": "Primary tumor.clinical [Class] Cancer"
+        }
+      ],
+      "direct_transition": "N Marker",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 58790005,
+        "display": "T0 category (finding)"
+      }
+    },
+    "T1_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21905-5",
+          "display": "Primary tumor.clinical [Class] Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 23351008,
+        "display": "T1 category (finding)"
+      },
+      "direct_transition": "N Marker"
+    },
+    "T2_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21905-5",
+          "display": "Primary tumor.clinical [Class] Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 67673008,
+        "display": "T2 category (finding)"
+      },
+      "direct_transition": "N Marker"
+    },
+    "T3_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21905-5",
+          "display": "Primary tumor.clinical [Class] Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 14410001,
+        "display": "T3 category (finding)"
+      },
+      "direct_transition": "N Marker",
+      "remarks": [
+        "https://www.cancer.net/cancer-types/breast-cancer/statistics"
+      ]
+    },
+    "T4_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21905-5",
+          "display": "Primary tumor.clinical [Class] Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 65565005,
+        "display": "T4 category (finding)"
+      },
+      "direct_transition": "N Marker"
+    },
+    "N1_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21906-3",
+          "display": "Regional lymph nodes.clinical [Class] Cancer"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 53623008,
+        "display": "N1 category (finding)"
+      }
+    },
+    "N0_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21906-3",
+          "display": "Regional lymph nodes.clinical [Class] Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 62455006,
+        "display": "N0 category (finding)"
+      },
+      "direct_transition": "Terminal"
+    },
+    "N2_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21906-3",
+          "display": "Regional lymph nodes.clinical [Class] Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 46059003,
+        "display": "N2 category (finding)"
+      },
+      "direct_transition": "Terminal"
+    },
+    "N3_Diagnosed": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21906-3",
+          "display": "Regional lymph nodes.clinical [Class] Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 5856006,
+        "display": "N3 category (finding)"
+      },
+      "direct_transition": "Terminal"
+    },
+    "T1": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_T",
+      "value": "T1",
+      "direct_transition": "T1_Diagnosed",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "No Evidence of Primary Tumor in Breast": {
+      "type": "Simple",
+      "direct_transition": "T0",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "T0": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_T",
+      "value": "T0",
+      "direct_transition": "T0_Diagnosed"
+    },
+    "Tumor Size 2 -5 cm": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "cm",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "33728-7",
+          "display": "Size.maximum dimension in Tumor"
+        }
+      ],
+      "direct_transition": "T2",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ],
+      "range": {
+        "low": 2,
+        "high": 5
+      }
+    },
+    "T2": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_T",
+      "value": "T2",
+      "direct_transition": "T2_Diagnosed",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "Tumor Size Greater Than 5 cm": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "cm",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "33728-7",
+          "display": "Size.maximum dimension in Tumor"
+        }
+      ],
+      "direct_transition": "T3",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ],
+      "range": {
+        "low": 5,
+        "high": 6
+      }
+    },
+    "Tumor Size Less than 2 cm": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "cm",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "33728-7",
+          "display": "Size.maximum dimension in Tumor"
+        }
+      ],
+      "direct_transition": "T1",
+      "range": {
+        "low": 0,
+        "high": 2
+      },
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "T3": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_T",
+      "value": "T3",
+      "direct_transition": "T3_Diagnosed",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "Tumor Size Any": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "cm",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "33728-7",
+          "display": "Size.maximum dimension in Tumor"
+        }
+      ],
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ],
+      "range": {
+        "low": 0,
+        "high": 6
+      },
+      "direct_transition": "T4"
+    },
+    "No Evidence of Distant Metastasis ": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "44667-4",
+          "display": "Site of distant metastasis in Breast tumor"
+        }
+      ],
+      "direct_transition": "M0",
+      "remarks": [
+        "https://www.cancer.net/cancer-types/breast-cancer/statistics",
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260413007,
+        "display": "None (qualifier value)"
+      }
+    },
+    "M0": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_M",
+      "value": "M0",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition",
+        "Cancer has either spread beyond the breast and nearby lymph nodes to other areas of the body (M1) or it has not (MO):",
+        "https://ww5.komen.org/BreastCancer/MetastasesandStaging.html"
+      ],
+      "direct_transition": "M0_Diagnosed"
+    },
+    "Distant Metastases Detected": {
+      "type": "Simple",
+      "direct_transition": "M1",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "M1": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_M",
+      "value": "M1",
+      "direct_transition": "M1_Diagnosed",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "No Regional Lymph Node Metastasis": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "#",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85352-3",
+          "display": "Lymph nodes with isolated tumor cells [#] in Cancer specimen by Light microscopy"
+        }
+      ],
+      "exact": {
+        "quantity": 0
+      },
+      "direct_transition": "N0",
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition",
+        "https://ww5.komen.org/BreastCancer/LymphNodeStatusandStaging.html"
+      ]
+    },
+    "N0": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_N",
+      "value": "N0",
+      "direct_transition": "N0_Diagnosed"
+    },
+    "Micrometastasis in 1 - 3 Lymph Nodes": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "#",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85344-0",
+          "display": "Lymph nodes with micrometastases [#] in Cancer specimen by Light microscopy"
+        }
+      ],
+      "direct_transition": "N1",
+      "range": {
+        "low": 1,
+        "high": 3
+      },
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition",
+        "https://ww5.komen.org/BreastCancer/LymphNodeStatusandStaging.html"
+      ]
+    },
+    "Macrometastases in 4 - 9 Lymph Nodes": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "#",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85343-2",
+          "display": "Lymph nodes with macrometastases [#] in Cancer specimen by Light microscopy"
+        }
+      ],
+      "direct_transition": "N2",
+      "range": {
+        "low": 4,
+        "high": 9
+      },
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition",
+        "https://ww5.komen.org/BreastCancer/LymphNodeStatusandStaging.html"
+      ]
+    },
+    "Macrometastases in 10+ Lymph Nodes": {
+      "type": "Observation",
+      "category": "imaging",
+      "unit": "#",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85343-2",
+          "display": "Lymph nodes with macrometastases [#] in Cancer specimen by Light microscopy"
+        }
+      ],
+      "direct_transition": "N3",
+      "range": {
+        "low": 10,
+        "high": 30
+      },
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition",
+        "https://ww5.komen.org/BreastCancer/LymphNodeStatusandStaging.html",
+        "https://www.medicalnewstoday.com/articles/319713.php"
+      ]
+    }
+  }
+}
+,
+"breast_cancer":{
+  "name": "Breast_cancer",
+  "remarks": [
+    "The main pathway for breast_cancer. Starts from initial and goes to obtaining breast cancer, screening, diagnosis, treatments, and final followup followed by potential death. ",
+    "",
+    "Information was primarily sourced from:",
+    "",
+    "1) Susan G. Komen: https://ww5.komen.org/",
+    "2) American Cancer Society: https://www.cancer.org/cancer/breast-cancer.html",
+    "3) National Comprehensive Cancer Network: https://www.nccn.org/professionals/physician_gls/default.aspx#site",
+    "4) Center for Disease Control: https://gis.cdc.gov/Cancer/USCS/DataViz.html",
+    "5) AJCC Cancer Staging Manual 8th Edition (Physical Textbook)",
+    "6) Conversations with Jim O'Connor, Breast Cancer Clinician",
+    "",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Male",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Female": {
+      "type": "Simple",
+      "remarks": [
+        "Race and ethnicity - Lifetime risk of breast cancer ",
+        "White",
+        "13%",
+        "Black",
+        "12%",
+        "Asian/Pacific Islander",
+        "11%",
+        "Hispanic",
+        "10%",
+        "American Indian/Alaska Native",
+        "8%",
+        "",
+        "https://ww5.komen.org/BreastCancer/RaceampEthnicity.html",
+        "",
+        "For an American woman, the lifetime risk of developing breast cancer is 12.38% or 1 in 8[4]:",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4127601/pdf/WJCO-5-283.pdf"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "White"
+          },
+          "distributions": [
+            {
+              "transition": "Pre_breastCancer",
+              "distribution": 0.13
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.8700000000000001
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Pre_breastCancer",
+              "distribution": 0.12
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.88
+            }
+          ],
+          "condition": {
+            "condition_type": "Race",
+            "race": "Black"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Pre_breastCancer",
+              "distribution": 0.11
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.89
+            }
+          ],
+          "condition": {
+            "condition_type": "Race",
+            "race": "Asian"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Pre_breastCancer",
+              "distribution": 0.1
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9
+            }
+          ],
+          "condition": {
+            "condition_type": "Race",
+            "race": "Hispanic"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Pre_breastCancer",
+              "distribution": 0.08
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.92
+            }
+          ],
+          "condition": {
+            "condition_type": "Race",
+            "race": "Native"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Pre_breastCancer",
+              "distribution": 0.125
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.875
+            }
+          ]
+        }
+      ]
+    },
+    "Male": {
+      "type": "Simple",
+      "remarks": [
+        "Breast cancer in men is a rare disease. Less than 1% of all breast cancers occur in men:",
+        "https://www.breastcancer.org/symptoms/types/male_bc",
+        "",
+        "All people, whether male or female, are born with some breast cells and tissue. Even though males do not develop milk-producing breasts, a man’s breast cells and tissue can still develop cancer. Even so, male breast cancer is very rare. Less than one percent of all breast cancer cases develop in men, and only one in a thousand men will ever be diagnosed with breast cancer.",
+        "https://www.nationalbreastcancer.org/male-breast-cancer",
+        "",
+        "Most breast cancers happen to men between ages 60 and 70:",
+        "https://www.webmd.com/breast-cancer/breast-cancer-men"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Terminal",
+          "distribution": 0.99
+        },
+        {
+          "transition": "Age 60-69",
+          "distribution": 0.001
+        }
+      ]
+    },
+    "Pre_breastCancer": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Age 0-39",
+          "distribution": 0.0454
+        },
+        {
+          "transition": "Age 39-59",
+          "distribution": 0.3549
+        },
+        {
+          "transition": "Age 60-69",
+          "distribution": 0.28800000000000003
+        },
+        {
+          "transition": "Age 69-85",
+          "distribution": 0.2591
+        },
+        {
+          "transition": "Age 85-140",
+          "distribution": 0.0526
+        }
+      ],
+      "remarks": [
+        "https://gis.cdc.gov/Cancer/USCS/DataViz.html",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4127601/pdf/WJCO-5-283.pdf"
+      ]
+    },
+    "BreastCancer_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Lump/mass",
+      "cause": "",
+      "probability": 0.83,
+      "direct_transition": "BreastCancer_Symptom2",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/about/breast-cancer-signs-and-symptoms.html",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5482318/"
+      ],
+      "range": {
+        "low": 0,
+        "high": 5
+      }
+    },
+    "BreastCancer_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Swelling",
+      "cause": "",
+      "probability": 0.006,
+      "direct_transition": "BreastCancer_Symptom3",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/about/breast-cancer-signs-and-symptoms.html",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5482318/"
+      ],
+      "range": {
+        "low": 20,
+        "high": 30
+      }
+    },
+    "BreastCancer_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Breast/Nipple Pain",
+      "cause": "",
+      "probability": 0.06,
+      "direct_transition": "BreastCancer_Symptom5",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/about/breast-cancer-signs-and-symptoms.html",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5482318/"
+      ],
+      "range": {
+        "low": 20,
+        "high": 60
+      }
+    },
+    "BreastCancer_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Skin Irritation/Dimpling",
+      "cause": "",
+      "probability": 0.02,
+      "direct_transition": "BreastCancer_Symptom4",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/about/breast-cancer-signs-and-symptoms.html",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5482318/"
+      ],
+      "range": {
+        "low": 0,
+        "high": 35
+      }
+    },
+    "BreastCancer_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Nipple Retraction",
+      "cause": "",
+      "probability": 0.07,
+      "direct_transition": "BreastCancer_Symptom6",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/about/breast-cancer-signs-and-symptoms.html"
+      ],
+      "range": {
+        "low": 0,
+        "high": 10
+      }
+    },
+    "BreastCancer_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Nipple Discharge",
+      "cause": "",
+      "probability": 0.1,
+      "direct_transition": "Breast Cancer",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/about/breast-cancer-signs-and-symptoms.html"
+      ],
+      "range": {
+        "low": 0,
+        "high": 5
+      }
+    },
+    "Breast Cancer": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 254837009,
+          "display": "Malignant neoplasm of breast (disorder)"
+        }
+      ],
+      "direct_transition": "Time Before Initial Doctor Visit",
+      "target_encounter": "Breast Cancer Encounter",
+      "assign_to_attribute": "breast_cancer_condition"
+    },
+    "Mammogram": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 241055006,
+          "display": "Mammogram - symptomatic (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 25,
+        "unit": "minutes"
+      },
+      "distributed_transition": [
+        {
+          "transition": "MRI",
+          "distribution": 0.25
+        },
+        {
+          "transition": "Ultrasound",
+          "distribution": 0.75
+        }
+      ],
+      "remarks": [
+        "Mammogram",
+        "A mammogram is an x-ray that allows a qualified specialist to examine the breast tissue for any suspicious areas.  In a diagnostic mammogram, more x-rays are taken, providing views of the breast from multiple vantage points.",
+        "https://www.nationalbreastcancer.org/breast-cancer-diagnosis",
+        "",
+        "https://www.breastcancer.org/research-news/20091204b"
+      ]
+    },
+    "Ultrasound": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 1571000087109,
+          "display": "Ultrasonography of bilateral breasts (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Breast Biopsy",
+      "remarks": [
+        "Ultrasound",
+        "A breast ultrasound is a scan that uses penetrating sound waves that do not affect or damage the tissue and cannot be heard by humans.",
+        "https://www.nationalbreastcancer.org/breast-cancer-diagnosis"
+      ]
+    },
+    "Breast Cancer Encounter": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom (procedure)"
+        }
+      ],
+      "direct_transition": "Mammogram"
+    },
+    "MRI": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 241615005,
+          "display": "Magnetic resonance imaging of breast (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 90,
+        "unit": "minutes"
+      },
+      "direct_transition": "Breast Biopsy",
+      "remarks": [
+        "MRI",
+        "During a breast MRI, a magnet connected to a computer transmits magnetic energy and radio waves (not radiation) through the breast tissue. It scans the tissue, making detailed pictures of areas within the breast.",
+        "https://www.nationalbreastcancer.org/breast-cancer-diagnosis"
+      ]
+    },
+    "Diagnose_TNM_Markers": {
+      "type": "CallSubmodule",
+      "submodule": "breast_cancer/tnm_diagnosis",
+      "direct_transition": "Diagnose Hormone Receptors"
+    },
+    "Diagnose Hormone Receptors": {
+      "type": "CallSubmodule",
+      "submodule": "breast_cancer/hormone_diagnosis",
+      "direct_transition": "Staging"
+    },
+    "Staging": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Stage IV",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_M",
+            "operator": "==",
+            "value": "M1"
+          }
+        },
+        {
+          "transition": "Nonmetastatic",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_M",
+            "operator": "==",
+            "value": "M0"
+          }
+        }
+      ],
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "Stage IV": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "direct_transition": "Delay for Analysis of Possible Treatments",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 258228008,
+        "display": "Stage 4 (qualifier value)"
+      }
+    },
+    "Nonmetastatic": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "IIIC",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_N",
+            "operator": "==",
+            "value": "N3"
+          }
+        },
+        {
+          "transition": "IIIB",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_T",
+            "operator": "==",
+            "value": "T4"
+          }
+        },
+        {
+          "transition": "IIIA",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_N",
+                "operator": "==",
+                "value": "N2"
+              },
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "breast_cancer_N",
+                    "operator": "==",
+                    "value": "N1"
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "breast_cancer_T",
+                    "operator": "==",
+                    "value": "T3"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Nonaggressive"
+        }
+      ]
+    },
+    "Stage IV Treatment": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Treatment Successful",
+          "distribution": 0.22
+        },
+        {
+          "transition": "Treatment Unsuccessful",
+          "distribution": 0.78
+        }
+      ],
+      "remarks": [
+        "The American Cancer Society report that 5-year survival rates break down by stage as follows:",
+        "Stage 0-1: Close to 100 percent survival rate. Approximately 61 percent of all breast cancers are diagnosed at this stage.",
+        "Stage 2: Relative survival rate of 93 percent.",
+        "Stage 3: Relative survival rate of 72 percent. Many women with this stage breast cancer are treated successfully.",
+        "Stage 4: Relative survival rate of 22 percent. Many different treatment options are available:",
+        "https://www.medicalnewstoday.com/articles/316867.php"
+      ]
+    },
+    "Stage III": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 258224005,
+        "display": "Stage 3 (qualifier value)"
+      },
+      "direct_transition": "Delay for Analysis of Possible Treatments"
+    },
+    "Stage I": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 258215001,
+        "display": "Stage 1 (qualifier value)"
+      },
+      "direct_transition": "Delay for Analysis of Possible Treatments"
+    },
+    "IIIB": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "direct_transition": "Stage III",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 261639007,
+        "display": "Stage 3B (qualifier value)"
+      }
+    },
+    "IIIA": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 261638004,
+        "display": "Stage 3A (qualifier value)"
+      },
+      "direct_transition": "Stage III"
+    },
+    "Stage III Treatment": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Treatment Successful",
+          "distribution": 0.72
+        },
+        {
+          "transition": "Treatment Unsuccessful",
+          "distribution": 0.28
+        }
+      ],
+      "remarks": [
+        "The American Cancer Society report that 5-year survival rates break down by stage as follows:",
+        "Stage 0-1: Close to 100 percent survival rate. Approximately 61 percent of all breast cancers are diagnosed at this stage.",
+        "Stage 2: Relative survival rate of 93 percent.",
+        "Stage 3: Relative survival rate of 72 percent. Many women with this stage breast cancer are treated successfully.",
+        "Stage 4: Relative survival rate of 22 percent. Many different treatment options are available:",
+        "https://www.medicalnewstoday.com/articles/316867.php"
+      ]
+    },
+    "Nonaggressive": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_T",
+                "operator": "==",
+                "value": "T3"
+              },
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "breast_cancer_T",
+                    "operator": "==",
+                    "value": "T2"
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "breast_cancer_N",
+                    "operator": "==",
+                    "value": "N1"
+                  }
+                ]
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "IIB",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_T",
+            "operator": "==",
+            "value": "T2"
+          },
+          "distributions": [
+            {
+              "transition": "IIA",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_T",
+                "operator": "==",
+                "value": "T1"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_N",
+                "operator": "==",
+                "value": "N1"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "IIA",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Early_Stage",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Early_Stage",
+              "distribution": 1
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "IIIC": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 261640009,
+        "display": "Stage 3C (qualifier value)"
+      },
+      "direct_transition": "Stage III"
+    },
+    "IIB": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 261615002,
+        "display": "Stage 2B (qualifier value)"
+      },
+      "direct_transition": "Stage II"
+    },
+    "IIA": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 261614003,
+        "display": "Stage 2A (qualifier value)"
+      },
+      "direct_transition": "Stage II"
+    },
+    "IA": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 261634002,
+        "display": "Stage 1A (qualifier value)"
+      },
+      "direct_transition": "Stage I"
+    },
+    "IB": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 261635001,
+        "display": "Stage 1B (qualifier value)"
+      },
+      "direct_transition": "Stage I"
+    },
+    "Early_Stage": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "IA",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_T",
+            "operator": "==",
+            "value": "T1"
+          }
+        },
+        {
+          "transition": "IB",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_N",
+            "operator": "==",
+            "value": "N1"
+          }
+        }
+      ],
+      "remarks": [
+        "AJCC Cancer Staging Manual; 8th Edition"
+      ]
+    },
+    "Stage II": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21908-9",
+          "display": "Stage group.clinical Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 258219007,
+        "display": "Stage 2 (qualifier value)"
+      },
+      "direct_transition": "Delay for Analysis of Possible Treatments"
+    },
+    "Stage II Treatment": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Treatment Successful",
+          "distribution": 0.93
+        },
+        {
+          "transition": "Treatment Unsuccessful",
+          "distribution": 0.07
+        }
+      ],
+      "remarks": [
+        "The American Cancer Society report that 5-year survival rates break down by stage as follows:",
+        "Stage 0-1: Close to 100 percent survival rate. Approximately 61 percent of all breast cancers are diagnosed at this stage.",
+        "Stage 2: Relative survival rate of 93 percent.",
+        "Stage 3: Relative survival rate of 72 percent. Many women with this stage breast cancer are treated successfully.",
+        "Stage 4: Relative survival rate of 22 percent. Many different treatment options are available:",
+        "https://www.medicalnewstoday.com/articles/316867.php"
+      ]
+    },
+    "End Initial Follow-Up Doctor Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Initial Follow-Up Counter"
+    },
+    "4 Months between Initial Follow-Ups": {
+      "type": "Delay",
+      "direct_transition": "Initial Follow-Up Doctor Visit",
+      "range": {
+        "low": 14,
+        "high": 18,
+        "unit": "weeks"
+      },
+      "remarks": [
+        "Doctor visits: At first, your follow-up doctor visits will probably be scheduled for every few months. The longer you have been free of cancer, the less often the appointments are needed. After 5 years, they are typically done about once a year:",
+        "https://www.cancer.org/cancer/breast-cancer/living-as-a-breast-cancer-survivor/follow-up-care-after-breast-cancer-treatment.html"
+      ]
+    },
+    "Initial Follow-Up Counter": {
+      "type": "Counter",
+      "attribute": "breast_cancer_init_followup_counter",
+      "action": "increment",
+      "conditional_transition": [
+        {
+          "transition": "4 Months between Initial Follow-Ups",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_init_followup_counter",
+                "operator": "<",
+                "value": 3
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_years_after_treatment",
+                "operator": "<",
+                "value": 5
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Mammogram Followup"
+        }
+      ],
+      "remarks": [
+        "1 unit of the counter indicates 4 months. Patients within 5 years of surgery will typically go to the doctors about every 4 months."
+      ]
+    },
+    "Initialize Initial Follow-Up Counter": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_init_followup_counter",
+      "direct_transition": "Initialize Years After Treatment Counter",
+      "value": 0,
+      "remarks": [
+        "1 unit of the counter indicates 4 months. Patients within 5 years of surgery will typically go to the doctors about every 4 months."
+      ]
+    },
+    "Mammogram Followup": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Mammogram Followup Visit",
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "21908-9",
+                "display": "Stage group.clinical Cancer"
+              }
+            ],
+            "operator": "!=",
+            "value_code": {
+              "system": "SNOMED-CT",
+              "code": 261635001,
+              "display": "Stage 1B (qualifier value)"
+            }
+          }
+        },
+        {
+          "transition": "Pelvic Followup"
+        }
+      ],
+      "remarks": [
+        "Mammograms: If you had breast-conserving surgery, you will get a mammogram about 6-12 months after surgery and radiation are completed, and then at least every year after that. Depending on the type of mastectomy you had, you may still need to have yearly mammograms on the remaining breast:",
+        "https://www.cancer.org/cancer/breast-cancer/living-as-a-breast-cancer-survivor/follow-up-care-after-breast-cancer-treatment.html"
+      ]
+    },
+    "Post-Surgery Mammogram": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 71651007,
+          "display": "Mammography (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 25,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Mammogram Followup Visit",
+      "reason": "breast_cancer_condition",
+      "remarks": [
+        "Mammogram",
+        "A mammogram is an x-ray that allows a qualified specialist to examine the breast tissue for any suspicious areas.  In a diagnostic mammogram, more x-rays are taken, providing views of the breast from multiple vantage points.",
+        "https://www.nationalbreastcancer.org/breast-cancer-diagnosis:",
+        "https://www.breastcancer.org/research-news/20091204b"
+      ]
+    },
+    "Mammogram Followup Visit": {
+      "type": "Encounter",
+      "reason": "breast_cancer_condition",
+      "direct_transition": "Post-Surgery Mammogram",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 410410006,
+          "display": "Screening surveillance (regime/therapy)"
+        }
+      ],
+      "encounter_class": "inpatient"
+    },
+    "End Mammogram Followup Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Pelvic Followup"
+    },
+    "Pelvic Followup": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Gynecologist Visit",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 10324,
+                    "display": "Tamoxifen"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 38409,
+                    "display": "Toremifene"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Gynecologist Visit",
+          "condition": {
+            "condition_type": "Symptom",
+            "symptom": "Unusual Vaginal Bleeding",
+            "operator": ">",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Gynecologist Visit",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_tamoxifen",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Bone Followup"
+        }
+      ],
+      "remarks": [
+        "Pelvic exams: If you are taking either of the hormone drugs tamoxifen or toremifene and still have your uterus, you should have pelvic exams every year because these drugs can increase your risk of uterine cancer. This risk is highest in women who have gone through menopause. Be sure to tell your doctor right away about any unusual vaginal bleeding, such as vaginal bleeding or spotting after menopause, bleeding or spotting between periods, or a change in your periods. Although this is usually caused by something that isn’t cancer, it can also be the first sign of uterine cancer.",
+        "https://www.cancer.org/cancer/breast-cancer/living-as-a-breast-cancer-survivor/follow-up-care-after-breast-cancer-treatment.html",
+        "",
+        "https://www.hopkinsmedicine.org/kimmel_cancer_center/centers/breast_cancer_program/treatment_and_services/survivorship/follow_up/pelvic_exams.html"
+      ]
+    },
+    "Gynecologist Visit": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "breast_cancer_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 310061009,
+          "display": "Gynecology service (qualifier value)"
+        }
+      ],
+      "direct_transition": "Pelvic Exam"
+    },
+    "Bone Followup": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Bone Exam Visit",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 258494,
+                    "display": "exemestane"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Active Medication",
+                    "codes": [
+                      {
+                        "system": "RxNorm",
+                        "code": 84857,
+                        "display": "anastrozole"
+                      }
+                    ]
+                  },
+                  {
+                    "condition_type": "Active Medication",
+                    "codes": [
+                      {
+                        "system": "RxNorm",
+                        "code": 72965,
+                        "display": "letrozole"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Bone Exam Visit",
+          "condition": {
+            "condition_type": "Symptom",
+            "symptom": "Early menopause due to treatment",
+            "operator": ">",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Bone Exam Visit",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_aromatase_inhibitors",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Reset Initial Follow-Up Counter"
+        }
+      ],
+      "remarks": [
+        "Bone density tests: If you are taking an aromatase inhibitor (anastrozole, letrozole, or exemestane) for early stage breast cancer, or if you go through menopause as a result of treatment, your doctor will want to monitor your bone health and may consider testing your bone density.",
+        "https://www.cancer.org/cancer/breast-cancer/living-as-a-breast-cancer-survivor/follow-up-care-after-breast-cancer-treatment.html"
+      ]
+    },
+    "End Gynecologist Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Bone Followup"
+    },
+    "Pelvic Exam": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 35025007,
+          "display": "Manual pelvic examination (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 10,
+        "high": 15,
+        "unit": "minutes"
+      },
+      "direct_transition": "Pap Smear",
+      "remarks": [
+        "What Can I Expect During a Pelvic Exam?",
+        "You can expect to feel a little discomfort, but you should not feel pain during a pelvic exam. The exam itself takes about 10 minutes. If you have any questions during the exam, be sure to ask your doctor.",
+        "https://www.webmd.com/women/guide/pelvic-examination#1"
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Pap Smear": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 90226004,
+          "display": "Cytopathology procedure, preparation of smear, genital source (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 10,
+        "high": 20,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Gynecologist Visit",
+      "remarks": [
+        "A routine gynecological exam with a pap smear should be performed yearly for cervical cancer screening. Any abnormal vaginal spotting or bleeding should be reported to your primary care provider or gynecologist to evaluate for the possibility of uterine (endometrial) cancer, especially in women over the age of 50 and on tamoxifen. Although unusual vaginal bleeding can occur with menopause, any kind of vaginal bleeding after menopause should be checked out by your gynecologist or primary care provider.",
+        "https://www.hopkinsmedicine.org/kimmel_cancer_center/centers/breast_cancer_program/treatment_and_services/survivorship/follow_up/pelvic_exams.html",
+        "",
+        "If you take tamoxifen, tell your doctor about any unusual vaginal bleeding. If you take it and still have your uterus, you need an annual Pap smear, regardless of age.",
+        "https://www.webmd.com/breast-cancer/guide/breast-cancer-follow-up-care"
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Bone Exam": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 312681000,
+          "display": "Bone density scan (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 10,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Bone Exam Visit",
+      "remarks": [
+        "If you have your bone density test done at a hospital, it'll probably be done on a central device, where you lie on a padded platform while a mechanical arm passes over your body. The amount of radiation you're exposed to is very low, much less than the amount emitted during a chest X-ray. The test usually takes about 10 to 30 minutes.",
+        "https://www.mayoclinic.org/tests-procedures/bone-density-test/about/pac-20385273"
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Bone Exam Visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "breast_cancer_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185389009,
+          "display": "Follow-up visit (procedure)"
+        }
+      ],
+      "direct_transition": "Bone Exam"
+    },
+    "End Bone Exam Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Reset Initial Follow-Up Counter"
+    },
+    "Years After Treatment Counter": {
+      "type": "Counter",
+      "attribute": "breast_cancer_years_after_treatment",
+      "action": "increment",
+      "conditional_transition": [
+        {
+          "transition": "Post-Op Cancer Status",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_years_after_treatment",
+            "operator": "<",
+            "value": 5
+          }
+        },
+        {
+          "transition": "1 Year Passed"
+        }
+      ],
+      "remarks": [
+        "Indicate that a year has passed"
+      ]
+    },
+    "Initialize Years After Treatment Counter": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_years_after_treatment",
+      "direct_transition": "4 Months between Initial Follow-Ups",
+      "value": 0,
+      "remarks": [
+        "1 unit of the counter represents around 1 year after completing treatment."
+      ]
+    },
+    "Reset Initial Follow-Up Counter": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_init_followup_counter",
+      "direct_transition": "Years After Treatment Counter",
+      "value": 0
+    },
+    "1 Year Passed": {
+      "type": "Delay",
+      "direct_transition": "Initial Follow-Up Doctor Visit",
+      "range": {
+        "low": 11,
+        "high": 13,
+        "unit": "months"
+      }
+    },
+    "Initial Follow-Up Doctor Visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "breast_cancer_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 439740005,
+          "display": "Postoperative follow-up visit (procedure)"
+        }
+      ],
+      "direct_transition": "End Initial Follow-Up Doctor Visit",
+      "remarks": [
+        "Doctor visits: At first, your follow-up doctor visits will probably be scheduled for every few months. The longer you have been free of cancer, the less often the appointments are needed. After 5 years, they are typically done about once a year.",
+        "https://www.cancer.org/cancer/breast-cancer/living-as-a-breast-cancer-survivor/follow-up-care-after-breast-cancer-treatment.html"
+      ]
+    },
+    "Treatment Unsuccessful": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_survival",
+      "direct_transition": "Impending Death from Cancer Complications",
+      "value": "no"
+    },
+    "Treatment Successful": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_survival",
+      "direct_transition": "Sit-Down with Oncologist to Discuss Treatment Options",
+      "value": "yes"
+    },
+    "Regular Mammogram Visit": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 86013001,
+          "display": "Periodic reevaluation and management of healthy individual (procedure)"
+        }
+      ],
+      "direct_transition": "Screening Mammogram"
+    },
+    "Breast Cancer Found": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 254837009,
+          "display": "Malignant neoplasm of breast (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnose_TNM_Markers",
+      "assign_to_attribute": "breast_cancer_condition"
+    },
+    "Breast Biopsy": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 122548005,
+          "display": "Biopsy of breast (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Breast Cancer Found",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Screening Mammogram"
+          }
+        },
+        {
+          "transition": "Diagnose_TNM_Markers"
+        }
+      ],
+      "remarks": [
+        "https://www.breastcancer.org/research-news/20091204b"
+      ]
+    },
+    "Time Before Initial Doctor Visit": {
+      "type": "Delay",
+      "direct_transition": "Breast Cancer Encounter",
+      "range": {
+        "low": 0,
+        "high": 1,
+        "unit": "weeks"
+      }
+    },
+    "Delay for Analysis of Possible Treatments": {
+      "type": "Delay",
+      "range": {
+        "low": 1,
+        "high": 7,
+        "unit": "days"
+      },
+      "direct_transition": "Breast Cancer Treatment Success Rate"
+    },
+    "Sit-Down with Oncologist to Discuss Treatment Options": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "breast_cancer_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 223484005,
+          "display": "Discussion about treatment (procedure)"
+        }
+      ],
+      "direct_transition": "End Meeting with Oncologist",
+      "remarks": [
+        "Treatment Options:",
+        "https://www.cancer.net/cancer-types/breast-cancer/types-treatment"
+      ]
+    },
+    "End Meeting with Oncologist": {
+      "type": "EncounterEnd",
+      "direct_transition": "Choose_Treatment_Option"
+    },
+    "Stage I Treatment": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Treatment Successful",
+          "distribution": 0.99
+        },
+        {
+          "transition": "Treatment Unsuccessful",
+          "distribution": 0.01
+        }
+      ],
+      "remarks": [
+        "The American Cancer Society report that 5-year survival rates break down by stage as follows:",
+        "Stage 0-1: Close to 100 percent survival rate. Approximately 61 percent of all breast cancers are diagnosed at this stage.",
+        "Stage 2: Relative survival rate of 93 percent.",
+        "Stage 3: Relative survival rate of 72 percent. Many women with this stage breast cancer are treated successfully.",
+        "Stage 4: Relative survival rate of 22 percent. Many different treatment options are available:",
+        "https://www.medicalnewstoday.com/articles/316867.php"
+      ]
+    },
+    "Choose_Treatment_Option": {
+      "type": "Delay",
+      "range": {
+        "low": 1,
+        "high": 7,
+        "unit": "days"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Set pre-surgery chemo counter",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_triple_negative",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "PriorState",
+                    "name": "Stage III"
+                  },
+                  {
+                    "condition_type": "PriorState",
+                    "name": "Stage IV"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Begin Surgery and Radiation Treatment"
+        }
+      ],
+      "remarks": [
+        "Decision for Neoadjuvant Chemotherapy based upon conversations with Doctor Jim O'Connor"
+      ]
+    },
+    "End Treatment": {
+      "type": "Observation",
+      "category": "procedure",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "59557-9",
+          "display": "Treatment status Cancer"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Improvement After Surgery/Therapy",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_survival",
+            "operator": "==",
+            "value": "yes"
+          }
+        },
+        {
+          "transition": "Worsening After Surgery/Therapy",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_survival",
+            "operator": "==",
+            "value": "no"
+          }
+        }
+      ],
+      "remarks": [
+        "The American Cancer Society report that 5-year survival rates break down by stage as follows:",
+        "Stage 0-1: Close to 100 percent survival rate. Approximately 61 percent of all breast cancers are diagnosed at this stage.",
+        "Stage 2: Relative survival rate of 93 percent.",
+        "Stage 3: Relative survival rate of 72 percent. Many women with this stage breast cancer are treated successfully.",
+        "Stage 4: Relative survival rate of 22 percent. Many different treatment options are available:",
+        "https://www.medicalnewstoday.com/articles/316867.php"
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 445528004,
+        "display": "Treatment changed (situation)"
+      }
+    },
+    "End Neodjuvant Medication in Preparation for Surgery": {
+      "type": "MedicationEnd",
+      "direct_transition": "End_Neoadjuvant_Chemo_Treatment",
+      "referenced_by_attribute": "breast_cancer_neoMed"
+    },
+    "Neoadjuvant Chemo Before Surgery": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Chemotherapy Drugs",
+      "reason": "breast_cancer_condition"
+    },
+    "End Chemo Treatment": {
+      "type": "Delay",
+      "direct_transition": "Improvement After Neoadjuvant Chemotherapy",
+      "range": {
+        "low": 2,
+        "high": 5,
+        "unit": "weeks"
+      },
+      "remarks": [
+        "This issue of time interval between completion of neoadjuvant chemotherapy and surgery has also not been well addressed in large randomized clinical trials on neoadjuvant systemic therapy and many do not even specify the recommended interval (8-10). But when mentioned, a surgery between 2 and 5 weeks after the last chemotherapy cycle was recommended (11-13):",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5293647/"
+      ]
+    },
+    "Doxorubicin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1790099,
+          "display": "10 ML Doxorubicin Hydrochloride 2 MG/ML Injection"
+        }
+      ],
+      "remarks": [
+        "- Doxorubicin (Adriamycin)",
+        "- Epriubicin (Ellence) ",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/chemotherapy-for-breast-cancer.html"
+      ],
+      "direct_transition": "Neoadjuvant chemotherapy procedure",
+      "assign_to_attribute": "breast_cancer_neoMed",
+      "reason": "breast_cancer_condition"
+    },
+    "Epirubicin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1732186,
+          "display": "100 ML Epirubicin Hydrochloride 2 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Neoadjuvant chemotherapy procedure",
+      "assign_to_attribute": "breast_cancer_neoMed",
+      "reason": "breast_cancer_condition"
+    },
+    "Paclitaxel": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 583214,
+          "display": "Paclitaxel 100 MG Injection"
+        }
+      ],
+      "direct_transition": "Neoadjuvant chemotherapy procedure",
+      "assign_to_attribute": "breast_cancer_neoMed",
+      "reason": "breast_cancer_condition"
+    },
+    "Anthracyclines": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Doxorubicin",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Epirubicin",
+          "distribution": 0.5
+        }
+      ],
+      "remarks": [
+        "The most common drugs used for adjuvant and neoadjuvant chemo include:",
+        "Anthracyclines, such as doxorubicin (Adriamycin) and epirubicin (Ellence)",
+        "Taxanes, such as paclitaxel (Taxol) and docetaxel (Taxotere)",
+        "5-fluorouracil (5-FU)",
+        "Cyclophosphamide (Cytoxan)",
+        "Carboplatin (Paraplatin)",
+        "Most often, combinations of 2 or 3 of these drugs are used:",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/chemotherapy-for-breast-cancer.html"
+      ]
+    },
+    "Taxanes": {
+      "type": "Simple",
+      "direct_transition": "Paclitaxel",
+      "remarks": [
+        "The most common drugs used for adjuvant and neoadjuvant chemo include:",
+        "Anthracyclines, such as doxorubicin (Adriamycin) and epirubicin (Ellence)",
+        "Taxanes, such as paclitaxel (Taxol) and docetaxel (Taxotere)",
+        "5-fluorouracil (5-FU)",
+        "Cyclophosphamide (Cytoxan)",
+        "Carboplatin (Paraplatin)",
+        "Most often, combinations of 2 or 3 of these drugs are used:",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/chemotherapy-for-breast-cancer.html"
+      ]
+    },
+    "End_Neoadjuvant_Chemo_Treatment": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Increment pre-surgery chemo counter",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_neoCount",
+            "operator": "<",
+            "value": 7
+          }
+        },
+        {
+          "transition": "End Chemo Treatment"
+        }
+      ]
+    },
+    "Chemotherapy Drugs": {
+      "type": "Simple",
+      "remarks": [
+        "The most common drugs used for adjuvant and neoadjuvant chemo include:",
+        "Anthracyclines, such as doxorubicin (Adriamycin) and epirubicin (Ellence)",
+        "Taxanes, such as paclitaxel (Taxol) and docetaxel (Taxotere)",
+        "5-fluorouracil (5-FU)",
+        "Cyclophosphamide (Cytoxan)",
+        "Carboplatin (Paraplatin)",
+        "Most often, combinations of 2 or 3 of these drugs are used:",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/chemotherapy-for-breast-cancer.html"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Doxorubicin"
+          },
+          "distributions": [
+            {
+              "transition": "Doxorubicin",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Epirubicin"
+          },
+          "distributions": [
+            {
+              "transition": "Epirubicin",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Paclitaxel",
+              "distribution": 1
+            }
+          ],
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Paclitaxel"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Anthracyclines",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Taxanes",
+              "distribution": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    "Set pre-surgery chemo counter": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_neoCount",
+      "direct_transition": "Neoadjuvant Chemo Before Surgery",
+      "value": 0
+    },
+    "Neoadjuvant chemotherapy procedure": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 367336001,
+          "display": "Chemotherapy (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 240,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Neodjuvant Medication in Preparation for Surgery",
+      "remarks": [
+        "Some last as long as three or four hours, while others may only take a half-hour:",
+        "https://www.cancercarenorthwest.com/frequently-asked-questions/"
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Increment pre-surgery chemo counter": {
+      "type": "Counter",
+      "attribute": "breast_cancer_neoCount",
+      "action": "increment",
+      "direct_transition": "Delay Until Next Cycle"
+    },
+    "Delay Until Next Cycle": {
+      "type": "Delay",
+      "direct_transition": "Start New Chemo Cycle",
+      "range": {
+        "low": 19,
+        "high": 23,
+        "unit": "days"
+      },
+      "remarks": [
+        "Doctors give chemo in cycles, with each period of treatment followed by a rest period to give you time to recover from the effects of the drugs. Cycles are most often 2 or 3 weeks long. The schedule varies depending on the drugs used:",
+        "https://www.cancer.org/cancer/breast-cancer/treatment/chemotherapy-for-breast-cancer.html"
+      ]
+    },
+    "Start New Chemo Cycle": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "breast_cancer_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Chemotherapy Drugs"
+    },
+    "Begin Hormone Therapy Treatment": {
+      "type": "CallSubmodule",
+      "submodule": "breast_cancer/hormonetherapy_breast",
+      "direct_transition": "End Treatment",
+      "remarks": [
+        "Order of hormone therapy after surgery and radiation was based off of a conversation with Doctor Jim O'Connor."
+      ]
+    },
+    "Begin Surgery and Radiation Treatment": {
+      "type": "CallSubmodule",
+      "submodule": "breast_cancer/surgery_therapy_breast",
+      "direct_transition": "Begin Hormone Therapy Treatment",
+      "remarks": [
+        "Order of hormone therapy after surgery and radiation was based off of a conversation with Doctor Jim O'Connor."
+      ]
+    },
+    "Screening Mammogram": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 24623002,
+          "display": "Screening mammography (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 25,
+        "unit": "minutes"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Ultrasound",
+          "distribution": 0.75
+        },
+        {
+          "transition": "MRI",
+          "distribution": 0.25
+        }
+      ],
+      "remarks": [
+        "Mammogram",
+        "A mammogram is an x-ray that allows a qualified specialist to examine the breast tissue for any suspicious areas.  In a diagnostic mammogram, more x-rays are taken, providing views of the breast from multiple vantage points.",
+        "https://www.nationalbreastcancer.org/breast-cancer-diagnosis"
+      ]
+    },
+    "Post-Treatment Surveillance": {
+      "type": "Simple",
+      "direct_transition": "Initialize Initial Follow-Up Counter"
+    },
+    "Age 85-140": {
+      "type": "Delay",
+      "range": {
+        "low": 85,
+        "high": 140,
+        "unit": "years"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Regular Mammogram Visit",
+          "distribution": 0.48
+        },
+        {
+          "transition": "BreastCancer_Symptom1",
+          "distribution": 0.52
+        }
+      ],
+      "remarks": [
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4127601/pdf/WJCO-5-283.pdf"
+      ]
+    },
+    "Age 0-39": {
+      "type": "Delay",
+      "remarks": [
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4127601/pdf/WJCO-5-283.pdf"
+      ],
+      "range": {
+        "low": 0,
+        "high": 39,
+        "unit": "years"
+      },
+      "direct_transition": "BreastCancer_Symptom1"
+    },
+    "Age 69-85": {
+      "type": "Delay",
+      "range": {
+        "low": 70,
+        "high": 85,
+        "unit": "years"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Regular Mammogram Visit",
+          "distribution": 0.69
+        },
+        {
+          "transition": "BreastCancer_Symptom1",
+          "distribution": 0.31
+        }
+      ],
+      "remarks": [
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4127601/pdf/WJCO-5-283.pdf"
+      ]
+    },
+    "Age 39-59": {
+      "type": "Delay",
+      "range": {
+        "low": 39,
+        "high": 59,
+        "unit": "years"
+      },
+      "remarks": [
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4127601/pdf/WJCO-5-283.pdf"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Regular Mammogram Visit",
+          "distribution": 0.63
+        },
+        {
+          "transition": "BreastCancer_Symptom1",
+          "distribution": 0.37
+        }
+      ]
+    },
+    "Age 60-69": {
+      "type": "Delay",
+      "range": {
+        "low": 60,
+        "high": 69,
+        "unit": "years"
+      },
+      "remarks": [
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4127601/pdf/WJCO-5-283.pdf"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "BreastCancer_Symptom1",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Regular Mammogram Visit",
+              "distribution": 0.7
+            },
+            {
+              "transition": "BreastCancer_Symptom1",
+              "distribution": 0.3
+            }
+          ]
+        }
+      ]
+    },
+    "Improvement After Neoadjuvant Chemotherapy": {
+      "type": "Observation",
+      "category": "therapy",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "88040-1",
+          "display": "Response to cancer treatment"
+        }
+      ],
+      "direct_transition": "Begin Surgery and Radiation Treatment",
+      "remarks": [
+        "http://standardhealthrecord.org/guides/mcode/ValueSet-shr-core-ConditionStatusTrendVS.html"
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 385633008,
+        "display": "Improving (qualifier value)"
+      }
+    },
+    "Improvement After Surgery/Therapy": {
+      "type": "Observation",
+      "category": "therapy",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "88040-1",
+          "display": "Response to cancer treatment"
+        }
+      ],
+      "remarks": [
+        "http://standardhealthrecord.org/guides/mcode/ValueSet-shr-core-ConditionStatusTrendVS.html"
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 385633008,
+        "display": "Improving (qualifier value)"
+      },
+      "direct_transition": "Post-Treatment Surveillance"
+    },
+    "Worsening After Surgery/Therapy": {
+      "type": "Observation",
+      "category": "therapy",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "88040-1",
+          "display": "Response to cancer treatment"
+        }
+      ],
+      "remarks": [
+        "http://standardhealthrecord.org/guides/mcode/ValueSet-shr-core-ConditionStatusTrendVS.html"
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 230993007,
+        "display": "Worsening (qualifier value)"
+      },
+      "direct_transition": "Post-Treatment Surveillance"
+    },
+    "Post-Op Cancer Status": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Ineffective Treatment",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Treatment Unsuccessful"
+          }
+        },
+        {
+          "transition": "Effective Treatment",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Treatment Successful"
+          }
+        }
+      ]
+    },
+    "Ineffective Treatment": {
+      "type": "Observation",
+      "category": "therapy",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "88040-1",
+          "display": "Response to cancer treatment"
+        }
+      ],
+      "remarks": [
+        "http://standardhealthrecord.org/guides/mcode/ValueSet-shr-core-ConditionStatusTrendVS.html"
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 230993007,
+        "display": "Worsening (qualifier value)"
+      },
+      "direct_transition": "4 Months between Initial Follow-Ups"
+    },
+    "Effective Treatment": {
+      "type": "Observation",
+      "category": "therapy",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "88040-1",
+          "display": "Response to cancer treatment"
+        }
+      ],
+      "remarks": [
+        "http://standardhealthrecord.org/guides/mcode/ValueSet-shr-core-ConditionStatusTrendVS.html"
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 385633008,
+        "display": "Improving (qualifier value)"
+      },
+      "direct_transition": "4 Months between Initial Follow-Ups"
+    },
+    "Breast Cancer Treatment Success Rate": {
+      "type": "Simple",
+      "remarks": [
+        "The American Cancer Society report that 5-year survival rates break down by stage as follows:",
+        "Stage 0-1: Close to 100 percent survival rate. Approximately 61 percent of all breast cancers are diagnosed at this stage.",
+        "Stage 2: Relative survival rate of 93 percent.",
+        "Stage 3: Relative survival rate of 72 percent. Many women with this stage breast cancer are treated successfully.",
+        "Stage 4: Relative survival rate of 22 percent. Many different treatment options are available:",
+        "https://www.medicalnewstoday.com/articles/316867.php"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Stage I Treatment",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Stage I"
+          }
+        },
+        {
+          "transition": "Stage II Treatment",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Stage II"
+          }
+        },
+        {
+          "transition": "Stage III Treatment",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Stage III"
+          }
+        },
+        {
+          "transition": "Stage IV Treatment",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Stage IV"
+          }
+        }
+      ]
+    },
+    "Impending Death from Cancer Complications": {
+      "type": "Death",
+      "referenced_by_attribute": "breast_cancer_condition",
+      "range": {
+        "low": 0,
+        "high": 5,
+        "unit": "years"
+      },
+      "direct_transition": "Sit-Down with Oncologist to Discuss Treatment Options"
+    }
+  }
+}
+,
 "bronchitis":{
   "name": "Bronchitis",
   "remarks": [
@@ -7390,7 +13223,83 @@ export default {"allergic_rhinitis":{
         "high": 7,
         "unit": "days"
       },
-      "direct_transition": "Oncologist_Encounter"
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "colorectal_cancer_stage",
+            "operator": "==",
+            "value": 1
+          },
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.4
+            },
+            {
+              "transition": "Oncologist_Encounter",
+              "distribution": 0.6
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.53
+            },
+            {
+              "transition": "Oncologist_Encounter",
+              "distribution": 0.47
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "colorectal_cancer_stage",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.66
+            },
+            {
+              "transition": "Oncologist_Encounter",
+              "distribution": 0.34
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "colorectal_cancer_stage",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.8
+            },
+            {
+              "transition": "Oncologist_Encounter",
+              "distribution": 0.2
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "colorectal_cancer_stage",
+            "operator": "==",
+            "value": 4
+          }
+        }
+      ],
+      "remarks": [
+        "40% of patients with early-stage colon tumors and nearly 80% of patients with advanced disease had anemia - "
+      ]
     },
     "Oncologist_Encounter": {
       "type": "Encounter",
@@ -8437,6 +14346,27 @@ export default {"allergic_rhinitis":{
         "high": 8
       },
       "direct_transition": "Record_CMP"
+    },
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
+      "direct_transition": "Oncologist_Encounter"
+    },
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Oncologist_Encounter"
+        }
+      ]
     }
   }
 }
@@ -8682,7 +14612,20 @@ export default {"allergic_rhinitis":{
     },
     "initial encounter end": {
       "type": "EncounterEnd",
-      "direct_transition": "intra_encounter time gate"
+      "distributed_transition": [
+        {
+          "transition": "Check_Anemia_Exist",
+          "distribution": 0.2
+        },
+        {
+          "transition": "intra_encounter time gate",
+          "distribution": 0.8
+        }
+      ],
+      "remarks": [
+        "Anemia prevalence for CHF - https://www.ncbi.nlm.nih.gov/pubmed/20630401",
+        ""
+      ]
     },
     "intra_encounter time gate": {
       "type": "Delay",
@@ -9842,6 +15785,27 @@ export default {"allergic_rhinitis":{
       "type": "SetAttribute",
       "attribute": "3decho",
       "direct_transition": "End Inpatient Encounter"
+    },
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
+      "direct_transition": "intra_encounter time gate"
+    },
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "intra_encounter time gate"
+        }
+      ]
     }
   }
 }
@@ -12933,7 +18897,20 @@ export default {"allergic_rhinitis":{
     },
     "End_Diagnosis_Encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "Living_with_COPD"
+      "distributed_transition": [
+        {
+          "transition": "Check_Anemia_Exist",
+          "distribution": 0.21
+        },
+        {
+          "transition": "Living_with_COPD",
+          "distribution": 0.79
+        }
+      ],
+      "remarks": [
+        "The prevalence of anemia in patients with COPD varies from 7.5% to 33% - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4372868/",
+        ""
+      ]
     },
     "Living_with_COPD": {
       "type": "Simple",
@@ -13534,6 +19511,27 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
+      "direct_transition": "Living_with_COPD"
+    },
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Living_with_COPD"
+        }
+      ]
     }
   }
 }
@@ -13772,7 +19770,79 @@ export default {"allergic_rhinitis":{
     },
     "End_Screening": {
       "type": "EncounterEnd",
-      "direct_transition": "Life_With_Cystic_Fibrosis"
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<",
+            "quantity": 11,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.185
+            },
+            {
+              "transition": "Life_With_Cystic_Fibrosis",
+              "distribution": 0.815
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 11,
+                "unit": "years",
+                "value": 0
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<=",
+                "quantity": 18,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.04
+            },
+            {
+              "transition": "Life_With_Cystic_Fibrosis",
+              "distribution": 0.96
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">",
+            "quantity": 18,
+            "unit": "years"
+          },
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.43
+            },
+            {
+              "transition": "Life_With_Cystic_Fibrosis",
+              "distribution": 0.57
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "Anemia prevalence in Cystic Fibrosis -"
+      ]
     },
     "Set_Gene_Mutation": {
       "type": "SetAttribute",
@@ -15194,6 +21264,27 @@ export default {"allergic_rhinitis":{
         "high": 14,
         "unit": "weeks"
       }
+    },
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
+      "direct_transition": "Life_With_Cystic_Fibrosis"
+    },
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Life_With_Cystic_Fibrosis"
+        }
+      ]
     }
   }
 }
@@ -17187,7 +23278,19 @@ export default {"allergic_rhinitis":{
         "high": 4,
         "unit": "hours"
       },
-      "direct_transition": "Dialysis weight record"
+      "conditional_transition": [
+        {
+          "transition": "Prescribe_EPOGEN Ref-RxNorm",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Dialysis weight record"
+        }
+      ]
     },
     "end dialysis": {
       "type": "EncounterEnd",
@@ -17242,7 +23345,20 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "3 day delay"
+      "distributed_transition": [
+        {
+          "transition": "Check_Anemia_Exist",
+          "distribution": 0.534
+        },
+        {
+          "transition": "3 day delay",
+          "distribution": 0.466
+        }
+      ],
+      "remarks": [
+        "The prevalence of anemia increased with stage of CKD, from 8.4% at stage 1 to 53.4% at stage 5\".  Dialysis  is needed at stage 5 - ps://www.ncbi.nlm.nih.gov/pmc/articles/PMC3879360/",
+        ""
+      ]
     },
     "Dialysis weight record": {
       "type": "Observation",
@@ -17816,6 +23932,48 @@ export default {"allergic_rhinitis":{
         "high": 6
       },
       "direct_transition": "end dialysis"
+    },
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
+      "direct_transition": "3 day delay"
+    },
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "3 day delay"
+        }
+      ]
+    },
+    "Prescribe_EPOGEN Ref-RxNorm": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 205923,
+          "display": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]"
+        }
+      ],
+      "direct_transition": "Epogen_Administered",
+      "remarks": [
+        "Recommended starting dose for adult patients is 50 to 100 Units/kg 3 times weekly. Reduce or interrupt the dose if hemoglobin level approaches or exceeds 11 g/dl - Ref: Section -For Adult Patients with CKD on Dialysis (https://www.rxlist.com/epogen-drug.htm#description)"
+      ],
+      "assign_to_attribute": "anemia_medication",
+      "reason": "anemia"
+    },
+    "Epogen_Administered": {
+      "type": "MedicationEnd",
+      "direct_transition": "Dialysis weight record",
+      "referenced_by_attribute": "anemia_medication"
     }
   }
 }
@@ -21654,8 +27812,527 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"hypertension":{
+  "name": "Hypertension",
+  "remarks": [
+    "Hypertension modelled after the JNC 8 Hypertension Guideline Algorithm.",
+    "",
+    "The hypertension model section located in the beginning of the Metabolic Syndrome Standard of Care   ",
+    "",
+    "The recommendation for first-line therapy for hypertension remains a beta blocker or diuretic given in a low dosage. A target blood pressure of less than 140/90 mm Hg is achieved in about 50 percent of patients treated with monotherapy; two or more agents from different pharmacologic classes are often needed to achieve adequate blood pressure control. Single-dose combination antihypertension therapy is an important option that combines efficacy of blood pressure reduction and a low side effect profile with convenient once-daily dosing to enhance compliance. Combination antihypertensives include combined agents from the following pharmacologic classes: diuretics and potassium-sparing diuretics, beta blockers and diuretics, angiotensin-converting enzyme (ACE) inhibitors and diuretics, angiotensin-II antagonists and diuretics, and calcium channel blockers and ACE inhibitors - https://www.aafp.org/afp/2000/0515/p3049.html"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "remarks": [
+        "Initial impl == direct translation of ruby module"
+      ],
+      "direct_transition": "Wellness_Encounter"
+    },
+    "Diagnose_Hypertension": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 59621000,
+          "display": "Hypertension"
+        }
+      ],
+      "assign_to_attribute": "hypertension_dx",
+      "direct_transition": "Set_BP_Not Controlled"
+    },
+    "Hypertension_Medication_Low": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 429503,
+          "display": "Hydrochlorothiazide 12.5 MG"
+        }
+      ],
+      "direct_transition": "End_Wellness_Encounter",
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx"
+    },
+    "Hypertension_Medication_High": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 316049,
+          "display": "Hydrochlorothiazide 25 MG"
+        }
+      ],
+      "direct_transition": "End_Wellness_Encounter",
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx"
+    },
+    "Hypertension_Followup_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 390906007,
+          "display": "Hypertension follow-up encounter"
+        }
+      ],
+      "direct_transition": "Record_BP"
+    },
+    "End_Hypertension_Followup_Encounter": {
+      "type": "EncounterEnd",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "blood_pressure_controlled",
+            "operator": "==",
+            "value": false
+          },
+          "distributions": [
+            {
+              "transition": "Set_BP_Controlled_2",
+              "distribution": 0.49
+            },
+            {
+              "transition": "Delay 2_Month",
+              "distribution": 0.51
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "Wellness_Encounter"
+        }
+      ]
+    },
+    "Hypertension_Combination_Medication": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 746030,
+          "display": "Atenolol 50 MG / Chlorthalidone 25 MG Oral Tablet"
+        }
+      ],
+      "assign_to_attribute": "hypertension_medication_2",
+      "reason": "hypertension_dx",
+      "direct_transition": "End_Hypertension_Followup_Encounter"
+    },
+    "End_Hypertension_Comb_Medication": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "hypertension_medication_2",
+      "direct_transition": "Hypertension_Combination_Medication_2"
+    },
+    "Hypertension_Combination_Medication_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 999969,
+          "display": "Amlodipine 5 MG / Hydrochlorothiazide 12.5 MG / Olmesartan medoxomil 20 MG"
+        }
+      ],
+      "assign_to_attribute": "hypertension_medication_3",
+      "reason": "hypertension_dx",
+      "direct_transition": "End_Hypertension_Followup_Encounter_2",
+      "remarks": [
+        "Olmesartan is an angiotensin II receptor blocker (ARB) that relaxes the blood vessels.",
+        "Amlodipine is a calcium channel blocker that relaxes the blood vessels.",
+        "Hydrochlorothiazide is a thiazide diuretic (water pill). It is used to help reduce the amount of water in the body by increasing the flow of urine."
+      ]
+    },
+    "Hypertension_Followup_Encounter_2": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 390906007,
+          "display": "Hypertension follow-up encounter"
+        }
+      ],
+      "direct_transition": "Record_BP_2"
+    },
+    "Hypertension_Followup_Encounter_3": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 390906007,
+          "display": "Hypertension follow-up encounter"
+        }
+      ],
+      "direct_transition": "Record_BP_3"
+    },
+    "End_Hypertension_Followup_Encounter_2": {
+      "type": "EncounterEnd",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "blood_pressure_controlled",
+            "operator": "==",
+            "value": false
+          },
+          "distributions": [
+            {
+              "transition": "Set_BP_Controlled_3",
+              "distribution": 0.49
+            },
+            {
+              "transition": "Delay_2_Month_2",
+              "distribution": 0.51
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "Wellness_Encounter"
+        }
+      ]
+    },
+    "End_Hypertension_Followup_Encounter_3": {
+      "type": "EncounterEnd",
+      "direct_transition": "Wellness_Encounter"
+    },
+    "LifeStyle_Modifications_Hypertension_CarePlan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 443402002,
+          "display": "Lifestyle education regarding hypertension"
+        }
+      ],
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 386463000,
+          "display": "Prescribed activity/exercise education"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 413473000,
+          "display": "Counseling about alcohol consumption"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 1151000175103,
+          "display": "Dietary approaches to stop hypertension diet"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 225323000,
+          "display": "Smoking cessation education"
+        }
+      ],
+      "goals": [
+        {
+          "addresses": [
+            "hypertension_dx"
+          ],
+          "text": "Maintain blood pressure below 140/90 mm[Hg]"
+        },
+        {
+          "addresses": [
+            "hypertension_dx"
+          ],
+          "text": "Reduce sodium intake to no more than 2,400 mg/day"
+        }
+      ],
+      "reason": "hypertension_dx",
+      "conditional_transition": [
+        {
+          "transition": "Hypertension_Medication_Low",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Systolic Blood Pressure",
+            "operator": "<",
+            "value": 160
+          }
+        },
+        {
+          "transition": "Hypertension_Medication_High",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Systolic Blood Pressure",
+            "operator": ">=",
+            "value": 160
+          }
+        }
+      ]
+    },
+    "End_Hypertension_Medication": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "hypertension_medication",
+      "direct_transition": "Hypertension_Combination_Medication"
+    },
+    "Wellness_Encounter": {
+      "type": "Encounter",
+      "wellness": true,
+      "conditional_transition": [
+        {
+          "transition": "Diagnose_Hypertension",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension_dx",
+                "operator": "is nil"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Wellness_Encounter"
+        }
+      ]
+    },
+    "End_Wellness_Encounter": {
+      "type": "EncounterEnd",
+      "distributed_transition": [
+        {
+          "transition": "Set_BP_Controlled",
+          "distribution": 0.49
+        },
+        {
+          "transition": "Delay_One_Month",
+          "distribution": 0.51
+        }
+      ]
+    },
+    "Delay_One_Month": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "months"
+      },
+      "direct_transition": "Hypertension_Followup_Encounter"
+    },
+    "Record_BP": {
+      "type": "MultiObservation",
+      "category": "vital-signs",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "55284-4",
+          "display": "Blood Pressure"
+        }
+      ],
+      "observations": [
+        {
+          "category": "vital-signs",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8480-6",
+              "display": "Systolic Blood Pressure"
+            }
+          ],
+          "unit": "mm[Hg]",
+          "vital_sign": "Systolic Blood Pressure"
+        },
+        {
+          "category": "vital-signs",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8462-4",
+              "display": "Diastolic Blood Pressure"
+            }
+          ],
+          "unit": "mm[Hg]",
+          "vital_sign": "Diastolic Blood Pressure"
+        }
+      ],
+      "target_encounter": "Hypertension_Followup_Encounter",
+      "conditional_transition": [
+        {
+          "transition": "End_Hypertension_Medication",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "blood_pressure_controlled",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "End_Hypertension_Followup_Encounter"
+        }
+      ]
+    },
+    "Record_BP_2": {
+      "type": "MultiObservation",
+      "category": "vital-signs",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "55284-4",
+          "display": "Blood Pressure"
+        }
+      ],
+      "observations": [
+        {
+          "category": "vital-signs",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8480-6",
+              "display": "Systolic Blood Pressure"
+            }
+          ],
+          "unit": "mm[Hg]",
+          "vital_sign": "Systolic Blood Pressure"
+        },
+        {
+          "category": "vital-signs",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8462-4",
+              "display": "Diastolic Blood Pressure"
+            }
+          ],
+          "unit": "mm[Hg]",
+          "vital_sign": "Diastolic Blood Pressure"
+        }
+      ],
+      "target_encounter": "Hypertension_Followup_Encounter",
+      "conditional_transition": [
+        {
+          "transition": "End_Hypertension_Comb_Medication",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "blood_pressure_controlled",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "End_Hypertension_Followup_Encounter_2"
+        }
+      ]
+    },
+    "Record_BP_3": {
+      "type": "MultiObservation",
+      "category": "vital-signs",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "55284-4",
+          "display": "Blood Pressure"
+        }
+      ],
+      "observations": [
+        {
+          "category": "vital-signs",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8480-6",
+              "display": "Systolic Blood Pressure"
+            }
+          ],
+          "unit": "mm[Hg]",
+          "vital_sign": "Systolic Blood Pressure"
+        },
+        {
+          "category": "vital-signs",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8462-4",
+              "display": "Diastolic Blood Pressure"
+            }
+          ],
+          "unit": "mm[Hg]",
+          "vital_sign": "Diastolic Blood Pressure"
+        }
+      ],
+      "target_encounter": "Hypertension_Followup_Encounter",
+      "conditional_transition": [
+        {
+          "transition": "Referral To Hypertension Clinic",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "blood_pressure_controlled",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "End_Hypertension_Followup_Encounter_3"
+        }
+      ]
+    },
+    "Referral To Hypertension Clinic": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 183856001,
+          "display": "Referral to hypertension clinic"
+        }
+      ],
+      "direct_transition": "End_Hypertension_Followup_Encounter_3"
+    },
+    "Set_BP_Not Controlled": {
+      "type": "SetAttribute",
+      "attribute": "blood_pressure_controlled",
+      "direct_transition": "LifeStyle_Modifications_Hypertension_CarePlan",
+      "value": false
+    },
+    "Delay 2_Month": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 2,
+        "unit": "months"
+      },
+      "direct_transition": "Hypertension_Followup_Encounter_2"
+    },
+    "Delay_2_Month_2": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 2,
+        "unit": "months"
+      },
+      "direct_transition": "Hypertension_Followup_Encounter_3"
+    },
+    "Set_BP_Controlled": {
+      "type": "SetAttribute",
+      "attribute": "blood_pressure_controlled",
+      "value": true,
+      "direct_transition": "Delay_One_Month"
+    },
+    "Set_BP_Controlled_2": {
+      "type": "SetAttribute",
+      "attribute": "blood_pressure_controlled",
+      "value": true,
+      "direct_transition": "Delay 2_Month"
+    },
+    "Set_BP_Controlled_3": {
+      "type": "SetAttribute",
+      "attribute": "blood_pressure_controlled",
+      "value": true,
+      "direct_transition": "Delay_2_Month_2"
+    }
+  }
+}
+,
 "hypothyroidism":{
-  "name": "Primary atrophic hypothyroidism",
+  "name": "Hypothyroidism",
   "remarks": [
     "A blank module"
   ],
@@ -21860,7 +28537,40 @@ export default {"allergic_rhinitis":{
     },
     "end encounter": {
       "type": "EncounterEnd",
+      "distributed_transition": [
+        {
+          "transition": "Check_Anemia_Exist",
+          "distribution": 0.43
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.57
+        }
+      ],
+      "remarks": [
+        "Anemia prevalence was 43% in the hypothyroid group - "
+      ]
+    },
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
       "direct_transition": "Terminal"
+    },
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
     }
   }
 }
@@ -25178,7 +31888,20 @@ export default {"allergic_rhinitis":{
     },
     "End_Diagnosis_Encounter_III": {
       "type": "EncounterEnd",
-      "direct_transition": "Schedule Follow Up III"
+      "distributed_transition": [
+        {
+          "transition": "Check_Anemia_Exist",
+          "distribution": 0.77
+        },
+        {
+          "transition": "Schedule Follow Up III",
+          "distribution": 0.23
+        }
+      ],
+      "remarks": [
+        "1462 of 1900 patients developed anemia at some point during the survey - ",
+        ""
+      ]
     },
     "Schedule Follow Up III": {
       "type": "Delay",
@@ -25572,7 +32295,8 @@ export default {"allergic_rhinitis":{
           "display": "Cisplatin 50 MG Injection"
         }
       ],
-      "direct_transition": "SCLC Chemotheraphy IB"
+      "direct_transition": "SCLC Chemotheraphy IB",
+      "administration": true
     },
     "SCLC Chemotheraphy IB": {
       "type": "MedicationEnd",
@@ -25595,7 +32319,8 @@ export default {"allergic_rhinitis":{
           "display": "Etoposide 100 MG Injection"
         }
       ],
-      "direct_transition": "SCLC Chemotheraphy IIB"
+      "direct_transition": "SCLC Chemotheraphy IIB",
+      "administration": true
     },
     "SCLC Chemotheraphy IIB": {
       "type": "MedicationEnd",
@@ -25679,7 +32404,8 @@ export default {"allergic_rhinitis":{
           "display": "Cisplatin 50 MG Injection"
         }
       ],
-      "direct_transition": "NSCLC Chemotheraphy IB"
+      "direct_transition": "NSCLC Chemotheraphy IB",
+      "administration": true
     },
     "NSCLC Chemotheraphy IB": {
       "type": "MedicationEnd",
@@ -25702,7 +32428,8 @@ export default {"allergic_rhinitis":{
           "display": "PACLitaxel 100 MG Injection"
         }
       ],
-      "direct_transition": "NSCLC Chemotheraphy IIB"
+      "direct_transition": "NSCLC Chemotheraphy IIB",
+      "administration": true
     },
     "NSCLC Chemotheraphy IIB": {
       "type": "MedicationEnd",
@@ -27283,6 +34010,27 @@ export default {"allergic_rhinitis":{
         "high": 10
       },
       "direct_transition": "Chest_CT"
+    },
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
+      "direct_transition": "Schedule Follow Up III"
+    },
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Schedule Follow Up III"
+        }
+      ]
     }
   }
 }
@@ -27481,7 +34229,20 @@ export default {"allergic_rhinitis":{
     },
     "End_Diagnosis_Encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "Corticosteroid_Treatment"
+      "distributed_transition": [
+        {
+          "transition": "Check_Anemia_Exist",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Corticosteroid_Treatment",
+          "distribution": 0.5
+        }
+      ],
+      "remarks": [
+        "The most common blood disorder is anemia, affecting about half of all people with active lupus - https://www.lupus.org/resources/what-you-need-to-know-about-anemia ",
+        ""
+      ]
     },
     "Corticosteroid_Treatment": {
       "type": "Delay",
@@ -27588,6 +34349,27 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
+      "direct_transition": "Corticosteroid_Treatment"
+    },
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Corticosteroid_Treatment"
+        }
+      ]
     }
   }
 }
@@ -29326,71 +36108,7 @@ export default {"allergic_rhinitis":{
     "Wellness_Encounter": {
       "type": "Encounter",
       "wellness": true,
-      "direct_transition": "Check_Hypertension"
-    },
-    "Check_Hypertension": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertension",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertension_dx",
-                "operator": "is nil"
-              }
-            ]
-          },
-          "transition": "Diagnose_Hypertension"
-        },
-        {
-          "transition": "Check_Hypertension_BP",
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertension",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertension_dx",
-                "operator": "is not nil"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Check_Diabetes",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "hypertension",
-            "operator": "!=",
-            "value": true
-          }
-        }
-      ]
-    },
-    "Diagnose_Hypertension": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "38341003",
-          "display": "Hypertension"
-        }
-      ],
-      "assign_to_attribute": "hypertension_dx",
-      "direct_transition": "Check_Hypertension_BP"
+      "direct_transition": "Check_Diabetes"
     },
     "Check_Diabetes": {
       "type": "Simple",
@@ -30194,7 +36912,83 @@ export default {"allergic_rhinitis":{
     },
     "Check_Complications": {
       "type": "Simple",
-      "direct_transition": "check CKD"
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 1
+          },
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.084
+            },
+            {
+              "transition": "check CKD",
+              "distribution": 0.916
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 2
+          },
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.121
+            },
+            {
+              "transition": "check CKD",
+              "distribution": 0.879
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.174
+            },
+            {
+              "transition": "check CKD",
+              "distribution": 0.826
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 4
+          },
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.503
+            },
+            {
+              "transition": "check CKD",
+              "distribution": 0.497
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "The prevalence of anemia increased with stage of CKD, from 8.4% at stage 1 to 53.4% at stage 5 - see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3879360/"
+      ]
     },
     "Check_Nephropathy": {
       "type": "Simple",
@@ -31482,159 +38276,6 @@ export default {"allergic_rhinitis":{
     "Living_With_Diabetes": {
       "type": "Simple",
       "direct_transition": "Wellness_Encounter"
-    },
-    "Hypertension_Medication_Low": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 316052,
-          "display": "Hydrochlorothiazide 6.25 MG"
-        }
-      ],
-      "direct_transition": "Check_Diabetes",
-      "assign_to_attribute": "hypertension_medication",
-      "reason": "hypertension_dx"
-    },
-    "Hypertension_Medication_High": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 316049,
-          "display": "Hydrochlorothiazide 25 MG"
-        }
-      ],
-      "direct_transition": "Check_Diabetes",
-      "assign_to_attribute": "hypertension_medication",
-      "reason": "hypertension_dx"
-    },
-    "End_Hypertension_Medication": {
-      "type": "MedicationEnd",
-      "referenced_by_attribute": "hypertension_medication",
-      "conditional_transition": [
-        {
-          "transition": "Hypertension_Medication_Low",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Systolic Blood Pressure",
-            "operator": "<",
-            "value": 160
-          }
-        },
-        {
-          "transition": "Hypertension_Medication_High",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Systolic Blood Pressure",
-            "operator": ">=",
-            "value": 160
-          }
-        }
-      ]
-    },
-    "Check_Hypertension_BP": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Check_Low_Dose",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Systolic Blood Pressure",
-            "operator": "<",
-            "value": 160
-          }
-        },
-        {
-          "transition": "Check_High_Dose",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Systolic Blood Pressure",
-            "operator": ">=",
-            "value": 160
-          }
-        }
-      ]
-    },
-    "Check_Low_Dose": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Check_Diabetes",
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": 316052,
-                "display": "Hydrochlorothiazide 6.25 MG"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Check_Diabetes",
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": 316049,
-                "display": "Hydrochlorothiazide 25 MG"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Hypertension_Medication_Low",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "hypertension",
-            "operator": "==",
-            "value": true
-          }
-        }
-      ]
-    },
-    "Check_High_Dose": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Check_Diabetes",
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": 316049,
-                "display": "Hydrochlorothiazide 25 MG"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "End_Hypertension_Medication",
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": 316052,
-                "display": "Hydrochlorothiazide 6.25 MG"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Hypertension_Medication_High",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "hypertension",
-            "operator": "==",
-            "value": true
-          }
-        }
-      ]
     },
     "check CKD": {
       "type": "Simple",
@@ -33527,6 +40168,32 @@ export default {"allergic_rhinitis":{
         }
       ],
       "direct_transition": "Check_Nephropathy"
+    },
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
+      "direct_transition": "check CKD"
+    },
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "check CKD"
+        }
+      ],
+      "remarks": [
+        "The prevalence of anemia increased with stage of CKD, from 8.4% at stage 1 to 53.4% at stage 5 - see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3879360/",
+        "",
+        ""
+      ]
     }
   }
 }
@@ -36799,13 +43466,16 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "distributed_transition": [
         {
-          "distribution": 0.9999,
-          "transition": "Week_12"
+          "transition": "Check_Anemia_Exist",
+          "distribution": 0.123
         },
         {
-          "distribution": 0.0001,
-          "transition": "Non_Low_Risk_Pregnancy"
+          "transition": "End_Anemia_Check",
+          "distribution": 0.877
         }
+      ],
+      "remarks": [
+        "Anemia across the board was 8.8% (general) and 3.5% for severe - "
       ]
     },
     "Non_Low_Risk_Pregnancy": {
@@ -38436,12 +45106,38 @@ export default {"allergic_rhinitis":{
     "Normal_Pregnancy_Ends": {
       "type": "ConditionEnd",
       "condition_onset": "Become_Pregnant",
-      "direct_transition": "Six_Weeks_After_Birth"
+      "conditional_transition": [
+        {
+          "transition": "Anemia_End",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia_pregnancy",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Six_Weeks_After_Birth"
+        }
+      ]
     },
     "Miscarriage_Ends": {
       "type": "ConditionEnd",
       "condition_onset": "Become_Pregnant",
-      "direct_transition": "Unset_Pregnant_Attribute"
+      "conditional_transition": [
+        {
+          "transition": "Anemia_End_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia_pregnancy",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Unset_Pregnant_Attribute"
+        }
+      ]
     },
     "Abortion_Ends": {
       "type": "ConditionEnd",
@@ -38533,203 +45229,68 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
-    }
-  }
-}
-,
-"primary_atrophic_hypothyroidism":{
-  "name": "Primary atrophic hypothyroidism",
-  "remarks": [
-    "Hypothyroidism is a disorder of the endocrine system in which the thyroid gland does not produce enough thyroid hormone. Diagnosed by lab panel, and treated with synthroid."
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Age delay"
     },
-    "Terminal": {
-      "type": "Terminal"
+    "Anemia_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "anemia/anemia_sub",
+      "direct_transition": "Set_Anemia_Pregnancy"
     },
-    "Age delay": {
-      "type": "Delay",
-      "range": {
-        "low": 50,
-        "high": 75,
-        "unit": "years"
-      },
-      "remarks": [
-        "common onset of primary atrophic hypothyroidism does not occer till after 50 years of age.",
-        ""
-      ],
-      "complex_transition": [
+    "End_Anemia_Check": {
+      "type": "Simple",
+      "distributed_transition": [
         {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "F"
-          },
-          "distributions": [
-            {
-              "transition": "Cold Symptom",
-              "distribution": 0.048
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.952
-            }
-          ]
+          "distribution": 0.9999,
+          "transition": "Week_12"
         },
         {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          },
-          "distributions": [
-            {
-              "transition": "Cold Symptom",
-              "distribution": 0.009
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.991
-            }
-          ]
+          "distribution": 0.0001,
+          "transition": "Non_Low_Risk_Pregnancy"
         }
       ]
     },
-    "Hypothyroid Condition Onset": {
-      "type": "ConditionOnset",
-      "target_encounter": "Hypothyroidism encounter",
-      "codes": [
+    "Check_Anemia_Exist": {
+      "type": "Simple",
+      "conditional_transition": [
         {
-          "system": "SNOMED-CT",
-          "code": 40930008,
-          "display": "Hypothyroidism (disorder)"
-        }
-      ],
-      "direct_transition": "Hypothyroidism encounter"
-    },
-    "encounter end": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
-    },
-    "Synthroid Medication Order": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 966222,
-          "display": "Levothyroxine Sodium 0.075 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "encounter end",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 60,
-          "unit": "days"
-        },
-        "refills": 6
-      }
-    },
-    "Lab Panel Results": {
-      "type": "DiagnosticReport",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "24348-5",
-          "display": "Free T4 and TSH panel - Serum or Plasma"
-        }
-      ],
-      "observations": [
-        {
-          "category": "laboratory",
-          "unit": "ng/dl",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "3024-7",
-              "display": "Thyroxine (T4) free [Mass/volume] in Serum or Plasma"
-            }
-          ],
-          "range": {
-            "low": 0.1,
-            "high": 0.4
+          "transition": "Anemia_Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is nil"
           }
         },
         {
-          "category": "laboratory",
-          "unit": "m[IU]/L",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "3016-3",
-              "display": "Thyrotropin [Units/volume] in Serum or Plasma"
-            }
-          ],
-          "range": {
-            "low": 2,
-            "high": 5
-          }
+          "transition": "End_Anemia_Check"
         }
-      ],
-      "direct_transition": "Synthroid Medication Order"
+      ]
     },
-    "Cold Symptom": {
-      "type": "Symptom",
-      "symptom": "cold intolerance",
-      "cause": "",
-      "direct_transition": "Decreased Appetite",
-      "range": {
-        "low": 1,
-        "high": 20
-      }
+    "Set_Anemia_Pregnancy": {
+      "type": "SetAttribute",
+      "attribute": "anemia_pregnancy",
+      "direct_transition": "End_Anemia_Check",
+      "value": 1
     },
-    "Decreased Appetite": {
-      "type": "Symptom",
-      "symptom": "decreased appetite",
-      "cause": "",
-      "direct_transition": "Weight Gain",
-      "range": {
-        "low": 1,
-        "high": 20
-      }
+    "Anemia_End": {
+      "type": "ConditionEnd",
+      "referenced_by_attribute": "anemia",
+      "direct_transition": "Remove_Anemia_Pregnacy"
     },
-    "Weight Gain": {
-      "type": "Symptom",
-      "symptom": "weight gain",
-      "cause": "",
-      "direct_transition": "Fatigue Symptom",
-      "range": {
-        "low": 1,
-        "high": 20
-      }
+    "Remove_Anemia_Pregnacy": {
+      "type": "SetAttribute",
+      "attribute": "anemia_pregnancy",
+      "direct_transition": "Six_Weeks_After_Birth",
+      "value": 0
     },
-    "Fatigue Symptom": {
-      "type": "Symptom",
-      "symptom": "fatigue",
-      "cause": "",
-      "direct_transition": "Hypothyroid Condition Onset",
-      "range": {
-        "low": 1,
-        "high": 20
-      }
+    "Anemia_End_2": {
+      "type": "ConditionEnd",
+      "referenced_by_attribute": "anemia",
+      "direct_transition": "Remove_Anemia_Pregnacy_2"
     },
-    "Hypothyroidism encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185345009,
-          "display": "Encounter for symptom"
-        }
-      ],
-      "direct_transition": "Lab Panel Results"
+    "Remove_Anemia_Pregnacy_2": {
+      "type": "SetAttribute",
+      "attribute": "anemia_pregnancy",
+      "value": 0,
+      "direct_transition": "Unset_Pregnant_Attribute"
     }
   }
 }
@@ -41446,7 +48007,8 @@ export default {"allergic_rhinitis":{
       "remarks": [
         "TODO: look into Phenobarbital (can cause apnea), Etomidate (risk of nausea), Ketamine (increased secretions, risk of laryngospasm and hallucinations), Dexmedetomidine",
         "https://www.ncbi.nlm.nih.gov/books/NBK493199/"
-      ]
+      ],
+      "administration": true
     },
     "Intubation": {
       "type": "Procedure",
@@ -41473,7 +48035,8 @@ export default {"allergic_rhinitis":{
           "display": "Midazolam 1 MG/ML Injectable Solution"
         }
       ],
-      "direct_transition": "Midazolam_End"
+      "direct_transition": "Midazolam_End",
+      "administration": true
     },
     "Anxiolytic": {
       "type": "Simple",
@@ -41506,7 +48069,8 @@ export default {"allergic_rhinitis":{
           "display": "Diazepam 5 MG/ML Injectable Solution"
         }
       ],
-      "direct_transition": "Diazepam_End"
+      "direct_transition": "Diazepam_End",
+      "administration": true
     },
     "Lorazepam": {
       "type": "MedicationOrder",
@@ -41517,7 +48081,8 @@ export default {"allergic_rhinitis":{
           "display": "Lorazepam 2 MG/ML Injectable Solution"
         }
       ],
-      "direct_transition": "Lorazepam_End"
+      "direct_transition": "Lorazepam_End",
+      "administration": true
     },
     "Antiemetic": {
       "type": "MedicationOrder",
@@ -41532,7 +48097,8 @@ export default {"allergic_rhinitis":{
       "remarks": [
         "4mg is the most common dose for Ondansetron and virtually all anesthesia patients receive it prior to general anesthesia.",
         "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5509245/"
-      ]
+      ],
+      "administration": true
     },
     "Paralytic": {
       "type": "MedicationOrder",
@@ -41551,7 +48117,8 @@ export default {"allergic_rhinitis":{
         "",
         "In one study of general anesthetics, Rocuronium was used in 96.7% of cases",
         "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5500064/"
-      ]
+      ],
+      "administration": true
     },
     "Fentanyl": {
       "type": "MedicationOrder",
@@ -41562,7 +48129,8 @@ export default {"allergic_rhinitis":{
           "display": "Fentanyl"
         }
       ],
-      "direct_transition": "Fentanyl_End"
+      "direct_transition": "Fentanyl_End",
+      "administration": true
     },
     "Analgesic": {
       "type": "Simple",
@@ -41598,7 +48166,8 @@ export default {"allergic_rhinitis":{
           "display": "Remifentanil"
         }
       ],
-      "direct_transition": "Remifentanil_End"
+      "direct_transition": "Remifentanil_End",
+      "administration": true
     },
     "Alfentanil": {
       "type": "MedicationOrder",
@@ -41609,7 +48178,8 @@ export default {"allergic_rhinitis":{
           "display": "Alfentanil"
         }
       ],
-      "direct_transition": "Alfentanil_End"
+      "direct_transition": "Alfentanil_End",
+      "administration": true
     },
     "Sufentanil": {
       "type": "MedicationOrder",
@@ -41620,7 +48190,8 @@ export default {"allergic_rhinitis":{
           "display": "Sufentanil"
         }
       ],
-      "direct_transition": "Sufentanil_End"
+      "direct_transition": "Sufentanil_End",
+      "administration": true
     },
     "Isoflurane": {
       "type": "MedicationOrder",
@@ -41631,7 +48202,8 @@ export default {"allergic_rhinitis":{
           "display": "Isoflurane 999 MG/ML Inhalant Solution"
         }
       ],
-      "direct_transition": "Isoflurane_End"
+      "direct_transition": "Isoflurane_End",
+      "administration": true
     },
     "Volatile_Anesthetic": {
       "type": "Simple",
@@ -41665,7 +48237,8 @@ export default {"allergic_rhinitis":{
           "display": "desflurane 990 MG/ML Inhalant Solution"
         }
       ],
-      "direct_transition": "Desflurane_End"
+      "direct_transition": "Desflurane_End",
+      "administration": true
     },
     "Sevoflurane": {
       "type": "MedicationOrder",
@@ -41676,7 +48249,8 @@ export default {"allergic_rhinitis":{
           "display": "sevoflurane 1000 MG/ML Inhalant Solution"
         }
       ],
-      "direct_transition": "Sevoflurane_End"
+      "direct_transition": "Sevoflurane_End",
+      "administration": true
     },
     "Midazolam_End": {
       "type": "MedicationEnd",
@@ -43602,7 +50176,7 @@ export default {"allergic_rhinitis":{
           ],
           "condition": {
             "condition_type": "Gender",
-            "gender": "M"
+            "gender": "F"
           }
         }
       ],
@@ -43859,7 +50433,7 @@ export default {"allergic_rhinitis":{
         {
           "condition": {
             "condition_type": "Gender",
-            "gender": "M"
+            "gender": "F"
           },
           "distributions": [
             {
@@ -47893,7 +54467,7 @@ export default {"allergic_rhinitis":{
 "veteran_ptsd":{
   "name": "Veteran PTSD",
   "remarks": [
-    "Post Traumatic Stress Disorder is one of the top disease conditions (by prevalence), disproportionately affecting veterans.  A majority of the guidelines detailed here in this module "
+    "Post Traumatic Stress Disorder is one of the top disease conditions (by prevalence), disproportionately affecting veterans.  A majority of the guidelines detailed here in this module...  Sources: https://www.ncbi.nlm.nih.gov/pubmed/26243685 ; https://cptforptsd.com/wp-content/uploads/2017/10/1-s2.0-S0005789417300783-main.pdf ; https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5047000/ ; https://www.ptsd.va.gov/apps/decisionaid/compare.aspx ; https://www.nursingtimes.net/post-traumatic-stress-disorder/1996064.article "
   ],
   "states": {
     "Initial": {
@@ -48099,25 +54673,6 @@ export default {"allergic_rhinitis":{
           "display": "Mental health care plan (record artifact)"
         }
       ],
-      "conditional_transition": [
-        {
-          "transition": "end re_evaluation_medication",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "SSRI",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "PTSD Medication Order",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "SSRI",
-            "operator": "is nil",
-            "value": "Vicodin"
-          }
-        }
-      ],
       "reason": "ptsd",
       "activities": [
         {
@@ -48155,6 +54710,24 @@ export default {"allergic_rhinitis":{
       "remarks": [
         "overall care plan recommendation provided in consultation with Drs Jodie Trafton and Brian Marx, SMEs for PTSD within the VA",
         ""
+      ],
+      "conditional_transition": [
+        {
+          "transition": "end re_evaluation_medication",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "SSRI",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "PTSD Medication Order",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "SSRI",
+            "operator": "is nil"
+          }
+        }
       ]
     },
     "PTSD_Careplan_Psych": {
@@ -48240,6 +54813,7 @@ export default {"allergic_rhinitis":{
     },
     "PTSD Diagnosis": {
       "type": "ConditionOnset",
+      "assign_to_attribute": "",
       "target_encounter": "Initial_Psychiatric_PTSD_Encounter",
       "codes": [
         {
@@ -48255,15 +54829,23 @@ export default {"allergic_rhinitis":{
         },
         {
           "transition": "PTSD_Careplan_Psych",
-          "distribution": 0.2
+          "distribution": 0.1
         },
         {
           "transition": "PTSD_Careplan_Psych_and_Rx",
-          "distribution": 0.4
+          "distribution": 0.2
         },
         {
           "transition": "PTSD_Careplan_Rx_ONLY",
           "distribution": 0.3
+        },
+        {
+          "transition": "PTSD_Careplan_Telehealth_Psych_and_Rx",
+          "distribution": 0.2
+        },
+        {
+          "transition": "PTSD_Careplan_Telehealth_Psych",
+          "distribution": 0.1
         }
       ],
       "remarks": [
@@ -48301,7 +54883,7 @@ export default {"allergic_rhinitis":{
       "distributed_transition": [
         {
           "transition": "Change_Dx_Not_PTSD",
-          "distribution": 0.48
+          "distribution": 0.22999999999999998
         },
         {
           "transition": "PTSD_Careplan_Psych",
@@ -48309,7 +54891,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "transition": "PTSD_Careplan_Rx_ONLY",
-          "distribution": 0.2
+          "distribution": 0.15
         },
         {
           "transition": "PTSD_Careplan_Psych_and_Rx",
@@ -48318,13 +54900,34 @@ export default {"allergic_rhinitis":{
         {
           "transition": "Inpatient Suicide Assessment",
           "distribution": 0.02
+        },
+        {
+          "transition": "PTSD_Careplan_Telehealth_Psych_and_Rx",
+          "distribution": 0.15
+        },
+        {
+          "transition": "PTSD_Careplan_Telehealth_Psych",
+          "distribution": 0.15
         }
       ],
       "reason": "ptsd"
     },
     "end_Psych_encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "therapy delay"
+      "conditional_transition": [
+        {
+          "transition": "Evaluation Gate delay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ptsd_careplan",
+            "operator": "==",
+            "value": "PTSD_Careplan_Rx_ONLY"
+          }
+        },
+        {
+          "transition": "therapy delay"
+        }
+      ]
     },
     "PTSD Medication Order": {
       "type": "MedicationOrder",
@@ -48671,12 +55274,34 @@ export default {"allergic_rhinitis":{
     },
     "therapy delay": {
       "type": "Delay",
-      "direct_transition": "Therapy_Visit",
       "range": {
         "low": 5,
         "high": 14,
         "unit": "days"
-      }
+      },
+      "conditional_transition": [
+        {
+          "transition": "Therapy_Visit_Telehealth",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ptsd_careplan",
+            "operator": "==",
+            "value": "PTSD_Careplan_Telehealth_Psych"
+          }
+        },
+        {
+          "transition": "Therapy_Visit_Telehealth",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ptsd_careplan",
+            "operator": "==",
+            "value": "PTSD_Careplan_Telehealth_Psych_and_Rx"
+          }
+        },
+        {
+          "transition": "Therapy_Visit"
+        }
+      ]
     },
     "Therapy_Visit": {
       "type": "Encounter",
@@ -48918,6 +55543,131 @@ export default {"allergic_rhinitis":{
       "remarks": [
         "workflow approach provided by Brian "
       ]
+    },
+    "PTSD_Careplan_Telehealth_Psych_and_Rx": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 718347000,
+          "display": "Mental health care plan (record artifact)"
+        }
+      ],
+      "reason": "ptsd",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 385724002,
+          "display": "Coping Support Management (Telehealth)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 406185000,
+          "display": "Trauma Therapy (Telehealth)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 88848003,
+          "display": "Psychiatric Follow-up"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 225337009,
+          "display": "Suicide Risk Assessment"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 76168009,
+          "display": "Group psychotherapy (regime/therapy) (Telehealth)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 719858009,
+          "display": "Telehealth monitoring (regime/therapy)"
+        }
+      ],
+      "assign_to_attribute": "ptsd_careplan",
+      "remarks": [
+        "overall care plan recommendation provided in consultation with Drs Jodie Trafton and Brian Marx, SMEs for PTSD within the VA",
+        ""
+      ],
+      "conditional_transition": [
+        {
+          "transition": "end re_evaluation_medication",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "SSRI",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "PTSD Medication Order",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "SSRI",
+            "operator": "is nil",
+            "value": "Vicodin"
+          }
+        }
+      ]
+    },
+    "PTSD_Careplan_Telehealth_Psych": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 718347000,
+          "display": "Mental health care plan (record artifact)"
+        }
+      ],
+      "reason": "ptsd",
+      "assign_to_attribute": "ptsd_careplan",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 406185000,
+          "display": "Trauma Therapy (Telehealth)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 225337009,
+          "display": "Suicide Risk Assessment"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 385724002,
+          "display": "Coping Support Management (Telehealth)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 88848003,
+          "display": "Psychiatric Follow-up"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 76168009,
+          "display": "Group psychotherapy (regime/therapy) (Telehealth)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 719858009,
+          "display": "Telehealth monitoring (regime/therapy)"
+        }
+      ],
+      "direct_transition": "end_Psych_encounter"
+    },
+    "Therapy_Visit_Telehealth": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "ptsd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Therapy Note"
     }
   }
 }
@@ -50104,7 +56854,7 @@ export default {"allergic_rhinitis":{
               "display": "Systolic Blood Pressure"
             }
           ],
-          "unit": "mmHg"
+          "unit": "mm[Hg]"
         },
         {
           "category": "vital-signs",
@@ -50116,7 +56866,7 @@ export default {"allergic_rhinitis":{
               "display": "Diastolic Blood Pressure"
             }
           ],
-          "unit": "mmHg"
+          "unit": "mm[Hg]"
         }
       ],
       "target_encounter": "Wellness_Encounter",
