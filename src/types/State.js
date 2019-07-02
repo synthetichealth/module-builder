@@ -140,6 +140,7 @@ export type MedicationOrderState = {
   remarks: string[],
   type: 'MedicationOrder',
   assign_to_attribute?: string,
+  administration?: boolean,
   reason?: string,
   codes: Code[],
   prescription?: {

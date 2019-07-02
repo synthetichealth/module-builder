@@ -732,6 +732,16 @@ class MedicationOrder extends Component<Props> {
           <br />
         </div>
         {this.renderPrescription()}
+        {this.renderCreateAdministration()}
+      </div>
+    );
+  }
+
+  renderCreateAdministration() {
+    let state = ((this.props.state: any): MedicationOrder);
+    return (
+      <div>
+        <input type="checkbox" checked={state.administration} onChange={() => this.props.onChange('administration')({ val: { id: !state.administration } })} /> Administration of the medication.
       </div>
     );
   }
