@@ -1,6 +1,7 @@
 // @flow
 import type { Module } from './types/Module';
 import type { State } from './types/State';
+import { Decimal } from 'decimal.js-light';
 
 import { cleanString } from '../utils/stringUtils';
 
@@ -124,12 +125,12 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
         if(typeof t.distribution === 'object'){
           distLabel = `p(${t.distribution.attribute})`
           if(t.distribution.default){
-            let pct = t.distribution.default * 100
-            distLabel += `, default ${pct}%`
+            let pct = formatAsPercentage(t.distribution.default)
+            distLabel += `, default ${pct}`
           }
         } else {
-          let pct = t.distribution * 100
-          distLabel = `${pct}%`
+          let pct = formatAsPercentage(t.distribution)
+          distLabel = `${pct}`
         }
         if(module.states[t.transition]){
           if(selectedState && t.transition === selectedState.name && selectedState.name !== name){
@@ -188,7 +189,16 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
         } else {
           t.distributions.forEach( dist => {
             if(module.states[dist.transition]){
-              let pct = dist.distribution * 100
+              let pct = ""
+              if(typeof dist.distribution === 'object'){
+                if(dist.distribution.default){
+                  pct = formatAsPercentage(dist.distribution.default)
+                } else {
+                  pct = "na"
+                }
+              } else {
+                pct = formatAsPercentage(dist.distribution)
+              }
               let nodes = `  "${escapedName}" -> "${dist.transition}"`
               if(selectedState && dist.transition === selectedState.name){
                 nodeHighlighted[nodes] = 'standard'
@@ -199,7 +209,7 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
               if(transitions[nodes] === undefined){
                 transitions[nodes] = [];
               }
-              transitions[nodes].push(`${cnd}: ${pct}%`)
+              transitions[nodes].push(`${cnd}: ${pct}`)
             } else {
               console.log(`NO SUCH NODE TO TRANSITION TO: ${dist.transition} FROM ${name}`);
             }
@@ -281,8 +291,8 @@ const stateDescription = (state) =>{
         details = `${s}: ${e['quantity']}`
       }
       if (p && p < 1.0 && p > 0) {
-        let pct = p*100;
-        details += ` (${pct}%)`
+        let pct = formatAsPercentage(p)
+        details += ` (${pct})`
       }
       break;
     case 'Observation':
@@ -614,6 +624,12 @@ const escapeLabel = (label) => {
   return cleanString(label, mapObj);
 
 }
+
+const formatAsPercentage = (num) => {
+    const y = new Decimal(num);
+    const places = Math.max(y.decimalPlaces() - 2,1);
+    return (y*100).toFixed(places).toString() + "%";
+  }
 
 export const svgDefs = `<defs>
 

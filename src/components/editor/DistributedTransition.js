@@ -2,13 +2,12 @@
 import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
 import _ from 'lodash';
-
+import { Decimal } from 'decimal.js-light';
 
 import type { DistributedTransition as DistributedTransitionType } from '../../types/Transition';
 import { getTemplate } from '../../templates/Templates';
 import type { State } from '../../types/State';
 import './Transition.css';
-
 
 type Props = {
   options: State[],
@@ -52,7 +51,8 @@ class DistributedTransition extends Component<Props> {
     let sum = this.props.transition.transition.reduce( (acc, val) => acc + (typeof val.distribution === 'object' ? val.distribution.default : val.distribution),0);
     let remainder = 0;
     if(typeof distribution === 'object') {
-      remainder = 1 - (sum - distribution.default);
+      let dp = Math.max(new Decimal(sum).decimalPlaces(),Decimal(distribution.default).decimalPlaces());
+      remainder = 1 - new Decimal(sum - distribution.default).toFixed(dp).valueOf();
       let remainderOption = null
       if (sum != 1) {
         remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution.default`)({val: remainder})}>(Change to Remainder)</a>
@@ -68,7 +68,8 @@ class DistributedTransition extends Component<Props> {
         </label>
       );
     } else {
-      remainder = 1 - (sum - distribution);
+      let dp = Math.max(new Decimal(sum).decimalPlaces(),Decimal(distribution).decimalPlaces());
+      remainder = 1 - new Decimal(sum - distribution).toFixed(dp).valueOf();
       let remainderOption = null
       if (sum != 1) {
         remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: remainder})}>(Change to Remainder)</a>
@@ -97,7 +98,9 @@ class DistributedTransition extends Component<Props> {
   }
 
   formatAsPercentage(num: number) {
-    return (num * 100) + "%";
+    const y = new Decimal(num);
+    const places = Math.max(y.decimalPlaces() - 2,1);
+    return (y*100).toFixed(places).toString() + "%";
   }
 
   checkInRange(num: number) {
