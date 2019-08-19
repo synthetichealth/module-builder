@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Dropzone from 'react-dropzone';
 import './LoadModule.css';
 import {generateDOT} from '../../utils/graphviz';
+import StyledDropzone from './StyledDropZone';
 
 class LoadModule extends Component {
 
@@ -42,18 +42,14 @@ class LoadModule extends Component {
   }
 
   onDrop = (files) => {
-
     files.forEach(file => {
       const reader = new FileReader();
 
       reader.onload = () => {
         this.loadModule(reader.result);
       };
-
       reader.readAsText(file);
-
     });
-
   }
 
   onLoadJSON = () => {
@@ -182,7 +178,9 @@ class LoadModule extends Component {
         break;
       case 'folder':
         list = this.state.Folders
-        break;  
+        break;
+      default:
+        break;
     }
     list.forEach((i) => {
       if (i.props.id !== ID) {
@@ -296,9 +294,7 @@ class LoadModule extends Component {
                 </button>
               </div>
               <div className="modal-body LoadModule-body">
-                <Dropzone activeClassName='LoadModule-dropzoneActive' className='LoadModule-dropzone' onDrop={this.onDrop.bind(this)}>
-                   Drop files here or click to open saved modules.
-                </Dropzone>
+                <StyledDropzone onDrop={this.onDrop.bind(this)}/>
                 <div className='container'>
                   <div className='row'>
                     <div className='col-3 nopadding'>

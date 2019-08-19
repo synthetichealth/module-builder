@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import _ from 'lodash'
@@ -18,14 +18,13 @@ import {cleanString } from '../utils/stringUtils';
 
 import { findAvailableKey, createSafeKeyFromName } from '../utils/keys';
 import { getTemplate } from '../templates/Templates';
-import { BasicTutorial, EditTutorial } from '../templates/Tutorial';
+import { BasicTutorial } from '../templates/Tutorial';
 
 import { RIEInput } from 'riek';
 
 import examplitis from '../data/example_module'
 
 import './Editor.css';
-import '../../node_modules/react-joyride/lib/react-joyride-compiled.css'
 
 import JsonEditor from '../components/editor/JsonEditor';
 
@@ -330,7 +329,7 @@ class Editor extends Component {
       dataTip += ' Please selected a state in the graph, state list, or attribute list.'
     }
 
-    return <li className={className}><button data-tip={dataTip} onClick={onClick}><img src={StateButton}/></button></li>
+    return <li className={className}><button data-tip={dataTip} onClick={onClick}><img src={StateButton} alt=""/></button></li>
   }
 
   renderStateListButton = () => {
@@ -338,7 +337,7 @@ class Editor extends Component {
    if(this.props.moduleStates.length > 0){
        stateCount = <span className='Editor-button-count'>{this.props.moduleStates.length}</span>
    }
-   return <li className={this.props.selectedModulePanel === 'statelist' ? 'Editor-left-selected' : ''}><button data-tip='Searchable list of states.' onClick={this.leftNavClick('statelist')}><img src={StateListButton}/>{stateCount}</button></li>
+   return <li className={this.props.selectedModulePanel === 'statelist' ? 'Editor-left-selected' : ''}><button data-tip='Searchable list of states.' onClick={this.leftNavClick('statelist')}><img src={StateListButton} alt=""/>{stateCount}</button></li>
 
   }
 
@@ -347,7 +346,7 @@ class Editor extends Component {
    if(this.props.attributes.length > 0){
      attributesCount = <span className='Editor-button-count'>{this.props.attributes.length}</span>
    }
-   return <li className={this.props.selectedModulePanel === 'attribute' ? 'Editor-left-selected' : ''}><button data-tip='Attributes set in this module.' onClick={this.leftNavClick('attribute')}><img src={AttributeButton}/>{attributesCount}</button></li>
+   return <li className={this.props.selectedModulePanel === 'attribute' ? 'Editor-left-selected' : ''}><button data-tip='Attributes set in this module.' onClick={this.leftNavClick('attribute')}><img src={AttributeButton} alt=""/>{attributesCount}</button></li>
 
   }
 
@@ -357,7 +356,7 @@ class Editor extends Component {
    if(this.props.warnings.length > 0){
      warningCount = <span className='Editor-button-count Editor-button-count-warning'>{this.props.warnings.length}</span>
    }
-   return <li className={this.props.selectedModulePanel === 'warning' ? 'Editor-left-selected' : ''}><button data-tip='Problems in module that need to be resolved.' onClick={this.leftNavClick('warning')}><img src={WarningButton} />{warningCount}</button></li>
+   return <li className={this.props.selectedModulePanel === 'warning' ? 'Editor-left-selected' : ''}><button data-tip='Problems in module that need to be resolved.' onClick={this.leftNavClick('warning')}><img src={WarningButton} alt=""/>{warningCount}</button></li>
 
   }
 
@@ -367,7 +366,7 @@ class Editor extends Component {
    if(this.props.relatedModules.length > 0){
      relatedCount = <span className='Editor-button-count'>{this.props.relatedModules.length}</span>
    }
-   return <li className={this.props.selectedModulePanel === 'related' ? 'Editor-left-selected' : ''}><button data-tip='Related modules, such as those that share attributes. ' onClick={this.leftNavClick('related')}><img src={RelatedButton}/>{relatedCount}</button></li>
+   return <li className={this.props.selectedModulePanel === 'related' ? 'Editor-left-selected' : ''}><button data-tip='Related modules, such as those that share attributes. ' onClick={this.leftNavClick('related')}><img src={RelatedButton} alt=""/>{relatedCount}</button></li>
 
   }
 
@@ -389,7 +388,7 @@ class Editor extends Component {
   renderNav = () => {
     return(
       <div className='Editor-top'>
-        <img src={SyntheaLogo} className='Editor-top-logo'/>
+        <img src={SyntheaLogo} className='Editor-top-logo' alt='Synthea Logo'/>
         <div className='Editor-top-title'>Synthea Module Builder</div>
         <div className='Editor-top-open'>
           <button className='button-clear' onClick={this.newModule(Object.keys(this.props.modules)).bind(this, undefined)}>New Module</button>
@@ -411,7 +410,7 @@ class Editor extends Component {
   renderMainEditor = () => {
 
     if(!this.props.module){
-      return <img className='Editor-loading-logo' src={LoadingLogo} />
+      return <img className='Editor-loading-logo' src={LoadingLogo} alt='Loading'/>
     }
 
     return (
@@ -433,12 +432,12 @@ class Editor extends Component {
 
         <div className='Editor-left'>
          <ul>
-        <li className={'Editor-left-fullscreen' + (!this.props.modulePanelVisible ? ' Editor-left-fullscreen-active' : '')}><button data-tip='Show/hide editor panel.' onClick={this.leftNavClick('hide')}><img src={FullscreenButton}/></button></li>
+        <li className={'Editor-left-fullscreen' + (!this.props.modulePanelVisible ? ' Editor-left-fullscreen-active' : '')}><button data-tip='Show/hide editor panel.' onClick={this.leftNavClick('hide')}><img src={FullscreenButton} alt=""/></button></li>
            <li className='Editor-left-spacer'></li>
-           <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button data-tip='Module Properties.' onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
+           <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button data-tip='Module Properties.' onClick={this.leftNavClick('info')}><img src={InfoButton} alt=""/></button></li>
            {this.renderStateButton()}
            <li className='Editor-left-spacer'></li>
-           <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON.' onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
+           <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON.' onClick={this.leftNavClick('code')}><img src={CodeButton} alt=""/></button></li>
            <li className='Editor-left-spacer'></li>
            {this.renderStateListButton()}
            {this.renderAttributesButton()}
@@ -451,7 +450,7 @@ class Editor extends Component {
 
         <div className='Editor-panel' style={{left: this.props.modulePanelVisible ? 50 :  -this.state.panelWidth, width: this.state.panelWidth}}>
           <div className='Editor-panel-content'>
-            <button className='Editor-panel-minimize button-clear' onClick={this.leftNavClick('hide')} ><img src={MinimizePanel} /></button>
+            <button className='Editor-panel-minimize button-clear' onClick={this.leftNavClick('hide')} ><img src={MinimizePanel} alt=""/></button>
             {this.renderPanelContent()}
           </div>
 

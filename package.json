@@ -5,8 +5,10 @@
   "homepage": "https://synthetichealth.github.io/module-builder",
   "dependencies": {
     "bootstrap": "4.3.1",
+    "brace": "^0.11.1",
     "chai": "^4.2.0",
     "chai-jquery": "^2.1.0",
+    "connected-react-router": "^6.5.2",
     "file-saver": "^2.0.2",
     "history": "^4.9.0",
     "jquery": "^3.4.1",
@@ -21,14 +23,13 @@
     "react-joyride": "^2.1.1",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
-    "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "3.0.1",
     "react-tooltip": "^3.10.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "svg-pan-zoom": "^3.6.0",
     "uuid-js": "^0.7.5",
-    "viz.js": "^2.1.2"
+    "viz.js": "^1.8.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -47,5 +48,17 @@
     "flow-bin": "^0.104.0",
     "gh-pages": "^2.1.0",
     "riek": "^1.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

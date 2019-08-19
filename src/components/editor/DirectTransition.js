@@ -13,13 +13,8 @@ type Props = {
 
 class DirectTransitionEditor extends Component<Props> {
   render() {
-    let currentValue = "";
     let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
-    // options.push({id: '', text: "-" });
 
-    if (this.props.transition) {
-      currentValue = this.props.transition.to;
-    }
     return (
       <label>
         Transition To:
