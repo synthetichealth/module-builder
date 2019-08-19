@@ -1,6 +1,7 @@
 import {analyze} from  './analysis';
 
 export const openModule = (key) => {
+
   return (dispatch, getState) => {
     let action = {type: 'OPEN_MODULE', data: {key}};
 

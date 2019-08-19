@@ -136,7 +136,7 @@ class ModuleGraph extends Component<Props> {
 
   writeSVG(module: Module, selectedState: State, selectedStateTransition: Number){
 
-    const dot = generateDOT(module, selectedState, selectedStateTransition: Number);
+    const dot = generateDOT(module, selectedState, (selectedStateTransition: Number));
     if(dot === this.lastDOT){
       return;
     }

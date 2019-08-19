@@ -43,7 +43,7 @@ class NavTabs extends Component<Props> {
                  {/*this.props.modules[m].name*/}
                  {m}.json
                </button>
-              <img className="NavTabs-close" src={CancelButton} onClick={this.onClose(m)}/>
+              <img className="NavTabs-close" src={CancelButton} onClick={this.onClose(m)} alt="Close"/>
              </li>
              )})
            }

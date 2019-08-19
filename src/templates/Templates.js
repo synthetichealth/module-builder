@@ -36,10 +36,12 @@ export function getTemplate(path){
     case 'Module':
       typeVar = ModuleTemplates;
       break;
+    default:
+      break;
   }
 
 
-  if(reducedPath.length == 0){
+  if(reducedPath.length === 0){
     return typeVar
   }
 

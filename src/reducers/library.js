@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 const initialState = {modules: {}, analysis: {}};
 
 export default (state = initialState, action) => {
