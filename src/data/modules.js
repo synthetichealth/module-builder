@@ -2187,7 +2187,6 @@ export default {"allergic_rhinitis":{
     },
     "Immunotherapy_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Immunotherapy_Consultation",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -2289,7 +2288,6 @@ export default {"allergic_rhinitis":{
     },
     "Immunotherapy_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Immunotherapy_Treatment",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -3251,8 +3249,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "326051000000105",
-          "display": "Self care"
+          "code": "384758001",
+          "display": "Self-care interventions (procedure)"
         }
       ],
       "activities": [
@@ -5235,7 +5233,6 @@ export default {"allergic_rhinitis":{
     },
     "Appendectomy": {
       "type": "Procedure",
-      "target_encounter": "Appendectomy_Encounter",
       "reason": "Appendicitis",
       "codes": [
         {
@@ -5565,7 +5562,6 @@ export default {"allergic_rhinitis":{
     },
     "Asthma_Screening": {
       "type": "Procedure",
-      "target_encounter": "Asthma_Diagnosis",
       "reason": "asthma_condition",
       "codes": [
         {
@@ -5578,7 +5574,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_Maintenance_Inhaler": {
       "type": "MedicationOrder",
-      "target_encounter": "Asthma_Diagnosis",
       "reason": "asthma_condition",
       "codes": [
         {
@@ -5590,11 +5585,11 @@ export default {"allergic_rhinitis":{
       "prescription": {
         "as_needed": true
       },
-      "direct_transition": "Prescribe_Emergency_Inhaler"
+      "direct_transition": "Prescribe_Emergency_Inhaler",
+      "chronic": true
     },
     "Prescribe_Emergency_Inhaler": {
       "type": "MedicationOrder",
-      "target_encounter": "Asthma_Diagnosis",
       "reason": "asthma_condition",
       "codes": [
         {
@@ -5606,7 +5601,8 @@ export default {"allergic_rhinitis":{
       "prescription": {
         "as_needed": true
       },
-      "direct_transition": "Asthma_CarePlan_Selector"
+      "direct_transition": "Asthma_CarePlan_Selector",
+      "chronic": true
     },
     "Asthma_CarePlan_Selector": {
       "type": "Simple",
@@ -5638,7 +5634,6 @@ export default {"allergic_rhinitis":{
     },
     "Smoker_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Asthma_Diagnosis",
       "assign_to_attribute": "asthma_careplan",
       "reason": "asthma_condition",
       "codes": [
@@ -5669,7 +5664,6 @@ export default {"allergic_rhinitis":{
     },
     "Nonsmoker_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Asthma_Diagnosis",
       "assign_to_attribute": "asthma_careplan",
       "reason": "asthma_condition",
       "codes": [
@@ -6274,7 +6268,6 @@ export default {"allergic_rhinitis":{
     },
     "ADHD_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "ADHD_Diagnosis",
       "reason": "ADHD",
       "codes": [
         {
@@ -6349,7 +6342,6 @@ export default {"allergic_rhinitis":{
     },
     "Behavior_Treatment_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Behavior_Treatment_Encounter",
       "reason": "ADHD",
       "codes": [
         {
@@ -6476,7 +6468,6 @@ export default {"allergic_rhinitis":{
     },
     "Ritalin": {
       "type": "MedicationOrder",
-      "target_encounter": "ADHD_Diagnosis",
       "assign_to_attribute": "adhd_medication",
       "reason": "ADHD",
       "codes": [
@@ -6499,7 +6490,6 @@ export default {"allergic_rhinitis":{
     },
     "Strattera": {
       "type": "MedicationOrder",
-      "target_encounter": "ADHD_Diagnosis",
       "assign_to_attribute": "adhd_medication",
       "reason": "ADHD",
       "codes": [
@@ -8040,7 +8030,7 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "SCTID: 447759004",
+          "code": "447759004",
           "display": "Brachytherapy of breast (procedure)"
         }
       ],
@@ -12393,7 +12383,6 @@ export default {"allergic_rhinitis":{
     },
     "Routine_Colonoscopy_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Routine_Colonoscopy_Encounter",
       "remarks": [
         "NIH study on the epidemiology of colorectal adenomas (polyps): ",
         "https://www.ncbi.nlm.nih.gov/pubmed/15666099 ",
@@ -12578,13 +12567,12 @@ export default {"allergic_rhinitis":{
         "will still return postive. This aligns with the likelihood of recurrent ",
         "adenomas being cancerous."
       ],
-      "target_encounter": "Routine_Colonoscopy_Encounter",
       "reason": "colorectal_adenoma",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "1015401000000102",
-          "display": "Fecal occult blood test"
+          "code": "104435004",
+          "display": "Screening for occult blood in feces (procedure)"
         }
       ],
       "conditional_transition": [
@@ -12644,7 +12632,6 @@ export default {"allergic_rhinitis":{
         "large and potentially cancerous a biopsy is then performed. For simplicity ",
         "all large colorectal adenomas found in this module are also cancerous."
       ],
-      "target_encounter": "Routine_Colonoscopy_Encounter",
       "reason": "colorectal_adenoma",
       "codes": [
         {
@@ -12672,7 +12659,6 @@ export default {"allergic_rhinitis":{
     },
     "Adenoma_Biopsy": {
       "type": "Procedure",
-      "target_encounter": "Routine_Colonoscopy_Encounter",
       "reason": "colorectal_adenoma",
       "codes": [
         {
@@ -12757,7 +12743,6 @@ export default {"allergic_rhinitis":{
     },
     "Followup_Colonoscopy_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Followup_Colonoscopy_Encounter",
       "remarks": [
         "Colorectal polyps recur at about 20-30% over a lifetime.",
         "Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2780113/"
@@ -12851,7 +12836,6 @@ export default {"allergic_rhinitis":{
     },
     "Recurrent_Adenoma_Removal": {
       "type": "Procedure",
-      "target_encounter": "Followup_Colonoscopy_Encounter",
       "reason": "recurrent_colorectal_adenoma",
       "codes": [
         {
@@ -13004,7 +12988,6 @@ export default {"allergic_rhinitis":{
     },
     "Diagnostic_Colonoscopy_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Diagnostic_Colonoscopy_Encounter",
       "remarks": [
         "The patient is showing all signs of advanced colorectal cancer. ",
         "The prognosis will not be good."
@@ -13327,7 +13310,6 @@ export default {"allergic_rhinitis":{
         "Caring for colorectal cancer differs by stage. Source for all treatment information: ",
         "http://www.cancer.org/cancer/colonandrectumcancer/detailedguide/colorectal-cancer-treating-by-stage-colon"
       ],
-      "target_encounter": "Oncologist_Encounter",
       "reason": "colorectal_cancer",
       "codes": [
         {
@@ -13474,7 +13456,6 @@ export default {"allergic_rhinitis":{
     },
     "Partial_Colectomy_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Partial_Colectomy_Encounter",
       "reason": "colorectal_cancer",
       "codes": [
         {
@@ -13487,7 +13468,6 @@ export default {"allergic_rhinitis":{
     },
     "Partial_Colectomy_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Partial_Colectomy_Encounter",
       "reason": "colorectal_cancer",
       "codes": [
         {
@@ -13601,7 +13581,6 @@ export default {"allergic_rhinitis":{
     },
     "Diverting_Colostomy_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Diverting_Colostomy_Encounter",
       "reason": "colorectal_cancer",
       "codes": [
         {
@@ -13614,7 +13593,6 @@ export default {"allergic_rhinitis":{
     },
     "Diverting_Colostomy_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Diverting_Colostomy_Encounter",
       "reason": "colorectal_cancer",
       "codes": [
         {
@@ -13716,7 +13694,6 @@ export default {"allergic_rhinitis":{
     },
     "Chemotherapy_Drugs_I": {
       "type": "MedicationOrder",
-      "target_encounter": "Chemotherapy_Encounter",
       "reason": "colorectal_cancer",
       "codes": [
         {
@@ -13729,7 +13706,6 @@ export default {"allergic_rhinitis":{
     },
     "Chemotherapy_Drugs_II": {
       "type": "MedicationOrder",
-      "target_encounter": "Chemotherapy_Encounter",
       "reason": "colorectal_cancer",
       "codes": [
         {
@@ -13742,7 +13718,6 @@ export default {"allergic_rhinitis":{
     },
     "Chemotherapy_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Chemotherapy_Encounter",
       "reason": "colorectal_cancer",
       "codes": [
         {
@@ -14276,7 +14251,6 @@ export default {"allergic_rhinitis":{
           }
         }
       ],
-      "target_encounter": "Wellness_Encounter",
       "direct_transition": "Chemotherapy_Drugs_I"
     },
     "Pain_Vital": {
@@ -14291,6 +14265,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 5,
         "high": 8
       },
@@ -14308,6 +14283,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 5,
         "high": 10
       },
@@ -14325,6 +14301,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 5,
         "high": 10
       },
@@ -14342,6 +14319,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 2,
         "high": 8
       },
@@ -14778,7 +14756,8 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for Problem"
         }
       ],
-      "direct_transition": "Record_CMP"
+      "direct_transition": "Record_CMP",
+      "reason": "CHF Condition Start"
     },
     "CXR_ED": {
       "type": "ImagingStudy",
@@ -14843,7 +14822,8 @@ export default {"allergic_rhinitis":{
           "display": "Inpatient stay (finding)"
         }
       ],
-      "direct_transition": "Inpatient LOS"
+      "direct_transition": "Inpatient LOS",
+      "reason": "CHF Condition Start"
     },
     "Inpatient CarePlan": {
       "type": "CarePlanStart",
@@ -15156,7 +15136,6 @@ export default {"allergic_rhinitis":{
           "unit": "mmol/L"
         }
       ],
-      "target_encounter": "Wellness_Encounter",
       "direct_transition": "Inpatient Daily Transition"
     },
     "Record_CMP": {
@@ -15537,14 +15516,14 @@ export default {"allergic_rhinitis":{
       "type": "ImagingStudy",
       "procedure_code": {
         "system": "SNOMED-CT",
-        "code": "34552-0",
-        "display": "trans thoracic echocardiogram"
+        "code": "434158009",
+        "display": "Transthoracic three dimensional ultrasonography of heart (procedure)"
       },
       "series": [
         {
           "body_site": {
             "system": "SNOMED-CT",
-            "code": 261179002,
+            "code": "261179002",
             "display": "thoracic"
           },
           "modality": {
@@ -15722,7 +15701,7 @@ export default {"allergic_rhinitis":{
     "Daily self-measurement": {
       "type": "MultiObservation",
       "category": "vital-signs",
-      "number_of_observations": 0,
+      "number_of_observations": 2,
       "codes": [
         {
           "system": "LOINC",
@@ -15734,7 +15713,7 @@ export default {"allergic_rhinitis":{
       "observations": [
         {
           "category": "vital-signs",
-          "unit": "",
+          "unit": "mm[Hg]",
           "codes": [
             {
               "system": "LOINC",
@@ -15746,7 +15725,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "vital-signs",
-          "unit": "",
+          "unit": "mm[Hg]",
           "codes": [
             {
               "system": "LOINC",
@@ -18801,7 +18780,6 @@ export default {"allergic_rhinitis":{
     },
     "Initial_FEV_Test": {
       "type": "Procedure",
-      "target_encounter": "DiagnosisEncounter",
       "reason": "copd_variant",
       "codes": [
         {
@@ -18847,7 +18825,6 @@ export default {"allergic_rhinitis":{
     },
     "Nonsmoker_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "DiagnosisEncounter",
       "reason": "copd_variant",
       "codes": [
         {
@@ -18872,7 +18849,6 @@ export default {"allergic_rhinitis":{
     },
     "Smoker_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "DiagnosisEncounter",
       "reason": "copd_variant",
       "codes": [
         {
@@ -19142,7 +19118,6 @@ export default {"allergic_rhinitis":{
     },
     "Followup_FEV_Test": {
       "type": "Procedure",
-      "target_encounter": "COPD_Followup_Encounter",
       "reason": "copd_variant",
       "codes": [
         {
@@ -19326,7 +19301,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_Medication": {
       "type": "MedicationOrder",
-      "target_encounter": "COPD_Followup_Encounter",
       "reason": "copd_variant",
       "codes": [
         {
@@ -19335,7 +19309,8 @@ export default {"allergic_rhinitis":{
           "display": "60 ACTUAT Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT Dry Powder Inhaler"
         }
       ],
-      "direct_transition": "Consider_Surgery"
+      "direct_transition": "Consider_Surgery",
+      "chronic": true
     },
     "Consider_Surgery": {
       "type": "Simple",
@@ -19451,7 +19426,6 @@ export default {"allergic_rhinitis":{
     },
     "Lung_Transplant": {
       "type": "Procedure",
-      "target_encounter": "Surgery_Encounter",
       "reason": "copd_variant",
       "codes": [
         {
@@ -19469,7 +19443,6 @@ export default {"allergic_rhinitis":{
     },
     "Lung_Volume_Reduction": {
       "type": "Procedure",
-      "target_encounter": "Surgery_Encounter",
       "reason": "copd_variant",
       "codes": [
         {
@@ -19486,7 +19459,6 @@ export default {"allergic_rhinitis":{
     },
     "Pulmonary_Rehab": {
       "type": "Procedure",
-      "target_encounter": "COPD_Followup_Encounter",
       "reason": "copd_variant",
       "codes": [
         {
@@ -21551,7 +21523,6 @@ export default {"allergic_rhinitis":{
     },
     "Dementia_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "DiagnosisEncounter",
       "reason": "Type of Alzheimer's",
       "codes": [
         {
@@ -21625,7 +21596,6 @@ export default {"allergic_rhinitis":{
     },
     "FirstPrescription1": {
       "type": "MedicationOrder",
-      "target_encounter": "DiagnosisEncounter",
       "assign_to_attribute": "Alzheimer's Medication",
       "reason": "Type of Alzheimer's",
       "codes": [
@@ -21639,7 +21609,6 @@ export default {"allergic_rhinitis":{
     },
     "FirstPrescription2": {
       "type": "MedicationOrder",
-      "target_encounter": "DiagnosisEncounter",
       "assign_to_attribute": "Alzheimer's Medication",
       "reason": "Type of Alzheimer's",
       "codes": [
@@ -21653,7 +21622,6 @@ export default {"allergic_rhinitis":{
     },
     "FirstPrescription3": {
       "type": "MedicationOrder",
-      "target_encounter": "DiagnosisEncounter",
       "assign_to_attribute": "Alzheimer's Medication",
       "reason": "Type of Alzheimer's",
       "codes": [
@@ -21809,7 +21777,6 @@ export default {"allergic_rhinitis":{
     },
     "SecondPrescription1": {
       "type": "MedicationOrder",
-      "target_encounter": "ModeratelySevere_Encounter",
       "reason": "Type of Alzheimer's",
       "codes": [
         {
@@ -21822,7 +21789,6 @@ export default {"allergic_rhinitis":{
     },
     "SecondPrescription2": {
       "type": "MedicationOrder",
-      "target_encounter": "ModeratelySevere_Encounter",
       "reason": "Type of Alzheimer's",
       "codes": [
         {
@@ -21835,7 +21801,6 @@ export default {"allergic_rhinitis":{
     },
     "SecondPrescription3": {
       "type": "MedicationOrder",
-      "target_encounter": "ModeratelySevere_Encounter",
       "reason": "Type of Alzheimer's",
       "codes": [
         {
@@ -23262,7 +23227,8 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem (procedure)"
         }
       ],
-      "direct_transition": "Dialysis"
+      "direct_transition": "Dialysis",
+      "reason": "dialysis_reason"
     },
     "Dialysis": {
       "type": "Procedure",
@@ -23321,7 +23287,8 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem (procedure)"
         }
       ],
-      "direct_transition": "Record_CMP"
+      "direct_transition": "Record_CMP",
+      "reason": "dialysis_reason"
     },
     "end encounter": {
       "type": "EncounterEnd",
@@ -23928,6 +23895,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 2,
         "high": 6
       },
@@ -24427,7 +24395,6 @@ export default {"allergic_rhinitis":{
         "high": 180,
         "unit": "minutes"
       },
-      "target_encounter": "Seizure_Encounter",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -25227,20 +25194,19 @@ export default {"allergic_rhinitis":{
     },
     "Fibromyalgia_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Fibromyalgia_Diagnosis",
       "assign_to_attribute": "fibromyalgia_careplan",
       "reason": "Fibromyalgia",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "872781000000100",
+          "code": "408869004",
           "display": "Musculoskeletal care"
         }
       ],
       "activities": [
         {
           "system": "SNOMED-CT",
-          "code": "872781000000100",
+          "code": "386294003",
           "display": "Joint mobility exercises"
         },
         {
@@ -25253,7 +25219,6 @@ export default {"allergic_rhinitis":{
     },
     "Strong_NSAID": {
       "type": "MedicationOrder",
-      "target_encounter": "Fibromyalgia_Diagnosis",
       "reason": "Fibromyalgia",
       "remarks": [
         "A stronger NSAID pain reliever than the basic Aleve."
@@ -25356,7 +25321,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_Lyrica": {
       "type": "MedicationOrder",
-      "target_encounter": "Fibromyalgia_Episode",
       "assign_to_attribute": "fibromyalgia_prescription",
       "reason": "Fibromyalgia",
       "codes": [
@@ -25370,7 +25334,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_Cymbalta": {
       "type": "MedicationOrder",
-      "target_encounter": "Fibromyalgia_Episode",
       "assign_to_attribute": "fibromyalgia_prescription",
       "reason": "Fibromyalgia",
       "codes": [
@@ -25384,7 +25347,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_Savella": {
       "type": "MedicationOrder",
-      "target_encounter": "Fibromyalgia_Episode",
       "assign_to_attribute": "fibromyalgia_prescription",
       "reason": "Fibromyalgia",
       "codes": [
@@ -25398,7 +25360,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_Opioid": {
       "type": "MedicationOrder",
-      "target_encounter": "Fibromyalgia_Episode",
       "assign_to_attribute": "opioid_prescription",
       "reason": "Fibromyalgia",
       "remarks": [
@@ -25457,6 +25418,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 5,
         "high": 10
       },
@@ -25613,8 +25575,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "326051000000105",
-          "display": "Self care"
+          "code": "384758001",
+          "display": "Self-care interventions (procedure)"
         }
       ],
       "activities": [
@@ -27197,13 +27159,12 @@ export default {"allergic_rhinitis":{
     },
     "Gout_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Gout_Diagnosis",
       "assign_to_attribute": "gout_careplan",
       "reason": "Gout",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "872781000000100",
+          "code": "408869004",
           "display": "Musculoskeletal care"
         }
       ],
@@ -27244,7 +27205,6 @@ export default {"allergic_rhinitis":{
     },
     "Strong_NSAID": {
       "type": "MedicationOrder",
-      "target_encounter": "Gout_Diagnosis",
       "assign_to_attribute": "gout_nsaid",
       "reason": "Gout",
       "remarks": [
@@ -27261,7 +27221,6 @@ export default {"allergic_rhinitis":{
     },
     "Colchicine": {
       "type": "MedicationOrder",
-      "target_encounter": "Gout_Diagnosis",
       "assign_to_attribute": "gout_nsaid",
       "reason": "Gout",
       "remarks": [
@@ -27278,7 +27237,6 @@ export default {"allergic_rhinitis":{
     },
     "Uric_Acid_Reducer": {
       "type": "MedicationOrder",
-      "target_encounter": "Gout_Diagnosis",
       "reason": "Gout",
       "codes": [
         {
@@ -27349,6 +27307,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 4,
         "high": 8
       },
@@ -27850,6 +27809,15 @@ export default {"allergic_rhinitis":{
           "display": "Hydrochlorothiazide 12.5 MG"
         }
       ],
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        }
+      },
+      "chronic": true,
       "direct_transition": "End_Wellness_Encounter",
       "assign_to_attribute": "hypertension_medication",
       "reason": "hypertension_dx"
@@ -27863,6 +27831,15 @@ export default {"allergic_rhinitis":{
           "display": "Hydrochlorothiazide 25 MG"
         }
       ],
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        }
+      },
+      "chronic": true,
       "direct_transition": "End_Wellness_Encounter",
       "assign_to_attribute": "hypertension_medication",
       "reason": "hypertension_dx"
@@ -27916,6 +27893,15 @@ export default {"allergic_rhinitis":{
           "display": "Atenolol 50 MG / Chlorthalidone 25 MG Oral Tablet"
         }
       ],
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        }
+      },
+      "chronic": true,
       "assign_to_attribute": "hypertension_medication_2",
       "reason": "hypertension_dx",
       "direct_transition": "End_Hypertension_Followup_Encounter"
@@ -27934,6 +27920,15 @@ export default {"allergic_rhinitis":{
           "display": "Amlodipine 5 MG / Hydrochlorothiazide 12.5 MG / Olmesartan medoxomil 20 MG"
         }
       ],
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        }
+      },
+      "chronic": true,
       "assign_to_attribute": "hypertension_medication_3",
       "reason": "hypertension_dx",
       "direct_transition": "End_Hypertension_Followup_Encounter_2",
@@ -28157,7 +28152,6 @@ export default {"allergic_rhinitis":{
           "vital_sign": "Diastolic Blood Pressure"
         }
       ],
-      "target_encounter": "Hypertension_Followup_Encounter",
       "conditional_transition": [
         {
           "transition": "End_Hypertension_Medication",
@@ -28209,7 +28203,6 @@ export default {"allergic_rhinitis":{
           "vital_sign": "Diastolic Blood Pressure"
         }
       ],
-      "target_encounter": "Hypertension_Followup_Encounter",
       "conditional_transition": [
         {
           "transition": "End_Hypertension_Comb_Medication",
@@ -28261,7 +28254,6 @@ export default {"allergic_rhinitis":{
           "vital_sign": "Diastolic Blood Pressure"
         }
       ],
-      "target_encounter": "Hypertension_Followup_Encounter",
       "conditional_transition": [
         {
           "transition": "Referral To Hypertension Clinic",
@@ -29525,7 +29517,7 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "872781000000100",
+          "code": "408869004",
           "display": "Musculoskeletal care"
         }
       ],
@@ -31679,7 +31671,6 @@ export default {"allergic_rhinitis":{
     },
     "Chest X-Ray": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter I",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -31723,7 +31714,6 @@ export default {"allergic_rhinitis":{
     },
     "Chest CT Scan": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter II",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -31836,7 +31826,6 @@ export default {"allergic_rhinitis":{
     },
     "Sputum Cytology (Phelgm)": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -31849,7 +31838,6 @@ export default {"allergic_rhinitis":{
     },
     "Thoracentesis (Fluid)": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -31862,7 +31850,6 @@ export default {"allergic_rhinitis":{
     },
     "Needle Biopsy (Cells)": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -31875,7 +31862,6 @@ export default {"allergic_rhinitis":{
     },
     "Bronchoscopy (Tube)": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -32190,7 +32176,6 @@ export default {"allergic_rhinitis":{
     },
     "Lung_Cancer_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Diagnosis Encounter IV",
       "reason": "Lung Cancer Condition",
       "codes": [
         {
@@ -32220,7 +32205,6 @@ export default {"allergic_rhinitis":{
     },
     "MRI Brain": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter IV",
       "reason": "Lung Cancer Condition",
       "codes": [
         {
@@ -32281,7 +32265,6 @@ export default {"allergic_rhinitis":{
     },
     "SCLC Chemotheraphy I": {
       "type": "MedicationOrder",
-      "target_encounter": "SCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "assign_to_attribute": "chemotherapy1",
       "remarks": [
@@ -32305,7 +32288,6 @@ export default {"allergic_rhinitis":{
     },
     "SCLC Chemotheraphy II": {
       "type": "MedicationOrder",
-      "target_encounter": "SCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "assign_to_attribute": "chemotherapy2",
       "remarks": [
@@ -32329,7 +32311,6 @@ export default {"allergic_rhinitis":{
     },
     "SCLC Radiation": {
       "type": "Procedure",
-      "target_encounter": "SCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "remarks": [
         "The type of radiation therapy most often used to treat SCLC is called external beam radiation therapy (EBRT).",
@@ -32389,7 +32370,6 @@ export default {"allergic_rhinitis":{
     },
     "NSCLC Chemotheraphy I": {
       "type": "MedicationOrder",
-      "target_encounter": "NSCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "assign_to_attribute": "chemotherapy1",
       "remarks": [
@@ -32414,7 +32394,6 @@ export default {"allergic_rhinitis":{
     },
     "NSCLC Chemotheraphy II": {
       "type": "MedicationOrder",
-      "target_encounter": "NSCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "assign_to_attribute": "chemotherapy2",
       "remarks": [
@@ -32438,7 +32417,6 @@ export default {"allergic_rhinitis":{
     },
     "NSCLC Radiation": {
       "type": "Procedure",
-      "target_encounter": "NSCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "remarks": [
         "External beam radiation therapy (EBRT) focuses radiation from outside the body on the cancer. This is the type of radiation therapy most often used to treat NSCLC or its spread to other organs.",
@@ -32995,6 +32973,8 @@ export default {"allergic_rhinitis":{
             "code": "CT",
             "display": "Computed Tomography"
           },
+          "min_number_instances": 300,
+          "max_number_instances": 500,
           "instances": [
             {
               "title": "CT Image Storage",
@@ -33028,6 +33008,8 @@ export default {"allergic_rhinitis":{
             "code": "CT",
             "display": "Computed Tomography"
           },
+          "min_number_instances": 300,
+          "max_number_instances": 500,
           "instances": [
             {
               "title": "CT Image Storage",
@@ -33777,7 +33759,6 @@ export default {"allergic_rhinitis":{
           }
         }
       ],
-      "target_encounter": "Wellness_Encounter",
       "direct_transition": "Hearing_Test"
     },
     "Record_CBC_Panel_2": {
@@ -33957,7 +33938,6 @@ export default {"allergic_rhinitis":{
           }
         }
       ],
-      "target_encounter": "Wellness_Encounter",
       "direct_transition": "Hearing Test"
     },
     "Pain_Vital": {
@@ -33972,6 +33952,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 4,
         "high": 8
       },
@@ -33989,6 +33970,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 4,
         "high": 10
       },
@@ -34006,6 +33988,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 4,
         "high": 10
       },
@@ -34171,13 +34154,12 @@ export default {"allergic_rhinitis":{
     },
     "Lupus_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Lupus_Diagnosis",
       "assign_to_attribute": "lupus_careplan",
       "reason": "Lupus",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "872781000000100",
+          "code": "408869004",
           "display": "Musculoskeletal care"
         }
       ],
@@ -34197,7 +34179,6 @@ export default {"allergic_rhinitis":{
     },
     "Lupus_Nonopioid_Pain_Medication": {
       "type": "MedicationOrder",
-      "target_encounter": "Lupus_Diagnosis",
       "reason": "Lupus",
       "codes": [
         {
@@ -34210,7 +34191,6 @@ export default {"allergic_rhinitis":{
     },
     "Corticosteroid": {
       "type": "MedicationOrder",
-      "target_encounter": "Lupus_Diagnosis",
       "assign_to_attribute": "lupus_corticosteroid",
       "reason": "Lupus",
       "remarks": [
@@ -34305,7 +34285,6 @@ export default {"allergic_rhinitis":{
     },
     "Immune_Suppressant": {
       "type": "MedicationOrder",
-      "target_encounter": "Lupus_Flareup",
       "reason": "Lupus",
       "remarks": [
         "More aggressive immune suppressants are used for subsequent flares."
@@ -34321,7 +34300,6 @@ export default {"allergic_rhinitis":{
     },
     "Flareup_Corticosteroid": {
       "type": "MedicationOrder",
-      "target_encounter": "Lupus_Flareup",
       "assign_to_attribute": "lupus_corticosteroid",
       "reason": "Lupus",
       "remarks": [
@@ -34486,12 +34464,11 @@ export default {"allergic_rhinitis":{
     },
     "Med_Rec": {
       "type": "Procedure",
-      "target_encounter": "Wellness_Encounter",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "428191000124101",
-          "display": "Documentation of current medications"
+          "code": "430193006",
+          "display": "Medication Reconciliation (procedure)"
         }
       ],
       "direct_transition": "Initial"
@@ -36582,7 +36559,8 @@ export default {"allergic_rhinitis":{
         }
       ],
       "reason": "Diagnose_Diabetes",
-      "direct_transition": "Bitherapy"
+      "direct_transition": "Bitherapy",
+      "chronic": true
     },
     "Bitherapy": {
       "type": "Simple",
@@ -36653,7 +36631,8 @@ export default {"allergic_rhinitis":{
         }
       ],
       "reason": "Diagnose_Diabetes",
-      "direct_transition": "Tritherapy"
+      "direct_transition": "Tritherapy",
+      "chronic": true
     },
     "End_Liraglutide": {
       "type": "MedicationEnd",
@@ -36829,7 +36808,8 @@ export default {"allergic_rhinitis":{
         }
       ],
       "reason": "Diagnose_Diabetes",
-      "direct_transition": "Check_Complications"
+      "direct_transition": "Check_Complications",
+      "chronic": true
     },
     "End_Basal_Insulin_Towards_Prandial": {
       "type": "MedicationEnd",
@@ -36852,7 +36832,8 @@ export default {"allergic_rhinitis":{
         }
       ],
       "reason": "Diagnose_Diabetes",
-      "direct_transition": "Check_Complications"
+      "direct_transition": "Check_Complications",
+      "chronic": true
     },
     "End_Insulin": {
       "type": "Simple",
@@ -37294,7 +37275,8 @@ export default {"allergic_rhinitis":{
           "display": "End stage renal disease (disorder)"
         }
       ],
-      "direct_transition": "Record_MetabolicPanel_5"
+      "direct_transition": "Record_MetabolicPanel_5",
+      "assign_to_attribute": "dialysis_reason"
     },
     "End_End_Stage_Renal_Disease": {
       "type": "ConditionEnd",
@@ -38364,7 +38346,8 @@ export default {"allergic_rhinitis":{
           "display": "Chronic kidney disease stage 4 (disorder)"
         }
       ],
-      "direct_transition": "Record_MetabolicPanel_4"
+      "direct_transition": "Record_MetabolicPanel_4",
+      "assign_to_attribute": "dialysis_reason"
     },
     "Obese_Check": {
       "type": "Simple",
@@ -41523,10 +41506,6 @@ export default {"allergic_rhinitis":{
         {
           "distribution": 0.334,
           "transition": "Enter_Directed_Use_Condition3"
-        },
-        {
-          "transition": "Initial",
-          "distribution": 1
         }
       ]
     },
@@ -41557,7 +41536,6 @@ export default {"allergic_rhinitis":{
     },
     "Enter_Directed_Use_Procedure1": {
       "type": "Procedure",
-      "target_encounter": "Enter_Directed_Use_Encounter1",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -41569,7 +41547,6 @@ export default {"allergic_rhinitis":{
     },
     "Directed_Use_Prescription1": {
       "type": "MedicationOrder",
-      "target_encounter": "Enter_Directed_Use_Encounter1",
       "assign_to_attribute": "opioid_prescription",
       "codes": [
         {
@@ -41607,7 +41584,6 @@ export default {"allergic_rhinitis":{
     },
     "Directed_Use_Prescription2": {
       "type": "MedicationOrder",
-      "target_encounter": "Enter_Directed_Use_Encounter2",
       "assign_to_attribute": "opioid_prescription",
       "codes": [
         {
@@ -41645,7 +41621,6 @@ export default {"allergic_rhinitis":{
     },
     "Directed_Use_Prescription3": {
       "type": "MedicationOrder",
-      "target_encounter": "Enter_Directed_Use_Encounter3",
       "assign_to_attribute": "opioid_prescription",
       "codes": [
         {
@@ -42113,7 +42088,6 @@ export default {"allergic_rhinitis":{
     },
     "Opioid_Addiction_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Addiction_Overdose_Encounter",
       "assign_to_attribute": "opioid_addiction_careplan",
       "reason": "Addiction_Overdose",
       "codes": [
@@ -42172,6 +42146,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 4,
         "high": 8
       },
@@ -42189,6 +42164,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 5,
         "high": 9
       },
@@ -42206,6 +42182,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 3,
         "high": 8
       },
@@ -42223,6 +42200,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 2,
         "high": 8
       },
@@ -42335,20 +42313,19 @@ export default {"allergic_rhinitis":{
     },
     "OA_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "OA_Diagnosis",
       "assign_to_attribute": "arthritis_careplan",
       "reason": "osteoarthritis",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "872781000000100",
+          "code": "408869004",
           "display": "Musculoskeletal care"
         }
       ],
       "activities": [
         {
           "system": "SNOMED-CT",
-          "code": "872781000000100",
+          "code": "386294003",
           "display": "Joint mobility exercises"
         },
         {
@@ -42361,7 +42338,6 @@ export default {"allergic_rhinitis":{
     },
     "OA_Pain_Medication": {
       "type": "MedicationOrder",
-      "target_encounter": "OA_Diagnosis",
       "reason": "osteoarthritis",
       "codes": [
         {
@@ -42658,6 +42634,7 @@ export default {"allergic_rhinitis":{
       ],
       "direct_transition": "OA_CarePlan",
       "range": {
+        "decimals": 0,
         "low": 5,
         "high": 10
       }
@@ -42992,7 +42969,6 @@ export default {"allergic_rhinitis":{
     },
     "Pregnancy_Test": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43005,7 +42981,6 @@ export default {"allergic_rhinitis":{
     },
     "Fetal_Viability_Ultrasound": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43190,7 +43165,6 @@ export default {"allergic_rhinitis":{
     },
     "Pregnancy_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "remarks": [
         "There are MANY activities that could be associated with a pregnancy care plan.",
@@ -43226,7 +43200,6 @@ export default {"allergic_rhinitis":{
     },
     "Inital_Visit_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43239,7 +43212,6 @@ export default {"allergic_rhinitis":{
     },
     "Inital_Visit_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43252,7 +43224,6 @@ export default {"allergic_rhinitis":{
     },
     "Blood_Typing": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43265,7 +43236,6 @@ export default {"allergic_rhinitis":{
     },
     "Hemoglobin_Test": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43278,7 +43248,6 @@ export default {"allergic_rhinitis":{
     },
     "Hep_B_Surface_Antigen": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43291,7 +43260,6 @@ export default {"allergic_rhinitis":{
     },
     "HIV_Test": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43304,7 +43272,6 @@ export default {"allergic_rhinitis":{
     },
     "Chlamydia_Test": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43317,7 +43284,6 @@ export default {"allergic_rhinitis":{
     },
     "Gonorrhea_Test": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43330,7 +43296,6 @@ export default {"allergic_rhinitis":{
     },
     "Syphilis_Test": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43343,7 +43308,6 @@ export default {"allergic_rhinitis":{
     },
     "Urine_Culture": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43356,7 +43320,6 @@ export default {"allergic_rhinitis":{
     },
     "Pap_Smear": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43369,7 +43332,6 @@ export default {"allergic_rhinitis":{
     },
     "Diabetes_Screen": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43382,7 +43344,6 @@ export default {"allergic_rhinitis":{
     },
     "Hep_C_Test": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43395,7 +43356,6 @@ export default {"allergic_rhinitis":{
     },
     "Rubella_Screen": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43408,7 +43368,6 @@ export default {"allergic_rhinitis":{
     },
     "Varicella_Test": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43421,7 +43380,6 @@ export default {"allergic_rhinitis":{
     },
     "Tuberculosis_Test": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43434,7 +43392,6 @@ export default {"allergic_rhinitis":{
     },
     "Urine_Protein_Test": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43447,7 +43404,6 @@ export default {"allergic_rhinitis":{
     },
     "Physical_Exam": {
       "type": "Procedure",
-      "target_encounter": "Prenatal_Initial_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43524,7 +43480,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_12_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_12_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43537,7 +43492,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_12_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_12_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43550,7 +43504,6 @@ export default {"allergic_rhinitis":{
     },
     "Fetal_Aneuploidy_Screen": {
       "type": "Procedure",
-      "target_encounter": "Week_12_Visit",
       "reason": "Become_Pregnant",
       "remarks": [
         "This is just one option for genetic screening, many options exist but it is unreasonable to represent all options."
@@ -43606,7 +43559,6 @@ export default {"allergic_rhinitis":{
     },
     "Fetal_Anatomy_Study": {
       "type": "Procedure",
-      "target_encounter": "Week_16_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43619,7 +43571,6 @@ export default {"allergic_rhinitis":{
     },
     "AFP_Test": {
       "type": "Procedure",
-      "target_encounter": "Week_16_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43632,7 +43583,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_16_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_16_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43645,7 +43595,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_16_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_16_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43683,7 +43632,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_20_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_20_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43696,7 +43644,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_20_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_20_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43734,7 +43681,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_24_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_24_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43747,7 +43693,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_24_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_24_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43798,7 +43743,6 @@ export default {"allergic_rhinitis":{
     },
     "Antibody_Screen": {
       "type": "Procedure",
-      "target_encounter": "Week_28_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43811,7 +43755,6 @@ export default {"allergic_rhinitis":{
     },
     "RhoD_Immune_Globulin": {
       "type": "Procedure",
-      "target_encounter": "Week_28_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43824,7 +43767,6 @@ export default {"allergic_rhinitis":{
     },
     "Second_Hemoglobin_Test": {
       "type": "Procedure",
-      "target_encounter": "Week_28_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43837,7 +43779,6 @@ export default {"allergic_rhinitis":{
     },
     "Tdap_Vaccine": {
       "type": "Procedure",
-      "target_encounter": "Week_28_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43850,7 +43791,6 @@ export default {"allergic_rhinitis":{
     },
     "Glucose_Screen": {
       "type": "Procedure",
-      "target_encounter": "Week_28_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43863,7 +43803,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_28_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_28_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43876,7 +43815,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_28_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_28_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43936,7 +43874,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_32_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_32_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -43949,7 +43886,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_32_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_32_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44037,7 +43973,6 @@ export default {"allergic_rhinitis":{
     },
     "Group_B_Strep_Test": {
       "type": "Procedure",
-      "target_encounter": "Week_36_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44050,7 +43985,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_36_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_36_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44063,7 +43997,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_36_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_36_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44110,7 +44043,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_38_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_38_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44123,7 +44055,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_38_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_38_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44176,7 +44107,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_39_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_39_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44189,7 +44119,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_39_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_39_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44242,7 +44171,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_40_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_40_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44255,7 +44183,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_40_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_40_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44302,7 +44229,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_41_Fundal_Height": {
       "type": "Procedure",
-      "target_encounter": "Week_41_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44315,7 +44241,6 @@ export default {"allergic_rhinitis":{
     },
     "Week_41_Fetal_Heartbeat": {
       "type": "Procedure",
-      "target_encounter": "Week_41_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44422,7 +44347,6 @@ export default {"allergic_rhinitis":{
     },
     "Induction": {
       "type": "Procedure",
-      "target_encounter": "Hospital_Admission_For_Birth",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44444,7 +44368,6 @@ export default {"allergic_rhinitis":{
     },
     "Epidural": {
       "type": "Procedure",
-      "target_encounter": "Hospital_Admission_For_Birth",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44466,7 +44389,6 @@ export default {"allergic_rhinitis":{
     },
     "Augmentation": {
       "type": "Procedure",
-      "target_encounter": "Hospital_Admission_For_Birth",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44488,7 +44410,6 @@ export default {"allergic_rhinitis":{
     },
     "Episiotomy": {
       "type": "Procedure",
-      "target_encounter": "Hospital_Admission_For_Birth",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44510,7 +44431,6 @@ export default {"allergic_rhinitis":{
     },
     "Assisted_Delivery": {
       "type": "Procedure",
-      "target_encounter": "Hospital_Admission_For_Birth",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44523,7 +44443,6 @@ export default {"allergic_rhinitis":{
     },
     "Spontaneous_Breech": {
       "type": "Procedure",
-      "target_encounter": "Hospital_Admission_For_Birth",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44583,7 +44502,6 @@ export default {"allergic_rhinitis":{
     },
     "Normal_Birth_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Hospital_Admission_For_Birth",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44596,7 +44514,6 @@ export default {"allergic_rhinitis":{
     },
     "Premature_Birth_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Hospital_Admission_For_Birth",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44609,7 +44526,6 @@ export default {"allergic_rhinitis":{
     },
     "Induced_Birth_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Hospital_Admission_For_Birth",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44757,7 +44673,6 @@ export default {"allergic_rhinitis":{
     },
     "Methotrexate_Injection": {
       "type": "Procedure",
-      "target_encounter": "Ectopic_Pregnancy_Encounter",
       "reason": "Ectopic_Pregnancy",
       "codes": [
         {
@@ -44770,7 +44685,6 @@ export default {"allergic_rhinitis":{
     },
     "Ectopic_Pregnancy_Surgery_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Ectopic_Pregnancy_Encounter",
       "reason": "Ectopic_Pregnancy",
       "codes": [
         {
@@ -44865,7 +44779,6 @@ export default {"allergic_rhinitis":{
     },
     "RhoD_Immune_Globulin_Post_Miscarriage": {
       "type": "Procedure",
-      "target_encounter": "Miscarriage_Followup_Encounter",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44878,7 +44791,6 @@ export default {"allergic_rhinitis":{
     },
     "Physical_Exam_Post_Miscarriage": {
       "type": "Procedure",
-      "target_encounter": "Miscarriage_Followup_Encounter",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44891,7 +44803,6 @@ export default {"allergic_rhinitis":{
     },
     "Depression_Screening_Post_Miscarriage": {
       "type": "Procedure",
-      "target_encounter": "Miscarriage_Followup_Encounter",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44940,7 +44851,6 @@ export default {"allergic_rhinitis":{
     },
     "Induced_Abortion_Therapy": {
       "type": "Procedure",
-      "target_encounter": "Induced_Abortion_Encounter",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -44953,7 +44863,6 @@ export default {"allergic_rhinitis":{
     },
     "Induced_Abortion_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Induced_Abortion_Encounter",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -45005,7 +44914,6 @@ export default {"allergic_rhinitis":{
     },
     "RhoD_Immune_Globulin_Post_Abortion": {
       "type": "Procedure",
-      "target_encounter": "Abortion_Followup_Encounter",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -45018,7 +44926,6 @@ export default {"allergic_rhinitis":{
     },
     "Pregnancy_Termination_Care": {
       "type": "Procedure",
-      "target_encounter": "Abortion_Followup_Encounter",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -45031,7 +44938,6 @@ export default {"allergic_rhinitis":{
     },
     "Physical_Exam_Post_Abortion": {
       "type": "Procedure",
-      "target_encounter": "Abortion_Followup_Encounter",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -45044,7 +44950,6 @@ export default {"allergic_rhinitis":{
     },
     "Depression_Screening_Post_Abortion": {
       "type": "Procedure",
-      "target_encounter": "Abortion_Followup_Encounter",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -45180,7 +45085,6 @@ export default {"allergic_rhinitis":{
     },
     "RhoD_Immune_Globulin_Post_Birth": {
       "type": "Procedure",
-      "target_encounter": "Postnatal_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -45193,7 +45097,6 @@ export default {"allergic_rhinitis":{
     },
     "Physical_Exam_Post_Birth": {
       "type": "Procedure",
-      "target_encounter": "Postnatal_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -45206,7 +45109,6 @@ export default {"allergic_rhinitis":{
     },
     "Depression_Screening_Post_Birth": {
       "type": "Procedure",
-      "target_encounter": "Postnatal_Visit",
       "reason": "Become_Pregnant",
       "codes": [
         {
@@ -45416,13 +45318,12 @@ export default {"allergic_rhinitis":{
     },
     "RA_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "RA_Diagnosis",
       "assign_to_attribute": "ra_careplan",
       "reason": "Rheumatoid_Arthritis",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "872781000000100",
+          "code": "408869004",
           "display": "Musculoskeletal care"
         }
       ],
@@ -45447,7 +45348,6 @@ export default {"allergic_rhinitis":{
     },
     "RA_Nonopioid_Pain_Medication": {
       "type": "MedicationOrder",
-      "target_encounter": "RA_Diagnosis",
       "reason": "Rheumatoid_Arthritis",
       "remarks": [
         "A stronger NSAID pain reliever than the basic Aleve."
@@ -45478,7 +45378,6 @@ export default {"allergic_rhinitis":{
     },
     "DMARD": {
       "type": "MedicationOrder",
-      "target_encounter": "RA_Diagnosis",
       "reason": "Rheumatoid_Arthritis",
       "remarks": [
         "Disease-Modifying Anti-Rheumatic Drugs (DMARDs) inhibit or halt the progression ",
@@ -45527,7 +45426,6 @@ export default {"allergic_rhinitis":{
     },
     "Corticosteroid": {
       "type": "MedicationOrder",
-      "target_encounter": "RA_Diagnosis",
       "reason": "Rheumatoid_Arthritis",
       "remarks": [
         "When introduced in higher levels than those produced by the body, corticosteroids ",
@@ -46067,7 +45965,6 @@ export default {"allergic_rhinitis":{
     },
     "Psychiatric_Evaluation": {
       "type": "Procedure",
-      "target_encounter": "ED_Visit_For_Attempted_Suicide",
       "reason": "suicide_attempt",
       "codes": [
         {
@@ -46080,7 +45977,6 @@ export default {"allergic_rhinitis":{
     },
     "Short_Hospital_Stay": {
       "type": "Procedure",
-      "target_encounter": "ED_Visit_For_Attempted_Suicide",
       "reason": "suicide_attempt",
       "codes": [
         {
@@ -46145,7 +46041,6 @@ export default {"allergic_rhinitis":{
     },
     "Suicide_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Attempted_Suicide_Followup",
       "assign_to_attribute": "suicide_careplan",
       "reason": "suicide_attempt",
       "codes": [
@@ -46176,7 +46071,6 @@ export default {"allergic_rhinitis":{
     },
     "Followup_Psychiatric_Evaluation": {
       "type": "Procedure",
-      "target_encounter": "Attempted_Suicide_Followup",
       "reason": "suicide_attempt",
       "codes": [
         {
@@ -46322,7 +46216,6 @@ export default {"allergic_rhinitis":{
     },
     "Autopsy_Examination": {
       "type": "Procedure",
-      "target_encounter": "Autopsy_Encounter",
       "reason": "suicide",
       "codes": [
         {
@@ -47046,7 +46939,6 @@ export default {"allergic_rhinitis":{
       "remarks": [
         "https://www.drugs.com/dosage/amoxicillin.html#Usual_Adult_Dose_for_Sinusitis"
       ],
-      "target_encounter": "Doctor_Visit",
       "reason": "Sinusitis Condition",
       "codes": [
         {
@@ -47310,7 +47202,6 @@ export default {"allergic_rhinitis":{
     },
     "Sinus_Surgery": {
       "type": "Procedure",
-      "target_encounter": "Chronic_Sinusitis_Followup",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -47792,7 +47683,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_Antibiotics_Child": {
       "type": "MedicationOrder",
-      "target_encounter": "Doctor_Visit",
       "assign_to_attribute": "Sore Throat Antibiotic",
       "reason": "Sore Throat Condition",
       "remarks": [
@@ -47809,7 +47699,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_Antibiotics_Adult": {
       "type": "MedicationOrder",
-      "target_encounter": "Doctor_Visit",
       "assign_to_attribute": "Sore Throat Antibiotic",
       "reason": "Sore Throat Condition",
       "codes": [
@@ -47823,7 +47712,6 @@ export default {"allergic_rhinitis":{
     },
     "Throat_Culture": {
       "type": "Procedure",
-      "target_encounter": "Doctor_Visit",
       "reason": "Sore Throat Condition",
       "codes": [
         {
@@ -49256,7 +49144,6 @@ export default {"allergic_rhinitis":{
     },
     "Knee_Replacement_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Joint_Replacement_Encounter",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -49268,7 +49155,6 @@ export default {"allergic_rhinitis":{
     },
     "Hip_Replacement_Procedure": {
       "type": "Procedure",
-      "target_encounter": "Joint_Replacement_Encounter",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -49280,7 +49166,6 @@ export default {"allergic_rhinitis":{
     },
     "Post_Op_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Joint_Replacement_Encounter",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -49739,7 +49624,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_UTI_Antibiotic": {
       "type": "MedicationOrder",
-      "target_encounter": "UTI_Diagnosis",
       "reason": "uti",
       "remarks": [
         "This is an antibiotic commonly prescribed for UTIs."
@@ -49755,7 +49639,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_OTC_Painkiller_For_UTIs": {
       "type": "MedicationOrder",
-      "target_encounter": "UTI_Diagnosis",
       "reason": "uti",
       "remarks": [
         "This is an OTC pain medication specifically for the urinary tract."
@@ -49771,7 +49654,6 @@ export default {"allergic_rhinitis":{
     },
     "UTI_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "UTI_Diagnosis",
       "reason": "uti",
       "codes": [
         {
@@ -49835,7 +49717,6 @@ export default {"allergic_rhinitis":{
     },
     "Prescribe_Second_Round_Of_Antibiotics": {
       "type": "MedicationOrder",
-      "target_encounter": "Followup_Encounter",
       "reason": "uti",
       "remarks": [
         "This is a stronger antibiotic."
@@ -51579,7 +51460,6 @@ export default {"allergic_rhinitis":{
     },
     "Chest X-Ray": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter I",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -51623,7 +51503,6 @@ export default {"allergic_rhinitis":{
     },
     "Chest CT Scan": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter II",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -51736,7 +51615,6 @@ export default {"allergic_rhinitis":{
     },
     "Sputum Cytology (Phelgm)": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -51749,7 +51627,6 @@ export default {"allergic_rhinitis":{
     },
     "Thoracentesis (Fluid)": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -51762,7 +51639,6 @@ export default {"allergic_rhinitis":{
     },
     "Needle Biopsy (Cells)": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -51775,7 +51651,6 @@ export default {"allergic_rhinitis":{
     },
     "Bronchoscopy (Tube)": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter III",
       "reason": "Suspected Lung Cancer",
       "codes": [
         {
@@ -52077,7 +51952,6 @@ export default {"allergic_rhinitis":{
     },
     "Lung_Cancer_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Diagnosis Encounter IV",
       "reason": "Lung Cancer Condition",
       "codes": [
         {
@@ -52107,7 +51981,6 @@ export default {"allergic_rhinitis":{
     },
     "MRI Brain": {
       "type": "Procedure",
-      "target_encounter": "Diagnosis Encounter IV",
       "reason": "Lung Cancer Condition",
       "codes": [
         {
@@ -52168,7 +52041,6 @@ export default {"allergic_rhinitis":{
     },
     "SCLC Chemotheraphy I": {
       "type": "MedicationOrder",
-      "target_encounter": "SCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "assign_to_attribute": "chemotherapy1",
       "remarks": [
@@ -52191,7 +52063,6 @@ export default {"allergic_rhinitis":{
     },
     "SCLC Chemotheraphy II": {
       "type": "MedicationOrder",
-      "target_encounter": "SCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "assign_to_attribute": "chemotherapy2",
       "remarks": [
@@ -52214,7 +52085,6 @@ export default {"allergic_rhinitis":{
     },
     "SCLC Radiation": {
       "type": "Procedure",
-      "target_encounter": "SCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "remarks": [
         "The type of radiation therapy most often used to treat SCLC is called external beam radiation therapy (EBRT).",
@@ -52274,7 +52144,6 @@ export default {"allergic_rhinitis":{
     },
     "NSCLC Chemotheraphy I": {
       "type": "MedicationOrder",
-      "target_encounter": "NSCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "assign_to_attribute": "chemotherapy1",
       "remarks": [
@@ -52298,7 +52167,6 @@ export default {"allergic_rhinitis":{
     },
     "NSCLC Chemotheraphy II": {
       "type": "MedicationOrder",
-      "target_encounter": "NSCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "assign_to_attribute": "chemotherapy2",
       "remarks": [
@@ -52321,7 +52189,6 @@ export default {"allergic_rhinitis":{
     },
     "NSCLC Radiation": {
       "type": "Procedure",
-      "target_encounter": "NSCLC Treatment Encounter",
       "reason": "Lung Cancer Condition",
       "remarks": [
         "External beam radiation therapy (EBRT) focuses radiation from outside the body on the cancer. This is the type of radiation therapy most often used to treat NSCLC or its spread to other organs.",
@@ -52539,7 +52406,7 @@ export default {"allergic_rhinitis":{
         {
           "condition": {
             "condition_type": "Attribute",
-            "attribute": "vetreran",
+            "attribute": "veteran",
             "operator": "==",
             "value": "Between_KW_and_VW"
           },
@@ -53250,8 +53117,6 @@ export default {"allergic_rhinitis":{
     },
     "annual_wellness_visit": {
       "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "codes": [],
       "direct_transition": "wellness_procedure",
       "wellness": true
     },
@@ -54458,7 +54323,6 @@ export default {"allergic_rhinitis":{
           }
         }
       ],
-      "target_encounter": "Wellness_Encounter",
       "direct_transition": "Chemotherapy_Hormone Order"
     }
   }
@@ -55469,6 +55333,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 4,
         "high": 8
       },
@@ -55486,6 +55351,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 4,
         "high": 8
       },
@@ -55503,6 +55369,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 0,
         "high": 3
       },
@@ -55520,6 +55387,7 @@ export default {"allergic_rhinitis":{
         }
       ],
       "range": {
+        "decimals": 0,
         "low": 1,
         "high": 4
       },
@@ -55782,7 +55650,6 @@ export default {"allergic_rhinitis":{
     },
     "Psychiatric_Evaluation": {
       "type": "Procedure",
-      "target_encounter": "ED_Visit_For_Attempted_Suicide",
       "reason": "suicide_attempt",
       "codes": [
         {
@@ -55795,7 +55662,6 @@ export default {"allergic_rhinitis":{
     },
     "Short_Hospital_Stay": {
       "type": "Procedure",
-      "target_encounter": "ED_Visit_For_Attempted_Suicide",
       "reason": "suicide_attempt",
       "codes": [
         {
@@ -55860,7 +55726,6 @@ export default {"allergic_rhinitis":{
     },
     "Suicide_CarePlan": {
       "type": "CarePlanStart",
-      "target_encounter": "Attempted_Suicide_Followup",
       "assign_to_attribute": "suicide_careplan",
       "reason": "suicide_attempt",
       "codes": [
@@ -55891,7 +55756,6 @@ export default {"allergic_rhinitis":{
     },
     "Followup_Psychiatric_Evaluation": {
       "type": "Procedure",
-      "target_encounter": "Attempted_Suicide_Followup",
       "reason": "suicide_attempt",
       "codes": [
         {
@@ -56037,7 +55901,6 @@ export default {"allergic_rhinitis":{
     },
     "Autopsy_Examination": {
       "type": "Procedure",
-      "target_encounter": "Autopsy_Encounter",
       "reason": "suicide",
       "codes": [
         {
@@ -56492,7 +56355,7 @@ export default {"allergic_rhinitis":{
     },
     "Alcohol Diagnosis": {
       "type": "ConditionOnset",
-      "target_encounter": "",
+      "target_encounter": "Wellness Encounter",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -56603,7 +56466,7 @@ export default {"allergic_rhinitis":{
     },
     "Opioid Abuse Diagnosis": {
       "type": "ConditionOnset",
-      "target_encounter": "",
+      "target_encounter": "Wellness Encounter",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -56774,7 +56637,6 @@ export default {"allergic_rhinitis":{
     },
     "Record_Height": {
       "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
       "category": "vital-signs",
       "vital_sign": "Height",
       "codes": [
@@ -56789,7 +56651,6 @@ export default {"allergic_rhinitis":{
     },
     "Record_Weight": {
       "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
       "category": "vital-signs",
       "vital_sign": "Weight",
       "codes": [
@@ -56802,16 +56663,13 @@ export default {"allergic_rhinitis":{
       "unit": "kg",
       "conditional_transition": [
         {
+          "transition": "Record_Weight_For_Length_Percentile",
           "condition": {
             "condition_type": "Age",
-            "operator": "<",
-            "quantity": 2,
+            "operator": "<=",
+            "quantity": 3,
             "unit": "years"
-          },
-          "remarks": [
-            "BMI is not particularly meaningful for children under 2"
-          ],
-          "transition": "Record_BP"
+          }
         },
         {
           "transition": "Record_BMI"
@@ -56820,7 +56678,6 @@ export default {"allergic_rhinitis":{
     },
     "Record_BMI": {
       "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
       "category": "vital-signs",
       "vital_sign": "BMI",
       "codes": [
@@ -56831,7 +56688,31 @@ export default {"allergic_rhinitis":{
         }
       ],
       "unit": "kg/m2",
-      "direct_transition": "Record_BP"
+      "conditional_transition": [
+        {
+          "transition": "Record_BMI_Percentile",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 2,
+                "unit": "years"
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<",
+                "quantity": 20,
+                "unit": "years"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Record_BP"
+        }
+      ]
     },
     "Record_BP": {
       "type": "MultiObservation",
@@ -56869,7 +56750,6 @@ export default {"allergic_rhinitis":{
           "unit": "mm[Hg]"
         }
       ],
-      "target_encounter": "Wellness_Encounter",
       "direct_transition": "Lab_MetabolicPanel"
     },
     "Record_MetabolicPanel": {
@@ -56980,7 +56860,6 @@ export default {"allergic_rhinitis":{
           "unit": "mmol/L"
         }
       ],
-      "target_encounter": "Wellness_Encounter",
       "direct_transition": "Lab_LipidPanel"
     },
     "Record_LipidPanel": {
@@ -57043,12 +56922,10 @@ export default {"allergic_rhinitis":{
           "unit": "mg/dL"
         }
       ],
-      "target_encounter": "Wellness_Encounter",
       "direct_transition": "Lab_ACR"
     },
     "Record_ACR": {
       "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
       "vital_sign": "Microalbumin Creatinine Ratio",
       "category": "laboratory",
       "codes": [
@@ -57063,7 +56940,6 @@ export default {"allergic_rhinitis":{
     },
     "Record_EGFR": {
       "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
       "category": "laboratory",
       "vital_sign": "EGFR",
       "codes": [
@@ -57492,12 +57368,10 @@ export default {"allergic_rhinitis":{
           }
         }
       ],
-      "target_encounter": "Wellness_Encounter",
       "direct_transition": "check_eGFR"
     },
     "Record_Pain": {
       "type": "Observation",
-      "target_encounter": "Wellness_Encounter",
       "category": "vital-signs",
       "codes": [
         {
@@ -57509,9 +57383,51 @@ export default {"allergic_rhinitis":{
       "unit": "{score}",
       "direct_transition": "Record_Weight",
       "range": {
+        "decimals": 0,
         "low": 0,
         "high": 4
       }
+    },
+    "Record_BMI_Percentile": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "%",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "59576-9",
+          "display": "Body mass index (BMI) [Percentile] Per age and gender"
+        }
+      ],
+      "direct_transition": "Record_BP",
+      "attribute": "bmi_percentile"
+    },
+    "Record_Weight_For_Length_Percentile": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "%",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "77606-2",
+          "display": "Weight-for-length Per age and sex"
+        }
+      ],
+      "attribute": "current_weight_length_percentile",
+      "conditional_transition": [
+        {
+          "transition": "Record_BMI",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 2,
+            "unit": "years"
+          }
+        },
+        {
+          "transition": "Record_BP"
+        }
+      ]
     }
   }
 }
