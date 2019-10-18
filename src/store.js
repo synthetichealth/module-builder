@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-export const history = createBrowserHistory()
+export const history = createBrowserHistory({basename: '/module-builder'})
 
 const createAppStore = (history) => {
   middleware.push(routerMiddleware(history))
