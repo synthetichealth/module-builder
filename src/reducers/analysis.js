@@ -166,8 +166,17 @@ const orphanStateWarnings = (module) => {
           }
         }
       });
+    } else if(nextState.table_transition){
+      nextState.table_transition.forEach(transition => {
+        if(!module.states[transition.transition]){
+          warnings.push({stateName: nextStateKey, message: 'Transition to state that does not exist: ' + transition.transition});
+        } else {
+          if(!visitedStateCheck[transition.transition]){
+            visitNext.push(transition.transition);
+          }
+        }
+      });
     } 
-    // probable need to add a table warning
     else if(nextState.conditional_transition){
       nextState.conditional_transition.forEach(transition => {
         if(!module.states[transition.transition]){

@@ -42,10 +42,7 @@ export type TableTransition = {
   type: 'Table',
   transition: [
     {
-      distribution: {
-        attribute: string,
-        default: number
-      } | number,
+      distribution: number,
       file: string,
       to: string
     }

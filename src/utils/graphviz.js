@@ -146,20 +146,11 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
       })
       return out_transitions
     } else if(state.table_transition !== undefined){
-      let out_transitions = ''
-      state.table_transition.forEach( (t, i) => {
+        let out_transitions = ''
+        state.table_transition.forEach( (t, i) => {
         let transitionClassName = className
-        let distLabel = ''
-        if(typeof t.distribution === 'object'){
-          distLabel = `p(${t.distribution.attribute})`
-          if(t.distribution.default){
-            let pct = t.distribution.default * 100
-            distLabel += `, default ${pct}%`
-          }
-        } else {
-          let pct = t.distribution * 100
-          distLabel = `${pct}%`
-        }
+        let pct = t.distribution * 100
+        let distLabel = `${pct}%`
         if(module.states[t.transition]){
           if(selectedState && t.transition === selectedState.name && selectedState.name !== name){
             transitionClassName = '';

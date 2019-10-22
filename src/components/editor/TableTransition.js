@@ -53,40 +53,18 @@ class TableTransition extends Component<Props> {
   }
 
   renderDistribution(distribution: mixed, index: number) {    
-    console.log(distribution);
-    let sum = this.props.transition.transition.reduce( (acc, val) => acc + (typeof val.distribution === 'object' ? val.distribution.default : val.distribution),0);
-    let remainder = 0;
-    if(typeof distribution === 'object') {
-      remainder = 1 - (sum - distribution.default);
-      let remainderOption = null
-      if (sum != 1) {
-        remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution.default`)({val: remainder})}>(Change to Remainder)</a>
-      }
-      return (
-        <label>
-          Attribute: <RIEInput className='editable-text' value={distribution.attribute} propName='attribute' change={this.props.onChange(`[${index}].distribution.attribute`)} />
-          <br />
-          Default Weight: <RIENumber className='editable-text' value={distribution.default} propName='default' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`[${index}].distribution.default`)} />
-          {remainderOption}
-          <br />
-          <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: {id: getTemplate('Attribute.UnnamedDistribution')}})}>Change to Unnamed Distribution</a>
-        </label>
-      );
-    } else {
-      remainder = 1 - (sum - distribution);
-      let remainderOption = null
-      if (sum != 1) {
-        remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: remainder})}>(Change to Remainder)</a>
-      }
-      return (
-        <label> Weight:
-          <RIENumber className='editable-text' value={distribution} propName='distribution' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`[${index}].distribution`)} />
-          {remainderOption}
-          <br />
-          <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: {id: getTemplate('Attribute.NamedDistribution')}})}>Change to Named Distribution</a>
-        </label>
-      );
+    let sum = this.props.transition.transition.reduce( (acc, val) => acc + val.distribution, 0);
+    let remainder = 1 - (sum - distribution);
+    let remainderOption = null
+    if (sum != 1) {
+      remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: remainder})}>(Change to Remainder)</a>
     }
+    return (
+      <label> Default Weight:
+        <RIENumber className='editable-text' value={distribution} propName='distribution' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`[${index}].distribution`)} />
+        {remainderOption}
+        </label>
+    );
   }
 
   renderWarning() {

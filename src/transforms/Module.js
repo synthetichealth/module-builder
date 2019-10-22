@@ -79,7 +79,10 @@ export function extractComplexTransition(data: any): ComplexTransition {
 
 export function extractTableTransition(data: any): TableTransition {
   let transition = data.map((d) => {
-    return {distribution: d.distribution, to: d.transition, file: d.file};
+    return {
+      distribution: d.distribution, 
+      to: d.transition, 
+      file: d.file};
   });
   return {type: 'Table', transition};
 }
