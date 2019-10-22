@@ -145,6 +145,35 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
         }
       })
       return out_transitions
+    } else if(state.table_transition !== undefined){
+      let out_transitions = ''
+      state.table_transition.forEach( (t, i) => {
+        let transitionClassName = className
+        let distLabel = ''
+        if(typeof t.distribution === 'object'){
+          distLabel = `p(${t.distribution.attribute})`
+          if(t.distribution.default){
+            let pct = t.distribution.default * 100
+            distLabel += `, default ${pct}%`
+          }
+        } else {
+          let pct = t.distribution * 100
+          distLabel = `${pct}%`
+        }
+        if(module.states[t.transition]){
+          if(selectedState && t.transition === selectedState.name && selectedState.name !== name){
+            transitionClassName = '';
+          }
+
+          if(selectedStateTransition === i){
+            transitionClassName += ' transition-selected';
+          }
+          out_transitions += `  "${escapedName}" -> "${escapeName(module.states[t.transition].name)}" [label = "${distLabel}", class = "transition transition-index_${i} ${transitionClassName}"];\n`
+        } else {
+          console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition} FROM ${name}`);
+        }
+      })
+      return out_transitions
     } else if (state.conditional_transition !== undefined){
       let out_transitions = ''
       state.conditional_transition.forEach( (t, i ) => {

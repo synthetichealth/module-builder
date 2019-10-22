@@ -118,7 +118,8 @@ class StateEditor extends Component<Props> {
       {id:"Direct" ,text:"Direct"},
       {id:"Distributed" ,text:"Distributed"},
       {id:"Conditional" ,text:"Conditional"},
-      {id:"Complex" ,text:"Complex"}
+      {id:"Complex" ,text:"Complex"},
+      {id:"Table" ,text:"Table"}
     ]
 
     let remarks = this.props.state.remarks ||"";

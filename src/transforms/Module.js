@@ -3,7 +3,7 @@ import uuid from 'uuid-js';
 
 import type { Module } from '../types/Module';
 import type { State } from '../types/State';
-import type { DirectTransition, DistributedTransition, ConditionalTransition, ComplexTransition, Transition } from '../types/Transition';
+import type { DirectTransition, DistributedTransition, ConditionalTransition, ComplexTransition, TableTransition, Transition } from '../types/Transition';
 
 export function extractModule(data: any): Module {
   let name = extractName(data);
@@ -42,6 +42,9 @@ export function extractTransition(state: any): ?Transition {
   if(state.complex_transition) {
     return extractComplexTransition(state.complex_transition);
   }
+  if(state.table_transition) {
+    return extractTableTransition(state.table_transition);
+  }
   return null;
 }
 
@@ -74,6 +77,12 @@ export function extractComplexTransition(data: any): ComplexTransition {
   return {type: 'Complex', transition};
 }
 
+export function extractTableTransition(data: any): TableTransition {
+  let transition = data.map((d) => {
+    return {distribution: d.distribution, to: d.transition, file: d.file};
+  });
+  return {type: 'Table', transition};
+}
 
 export function extractRemarks(data: any):string[] {
   return (data.remarks :string[]);

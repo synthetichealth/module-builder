@@ -166,7 +166,9 @@ const orphanStateWarnings = (module) => {
           }
         }
       });
-    } else if(nextState.conditional_transition){
+    } 
+    // probable need to add a table warning
+    else if(nextState.conditional_transition){
       nextState.conditional_transition.forEach(transition => {
         if(!module.states[transition.transition]){
           warnings.push({stateName: nextStateKey, message: 'Transition to state that does not exist: ' + transition.transition});

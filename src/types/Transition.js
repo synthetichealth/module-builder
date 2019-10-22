@@ -38,4 +38,18 @@ export type ComplexTransition = {
   }]
 };
 
-export type Transition = DirectTransition | DistributedTransition | ConditionalTransition | ComplexTransition;
+export type TableTransition = {
+  type: 'Table',
+  transition: [
+    {
+      distribution: {
+        attribute: string,
+        default: number
+      } | number,
+      file: string,
+      to: string
+    }
+  ]
+};
+
+export type Transition = DirectTransition | DistributedTransition | ConditionalTransition | ComplexTransition | TableTransition;

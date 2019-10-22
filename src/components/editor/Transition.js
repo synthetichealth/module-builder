@@ -6,6 +6,7 @@ import DirectTransition from './DirectTransition';
 import DistributedTransition from './DistributedTransition';
 import ConditionalTransition from './ConditionalTransition';
 import ComplexTransition from './ComplexTransition';
+import TableTransition from './TableTransition';
 
 type Props = {
   options: State[],
@@ -25,6 +26,8 @@ class Transition extends Component<Props> {
           return <ConditionalTransition {...this.props} onChange={this.props.onChange('conditional_transition')} />
         case "Complex":
           return <ComplexTransition {...this.props} onChange={this.props.onChange('complex_transition')} />
+        case "Table":
+          return <TableTransition {...this.props} onChange={this.props.onChange('table_transition')} />
         case "None":
           return <div> No transition </div>
         default:
