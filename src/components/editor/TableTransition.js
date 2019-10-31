@@ -1,13 +1,16 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber } from 'riek';
+import { RIESelect, RIEInput, RIENumber, RIETextArea } from 'riek';
 import _ from 'lodash';
+import Papa from 'papaparse'
 
 
 import type { TableTransition as TableTransitionType } from '../../types/Transition';
 import { getTemplate } from '../../templates/Templates';
 import type { State } from '../../types/State';
 import './Transition.css';
+import Table from './Table'
+import './TableTransition.css';
 
 
 type Props = {
@@ -17,7 +20,15 @@ type Props = {
 }
 
 class TableTransition extends Component<Props> {
+  state = {
+    parsedData : '',
+    display : false,
+    buttonText : 'Display Read-Only Table'
+  }
+
   render() {
+    //const [display, setDisplay] = useState(initialRows);
+    console.log('render table trans')
     let currentValue = [];
     if (this.props.transition) {
       currentValue = this.props.transition.transition;
@@ -25,8 +36,25 @@ class TableTransition extends Component<Props> {
     if(!this.props.transition) {
       return null;
     }
+
+    let displayTable;
+
+    if (this.state.display){
+      displayTable = 
+        <div className="TableTransition-table">
+          <Table columnHeaders={Object.keys(this.state.parsedData[0])} initialRows={this.state.parsedData} />
+        </div>
+    }else{
+      displayTable = 
+        <div className='TableTransition-remarks'>
+        {/* // want this to be in a higher level instead of the first transition probably */}
+          <RIETextArea value={this.props.transition.transition[0].lookuptable} propName='lookuptable' change={this.props.onChange(`[0].lookuptable`)}/>
+        </div>
+    }
+
     let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
     return (
+      <div>
       <label>
         Table Transition:
         {
@@ -47,8 +75,16 @@ class TableTransition extends Component<Props> {
         })}
         <a className='editable-text add-button' onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: getTemplate('Transition.Table[0]')}})}>+</a>
         <br/>
+        <br/>
+        </label>
+        <div>
+        <button onClick={() => this.displayTableView()}>{this.state.buttonText}</button>
+        <br/>
+        {displayTable}
+        <br/>
         {this.renderWarning()}
-      </label>
+      </div>
+      </div>
     );
   }
 
@@ -85,6 +121,35 @@ class TableTransition extends Component<Props> {
 
   checkInRange(num: number) {
     return ((num >= 0) && (num <= 1));
+  }
+
+  parseTextArea(data) {
+    let d;
+    Papa.parse(data, {
+    header: true,
+    complete: function(results) {
+        d=results;
+    }
+    });
+    
+    var i;
+    for (i=0; i<d.data.length; i++)
+    {
+        d.data[i]["originalIndex"] = i;
+    }
+    this.setState({parsedData : d.data});
+  }    
+
+  displayTableView() {        
+    console.log('in display table view')
+    if (this.state.display){
+      this.setState({buttonText: 'Display Read-Only Table'});
+    }else {
+      this.setState({buttonText: 'Display Editable Text Area'});
+    }
+    // want this to be in a higher level instead of the first transition probably
+    this.parseTextArea(this.props.transition.transition[0].lookuptable);
+    this.setState({display: !this.state.display});
   }
 }
 

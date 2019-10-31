@@ -82,9 +82,12 @@ export function extractTableTransition(data: any): TableTransition {
     return {
       distribution: d.distribution, 
       to: d.transition, 
-      file: d.file};
+      file: d.file,
+      lookuptable: d.lookuptable
+    };
   });
   return {type: 'Table', transition};
+  //return {type: 'Table', lookuptable: transition.lookuptable, transition};
 }
 
 export function extractRemarks(data: any):string[] {

@@ -345,7 +345,7 @@ const TransitionTemplates = {
   Conditional: [{transition: 'Initial', condition: {...TypeTemplates.Condition.Age}}],
   Distributed: [{transition: 'Initial', distribution: 1.0}],
   Complex: [{condition: {...TypeTemplates.Condition.Age}, distributions: [{transition: 'Initial', distribution: 1.0}]}],
-  Table: [{transition: 'Initial', distribution: 1.0, file: 'table.csv'}]
+  Table: [{transition: 'Initial', distribution: 1.0, file: 'table.csv', lookuptable: 'age,Initial,Terminal\n0-50,.1,.9\n51-140,.4,.6'}]
 }
 
 const StateTemplates = {
