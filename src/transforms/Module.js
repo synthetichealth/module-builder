@@ -78,7 +78,7 @@ export function extractComplexTransition(data: any): ComplexTransition {
 }
 
 export function extractTableTransition(data: any): TableTransition {
-  let transition = data.map((d) => {
+  let transition = data.transitions.map((d) => {
     return {
       distribution: d.distribution, 
       to: d.transition, 
@@ -86,8 +86,7 @@ export function extractTableTransition(data: any): TableTransition {
       lookuptable: d.lookuptable
     };
   });
-  return {type: 'Table', transition};
-  //return {type: 'Table', lookuptable: transition.lookuptable, transition};
+  return {type: 'Table', lookuptable: data.lookuptable, file: data.file, transition};
 }
 
 export function extractRemarks(data: any):string[] {

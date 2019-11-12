@@ -340,11 +340,13 @@ export default (state = initialState, action) => {
           break;
         case 'distributed_transition':
         case 'conditional_transition':
-        case 'table_transition':
           transitionTo = _.get(action, 'data.nodeName.transition.transition[0].to', null);
           break;
         case 'complex_transition':
           transitionTo = _.get(action, 'data.nodeName.transition.transition[0].distributions[0].to', null);
+          break;
+        case 'table_transition':
+          transitionTo = _.get(action, 'data.nodeName.transition.transitions.transition[0].to', null);
           break;
       }
 
@@ -356,11 +358,13 @@ export default (state = initialState, action) => {
             break;
           case 'distributed_transition':
           case 'conditional_transition':
-          case 'table_transition':
             newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName][0].transition = transitionTo;
             break;
           case 'complex_transition':
             newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName][0].distributions[0].transition = transitionTo;
+            break;
+          case 'table_transition':
+            newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName].transitions[0].transition = transitionTo;
             break;
         }
       }

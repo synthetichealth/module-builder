@@ -147,7 +147,7 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
       return out_transitions
     } else if(state.table_transition !== undefined){
         let out_transitions = ''
-        state.table_transition.forEach( (t, i) => {
+        state.table_transition.transitions.forEach( (t, i) => {
         let transitionClassName = className
         let pct = t.distribution * 100
         let distLabel = `${pct}%`

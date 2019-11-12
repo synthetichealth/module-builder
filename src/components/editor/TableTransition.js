@@ -20,18 +20,19 @@ type Props = {
 }
 
 class TableTransition extends Component<Props> {
+
   state = {
     parsedData : '',
     display : false,
     buttonText : 'Display Read-Only Table'
-  }
+  } 
 
   render() {
-    //const [display, setDisplay] = useState(initialRows);
-    console.log('render table trans')
     let currentValue = [];
+    let cv;
     if (this.props.transition) {
       currentValue = this.props.transition.transition;
+      cv = this.props.transition.file;
     }
     if(!this.props.transition) {
       return null;
@@ -47,11 +48,9 @@ class TableTransition extends Component<Props> {
     }else{
       displayTable = 
         <div className='TableTransition-remarks'>
-        {/* // want this to be in a higher level instead of the first transition probably */}
-          <RIETextArea value={this.props.transition.transition[0].lookuptable} propName='lookuptable' change={this.props.onChange(`[0].lookuptable`)}/>
+          <RIETextArea value={this.props.transition.lookuptable} propName='lookuptable' change={this.props.onChange(`lookuptable`)}/>
         </div>
     }
-
     let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
     return (
       <div>
@@ -61,23 +60,23 @@ class TableTransition extends Component<Props> {
           currentValue.map((t, i) => {
           return <div key={i} className="transition-option">
             <label>To:
-              <RIESelect className='editable-text' propName='transition' value={{id:t.to, text:t.to}} change={this.props.onChange(`[${i}].transition`)} options={options} />
+              <RIESelect className='editable-text' propName='transition' value={{id:t.to, text:t.to}} change={this.props.onChange(`transitions[${i}].transition`)} options={options} />
             </label>
             <br/>
             {this.renderDistribution(t.distribution, i)}
             <br />
-            <label>Lookup Table: 
-              <RIEInput className='editable-text' value={t.file} propName='file' change={this.props.onChange(`[${i}].file`)} />
-            </label>
-            <br/>
-            <a className='editable-text delete-button' onClick={() => this.props.onChange(`[${i}]`)({val: {id: null}})}>remove</a>
+            <a className='editable-text delete-button' onClick={() => this.props.onChange(`transitions[${i}]`)({val: {id: null}})}>remove</a>
           </div>
         })}
-        <a className='editable-text add-button' onClick={() => this.props.onChange(`[${currentValue.length}]`)({val: {id: getTemplate('Transition.Table[0]')}})}>+</a>
+        <a className='editable-text add-button' onClick={() => this.props.onChange(`transitions[${currentValue.length}]`)({val: {id: getTemplate('Transition.Table.transitions[0]')}})}>+</a>
         <br/>
         <br/>
         </label>
         <div>
+          <label>Lookup Table: 
+            <RIEInput className='editable-text' value={cv} propName='file' change={this.props.onChange(`file`)} />
+          </label>
+          <br/>
         <button onClick={() => this.displayTableView()}>{this.state.buttonText}</button>
         <br/>
         {displayTable}
@@ -93,11 +92,11 @@ class TableTransition extends Component<Props> {
     let remainder = 1 - (sum - distribution);
     let remainderOption = null
     if (sum != 1) {
-      remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: remainder})}>(Change to Remainder)</a>
+      remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`transitions[${index}].distribution`)({val: remainder})}>(Change to Remainder)</a>
     }
     return (
       <label> Default Weight:
-        <RIENumber className='editable-text' value={distribution} propName='distribution' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`[${index}].distribution`)} />
+        <RIENumber className='editable-text' value={distribution} propName='distribution' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`transitions[${index}].distribution`)} />
         {remainderOption}
         </label>
     );
@@ -147,8 +146,7 @@ class TableTransition extends Component<Props> {
     }else {
       this.setState({buttonText: 'Display Editable Text Area'});
     }
-    // want this to be in a higher level instead of the first transition probably
-    this.parseTextArea(this.props.transition.transition[0].lookuptable);
+    this.parseTextArea(this.props.transition.lookuptable);
     this.setState({display: !this.state.display});
   }
 }
