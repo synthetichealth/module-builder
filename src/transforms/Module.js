@@ -80,13 +80,11 @@ export function extractComplexTransition(data: any): ComplexTransition {
 export function extractTableTransition(data: any): TableTransition {
   let transition = data.transitions.map((d) => {
     return {
-      distribution: d.distribution, 
-      to: d.transition, 
-      file: d.file,
-      lookuptable: d.lookuptable
+      default_probability: d.default_probability, 
+      transition: d.transition
     };
   });
-  return {type: 'Table', lookuptable: data.lookuptable, file: data.file, transition};
+  return {type: 'Table', lookuptable: data.lookuptable, lookup_table_name: data.lookup_table_name, transition};
 }
 
 export function extractRemarks(data: any):string[] {

@@ -40,12 +40,12 @@ export type ComplexTransition = {
 
 export type TableTransition = {
   type: 'Table',
-  file: string,
+  lookup_table_name: string,
   lookuptable: string,
   transition: [
     {
-      distribution: number,
-      to: string,
+      default_probability: number,
+      transition: string,
     }
   ]
 };

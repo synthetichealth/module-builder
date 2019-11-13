@@ -32,7 +32,7 @@ class TableTransition extends Component<Props> {
     let cv;
     if (this.props.transition) {
       currentValue = this.props.transition.transition;
-      cv = this.props.transition.file;
+      cv = this.props.transition.lookup_table_name;
     }
     if(!this.props.transition) {
       return null;
@@ -60,10 +60,10 @@ class TableTransition extends Component<Props> {
           currentValue.map((t, i) => {
           return <div key={i} className="transition-option">
             <label>To:
-              <RIESelect className='editable-text' propName='transition' value={{id:t.to, text:t.to}} change={this.props.onChange(`transitions[${i}].transition`)} options={options} />
+              <RIESelect className='editable-text' propName='transition' value={{id:t.transition, text:t.transition}} change={this.props.onChange(`transitions[${i}].transition`)} options={options} />
             </label>
             <br/>
-            {this.renderDistribution(t.distribution, i)}
+            {this.renderDistribution(t.default_probability, i)}
             <br />
             <a className='editable-text delete-button' onClick={() => this.props.onChange(`transitions[${i}]`)({val: {id: null}})}>remove</a>
           </div>
@@ -74,7 +74,7 @@ class TableTransition extends Component<Props> {
         </label>
         <div>
           <label>Lookup Table: 
-            <RIEInput className='editable-text' value={cv} propName='file' change={this.props.onChange(`file`)} />
+            <RIEInput className='editable-text' value={cv} propName='lookup_table_name' change={this.props.onChange(`lookup_table_name`)} />
           </label>
           <br/>
         <button onClick={() => this.displayTableView()}>{this.state.buttonText}</button>
@@ -88,15 +88,15 @@ class TableTransition extends Component<Props> {
   }
 
   renderDistribution(distribution: mixed, index: number) {    
-    let sum = this.props.transition.transition.reduce( (acc, val) => acc + val.distribution, 0);
+    let sum = this.props.transition.transition.reduce( (acc, val) => acc + val.default_probability, 0);
     let remainder = 1 - (sum - distribution);
     let remainderOption = null
     if (sum != 1) {
-      remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`transitions[${index}].distribution`)({val: remainder})}>(Change to Remainder)</a>
+      remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`transitions[${index}].default_probability`)({val: remainder})}>(Change to Remainder)</a>
     }
     return (
       <label> Default Weight:
-        <RIENumber className='editable-text' value={distribution} propName='distribution' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`transitions[${index}].distribution`)} />
+        <RIENumber className='editable-text' value={distribution} propName='default_probability' editProps={{step: .01, min: 0, max: 1}} format={this.formatAsPercentage} validate={this.checkInRange} change={this.props.onChange(`transitions[${index}].default_probability`)} />
         {remainderOption}
         </label>
     );
@@ -106,7 +106,7 @@ class TableTransition extends Component<Props> {
     if(!this.props.transition) {
       return null;
     }
-    let warn = (this.props.transition.transition.reduce((acc, val) => acc + (typeof val.distribution === 'object' ? val.distribution.default : val.distribution), 0) !== 1);
+    let warn = (this.props.transition.transition.reduce((acc, val) => acc + (typeof val.default_probability === 'object' ? val.default_probability.default : val.default_probability), 0) !== 1);
     if (warn) {
       return (
         <label className='warning'>Weights do not add up to 100%.</label>
