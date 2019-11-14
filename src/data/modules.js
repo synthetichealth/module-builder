@@ -5594,8 +5594,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "745679",
-          "display": "200 ACTUAT Albuterol 0.09 MG/ACTUAT Metered Dose Inhaler"
+          "code": "2123111",
+          "display": "NDA020503 200 ACTUAT Albuterol 0.09 MG/ACTUAT Metered Dose Inhaler"
         }
       ],
       "prescription": {
@@ -6918,6 +6918,538 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"breast_cancer/hormonetherapy_breast":{
+  "name": "hormonetherapy_breast",
+  "remarks": [
+    "This module has ER/PR and HER2 treatments depending on whether each receptor is positive or negative. There is also treatment for if ER/PR are both positive. "
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "ER-encounter"
+    },
+    "Fulvestrant": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 727762,
+          "display": "5 ML fulvestrant 50 MG/ML Prefilled Syringe"
+        }
+      ],
+      "direct_transition": "ER_medication_end",
+      "assign_to_attribute": "ER_medication",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/hormone-therapy-for-breast-cancer.html",
+        "",
+        "Fulvestrant (Faslodex)",
+        "Fulvestrant is a drug that blocks and damages estrogen receptors.This drug is not a SERM – it acts like an anti-estrogen throughout the body. It is also known as a selective estrogen receptor degrader (SERD).",
+        "",
+        "Fulvestrant is used to treat metastatic breast cancer, most often after other hormone drugs (like tamoxifen and often an aromatase inhibitor) have stopped working.",
+        "",
+        "It is given by injections into the buttocks. For the first month, the shots are given 2 weeks apart. After that, they are given once a month. Common short-term side effects can include:",
+        "",
+        "Hot flashes and/or night sweats",
+        "Headache",
+        "Mild nausea",
+        "Bone pain",
+        "Injection site pain",
+        "Because fulvestrant blocks estrogen, in theory it could cause weakened bones (osteoporosis) if taken for a long time. Fulvestrant is currently approved only for use in post-menopausal women. It is sometimes used “off-label” in pre-menopausal women, often combined with a luteinizing-hormone releasing hormone (LHRH) agonist to turn off the ovaries (see the section on Ovarian Ablation below)."
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Aromatase Inhibitors (AI)": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_aromatase_inhibitors",
+      "distributed_transition": [
+        {
+          "transition": "Letrozole",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Anastrozole",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Exemestane",
+          "distribution": 0.34
+        }
+      ],
+      "value": true,
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/hormone-therapy-for-breast-cancer.html",
+        "",
+        "Aromatase inhibitors (AIs)",
+        "Aromatase inhibitors (AIs) are drugs that stop estrogen production. Before menopause, most estrogen is made by the ovaries. But for women whose ovaries aren’t working, either due to menopause or certain treatments, a small amount of estrogen is still made in the fat tissue by an enzyme (called aromatase). AIs work by blocking aromatase from making estrogen.",
+        "",
+        "These drugs are useful in women who are past menopause, although they can also be used in premenopausal women in combination with ovarian suppression (see below).",
+        "",
+        "There are 3 AIs that seem to work about equally well in treating breast cancer:",
+        "",
+        "Letrozole (Femara)",
+        "Anastrozole (Arimidex)",
+        "Exemestane (Aromasin)",
+        "These drugs are pills taken daily.",
+        "",
+        "Use in adjuvant therapy: After surgery, taking an AI, either alone or after tamoxifen, has been shown to work better than taking just tamoxifen for 5 years to reduce the risk of the cancer coming back .",
+        "",
+        "Schedules that are known to be helpful include:",
+        "",
+        "Tamoxifen for 2 to 3 years, followed by an AI to complete 5 years of treatment",
+        "An AI for 2 to 3 years followed by Tamoxifen to complete 5 years of treatment",
+        "Tamoxifen for 5 years, followed by an AI for 5 years",
+        "An AI for 5 years",
+        "Tamoxifen for 5 to 10 years (if you are unable to take an AI)",
+        "For most post-menopausal women whose cancers are hormone receptor-positive, most doctors recommend taking an AI at some point during adjuvant therapy. Right now, standard treatment is to take these drugs for about 5 years, or to alternate with tamoxifen for a total of at least 5 years, or to take in sequence with tamoxifen for at least 3 years. Studies are now being done to see if taking an AI for more than 5 years would be more helpful. Tamoxifen is an option for some women who cannot take an AI. Taking tamoxifen for 10 years is considered more effective than taking it for 5 years, but you and your doctor will decide the best schedule of treatment for you.",
+        "",
+        "If you have early-stage breast cancer and had not gone through menopause when you were first diagnosed, your doctor might recommend taking tamoxifen first, and then taking an AI later if you go through menopause during treatment. Another option is taking a drug called a luteinizing hormone-releasing hormone (LHRH) analog, which turns off the ovaries, along with an AI. An AI should not be taken alone for breast cancer treatment in pre-menopausal women because it is unsafe and can increase hormone levels.",
+        "",
+        "Use in cancer that comes back or has spread: AIs can also be used to treat more advanced hormone-positive breast cancers, especially in post-menopausal women. They are often continued for as long as they are helpful.",
+        "",
+        "Possible side effects: The AIs tend to have fewer serious side effects than tamoxifen. They don't cause uterine cancers and very rarely cause blood clots. They can, however, cause muscle pain and joint stiffness and/or pain. The joint pain may be similar to a feeling of having arthritis in many different joints at one time. Switching to a different AI may improve this side effect, but it has led some women to stop treatment. If this happens, most doctors recommend using tamoxifen to complete 5 to 10 years of hormone treatment.",
+        "",
+        "Because AIs drastically lower the estrogen level in women after menopause, they can also cause bone thinning, sometimes leading to osteoporosis and even fractures. If you are taking an AI, your bone density may be tested and you may also be given drugs, such as bisphosphonates or denosumab (Xgeva, Prolia), to strengthen your bones.",
+        "",
+        ""
+      ]
+    },
+    "Letrozole": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200064,
+          "display": "letrozole 2.5 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_medication_end",
+      "assign_to_attribute": "ER_medication",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 7,
+          "unit": "years"
+        }
+      },
+      "reason": "breast_cancer_condition"
+    },
+    "Anastrozole": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 199224,
+          "display": "anastrozole 1 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_medication_end",
+      "assign_to_attribute": "ER_medication",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 7,
+          "unit": "years"
+        }
+      },
+      "reason": "breast_cancer_condition"
+    },
+    "Exemestane": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310261,
+          "display": "exemestane 25 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_medication_end",
+      "assign_to_attribute": "ER_medication",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 7,
+          "unit": "years"
+        }
+      },
+      "reason": "breast_cancer_condition"
+    },
+    "ER-Treatments": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Estrogen Blocking Receptors",
+          "distribution": 0.6
+        },
+        {
+          "transition": "Fulvestrant",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Aromatase Inhibitors (AI)",
+          "distribution": 0.3
+        }
+      ],
+      "remarks": [
+        "https://www.breastcancer.org/research-news/5-more-years-of-ais-no-better-than-2-more",
+        ""
+      ]
+    },
+    "HER2-Treatment": {
+      "type": "Simple",
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/targeted-therapy-for-breast-cancer.html",
+        "",
+        "For about 1 in 5 women with breast cancer, the cancer cells have too much of a growth-promoting protein known as HER2/neu (or just HER2) on their surface. These cancers, known as HER2-positive breast cancers, tend to grow and spread more aggressively. A number of drugs have been developed that target this protein:",
+        "",
+        "Trastuzumab (Herceptin): This is a monoclonal antibody, which is a man-made version of a very specific immune system protein. It is often given along with chemo, but it might also be used alone (especially if chemo alone has already been tried). Trastuzumab can be used to treat both early- and late-stage breast cancer. When started before or after surgery to treat early breast cancer, this drug is usually given for a total of 6 months to a year. For advanced breast cancer, treatment is often given for as long as the drug is helpful. This drug is given into a vein (IV) and is infused over 30-90 minutes. Another type of trastuzumab called trastuzumab and hyaluronidase-oysk injection (Herceptin Hylecta) is also available. It is given as a subcutaneous (under the skin) shot that takes about 2 to 5 minutes to inject.",
+        "Pertuzumab (Perjeta): This monoclonal antibody can be given with trastuzumab and chemo, either before surgery to treat early-stage breast cancer, or to treat advanced breast cancer. This drug is given into a vein (IV).",
+        "Ado-trastuzumab emtansine (Kadcyla, also known as TDM-1): This is a monoclonal antibody attached to a chemotherapy drug. It is used by itself to treat advanced breast cancer in women who have already been treated with trastuzumab and chemo. This drug is also given in a vein (IV).",
+        "Lapatinib (Tykerb): This is a kinase inhibitor. It is a pill taken daily. Lapatinib is used to treat advanced breast cancer, and might be used along with certain chemotherapy drugs, trastuzumab, or hormone therapy drugs.",
+        "Neratinib (Nerlynx): This is another kinase inhibitor. It is a pill that is taken daily. Neratinib is used to treat early-stage breast cancer after a woman has completed one year of trastuzumab and is usually given for one year. Some clinical trials show that it may also be effective in advanced breast cancer, as well.",
+        "Side effects of targeted therapy for HER2-positive breast cancer",
+        "The side effects of these drugs are often mild, but some can be serious. Discuss what you can expect with your doctor.",
+        "",
+        "Some women develop heart damage during or after treatment with trastuzumab, pertuzumab, or ado-trastuzumab emtansine. This can lead to congestive heart failure. For most (but not all) women, this effect lasts a short time and gets better when the drug is stopped. The risk of heart problems is higher when these drugs are given with certain chemo drugs that also can cause heart damage, such as doxorubicin (Adriamycin) and epirubicin (Ellence). Because these drugs can cause heart damage, doctors often check your heart function (with an echocardiogram or a MUGA scan) before treatment, and again while you are taking the drug. Let your doctor know if you develop symptoms such as shortness of breath, leg swelling, and severe fatigue.",
+        "",
+        "Lapatinib and neratinib can cause severe diarrhea, so it’s very important to let your health care team know about any changes in bowel habits as soon as they happen. Lapatinib can also cause hand-foot syndrome, in which the hands and feet become sore and red, and may blister and peel. Pertuzumab can also cause diarrhea.  ",
+        "",
+        "If you are pregnant, you should not take these drugs. They can harm and even cause death to the fetus. If you could become pregnant, talk to your doctor about using effective birth control while taking these drugs.",
+        "",
+        "Targeted therapy for hormone receptor-positive breast cancer",
+        "About 2 of 3 breast cancers are hormone receptor-positive (ER-positive or PR-positive). For women with these cancers, treatment with hormone therapy is often helpful. Certain targeted therapy drugs can make hormone therapy even more effective, although these targeted drugs might also add to the side effects."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_HER2",
+            "operator": "==",
+            "value": "HER2-positive"
+          },
+          "distributions": [
+            {
+              "transition": "Trastuzumab_her2",
+              "distribution": 0.9
+            },
+            {
+              "transition": "Ado_trastuzumab_emtansine",
+              "distribution": 0.03
+            },
+            {
+              "transition": "Lapatinib",
+              "distribution": 0.03
+            },
+            {
+              "transition": "Neratinib",
+              "distribution": 0.04
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 1,
+              "transition": "Hormone_Receptor_Positive_Treatments"
+            }
+          ]
+        }
+      ]
+    },
+    "Ado_trastuzumab_emtansine": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1658084,
+          "display": "ado-trastuzumab emtansine 100 MG Injection"
+        }
+      ],
+      "direct_transition": "HER2_medication_end",
+      "assign_to_attribute": "HER2_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "Lapatinib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 672149,
+          "display": "lapatinib 250 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "HER2_medication_end",
+      "assign_to_attribute": "HER2_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "Neratinib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1940648,
+          "display": "neratinib 40 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "HER2_medication_end",
+      "assign_to_attribute": "HER2_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "Trastuzumab_her2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2119714,
+          "display": "5 ML hyaluronidase-oysk 2000 UNT/ML / trastuzumab 120 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "HER2_medication_end",
+      "assign_to_attribute": "HER2_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "CDK4/6 Inhibitors": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Abemaciclib",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Palbociclib",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Ribociclib",
+          "distribution": 0.34
+        }
+      ],
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/targeted-therapy-for-breast-cancer.html",
+        "",
+        "CDK4/6 inhibitors",
+        "Palbociclib (Ibrance), ribociclib (Kisqali), and abemaciclib (Verzenio) are drugs that block proteins in the cell called cyclin-dependent kinases (CDKs), particularly CDK4 and CDK6. Blocking these proteins in hormone receptor-positive breast cancer cells helps stop the cells from dividing. This can slow cancer growth.",
+        "",
+        "These drugs are approved for women with advanced hormone receptor-positive, HER2-negative breast cancer and are taken as pills, typically once or twice a day.",
+        "",
+        "There are different ways to use these drugs.",
+        "",
+        "Any of the three drugs can be given along with an aromatase inhibitor (such as letrozole) or fulvestrant to women who have gone through menopause.",
+        "Palbociclib or abemaciclib can be given with fulvestrant to women who are still having regular periods (premenopausal) or are almost in menopause (perimenopausal). These women, however, must also be on medicines, such as luteinizing hormone-releasing hormone (LHRH) analogs, that stop the ovaries from making estrogen.",
+        "Ribociclib can be given with an aromatase inhibitor to women who have not gone through menopause. Again, these women must also be on medicines that suppress the ovaries, such as a luteinizing hormone-releasing hormone (LHRH) analogs. ",
+        "Abemaciclib can also be used by itself in women who have previously been treated with hormone therapy and chemotherapy.",
+        "",
+        "Side effects of these drugs tend to be mild. The most common side effects are low blood cell counts and fatigue. Nausea and vomiting, mouth sores, hair loss, diarrhea, and headache are less common side effects. Very low white blood cell counts can increase the risk of serious infection.",
+        "",
+        ""
+      ]
+    },
+    "Abemaciclib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1946840,
+          "display": "Verzenio 100 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_PR_medication_end",
+      "assign_to_attribute": "ER_PR_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "Palbociclib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1601380,
+          "display": "palbociclib 100 MG Oral Capsule"
+        }
+      ],
+      "direct_transition": "ER_PR_medication_end",
+      "assign_to_attribute": "ER_PR_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "Ribociclib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1873983,
+          "display": "ribociclib 200 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_PR_medication_end",
+      "assign_to_attribute": "ER_PR_medication",
+      "reason": "breast_cancer_condition"
+    },
+    "ER-encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "ER-Treatments",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_PR",
+                "operator": "==",
+                "value": "PR-positive"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_ER",
+                "operator": "==",
+                "value": "ER-positive"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Upper Stage Treatment"
+        }
+      ]
+    },
+    "Upper Stage Treatment": {
+      "type": "Simple",
+      "direct_transition": "HER2-Treatment"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "end_encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "Hormone_Receptor_Positive_Treatments": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CDK4/6 Inhibitors",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_ER",
+                "operator": "==",
+                "value": "ER-positive"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_PR",
+                "operator": "==",
+                "value": "PR-positive"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "end_encounter"
+        }
+      ]
+    },
+    "Tamoxifen": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 198240,
+          "display": "Tamoxifen 10 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "ER_medication_end",
+      "assign_to_attribute": "ER_medication",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "years"
+        }
+      },
+      "reason": "breast_cancer_condition"
+    },
+    "Estrogen Blocking Receptors": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_tamoxifen",
+      "direct_transition": "Tamoxifen",
+      "value": true,
+      "remarks": [
+        "https://www.cancer.org/cancer/breast-cancer/treatment/hormone-therapy-for-breast-cancer.html",
+        "",
+        "Tamoxifen",
+        "This drug blocks estrogen receptors on breast cancer cells. It stops estrogen from connecting to the cancer cells and telling them to grow and divide. While tamoxifen acts like an anti-estrogen in breast cells, it acts like an estrogen in other tissues, like the uterus and the bones. Because of this, it is called a selective estrogen receptor modulator (SERM).",
+        "",
+        "Tamoxifen can be used in several ways:",
+        "",
+        "For women with hormone receptor-positive breast cancer treated with surgery, tamoxifen can help lower the chances of the cancer coming back and raise the chances of living longer. It can also lower the risk of getting a new cancer in the other breast. Tamoxifen can be started either after surgery (adjuvant therapy) or before surgery (neoadjuvant therapy) and is usually taken for 5 to 10 years. For early- stage breast cancer, this drug is mainly used for women who have not yet gone through menopause. (If you have gone through menopause, aromatase inhibitors are usually used instead.)",
+        "For women who have been treated for ductal carcinoma in situ (DCIS) that is hormone receptor-positive, taking tamoxifen for 5 years lowers the chance of the DCIS coming back. It also lowers the chance of getting an invasive breast cancer.",
+        "For women with hormone-positive breast cancer that has spread to other parts of the body, tamoxifen can often help slow or stop the growth of the cancer, and might even shrink some tumors.",
+        "In women at high risk of breast cancer, tamoxifen can be used to help lower the risk of developing breast cancer.",
+        "Toremifene (Fareston) is another SERM that works in a similar way, but it is used less often and is only approved to treat metastatic breast cancer. It is not likely to work if tamoxifen has already been used and has stopped working. These drugs are taken by mouth as a pill. The most common side effects of tamoxifen and toremifene are:",
+        "",
+        "Hot flashes",
+        "Vaginal dryness or discharge",
+        "Mood swings",
+        "Some women with cancer spread to the bones may have a tumor flare with pain and swelling in the muscles and bones. This usually decreases quickly, but in some rare cases a woman may also develop a high calcium level in the blood that is hard to control. If this happens, the treatment may need to be stopped for a time.",
+        "",
+        "Rare, but more serious side effects are also possible:",
+        "",
+        "If a woman has gone through menopause, these drugs can increase her risk of developing uterine cancer . Tell your doctor right away about any unusual vaginal bleeding (a common symptom of both of these cancers). Most uterine bleeding is not from cancer, but this symptom always needs prompt attention.",
+        "Blood clots are another uncommon, but serious side effect. They usually form in the legs (called deep vein thrombosis or DVT), but sometimes a piece of clot may break off and end up blocking an artery in the lungs (pulmonary embolism or PE). Call your doctor or nurse right away if you develop pain, redness, or swelling in your lower leg (calf), shortness of breath, or chest pain, because these can be symptoms of a DVT or PE.",
+        "Rarely, tamoxifen has been associated with strokes in post-menopausal women, so tell your doctor if you have severe headaches, confusion, or trouble speaking or moving.",
+        "Depending on a woman's menopausal status, tamoxifen can have different effects on the bones. In pre-menopausal women, tamoxifen can cause some bone thinning, but in post-menopausal women it is often good to strengthen bone. The benefits of taking these drugs outweigh the risks for almost all women with hormone receptor-positive breast cancer.",
+        "",
+        ""
+      ]
+    },
+    "ER_medication_end": {
+      "type": "MedicationEnd",
+      "direct_transition": "Upper Stage Treatment",
+      "referenced_by_attribute": "ER_medication"
+    },
+    "HER2_medication_end": {
+      "type": "MedicationEnd",
+      "direct_transition": "Hormone_Receptor_Positive_Treatments",
+      "referenced_by_attribute": "HER2_medication"
+    },
+    "ER_PR_medication_end": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "ER_PR_medication",
+      "direct_transition": "end_encounter"
+    }
+  }
+}
+,
 "breast_cancer/hormone_diagnosis":{
   "name": "Hormone_Diagnosis",
   "remarks": [
@@ -7345,538 +7877,6 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": "greater than 2.2"
       }
-    }
-  }
-}
-,
-"breast_cancer/hormonetherapy_breast":{
-  "name": "hormonetherapy_breast",
-  "remarks": [
-    "This module has ER/PR and HER2 treatments depending on whether each receptor is positive or negative. There is also treatment for if ER/PR are both positive. "
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "ER-encounter"
-    },
-    "Fulvestrant": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 727762,
-          "display": "5 ML fulvestrant 50 MG/ML Prefilled Syringe"
-        }
-      ],
-      "direct_transition": "ER_medication_end",
-      "assign_to_attribute": "ER_medication",
-      "remarks": [
-        "https://www.cancer.org/cancer/breast-cancer/treatment/hormone-therapy-for-breast-cancer.html",
-        "",
-        "Fulvestrant (Faslodex)",
-        "Fulvestrant is a drug that blocks and damages estrogen receptors.This drug is not a SERM – it acts like an anti-estrogen throughout the body. It is also known as a selective estrogen receptor degrader (SERD).",
-        "",
-        "Fulvestrant is used to treat metastatic breast cancer, most often after other hormone drugs (like tamoxifen and often an aromatase inhibitor) have stopped working.",
-        "",
-        "It is given by injections into the buttocks. For the first month, the shots are given 2 weeks apart. After that, they are given once a month. Common short-term side effects can include:",
-        "",
-        "Hot flashes and/or night sweats",
-        "Headache",
-        "Mild nausea",
-        "Bone pain",
-        "Injection site pain",
-        "Because fulvestrant blocks estrogen, in theory it could cause weakened bones (osteoporosis) if taken for a long time. Fulvestrant is currently approved only for use in post-menopausal women. It is sometimes used “off-label” in pre-menopausal women, often combined with a luteinizing-hormone releasing hormone (LHRH) agonist to turn off the ovaries (see the section on Ovarian Ablation below)."
-      ],
-      "reason": "breast_cancer_condition"
-    },
-    "Aromatase Inhibitors (AI)": {
-      "type": "SetAttribute",
-      "attribute": "breast_cancer_aromatase_inhibitors",
-      "distributed_transition": [
-        {
-          "transition": "Letrozole",
-          "distribution": 0.33
-        },
-        {
-          "transition": "Anastrozole",
-          "distribution": 0.33
-        },
-        {
-          "transition": "Exemestane",
-          "distribution": 0.34
-        }
-      ],
-      "value": true,
-      "remarks": [
-        "https://www.cancer.org/cancer/breast-cancer/treatment/hormone-therapy-for-breast-cancer.html",
-        "",
-        "Aromatase inhibitors (AIs)",
-        "Aromatase inhibitors (AIs) are drugs that stop estrogen production. Before menopause, most estrogen is made by the ovaries. But for women whose ovaries aren’t working, either due to menopause or certain treatments, a small amount of estrogen is still made in the fat tissue by an enzyme (called aromatase). AIs work by blocking aromatase from making estrogen.",
-        "",
-        "These drugs are useful in women who are past menopause, although they can also be used in premenopausal women in combination with ovarian suppression (see below).",
-        "",
-        "There are 3 AIs that seem to work about equally well in treating breast cancer:",
-        "",
-        "Letrozole (Femara)",
-        "Anastrozole (Arimidex)",
-        "Exemestane (Aromasin)",
-        "These drugs are pills taken daily.",
-        "",
-        "Use in adjuvant therapy: After surgery, taking an AI, either alone or after tamoxifen, has been shown to work better than taking just tamoxifen for 5 years to reduce the risk of the cancer coming back .",
-        "",
-        "Schedules that are known to be helpful include:",
-        "",
-        "Tamoxifen for 2 to 3 years, followed by an AI to complete 5 years of treatment",
-        "An AI for 2 to 3 years followed by Tamoxifen to complete 5 years of treatment",
-        "Tamoxifen for 5 years, followed by an AI for 5 years",
-        "An AI for 5 years",
-        "Tamoxifen for 5 to 10 years (if you are unable to take an AI)",
-        "For most post-menopausal women whose cancers are hormone receptor-positive, most doctors recommend taking an AI at some point during adjuvant therapy. Right now, standard treatment is to take these drugs for about 5 years, or to alternate with tamoxifen for a total of at least 5 years, or to take in sequence with tamoxifen for at least 3 years. Studies are now being done to see if taking an AI for more than 5 years would be more helpful. Tamoxifen is an option for some women who cannot take an AI. Taking tamoxifen for 10 years is considered more effective than taking it for 5 years, but you and your doctor will decide the best schedule of treatment for you.",
-        "",
-        "If you have early-stage breast cancer and had not gone through menopause when you were first diagnosed, your doctor might recommend taking tamoxifen first, and then taking an AI later if you go through menopause during treatment. Another option is taking a drug called a luteinizing hormone-releasing hormone (LHRH) analog, which turns off the ovaries, along with an AI. An AI should not be taken alone for breast cancer treatment in pre-menopausal women because it is unsafe and can increase hormone levels.",
-        "",
-        "Use in cancer that comes back or has spread: AIs can also be used to treat more advanced hormone-positive breast cancers, especially in post-menopausal women. They are often continued for as long as they are helpful.",
-        "",
-        "Possible side effects: The AIs tend to have fewer serious side effects than tamoxifen. They don't cause uterine cancers and very rarely cause blood clots. They can, however, cause muscle pain and joint stiffness and/or pain. The joint pain may be similar to a feeling of having arthritis in many different joints at one time. Switching to a different AI may improve this side effect, but it has led some women to stop treatment. If this happens, most doctors recommend using tamoxifen to complete 5 to 10 years of hormone treatment.",
-        "",
-        "Because AIs drastically lower the estrogen level in women after menopause, they can also cause bone thinning, sometimes leading to osteoporosis and even fractures. If you are taking an AI, your bone density may be tested and you may also be given drugs, such as bisphosphonates or denosumab (Xgeva, Prolia), to strengthen your bones.",
-        "",
-        ""
-      ]
-    },
-    "Letrozole": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 200064,
-          "display": "letrozole 2.5 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "ER_medication_end",
-      "assign_to_attribute": "ER_medication",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 7,
-          "unit": "years"
-        }
-      },
-      "reason": "breast_cancer_condition"
-    },
-    "Anastrozole": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 199224,
-          "display": "anastrozole 1 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "ER_medication_end",
-      "assign_to_attribute": "ER_medication",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 7,
-          "unit": "years"
-        }
-      },
-      "reason": "breast_cancer_condition"
-    },
-    "Exemestane": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 310261,
-          "display": "exemestane 25 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "ER_medication_end",
-      "assign_to_attribute": "ER_medication",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 7,
-          "unit": "years"
-        }
-      },
-      "reason": "breast_cancer_condition"
-    },
-    "ER-Treatments": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Estrogen Blocking Receptors",
-          "distribution": 0.6
-        },
-        {
-          "transition": "Fulvestrant",
-          "distribution": 0.1
-        },
-        {
-          "transition": "Aromatase Inhibitors (AI)",
-          "distribution": 0.3
-        }
-      ],
-      "remarks": [
-        "https://www.breastcancer.org/research-news/5-more-years-of-ais-no-better-than-2-more",
-        ""
-      ]
-    },
-    "HER2-Treatment": {
-      "type": "Simple",
-      "remarks": [
-        "https://www.cancer.org/cancer/breast-cancer/treatment/targeted-therapy-for-breast-cancer.html",
-        "",
-        "For about 1 in 5 women with breast cancer, the cancer cells have too much of a growth-promoting protein known as HER2/neu (or just HER2) on their surface. These cancers, known as HER2-positive breast cancers, tend to grow and spread more aggressively. A number of drugs have been developed that target this protein:",
-        "",
-        "Trastuzumab (Herceptin): This is a monoclonal antibody, which is a man-made version of a very specific immune system protein. It is often given along with chemo, but it might also be used alone (especially if chemo alone has already been tried). Trastuzumab can be used to treat both early- and late-stage breast cancer. When started before or after surgery to treat early breast cancer, this drug is usually given for a total of 6 months to a year. For advanced breast cancer, treatment is often given for as long as the drug is helpful. This drug is given into a vein (IV) and is infused over 30-90 minutes. Another type of trastuzumab called trastuzumab and hyaluronidase-oysk injection (Herceptin Hylecta) is also available. It is given as a subcutaneous (under the skin) shot that takes about 2 to 5 minutes to inject.",
-        "Pertuzumab (Perjeta): This monoclonal antibody can be given with trastuzumab and chemo, either before surgery to treat early-stage breast cancer, or to treat advanced breast cancer. This drug is given into a vein (IV).",
-        "Ado-trastuzumab emtansine (Kadcyla, also known as TDM-1): This is a monoclonal antibody attached to a chemotherapy drug. It is used by itself to treat advanced breast cancer in women who have already been treated with trastuzumab and chemo. This drug is also given in a vein (IV).",
-        "Lapatinib (Tykerb): This is a kinase inhibitor. It is a pill taken daily. Lapatinib is used to treat advanced breast cancer, and might be used along with certain chemotherapy drugs, trastuzumab, or hormone therapy drugs.",
-        "Neratinib (Nerlynx): This is another kinase inhibitor. It is a pill that is taken daily. Neratinib is used to treat early-stage breast cancer after a woman has completed one year of trastuzumab and is usually given for one year. Some clinical trials show that it may also be effective in advanced breast cancer, as well.",
-        "Side effects of targeted therapy for HER2-positive breast cancer",
-        "The side effects of these drugs are often mild, but some can be serious. Discuss what you can expect with your doctor.",
-        "",
-        "Some women develop heart damage during or after treatment with trastuzumab, pertuzumab, or ado-trastuzumab emtansine. This can lead to congestive heart failure. For most (but not all) women, this effect lasts a short time and gets better when the drug is stopped. The risk of heart problems is higher when these drugs are given with certain chemo drugs that also can cause heart damage, such as doxorubicin (Adriamycin) and epirubicin (Ellence). Because these drugs can cause heart damage, doctors often check your heart function (with an echocardiogram or a MUGA scan) before treatment, and again while you are taking the drug. Let your doctor know if you develop symptoms such as shortness of breath, leg swelling, and severe fatigue.",
-        "",
-        "Lapatinib and neratinib can cause severe diarrhea, so it’s very important to let your health care team know about any changes in bowel habits as soon as they happen. Lapatinib can also cause hand-foot syndrome, in which the hands and feet become sore and red, and may blister and peel. Pertuzumab can also cause diarrhea.  ",
-        "",
-        "If you are pregnant, you should not take these drugs. They can harm and even cause death to the fetus. If you could become pregnant, talk to your doctor about using effective birth control while taking these drugs.",
-        "",
-        "Targeted therapy for hormone receptor-positive breast cancer",
-        "About 2 of 3 breast cancers are hormone receptor-positive (ER-positive or PR-positive). For women with these cancers, treatment with hormone therapy is often helpful. Certain targeted therapy drugs can make hormone therapy even more effective, although these targeted drugs might also add to the side effects."
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "breast_cancer_HER2",
-            "operator": "==",
-            "value": "HER2-positive"
-          },
-          "distributions": [
-            {
-              "transition": "Trastuzumab_her2",
-              "distribution": 0.9
-            },
-            {
-              "transition": "Ado_trastuzumab_emtansine",
-              "distribution": 0.03
-            },
-            {
-              "transition": "Lapatinib",
-              "distribution": 0.03
-            },
-            {
-              "transition": "Neratinib",
-              "distribution": 0.04
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 1,
-              "transition": "Hormone_Receptor_Positive_Treatments"
-            }
-          ]
-        }
-      ]
-    },
-    "Ado_trastuzumab_emtansine": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 1658084,
-          "display": "ado-trastuzumab emtansine 100 MG Injection"
-        }
-      ],
-      "direct_transition": "HER2_medication_end",
-      "assign_to_attribute": "HER2_medication",
-      "reason": "breast_cancer_condition"
-    },
-    "Lapatinib": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 672149,
-          "display": "lapatinib 250 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "HER2_medication_end",
-      "assign_to_attribute": "HER2_medication",
-      "reason": "breast_cancer_condition"
-    },
-    "Neratinib": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 1940648,
-          "display": "neratinib 40 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "HER2_medication_end",
-      "assign_to_attribute": "HER2_medication",
-      "reason": "breast_cancer_condition"
-    },
-    "Trastuzumab_her2": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 2119714,
-          "display": "5 ML hyaluronidase-oysk 2000 UNT/ML / trastuzumab 120 MG/ML Injection"
-        }
-      ],
-      "direct_transition": "HER2_medication_end",
-      "assign_to_attribute": "HER2_medication",
-      "reason": "breast_cancer_condition"
-    },
-    "CDK4/6 Inhibitors": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Abemaciclib",
-          "distribution": 0.33
-        },
-        {
-          "transition": "Palbociclib",
-          "distribution": 0.33
-        },
-        {
-          "transition": "Ribociclib",
-          "distribution": 0.34
-        }
-      ],
-      "remarks": [
-        "https://www.cancer.org/cancer/breast-cancer/treatment/targeted-therapy-for-breast-cancer.html",
-        "",
-        "CDK4/6 inhibitors",
-        "Palbociclib (Ibrance), ribociclib (Kisqali), and abemaciclib (Verzenio) are drugs that block proteins in the cell called cyclin-dependent kinases (CDKs), particularly CDK4 and CDK6. Blocking these proteins in hormone receptor-positive breast cancer cells helps stop the cells from dividing. This can slow cancer growth.",
-        "",
-        "These drugs are approved for women with advanced hormone receptor-positive, HER2-negative breast cancer and are taken as pills, typically once or twice a day.",
-        "",
-        "There are different ways to use these drugs.",
-        "",
-        "Any of the three drugs can be given along with an aromatase inhibitor (such as letrozole) or fulvestrant to women who have gone through menopause.",
-        "Palbociclib or abemaciclib can be given with fulvestrant to women who are still having regular periods (premenopausal) or are almost in menopause (perimenopausal). These women, however, must also be on medicines, such as luteinizing hormone-releasing hormone (LHRH) analogs, that stop the ovaries from making estrogen.",
-        "Ribociclib can be given with an aromatase inhibitor to women who have not gone through menopause. Again, these women must also be on medicines that suppress the ovaries, such as a luteinizing hormone-releasing hormone (LHRH) analogs. ",
-        "Abemaciclib can also be used by itself in women who have previously been treated with hormone therapy and chemotherapy.",
-        "",
-        "Side effects of these drugs tend to be mild. The most common side effects are low blood cell counts and fatigue. Nausea and vomiting, mouth sores, hair loss, diarrhea, and headache are less common side effects. Very low white blood cell counts can increase the risk of serious infection.",
-        "",
-        ""
-      ]
-    },
-    "Abemaciclib": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 1946831,
-          "display": "abemaciclib 100 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "ER_PR_medication_end",
-      "assign_to_attribute": "ER_PR_medication",
-      "reason": "breast_cancer_condition"
-    },
-    "Palbociclib": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 1601380,
-          "display": "palbociclib 100 MG Oral Capsule"
-        }
-      ],
-      "direct_transition": "ER_PR_medication_end",
-      "assign_to_attribute": "ER_PR_medication",
-      "reason": "breast_cancer_condition"
-    },
-    "Ribociclib": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 1873983,
-          "display": "ribociclib 200 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "ER_PR_medication_end",
-      "assign_to_attribute": "ER_PR_medication",
-      "reason": "breast_cancer_condition"
-    },
-    "ER-encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185347001,
-          "display": "Encounter for problem"
-        }
-      ],
-      "conditional_transition": [
-        {
-          "transition": "ER-Treatments",
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "breast_cancer_PR",
-                "operator": "==",
-                "value": "PR-positive"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "breast_cancer_ER",
-                "operator": "==",
-                "value": "ER-positive"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Upper Stage Treatment"
-        }
-      ]
-    },
-    "Upper Stage Treatment": {
-      "type": "Simple",
-      "direct_transition": "HER2-Treatment"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "end_encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
-    },
-    "Hormone_Receptor_Positive_Treatments": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "CDK4/6 Inhibitors",
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "breast_cancer_ER",
-                "operator": "==",
-                "value": "ER-positive"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "breast_cancer_PR",
-                "operator": "==",
-                "value": "PR-positive"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "end_encounter"
-        }
-      ]
-    },
-    "Tamoxifen": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 198240,
-          "display": "Tamoxifen 10 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "ER_medication_end",
-      "assign_to_attribute": "ER_medication",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 10,
-          "unit": "years"
-        }
-      },
-      "reason": "breast_cancer_condition"
-    },
-    "Estrogen Blocking Receptors": {
-      "type": "SetAttribute",
-      "attribute": "breast_cancer_tamoxifen",
-      "direct_transition": "Tamoxifen",
-      "value": true,
-      "remarks": [
-        "https://www.cancer.org/cancer/breast-cancer/treatment/hormone-therapy-for-breast-cancer.html",
-        "",
-        "Tamoxifen",
-        "This drug blocks estrogen receptors on breast cancer cells. It stops estrogen from connecting to the cancer cells and telling them to grow and divide. While tamoxifen acts like an anti-estrogen in breast cells, it acts like an estrogen in other tissues, like the uterus and the bones. Because of this, it is called a selective estrogen receptor modulator (SERM).",
-        "",
-        "Tamoxifen can be used in several ways:",
-        "",
-        "For women with hormone receptor-positive breast cancer treated with surgery, tamoxifen can help lower the chances of the cancer coming back and raise the chances of living longer. It can also lower the risk of getting a new cancer in the other breast. Tamoxifen can be started either after surgery (adjuvant therapy) or before surgery (neoadjuvant therapy) and is usually taken for 5 to 10 years. For early- stage breast cancer, this drug is mainly used for women who have not yet gone through menopause. (If you have gone through menopause, aromatase inhibitors are usually used instead.)",
-        "For women who have been treated for ductal carcinoma in situ (DCIS) that is hormone receptor-positive, taking tamoxifen for 5 years lowers the chance of the DCIS coming back. It also lowers the chance of getting an invasive breast cancer.",
-        "For women with hormone-positive breast cancer that has spread to other parts of the body, tamoxifen can often help slow or stop the growth of the cancer, and might even shrink some tumors.",
-        "In women at high risk of breast cancer, tamoxifen can be used to help lower the risk of developing breast cancer.",
-        "Toremifene (Fareston) is another SERM that works in a similar way, but it is used less often and is only approved to treat metastatic breast cancer. It is not likely to work if tamoxifen has already been used and has stopped working. These drugs are taken by mouth as a pill. The most common side effects of tamoxifen and toremifene are:",
-        "",
-        "Hot flashes",
-        "Vaginal dryness or discharge",
-        "Mood swings",
-        "Some women with cancer spread to the bones may have a tumor flare with pain and swelling in the muscles and bones. This usually decreases quickly, but in some rare cases a woman may also develop a high calcium level in the blood that is hard to control. If this happens, the treatment may need to be stopped for a time.",
-        "",
-        "Rare, but more serious side effects are also possible:",
-        "",
-        "If a woman has gone through menopause, these drugs can increase her risk of developing uterine cancer . Tell your doctor right away about any unusual vaginal bleeding (a common symptom of both of these cancers). Most uterine bleeding is not from cancer, but this symptom always needs prompt attention.",
-        "Blood clots are another uncommon, but serious side effect. They usually form in the legs (called deep vein thrombosis or DVT), but sometimes a piece of clot may break off and end up blocking an artery in the lungs (pulmonary embolism or PE). Call your doctor or nurse right away if you develop pain, redness, or swelling in your lower leg (calf), shortness of breath, or chest pain, because these can be symptoms of a DVT or PE.",
-        "Rarely, tamoxifen has been associated with strokes in post-menopausal women, so tell your doctor if you have severe headaches, confusion, or trouble speaking or moving.",
-        "Depending on a woman's menopausal status, tamoxifen can have different effects on the bones. In pre-menopausal women, tamoxifen can cause some bone thinning, but in post-menopausal women it is often good to strengthen bone. The benefits of taking these drugs outweigh the risks for almost all women with hormone receptor-positive breast cancer.",
-        "",
-        ""
-      ]
-    },
-    "ER_medication_end": {
-      "type": "MedicationEnd",
-      "direct_transition": "Upper Stage Treatment",
-      "referenced_by_attribute": "ER_medication"
-    },
-    "HER2_medication_end": {
-      "type": "MedicationEnd",
-      "direct_transition": "Hormone_Receptor_Positive_Treatments",
-      "referenced_by_attribute": "HER2_medication"
-    },
-    "ER_PR_medication_end": {
-      "type": "MedicationEnd",
-      "referenced_by_attribute": "ER_PR_medication",
-      "direct_transition": "end_encounter"
     }
   }
 }
@@ -10638,8 +10638,8 @@ export default {"allergic_rhinitis":{
                 "codes": [
                   {
                     "system": "RxNorm",
-                    "code": 10324,
-                    "display": "Tamoxifen"
+                    "code": "198240",
+                    "display": "Tamoxifen 10 MG Oral Tablet"
                   }
                 ]
               },
@@ -10648,8 +10648,8 @@ export default {"allergic_rhinitis":{
                 "codes": [
                   {
                     "system": "RxNorm",
-                    "code": 38409,
-                    "display": "Toremifene"
+                    "code": "313428",
+                    "display": "Toremifene 60 MG Oral Tablet"
                   }
                 ]
               }
@@ -10711,8 +10711,8 @@ export default {"allergic_rhinitis":{
                 "codes": [
                   {
                     "system": "RxNorm",
-                    "code": 258494,
-                    "display": "exemestane"
+                    "code": "310261",
+                    "display": "exemestane 25 MG Oral Tablet"
                   }
                 ]
               },
@@ -10724,8 +10724,8 @@ export default {"allergic_rhinitis":{
                     "codes": [
                       {
                         "system": "RxNorm",
-                        "code": 84857,
-                        "display": "anastrozole"
+                        "code": "199224",
+                        "display": "anastrozole 1 MG Oral Tablet"
                       }
                     ]
                   },
@@ -10734,8 +10734,8 @@ export default {"allergic_rhinitis":{
                     "codes": [
                       {
                         "system": "RxNorm",
-                        "code": 72965,
-                        "display": "letrozole"
+                        "code": "200064",
+                        "display": "letrozole 2.5 MG Oral Tablet"
                       }
                     ]
                   }
@@ -14091,7 +14091,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "6690-2",
-              "display": "Leukocytes [#/​volume] in Blood by Automated count"
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
             }
           ],
           "unit": "10*3/uL",
@@ -14106,7 +14106,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "789-8",
-              "display": "Erythrocytes [#/​volume] in Blood by Automated count"
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
             }
           ],
           "unit": "10*6/uL",
@@ -14121,7 +14121,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "718-7",
-              "display": "Hemoglobin [Mass/​volume] in Blood"
+              "display": "Hemoglobin [Mass/volume] in Blood"
             }
           ],
           "unit": "g/dL",
@@ -14182,7 +14182,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "786-4",
-              "display": "MCHC [Mass/​volume] by Automated count"
+              "display": "MCHC [Mass/volume] by Automated count"
             }
           ],
           "range": {
@@ -14212,7 +14212,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "777-3",
-              "display": "Platelets [#/​volume] in Blood by Automated count"
+              "display": "Platelets [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -14643,8 +14643,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 315971,
-          "display": "Lasix 40mg"
+          "code": "313988",
+          "display": "Furosemide 40 MG Oral Tablet"
         }
       ],
       "direct_transition": "Assign CHF care plan",
@@ -15251,7 +15251,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
             }
           ],
           "range": {
@@ -15266,7 +15266,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "2885-2",
-              "display": "Protein [Mass/​volume] in Serum or Plasma"
+              "display": "Protein [Mass/volume] in Serum or Plasma"
             }
           ],
           "range": {
@@ -15281,7 +15281,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "1751-7",
-              "display": "Albumin [Mass/​volume] in Serum or Plasma"
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
             }
           ],
           "range": {
@@ -15296,7 +15296,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "10834-0",
-              "display": "Globulin [Mass/​volume] in Serum by calculation"
+              "display": "Globulin [Mass/volume] in Serum by calculation"
             }
           ],
           "range": {
@@ -15311,7 +15311,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "1975-2",
-              "display": "Bilirubin.total [Mass/​volume] in Serum or Plasma"
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
             }
           ],
           "range": {
@@ -15326,7 +15326,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "6768-6",
-              "display": "Alkaline phosphatase [Enzymatic activity/​volume] in Serum or Plasma"
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
             }
           ],
           "range": {
@@ -15341,7 +15341,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "1742-6",
-              "display": "Alanine aminotransferase [Enzymatic activity/​volume] in Serum or Plasma"
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
             }
           ],
           "range": {
@@ -15356,7 +15356,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "1920-8",
-              "display": "Aspartate aminotransferase [Enzymatic activity/​volume] in Serum or Plasma"
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
             }
           ],
           "range": {
@@ -15785,492 +15785,6 @@ export default {"allergic_rhinitis":{
           "transition": "intra_encounter time gate"
         }
       ]
-    }
-  }
-}
-,
-"contraceptive_maintenance":{
-  "name": "Contraceptive Maintenance",
-  "remarks": [
-    "Three types of contraceptives require periodic renewal to be effective: ",
-    "1. 'iud' - requires replacement every 5-10 years ",
-    "2. 'implant' - requires replacement every 3-4 years ",
-    "3. 'injectable' - requires another injection every 3 months ",
-    "Each of these contraceptives is initially implanted/injected by the prescribing ",
-    "submodule. Subsequent renewal or removal of these contraceptives is handled ",
-    "by this maintenance module.",
-    "Contraceptive maintenance automatically cancelled if either: ",
-    "1. 'pregnant' == true ",
-    "2. 'contraceptive_type' == nil "
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          },
-          "transition": "Terminal"
-        },
-        {
-          "transition": "Contraceptive_Type_Guard"
-        }
-      ]
-    },
-    "Clear_Contraceptive": {
-      "type": "CallSubmodule",
-      "submodule": "contraceptives/clear_contraceptive",
-      "direct_transition": "Contraceptive_Type_Guard"
-    },
-    "Contraceptive_Type_Guard": {
-      "type": "Guard",
-      "allow": {
-        "condition_type": "Or",
-        "conditions": [
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "iud"
-          },
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "implant"
-          },
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "injectable"
-          }
-        ]
-      },
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "iud"
-          },
-          "transition": "IUD_Maintenance"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "implant"
-          },
-          "transition": "Implant_Maintenance"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "injectable"
-          },
-          "transition": "Injectable_Maintenance"
-        }
-      ]
-    },
-    "IUD_Maintenance": {
-      "type": "Guard",
-      "remarks": [
-        "======================================================================",
-        " IUD CONTRACEPTIVE MAINTENANCE                                        ",
-        "======================================================================",
-        "Allow module progression if the IUD's lifetime is up (~4 years) ",
-        "or if the patient becomes pregnant."
-      ],
-      "allow": {
-        "condition_type": "Or",
-        "conditions": [
-          {
-            "condition_type": "Attribute",
-            "attribute": "pregnant",
-            "operator": "==",
-            "value": true
-          },
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "is nil"
-          },
-          {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "Contraceptive_Type_Guard",
-                  "within": {
-                    "quantity": 5,
-                    "unit": "years"
-                  }
-                }
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "IUD_Replacement",
-                  "within": {
-                    "quantity": 5,
-                    "unit": "years"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "pregnant",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "contraceptive_type",
-                "operator": "is nil"
-              }
-            ]
-          },
-          "transition": "Remove_IUD_Encounter"
-        },
-        {
-          "transition": "Renew_IUD_Encounter"
-        }
-      ]
-    },
-    "Renew_IUD_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "308335008",
-          "display": "Patient encounter procedure"
-        }
-      ],
-      "direct_transition": "IUD_Replacement"
-    },
-    "IUD_Replacement": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "46706006",
-          "display": "Replacement of contraceptive intrauterine device"
-        }
-      ],
-      "duration": {
-        "low": 40,
-        "high": 70,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_IUD_Replacement_Encounter"
-    },
-    "End_IUD_Replacement_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "IUD_Maintenance"
-    },
-    "Remove_IUD_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "308335008",
-          "display": "Patient encounter procedure"
-        }
-      ],
-      "direct_transition": "IUD_Removal"
-    },
-    "IUD_Removal": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "68254000",
-          "display": "Removal of intrauterine device"
-        }
-      ],
-      "duration": {
-        "low": 40,
-        "high": 70,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_IUD_Removal_Encounter"
-    },
-    "End_IUD_Removal_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Clear_Contraceptive"
-    },
-    "Implant_Maintenance": {
-      "type": "Guard",
-      "remarks": [
-        "======================================================================",
-        " IMPLANT CONTRACEPTIVE MAINTENANCE                                    ",
-        "======================================================================",
-        "Every 3-4 years the implant must be removed or replaced."
-      ],
-      "allow": {
-        "condition_type": "Or",
-        "conditions": [
-          {
-            "condition_type": "Attribute",
-            "attribute": "pregnant",
-            "operator": "==",
-            "value": true
-          },
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "is nil"
-          },
-          {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "Contraceptive_Type_Guard",
-                  "within": {
-                    "quantity": 4,
-                    "unit": "years"
-                  }
-                }
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "Renew_Contraceptive_Implant",
-                  "within": {
-                    "quantity": 4,
-                    "unit": "years"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "pregnant",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "contraceptive_type",
-                "operator": "is nil"
-              }
-            ]
-          },
-          "transition": "Remove_Implant_Encounter"
-        },
-        {
-          "transition": "Renew_Implant_Encounter"
-        }
-      ]
-    },
-    "Renew_Implant_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "308335008",
-          "display": "Patient encounter procedure"
-        }
-      ],
-      "direct_transition": "Renew_Contraceptive_Implant"
-    },
-    "Renew_Contraceptive_Implant": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "755621000000101",
-          "display": "Replacement of subcutaneous contraceptive"
-        }
-      ],
-      "duration": {
-        "low": 20,
-        "high": 40,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_Renew_Implant_Encounter"
-    },
-    "End_Renew_Implant_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Implant_Maintenance"
-    },
-    "Remove_Implant_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "308335008",
-          "display": "Patient encounter procedure"
-        }
-      ],
-      "direct_transition": "Remove_Implant"
-    },
-    "Remove_Implant": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "301807007",
-          "display": "Removal of subcutaneous contraceptive"
-        }
-      ],
-      "duration": {
-        "low": 20,
-        "high": 40,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_Remove_Implant_Encounter"
-    },
-    "End_Remove_Implant_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Clear_Contraceptive"
-    },
-    "Injectable_Maintenance": {
-      "type": "Guard",
-      "remarks": [
-        "======================================================================",
-        " INJECTABLE CONTRACEPTIVE MAINTENANCE                                 ",
-        "======================================================================",
-        "Every 3 months an additional dose is given. If the age limit for the current ",
-        "age bracket is reached, no more additional doses are given."
-      ],
-      "allow": {
-        "condition_type": "Or",
-        "conditions": [
-          {
-            "condition_type": "Attribute",
-            "attribute": "pregnant",
-            "operator": "==",
-            "value": true
-          },
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "is nil"
-          },
-          {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "Contraceptive_Type_Guard",
-                  "within": {
-                    "quantity": 3,
-                    "unit": "months"
-                  }
-                }
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "Regular_Injection_Encounter",
-                  "within": {
-                    "quantity": 3,
-                    "unit": "months"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "pregnant",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "contraceptive_type",
-                "operator": "is nil"
-              }
-            ]
-          },
-          "transition": "Clear_Contraceptive"
-        },
-        {
-          "transition": "Regular_Injection_Encounter"
-        }
-      ]
-    },
-    "Regular_Injection_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "308335008",
-          "display": "Patient encounter procedure"
-        }
-      ],
-      "direct_transition": "Regular_Contraceptive_Injection"
-    },
-    "Regular_Contraceptive_Injection": {
-      "type": "Procedure",
-      "duration": {
-        "low": 10,
-        "high": 20,
-        "unit": "minutes"
-      },
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "76601001",
-          "display": "Intramuscular injection"
-        }
-      ],
-      "direct_transition": "End_Regular_Injection_Encounter"
-    },
-    "End_Regular_Injection_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Injectable_Maintenance"
-    },
-    "Terminal": {
-      "type": "Terminal"
     }
   }
 }
@@ -16778,8 +16292,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1000156",
-          "display": "0.65 ML medroxyprogesterone acetate 160 MG/ML Prefilled Syringe"
+          "code": "1000126",
+          "display": "1 ML medroxyPROGESTERone acetate 150 MG/ML Injection"
         }
       ],
       "direct_transition": "Initial_Injection_By_Physician"
@@ -18505,6 +18019,492 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"contraceptive_maintenance":{
+  "name": "Contraceptive Maintenance",
+  "remarks": [
+    "Three types of contraceptives require periodic renewal to be effective: ",
+    "1. 'iud' - requires replacement every 5-10 years ",
+    "2. 'implant' - requires replacement every 3-4 years ",
+    "3. 'injectable' - requires another injection every 3 months ",
+    "Each of these contraceptives is initially implanted/injected by the prescribing ",
+    "submodule. Subsequent renewal or removal of these contraceptives is handled ",
+    "by this maintenance module.",
+    "Contraceptive maintenance automatically cancelled if either: ",
+    "1. 'pregnant' == true ",
+    "2. 'contraceptive_type' == nil "
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "transition": "Terminal"
+        },
+        {
+          "transition": "Contraceptive_Type_Guard"
+        }
+      ]
+    },
+    "Clear_Contraceptive": {
+      "type": "CallSubmodule",
+      "submodule": "contraceptives/clear_contraceptive",
+      "direct_transition": "Contraceptive_Type_Guard"
+    },
+    "Contraceptive_Type_Guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Or",
+        "conditions": [
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "iud"
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "implant"
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "injectable"
+          }
+        ]
+      },
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "iud"
+          },
+          "transition": "IUD_Maintenance"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "implant"
+          },
+          "transition": "Implant_Maintenance"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "injectable"
+          },
+          "transition": "Injectable_Maintenance"
+        }
+      ]
+    },
+    "IUD_Maintenance": {
+      "type": "Guard",
+      "remarks": [
+        "======================================================================",
+        " IUD CONTRACEPTIVE MAINTENANCE                                        ",
+        "======================================================================",
+        "Allow module progression if the IUD's lifetime is up (~4 years) ",
+        "or if the patient becomes pregnant."
+      ],
+      "allow": {
+        "condition_type": "Or",
+        "conditions": [
+          {
+            "condition_type": "Attribute",
+            "attribute": "pregnant",
+            "operator": "==",
+            "value": true
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "is nil"
+          },
+          {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Contraceptive_Type_Guard",
+                  "within": {
+                    "quantity": 5,
+                    "unit": "years"
+                  }
+                }
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "IUD_Replacement",
+                  "within": {
+                    "quantity": 5,
+                    "unit": "years"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "pregnant",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "contraceptive_type",
+                "operator": "is nil"
+              }
+            ]
+          },
+          "transition": "Remove_IUD_Encounter"
+        },
+        {
+          "transition": "Renew_IUD_Encounter"
+        }
+      ]
+    },
+    "Renew_IUD_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "308335008",
+          "display": "Patient encounter procedure"
+        }
+      ],
+      "direct_transition": "IUD_Replacement"
+    },
+    "IUD_Replacement": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "46706006",
+          "display": "Replacement of contraceptive intrauterine device"
+        }
+      ],
+      "duration": {
+        "low": 40,
+        "high": 70,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_IUD_Replacement_Encounter"
+    },
+    "End_IUD_Replacement_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "IUD_Maintenance"
+    },
+    "Remove_IUD_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "308335008",
+          "display": "Patient encounter procedure"
+        }
+      ],
+      "direct_transition": "IUD_Removal"
+    },
+    "IUD_Removal": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "68254000",
+          "display": "Removal of intrauterine device"
+        }
+      ],
+      "duration": {
+        "low": 40,
+        "high": 70,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_IUD_Removal_Encounter"
+    },
+    "End_IUD_Removal_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Clear_Contraceptive"
+    },
+    "Implant_Maintenance": {
+      "type": "Guard",
+      "remarks": [
+        "======================================================================",
+        " IMPLANT CONTRACEPTIVE MAINTENANCE                                    ",
+        "======================================================================",
+        "Every 3-4 years the implant must be removed or replaced."
+      ],
+      "allow": {
+        "condition_type": "Or",
+        "conditions": [
+          {
+            "condition_type": "Attribute",
+            "attribute": "pregnant",
+            "operator": "==",
+            "value": true
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "is nil"
+          },
+          {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Contraceptive_Type_Guard",
+                  "within": {
+                    "quantity": 4,
+                    "unit": "years"
+                  }
+                }
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Renew_Contraceptive_Implant",
+                  "within": {
+                    "quantity": 4,
+                    "unit": "years"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "pregnant",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "contraceptive_type",
+                "operator": "is nil"
+              }
+            ]
+          },
+          "transition": "Remove_Implant_Encounter"
+        },
+        {
+          "transition": "Renew_Implant_Encounter"
+        }
+      ]
+    },
+    "Renew_Implant_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "308335008",
+          "display": "Patient encounter procedure"
+        }
+      ],
+      "direct_transition": "Renew_Contraceptive_Implant"
+    },
+    "Renew_Contraceptive_Implant": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "755621000000101",
+          "display": "Replacement of subcutaneous contraceptive"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Renew_Implant_Encounter"
+    },
+    "End_Renew_Implant_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Implant_Maintenance"
+    },
+    "Remove_Implant_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "308335008",
+          "display": "Patient encounter procedure"
+        }
+      ],
+      "direct_transition": "Remove_Implant"
+    },
+    "Remove_Implant": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "301807007",
+          "display": "Removal of subcutaneous contraceptive"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Remove_Implant_Encounter"
+    },
+    "End_Remove_Implant_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Clear_Contraceptive"
+    },
+    "Injectable_Maintenance": {
+      "type": "Guard",
+      "remarks": [
+        "======================================================================",
+        " INJECTABLE CONTRACEPTIVE MAINTENANCE                                 ",
+        "======================================================================",
+        "Every 3 months an additional dose is given. If the age limit for the current ",
+        "age bracket is reached, no more additional doses are given."
+      ],
+      "allow": {
+        "condition_type": "Or",
+        "conditions": [
+          {
+            "condition_type": "Attribute",
+            "attribute": "pregnant",
+            "operator": "==",
+            "value": true
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "is nil"
+          },
+          {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Contraceptive_Type_Guard",
+                  "within": {
+                    "quantity": 3,
+                    "unit": "months"
+                  }
+                }
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Regular_Injection_Encounter",
+                  "within": {
+                    "quantity": 3,
+                    "unit": "months"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "pregnant",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "contraceptive_type",
+                "operator": "is nil"
+              }
+            ]
+          },
+          "transition": "Clear_Contraceptive"
+        },
+        {
+          "transition": "Regular_Injection_Encounter"
+        }
+      ]
+    },
+    "Regular_Injection_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "308335008",
+          "display": "Patient encounter procedure"
+        }
+      ],
+      "direct_transition": "Regular_Contraceptive_Injection"
+    },
+    "Regular_Contraceptive_Injection": {
+      "type": "Procedure",
+      "duration": {
+        "low": 10,
+        "high": 20,
+        "unit": "minutes"
+      },
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "76601001",
+          "display": "Intramuscular injection"
+        }
+      ],
+      "direct_transition": "End_Regular_Injection_Encounter"
+    },
+    "End_Regular_Injection_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Injectable_Maintenance"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    }
+  }
+}
+,
 "copd":{
   "name": "COPD",
   "remarks": [
@@ -19989,8 +19989,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 210856,
-          "display": "Pancreatin 4X 600 MG Oral Tablet"
+          "code": "198767",
+          "display": "Pancreatin 600 MG Oral Tablet"
         }
       ],
       "direct_transition": "CF_CarePlan",
@@ -20196,8 +20196,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 1655927,
-          "display": "Ivacaftor"
+          "code": 1243052,
+          "display": "Kalydeco 150 MG Oral Tablet"
         }
       ],
       "direct_transition": "Prescribe_Mucus_Thinner",
@@ -20720,8 +20720,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 998755,
-          "display": "Ciprofloxacin 10MG/ML"
+          "code": 1665227,
+          "display": "20 ML Ciprofloxacin 10 MG/ML Injection"
         }
       ],
       "direct_transition": "Pulmonary_Function_Test",
@@ -20735,8 +20735,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 1160499,
-          "display": "IV antibiotic Vancomycin"
+          "code": 313572,
+          "display": "Vancomycin 50 MG/ML Injectable Solution"
         }
       ],
       "direct_transition": "Pulmonary_Function_Test",
@@ -21805,8 +21805,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "998582",
-          "display": "Donepezil hydrochloride 23 MG [Aricept]"
+          "code": "1100184",
+          "display": "Donepezil hydrochloride 23 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_ModeratelySevere_Encounter"
@@ -23077,8 +23077,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "835900",
-          "display": "cycloSPORINE 50 MG Oral Capsule"
+          "code": "241834",
+          "display": "cycloSPORINE, modified 100 MG Oral Capsule"
         }
       ],
       "prescription": {
@@ -23124,8 +23124,8 @@ export default {"allergic_rhinitis":{
             "codes": [
               {
                 "system": "RxNorm",
-                "code": "835900",
-                "display": "cycloSPORINE 50 MG Oral Capsule"
+                "code": "241834",
+                "display": "cycloSPORINE, modified 100 MG Oral Capsule"
               }
             ]
           },
@@ -24497,8 +24497,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "563026",
-          "display": "Diazepam [Valium]"
+          "code": "197591",
+          "display": "Diazepam 5 MG Oral Tablet"
         }
       ],
       "assign_to_attribute": "seizure_meds",
@@ -24520,8 +24520,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1153378",
-          "display": "Clonazepam [Klonopin]"
+          "code": "204892",
+          "display": "clonazePAM 0.25 MG Oral Tablet"
         }
       ],
       "assign_to_attribute": "seizure_meds",
@@ -25352,8 +25352,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "833137",
-          "display": "Milnacipran hydrochloride 100 MG [Savella]"
+          "code": "833135",
+          "display": "Milnacipran hydrochloride 100 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Episode_Encounter"
@@ -25368,8 +25368,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1049636",
-          "display": "Acetaminophen 325 MG / oxyCODONE Hydrochloride 2.5 MG [Percocet]"
+          "code": "1049635",
+          "display": "Acetaminophen 325 MG / oxyCODONE Hydrochloride 2.5 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Episode_Encounter"
@@ -26946,8 +26946,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 314659,
-          "display": "heparin sodium, porcine"
+          "code": "1659263",
+          "display": "1 ML heparin sodium, porcine 5000 UNT/ML Injection"
         }
       ],
       "direct_transition": "Heparin_End"
@@ -27229,8 +27229,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "858069",
-          "display": "Colchicine 0.6 MG [Colcrys]"
+          "code": "197541",
+          "display": "Colchicine 0.6 MG Oral Tablet"
         }
       ],
       "direct_transition": "Uric_Acid_Reducer"
@@ -27827,8 +27827,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 316049,
-          "display": "Hydrochlorothiazide 25 MG"
+          "code": 310798,
+          "display": "Hydrochlorothiazide 25 MG Oral Tablet"
         }
       ],
       "prescription": {
@@ -27916,8 +27916,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 999969,
-          "display": "Amlodipine 5 MG / Hydrochlorothiazide 12.5 MG / Olmesartan medoxomil 20 MG"
+          "code": 999967,
+          "display": "amLODIPine 5 MG / Hydrochlorothiazide 12.5 MG / Olmesartan medoxomil 20 MG Oral Tablet"
         }
       ],
       "prescription": {
@@ -33599,7 +33599,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "6690-2",
-              "display": "Leukocytes [#/​volume] in Blood by Automated count"
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
             }
           ],
           "unit": "10*3/uL",
@@ -33614,7 +33614,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "789-8",
-              "display": "Erythrocytes [#/​volume] in Blood by Automated count"
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
             }
           ],
           "unit": "10*6/uL",
@@ -33629,7 +33629,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "718-7",
-              "display": "Hemoglobin [Mass/​volume] in Blood"
+              "display": "Hemoglobin [Mass/volume] in Blood"
             }
           ],
           "unit": "g/dL",
@@ -33690,7 +33690,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "786-4",
-              "display": "MCHC [Mass/​volume] by Automated count"
+              "display": "MCHC [Mass/volume] by Automated count"
             }
           ],
           "range": {
@@ -33720,7 +33720,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "777-3",
-              "display": "Platelets [#/​volume] in Blood by Automated count"
+              "display": "Platelets [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -33778,7 +33778,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "6690-2",
-              "display": "Leukocytes [#/​volume] in Blood by Automated count"
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
             }
           ],
           "unit": "10*3/uL",
@@ -33793,7 +33793,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "789-8",
-              "display": "Erythrocytes [#/​volume] in Blood by Automated count"
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
             }
           ],
           "unit": "10*6/uL",
@@ -33808,7 +33808,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "718-7",
-              "display": "Hemoglobin [Mass/​volume] in Blood"
+              "display": "Hemoglobin [Mass/volume] in Blood"
             }
           ],
           "unit": "g/dL",
@@ -33869,7 +33869,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "786-4",
-              "display": "MCHC [Mass/​volume] by Automated count"
+              "display": "MCHC [Mass/volume] by Automated count"
             }
           ],
           "range": {
@@ -33899,7 +33899,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "777-3",
-              "display": "Platelets [#/​volume] in Blood by Automated count"
+              "display": "Platelets [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -34201,8 +34201,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "567645",
-          "display": "predniSONE 2.5 MG [Deltasone]"
+          "code": "312615",
+          "display": "predniSONE 20 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Diagnosis_Encounter"
@@ -34292,8 +34292,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "835900",
-          "display": "cycloSPORINE, modified 100 MG [Neoral]"
+          "code": "241834",
+          "display": "cycloSPORINE, modified 100 MG Oral Capsule"
         }
       ],
       "direct_transition": "Flareup_Corticosteroid"
@@ -34310,8 +34310,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "567645",
-          "display": "predniSONE 2.5 MG [Deltasone]"
+          "code": "312615",
+          "display": "predniSONE 20 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Flareup_Encounter"
@@ -34348,130 +34348,6 @@ export default {"allergic_rhinitis":{
           "transition": "Corticosteroid_Treatment"
         }
       ]
-    }
-  }
-}
-,
-"mTBI":{
-  "name": "Veteran mild TBI ",
-  "remarks": [
-    "A blank module"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "veteran delay"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "veteran delay": {
-      "type": "Delay",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "transition": "Loss of Consciousness",
-              "distribution": 0.0094
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.9906
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "transition": "Terminal",
-              "distribution": 1
-            }
-          ]
-        }
-      ],
-      "range": {
-        "low": 18,
-        "high": 21,
-        "unit": "years"
-      }
-    },
-    "Loss of Consciousness": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "mTBI",
-      "target_encounter": "Wellness Encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 127295002,
-          "display": "Traumatic brain injury (disorder)"
-        }
-      ],
-      "direct_transition": "Wellness Encounter"
-    },
-    "Wellness Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "mTBI",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185345009,
-          "display": "Encounter for symptom (procedure)"
-        }
-      ],
-      "direct_transition": "end encounter",
-      "wellness": true
-    },
-    "end encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
-    }
-  }
-}
-,
-"med_rec":{
-  "name": "Medication Reconciliation",
-  "remarks": [
-    "This module will generate a documentation of current medications procedure at 45% of",
-    "wellness encounters. Through the Meaningful Use program, ONC is striving for",
-    "medication reconciliation at 50% of encounters. This assumes that we are not",
-    "at the goal level yet.",
-    "Source: https://www.healthit.gov/providers-professionals/achieve-meaningful-use/core-measures-2/medication-reconciliation"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Wellness_Encounter"
-    },
-    "Wellness_Encounter": {
-      "type": "Encounter",
-      "wellness": true,
-      "distributed_transition": [
-        {
-          "distribution": 0.45,
-          "transition": "Med_Rec"
-        },
-        {
-          "distribution": 0.55,
-          "transition": "Initial"
-        }
-      ]
-    },
-    "Med_Rec": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "430193006",
-          "display": "Medication Reconciliation (procedure)"
-        }
-      ],
-      "direct_transition": "Initial"
     }
   }
 }
@@ -35799,8 +35675,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "282464",
-          "display": "Acetaminophen 160 MG Oral Tablet"
+          "code": "313820",
+          "display": "Acetaminophen 160 MG Chewable Tablet"
         }
       ],
       "prescription": {
@@ -36067,6 +35943,48 @@ export default {"allergic_rhinitis":{
     },
     "Strong_Opioid_Terminal": {
       "type": "Terminal"
+    }
+  }
+}
+,
+"med_rec":{
+  "name": "Medication Reconciliation",
+  "remarks": [
+    "This module will generate a documentation of current medications procedure at 45% of",
+    "wellness encounters. Through the Meaningful Use program, ONC is striving for",
+    "medication reconciliation at 50% of encounters. This assumes that we are not",
+    "at the goal level yet.",
+    "Source: https://www.healthit.gov/providers-professionals/achieve-meaningful-use/core-measures-2/medication-reconciliation"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Wellness_Encounter"
+    },
+    "Wellness_Encounter": {
+      "type": "Encounter",
+      "wellness": true,
+      "distributed_transition": [
+        {
+          "distribution": 0.45,
+          "transition": "Med_Rec"
+        },
+        {
+          "distribution": 0.55,
+          "transition": "Initial"
+        }
+      ]
+    },
+    "Med_Rec": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "430193006",
+          "display": "Medication Reconciliation (procedure)"
+        }
+      ],
+      "direct_transition": "Initial"
     }
   }
 }
@@ -38517,7 +38435,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
             }
           ],
           "range": {
@@ -38644,7 +38562,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
             }
           ],
           "range": {
@@ -38771,7 +38689,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
             }
           ],
           "range": {
@@ -38898,7 +38816,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
             }
           ],
           "range": {
@@ -39025,7 +38943,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/​1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
             }
           ],
           "range": {
@@ -39116,7 +39034,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5792-7",
-              "display": "Glucose [Mass/​volume] in Urine by Test strip"
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
             }
           ],
           "unit": "mg/dL",
@@ -39147,7 +39065,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "20505-4",
-              "display": "Bilirubin.total [Mass/​volume] in Urine by Test strip"
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
             }
           ],
           "unit": "mg/dL",
@@ -39179,7 +39097,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5797-6",
-              "display": "Ketones [Mass/​volume] in Urine by Test strip"
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
             }
           ],
           "range": {
@@ -39240,7 +39158,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5804-0",
-              "display": "Protein [Mass/​volume] in Urine by Test strip"
+              "display": "Protein [Mass/volume] in Urine by Test strip"
             }
           ],
           "range": {
@@ -39395,7 +39313,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5792-7",
-              "display": "Glucose [Mass/​volume] in Urine by Test strip"
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
             }
           ],
           "unit": "mg/dL",
@@ -39426,7 +39344,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "20505-4",
-              "display": "Bilirubin.total [Mass/​volume] in Urine by Test strip"
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
             }
           ],
           "unit": "mg/dL",
@@ -39458,7 +39376,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5797-6",
-              "display": "Ketones [Mass/​volume] in Urine by Test strip"
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
             }
           ],
           "range": {
@@ -39519,7 +39437,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5804-0",
-              "display": "Protein [Mass/​volume] in Urine by Test strip"
+              "display": "Protein [Mass/volume] in Urine by Test strip"
             }
           ],
           "range": {
@@ -39674,7 +39592,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5792-7",
-              "display": "Glucose [Mass/​volume] in Urine by Test strip"
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
             }
           ],
           "unit": "mg/dL",
@@ -39705,7 +39623,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "20505-4",
-              "display": "Bilirubin.total [Mass/​volume] in Urine by Test strip"
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
             }
           ],
           "unit": "mg/dL",
@@ -39737,7 +39655,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5797-6",
-              "display": "Ketones [Mass/​volume] in Urine by Test strip"
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
             }
           ],
           "range": {
@@ -39798,7 +39716,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5804-0",
-              "display": "Protein [Mass/​volume] in Urine by Test strip"
+              "display": "Protein [Mass/volume] in Urine by Test strip"
             }
           ],
           "range": {
@@ -39953,7 +39871,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5792-7",
-              "display": "Glucose [Mass/​volume] in Urine by Test strip"
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
             }
           ],
           "unit": "mg/dL",
@@ -39984,7 +39902,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "20505-4",
-              "display": "Bilirubin.total [Mass/​volume] in Urine by Test strip"
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
             }
           ],
           "unit": "mg/dL",
@@ -40016,7 +39934,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5797-6",
-              "display": "Ketones [Mass/​volume] in Urine by Test strip"
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
             }
           ],
           "range": {
@@ -40077,7 +39995,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "5804-0",
-              "display": "Protein [Mass/​volume] in Urine by Test strip"
+              "display": "Protein [Mass/volume] in Urine by Test strip"
             }
           ],
           "range": {
@@ -41355,6 +41273,88 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"mTBI":{
+  "name": "Veteran mild TBI ",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "veteran delay"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "veteran delay": {
+      "type": "Delay",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Loss of Consciousness",
+              "distribution": 0.0094
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9906
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Terminal",
+              "distribution": 1
+            }
+          ]
+        }
+      ],
+      "range": {
+        "low": 18,
+        "high": 21,
+        "unit": "years"
+      }
+    },
+    "Loss of Consciousness": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "mTBI",
+      "target_encounter": "Wellness Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 127295002,
+          "display": "Traumatic brain injury (disorder)"
+        }
+      ],
+      "direct_transition": "Wellness Encounter"
+    },
+    "Wellness Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "mTBI",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom (procedure)"
+        }
+      ],
+      "direct_transition": "end encounter",
+      "wellness": true
+    },
+    "end encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    }
+  }
+}
+,
 "opioid_addiction":{
   "name": "Opioid Addiction",
   "remarks": [
@@ -41551,8 +41551,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1310197",
-          "display": "Acetaminophen 300 MG / HYDROcodone Bitartrate 5 MG [Vicodin]"
+          "code": "856987",
+          "display": "Acetaminophen 300 MG / HYDROcodone Bitartrate 5 MG Oral Tablet"
         }
       ],
       "direct_transition": "End_Directed_Use_Encounter"
@@ -45388,8 +45388,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "105586",
-          "display": "Methotrexate 10 MG Oral Tablet"
+          "code": "105585",
+          "display": "Methotrexate 2.5 MG Oral Tablet"
         }
       ],
       "direct_transition": "Encounter_Ends_After_DMARD"
@@ -45435,8 +45435,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "567645",
-          "display": "predniSONE 2.5 MG [Deltasone]"
+          "code": "312615",
+          "display": "predniSONE 20 MG Oral Tablet"
         }
       ],
       "direct_transition": "Encounter_Ends_After_Corticosteroids"
@@ -45594,7 +45594,7 @@ export default {"allergic_rhinitis":{
         " INCIDENCE                                                            ",
         "======================================================================",
         "Initial breakdown by gender and race. For simplicity, grouping race into only 3 categories: ",
-        "white, hispanic, and the rest. For the rest, I averaged the incidence rates: (6.3 + 5.9 + 5.5) / 3 = 5.9 ",
+        "white, native, and the rest. For the rest, I averaged the incidence rates: (6.3 + 5.9 + 5.5) / 3 = 5.9 ",
         "The assumption here is that all races have the same relative ratios of attempts to completions (12:1).",
         "Females ATTEMPT suicide 3x as often as males, but males complete 3.5x as often. If the death rate ",
         "is 12.93/100k and attempt rates are estimated at 12x that number, then the average ATTEMPT rates ",
@@ -48013,8 +48013,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 4337,
-          "display": "Fentanyl"
+          "code": "1735006",
+          "display": "10 ML Fentanyl 0.05 MG/ML Injection"
         }
       ],
       "direct_transition": "Fentanyl_End",
@@ -48050,8 +48050,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 73032,
-          "display": "Remifentanil"
+          "code": "1729584",
+          "display": "remifentanil 2 MG Injection"
         }
       ],
       "direct_transition": "Remifentanil_End",
@@ -48062,8 +48062,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 480,
-          "display": "Alfentanil"
+          "code": "1723208",
+          "display": "10 ML Alfentanil 0.5 MG/ML Injection"
         }
       ],
       "direct_transition": "Alfentanil_End",
@@ -48074,8 +48074,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 56795,
-          "display": "Sufentanil"
+          "code": "1809104",
+          "display": "5 ML SUFentanil 0.05 MG/ML Injection"
         }
       ],
       "direct_transition": "Sufentanil_End",
@@ -48121,8 +48121,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 200252,
-          "display": "desflurane 990 MG/ML Inhalant Solution"
+          "code": "562366",
+          "display": "desflurane 1000 MG/ML Inhalation Solution"
         }
       ],
       "direct_transition": "Desflurane_End",
@@ -50503,6 +50503,106 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"veterans/veteran_suicide_probabilities":{
+  "name": "Veteran Suicide Probabilities",
+  "remarks": [
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Veteran check"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Veteran": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "PTSD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ptsd",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "SUD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "opioid_addiction",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "MDD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "mdd",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Baseline"
+        }
+      ]
+    },
+    "PTSD": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.006,
+      "remarks": [
+        "50 deaths / 100k * 12 attempts / completion == 600 attempts / 100k == .006 == .6 % lifetime probability"
+      ]
+    },
+    "SUD": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.0144,
+      "remarks": [
+        "120 deaths / 100k * 12 attempts / completion == 1440 attempts / 100k == .0144 == 1.44 % lifetime probability"
+      ]
+    },
+    "Veteran check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          },
+          "transition": "Veteran"
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "MDD": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.0072,
+      "remarks": [
+        "60 deaths / 100k * 12 attempts / completion == 720 attempts / 100k == .0072 == .72 % lifetime probability"
+      ]
+    },
+    "Baseline": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.003072,
+      "remarks": [
+        "25.6 deaths / 100k * 12 attempts / completion == 307.2 attempts / 100k == .003072 == .3 % lifetime probability"
+      ]
+    }
+  }
+}
+,
 "veteran_hyperlipidemia":{
   "name": "Veteran Hyperlipidemia",
   "remarks": [
@@ -50715,8 +50815,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 316672,
-          "display": "Simvistatin 10 MG"
+          "code": 314231,
+          "display": "Simvastatin 10 MG Oral Tablet"
         }
       ],
       "direct_transition": "followup encounter end",
@@ -51320,8 +51420,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 316672,
-          "display": "Simvistatin 10 MG"
+          "code": 314231,
+          "display": "Simvastatin 10 MG Oral Tablet"
         }
       ],
       "reason": "hyperlipidemia",
@@ -52845,8 +52945,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 406022,
-          "display": "Fluoxetine 25MG"
+          "code": 310385,
+          "display": "FLUoxetine 20 MG Oral Capsule"
         }
       ],
       "assign_to_attribute": "ssri",
@@ -54163,7 +54263,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "6690-2",
-              "display": "Leukocytes [#/​volume] in Blood by Automated count"
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
             }
           ],
           "unit": "10*3/uL",
@@ -54178,7 +54278,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "789-8",
-              "display": "Erythrocytes [#/​volume] in Blood by Automated count"
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
             }
           ],
           "unit": "10*6/uL",
@@ -54193,7 +54293,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "718-7",
-              "display": "Hemoglobin [Mass/​volume] in Blood"
+              "display": "Hemoglobin [Mass/volume] in Blood"
             }
           ],
           "unit": "g/dL",
@@ -54254,7 +54354,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "786-4",
-              "display": "MCHC [Mass/​volume] by Automated count"
+              "display": "MCHC [Mass/volume] by Automated count"
             }
           ],
           "range": {
@@ -54284,7 +54384,7 @@ export default {"allergic_rhinitis":{
             {
               "system": "LOINC",
               "code": "777-3",
-              "display": "Platelets [#/​volume] in Blood by Automated count"
+              "display": "Platelets [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -54798,8 +54898,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 328670,
-          "display": "Sertraline 100MG"
+          "code": 312938,
+          "display": "Sertraline 100 MG Oral Tablet"
         }
       ],
       "assign_to_attribute": "SSRI",
@@ -56515,106 +56615,6 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Wellness Encounter",
       "remarks": [
         "Added this state just so that only one path goes back up to the top"
-      ]
-    }
-  }
-}
-,
-"veterans/veteran_suicide_probabilities":{
-  "name": "Veteran Suicide Probabilities",
-  "remarks": [
-    ""
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Veteran check"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Veteran": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "PTSD",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ptsd",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "SUD",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "opioid_addiction",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "MDD",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "mdd",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "Baseline"
-        }
-      ]
-    },
-    "PTSD": {
-      "type": "SetAttribute",
-      "attribute": "probability_of_suicide",
-      "direct_transition": "Terminal",
-      "value": 0.006,
-      "remarks": [
-        "50 deaths / 100k * 12 attempts / completion == 600 attempts / 100k == .006 == .6 % lifetime probability"
-      ]
-    },
-    "SUD": {
-      "type": "SetAttribute",
-      "attribute": "probability_of_suicide",
-      "direct_transition": "Terminal",
-      "value": 0.0144,
-      "remarks": [
-        "120 deaths / 100k * 12 attempts / completion == 1440 attempts / 100k == .0144 == 1.44 % lifetime probability"
-      ]
-    },
-    "Veteran check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          },
-          "transition": "Veteran"
-        },
-        {
-          "transition": "Terminal"
-        }
-      ]
-    },
-    "MDD": {
-      "type": "SetAttribute",
-      "attribute": "probability_of_suicide",
-      "direct_transition": "Terminal",
-      "value": 0.0072,
-      "remarks": [
-        "60 deaths / 100k * 12 attempts / completion == 720 attempts / 100k == .0072 == .72 % lifetime probability"
-      ]
-    },
-    "Baseline": {
-      "type": "SetAttribute",
-      "attribute": "probability_of_suicide",
-      "direct_transition": "Terminal",
-      "value": 0.003072,
-      "remarks": [
-        "25.6 deaths / 100k * 12 attempts / completion == 307.2 attempts / 100k == .003072 == .3 % lifetime probability"
       ]
     }
   }
