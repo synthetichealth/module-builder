@@ -149,7 +149,7 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
         let out_transitions = ''
         state.table_transition.transitions.forEach( (t, i) => {
         let transitionClassName = className
-        let pct = t.distribution * 100
+        let pct = t.default_probability * 100
         let distLabel = `${pct}%`
         if(module.states[t.transition]){
           if(selectedState && t.transition === selectedState.name && selectedState.name !== name){

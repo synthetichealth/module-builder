@@ -29,13 +29,22 @@ class TableTransition extends Component<Props> {
 
   render() {
     let currentValue = [];
-    let cv;
+    let lookupTableName;
     if (this.props.transition) {
       currentValue = this.props.transition.transition;
-      cv = this.props.transition.lookup_table_name;
+      lookupTableName = this.props.transition.lookup_table_name_ModuleBuilder;
     }
     if(!this.props.transition) {
       return null;
+    }
+    
+    // update lookup table name for each transition
+    for (let i = 0; i<this.props.transition.transition.length; i++)
+    {
+      if (this.props.transition.transition[i].lookup_table_name != lookupTableName)
+      {
+        this.props.onChange(`transitions[${i}].lookup_table_name`)({val: lookupTableName});
+      }
     }
 
     let displayTable;
@@ -65,6 +74,10 @@ class TableTransition extends Component<Props> {
             <br/>
             {this.renderDistribution(t.default_probability, i)}
             <br />
+            {/* <label>Lookup Table: 
+              <RIEInput className='editable-text' value={t.lookup_table_name} propName='lookup_table_name' change={this.props.onChange(`transitions[${i}].lookup_table_name`)} />
+            </label>
+            <br/> */}
             <a className='editable-text delete-button' onClick={() => this.props.onChange(`transitions[${i}]`)({val: {id: null}})}>remove</a>
           </div>
         })}
@@ -74,7 +87,7 @@ class TableTransition extends Component<Props> {
         </label>
         <div>
           <label>Lookup Table: 
-            <RIEInput className='editable-text' value={cv} propName='lookup_table_name' change={this.props.onChange(`lookup_table_name`)} />
+            <RIEInput className='editable-text' value={lookupTableName} propName='lookup_table_name_ModuleBuilder' change={this.props.onChange(`lookup_table_name_ModuleBuilder`)} />
           </label>
           <br/>
         <button onClick={() => this.displayTableView()}>{this.state.buttonText}</button>

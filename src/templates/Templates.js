@@ -348,8 +348,8 @@ const TransitionTemplates = {
   Table: {
     type: 'Table',
     lookuptable: 'age,Initial,Terminal\n0-50,.1,.9\n51-140,.4,.6',
-    lookup_table_name: 'file.csv', 
-    transitions:[{transition: 'Initial', default_probability: 1.0}]
+    lookup_table_name_ModuleBuilder: 'file.csv', 
+    transitions:[{transition: 'Initial', default_probability: 1.0, lookup_table_name: 'table.csv'}]
   }
 }
 
