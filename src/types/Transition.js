@@ -41,6 +41,8 @@ export type ComplexTransition = {
 export type TableTransition = {
   type: 'Table',
   lookup_table_name_ModuleBuilder: string,
+  parsedData: [],
+  viewTable: Boolean,
   lookuptable: string,
   transition: [
     {

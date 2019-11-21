@@ -5,12 +5,13 @@ import _ from 'lodash';
 import Papa from 'papaparse'
 
 
-import type { TableTransition as TableTransitionType } from '../../types/Transition';
+//import type { TableTransition as TableTransitionType } from '../../types/Transition';
 import { getTemplate } from '../../templates/Templates';
-import type { State } from '../../types/State';
+//import type { State } from '../../types/State';
 import './Transition.css';
 import Table from './Table'
 import './TableTransition.css';
+import { isNumber } from 'util';
 
 
 type Props = {
@@ -21,20 +22,13 @@ type Props = {
 
 class TableTransition extends Component<Props> {
 
-  state = {
-    parsedData : '',
-    display : false,
-    buttonText : 'Display Read-Only Table'
-  } 
-
   render() {
     let currentValue = [];
     let lookupTableName;
     if (this.props.transition) {
       currentValue = this.props.transition.transition;
       lookupTableName = this.props.transition.lookup_table_name_ModuleBuilder;
-    }
-    if(!this.props.transition) {
+    } else {
       return null;
     }
     
@@ -47,14 +41,27 @@ class TableTransition extends Component<Props> {
       }
     }
 
+    let buttonText;
     let displayTable;
-
-    if (this.state.display){
+    
+    if (this.props.transition.viewTable && this.props.transition.parsedData.length > 0 && Object.keys(this.props.transition.parsedData[0]).length > 0){
+      buttonText = 'Display Editable Text Area'
+      console.log('keys')
+      console.log(Object.keys(this.props.transition.parsedData[0]))
+      console.log('rows')
+      console.log(this.props.transition.parsedData)
       displayTable = 
         <div className="TableTransition-table">
-          <Table columnHeaders={Object.keys(this.state.parsedData[0])} initialRows={this.state.parsedData} />
+          <Table columnHeaders={Object.keys(this.props.transition.parsedData[0])} rows={this.props.transition.parsedData} />
         </div>
     }else{
+      buttonText = 'Display Read Only Table'
+      if (this.props.transition.lookuptable == ''){
+        this.props.onChange(`lookuptable`)({val: 'Enter table'});
+      }
+      if (isNumber(this.props.transition.lookuptable)){
+        this.props.transition.lookuptable = this.props.transition.lookuptable.toString();
+      }
       displayTable = 
         <div className='TableTransition-remarks'>
           <RIETextArea value={this.props.transition.lookuptable} propName='lookuptable' change={this.props.onChange(`lookuptable`)}/>
@@ -74,15 +81,12 @@ class TableTransition extends Component<Props> {
             <br/>
             {this.renderDistribution(t.default_probability, i)}
             <br />
-            {/* <label>Lookup Table: 
-              <RIEInput className='editable-text' value={t.lookup_table_name} propName='lookup_table_name' change={this.props.onChange(`transitions[${i}].lookup_table_name`)} />
-            </label>
-            <br/> */}
             <a className='editable-text delete-button' onClick={() => this.props.onChange(`transitions[${i}]`)({val: {id: null}})}>remove</a>
           </div>
         })}
         <a className='editable-text add-button' onClick={() => this.props.onChange(`transitions[${currentValue.length}]`)({val: {id: getTemplate('Transition.Table.transitions[0]')}})}>+</a>
         <br/>
+        {this.renderWarning()}
         <br/>
         </label>
         <div>
@@ -90,11 +94,9 @@ class TableTransition extends Component<Props> {
             <RIEInput className='editable-text' value={lookupTableName} propName='lookup_table_name_ModuleBuilder' change={this.props.onChange(`lookup_table_name_ModuleBuilder`)} />
           </label>
           <br/>
-        <button onClick={() => this.displayTableView()}>{this.state.buttonText}</button>
-        <br/>
+         <button onClick={() => this.displayTableView()}>{buttonText}</button>
+        <br/> 
         {displayTable}
-        <br/>
-        {this.renderWarning()}
       </div>
       </div>
     );
@@ -137,6 +139,10 @@ class TableTransition extends Component<Props> {
 
   parseTextArea(data) {
     let d;
+    if (isNumber(data))
+    {
+      data  = data.toString();
+    }
     Papa.parse(data, {
     header: true,
     complete: function(results) {
@@ -144,23 +150,17 @@ class TableTransition extends Component<Props> {
     }
     });
     
-    var i;
-    for (i=0; i<d.data.length; i++)
+    for (let i=0; i<d.data.length; i++)
     {
         d.data[i]["originalIndex"] = i;
     }
-    this.setState({parsedData : d.data});
+    
+    this.props.onChange('parsedData')({val:{id: d.data}});
   }    
 
   displayTableView() {        
-    console.log('in display table view')
-    if (this.state.display){
-      this.setState({buttonText: 'Display Read-Only Table'});
-    }else {
-      this.setState({buttonText: 'Display Editable Text Area'});
-    }
     this.parseTextArea(this.props.transition.lookuptable);
-    this.setState({display: !this.state.display});
+    this.props.onChange('viewTable')({val: !this.props.transition.viewTable})
   }
 }
 

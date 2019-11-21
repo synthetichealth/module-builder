@@ -85,7 +85,14 @@ export function extractTableTransition(data: any): TableTransition {
       lookup_table_name: d.lookup_table_name,
     };
   });
-  return {type: 'Table', lookuptable: data.lookuptable, lookup_table_name_ModuleBuilder: data.lookup_table_name_ModuleBuilder, transition};
+  return { 
+    type: 'Table', 
+    lookuptable: data.lookuptable, 
+    parsedData: data.parsedData, 
+    viewTable: data.viewTable,
+    lookup_table_name_ModuleBuilder: data.lookup_table_name_ModuleBuilder, 
+    transition 
+  };
 }
 
 export function extractRemarks(data: any):string[] {

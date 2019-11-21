@@ -21,11 +21,12 @@ import ReactDataGrid from "react-data-grid";
                 return a['originalIndex'] > b['originalIndex'] ? 1 : -1;                
             }
         };
+
         return [...rows].sort(comparer);
     };
     
-    function Table({columnHeaders, initialRows }) {
-        const [rows, setRows] = useState(initialRows);
+    function Table({columnHeaders, rows }) {
+        //const [rows, setRows] = useState(initialRows);
         const columns = [];
         
         columnHeaders.forEach(function(item){
@@ -37,7 +38,7 @@ import ReactDataGrid from "react-data-grid";
                 key: str,
                 name: str,
                 //editable: true,
-                sortable: true,
+                //sortable: true,
                 width: 180,
                 //resizable: true
             }
@@ -55,9 +56,9 @@ import ReactDataGrid from "react-data-grid";
             // onColumnResize={(idx, width) =>
             //     console.log(`Column ${idx} has been resized to ${width}`)
             //   }
-            onGridSort={(sortColumn, sortDirection) =>
-                setRows(sortRows(sortColumn, sortDirection))
-            }
+            // onGridSort={(sortColumn, sortDirection) =>
+            //     SetRows(sortRows(sortColumn, sortDirection))
+            // }
             />
         );
     }

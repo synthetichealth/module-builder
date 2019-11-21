@@ -8,3 +8,8 @@
   height: 500px;
   font-size: .8em;
 }
+
+.Download label {
+  color: red;
+  font-size: .7em;
+}

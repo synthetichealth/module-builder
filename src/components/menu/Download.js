@@ -28,7 +28,6 @@ class Download extends Component {
     const nameTextLength = 35;
     const tableTextLenth = 15;
 
-    debugger;
     while ( restOfFile.search("lookup_table_name_ModuleBuilder") != -1)
     {
       let nameIndex = restOfFile.search("lookup_table_name_ModuleBuilder");
@@ -41,7 +40,7 @@ class Download extends Component {
       let endTableIndex = tempFile.search('\"');
       let table = tempFile.substr(0,endTableIndex);
       this.downloadCsv(fileName, table)
-      let removeTable = "        \"lookuptable\": \""+table+"\",\n        \"lookup_table_name_ModuleBuilder\": \""+fileName+"\",\n"
+      let removeTable = "       \""+restOfFile.substr(tableIndex, (nameIndex+nameTextLength+endNameIndex)-tableIndex)+"\",\n";
       returnFile = returnFile.replace(removeTable,'')
       restOfFile = restOfFile.substr(nameIndex+nameTextLength+endNameIndex);
     }
@@ -51,8 +50,12 @@ class Download extends Component {
   }
 
   downloadCsv(filename, data){
-      var element = document.createElement('a');
-      element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(data));
+      // the \n are getting encoded to \ + n. replace that with a line break
+      data = encodeURIComponent(data);
+      data = data.replace(/%5Cn/g, "%0D%0A"); 
+
+      var element = document.createElement('a');      
+      element.setAttribute('href', 'data:text/csv;charset=utf-8,' + data);
       element.setAttribute('download', filename);
 
       element.style.display = 'none';
@@ -102,6 +105,7 @@ class Download extends Component {
               <textarea ref="codeInput" disabled value={this.prepareJSON()} />
               </div>
               <div className="modal-footer">
+                <label> NOTE: Table Transitions will appear slightly different in the downloaded file</label>
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onDownload}>Download</button>
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.props.onHide}>Close</button>
               </div>
