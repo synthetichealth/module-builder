@@ -26,6 +26,7 @@ class TableTransition extends Component<Props> {
     let currentValue = [];
     let lookupTableName;
     if (this.props.transition) {
+      this.fixMissingValues();
       currentValue = this.props.transition.transition;
       lookupTableName = this.props.transition.lookup_table_name_ModuleBuilder;
     } else {
@@ -46,10 +47,6 @@ class TableTransition extends Component<Props> {
     
     if (this.props.transition.viewTable && this.props.transition.parsedData.length > 0 && Object.keys(this.props.transition.parsedData[0]).length > 0){
       buttonText = 'Display Editable Text Area'
-      console.log('keys')
-      console.log(Object.keys(this.props.transition.parsedData[0]))
-      console.log('rows')
-      console.log(this.props.transition.parsedData)
       displayTable = 
         <div className="TableTransition-table">
           <Table columnHeaders={Object.keys(this.props.transition.parsedData[0])} rows={this.props.transition.parsedData} />
@@ -58,8 +55,7 @@ class TableTransition extends Component<Props> {
       buttonText = 'Display Read Only Table'
       if (this.props.transition.lookuptable == ''){
         this.props.onChange(`lookuptable`)({val: 'Enter table'});
-      }
-      if (isNumber(this.props.transition.lookuptable)){
+      }else if (isNumber(this.props.transition.lookuptable)){
         this.props.transition.lookuptable = this.props.transition.lookuptable.toString();
       }
       displayTable = 
@@ -161,6 +157,29 @@ class TableTransition extends Component<Props> {
   displayTableView() {        
     this.parseTextArea(this.props.transition.lookuptable);
     this.props.onChange('viewTable')({val: !this.props.transition.viewTable})
+  }
+
+  fixMissingValues(){
+    if (this.props.transition.lookuptable == undefined)
+    {
+      this.props.transition.lookuptable = '';
+    }
+    if (this.props.transition.parsedData == undefined)
+    {
+      this.props.transition.parsedData = [];
+    }
+    if (this.props.transition.viewTable == undefined)
+    {
+      this.props.transition.viewTable = false;
+    }
+    if (this.props.transition.lookup_table_name_ModuleBuilder == undefined)
+    {
+      if (this.props.transition.transition[0].lookup_table_name != ''){
+        this.props.transition.lookup_table_name_ModuleBuilder = this.props.transition.transition[0].lookup_table_name;
+      }else{
+        this.props.transition.lookup_table_name_ModuleBuilder = '';
+      }
+    }
   }
 }
 

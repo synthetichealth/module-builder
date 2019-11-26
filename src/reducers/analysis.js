@@ -100,6 +100,37 @@ const placeholderCodeWarnings = (module) => {
 
 }
 
+const tableTransitionWarnings = (module) => {
+  
+  const warnings = [];
+  
+  Object.keys(module.states).forEach(stateName => {
+    let state = module.states[stateName];
+
+    // find table transitions and check table data
+    if (state.table_transition !== undefined){
+      let message = '';
+      if(state.table_transition.lookup_table_name_ModuleBuilder === ""){
+        message = 'Invalid filename ';
+      }
+      if (state.table_transition.lookuptable === "Enter table"){
+        if (message === ''){ 
+          message = 'Invalid data ';
+        } else {
+          message += 'and invalid data '
+        }
+
+      }
+      if (message !== ''){
+        message += 'for table in ';
+        warnings.push({stateName, message: message + stateName + '. '});
+      }        
+    }
+  });
+
+  return warnings;
+}
+
 const stateCollisionWarnings = (module, globalCodes) => {
   const equivalentStates = [
    ['MedicationOrder', 'MedicationEnd'],
@@ -286,7 +317,8 @@ export default (state = initialState, action) => {
 
       newState.warnings = [...stateCollisionWarnings(action.data.module, newState.libraryModuleCodes),
                            ...orphanStateWarnings(action.data.module),
-                           ...placeholderCodeWarnings(action.data.module)];
+                           ...placeholderCodeWarnings(action.data.module),
+                           ...tableTransitionWarnings(action.data.module)];
 
       newState.relatedModules = [...relatedBySubmodule(action.data.moduleKey, action.data.module, newState.libraryRelatedModules)];
 

@@ -10,43 +10,33 @@ class Download extends Component {
     super(props)
     this.onDownload = this.onDownload.bind(this)
   }
-
+  
   onDownload(){
-    let blob = new Blob([this.extractTables(this.refs.codeInput.value)], {
+    let blob = new Blob([this.refs.codeInput.value], {
        type: "text/plain;charset=utf-8"
     });
+
+    this.downloadCsvs();
 
     let filename = this.props.module.name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
 
     FileSaver.saveAs(blob, `${filename}.json`, true); // true = no BOM, see https://github.com/eligrey/FileSaver.js/issues/160
   }
 
-  extractTables(data){
+  downloadCsvs(){
     
-    let restOfFile = data;
-    let returnFile = data;
-    const nameTextLength = 35;
-    const tableTextLenth = 15;
+    let module = _.cloneDeep(this.props.module);
 
-    while ( restOfFile.search("lookup_table_name_ModuleBuilder") != -1)
-    {
-      let nameIndex = restOfFile.search("lookup_table_name_ModuleBuilder");
-      let tempFile = restOfFile.substr(nameIndex+nameTextLength);
-      let endNameIndex = tempFile.search("\"");
-      let fileName = tempFile.substr(0,endNameIndex);
+    // We currently save name in the state for convenience
+    // In lieu of a better solution, we will just remove it here
+    Object.keys(module.states).map(k => module.states[k]).forEach( s => {
 
-      let tableIndex = restOfFile.search("lookuptable")
-      tempFile = restOfFile.substr(tableIndex+tableTextLenth);
-      let endTableIndex = tempFile.search('\"');
-      let table = tempFile.substr(0,endTableIndex);
-      this.downloadCsv(fileName, table)
-      let removeTable = "       \""+restOfFile.substr(tableIndex, (nameIndex+nameTextLength+endNameIndex)-tableIndex)+"\",\n";
-      returnFile = returnFile.replace(removeTable,'')
-      restOfFile = restOfFile.substr(nameIndex+nameTextLength+endNameIndex);
-    }
-    
+      // find table transitions and download them
+      if (s.table_transition !== undefined){
+        this.downloadCsv(s.table_transition.lookup_table_name_ModuleBuilder, s.table_transition.lookuptable);
+      }
 
-    return returnFile;
+    })
   }
 
   downloadCsv(filename, data){
@@ -75,6 +65,15 @@ class Download extends Component {
       if(s['name'] !== undefined){
         delete s.name;
       }
+
+      // find table transitions and delete state data
+      if (s.table_transition !== undefined){
+        delete s.table_transition.lookup_table_name_ModuleBuilder;
+        delete s.table_transition.lookuptable;
+        delete s.table_transition.parsedData;
+        delete s.table_transition.viewTable;
+      }
+
     })
 
     return JSON.stringify(module, null, 2)

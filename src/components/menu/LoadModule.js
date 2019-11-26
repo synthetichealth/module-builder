@@ -22,6 +22,29 @@ class LoadModule extends Component {
         throw new Error('Module must have at least one state.')
       }
 
+      let tableMessage =  ''
+
+      // need to get the tables for any table transition
+      for (var key in module.states)
+      {
+        if (module.states[key].table_transition != null)
+        { 
+          tableMessage += key.toString() + ' & '
+          
+          // put default data in for state of the table transition
+          module.states[key].table_transition.lookup_table_name_ModuleBuilder = module.states[key].table_transition.transitions[0].lookup_table_name;
+          module.states[key].table_transition.viewTable = false;
+          module.states[key].table_transition.parsedData = [];          
+          module.states[key].table_transition.lookuptable = '';
+        }
+      }
+
+      if (tableMessage.length > 0)
+      {
+        tableMessage = tableMessage.substr(0, tableMessage.length - 2);
+        // make a pop-up to tell the user to enter the table data
+        alert('Table Transition must be filled out in Module Builder for ' + tableMessage)
+      }
       // this will throw an error if the module is incomprehensible
       let dot = generateDOT(module);
 
