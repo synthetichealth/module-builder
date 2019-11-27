@@ -36,6 +36,7 @@ class LoadModule extends Component {
           module.states[key].table_transition.viewTable = false;
           module.states[key].table_transition.parsedData = [];          
           module.states[key].table_transition.lookuptable = '';
+          module.states[key].table_transition.tableErrors = false;
         }
       }
 

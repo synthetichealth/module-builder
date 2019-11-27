@@ -282,6 +282,9 @@ export default (state = initialState, action) => {
       else{
         _.unset(newState.modules, path);
         let parent = [...action.data.path].splice(0, action.data.path.length -1).join(".");
+        if (action.data.path[2] == 'table_transition'){
+         parent  += '.transitions'
+        }
         let newVal = _.get(newState.modules, parent);
         if(Array.isArray(newVal)) {
           _.set(newState.modules, parent, newVal.filter(x => x));
@@ -523,7 +526,7 @@ const fixStateReferences = (module, stateName, newName) => {
         }
       })
     } else if (state.table_transition){
-      state.table_transition.forEach( transition => {
+      state.table_transition.transitions.forEach( transition => {
         if(transition.transition === stateName){
           if(newName === null){
             delete transition.transition

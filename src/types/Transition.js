@@ -44,6 +44,7 @@ export type TableTransition = {
   parsedData: [],
   viewTable: Boolean,
   lookuptable: string,
+  tableErrors: Boolean,
   transition: [
     {
       default_probability: number,

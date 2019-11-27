@@ -103,7 +103,7 @@ const placeholderCodeWarnings = (module) => {
 const tableTransitionWarnings = (module) => {
   
   const warnings = [];
-  
+
   Object.keys(module.states).forEach(stateName => {
     let state = module.states[stateName];
 
@@ -113,14 +113,38 @@ const tableTransitionWarnings = (module) => {
       if(state.table_transition.lookup_table_name_ModuleBuilder === ""){
         message = 'Invalid filename ';
       }
-      if (state.table_transition.lookuptable === "Enter table"){
+      if (state.table_transition.lookuptable === "Enter table" || state.table_transition.tableErrors){
         if (message === ''){ 
           message = 'Invalid data ';
         } else {
           message += 'and invalid data '
         }
-
       }
+      // check the last X columns vs X transitions
+      if (!state.table_transition.tableErrors){
+        let t = [];
+        let originalIndex = 1;
+        if (state.table_transition.parsedData.length > 0){ 
+          t = Object.keys(state.table_transition.parsedData[0]);
+        }
+
+        for (let i = 0; i < state.table_transition.transitions.length; i++)
+        {
+          let a = state.table_transition.transitions[state.table_transition.transitions.length - i - 1].transition;
+          let b = t[t.length-i -1 -originalIndex];
+          if (a != b)
+          {
+            if (message === '')
+            {
+              message += 'Invalid columns (table data and transition\'s to state don\'t match) '
+            } else {
+              message += ' and invalid columns (table data and transition\'s to states don\'t match) '
+            }
+            break;
+          }
+        }
+      }
+
       if (message !== ''){
         message += 'for table in ';
         warnings.push({stateName, message: message + stateName + '. '});

@@ -44,15 +44,18 @@ class TableTransition extends Component<Props> {
 
     let buttonText;
     let displayTable;
+    let displayTableError;
     
-    if (this.props.transition.viewTable && this.props.transition.parsedData.length > 0 && Object.keys(this.props.transition.parsedData[0]).length > 0){
-      buttonText = 'Display Editable Text Area'
+    this.checkInput();
+
+    if (this.props.transition.viewTable && !this.props.transition.tableErrors){
+      buttonText = 'Display Editable Text Area';
       displayTable = 
         <div className="TableTransition-table">
           <Table columnHeaders={Object.keys(this.props.transition.parsedData[0])} rows={this.props.transition.parsedData} />
         </div>
     }else{
-      buttonText = 'Display Read Only Table'
+      buttonText = 'Display Read Only Table';
       if (this.props.transition.lookuptable == ''){
         this.props.onChange(`lookuptable`)({val: 'Enter table'});
       }else if (isNumber(this.props.transition.lookuptable)){
@@ -63,6 +66,13 @@ class TableTransition extends Component<Props> {
           <RIETextArea value={this.props.transition.lookuptable} propName='lookuptable' change={this.props.onChange(`lookuptable`)}/>
         </div>
     }
+    if (this.props.transition.tableErrors){
+      displayTableError= <label className='warning'>Invalid table data. The table must have a header row and be separated by commas.</label>
+    }else {
+      let msg = this.checkTable();
+      displayTableError = <label className='warning'>{msg}</label>
+    }
+
     let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
     return (
       <div>
@@ -77,7 +87,7 @@ class TableTransition extends Component<Props> {
             <br/>
             {this.renderDistribution(t.default_probability, i)}
             <br />
-            <a className='editable-text delete-button' onClick={() => this.props.onChange(`transitions[${i}]`)({val: {id: null}})}>remove</a>
+            <a className='editable-text delete-button' onClick={() => this.props.onChange(`transitions.[${i}]`)({val: {id: null}})}>remove</a>
           </div>
         })}
         <a className='editable-text add-button' onClick={() => this.props.onChange(`transitions[${currentValue.length}]`)({val: {id: getTemplate('Transition.Table.transitions[0]')}})}>+</a>
@@ -89,6 +99,8 @@ class TableTransition extends Component<Props> {
           <label>Lookup Table: 
             <RIEInput className='editable-text' value={lookupTableName} propName='lookup_table_name_ModuleBuilder' change={this.props.onChange(`lookup_table_name_ModuleBuilder`)} />
           </label>
+          <br/>
+          {displayTableError}
           <br/>
          <button onClick={() => this.displayTableView()}>{buttonText}</button>
         <br/> 
@@ -150,8 +162,11 @@ class TableTransition extends Component<Props> {
     {
         d.data[i]["originalIndex"] = i;
     }
-    
-    this.props.onChange('parsedData')({val:{id: d.data}});
+
+    // Only update if the data is different
+    if (JSON.stringify(this.props.transition.parsedData) !== JSON.stringify(d.data)){
+      this.props.onChange('parsedData')({val:{id: d.data}});
+    }
   }    
 
   displayTableView() {        
@@ -180,6 +195,50 @@ class TableTransition extends Component<Props> {
         this.props.transition.lookup_table_name_ModuleBuilder = '';
       }
     }
+    if (this.props.transition.tableErrors == undefined)
+    {
+      this.props.transition.tableErrors = false;
+    }
+  }
+
+  checkInput(){    
+    this.parseTextArea(this.props.transition.lookuptable);
+    let textOk = !(this.props.transition.lookuptable == 'Enter table' || this.props.transition.lookuptable == '')
+    let parseOk = (this.props.transition.parsedData.length > 0 && Object.keys(this.props.transition.parsedData[0]).length > 0)
+
+    if (textOk && parseOk && this.props.transition.tableErrors){      
+      this.props.onChange(`tableErrors`)({val: false});
+      this.props.transition.tableErrors = false;
+    } else if ((!textOk || !parseOk) && !this.props.transition.tableErrors) {   
+      this.props.onChange(`tableErrors`)({val: true});
+      this.props.transition.tableErrors = true;
+    }
+  }
+
+  checkTable(){
+    let message = ''
+    // check the last X columns vs X transitions
+    if (this.props.transition.tableErrors){
+      return message;
+    }
+    let t = [];
+    let originalIndex = 1;
+    if (this.props.transition.parsedData.length > 0){ 
+      t = Object.keys(this.props.transition.parsedData[0]);
+    }
+
+    for (let i = 0; i < this.props.transition.transition.length; i++)
+    {
+      let a = this.props.transition.transition[this.props.transition.transition.length - i - 1].transition;
+      let b = t[t.length-i -1 -originalIndex];
+      if (a != b)
+      {
+        message += 'Invalid columns (table data and transition\'s to state don\'t match) '
+        break;
+      }
+    }
+
+    return message;    
   }
 }
 

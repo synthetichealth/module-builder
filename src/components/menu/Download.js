@@ -72,6 +72,7 @@ class Download extends Component {
         delete s.table_transition.lookuptable;
         delete s.table_transition.parsedData;
         delete s.table_transition.viewTable;
+        delete s.table_transition.tableErrors;
       }
 
     })

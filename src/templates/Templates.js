@@ -350,7 +350,8 @@ const TransitionTemplates = {
     lookuptable: 'age,Initial,Terminal\n0-50,.1,.9\n51-140,.4,.6',
     parsedData: [{age: "0-50", Initial: ".1", Terminal: ".9", originalIndex: 0}, {age: "51-140", Initial: ".4", Terminal: ".6", originalIndex: 1}],
     viewTable: true,
-    lookup_table_name_ModuleBuilder: 'file.csv', 
+    lookup_table_name_ModuleBuilder: 'file.csv',
+    tableErrors: false, 
     transitions:[{transition: 'Initial', default_probability: 1.0, lookup_table_name: 'table.csv'}]
   }
 }
