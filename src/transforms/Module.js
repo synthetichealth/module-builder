@@ -88,10 +88,8 @@ export function extractTableTransition(data: any): TableTransition {
   return { 
     type: 'Table', 
     lookuptable: data.lookuptable, 
-    parsedData: data.parsedData, 
     viewTable: data.viewTable,
     lookup_table_name_ModuleBuilder: data.lookup_table_name_ModuleBuilder, 
-    tableErrors: data.tableErrors,
     transition 
   };
 }

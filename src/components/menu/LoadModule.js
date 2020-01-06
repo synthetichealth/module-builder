@@ -33,10 +33,8 @@ class LoadModule extends Component {
           
           // put default data in for state of the table transition
           module.states[key].table_transition.lookup_table_name_ModuleBuilder = module.states[key].table_transition.transitions[0].lookup_table_name;
-          module.states[key].table_transition.viewTable = false;
-          module.states[key].table_transition.parsedData = [];          
+          module.states[key].table_transition.viewTable = false;    
           module.states[key].table_transition.lookuptable = '';
-          module.states[key].table_transition.tableErrors = false;
         }
       }
 

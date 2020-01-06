@@ -32,27 +32,17 @@ class TableTransition extends Component<Props> {
     } else {
       return null;
     }
-    
-    // update lookup table name for each transition
-    for (let i = 0; i<this.props.transition.transition.length; i++)
-    {
-      if (this.props.transition.transition[i].lookup_table_name != lookupTableName)
-      {
-        this.props.onChange(`transitions[${i}].lookup_table_name`)({val: lookupTableName});
-      }
-    }
 
     let buttonText;
     let displayTable;
     let displayTableError;
     
-    this.checkInput();
-
-    if (this.props.transition.viewTable && !this.props.transition.tableErrors){
+    if (this.props.transition.viewTable && !this.doesDataHaveInputError()){
       buttonText = 'Display Editable Text Area';
+      let data = this.parseTextArea(this.props.transition.lookuptable);
       displayTable = 
         <div className="TableTransition-table">
-          <Table columnHeaders={Object.keys(this.props.transition.parsedData[0])} rows={this.props.transition.parsedData} />
+          <Table columnHeaders={Object.keys(data[0])} rows={data} />
         </div>
     }else{
       buttonText = 'Display Read Only Table';
@@ -66,7 +56,7 @@ class TableTransition extends Component<Props> {
           <RIETextArea value={this.props.transition.lookuptable} propName='lookuptable' change={this.props.onChange(`lookuptable`)}/>
         </div>
     }
-    if (this.props.transition.tableErrors){
+    if (this.doesDataHaveInputError()){
       displayTableError= <label className='warning'>Invalid table data. The table must have a header row and be separated by commas.</label>
     }else {
       let msg = this.checkTable();
@@ -157,31 +147,23 @@ class TableTransition extends Component<Props> {
         d=results;
     }
     });
-    
-    for (let i=0; i<d.data.length; i++)
-    {
-        d.data[i]["originalIndex"] = i;
-    }
 
-    // Only update if the data is different
-    if (JSON.stringify(this.props.transition.parsedData) !== JSON.stringify(d.data)){
-      this.props.onChange('parsedData')({val:{id: d.data}});
-    }
+    return d.data;
   }    
 
   displayTableView() {        
-    this.parseTextArea(this.props.transition.lookuptable);
-    this.props.onChange('viewTable')({val: !this.props.transition.viewTable})
+    // need to check if the table is correct and that it will be ok being displayed as a table before changing this to true
+    // otherwise the undo take an extra click
+    if (!this.doesDataHaveInputError())
+    {
+      this.props.onChange('viewTable')({val: !this.props.transition.viewTable})
+    }
   }
 
   fixMissingValues(){
     if (this.props.transition.lookuptable == undefined)
     {
       this.props.transition.lookuptable = '';
-    }
-    if (this.props.transition.parsedData == undefined)
-    {
-      this.props.transition.parsedData = [];
     }
     if (this.props.transition.viewTable == undefined)
     {
@@ -195,45 +177,38 @@ class TableTransition extends Component<Props> {
         this.props.transition.lookup_table_name_ModuleBuilder = '';
       }
     }
-    if (this.props.transition.tableErrors == undefined)
-    {
-      this.props.transition.tableErrors = false;
-    }
   }
 
-  checkInput(){    
-    this.parseTextArea(this.props.transition.lookuptable);
+  doesDataHaveInputError(){    
+    let data = this.parseTextArea(this.props.transition.lookuptable);
     let textOk = !(this.props.transition.lookuptable == 'Enter table' || this.props.transition.lookuptable == '')
-    let parseOk = (this.props.transition.parsedData.length > 0 && Object.keys(this.props.transition.parsedData[0]).length > 0)
-
-    if (textOk && parseOk && this.props.transition.tableErrors){      
-      this.props.onChange(`tableErrors`)({val: false});
-      this.props.transition.tableErrors = false;
-    } else if ((!textOk || !parseOk) && !this.props.transition.tableErrors) {   
-      this.props.onChange(`tableErrors`)({val: true});
-      this.props.transition.tableErrors = true;
-    }
+    let parseOk = (data.length > 0 && Object.keys(data[0]).length > 0)
+    if (textOk && parseOk ){
+        return false;
+      } else {
+        return true;
+      } 
   }
 
   checkTable(){
     let message = ''
     // check the last X columns vs X transitions
-    if (this.props.transition.tableErrors){
+    if (this.doesDataHaveInputError()){
       return message;
     }
     let t = [];
-    let originalIndex = 1;
-    if (this.props.transition.parsedData.length > 0){ 
-      t = Object.keys(this.props.transition.parsedData[0]);
+    let data = this.parseTextArea(this.props.transition.lookuptable);
+    if (data.length > 0){ 
+      t = Object.keys(data[0]);
     }
 
     for (let i = 0; i < this.props.transition.transition.length; i++)
     {
       let a = this.props.transition.transition[this.props.transition.transition.length - i - 1].transition;
-      let b = t[t.length-i -1 -originalIndex];
+      let b = t[t.length-i -1];
       if (a != b)
       {
-        message += 'Invalid columns (table data and transition\'s to state don\'t match) '
+        message += 'Invalid columns (table data and transitions to state don\'t match) '
         break;
       }
     }

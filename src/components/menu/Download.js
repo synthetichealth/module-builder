@@ -68,11 +68,14 @@ class Download extends Component {
 
       // find table transitions and delete state data
       if (s.table_transition !== undefined){
+        let name = s.table_transition.lookup_table_name_ModuleBuilder;
+        s.table_transition.transitions.forEach( t => 
+          {
+            t.lookup_table_name = name;
+          })
         delete s.table_transition.lookup_table_name_ModuleBuilder;
         delete s.table_transition.lookuptable;
-        delete s.table_transition.parsedData;
         delete s.table_transition.viewTable;
-        delete s.table_transition.tableErrors;
       }
 
     })
@@ -105,7 +108,6 @@ class Download extends Component {
               <textarea ref="codeInput" disabled value={this.prepareJSON()} />
               </div>
               <div className="modal-footer">
-                <label> NOTE: Table Transitions will appear slightly different in the downloaded file</label>
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onDownload}>Download</button>
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.props.onHide}>Close</button>
               </div>

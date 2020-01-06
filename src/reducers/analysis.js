@@ -1,5 +1,8 @@
 import _ from 'lodash'
 import { getTemplate } from '../templates/Templates'
+import Papa from 'papaparse'
+import { isNumber } from 'util';
+import { stat } from 'fs';
 
 const initialState = {
   libraryModuleCodes: {}, // list types of nodes
@@ -113,7 +116,7 @@ const tableTransitionWarnings = (module) => {
       if(state.table_transition.lookup_table_name_ModuleBuilder === ""){
         message = 'Invalid filename ';
       }
-      if (state.table_transition.lookuptable === "Enter table" || state.table_transition.tableErrors){
+      if (state.table_transition.lookuptable === "Enter table" || tableHasError(state.table_transition.lookuptable) ) { 
         if (message === ''){ 
           message = 'Invalid data ';
         } else {
@@ -121,24 +124,24 @@ const tableTransitionWarnings = (module) => {
         }
       }
       // check the last X columns vs X transitions
-      if (!state.table_transition.tableErrors){
+      if (!tableHasError(state.table_transition.lookuptable)){
         let t = [];
-        let originalIndex = 1;
-        if (state.table_transition.parsedData.length > 0){ 
-          t = Object.keys(state.table_transition.parsedData[0]);
+        let data = parseLookupTable(state.table_transition.lookuptable);
+        if (data.length > 0){ 
+          t = Object.keys(data[0]);
         }
 
         for (let i = 0; i < state.table_transition.transitions.length; i++)
         {
           let a = state.table_transition.transitions[state.table_transition.transitions.length - i - 1].transition;
-          let b = t[t.length-i -1 -originalIndex];
+          let b = t[t.length-i -1];
           if (a != b)
           {
             if (message === '')
             {
-              message += 'Invalid columns (table data and transition\'s to state don\'t match) '
+              message += 'Invalid columns (table data and transitions to state don\'t match) '
             } else {
-              message += ' and invalid columns (table data and transition\'s to states don\'t match) '
+              message += ' and invalid columns (table data and transitions to states don\'t match) '
             }
             break;
           }
@@ -153,6 +156,33 @@ const tableTransitionWarnings = (module) => {
   });
 
   return warnings;
+}
+
+const parseLookupTable = (data) => {
+  let d;
+  if (isNumber(data))
+  {
+    data  = data.toString();
+  }
+  Papa.parse(data, {
+  header: true,
+  complete: function(results) {
+      d=results;
+  }
+  });
+      
+  return d.data;
+}    
+
+const tableHasError = (lookuptable) =>{    
+  let data = parseLookupTable(lookuptable);
+  let textOk = !(lookuptable == 'Enter table' || lookuptable == '')
+  let parseOk = (data.length > 0 && Object.keys(data[0]).length > 0)
+ if (textOk && parseOk ){
+    return false;
+  } else {
+    return true;
+  } 
 }
 
 const stateCollisionWarnings = (module, globalCodes) => {
