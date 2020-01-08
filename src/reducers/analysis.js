@@ -125,17 +125,17 @@ const tableTransitionWarnings = (module) => {
       }
       // check the last X columns vs X transitions
       if (!tableHasError(state.table_transition.lookuptable)){
-        let t = [];
+        let tableColumns = [];
         let data = parseLookupTable(state.table_transition.lookuptable);
         if (data.length > 0){ 
-          t = Object.keys(data[0]);
+          tableColumns = Object.keys(data[0]);
         }
 
         for (let i = 0; i < state.table_transition.transitions.length; i++)
         {
-          let a = state.table_transition.transitions[state.table_transition.transitions.length - i - 1].transition;
-          let b = t[t.length-i -1];
-          if (a != b)
+          let transition = state.table_transition.transitions[state.table_transition.transitions.length - i - 1].transition;
+          let column = tableColumns[tableColumns.length-i -1];
+          if (transition != column)
           {
             if (message === '')
             {
@@ -159,7 +159,7 @@ const tableTransitionWarnings = (module) => {
 }
 
 const parseLookupTable = (data) => {
-  let d;
+  let parsed;
   if (isNumber(data))
   {
     data  = data.toString();
@@ -167,11 +167,11 @@ const parseLookupTable = (data) => {
   Papa.parse(data, {
   header: true,
   complete: function(results) {
-      d=results;
+    parsed=results;
   }
   });
       
-  return d.data;
+  return parsed.data;
 }    
 
 const tableHasError = (lookuptable) =>{    

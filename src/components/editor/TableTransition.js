@@ -1,13 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber, RIETextArea } from 'riek';
-import _ from 'lodash';
 import Papa from 'papaparse'
 
-
-//import type { TableTransition as TableTransitionType } from '../../types/Transition';
 import { getTemplate } from '../../templates/Templates';
-//import type { State } from '../../types/State';
 import './Transition.css';
 import Table from './Table'
 import './TableTransition.css';
@@ -46,7 +42,7 @@ class TableTransition extends Component<Props> {
         </div>
     }else{
       buttonText = 'Display Read Only Table';
-      if (this.props.transition.lookuptable == ''){
+      if (this.props.transition.lookuptable === ''){
         this.props.onChange(`lookuptable`)({val: 'Enter table'});
       }else if (isNumber(this.props.transition.lookuptable)){
         this.props.transition.lookuptable = this.props.transition.lookuptable.toString();
@@ -104,7 +100,7 @@ class TableTransition extends Component<Props> {
     let sum = this.props.transition.transition.reduce( (acc, val) => acc + val.default_probability, 0);
     let remainder = 1 - (sum - distribution);
     let remainderOption = null
-    if (sum != 1) {
+    if (sum !== 1) {
       remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`transitions[${index}].default_probability`)({val: remainder})}>(Change to Remainder)</a>
     }
     return (
@@ -136,7 +132,7 @@ class TableTransition extends Component<Props> {
   }
 
   parseTextArea(data) {
-    let d;
+    let parsed;
     if (isNumber(data))
     {
       data  = data.toString();
@@ -144,11 +140,11 @@ class TableTransition extends Component<Props> {
     Papa.parse(data, {
     header: true,
     complete: function(results) {
-        d=results;
+      parsed=results;
     }
     });
 
-    return d.data;
+    return parsed.data;
   }    
 
   displayTableView() {        
@@ -161,17 +157,17 @@ class TableTransition extends Component<Props> {
   }
 
   fixMissingValues(){
-    if (this.props.transition.lookuptable == undefined)
+    if (this.props.transition.lookuptable === undefined)
     {
       this.props.transition.lookuptable = '';
     }
-    if (this.props.transition.viewTable == undefined)
+    if (this.props.transition.viewTable === undefined)
     {
       this.props.transition.viewTable = false;
     }
-    if (this.props.transition.lookup_table_name_ModuleBuilder == undefined)
+    if (this.props.transition.lookup_table_name_ModuleBuilder === undefined)
     {
-      if (this.props.transition.transition[0].lookup_table_name != ''){
+      if (this.props.transition.transition[0].lookup_table_name !== ''){
         this.props.transition.lookup_table_name_ModuleBuilder = this.props.transition.transition[0].lookup_table_name;
       }else{
         this.props.transition.lookup_table_name_ModuleBuilder = '';
@@ -181,7 +177,7 @@ class TableTransition extends Component<Props> {
 
   doesDataHaveInputError(){    
     let data = this.parseTextArea(this.props.transition.lookuptable);
-    let textOk = !(this.props.transition.lookuptable == 'Enter table' || this.props.transition.lookuptable == '')
+    let textOk = !(this.props.transition.lookuptable === 'Enter table' || this.props.transition.lookuptable === '')
     let parseOk = (data.length > 0 && Object.keys(data[0]).length > 0)
     if (textOk && parseOk ){
         return false;
@@ -196,17 +192,17 @@ class TableTransition extends Component<Props> {
     if (this.doesDataHaveInputError()){
       return message;
     }
-    let t = [];
+    let tableColumns = [];
     let data = this.parseTextArea(this.props.transition.lookuptable);
     if (data.length > 0){ 
-      t = Object.keys(data[0]);
+      tableColumns = Object.keys(data[0]);
     }
 
     for (let i = 0; i < this.props.transition.transition.length; i++)
     {
-      let a = this.props.transition.transition[this.props.transition.transition.length - i - 1].transition;
-      let b = t[t.length-i -1];
-      if (a != b)
+      let transition = this.props.transition.transition[this.props.transition.transition.length - i - 1].transition;
+      let column = tableColumns[tableColumns.length-i -1];
+      if (transition !== column)
       {
         message += 'Invalid columns (table data and transitions to state don\'t match) '
         break;
