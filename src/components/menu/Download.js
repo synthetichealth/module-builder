@@ -27,11 +27,10 @@ class Download extends Component {
     
     let module = _.cloneDeep(this.props.module);
 
-    // We currently save name in the state for convenience
-    // In lieu of a better solution, we will just remove it here
+    // Go through the states
     Object.keys(module.states).map(k => module.states[k]).forEach( s => {
 
-      // find table transitions and download them
+      // find table transitions and download the tables
       if (s.table_transition !== undefined){
         this.downloadCsv(s.table_transition.lookup_table_name_ModuleBuilder, s.table_transition.lookuptable);
       }
@@ -44,15 +43,13 @@ class Download extends Component {
       data = encodeURIComponent(data);
       data = data.replace(/%5Cn/g, "%0D%0A"); 
 
-      var element = document.createElement('a');      
+      
+      var element = document.createElement('tempDownload');   
+      element.style.display = 'none';   
       element.setAttribute('href', 'data:text/csv;charset=utf-8,' + data);
       element.setAttribute('download', filename);
-
-      element.style.display = 'none';
       document.body.appendChild(element);
-
       element.click();
-
       document.body.removeChild(element);
   }
 
