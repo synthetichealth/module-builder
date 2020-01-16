@@ -159,8 +159,8 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
           if(selectedStateTransition === i){
             transitionClassName += ' transition-selected';
           }
-          out_transitions += `  "${escapedName}" -> "${escapeName(module.states[t.transition].name)}" [label = "${distLabel}", class = "transition transition-index_${i} ${transitionClassName}"];\n`
-        } else {
+          out_transitions += `  "${escapedName}" -> "${escapeName(module.states[t.transition].name)}" [label = "See Table", class = "transition transition-index_${i} ${transitionClassName}"];\n`
+          } else {
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition} FROM ${name}`);
         }
       })
