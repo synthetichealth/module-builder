@@ -44,7 +44,7 @@ class Download extends Component {
       data = data.replace(/%5Cn/g, "%0D%0A"); 
 
       
-      var element = document.createElement('tempDownload');   
+      var element = document.createElement('a');   
       element.style.display = 'none';   
       element.setAttribute('href', 'data:text/csv;charset=utf-8,' + data);
       element.setAttribute('download', filename);
