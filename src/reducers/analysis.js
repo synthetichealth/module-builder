@@ -1,5 +1,8 @@
 import _ from 'lodash'
 import { getTemplate } from '../templates/Templates'
+import Papa from 'papaparse'
+import { isNumber } from 'util';
+import { stat } from 'fs';
 
 const initialState = {
   libraryModuleCodes: {}, // list types of nodes
@@ -100,6 +103,88 @@ const placeholderCodeWarnings = (module) => {
 
 }
 
+const tableTransitionWarnings = (module) => {
+  
+  const warnings = [];
+
+  Object.keys(module.states).forEach(stateName => {
+    let state = module.states[stateName];
+
+    // find table transitions and check table data
+    if (state.table_transition !== undefined){
+      let message = '';
+      if(state.table_transition.lookup_table_name_ModuleBuilder === ""){
+        message = 'Invalid filename ';
+      }
+      if (state.table_transition.lookuptable === "Enter table" || tableHasError(state.table_transition.lookuptable) ) { 
+        if (message === ''){ 
+          message = 'Invalid data ';
+        } else {
+          message += 'and invalid data '
+        }
+      }
+      // check the last X columns vs X transitions
+      if (!tableHasError(state.table_transition.lookuptable)){
+        let tableColumns = [];
+        let data = parseLookupTable(state.table_transition.lookuptable);
+        if (data.length > 0){ 
+          tableColumns = Object.keys(data[0]);
+        }
+
+        for (let i = 0; i < state.table_transition.transitions.length; i++)
+        {
+          let transition = state.table_transition.transitions[state.table_transition.transitions.length - i - 1].transition;
+          let column = tableColumns[tableColumns.length-i -1];
+          if (transition != column)
+          {
+            if (message === '')
+            {
+              message += 'Invalid columns (table data and transitions to state don\'t match) '
+            } else {
+              message += ' and invalid columns (table data and transitions to states don\'t match) '
+            }
+            break;
+          }
+        }
+      }
+
+      if (message !== ''){
+        message += 'for table in ';
+        warnings.push({stateName, message: message + stateName + '. '});
+      }        
+    }
+  });
+
+  return warnings;
+}
+
+const parseLookupTable = (data) => {
+  let parsed;
+  if (isNumber(data))
+  {
+    data  = data.toString();
+  }
+  Papa.parse(data, {
+  header: true,
+  complete: function(results) {
+    parsed=results;
+  }
+  });
+      
+  return parsed.data;
+}    
+
+const tableHasError = (lookuptable) =>{    
+  let data = parseLookupTable(lookuptable);
+  let textOk = !(lookuptable == 'Enter table' || lookuptable == '')
+  let parseOk = (data.length > 0 && Object.keys(data[0]).length > 0)
+ if (textOk && parseOk ){
+    return false;
+  } else {
+    return true;
+  } 
+}
+
 const stateCollisionWarnings = (module, globalCodes) => {
   const equivalentStates = [
    ['MedicationOrder', 'MedicationEnd'],
@@ -166,7 +251,18 @@ const orphanStateWarnings = (module) => {
           }
         }
       });
-    } else if(nextState.conditional_transition){
+    } else if(nextState.table_transition){
+      nextState.table_transition.transitions.forEach(transition => {
+        if(!module.states[transition.transition]){
+          warnings.push({stateName: nextStateKey, message: 'Transition to state that does not exist: ' + transition.transition});
+        } else {
+          if(!visitedStateCheck[transition.transition]){
+            visitNext.push(transition.transition);
+          }
+        }
+      });
+    } 
+    else if(nextState.conditional_transition){
       nextState.conditional_transition.forEach(transition => {
         if(!module.states[transition.transition]){
           warnings.push({stateName: nextStateKey, message: 'Transition to state that does not exist: ' + transition.transition});
@@ -275,7 +371,8 @@ export default (state = initialState, action) => {
 
       newState.warnings = [...stateCollisionWarnings(action.data.module, newState.libraryModuleCodes),
                            ...orphanStateWarnings(action.data.module),
-                           ...placeholderCodeWarnings(action.data.module)];
+                           ...placeholderCodeWarnings(action.data.module),
+                           ...tableTransitionWarnings(action.data.module)];
 
       newState.relatedModules = [...relatedBySubmodule(action.data.moduleKey, action.data.module, newState.libraryRelatedModules)];
 

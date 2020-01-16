@@ -1,0 +1,48 @@
+.Editor.hide-info .TableTransition {
+    left: -400px;
+  }
+    
+  .TableTransition { 
+    padding-bottom: 10px;
+    height: 100%;
+    padding-right: 10px;
+  }
+  
+  .TableTransition-remarks {
+    height: 100%;
+  }
+  
+  .TableTransition-remarks > span {
+    color: #336699;
+    font-style: italic;
+    text-decoration: underline;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-left: .2em;
+    padding-right: .2em;
+    cursor: text;
+  }
+  
+  .TableTransition-remarks > span:hover {
+    color: #cb7732;
+  }
+  
+  .TableTransition input {
+    width: 100%;
+  }
+  
+  .TableTransition-table {
+      width: 95%;
+  }
+  
+  .TableTransition-name {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .TableTransition-remarks {
+    font-size: 1em;
+  }
+  

@@ -38,4 +38,18 @@ export type ComplexTransition = {
   }]
 };
 
-export type Transition = DirectTransition | DistributedTransition | ConditionalTransition | ComplexTransition;
+export type TableTransition = {
+  type: 'Table',
+  lookup_table_name_ModuleBuilder: string,
+  viewTable: Boolean,
+  lookuptable: string,
+  transition: [
+    {
+      default_probability: number,
+      transition: string,
+      lookup_table_name: string,
+    }
+  ]
+};
+
+export type Transition = DirectTransition | DistributedTransition | ConditionalTransition | ComplexTransition | TableTransition;

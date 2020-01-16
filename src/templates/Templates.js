@@ -344,7 +344,14 @@ const TransitionTemplates = {
   Direct: 'Initial',
   Conditional: [{transition: 'Initial', condition: {...TypeTemplates.Condition.Age}}],
   Distributed: [{transition: 'Initial', distribution: 1.0}],
-  Complex: [{condition: {...TypeTemplates.Condition.Age}, distributions: [{transition: 'Initial', distribution: 1.0}]}]
+  Complex: [{condition: {...TypeTemplates.Condition.Age}, distributions: [{transition: 'Initial', distribution: 1.0}]}],
+  Table: {
+    type: 'Table',
+    lookuptable: 'age,Initial,Terminal\n0-50,.1,.9\n51-140,.4,.6',
+    viewTable: true,
+    lookup_table_name_ModuleBuilder: 'file.csv',
+    transitions:[{transition: 'Initial', default_probability: 1.0, lookup_table_name: 'table.csv'}]
+  }
 }
 
 const StateTemplates = {
