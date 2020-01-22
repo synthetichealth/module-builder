@@ -51,6 +51,16 @@ textarea {
   padding-right: .2em;
 }
 
+.remarks-text div {
+  font-style: italic;
+  text-decoration: underline !important;
+  cursor: text;
+  color: #336699 !important;
+  position:relative;
+  padding-left: .2em;
+  padding-right: .2em;
+}
+
 .editable-error {
   color: #ff3300 !important;
 }
@@ -59,12 +69,16 @@ span.editable-text:empty {
   color: #ff3300 !important;
 }
 
+span.remarks-text div:empty{
+  height:1.5em;
+}
+
 span.editable-text:empty:after {
-  content: 'Enter value';
+  content: 'Enter Value';
 }
 
 span.editable-text > :empty:after {
-  content: 'Enter value';
+  content: 'Enter Value';
 }
 
 .section {
@@ -91,3 +105,4 @@ span.editable-text > :empty:after {
 .warning {
   color: #ff3300;
 }
+
