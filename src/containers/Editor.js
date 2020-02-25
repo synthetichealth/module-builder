@@ -234,7 +234,8 @@ class Editor extends Component {
         addTransition={this.addTransition(this.props.selectedModuleKey, this.props.moduleState)}
         state={this.props.moduleState}
         otherStates={this.props.moduleStates}
-        onChange={this.onChange(this.props.selectedModuleKey)} />
+        onChange={this.onChange(this.props.selectedModuleKey)}
+        displayAttributes={this.leftNavClick('attribute')} />
     }
     return <div/>
 
@@ -258,6 +259,21 @@ class Editor extends Component {
           welcome={!this.props.module}
           newModule={this.newModule(Object.keys(this.props.modules))}
           />
+  }
+
+  loadSelectedModule= (key) => 
+  {
+    let val;
+    Object.keys(this.props.library).forEach(option => {
+      if (this.props.library[option].name === key)
+      {
+        val = option;
+      }
+    })
+    if (val !== undefined)
+    {
+        this.props.push('#' + val);   
+    }
   }
 
   renderModulePropertiesEditor = () => {
@@ -304,7 +320,7 @@ class Editor extends Component {
       case 'code':
         return <JsonEditor onChange={(value) => {this.props.jsonEdit(value)}} module={this.props.module} refreshCodeFlag={this.props.refreshCodeFlag}/>
       case 'attribute':
-        return <AttributeList attributes={this.props.attributes} selectedState={this.props.moduleState} modules={this.props.modules} states={this.props.moduleStates} onClick={this.props.selectNode} />
+        return <AttributeList attributes={this.props.attributes} selectedState={this.props.moduleState} modules={this.props.modules} states={this.props.moduleStates} onClick={this.props.selectNode} module={this.props.module} editor={this.props} loadSelectedModule={this.loadSelectedModule}/>
       case 'warning':
         return <WarningList warnings={this.props.warnings} selectedState={this.props.moduleState} onClick={this.props.selectNode} />
       case 'related':

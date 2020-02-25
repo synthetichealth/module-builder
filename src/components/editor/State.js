@@ -12,8 +12,9 @@ import ConditionalEditor from './Conditional';
 import Transition from './Transition';
 import { getTemplate } from '../../templates/Templates';
 import { BasicTutorial, EditTutorial } from '../../templates/Tutorial';
-
-
+import AutoCompleteText from './AutoCompleteText';
+import Attributes from './Attributes.js';
+import AttributeData from '../analysis/AttributeData.json';
 import './State.css';
 
 type Props = {
@@ -25,7 +26,8 @@ type Props = {
   copyNode: any,
   changeType: any,
   addTransition: any,
-  helpFunction: any
+  helpFunction: any,
+  displayAttributes: any
 }
 
 const unitOfTimeOptions = [
@@ -253,12 +255,59 @@ class Delay extends Component<Props> {
 }
 
 class SetAttribute extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.attribute,
+      lastSubmitted : this.props.state.attribute,
+      displayLabel : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): SetAttributeState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.attribute]!= undefined) 
+        {
+          Object.keys(data[state.attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (state.attribute === '')
+        {
+          state.attribute = 'text';
+        }
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     return (
       <div>
-        Attribute: <RIEInput className='editable-text' value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
+        Attribute: {displayAttribute}
         <br/>
         {this.renderValue()}
       </div>
@@ -290,23 +339,122 @@ class SetAttribute extends Component<Props> {
     }
   }
 
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.attribute != this.state.value)
+    {
+      this.props.onChange('attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.attribute});      
+    this.setState({lastSubmitted: this.props.state.attribute})
+  }
+
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
+
 }
 
 class Counter extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.attribute,//'',
+      lastSubmitted : this.props.state.attribute,
+      displayLabel : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): CounterState);
     let options = [
       {id: 'increment', text: 'increment'},
       {id: 'decrement', text: 'decrement'}
-    ];
+    ]; 
+    
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.attribute]!= undefined) 
+        {
+          Object.keys(data[state.attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (state.attribute === '')
+        {
+          state.attribute = 'text';
+        }
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     return (
       <div>
-        Attribute: <RIEInput className='editable-text' value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
+        Attribute: {displayAttribute}
         <br/>
         Action: <RIESelect className='editable-text' value={{id: state.action, text: state.action}} propName="action" change={this.props.onChange('action')} options={options} />
       </div>
     );
+  }
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.attribute != this.state.value)
+    {
+      this.props.onChange('attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.attribute});      
+    this.setState({lastSubmitted: this.props.state.attribute})
+  }
+
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
   }
 
 }
@@ -329,7 +477,23 @@ class CallSubmodule extends Component<Props> {
 
 class Encounter extends Component<Props> {
 
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.reason,
+      lastSubmitted : this.props.state.reason,
+      displayLabel : true,
+    }
+  }
+
   render() {
+    // check for undo/redo
+    if (this.props.state.reason != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): EncounterState);
     let options = [
       {id: 'emergency', text: 'emergency'},
@@ -398,13 +562,44 @@ class Encounter extends Component<Props> {
       let allOptions = options.concat(inputAttribute);
       let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
       if (state.reason === "*Input Attribute*") {
-        let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        let displayAttribute;
+        if (this.state.displayLabel)
+        {
+            const data = AttributeData;      
+            let others = [this.props.moduleName];
+            if (data[state.reason]!= undefined) 
+            {
+              Object.keys(data[state.reason].read).forEach(i => {others.push(i)})                
+              Object.keys(data[state.reason].write).forEach(i => {others.push(i)})
+            }
+            others = others.filter((x, i, a) => a.indexOf(x) == i)
+            others.splice(others.indexOf[this.props.moduleName], 1);
+    
+            if (state.reason === '')
+            {
+              state.reason = 'text';
+            }
+            if (others.length > 0)
+            {
+              displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.reason}</label>
+              <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+              </span>
+            }
+            else{
+              displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.reason}</label>
+            }
+    
+        }
+        else
+        {
+         displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+        }
         return (
           <div>
             Reason: {reason}
             <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
             <br/>
-            Attribute: {attribute}
+            Attribute: {displayAttribute}
             <br/>
           </div>
         );
@@ -419,6 +614,32 @@ class Encounter extends Component<Props> {
       }
     }
   }
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.reason != this.state.value)
+    {
+      this.props.onChange('reason')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.reason});      
+    this.setState({lastSubmitted: this.props.state.reason})
+  }
+
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
+
 
 }
 
@@ -456,8 +677,24 @@ class EncounterEnd extends Component<Props> {
 }
 
 class ConditionOnset extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.assign_to_attribute,//'',
+      lastSubmitted : this.props.state.assign_to_attribute,
+      displayLabel : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.assign_to_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
+
     let state = ((this.props.state: any): ConditionOnsetState);
     return (
       <div>
@@ -498,6 +735,34 @@ class ConditionOnset extends Component<Props> {
 
   renderAssignToAttribute() {
     let state = ((this.props.state: any): ConditionOnsetState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.assign_to_attribute]!= undefined) 
+        {
+          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.assign_to_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.assign_to_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.assign_to_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     if (!state.assign_to_attribute) {
       return (
         <div>
@@ -508,19 +773,60 @@ class ConditionOnset extends Component<Props> {
     } else {
       return (
         <div>
-          Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'}  change={this.props.onChange('assign_to_attribute')} />
+          Assign to Attribute: {displayAttribute}
           <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
     }
   }
+  
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.assign_to_attribute != this.state.value)
+    {
+      this.props.onChange('assign_to_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.assign_to_attribute});      
+    this.setState({lastSubmitted: this.props.state.assign_to_attribute})
+  }
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
 
 }
 
+
 class ConditionEnd extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.referenced_by_attribute,
+      lastSubmitted : this.props.state.referenced_by_attribute,
+      displayLabel : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.referenced_by_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): ConditionEndState);
     return (
       <div>
@@ -555,6 +861,34 @@ class ConditionEnd extends Component<Props> {
 
   renderReferencedByAttribute() {
     let state = ((this.props.state: any): ConditionEndState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.referenced_by_attribute]!= undefined) 
+        {
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     if (!state.referenced_by_attribute) {
       return (
         <div>
@@ -565,7 +899,7 @@ class ConditionEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'}  change={this.props.onChange('referenced_by_attribute')} />
+          Referenced by Attribute: {displayAttribute}
           <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -594,12 +928,52 @@ class ConditionEnd extends Component<Props> {
       );
     }
   }
+  
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.referenced_by_attribute != this.state.value)
+    {
+      this.props.onChange('referenced_by_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.referenced_by_attribute});      
+    this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
+  }
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
 
 }
 
 class AllergyOnset extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.assign_to_attribute,//'',
+      lastSubmitted : this.props.state.assign_to_attribute,
+      displayLabel : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.assign_to_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): AllergyOnsetState);
     let encounters = this.props.otherStates.filter((s) => {return s.type === "Encounter"});
     let options = encounters.map((e) => {return {id: e.name, text: e.name}});
@@ -619,6 +993,34 @@ class AllergyOnset extends Component<Props> {
 
   renderAssignToAttribute() {
     let state = ((this.props.state: any): AllergyOnsetState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.assign_to_attribute]!= undefined) 
+        {
+          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.assign_to_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.assign_to_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.assign_to_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     if (!state.assign_to_attribute) {
       return (
         <div>
@@ -629,19 +1031,59 @@ class AllergyOnset extends Component<Props> {
     } else {
       return (
         <div>
-          Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'}  change={this.props.onChange('assign_to_attribute')} />
+          Assign to Attribute: {displayAttribute}
           <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
     }
   }
+  
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.assign_to_attribute != this.state.value)
+    {
+      this.props.onChange('assign_to_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.assign_to_attribute});      
+    this.setState({lastSubmitted: this.props.state.assign_to_attribute})
+  }
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
 
 }
 
 class AllergyEnd extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.referenced_by_attribute,
+      lastSubmitted : this.props.state.referenced_by_attribute,
+      displayLabel : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.referenced_by_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): AllergyEndState);
     return (
       <div>
@@ -676,6 +1118,34 @@ class AllergyEnd extends Component<Props> {
 
   renderReferencedByAttribute() {
     let state = ((this.props.state: any): AllergyEndState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.referenced_by_attribute]!= undefined) 
+        {
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     if (!state.referenced_by_attribute) {
       return (
         <div>
@@ -686,7 +1156,7 @@ class AllergyEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'}  change={this.props.onChange('referenced_by_attribute')} />
+          Referenced by Attribute: {displayAttribute}
           <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -715,12 +1185,57 @@ class AllergyEnd extends Component<Props> {
       );
     }
   }
+  
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.referenced_by_attribute != this.state.value)
+    {
+      this.props.onChange('referenced_by_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.referenced_by_attribute});      
+    this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
+  }
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
 
 }
 
 class MedicationOrder extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTextChangeReason = this.handleTextChangeReason.bind(this);
+    this.handleSubmitReason = this.handleSubmitReason.bind(this);
+    this.state = {
+      value : this.props.state.assign_to_attribute,
+      lastSubmitted : this.props.state.assign_to_attribute,
+      displayLabel : true,
+      valueReason : this.props.state.reason,
+      lastSubmittedReason : this.props.state.reason,
+      displayLabelReason : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.assign_to_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): MedicationOrderState);
     return (
       <div>
@@ -759,6 +1274,34 @@ class MedicationOrder extends Component<Props> {
 
   renderAssignToAttribute() {
     let state = ((this.props.state: any): ConditionOnsetState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.assign_to_attribute]!= undefined) 
+        {
+          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.assign_to_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.assign_to_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.assign_to_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     if (!state.assign_to_attribute) {
       return (
         <div>
@@ -769,7 +1312,7 @@ class MedicationOrder extends Component<Props> {
     } else {
       return (
         <div>
-          Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'}  change={this.props.onChange('assign_to_attribute')} />
+          Assign to Attribute: {displayAttribute}
           <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -780,6 +1323,10 @@ class MedicationOrder extends Component<Props> {
   renderReason() {
     let state = ((this.props.state: any): MedicationOrder);
     if (!state.reason) {
+      if( this.state.valueReason !== 'text')
+      {
+        this.setState({valueReason: 'text'});
+      }
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "Select Condition/Enter Attribute"}})}>Add Reason</a>
@@ -793,13 +1340,22 @@ class MedicationOrder extends Component<Props> {
       let allOptions = options.concat(inputAttribute);
       let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
       if (state.reason === "*Input Attribute*") {
-        let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        let displayAttribute;
+        if (this.state.displayLabelReason)
+        {
+          displayAttribute = <label className="editable-text" onClick={this.toggleLabelReason}>{state.reason}</label>
+    
+        }
+        else
+        {
+         displayAttribute = <AutoCompleteText onChange={this.handleTextChangeReason} onBlur={this.handleSubmitReason} text={this.state.valueReason} items={Attributes}/>
+        }
         return (
           <div>
             Reason: {reason}
             <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
             <br/>
-            Attribute: {attribute}
+            Attribute: {displayAttribute}
             <br/>
           </div>
         );
@@ -935,11 +1491,72 @@ class MedicationOrder extends Component<Props> {
     }
   }
 
+  handleTextChange(value) {
+    this.setState({value: value});      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.assign_to_attribute != this.state.value)
+    {
+      this.props.onChange('assign_to_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.assign_to_attribute});      
+    this.setState({lastSubmitted: this.props.state.assign_to_attribute})
+  }
+  
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
+
+  handleTextChangeReason(value) {
+    this.setState({valueReason: value});
+      
+  }
+
+  handleSubmitReason(save) {
+    if (save && this.props.state.reason != this.state.valueReason)
+    {
+      this.props.onChange('reason')({val: this.state.valueReason})
+      this.setState({lastSubmittedReason: this.state.valueReason})      
+    }
+    else {
+      this.setState({valueReason: this.state.lastSubmittedReason})
+    }
+    this.toggleLabelReason();
+  }
+
+  toggleLabelReason = () =>  {
+    this.setState({displayLabelReason: !this.state.displayLabelReason});
+  }
+
 }
 
 class MedicationEnd extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.referenced_by_attribute,
+      lastSubmitted : this.props.state.referenced_by_attribute,
+      displayLabel : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.referenced_by_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): MedicationEndState);
     return (
       <div>
@@ -974,6 +1591,34 @@ class MedicationEnd extends Component<Props> {
 
   renderReferencedByAttribute() {
     let state = ((this.props.state: any): MedicationEndState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.referenced_by_attribute]!= undefined) 
+        {
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     if (!state.referenced_by_attribute) {
       return (
         <div>
@@ -984,7 +1629,7 @@ class MedicationEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'}  change={this.props.onChange('referenced_by_attribute')} />
+          Referenced by Attribute: {displayAttribute}
           <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -1014,11 +1659,56 @@ class MedicationEnd extends Component<Props> {
     }
   }
 
+  handleTextChange(value) {
+    this.setState({value: value});      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.referenced_by_attribute != this.state.value)
+    {
+      this.props.onChange('referenced_by_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.referenced_by_attribute});      
+    this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
+  }
+  
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
+
 }
 
 class CarePlanStart extends Component<Props> {
+  constructor (props) {
+    super(props)    
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTextChangeReason = this.handleTextChangeReason.bind(this);
+    this.handleSubmitReason = this.handleSubmitReason.bind(this);
+    this.state = {
+      value : this.props.state.assign_to_attribute,
+      lastSubmitted : this.props.state.assign_to_attribute,
+      displayLabel : true,
+      valueReason : this.props.state.reason,
+      lastSubmittedReason : this.props.state.reason,
+      displayLabelReason : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.assign_to_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): CarePlanStartState);
     return (
       <div>
@@ -1038,6 +1728,34 @@ class CarePlanStart extends Component<Props> {
 
   renderAssignToAttribute() {
     let state = ((this.props.state: any): CarePlanStartState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.assign_to_attribute]!= undefined) 
+        {
+          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.assign_to_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.assign_to_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.assign_to_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     if (!state.assign_to_attribute) {
       return (
         <div>
@@ -1048,7 +1766,7 @@ class CarePlanStart extends Component<Props> {
     } else {
       return (
         <div>
-          Assign to Attribute: <RIEInput className='editable-text' value={state.assign_to_attribute} propName={'assign_to_attribute'}  change={this.props.onChange('assign_to_attribute')} />
+          Assign to Attribute: {displayAttribute}
           <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -1059,6 +1777,10 @@ class CarePlanStart extends Component<Props> {
   renderReason() {
     let state = ((this.props.state: any): CarePlanStart);
     if (!state.reason) {
+      if( this.state.valueReason !== 'text')
+      {
+        this.setState({valueReason: 'text'});
+      }
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "Select Condition/Enter Attribute"}})}>Add Reason</a>
@@ -1072,17 +1794,26 @@ class CarePlanStart extends Component<Props> {
       let allOptions = options.concat(inputAttribute);
       let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
       if (state.reason === "*Input Attribute*") {
-        let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        let displayAttribute;
+        
+        if (this.state.displayLabelReason)
+        {            
+            displayAttribute = <label className="editable-text" onClick={this.toggleLabelReason}>{state.reason}</label>    
+        }
+        else
+        {
+         displayAttribute = <AutoCompleteText onChange={this.handleTextChangeReason} onBlur={this.handleSubmitReason} text={this.state.valueReason} items={Attributes}/>
+        }
         return (
           <div>
             Reason: {reason}
             <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
             <br/>
-            Attribute: {attribute}
+            Attribute: {displayAttribute}
             <br/>
           </div>
         );
-      } else {
+      } else {           
         return (
           <div>
             Reason: {reason}
@@ -1138,11 +1869,71 @@ class CarePlanStart extends Component<Props> {
     }
   }
 
+  handleTextChange(value) {
+    this.setState({value: value});      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.assign_to_attribute != this.state.value)
+    {
+      this.props.onChange('assign_to_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.assign_to_attribute});      
+    this.setState({lastSubmitted: this.props.state.assign_to_attribute})
+  }
+
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
+  handleTextChangeReason(value) {
+    this.setState({valueReason: value});
+      
+  }
+
+  handleSubmitReason(save) {
+    if (save && this.props.state.reason != this.state.valueReason)
+    {
+      this.props.onChange('reason')({val: this.state.valueReason})
+      this.setState({lastSubmittedReason: this.state.valueReason})      
+    }
+    else {
+      this.setState({valueReason: this.state.lastSubmittedReason})
+    }
+    this.toggleLabelReason();
+  }
+
+  toggleLabelReason = () =>  {
+    this.setState({displayLabelReason: !this.state.displayLabelReason});
+  }
 }
 
 class CarePlanEnd extends Component<Props> {
 
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.referenced_by_attribute,
+      lastSubmitted : this.props.state.referenced_by_attribute,
+      displayLabel : true,
+    }
+  }
+
   render() {
+    // check for undo/redo
+    if (this.props.state.referenced_by_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): CarePlanEndState);
     return (
       <div>
@@ -1177,6 +1968,34 @@ class CarePlanEnd extends Component<Props> {
 
   renderReferencedByAttribute() {
     let state = ((this.props.state: any): CarePlanEndState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.referenced_by_attribute]!= undefined) 
+        {
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     if (!state.referenced_by_attribute) {
       return (
         <div>
@@ -1187,7 +2006,7 @@ class CarePlanEnd extends Component<Props> {
     } else {
       return (
         <div>
-          Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'}  change={this.props.onChange('referenced_by_attribute')} />
+          Referenced by Attribute: {displayAttribute}
           <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -1217,9 +2036,45 @@ class CarePlanEnd extends Component<Props> {
     }
   }
 
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.referenced_by_attribute != this.state.value)
+    {
+      this.props.onChange('referenced_by_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.referenced_by_attribute});      
+    this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
+  }
+
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
+
 }
 
 class Procedure extends Component<Props> {
+  constructor (props) {
+    super(props)    
+    this.handleTextChangeReason = this.handleTextChangeReason.bind(this);
+    this.handleSubmitReason = this.handleSubmitReason.bind(this);
+    this.state = {
+      valueReason : this.props.state.reason,
+      lastSubmittedReason : this.props.state.reason,
+      displayLabelReason : true,
+    }
+  }
 
   render() {
     let state = ((this.props.state: any): ProcedureState);
@@ -1240,6 +2095,10 @@ class Procedure extends Component<Props> {
   renderReason() {
     let state = ((this.props.state: any): Procedure);
     if (!state.reason) {
+      if( this.state.valueReason !== 'text')
+      {
+        this.setState({valueReason: 'text'});
+      }
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: "Select Condition/Enter Attribute"}})}>Add Reason</a>
@@ -1253,13 +2112,22 @@ class Procedure extends Component<Props> {
       let allOptions = options.concat(inputAttribute);
       let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
       if (state.reason === "*Input Attribute*") {
-        let attribute = <RIEInput className='editable-text' value={state.reason} propName={'reason'}  change={this.props.onChange('reason')} />
+        let displayAttribute;
+        
+        if (this.state.displayLabelReason)
+        {            
+            displayAttribute = <label className="editable-text" onClick={this.toggleLabelReason}>{state.reason}</label>    
+        }
+        else
+        {
+         displayAttribute = <AutoCompleteText onChange={this.handleTextChangeReason} onBlur={this.handleSubmitReason} text={this.state.valueReason} items={Attributes}/>
+        }
         return (
           <div>
             Reason: {reason}
             <a className='editable-text' onClick={() => this.props.onChange('reason')({val: {id: null}})}>(remove)</a>
             <br/>
-            Attribute: {attribute}
+            Attribute: {displayAttribute}
             <br/>
           </div>
         );
@@ -1298,6 +2166,27 @@ class Procedure extends Component<Props> {
         </div>
       );
     }
+  }
+  
+  handleTextChangeReason(value) {
+    this.setState({valueReason: value});
+      
+  }
+
+  handleSubmitReason(save) {
+    if (save && this.props.state.reason != this.state.valueReason)
+    {
+      this.props.onChange('reason')({val: this.state.valueReason})
+      this.setState({lastSubmittedReason: this.state.valueReason})      
+    }
+    else {
+      this.setState({valueReason: this.state.lastSubmittedReason})
+    }
+    this.toggleLabelReason();
+  }
+
+  toggleLabelReason = () =>  {
+    this.setState({displayLabelReason: !this.state.displayLabelReason});
   }
 
 }
@@ -1346,8 +2235,23 @@ class VitalSign extends Component<Props> {
 }
 
 class Observation extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.attribute,//'',
+      lastSubmitted : this.props.state.attribute,
+      displayLabel : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): ObservationState);
     let options = [
       {id: 'social-history', text: 'social-history'},
@@ -1401,9 +2305,37 @@ class Observation extends Component<Props> {
         </div>
       );
     } else if (state.attribute) {
+      let displayAttribute;
+      if (this.state.displayLabel)
+      {
+          const data = AttributeData;      
+          let others = [this.props.moduleName];
+          if (data[state.attribute]!= undefined) 
+          {
+            Object.keys(data[state.attribute].read).forEach(i => {others.push(i)})                
+            Object.keys(data[state.attribute].write).forEach(i => {others.push(i)})
+          }
+          others = others.filter((x, i, a) => a.indexOf(x) == i)
+          others.splice(others.indexOf[this.props.moduleName], 1);
+  
+          if (others.length > 0)
+          {
+            displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.attribute}</label>
+            <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+            </span>
+          }
+          else{
+            displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.attribute}</label>
+          }
+  
+      }
+      else
+      {
+       displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+      }
       return (
         <div className='section'>
-          Attribute: <RIEInput className='editable-text' value={state.attribute} propName={'attribute'}  change={this.props.onChange('attribute')} />
+          Attribute: {displayAttribute}
           <br/>
           { this.renderToggles('attribute') }
         </div>
@@ -1476,6 +2408,31 @@ class Observation extends Component<Props> {
     }
 
     return toggles;
+  }
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.attribute != this.state.value)
+    {
+      this.props.onChange('attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.attribute});      
+    this.setState({lastSubmitted: this.props.state.attribute})
+  }
+
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
   }
 
 }
@@ -1667,8 +2624,23 @@ class Symptom extends Component<Props> {
 }
 
 class Death extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.referenced_by_attribute,
+      lastSubmitted : this.props.state.referenced_by_attribute,
+      displayLabel : true,
+    }
+  }
 
   render() {
+    // check for undo/redo
+    if (this.props.state.referenced_by_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): DeathState);
     return (
       <div>
@@ -1767,6 +2739,34 @@ class Death extends Component<Props> {
 
   renderReferencedByAttribute() {
     let state = ((this.props.state: any): DeathState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.referenced_by_attribute]!= undefined) 
+        {
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
     if (!state.referenced_by_attribute) {
       return (
         <div>
@@ -1777,12 +2777,38 @@ class Death extends Component<Props> {
     } else {
       return (
         <div>
-          Referenced by Attribute: <RIEInput className='editable-text' value={state.referenced_by_attribute} propName={'referenced_by_attribute'}  change={this.props.onChange('referenced_by_attribute')} />
+          Referenced by Attribute: {displayAttribute}
           <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
       );
     }
+  }
+   
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.referenced_by_attribute != this.state.value)
+    {
+      this.props.onChange('referenced_by_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.referenced_by_attribute});      
+    this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
+  }
+
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
   }
 
 }
