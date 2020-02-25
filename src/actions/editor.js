@@ -181,7 +181,7 @@ export const hideDownload = () => {
 
 
 export const changeModulePanel = (targetPanel) => {
-  return ({
+  return dispatchThenAnalyze({
     type: 'CHANGE_MODULE_PANEL',
     data:{
       targetPanel
