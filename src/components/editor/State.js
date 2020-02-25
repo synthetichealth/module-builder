@@ -305,6 +305,8 @@ class Counter extends Component<Props> {
         Attribute: <RIEInput className='editable-text' value={state.attribute} propName={'attribute'} change={this.props.onChange('attribute')} />
         <br/>
         Action: <RIESelect className='editable-text' value={{id: state.action, text: state.action}} propName="action" change={this.props.onChange('action')} options={options} />
+        <br/>
+        Amount: <RIENumber className='editable-text' value={state.amount || 1} propName='amount' change={this.props.onChange('amount')} />
       </div>
     );
   }

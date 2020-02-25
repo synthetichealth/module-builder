@@ -340,7 +340,7 @@ const stateDescription = (state) =>{
       break;
 
     case 'Counter':
-      details = `${state['action']} value of attribute '${state["attribute"]}' by 1`
+      details = `${state['action']} value of attribute '${state["attribute"]}' by ${state['amount'] || 1}`
       break;
     case 'VitalSign':
       let vs = state['vital_sign']
