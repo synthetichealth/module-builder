@@ -2197,8 +2197,8 @@ export default {"allergic_rhinitis":{
       "activities": [
         {
           "system": "SNOMED-CT",
-          "code": "764101000000108",
-          "display": "Allergen immunotherapy drugs Band 1"
+          "code": "182678001",
+          "display": "Hyposensitization to allergens (procedure)"
         }
       ],
       "direct_transition": "Benchmark_Allergy_Test"
@@ -14869,7 +14869,7 @@ export default {"allergic_rhinitis":{
               {
                 "system": "LOINC",
                 "code": "59408-5",
-                "display": "oxygen saturation in arterial blood by pulse oximetry"
+                "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
               }
             ],
             "operator": ">",
@@ -14878,7 +14878,7 @@ export default {"allergic_rhinitis":{
         }
       ]
     },
-    "Lasix IV": {
+    "Furosemide": {
       "type": "MedicationOrder",
       "codes": [
         {
@@ -14939,7 +14939,7 @@ export default {"allergic_rhinitis":{
       "type": "VitalSign",
       "vital_sign": "Oxygen Saturation",
       "unit": "%",
-      "direct_transition": "CXR_Inpt_daily",
+      "direct_transition": "Record O2",
       "range": {
         "low": 65,
         "high": 85
@@ -15498,7 +15498,7 @@ export default {"allergic_rhinitis":{
       ],
       "observations": [
         {
-          "category": "vital-sign",
+          "category": "laboratory",
           "unit": "%",
           "codes": [
             {
@@ -15606,7 +15606,7 @@ export default {"allergic_rhinitis":{
     },
     "Inpatient daily routine": {
       "type": "Simple",
-      "direct_transition": "Lasix IV"
+      "direct_transition": "Furosemide"
     },
     "Death": {
       "type": "Death",
@@ -15705,7 +15705,7 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "LOINC",
-          "code": "55284-4",
+          "code": "85354-9",
           "display": "Blood Pressure"
         }
       ],
@@ -15757,7 +15757,7 @@ export default {"allergic_rhinitis":{
     "Set 3D Echo": {
       "type": "SetAttribute",
       "attribute": "3decho",
-      "direct_transition": "CXR_Inpt_daily",
+      "direct_transition": "O2 Vitals",
       "value": true
     },
     "Reset 3D Echo": {
@@ -15785,6 +15785,25 @@ export default {"allergic_rhinitis":{
           "transition": "intra_encounter time gate"
         }
       ]
+    },
+    "Record O2": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "%",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "2708-6",
+          "display": "Oxygen saturation in Arterial blood"
+        },
+        {
+          "system": "LOINC",
+          "code": "59408-5",
+          "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+        }
+      ],
+      "direct_transition": "CXR_Inpt_daily",
+      "vital_sign": "Oxygen Saturation"
     }
   }
 }
@@ -15923,8 +15942,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "787301000000101",
-          "display": "Surgery care management"
+          "code": "737471002",
+          "display": "Minor surgery care management (procedure)"
         }
       ],
       "activities": [
@@ -16735,8 +16754,8 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "787301000000101",
-          "display": "Surgery care management"
+          "code": "737471002",
+          "display": "Minor surgery care management (procedure)"
         }
       ],
       "activities": [
@@ -18290,7 +18309,7 @@ export default {"allergic_rhinitis":{
                 "condition_type": "Not",
                 "condition": {
                   "condition_type": "PriorState",
-                  "name": "Renew_Contraceptive_Implant",
+                  "name": "Replace_Contraceptive_Implant",
                   "within": {
                     "quantity": 4,
                     "unit": "years"
@@ -18336,23 +18355,7 @@ export default {"allergic_rhinitis":{
           "display": "Patient encounter procedure"
         }
       ],
-      "direct_transition": "Renew_Contraceptive_Implant"
-    },
-    "Renew_Contraceptive_Implant": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "755621000000101",
-          "display": "Replacement of subcutaneous contraceptive"
-        }
-      ],
-      "duration": {
-        "low": 20,
-        "high": 40,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_Renew_Implant_Encounter"
+      "direct_transition": "Remove_Implant_Before_Replacement"
     },
     "End_Renew_Implant_Encounter": {
       "type": "EncounterEnd",
@@ -18501,6 +18504,38 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Replace_Contraceptive_Implant": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 169553002,
+          "display": "Insertion of subcutaneous contraceptive"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Renew_Implant_Encounter"
+    },
+    "Remove_Implant_Before_Replacement": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 301807007,
+          "display": "Removal of subcutaneous contraceptive"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "Replace_Contraceptive_Implant"
     }
   }
 }
@@ -28122,7 +28157,7 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "LOINC",
-          "code": "55284-4",
+          "code": "85354-9",
           "display": "Blood Pressure"
         }
       ],
@@ -28173,7 +28208,7 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "LOINC",
-          "code": "55284-4",
+          "code": "85354-9",
           "display": "Blood Pressure"
         }
       ],
@@ -28224,7 +28259,7 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "LOINC",
-          "code": "55284-4",
+          "code": "85354-9",
           "display": "Blood Pressure"
         }
       ],
@@ -47292,7 +47327,7 @@ export default {"allergic_rhinitis":{
               ]
             },
             {
-              "distribution": 0.9913,
+              "distribution": 0.99125,
               "transition": "Potential_Infection"
             }
           ]
@@ -47522,6 +47557,11 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "LOINC",
+          "code": "8310-5",
+          "display": "Body temperature"
+        },
+        {
+          "system": "LOINC",
           "code": "8331-1",
           "display": "Oral temperature"
         }
@@ -47540,6 +47580,11 @@ export default {"allergic_rhinitis":{
       ],
       "unit": "Cel",
       "codes": [
+        {
+          "system": "LOINC",
+          "code": "8310-5",
+          "display": "Body temperature"
+        },
         {
           "system": "LOINC",
           "code": "8331-1",
@@ -47585,8 +47630,8 @@ export default {"allergic_rhinitis":{
                 "codes": [
                   {
                     "system": "LOINC",
-                    "code": "8331-1",
-                    "display": "Oral temperature"
+                    "code": "8310-5",
+                    "display": "Body temperature"
                   }
                 ],
                 "operator": ">",
@@ -47636,8 +47681,8 @@ export default {"allergic_rhinitis":{
                 "codes": [
                   {
                     "system": "LOINC",
-                    "code": "8331-1",
-                    "display": "Oral temperature"
+                    "code": "8310-5",
+                    "display": "Body temperature"
                   }
                 ],
                 "operator": ">",
@@ -56720,7 +56765,7 @@ export default {"allergic_rhinitis":{
       "codes": [
         {
           "system": "LOINC",
-          "code": "55284-4",
+          "code": "85354-9",
           "display": "Blood Pressure"
         }
       ],
@@ -56750,7 +56795,7 @@ export default {"allergic_rhinitis":{
           "unit": "mm[Hg]"
         }
       ],
-      "direct_transition": "Lab_MetabolicPanel"
+      "direct_transition": "Record_Heart_Rate"
     },
     "Record_MetabolicPanel": {
       "type": "DiagnosticReport",
@@ -57414,6 +57459,19 @@ export default {"allergic_rhinitis":{
         }
       ],
       "attribute": "current_weight_length_percentile",
+      "direct_transition": "Record Head Circumference"
+    },
+    "Record Head Circumference": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "cm",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "9843-4",
+          "display": "Head Occipital-frontal circumference"
+        }
+      ],
       "conditional_transition": [
         {
           "transition": "Record_BMI",
@@ -57427,7 +57485,36 @@ export default {"allergic_rhinitis":{
         {
           "transition": "Record_BP"
         }
-      ]
+      ],
+      "vital_sign": "Head Circumference"
+    },
+    "Record_Heart_Rate": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "/min",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "8867-4",
+          "display": "Heart rate"
+        }
+      ],
+      "direct_transition": "Record_Respiratory_Rate",
+      "vital_sign": "Heart Rate"
+    },
+    "Record_Respiratory_Rate": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "/min",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "9279-1",
+          "display": "Respiratory rate"
+        }
+      ],
+      "direct_transition": "Lab_MetabolicPanel",
+      "vital_sign": "Respiration Rate"
     }
   }
 }

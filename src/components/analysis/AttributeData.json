@@ -1,0 +1,4469 @@
+{
+    "3decho": {
+      "read": {
+        "Congestive Heart Failure": [
+          "Furosemide"
+        ]
+      },
+      "write": {
+        "Congestive Heart Failure": [
+          "Reset 3D Echo",
+          "Set 3D Echo"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "AGE": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Numeric"
+      ]
+    },
+    "AGE_MONTHS": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Numeric"
+      ]
+    },
+    "Alzheimer's Medication": {
+      "read": {
+        "Dementia": [
+          "EndFirstPrescription",
+          "ModeratelySevere_MMSE_Score"
+        ]
+      },
+      "write": {
+        "Dementia": [
+          "FirstPrescription1",
+          "FirstPrescription2",
+          "FirstPrescription3"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "BMI": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Obese_Check"
+        ],
+        "Oral Contraceptive": [
+          "Combination_Or_Minipill"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "Breast Cancer": {
+      "read": {
+        "chemotherapy_breast": [
+          "Start New Cycle"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "CF_Complication": {
+      "read": {
+        "Cystic Fibrosis": [
+          "Emergency_Room"
+        ]
+      },
+      "write": {
+        "Cystic Fibrosis": [
+          "Sepsis_Of_Paeruginosa",
+          "Sepsis_of_Staphylococcus_aureus",
+          "pulmonary_exacerbation"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "Cystic_Fibrosis": {
+      "read": {},
+      "write": {
+        "Cystic Fibrosis": [
+          "Cystic_Fibrosis"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "DALY": {
+      "read": {
+        "QualityOfLifeModule": []
+      },
+      "write": {
+        "QualityOfLifeModule": []
+      },
+      "example_values": [
+        "LinkedHashMap<Integer, Double>"
+      ]
+    },
+    "ER_PR_medication": {
+      "read": {
+        "hormonetherapy_breast": [
+          "ER_PR_medication_end"
+        ]
+      },
+      "write": {
+        "hormonetherapy_breast": [
+          "Abemaciclib",
+          "Palbociclib",
+          "Ribociclib"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "ER_medication": {
+      "read": {
+        "hormonetherapy_breast": [
+          "ER_medication_end"
+        ]
+      },
+      "write": {
+        "hormonetherapy_breast": [
+          "Anastrozole",
+          "Exemestane",
+          "Fulvestrant",
+          "Letrozole",
+          "Tamoxifen"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "Early menopause due to treatment": {
+      "read": {
+        "Breast_cancer": [
+          "Bone Followup"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "G155D Mutation": {
+      "read": {},
+      "write": {
+        "Cystic Fibrosis": [
+          "Set_Gene_Mutation"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "Glucose": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Blood_Sugar_Check"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "HER2_medication": {
+      "read": {
+        "hormonetherapy_breast": [
+          "HER2_medication_end"
+        ]
+      },
+      "write": {
+        "hormonetherapy_breast": [
+          "Ado_trastuzumab_emtansine",
+          "Lapatinib",
+          "Neratinib",
+          "Trastuzumab_her2"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "Lung Cancer": {
+      "read": {
+        "Lung Cancer": [
+          "Diagnosis Encounter III",
+          "Stage I",
+          "Stage II",
+          "Stage III",
+          "Stage IV"
+        ],
+        "Veteran Lung Cancer": [
+          "Diagnosis Encounter III",
+          "Stage I",
+          "Stage II",
+          "Stage III",
+          "Stage IV"
+        ]
+      },
+      "write": {
+        "Lung Cancer": [
+          "NSCLC",
+          "SCLC"
+        ],
+        "Veteran Lung Cancer": [
+          "NSCLC",
+          "SCLC"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "Lung Cancer Condition": {
+      "read": {
+        "Lung Cancer": [
+          "Diagnosis Encounter IV",
+          "Lung_Cancer_CarePlan",
+          "MRI Brain",
+          "NSCLC Chemotheraphy I",
+          "NSCLC Chemotheraphy II",
+          "NSCLC Radiation",
+          "SCLC Chemotheraphy I",
+          "SCLC Chemotheraphy II",
+          "SCLC Radiation",
+          "SCLC Treatment Encounter"
+        ],
+        "Veteran Lung Cancer": [
+          "Diagnosis Encounter IV",
+          "Lung_Cancer_CarePlan",
+          "MRI Brain",
+          "NSCLC Chemotheraphy I",
+          "NSCLC Chemotheraphy II",
+          "NSCLC Radiation",
+          "SCLC Chemotheraphy I",
+          "SCLC Chemotheraphy II",
+          "SCLC Radiation",
+          "SCLC Treatment Encounter"
+        ]
+      },
+      "write": {
+        "Lung Cancer": [
+          "NSCLC I",
+          "NSCLC II",
+          "NSCLC III",
+          "NSCLC IV",
+          "SCLC I",
+          "SCLC II",
+          "SCLC III",
+          "SCLC IV"
+        ],
+        "Veteran Lung Cancer": [
+          "NSCLC I",
+          "NSCLC II",
+          "NSCLC III",
+          "NSCLC IV",
+          "SCLC I",
+          "SCLC II",
+          "SCLC III",
+          "SCLC IV"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "Lung Cancer Type": {
+      "read": {
+        "Lung Cancer": [
+          "End_Diagnosis_Encounter_IV",
+          "Stage I",
+          "Stage II",
+          "Stage III",
+          "Stage IV"
+        ],
+        "Veteran Lung Cancer": [
+          "End_Diagnosis_Encounter_IV",
+          "Stage I",
+          "Stage II",
+          "Stage III",
+          "Stage IV"
+        ]
+      },
+      "write": {
+        "Lung Cancer": [
+          "Non-Small Cell Lung Cancer",
+          "Small Cell Lung Cancer"
+        ],
+        "Veteran Lung Cancer": [
+          "Non-Small Cell Lung Cancer",
+          "Small Cell Lung Cancer"
+        ]
+      },
+      "example_values": [
+        "\"NSCLC\"",
+        "\"SCLC\""
+      ]
+    },
+    "MDD care plan": {
+      "read": {},
+      "write": {
+        "Veteran MDD": [
+          "MDD_Initial_Careplan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "Memory Loss": {
+      "read": {
+        "Dementia": [
+          "MildDecline",
+          "ModerateDecline"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "Mucus": {
+      "read": {
+        "Bronchitis": [
+          "OTC_Medicine"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "OTC_Bronchitis_Med": {
+      "read": {
+        "Bronchitis": [
+          "Bronchitis_Symptom3_Subsides",
+          "End_OTC_Medication"
+        ]
+      },
+      "write": {
+        "Bronchitis": [
+          "Acetaminophen",
+          "Cough_suppressant"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "QALY": {
+      "read": {
+        "QualityOfLifeModule": []
+      },
+      "write": {
+        "QualityOfLifeModule": []
+      },
+      "example_values": [
+        "LinkedHashMap<Integer, Double>"
+      ]
+    },
+    "QOLS": {
+      "read": {
+        "QualityOfLifeModule": []
+      },
+      "write": {
+        "QualityOfLifeModule": []
+      },
+      "example_values": [
+        "LinkedHashMap<Integer, Double>"
+      ]
+    },
+    "RH_NEG": {
+      "read": {
+        "Pregnancy": [
+          "Abortion_Followup_Encounter",
+          "Miscarriage_Followup_Encounter",
+          "Postnatal_Visit",
+          "Week_28_Visit"
+        ]
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Boolean"
+      ]
+    },
+    "SSRI": {
+      "read": {
+        "Veteran PTSD": [
+          "PTSD_Careplan_Psych_and_Rx",
+          "PTSD_Careplan_Rx_ONLY",
+          "PTSD_Careplan_Telehealth_Psych_and_Rx",
+          "end re_evaluation_medication"
+        ]
+      },
+      "write": {
+        "Veteran PTSD": [
+          "PTSD Medication Order"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "Sinusitis Condition": {
+      "read": {
+        "Sinusitis": [
+          "Chronic_Sinusitis_Followup",
+          "Doctor_Visit",
+          "Prescribe_Antibiotic",
+          "Sinusitis_Ends"
+        ]
+      },
+      "write": {
+        "Sinusitis": [
+          "Bacterial_Infection_Starts",
+          "Inflammation_Starts",
+          "Viral_Infection_Starts"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "Sore Throat Antibiotic": {
+      "read": {
+        "Sore Throat": [
+          "Condition_Resolves",
+          "End_Antibiotics"
+        ]
+      },
+      "write": {
+        "Sore Throat": [
+          "Prescribe_Antibiotics_Adult",
+          "Prescribe_Antibiotics_Child"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "Sore Throat Condition": {
+      "read": {
+        "Sore Throat": [
+          "Condition_Resolves",
+          "Doctor_Visit",
+          "Prescribe_Antibiotics_Adult",
+          "Prescribe_Antibiotics_Child",
+          "Throat_Culture"
+        ]
+      },
+      "write": {
+        "Sore Throat": [
+          "Acquire_Bacterial_Infection",
+          "Acquire_Viral_Infection"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "Suspected Lung Cancer": {
+      "read": {},
+      "write": {
+        "Lung Cancer": [
+          "Suspected Lung Cancer"
+        ],
+        "Veteran Lung Cancer": [
+          "Suspected Lung Cancer"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "Systolic Blood Pressure": {
+      "read": {
+        "Hypertension": [
+          "LifeStyle_Modifications_Hypertension_CarePlan"
+        ],
+        "Oral Contraceptive": [
+          "Combination_Or_Minipill"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "Triglycerides": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Triglyceride_Check"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "Type of Alzheimer's": {
+      "read": {
+        "Dementia": [
+          "Death",
+          "Dementia_CarePlan",
+          "FirstPrescription1",
+          "FirstPrescription2",
+          "FirstPrescription3",
+          "ModeratelySevere_Encounter",
+          "SecondPrescription1",
+          "SecondPrescription2",
+          "SecondPrescription3",
+          "Severe_Encounter",
+          "VerySevere_Encounter"
+        ]
+      },
+      "write": {
+        "Dementia": [
+          "AlzheimersOnset",
+          "EarlyOnsetAlzheimersOnset"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "Unusual Vaginal Bleeding": {
+      "read": {
+        "Breast_cancer": [
+          "Pelvic Followup"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "active_emergency_encounter": {
+      "read": {},
+      "write": {
+        "EncounterModule": []
+      },
+      "example_values": [
+        "Boolean"
+      ]
+    },
+    "active_urgent_care_encounter": {
+      "read": {},
+      "write": {
+        "EncounterModule": []
+      },
+      "example_values": [
+        "Boolean"
+      ]
+    },
+    "active_wellness_encounter": {
+      "read": {},
+      "write": {
+        "EncounterModule": []
+      },
+      "example_values": [
+        "Boolean"
+      ]
+    },
+    "address": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "adhd_medication": {
+      "read": {
+        "Attention Deficit Disorder": [
+          "ADHD_CarePlan_Ends",
+          "End_ADHD_Medication"
+        ]
+      },
+      "write": {
+        "Attention Deficit Disorder": [
+          "Ritalin",
+          "Strattera"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "adherence": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {},
+      "example_values": []
+    },
+    "adherence probability": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "1.0"
+      ]
+    },
+    "adv_drug": {
+      "read": {
+        "Surgery_Therapy_Breast": [
+          "End Advanced Drug Medication",
+          "End Pamidronate Medication"
+        ]
+      },
+      "write": {
+        "Surgery_Therapy_Breast": [
+          "Denosumab",
+          "Pamidronate",
+          "Zoledronic_Acid"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "alcoholic": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Boolean"
+      ]
+    },
+    "alcoholism": {
+      "read": {
+        "Veteran Substance Abuse Treatment": [
+          "Alcohol Check"
+        ]
+      },
+      "write": {
+        "Veteran Substance Abuse Conditions": [
+          "Alcohol Dependence",
+          "No Alcohol Dependence"
+        ],
+        "Veteran Substance Abuse Treatment": [
+          "alcoholism symptom post treatment"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "allergic_rhinitis": {
+      "read": {
+        "Allergic Rhinitis": [
+          "Allergic_Rhinitis_Diagnosis",
+          "Allergic_Rhinitis_Subsides"
+        ]
+      },
+      "write": {
+        "Allergic Rhinitis": [
+          "Has_Perennial_Allergic_Rhinitis",
+          "Has_Perennial_And_Seasonal_Allergic_Rhinitis",
+          "Has_Seasonal_Allergic_Rhinitis"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "anemia": {
+      "read": {
+        "Anemia - Unknown Etiology": [
+          "Anemia_End",
+          "Check_Anemia_Exist"
+        ],
+        "COPD": [
+          "Check_Anemia_Exist"
+        ],
+        "Colorectal Cancer": [
+          "Check_Anemia_Exist"
+        ],
+        "Congestive Heart Failure": [
+          "Check_Anemia_Exist"
+        ],
+        "Cystic Fibrosis": [
+          "Check_Anemia_Exist"
+        ],
+        "Dialysis": [
+          "Check_Anemia_Exist",
+          "Dialysis",
+          "Prescribe_EPOGEN Ref-RxNorm"
+        ],
+        "Hypothyroidism": [
+          "Check_Anemia_Exist"
+        ],
+        "Lung Cancer": [
+          "Check_Anemia_Exist"
+        ],
+        "Lupus": [
+          "Check_Anemia_Exist"
+        ],
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Anemia_Exist"
+        ],
+        "Pregnancy": [
+          "Anemia_End",
+          "Anemia_End_2",
+          "Check_Anemia_Exist"
+        ],
+        "anemia_sub": [
+          "Anemia_Encounter",
+          "Transfusion_Encounter"
+        ]
+      },
+      "write": {
+        "anemia_sub": [
+          "Anemia"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "anemia_medication": {
+      "read": {
+        "Dialysis": [
+          "Epogen_Administered"
+        ]
+      },
+      "write": {
+        "Dialysis": [
+          "Prescribe_EPOGEN Ref-RxNorm"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "anemia_pregnancy": {
+      "read": {
+        "Pregnancy": [
+          "Miscarriage_Ends",
+          "Normal_Pregnancy_Ends"
+        ]
+      },
+      "write": {
+        "Pregnancy": [
+          "Remove_Anemia_Pregnacy",
+          "Remove_Anemia_Pregnacy_2",
+          "Set_Anemia_Pregnancy"
+        ]
+      },
+      "example_values": [
+        "0",
+        "1"
+      ]
+    },
+    "antibiotic_prescription": {
+      "read": {
+        "Ear Infection Antibiotic": [
+          "Initial"
+        ],
+        "Ear Infections": [
+          "End_Antibiotic_Prescription",
+          "End_Ear_Infection_Medications"
+        ],
+        "Injuries": [
+          "End_Antibiotic_Prescription",
+          "End_Injury_Medications"
+        ]
+      },
+      "write": {
+        "Ear Infection Antibiotic": [
+          "Adult_Amoxicillin",
+          "Adult_Cefaclor",
+          "Adult_Doxycycline",
+          "Pediatric_Amoxicillin",
+          "Pediatric_Cefaclor",
+          "Pediatric_Doxycycline",
+          "Prescribe_Ampicillin",
+          "Prescribe_Cefuroxime",
+          "Prescribe_Penicillin"
+        ],
+        "Ear Infections": [
+          "Unset_Antibiotic_Prescription_Attribute"
+        ],
+        "Injuries": [
+          "Unset_Antibiotic_Prescription_Attribute"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "arthritis_careplan": {
+      "read": {},
+      "write": {
+        "Osteoarthritis": [
+          "OA_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "assessment_done": {
+      "read": {
+        "Functional Status Assessments": [
+          "Perform_Functional_Status_Assessment_Hip",
+          "Perform_Functional_Status_Assessment_Knee"
+        ]
+      },
+      "write": {
+        "Functional Status Assessments": [
+          "HOOS_Attribute_Set",
+          "KOOS_Attribute_Set",
+          "PROMIS10_Attribute_Set",
+          "PROMIS29_Attribute_Set",
+          "VR12_Attribute_Set",
+          "VR36_Attribute_Set"
+        ]
+      },
+      "example_values": [
+        "\"HOOS\"",
+        "\"KOOS\"",
+        "\"PROMIS-10\"",
+        "\"PROMIS-29\"",
+        "\"VR-12\"",
+        "\"VR-36\""
+      ]
+    },
+    "asthma_careplan": {
+      "read": {
+        "Asthma": [
+          "End_Asthma_CarePlan"
+        ]
+      },
+      "write": {
+        "Asthma": [
+          "Nonsmoker_CarePlan",
+          "Smoker_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "asthma_condition": {
+      "read": {
+        "Asthma": [
+          "Asthma_Attack_Followup",
+          "Asthma_Diagnosis",
+          "Asthma_ED_Visit",
+          "Asthma_Screening",
+          "Childhood_Asthma_Becomes_Lifelong_Asthma",
+          "Childhood_Asthma_Subsides",
+          "Nonsmoker_CarePlan",
+          "Prescribe_Emergency_Inhaler",
+          "Prescribe_Maintenance_Inhaler",
+          "Smoker_CarePlan"
+        ]
+      },
+      "write": {
+        "Asthma": [
+          "Adult_Asthma_Begins",
+          "Childhood_Asthma_Begins",
+          "Lifelong_Asthma_Begins"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "asthma_type": {
+      "read": {
+        "Asthma": [
+          "Maintaining_Asthma"
+        ]
+      },
+      "write": {
+        "Asthma": [
+          "Lifelong_Asthma",
+          "Set_Adult_Asthma",
+          "Set_Childhood_Asthma"
+        ]
+      },
+      "example_values": [
+        "\"childhood\"",
+        "\"lifelong\""
+      ]
+    },
+    "atopic": {
+      "read": {
+        "Allergic Rhinitis": [
+          "Delay_For_Atopy"
+        ],
+        "Allergy Incidence": [
+          "Chance_of_Bee_Allergy",
+          "Chance_of_Dairy_Allergy",
+          "Chance_of_Dust_Mite_Allergy",
+          "Chance_of_Eggs_Allergy",
+          "Chance_of_Fish_Allergy",
+          "Chance_of_Grass_Pollen_Allergy",
+          "Chance_of_Latex_Allergy",
+          "Chance_of_Mold_Allergy",
+          "Chance_of_Peanut_Allergy",
+          "Chance_of_Pet_Dander_Allergy",
+          "Chance_of_Shellfish_Allergy",
+          "Chance_of_Soy_Allergy",
+          "Chance_of_TreeNut_Allergy",
+          "Chance_of_Tree_Pollen_Allergy",
+          "Chance_of_Wheat_Allergy"
+        ],
+        "Asthma": [
+          "Delay_For_Atopy"
+        ],
+        "Dermatitis": [
+          "Delay_For_Atopy"
+        ],
+        "Food Allergies": [
+          "Allergic_Reaction_To_Food"
+        ]
+      },
+      "write": {
+        "Atopy": [
+          "Is_Atopic"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "atrial_fibrillation": {
+      "read": {
+        "CardiovascularDiseaseModule": []
+      },
+      "write": {
+        "CardiovascularDiseaseModule": []
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "atrial_fibrillation_risk": {
+      "read": {
+        "CardiovascularDiseaseModule": []
+      },
+      "write": {
+        "CardiovascularDiseaseModule": []
+      },
+      "example_values": [
+        "Numeric"
+      ]
+    },
+    "birth_city": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Bedford"
+      ]
+    },
+    "birth_country": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "USA"
+      ]
+    },
+    "birth_state": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Massachusetts"
+      ]
+    },
+    "birth_type": {
+      "read": {
+        "Pregnancy": [
+          "Give_Birth"
+        ]
+      },
+      "write": {
+        "Pregnancy": [
+          "Emergency_CS",
+          "Induced_Birth",
+          "Normal_Birth",
+          "Premature_Birth"
+        ]
+      },
+      "example_values": [
+        "\"induced\"",
+        "\"normal\"",
+        "\"premature\""
+      ]
+    },
+    "birthdate": {
+      "read": {
+        "Asthma": [
+          "Asthma_CarePlan_Selector",
+          "Maintaining_Asthma"
+        ],
+        "Attention Deficit Disorder": [
+          "End_Behavior_Treatment_Encounter"
+        ],
+        "Bronchitis": [
+          "Bronchitis_CarePlan_Selector",
+          "Potential_Infection"
+        ],
+        "COPD": [
+          "Consider_Surgery"
+        ],
+        "Colorectal Cancer": [
+          "Routine_Colonoscopy_Procedure",
+          "Wait_For_Next_Routine_Colonoscopy"
+        ],
+        "Congestive Heart Failure": [
+          "chance of CHF"
+        ],
+        "Contraceptives": [
+          "Female_Contraceptive_Use",
+          "Reset_Contraceptive_Use",
+          "Using_Sterilization"
+        ],
+        "Cystic Fibrosis": [
+          "End_Screening",
+          "Life_With_Cystic_Fibrosis",
+          "Quarterly_Checkup",
+          "startDiseaseChain"
+        ],
+        "Dermatitis": [
+          "Dermatologist_Visit_For_Flare_Up",
+          "Living_With_Dermatitis"
+        ],
+        "Ear Infection Antibiotic": [
+          "Prescribe_Amoxicillin",
+          "Prescribe_Cefaclor",
+          "Prescribe_Doxycycline"
+        ],
+        "Ear Infections": [
+          "No_Infection"
+        ],
+        "Female Reproduction": [
+          "Female_Reproductive_Cycle"
+        ],
+        "Food Allergies": [
+          "Living_With_Food_Allergies",
+          "Potential_Allergic_Reaction_To_Food"
+        ],
+        "Injuries": [
+          "Consider_Osteoporosis",
+          "Wait_For_Injury"
+        ],
+        "Moderate Opioid Pain Reliever": [
+          "Initial"
+        ],
+        "Over-The-Counter Antihistamine": [
+          "Prescribe_Cetirizine",
+          "Prescribe_Chlorphenamine",
+          "Prescribe_Fexofenadine",
+          "Prescribe_Loratadine"
+        ],
+        "Over-The-Counter Pain Reliever": [
+          "Prescribe_Acetaminophen",
+          "Prescribe_Ibuprofen",
+          "Prescribe_Naproxen_Sodium"
+        ],
+        "Pregnancy": [
+          "Fetal_Viability_Ultrasound"
+        ],
+        "QualityOfLifeModule": [],
+        "Sexual Activity": [
+          "Female_Sexual_Activity",
+          "Male_Sexual_Activity",
+          "Old_Age_Check"
+        ],
+        "Sore Throat": [
+          "Potential_Infection",
+          "Prescribe_Antibiotics"
+        ],
+        "Strong Opioid Pain Reliever": [
+          "Initial"
+        ],
+        "Wellness Encounters": [
+          "Lab_LipidPanel",
+          "Record Head Circumference",
+          "Record_BMI",
+          "Record_Weight"
+        ]
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "birthplace": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Boston"
+      ]
+    },
+    "blindness": {
+      "read": {
+        "HealthInsuranceModule": [],
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Blindness"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Set_Blindness"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "blood_pressure_controlled": {
+      "read": {
+        "CardiovascularDiseaseModule": [],
+        "Hypertension": [
+          "End_Hypertension_Followup_Encounter",
+          "End_Hypertension_Followup_Encounter_2",
+          "Record_BP",
+          "Record_BP_2",
+          "Record_BP_3"
+        ]
+      },
+      "write": {
+        "Hypertension": [
+          "Set_BP_Controlled",
+          "Set_BP_Controlled_2",
+          "Set_BP_Controlled_3",
+          "Set_BP_Not Controlled"
+        ]
+      },
+      "example_values": [
+        "false",
+        "true"
+      ]
+    },
+    "bmi_percentile": {
+      "read": {
+        "Wellness Encounters": [
+          "Record_BMI_Percentile"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "breast_cancer_ER": {
+      "read": {
+        "Hormone_Diagnosis": [
+          "Overall_Receptor_Analysis"
+        ],
+        "hormonetherapy_breast": [
+          "ER-encounter",
+          "Hormone_Receptor_Positive_Treatments"
+        ]
+      },
+      "write": {
+        "Hormone_Diagnosis": [
+          "ER+",
+          "ER-"
+        ]
+      },
+      "example_values": [
+        "\"ER-negative\"",
+        "\"ER-positive\""
+      ]
+    },
+    "breast_cancer_HER2": {
+      "read": {
+        "Hormone_Diagnosis": [
+          "Hormone Receptor Negative"
+        ],
+        "hormonetherapy_breast": [
+          "HER2-Treatment"
+        ]
+      },
+      "write": {
+        "Hormone_Diagnosis": [
+          "HER2+",
+          "HER2-"
+        ]
+      },
+      "example_values": [
+        "\"HER2-negative\"",
+        "\"HER2-positive\""
+      ]
+    },
+    "breast_cancer_Location": {
+      "read": {
+        "TNM_Diagnosis": [
+          "N Marker"
+        ]
+      },
+      "write": {
+        "TNM_Diagnosis": [
+          "Distant Breast Cancer",
+          "Local Breast Cancer",
+          "Regional Breast Cancer"
+        ]
+      },
+      "example_values": [
+        "\"distant\"",
+        "\"local\"",
+        "\"regional\""
+      ]
+    },
+    "breast_cancer_M": {
+      "read": {
+        "Breast_cancer": [
+          "Staging"
+        ],
+        "TNM_Diagnosis": [
+          "N Marker"
+        ]
+      },
+      "write": {
+        "TNM_Diagnosis": [
+          "M0",
+          "M1"
+        ]
+      },
+      "example_values": [
+        "\"M0\"",
+        "\"M1\""
+      ]
+    },
+    "breast_cancer_N": {
+      "read": {
+        "Breast_cancer": [
+          "Early_Stage",
+          "Nonaggressive",
+          "Nonmetastatic"
+        ],
+        "Surgery_Therapy_Breast": [
+          "Surgery encounter"
+        ]
+      },
+      "write": {
+        "TNM_Diagnosis": [
+          "N0",
+          "N1",
+          "N2",
+          "N3"
+        ]
+      },
+      "example_values": [
+        "\"N0\"",
+        "\"N1\"",
+        "\"N2\"",
+        "\"N3\""
+      ]
+    },
+    "breast_cancer_PR": {
+      "read": {
+        "Hormone_Diagnosis": [
+          "Overall_Receptor_Analysis"
+        ],
+        "hormonetherapy_breast": [
+          "ER-encounter",
+          "Hormone_Receptor_Positive_Treatments"
+        ]
+      },
+      "write": {
+        "Hormone_Diagnosis": [
+          "PR+",
+          "PR-"
+        ]
+      },
+      "example_values": [
+        "\"PR-negative\"",
+        "\"PR-positive\""
+      ]
+    },
+    "breast_cancer_T": {
+      "read": {
+        "Breast_cancer": [
+          "Early_Stage",
+          "Nonaggressive",
+          "Nonmetastatic"
+        ],
+        "Surgery_Therapy_Breast": [
+          "End_Lymph_Node_Surgery"
+        ]
+      },
+      "write": {
+        "TNM_Diagnosis": [
+          "T0",
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ]
+      },
+      "example_values": [
+        "\"T0\"",
+        "\"T1\"",
+        "\"T2\"",
+        "\"T3\"",
+        "\"T4\""
+      ]
+    },
+    "breast_cancer_aromatase_inhibitors": {
+      "read": {
+        "Breast_cancer": [
+          "Bone Followup"
+        ]
+      },
+      "write": {
+        "hormonetherapy_breast": [
+          "Aromatase Inhibitors (AI)"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "breast_cancer_chemoCount": {
+      "read": {
+        "chemotherapy_breast": [
+          "End Current Chemo Treatment"
+        ]
+      },
+      "write": {
+        "chemotherapy_breast": [
+          "Increment Chemo Counter",
+          "Set chemo counter"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "breast_cancer_condition": {
+      "read": {
+        "Breast_cancer": [
+          "Bone Exam",
+          "Bone Exam Visit",
+          "Doxorubicin",
+          "Epirubicin",
+          "Gynecologist Visit",
+          "Impending Death from Cancer Complications",
+          "Initial Follow-Up Doctor Visit",
+          "Mammogram Followup Visit",
+          "Neoadjuvant Chemo Before Surgery",
+          "Neoadjuvant chemotherapy procedure",
+          "Paclitaxel",
+          "Pap Smear",
+          "Pelvic Exam",
+          "Post-Surgery Mammogram",
+          "Sit-Down with Oncologist to Discuss Treatment Options",
+          "Start New Chemo Cycle"
+        ],
+        "Hormone_Diagnosis": [
+          "Human_Epidermal_Growth_Factor_Receptor_2_HER2_Detection_Immunochemistry",
+          "Human_Epidermal_Growth_Factor_Receptor_2__HER2__Detection___Fluorescence_in_situ_Hybridization__FISH_"
+        ],
+        "Surgery_Therapy_Breast": [
+          "Advanced Drugs IV Injection",
+          "Axillary_Lymph_Node_Dissection__ALND_",
+          "Brachytherapy",
+          "Breast-conserving surgery (BCS)",
+          "Denosumab",
+          "Excision_Of_Sentinel_Lymph_Node",
+          "External Beam Radiation",
+          "Hypofractionated radiation therapy",
+          "Interstitial Brachytherapy",
+          "Intracavitary brachytherapy",
+          "Intraoperative radiation therapy (IORT)",
+          "Mastectomy",
+          "Pamidronate",
+          "Pamidronate IV Injection",
+          "Sentinel_Lymph_Node_Biopsy__SLNB_",
+          "Zoledronic_Acid"
+        ],
+        "chemotherapy_breast": [
+          "5-fluorouracil",
+          "Carboplatin",
+          "Cyclophosphamide",
+          "Doxorubicin",
+          "Epirubicin",
+          "Paclitaxel"
+        ],
+        "hormonetherapy_breast": [
+          "Abemaciclib",
+          "Ado_trastuzumab_emtansine",
+          "Anastrozole",
+          "Exemestane",
+          "Fulvestrant",
+          "Lapatinib",
+          "Letrozole",
+          "Neratinib",
+          "Palbociclib",
+          "Ribociclib",
+          "Tamoxifen",
+          "Trastuzumab_her2"
+        ]
+      },
+      "write": {
+        "Breast_cancer": [
+          "Breast Cancer",
+          "Breast Cancer Found"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "breast_cancer_init_followup_counter": {
+      "read": {
+        "Breast_cancer": [
+          "Initial Follow-Up Counter"
+        ]
+      },
+      "write": {
+        "Breast_cancer": [
+          "Initial Follow-Up Counter",
+          "Initialize Initial Follow-Up Counter",
+          "Reset Initial Follow-Up Counter"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "breast_cancer_neoCount": {
+      "read": {
+        "Breast_cancer": [
+          "End_Neoadjuvant_Chemo_Treatment"
+        ]
+      },
+      "write": {
+        "Breast_cancer": [
+          "Increment pre-surgery chemo counter",
+          "Set pre-surgery chemo counter"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "breast_cancer_neoMed": {
+      "read": {
+        "Breast_cancer": [
+          "End Neodjuvant Medication in Preparation for Surgery"
+        ]
+      },
+      "write": {
+        "Breast_cancer": [
+          "Doxorubicin",
+          "Epirubicin",
+          "Paclitaxel"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "breast_cancer_survival": {
+      "read": {
+        "Breast_cancer": [
+          "End Treatment"
+        ]
+      },
+      "write": {
+        "Breast_cancer": [
+          "Treatment Successful",
+          "Treatment Unsuccessful"
+        ]
+      },
+      "example_values": [
+        "\"no\"",
+        "\"yes\""
+      ]
+    },
+    "breast_cancer_tamoxifen": {
+      "read": {
+        "Breast_cancer": [
+          "Pelvic Followup"
+        ]
+      },
+      "write": {
+        "hormonetherapy_breast": [
+          "Estrogen Blocking Receptors"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "breast_cancer_treat_count": {
+      "read": {
+        "Surgery_Therapy_Breast": [
+          "End Current Advanced Drug Infusion",
+          "End Current Radiation Visit"
+        ]
+      },
+      "write": {
+        "Surgery_Therapy_Breast": [
+          "Increment Radiation Treatment Count",
+          "Increment treatment counter",
+          "Initialize Breast Surgery Treatment Counter"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "breast_cancer_triple_negative": {
+      "read": {
+        "Breast_cancer": [
+          "Choose_Treatment_Option"
+        ],
+        "Surgery_Therapy_Breast": [
+          "BCS Follow-Up Treatment",
+          "Mastectomy Follow-Up Therapy",
+          "chemo"
+        ]
+      },
+      "write": {
+        "Hormone_Diagnosis": [
+          "Triple_Negative_Patient"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "breast_cancer_years_after_treatment": {
+      "read": {
+        "Breast_cancer": [
+          "Initial Follow-Up Counter",
+          "Years After Treatment Counter"
+        ]
+      },
+      "write": {
+        "Breast_cancer": [
+          "Initialize Years After Treatment Counter",
+          "Years After Treatment Counter"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "broken_bone": {
+      "read": {
+        "Injuries": [
+          "Broken_Bone_CarePlan",
+          "Broken_Bone_Immobilization",
+          "Broken_Bone_Injury_Followup",
+          "Broken_Bone_Surgery",
+          "End_Broken_Bone_Injury",
+          "Osteoporosis_Workup"
+        ]
+      },
+      "write": {
+        "Injuries": [
+          "Broken_Ankle",
+          "Broken_Arm",
+          "Broken_Clavicle",
+          "Broken_Hip",
+          "Broken_Rib",
+          "Broken_Wrist"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "bronchitis_careplan": {
+      "read": {
+        "Bronchitis": [
+          "End_Bronchitis_CarePlan"
+        ]
+      },
+      "write": {
+        "Bronchitis": [
+          "Nonsmoker_CarePlan",
+          "Smoker_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "burn_injury": {
+      "read": {
+        "Injuries": [
+          "Burn_CarePlan",
+          "Burn_Injury_Followup",
+          "Death_Severe_Burn",
+          "End_Burn_Injury",
+          "Severe_Burn_Care",
+          "Severe_Burn_Hospitalization"
+        ]
+      },
+      "write": {
+        "Injuries": [
+          "Deadly_Burn",
+          "First_Degree_Burn",
+          "Second_Degree_Burn",
+          "Third_Degree_Burn"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "cardio_risk": {
+      "read": {
+        "CardiovascularDiseaseModule": []
+      },
+      "write": {
+        "CardiovascularDiseaseModule": []
+      },
+      "example_values": [
+        "1.0"
+      ]
+    },
+    "cardiovascular_disease_med_changes": {
+      "read": {
+        "CardiovascularDiseaseModule": []
+      },
+      "write": {
+        "CardiovascularDiseaseModule": []
+      },
+      "example_values": [
+        "Set<String>"
+      ]
+    },
+    "cardiovascular_procedures": {
+      "read": {
+        "CardiovascularDiseaseModule": []
+      },
+      "write": {
+        "CardiovascularDiseaseModule": []
+      },
+      "example_values": [
+        "Map<String, List<String>>"
+      ]
+    },
+    "cause_of_death": {
+      "read": {
+        "DeathModule": []
+      },
+      "write": {},
+      "example_values": []
+    },
+    "chemoMed": {
+      "read": {
+        "chemotherapy_breast": [
+          "End Current Adjuvant Chemo Medication"
+        ]
+      },
+      "write": {
+        "chemotherapy_breast": [
+          "5-fluorouracil",
+          "Carboplatin",
+          "Cyclophosphamide",
+          "Doxorubicin",
+          "Epirubicin",
+          "Paclitaxel"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "chemotherapy1": {
+      "read": {
+        "Lung Cancer": [
+          "NSCLC Chemotheraphy IB",
+          "SCLC Chemotheraphy IB"
+        ],
+        "Veteran Lung Cancer": [
+          "NSCLC Chemotheraphy IB",
+          "SCLC Chemotheraphy IB"
+        ]
+      },
+      "write": {
+        "Lung Cancer": [
+          "NSCLC Chemotheraphy I",
+          "SCLC Chemotheraphy I"
+        ],
+        "Veteran Lung Cancer": [
+          "NSCLC Chemotheraphy I",
+          "SCLC Chemotheraphy I"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "chemotherapy2": {
+      "read": {
+        "Lung Cancer": [
+          "NSCLC Chemotheraphy IIB",
+          "SCLC Chemotheraphy IIB"
+        ],
+        "Veteran Lung Cancer": [
+          "NSCLC Chemotheraphy IIB",
+          "SCLC Chemotheraphy IIB"
+        ]
+      },
+      "write": {
+        "Lung Cancer": [
+          "NSCLC Chemotheraphy II",
+          "SCLC Chemotheraphy II"
+        ],
+        "Veteran Lung Cancer": [
+          "NSCLC Chemotheraphy II",
+          "SCLC Chemotheraphy II"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "chf": {
+      "read": {
+        "Congestive Heart Failure": [
+          "CHF Medication Start 1",
+          "CHF Medication Start 2",
+          "CHF careplan",
+          "CHF careplan for smokers",
+          "CHF initial workup encounter",
+          "Daily Self-Measurement Encounter",
+          "Furosemide",
+          "followup_CHF_encounter"
+        ]
+      },
+      "write": {
+        "Congestive Heart Failure": [
+          "CHF Condition Start"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "ckd": {
+      "read": {
+        "LifecycleModule": [],
+        "Metabolic Syndrome Disease Progression": [
+          "Nephropathy_Progression"
+        ],
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Complications",
+          "Check_End_Stage_Renal_Disease",
+          "check CKD"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Initial_Kidney_Health",
+          "Set_CKD_1 Damage",
+          "Set_CKD_2 Damage",
+          "Set_CKD_3 Damage",
+          "Set_CKD_4 Damage",
+          "Set_CKD_5 Damage"
+        ]
+      },
+      "example_values": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    "colorectal_adenoma": {
+      "read": {
+        "Colorectal Cancer": [
+          "Adenoma_Biopsy",
+          "Adenoma_Removal",
+          "Biopsy_Followup",
+          "End_Colorectal_Adenoma",
+          "Fecal_Test"
+        ]
+      },
+      "write": {
+        "Colorectal Cancer": [
+          "Detect_Adenoma"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "colorectal_cancer": {
+      "read": {
+        "Colorectal Cancer": [
+          "Chemotherapy_Drugs_I",
+          "Chemotherapy_Drugs_II",
+          "Chemotherapy_Encounter",
+          "Chemotherapy_Procedure",
+          "Colorectal_Cancer_CarePlan",
+          "Diverting_Colostomy_CarePlan",
+          "Diverting_Colostomy_Encounter",
+          "Diverting_Colostomy_Procedure",
+          "End_Colorectal_Cancer",
+          "Eventual_Death",
+          "Oncologist_Encounter",
+          "Partial_Colectomy_CarePlan",
+          "Partial_Colectomy_Encounter",
+          "Partial_Colectomy_Procedure",
+          "Remission_Encounter"
+        ]
+      },
+      "write": {
+        "Colorectal Cancer": [
+          "Colorectal_Cancer_Stage_I",
+          "Colorectal_Cancer_Stage_II",
+          "Colorectal_Cancer_Stage_III",
+          "Colorectal_Cancer_Stage_IV"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "colorectal_cancer_stage": {
+      "read": {
+        "Colorectal Cancer": [
+          "Colorectal_Cancer",
+          "End_Oncologist_Encounter",
+          "End_Partial_Colectomy_CarePlan",
+          "Wait_For_Oncologist_Encounter"
+        ]
+      },
+      "write": {
+        "Colorectal Cancer": [
+          "Colorectal_Cancer_Diagnose_Stage_I",
+          "Colorectal_Cancer_Diagnose_Stage_II",
+          "Colorectal_Cancer_Diagnose_Stage_III",
+          "Colorectal_Cancer_Diagnose_Stage_IV"
+        ]
+      },
+      "example_values": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    "concussion_injury": {
+      "read": {
+        "Injuries": [
+          "Concussion_CarePlan",
+          "Concussion_Injury_Followup",
+          "Death_Severe_Concussion",
+          "End_Concussion_Injury"
+        ]
+      },
+      "write": {
+        "Injuries": [
+          "Mild_Concussion",
+          "Moderate_Concussion",
+          "Severe_Concussion"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "contraceptive": {
+      "read": {
+        "Clear Contraceptive": [
+          "Clear_Contraceptive_Med",
+          "End_Contraceptive_Med"
+        ],
+        "Contraceptives": [
+          "Contraceptive_Prescribed?"
+        ]
+      },
+      "write": {
+        "Clear Contraceptive": [
+          "Clear_Contraceptive"
+        ],
+        "Implant Contraceptive": [
+          "Prescribe_Implanon",
+          "Prescribe_Nexplanon",
+          "Prescribe_Norplant"
+        ],
+        "Injectable Contraceptive": [
+          "Prescribe_Depo_Provera",
+          "Prescribe_Depo_SubQ"
+        ],
+        "Intrauterine Device": [
+          "Prescribe_Kyleena",
+          "Prescribe_Liletta",
+          "Prescribe_Mirena"
+        ],
+        "Oral Contraceptive": [
+          "Prescribe_Camila",
+          "Prescribe_Enovid",
+          "Prescribe_Errin",
+          "Prescribe_Estrostep",
+          "Prescribe_Jolivette",
+          "Prescribe_Levora",
+          "Prescribe_Natazia",
+          "Prescribe_Norinyl",
+          "Prescribe_Ortho_Tri_Cyclen",
+          "Prescribe_Seasonique",
+          "Prescribe_Trinessa",
+          "Prescribe_Yaz"
+        ],
+        "Patch Contraceptive": [
+          "Prescribe_Xulane"
+        ],
+        "Vaginal Ring Contraceptive": [
+          "Prescribe_Nuvaring"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "contraceptive_type": {
+      "read": {
+        "Contraceptive Maintenance": [
+          "Contraceptive_Type_Guard",
+          "IUD_Maintenance",
+          "Implant_Maintenance",
+          "Injectable_Maintenance"
+        ],
+        "Contraceptives": [
+          "Contraceptive_Prescribed?"
+        ],
+        "Female Reproduction": [
+          "Contraceptive_Incidence"
+        ]
+      },
+      "write": {
+        "Clear Contraceptive": [
+          "Clear_Contraceptive_Type"
+        ],
+        "Contraceptives": [
+          "Using_Condom_Only",
+          "Using_Male_Sterilization",
+          "Using_No_Contraceptive",
+          "Using_Withdrawal"
+        ],
+        "Female Sterilization": [
+          "Set_Contraceptive_Type"
+        ],
+        "Implant Contraceptive": [
+          "Set_Contraceptive_Type"
+        ],
+        "Injectable Contraceptive": [
+          "Set_Contraceptive_Type"
+        ],
+        "Intrauterine Device": [
+          "Set_Contraceptive_Type"
+        ],
+        "Oral Contraceptive": [
+          "Set_Contraceptive_Type"
+        ],
+        "Patch Contraceptive": [
+          "Set_Contraceptive_Type"
+        ],
+        "Vaginal Ring Contraceptive": [
+          "Set_Contraceptive_Type"
+        ]
+      },
+      "example_values": [
+        "\"condom\"",
+        "\"implant\"",
+        "\"injectable\"",
+        "\"iud\"",
+        "\"none\"",
+        "\"patch\"",
+        "\"pill\"",
+        "\"ring\"",
+        "\"sterilization\"",
+        "\"withdrawal\""
+      ]
+    },
+    "copd_variant": {
+      "read": {
+        "COPD": [
+          "Death",
+          "Followup_FEV_Test",
+          "Initial_FEV_Test",
+          "Lung_Transplant",
+          "Lung_Volume_Reduction",
+          "Nonsmoker_CarePlan",
+          "Prescribe_Medication",
+          "Pulmonary_Rehab",
+          "Smoker_CarePlan",
+          "Surgery_Encounter"
+        ]
+      },
+      "write": {
+        "COPD": [
+          "Chronic_Bronchitis",
+          "Emphysema"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "coronary_heart_disease": {
+      "read": {
+        "CardiovascularDiseaseModule": []
+      },
+      "write": {
+        "CardiovascularDiseaseModule": []
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "cr_chemo_count": {
+      "read": {
+        "Colorectal Cancer": [
+          "Chemotherapy_Treatment_Path"
+        ]
+      },
+      "write": {
+        "Colorectal Cancer": [
+          "Count_A_Chemo_Treatment",
+          "Initialize_Chemo_Counter"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "current_weight_length_percentile": {
+      "read": {
+        "Wellness Encounters": [
+          "Record_Weight_For_Length_Percentile"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "dermatitis": {
+      "read": {
+        "Dermatitis": [
+          "Dermatitis_Careplan",
+          "Dermatitis_Resolves",
+          "Dermatologist_Visit_For_Flare_Up",
+          "PCP_Encounter",
+          "Prescribe_Corticosteroid",
+          "Prescribe_Corticosteroid_For_Flare_Up",
+          "Prescribe_Immunosuppressant"
+        ]
+      },
+      "write": {
+        "Dermatitis": [
+          "Adult_Contact_Dermatitis",
+          "Childhood_Atopic_Dermatitis"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "diabetes": {
+      "read": {
+        "CardiovascularDiseaseModule": [],
+        "Cystic Fibrosis": [
+          "GlucoseTest",
+          "Life_With_Cystic_Fibrosis"
+        ],
+        "LifecycleModule": [],
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Diabetes"
+        ]
+      },
+      "write": {
+        "Cystic Fibrosis": [
+          "diatbetesState"
+        ],
+        "Metabolic Syndrome Disease Progression": [
+          "Onset_Diabetes"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "diabetes_amputation_necessary": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Schedule_Followup"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Standards of Care": [
+          "Amputation_Necessary",
+          "No_Amputation_Necessary"
+        ]
+      },
+      "example_values": [
+        "false",
+        "true"
+      ]
+    },
+    "diabetes_severity": {
+      "read": {
+        "LifecycleModule": [],
+        "Metabolic Syndrome Standards of Care": [
+          "Bitherapy",
+          "Diagnosis",
+          "Monotherapy",
+          "Tritherapy"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Standards of Care": [
+          "Set_Severity_0",
+          "Set_Severity_1",
+          "Set_Severity_2",
+          "Set_Severity_3",
+          "Set_Severity_4"
+        ]
+      },
+      "example_values": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    "diabetes_stage": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Diabetic_CarePlan"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Standards of Care": [
+          "Diagnose_Diabetes",
+          "Diagnose_Prediabetes"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "diabetic_eye_damage": {
+      "read": {
+        "Metabolic Syndrome Disease Progression": [
+          "Retinopathy_Progression"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Initial_Eye_Health",
+          "Set_Mild_Eye_Damage",
+          "Set_Moderate_Eye_Damage",
+          "Set_Severe_Eye_Damage"
+        ]
+      },
+      "example_values": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "diabetic_nerve_damage": {
+      "read": {
+        "Metabolic Syndrome Disease Progression": [
+          "Neuropathy_Progression"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Initial_Nerve_Health",
+          "Set_Mild_Nerve_Damage",
+          "Set_Moderate_Nerve_Damage",
+          "Set_Severe_Nerve_Damage"
+        ]
+      },
+      "example_values": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "dialysis_reason": {
+      "read": {
+        "Dialysis": [
+          "Dialysis_Encounter",
+          "Physician Monthly Enc"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Standards of Care": [
+          "CKD4 Diagnosis",
+          "Diagnose_End_Stage_Renal_Disease"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "education_level": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {},
+      "example_values": []
+    },
+    "end_stage_renal_disease": {
+      "read": {
+        "HealthInsuranceModule": [],
+        "Metabolic Syndrome Standards of Care": [
+          "Check_End_Stage_Renal_Disease"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "ethnicity": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "fatal_pregnancy_complication": {
+      "read": {
+        "Pregnancy": [
+          "Miscarriage_Fatal_Pregnancy_Complication_Ends",
+          "Miscarriage_Followup_Encounter"
+        ]
+      },
+      "write": {
+        "Pregnancy": [
+          "Blighted_Ovum",
+          "Early_Uknown_Complication",
+          "Ectopic_Pregnancy",
+          "Late_Fetal_Chromosomal_Anomaly",
+          "Unknown_Complication",
+          "Uterine_Anomaly"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "fibromyalgia_careplan": {
+      "read": {},
+      "write": {
+        "Fibromyalgia": [
+          "Fibromyalgia_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "fibromyalgia_prescription": {
+      "read": {
+        "Fibromyalgia": [
+          "End_Episode_Encounter",
+          "End_Fibromyalgia_Prescription"
+        ]
+      },
+      "write": {
+        "Fibromyalgia": [
+          "Prescribe_Cymbalta",
+          "Prescribe_Lyrica",
+          "Prescribe_Savella"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "first_language": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {},
+      "example_values": []
+    },
+    "first_name": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "food_allergy": {
+      "read": {
+        "Food Allergies": [
+          "Delay_For_Allergic_Reaction_To_Food"
+        ]
+      },
+      "write": {
+        "Allergy Incidence": [
+          "Dairy_Allergy",
+          "Eggs_Allergy",
+          "Fish_Allergy",
+          "Peanut_Allergy",
+          "Shellfish_Allergy",
+          "Soy_Allergy",
+          "TreeNut_Allergy",
+          "Wheat_Allergy"
+        ]
+      },
+      "example_values": [
+        "AllergyOnset"
+      ]
+    },
+    "food_allergy_careplan": {
+      "read": {
+        "Food Allergies": [
+          "PCP_Visit_For_Food_Allergy"
+        ]
+      },
+      "write": {
+        "Food Allergies": [
+          "Food_Allergy_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "gender": {
+      "read": {
+        "Anemia - Unknown Etiology": [
+          "Initial"
+        ],
+        "Appendicitis": [
+          "Initial"
+        ],
+        "Attention Deficit Disorder": [
+          "Initial"
+        ],
+        "Breast_cancer": [
+          "Age 60-69",
+          "Initial"
+        ],
+        "CardiovascularDiseaseModule": [],
+        "Contraceptive Maintenance": [
+          "Initial"
+        ],
+        "Contraceptives": [
+          "Initial"
+        ],
+        "Cystic Fibrosis": [
+          "Cystic_Fibrosis"
+        ],
+        "Epilepsy": [
+          "Suspected_Epilepsy"
+        ],
+        "Female Reproduction": [
+          "Initial"
+        ],
+        "Fibromyalgia": [
+          "Initial"
+        ],
+        "Gallstones": [
+          "Initial"
+        ],
+        "Gout": [
+          "Initial"
+        ],
+        "HealthInsuranceModule": [],
+        "Hypothyroidism": [
+          "Age delay"
+        ],
+        "Implant Contraceptive": [
+          "Initial"
+        ],
+        "Injectable Contraceptive": [
+          "Initial"
+        ],
+        "Intrauterine Device": [
+          "Initial"
+        ],
+        "LifecycleModule": [],
+        "Lung Cancer Probabilities": [
+          "Initial"
+        ],
+        "Lupus": [
+          "Initial"
+        ],
+        "Oral Contraceptive": [
+          "Initial"
+        ],
+        "Osteoarthritis": [
+          "Non_Veteran"
+        ],
+        "Osteoporosis": [
+          "Initial"
+        ],
+        "Patch Contraceptive": [
+          "Initial"
+        ],
+        "Pregnancy": [
+          "Initial"
+        ],
+        "Self Harm": [
+          "Attempts_Suicide",
+          "Initial"
+        ],
+        "Sexual Activity": [
+          "Delay_For_Sexual_Activity",
+          "Old_Age_Check"
+        ],
+        "Urinary Tract Infections": [
+          "Initial"
+        ],
+        "Vaginal Ring Contraceptive": [
+          "Initial"
+        ],
+        "Veteran": [
+          "Between_KW_and_VW",
+          "Between_VW_and_GW",
+          "Between_WW2_and_KW",
+          "Early_Gulf_War",
+          "Korean_War",
+          "Late_Gulf_War",
+          "Pre_WW2",
+          "Vietnam_War",
+          "WW2"
+        ],
+        "Veteran MDD": [
+          "Veteran"
+        ],
+        "Veteran PTSD": [
+          "Veteran"
+        ],
+        "Veteran Prostate Cancer": [
+          "male_guard"
+        ],
+        "Veteran Self Harm": [
+          "Attempts_Suicide",
+          "Comorbidity Check"
+        ],
+        "Veteran Substance Abuse Conditions": [
+          "Alcohol Check",
+          "Smoking Check"
+        ],
+        "anemia_sub": [
+          "Anemia_Encounter",
+          "Brief_Examination",
+          "Consult_Referral_to_Experts_Encounter"
+        ]
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "F"
+      ]
+    },
+    "gout_careplan": {
+      "read": {
+        "Gout": [
+          "Pain_Vital"
+        ]
+      },
+      "write": {
+        "Gout": [
+          "Gout_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "gout_nsaid": {
+      "read": {
+        "Gout": [
+          "End_Gout_Nonopioid"
+        ]
+      },
+      "write": {
+        "Gout": [
+          "Colchicine",
+          "Strong_NSAID"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "gunshot_wound": {
+      "read": {
+        "Injuries": [
+          "Death_Gunshot_Wound"
+        ]
+      },
+      "write": {
+        "Injuries": [
+          "Gunshot_Wound"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "homeless": {
+      "read": {},
+      "write": {
+        "Homelessness": [
+          "Begin_Homelessness",
+          "End_Homelessness"
+        ]
+      },
+      "example_values": [
+        "false",
+        "true"
+      ]
+    },
+    "homelessness_category": {
+      "read": {
+        "Homelessness": [
+          "Living_Homeless"
+        ]
+      },
+      "write": {
+        "Homelessness": [
+          "Chronic_Homelessness",
+          "Temporary_Homelessness"
+        ]
+      },
+      "example_values": [
+        "\"chronic\"",
+        "\"temporary\""
+      ]
+    },
+    "hyperglycemia": {
+      "read": {},
+      "write": {
+        "Metabolic Syndrome Standards of Care": [
+          "Hyperglycemia"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "hyperlipidemia": {
+      "read": {
+        "Veteran Hyperlipidemia": [
+          "Hyperlipidemia initial workup encounter",
+          "Hyperlipidemia medication start",
+          "Hyperlipidemia_medication_renewal",
+          "annual_hyperlipidemia_assessment",
+          "followup_hyperlipidemia_encounter",
+          "hyperlipidemia careplan"
+        ]
+      },
+      "write": {
+        "Veteran Hyperlipidemia": [
+          "Hyperlipidemia Condition Start"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "hypertension": {
+      "read": {
+        "Hypertension": [
+          "Wellness_Encounter"
+        ],
+        "Metabolic Syndrome Disease Progression": [
+          "Chance_to_Onset_Hypertension_at_Diabetes_Onset"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "No_Hypertension",
+          "No_Hypertension_With_Diabetes",
+          "Onset_Hypertension",
+          "Onset_Hypertension_with_Diabetes"
+        ]
+      },
+      "example_values": [
+        "false",
+        "true"
+      ]
+    },
+    "hypertension_dx": {
+      "read": {
+        "Hypertension": [
+          "Hypertension_Combination_Medication",
+          "Hypertension_Combination_Medication_2",
+          "Hypertension_Medication_High",
+          "Hypertension_Medication_Low",
+          "LifeStyle_Modifications_Hypertension_CarePlan",
+          "Wellness_Encounter"
+        ]
+      },
+      "write": {
+        "Hypertension": [
+          "Diagnose_Hypertension"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "hypertension_medication": {
+      "read": {
+        "Hypertension": [
+          "End_Hypertension_Medication"
+        ]
+      },
+      "write": {
+        "Hypertension": [
+          "Hypertension_Medication_High",
+          "Hypertension_Medication_Low"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "hypertension_medication_2": {
+      "read": {
+        "Hypertension": [
+          "End_Hypertension_Comb_Medication"
+        ]
+      },
+      "write": {
+        "Hypertension": [
+          "Hypertension_Combination_Medication"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "hypertension_medication_3": {
+      "read": {},
+      "write": {
+        "Hypertension": [
+          "Hypertension_Combination_Medication_2"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "hypertriglyceridemia": {
+      "read": {},
+      "write": {
+        "Metabolic Syndrome Standards of Care": [
+          "Hypertriglyceridemia"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "hypothyroidism": {
+      "read": {},
+      "write": {
+        "Hypothyroidism": [
+          "Hypothyroid Condition Onset"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "id": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "identifier_drivers": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "identifier_passport": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "identifier_ssn": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "999-99-9999"
+      ]
+    },
+    "immunizations": {
+      "read": {
+        "Immunizations": []
+      },
+      "write": {
+        "Immunizations": []
+      },
+      "example_values": [
+        "Map<String, List<Long>>"
+      ]
+    },
+    "immunotherapy_counter": {
+      "read": {
+        "Allergy Immunotherapy": [
+          "Undergoing_Immunotherapy_Treatment"
+        ]
+      },
+      "write": {
+        "Allergy Immunotherapy": [
+          "Count_A_Treatment",
+          "Initialize_Immunotherapy_Counter"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "immunotherapy_status": {
+      "read": {
+        "Allergy Immunotherapy": [
+          "End_Consultation"
+        ]
+      },
+      "write": {
+        "Allergy Immunotherapy": [
+          "Immunotherapy_Given",
+          "Immunotherapy_Not_Given"
+        ]
+      },
+      "example_values": [
+        "\"given\"",
+        "\"not-given\""
+      ]
+    },
+    "income": {
+      "read": {
+        "HealthInsuranceModule": []
+      },
+      "write": {},
+      "example_values": []
+    },
+    "infertile": {
+      "read": {
+        "Female Reproduction": [
+          "Reproductive_Cycle_Outcome"
+        ]
+      },
+      "write": {
+        "Female Sterilization": [
+          "Become_Infertile"
+        ],
+        "Male Sterilization": [
+          "Become_Infertile"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "injury_careplan": {
+      "read": {
+        "Injuries": [
+          "End_Injury_CarePlan"
+        ]
+      },
+      "write": {
+        "Injuries": [
+          "Broken_Bone_CarePlan",
+          "Burn_CarePlan",
+          "Concussion_CarePlan",
+          "Gunshot_Wound_CarePlan",
+          "Knee_Injury_CarePlan",
+          "Laceration_CarePlan",
+          "Shoulder_Injury_CarePlan",
+          "Spinal_Injury_CarePlan",
+          "Sprain_CarePlan",
+          "Whiplash_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "inpatient-count": {
+      "read": {
+        "Congestive Heart Failure": [
+          "Inpatient Death decision"
+        ]
+      },
+      "write": {
+        "Congestive Heart Failure": [
+          "Count inpatient stays",
+          "Reset inpatient count"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "inpatient-los": {
+      "read": {
+        "Congestive Heart Failure": [
+          "Inpatient Discharge decision"
+        ]
+      },
+      "write": {
+        "Congestive Heart Failure": [
+          "Inpatient Discharge decision",
+          "Inpatient LOS"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "instances_of_homelessness": {
+      "read": {
+        "Homelessness": [
+          "Homelessness_Counter"
+        ]
+      },
+      "write": {
+        "Homelessness": [
+          "Homelessness_Counter"
+        ]
+      },
+      "example_values": [
+        "Integer"
+      ]
+    },
+    "joint_replacement": {
+      "read": {
+        "Functional Status Assessments": [
+          "Initial"
+        ],
+        "Total Joint Replacement": [
+          "End_Post_Op_CarePlan",
+          "Joint_Replacement_Encounter",
+          "Pre_Procedure_Encounter_End"
+        ]
+      },
+      "write": {
+        "Osteoarthritis": [
+          "Setup_Hip_Replacement",
+          "Setup_Knee_Replacement"
+        ],
+        "Rheumatoid Arthritis": [
+          "Setup_Hip_Replacement",
+          "Setup_Knee_Replacement"
+        ]
+      },
+      "example_values": [
+        "\"hip\"",
+        "\"knee\""
+      ]
+    },
+    "knee_injury": {
+      "read": {
+        "Injuries": [
+          "End_Knee_Injury",
+          "Knee_Injury_CarePlan",
+          "Knee_Surgery_Encounter",
+          "Knee_Surgery_Procedure"
+        ]
+      },
+      "write": {
+        "Injuries": [
+          "Torn_ACL",
+          "Torn_MCL",
+          "Torn_Meniscus",
+          "Torn_Patellar_Tendon"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "laceration_injury": {
+      "read": {
+        "Injuries": [
+          "End_Laceration_Injury",
+          "Laceration_CarePlan",
+          "Laceration_Tetanus_Shot",
+          "Suture_Laceration"
+        ]
+      },
+      "write": {
+        "Injuries": [
+          "Laceration_Of_Arm",
+          "Laceration_Of_Face",
+          "Laceration_Of_Foot",
+          "Laceration_Of_Hand",
+          "Laceration_Of_Leg"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "last_name": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "last_visit_symptom_total": {
+      "read": {
+        "EncounterModule": []
+      },
+      "write": {
+        "EncounterModule": []
+      },
+      "example_values": [
+        "Integer"
+      ]
+    },
+    "left_ventricular_hypertrophy": {
+      "read": {
+        "CardiovascularDiseaseModule": []
+      },
+      "write": {},
+      "example_values": []
+    },
+    "lung_cancer": {
+      "read": {},
+      "write": {
+        "Lung Cancer": [
+          "Onset_Lung_Cancer"
+        ],
+        "Veteran Lung Cancer": [
+          "Onset_Lung_Cancer"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "lung_cancer_nondiagnosis_counter": {
+      "read": {
+        "Lung Cancer": [
+          "Schedule Follow Up III"
+        ],
+        "Veteran Lung Cancer": [
+          "Schedule Follow Up III"
+        ]
+      },
+      "write": {
+        "Lung Cancer": [
+          "Increment_Counter",
+          "Init_Lung_Cancer_Counter"
+        ],
+        "Veteran Lung Cancer": [
+          "Increment_Counter",
+          "Init_Lung_Cancer_Counter"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "lung_transplant": {
+      "read": {
+        "Cystic Fibrosis": [
+          "Life_With_Cystic_Fibrosis"
+        ]
+      },
+      "write": {
+        "Cystic Fibrosis": [
+          "Lung_Transplant_Denied",
+          "setTransplant"
+        ]
+      },
+      "example_values": [
+        "\"accepted\"",
+        "\"denied\""
+      ]
+    },
+    "lupus_careplan": {
+      "read": {},
+      "write": {
+        "Lupus": [
+          "Lupus_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "lupus_corticosteroid": {
+      "read": {
+        "Lupus": [
+          "End_Corticosteroid"
+        ]
+      },
+      "write": {
+        "Lupus": [
+          "Corticosteroid",
+          "Flareup_Corticosteroid"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "mTBI": {
+      "read": {
+        "Veteran PTSD": [
+          "mTBI check"
+        ],
+        "Veteran mild TBI ": [
+          "Wellness Encounter"
+        ]
+      },
+      "write": {
+        "Veteran mild TBI ": [
+          "Loss of Consciousness"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "macular_edema": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Macular_Edema"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Set_Macular_Edema"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "maiden_name": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "marital_status": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "M"
+      ]
+    },
+    "mdd": {
+      "read": {
+        "Veteran MDD": [
+          "Change_Dx_Not_MDD",
+          "Initial_Psychiatric_MDD_Encounter",
+          "MDD Medication Order",
+          "MDD_Encounter",
+          "MDD_Initial_Careplan",
+          "Negative_PHQ9",
+          "Positive_PHQ9"
+        ],
+        "Veteran Suicide Probabilities": [
+          "Veteran"
+        ]
+      },
+      "write": {
+        "Veteran MDD": [
+          "MDD Episode"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "mdd_psych": {
+      "read": {
+        "Veteran MDD": [
+          "MDD_Careplan_Psych",
+          "MDD_Careplan_Psych_and_Rx",
+          "MDD_Careplan_Rx_ONLY",
+          "MDD_Re_evaluation Encounter",
+          "Therapy_Visit"
+        ]
+      },
+      "write": {
+        "Veteran MDD": [
+          "MDD Diagnosis"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "metabolic_syndrome": {
+      "read": {},
+      "write": {
+        "Metabolic Syndrome Standards of Care": [
+          "Metabolic_Syndrome"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "microalbuminuria": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Microalbuminuria"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Set_Microalbuminuria"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "miscarriage": {
+      "read": {},
+      "write": {
+        "Pregnancy": [
+          "Miscarriage_In_First_Trimester",
+          "Miscarriage_In_Second_Trimester"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "most-recent-daly": {
+      "read": {},
+      "write": {
+        "QualityOfLifeModule": []
+      },
+      "example_values": [
+        "Numeric"
+      ]
+    },
+    "most-recent-qaly": {
+      "read": {},
+      "write": {
+        "QualityOfLifeModule": []
+      },
+      "example_values": [
+        "Numeric"
+      ]
+    },
+    "multiple_birth_status": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Boolean"
+      ]
+    },
+    "name": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "name_father": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "name_mother": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "name_prefix": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "name_suffix": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "nephropathy": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Nephropathy"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Set_Nephropathy"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "neuropathy": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Neuropathy"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Set_Neuropathy"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "non_low_risk_pregnancy": {
+      "read": {
+        "Pregnancy": [
+          "Non_Low_Risk_Pregnancy_Ends"
+        ]
+      },
+      "write": {
+        "Pregnancy": [
+          "Non_Low_Risk_Pregnancy"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "nonproliferative_retinopathy": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Nonproliferative_Retinopathy"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Set_Nonproliferative_Retinopathy"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "number_of_children": {
+      "read": {},
+      "write": {
+        "Pregnancy": [
+          "Initially_No_Children",
+          "Normal_Pregnancy_Completion"
+        ]
+      },
+      "example_values": [
+        "0",
+        "Integer"
+      ]
+    },
+    "obesity": {
+      "read": {},
+      "write": {
+        "Metabolic Syndrome Standards of Care": [
+          "Obesity",
+          "Severe Obesity"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "occupation_level": {
+      "read": {
+        "HealthInsuranceModule": []
+      },
+      "write": {},
+      "example_values": []
+    },
+    "opioid_addiction": {
+      "read": {
+        "Veteran Substance Abuse Treatment": [
+          "SUD check"
+        ],
+        "Veteran Suicide Probabilities": [
+          "Veteran"
+        ]
+      },
+      "write": {
+        "Veteran Substance Abuse Conditions": [
+          "No Opioid Dependence",
+          "Opioid Dependance"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "opioid_addiction_careplan": {
+      "read": {
+        "Opioid Addiction": [
+          "Addiction_CarePlan_Selector"
+        ]
+      },
+      "write": {
+        "Opioid Addiction": [
+          "Opioid_Addiction_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "opioid_prescription": {
+      "read": {
+        "Fibromyalgia": [
+          "Fibromyalgia_Episode"
+        ],
+        "Moderate Opioid Pain Reliever": [
+          "Initial"
+        ],
+        "Opioid Addiction": [
+          "End_Prescription_Towards_Gen_Pop",
+          "End_Prescription_Towards_Misuse",
+          "General_Population"
+        ],
+        "Strong Opioid Pain Reliever": [
+          "Initial"
+        ]
+      },
+      "write": {
+        "Fibromyalgia": [
+          "Prescribe_Opioid"
+        ],
+        "Moderate Opioid Pain Reliever": [
+          "Prescribe_Hydrocodone_Acetaminophen",
+          "Prescribe_Meperidine",
+          "Prescribe_Oxycodone_Acetaminophen"
+        ],
+        "Opioid Addiction": [
+          "Directed_Use_Prescription1",
+          "Directed_Use_Prescription2",
+          "Directed_Use_Prescription3",
+          "Reset_Opioid_var_Towards_Gen_Pop"
+        ],
+        "Strong Opioid Pain Reliever": [
+          "Prescribe_Methadone",
+          "Prescribe_Oxycodone"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "osteoarthritis": {
+      "read": {
+        "Osteoarthritis": [
+          "OA_CarePlan",
+          "OA_Diagnosis",
+          "OA_Pain_Medication"
+        ]
+      },
+      "write": {
+        "Osteoarthritis": [
+          "OA_Of_The_Hand",
+          "OA_Of_The_Hip",
+          "OA_Of_The_Knee"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "osteoporosis": {
+      "read": {
+        "Injuries": [
+          "Broken_Bone",
+          "Elderly_Incidence_Rates",
+          "Osteoporosis_Workup"
+        ],
+        "LifecycleModule": []
+      },
+      "write": {
+        "Osteoporosis": [
+          "Onset_Osteoporosis"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "otc_antihistamine": {
+      "read": {
+        "Over-The-Counter Antihistamine": [
+          "Initial"
+        ]
+      },
+      "write": {
+        "Over-The-Counter Antihistamine": [
+          "Adult_Cetirizine",
+          "Adult_Chlorphenamine",
+          "Adult_Fexofenadine",
+          "Adult_Loratadine",
+          "Pediatric_Cetirizine",
+          "Pediatric_Chlorphenamine",
+          "Pediatric_Fexofenadine",
+          "Pediatric_Loratadine",
+          "Prescribe_Astemizole",
+          "Prescribe_Diphenhydramine",
+          "Prescribe_Terfenadine"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "otc_pain_reliever": {
+      "read": {
+        "Ear Infections": [
+          "End_Ear_Infection_Medications",
+          "End_Non_Opioid_Prescription"
+        ],
+        "Injuries": [
+          "End_Injury_Medications",
+          "End_Non_Opioid_Prescription"
+        ],
+        "Over-The-Counter Pain Reliever": [
+          "Initial"
+        ]
+      },
+      "write": {
+        "Ear Infections": [
+          "Unset_Non_Opioid_Prescription_Attribute"
+        ],
+        "Injuries": [
+          "Unset_Non_Opioid_Prescription_Attribute"
+        ],
+        "Over-The-Counter Pain Reliever": [
+          "Adult_Acetaminophen",
+          "Adult_Ibuprofen",
+          "Naproxen_Sodium",
+          "Pediatric_Acetaminophen",
+          "Pediatric_Ibuprofen",
+          "Prescribe_Aspirin"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "outgrew_food_allergies": {
+      "read": {
+        "Food Allergies": [
+          "Living_With_Food_Allergies",
+          "Potential_To_Outgrow_Allergies"
+        ]
+      },
+      "write": {
+        "Outgrow Food Allergies": [
+          "No_Food_Allergies_Here",
+          "Still_Has_Some_Food_Allergies"
+        ]
+      },
+      "example_values": [
+        "\"false\"",
+        "\"true\""
+      ]
+    },
+    "prediabetes": {
+      "read": {
+        "LifecycleModule": [],
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Diabetes"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Onset_Prediabetes",
+          "Onset_Prediabetes_Towards_Diabetes"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "pregnancy_birth_sex": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "M"
+      ]
+    },
+    "pregnancy_careplan": {
+      "read": {
+        "Pregnancy": [
+          "Pregnancy_CarePlan_Ends"
+        ]
+      },
+      "write": {
+        "Pregnancy": [
+          "Pregnancy_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "pregnancy_complication": {
+      "read": {
+        "Pregnancy": [
+          "Normal_Pregnancy_Completion",
+          "Pre_Eclampsia_Becomes_Eclampsia",
+          "Pre_Eclampsia_Check",
+          "Pregnancy_Complication_Ends"
+        ]
+      },
+      "write": {
+        "Pregnancy": [
+          "Develop_Eclampsia",
+          "Develop_Pre_Eclampsia",
+          "Unset_Pregnancy_Complication_Attribute"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "pregnant": {
+      "read": {
+        "Contraceptive Maintenance": [
+          "IUD_Maintenance",
+          "Implant_Maintenance",
+          "Injectable_Maintenance"
+        ],
+        "Contraceptives": [
+          "Reset_Contraceptive_Use"
+        ],
+        "Female Reproduction": [
+          "Female_Reproductive_Cycle"
+        ],
+        "HealthInsuranceModule": [],
+        "Implant Contraceptive": [
+          "Initial"
+        ],
+        "Injectable Contraceptive": [
+          "Initial"
+        ],
+        "Intrauterine Device": [
+          "Initial"
+        ],
+        "Oral Contraceptive": [
+          "Initial"
+        ],
+        "Patch Contraceptive": [
+          "Initial"
+        ],
+        "Vaginal Ring Contraceptive": [
+          "Initial"
+        ],
+        "anemia_sub": [
+          "Female"
+        ]
+      },
+      "write": {
+        "Female Reproduction": [
+          "Become_Pregnant"
+        ],
+        "LifecycleModule": [],
+        "Pregnancy": [
+          "Initially_Not_Pregnant",
+          "Unset_Pregnant_Attribute"
+        ]
+      },
+      "example_values": [
+        "Boolean",
+        "false",
+        "true"
+      ]
+    },
+    "probability_of_fall_injury": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "1.0"
+      ]
+    },
+    "probability_of_lung_cancer": {
+      "read": {},
+      "write": {
+        "Lung Cancer Probabilities": [
+          "Female_Nonsmoker",
+          "Female_Quit",
+          "Female_Smoker",
+          "Male_Nonsmoker",
+          "Male_Quit",
+          "Male_Smoker"
+        ]
+      },
+      "example_values": [
+        "0.002",
+        "0.004",
+        "0.026",
+        "0.055",
+        "0.185",
+        "0.244"
+      ]
+    },
+    "probability_of_suicide": {
+      "read": {},
+      "write": {
+        "Veteran Suicide Probabilities": [
+          "Baseline",
+          "MDD",
+          "PTSD",
+          "SUD"
+        ]
+      },
+      "example_values": [
+        "0.003072",
+        "0.006",
+        "0.0072",
+        "0.0144"
+      ]
+    },
+    "proliferative_retinopathy": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Proliferative_Retinopathy"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Set_Proliferative_Retinopathy"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "prostate_cancer": {
+      "read": {
+        "Veteran Prostate Cancer": [
+          "Aggressive_Therapy_Careplan",
+          "Prostate_Cancer_Therapy",
+          "Prostatectomy",
+          "Watchful_Waiting_Careplan",
+          "biopsy_visit_end"
+        ]
+      },
+      "write": {
+        "Veteran Prostate Cancer": [
+          "Prostate_Cancer"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "proteinuria": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Proteinuria"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Set_Proteinuria"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "ptsd": {
+      "read": {
+        "Opioid Addiction": [
+          "General_Population"
+        ],
+        "Veteran PTSD": [
+          "Change_Dx_Not_PTSD",
+          "Columbia Suicide Risk Assessment",
+          "Columbia_Suicide_Risk_Assessment",
+          "Initial_Psychiatric_PTSD_Encounter",
+          "Inpatient Suicide Risk Assessment",
+          "PHQ2_Q9 Assessment",
+          "PHQ2_Q9_Assessment",
+          "PTSD Chronic Pain Med",
+          "PTSD Medication Order",
+          "PTSD_Careplan_Psych",
+          "PTSD_Careplan_Psych_and_Rx",
+          "PTSD_Careplan_Rx_ONLY",
+          "PTSD_Careplan_Telehealth_Psych",
+          "PTSD_Careplan_Telehealth_Psych_and_Rx",
+          "PTSD_Encounter",
+          "PTSD_Initial_Careplan",
+          "PTSD_Re_evaluation Encounter",
+          "Telehealth_Visit",
+          "Therapy_Visit",
+          "Therapy_Visit_Telehealth"
+        ],
+        "Veteran Suicide Probabilities": [
+          "Veteran"
+        ]
+      },
+      "write": {
+        "Veteran PTSD": [
+          "PTSD Episode"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "ptsd_careplan": {
+      "read": {
+        "Veteran PTSD": [
+          "end_PTSD_Re_evaluation_Encounter",
+          "end_Psych_encounter",
+          "end_follow_up_careplan",
+          "therapy delay"
+        ]
+      },
+      "write": {
+        "Veteran PTSD": [
+          "PTSD_Careplan_Psych",
+          "PTSD_Careplan_Psych_and_Rx",
+          "PTSD_Careplan_Rx_ONLY",
+          "PTSD_Careplan_Telehealth_Psych",
+          "PTSD_Careplan_Telehealth_Psych_and_Rx"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "quit alcoholism age": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Numeric"
+      ]
+    },
+    "quit alcoholism probability": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "1.0"
+      ]
+    },
+    "quit smoking age": {
+      "read": {
+        "Lung Cancer Probabilities": [
+          "Female",
+          "Male"
+        ],
+        "Wellness Encounters": [
+          "Smoker_Status_Observation"
+        ]
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Numeric"
+      ]
+    },
+    "quit smoking probability": {
+      "read": {
+        "LifecycleModule": []
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "1.0"
+      ]
+    },
+    "ra_careplan": {
+      "read": {},
+      "write": {
+        "Rheumatoid Arthritis": [
+          "RA_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "race": {
+      "read": {
+        "Anemia - Unknown Etiology": [
+          "Initial"
+        ],
+        "Breast_cancer": [
+          "Female"
+        ],
+        "Cystic Fibrosis": [
+          "Potential_Onset"
+        ],
+        "Gallstones": [
+          "Female",
+          "Male"
+        ],
+        "LifecycleModule": [],
+        "Metabolic Syndrome Disease Progression": [
+          "Non_Veteran_Diabetes_Prevalence"
+        ],
+        "Self Harm": [
+          "Initial"
+        ]
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "recurrent_colorectal_adenoma": {
+      "read": {
+        "Colorectal Cancer": [
+          "End_Recurrent_Adenoma",
+          "Recurrent_Adenoma_Removal"
+        ]
+      },
+      "write": {
+        "Colorectal Cancer": [
+          "Recurrent_Colorectal_Adenoma"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "retinopathy": {
+      "read": {
+        "Metabolic Syndrome Standards of Care": [
+          "Check_Retinopathy"
+        ]
+      },
+      "write": {
+        "Metabolic Syndrome Disease Progression": [
+          "Set_Retinopathy"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "seizure": {
+      "read": {
+        "Epilepsy": [
+          "Medicine_Encounter",
+          "Seizure_Encounter"
+        ]
+      },
+      "write": {
+        "Epilepsy": [
+          "Seizure_Disorder"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "seizure_meds": {
+      "read": {
+        "Epilepsy": [
+          "Medication_End"
+        ]
+      },
+      "write": {
+        "Epilepsy": [
+          "Carbamazepine",
+          "Clonazepam",
+          "Diazepam"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "sexual_orientation": {
+      "read": {
+        "Homelessness": [
+          "Question_1"
+        ]
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": []
+    },
+    "sexually_active": {
+      "read": {
+        "Female Reproduction": [
+          "Reproductive_Cycle_Outcome"
+        ]
+      },
+      "write": {
+        "Sexual Activity": [
+          "Initially_Inactive",
+          "Not_Sexually_Active",
+          "Sexually_Active"
+        ]
+      },
+      "example_values": [
+        "false",
+        "true"
+      ]
+    },
+    "smoker": {
+      "read": {
+        "Asthma": [
+          "Asthma_CarePlan_Selector"
+        ],
+        "Bronchitis": [
+          "Bronchitis_CarePlan_Selector"
+        ],
+        "COPD": [
+          "Age_Guard",
+          "Consider_Surgery",
+          "Initial_FEV_Result",
+          "Living_with_COPD",
+          "Potential_COPD_Nonsmoker"
+        ],
+        "CardiovascularDiseaseModule": [],
+        "Colorectal Cancer": [
+          "Delay_For_Smoking_History"
+        ],
+        "Congestive Heart Failure": [
+          "Assign CHF care plan"
+        ],
+        "LifecycleModule": [],
+        "Lung Cancer Probabilities": [
+          "Female",
+          "Male"
+        ],
+        "Oral Contraceptive": [
+          "Combination_Or_Minipill"
+        ],
+        "Veteran Lung Cancer": [
+          "smoking_status"
+        ],
+        "Wellness Encounters": [
+          "Smoker_Status_Observation"
+        ]
+      },
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "Boolean"
+      ]
+    },
+    "smoking": {
+      "read": {
+        "Veteran Substance Abuse Treatment": [
+          "Smoking_Check"
+        ]
+      },
+      "write": {
+        "Veteran Substance Abuse Conditions": [
+          "non_smoker",
+          "smoker"
+        ],
+        "Veteran Substance Abuse Treatment": [
+          "smoking symptom post treatment"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "smoking_medication": {
+      "read": {
+        "Veteran Substance Abuse Treatment": [
+          "Smoking_Careplan"
+        ]
+      },
+      "write": {
+        "Veteran Substance Abuse Treatment": [
+          "Smoking Medication"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "socioeconomic_category": {
+      "read": {
+        "COPD": [
+          "Potential_COPD_Smoker"
+        ],
+        "Dementia": [
+          "PreAlzheimers"
+        ],
+        "Homelessness": [
+          "Potential_Homelessness"
+        ],
+        "Opioid Addiction": [
+          "General_Population"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "spinal_injury": {
+      "read": {
+        "Injuries": [
+          "Death_Spinal_Cord",
+          "End_Spinal_Injury",
+          "Spinal_Injury_CarePlan",
+          "Spinal_Injury_Followup",
+          "Spinal_Injury_Treatment_Encounter",
+          "Spinal_Surgery"
+        ]
+      },
+      "write": {
+        "Injuries": [
+          "No_Spinal_Cord_Damage",
+          "Spinal_Cord_Damage"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "sprain_injury": {
+      "read": {
+        "Injuries": [
+          "End_Sprain_Injury",
+          "Sprain_CarePlan"
+        ]
+      },
+      "write": {
+        "Injuries": [
+          "Sprained_Ankle",
+          "Sprained_Wrist"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "ssri": {
+      "read": {
+        "Veteran MDD": [
+          "MDD_Careplan_Psych_and_Rx",
+          "MDD_Careplan_Rx_ONLY",
+          "end re_evaluation_medication"
+        ]
+      },
+      "write": {
+        "Veteran MDD": [
+          "MDD Medication Order"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "statin_initial": {
+      "read": {
+        "Veteran Hyperlipidemia": [
+          "Record_LipidPanel_2",
+          "end old statin"
+        ]
+      },
+      "write": {
+        "Veteran Hyperlipidemia": [
+          "Hyperlipidemia medication start"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "statin_renewal": {
+      "read": {},
+      "write": {
+        "Veteran Hyperlipidemia": [
+          "Hyperlipidemia_medication_renewal"
+        ]
+      },
+      "example_values": [
+        "MedicationOrder"
+      ]
+    },
+    "stroke_history": {
+      "read": {},
+      "write": {
+        "CardiovascularDiseaseModule": []
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "stroke_points": {
+      "read": {},
+      "write": {
+        "CardiovascularDiseaseModule": []
+      },
+      "example_values": [
+        "Numeric"
+      ]
+    },
+    "stroke_risk": {
+      "read": {
+        "CardiovascularDiseaseModule": []
+      },
+      "write": {
+        "CardiovascularDiseaseModule": []
+      },
+      "example_values": [
+        "0.0",
+        "0.5",
+        "1.0"
+      ]
+    },
+    "suicide": {
+      "read": {
+        "Self Harm": [
+          "Autopsy_Encounter",
+          "Autopsy_Examination",
+          "Death",
+          "End_Suicide"
+        ],
+        "Veteran Self Harm": [
+          "Autopsy_Encounter",
+          "Autopsy_Examination",
+          "Death",
+          "End_Suicide"
+        ]
+      },
+      "write": {
+        "Self Harm": [
+          "Suicide_By_Firearm",
+          "Suicide_By_Other_Means",
+          "Suicide_By_Poisoning",
+          "Suicide_By_Suffocation"
+        ],
+        "Veteran Self Harm": [
+          "Suicide_By_Firearm",
+          "Suicide_By_Other_Means",
+          "Suicide_By_Poisoning",
+          "Suicide_By_Suffocation"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "suicide_attempt": {
+      "read": {
+        "Self Harm": [
+          "Attempted_Suicide_Followup",
+          "ED_Visit_For_Attempted_Suicide",
+          "End_Suicide_Attempt",
+          "Followup_Psychiatric_Evaluation",
+          "Psychiatric_Evaluation",
+          "Short_Hospital_Stay",
+          "Suicide_CarePlan"
+        ],
+        "Veteran Self Harm": [
+          "Attempted_Suicide_Followup",
+          "ED_Visit_For_Attempted_Suicide",
+          "End_Suicide_Attempt",
+          "Followup_Psychiatric_Evaluation",
+          "Psychiatric_Evaluation",
+          "Short_Hospital_Stay",
+          "Suicide_CarePlan"
+        ]
+      },
+      "write": {
+        "Self Harm": [
+          "Attempt_By_Cutting",
+          "Attempt_By_Poisoning",
+          "Attempt_By_Suffocation"
+        ],
+        "Veteran Self Harm": [
+          "Attempt_By_Cutting",
+          "Attempt_By_Poisoning",
+          "Attempt_By_Suffocation"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "suicide_careplan": {
+      "read": {
+        "Self Harm": [
+          "Suicide_CarePlan_Selector"
+        ],
+        "Veteran Self Harm": [
+          "Suicide_CarePlan_Selector"
+        ]
+      },
+      "write": {
+        "Self Harm": [
+          "Suicide_CarePlan"
+        ],
+        "Veteran Self Harm": [
+          "Suicide_CarePlan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "suicide_risk": {
+      "read": {
+        "Veteran PTSD": [
+          "Inpatient Suicide Assessment",
+          "Inpatient Suicide Care Plan",
+          "Inpatient_admission"
+        ]
+      },
+      "write": {
+        "Veteran PTSD": [
+          "At Risk for suicide"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "telecom": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "555-555-5555"
+      ]
+    },
+    "text": {
+      "read": {},
+      "write": {
+        "Metabolic Syndrome Standards of Care": [
+          "CKD3 Diagnosis"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "uti": {
+      "read": {
+        "Urinary Tract Infections": [
+          "End_Urinary_Tract_Infection",
+          "Followup_Encounter",
+          "Prescribe_OTC_Painkiller_For_UTIs",
+          "Prescribe_Second_Round_Of_Antibiotics",
+          "Prescribe_UTI_Antibiotic",
+          "UTI_CarePlan",
+          "UTI_Diagnosis"
+        ]
+      },
+      "write": {
+        "Urinary Tract Infections": [
+          "Cystitis",
+          "Pyelonephritis",
+          "Urethritis"
+        ]
+      },
+      "example_values": [
+        "ConditionOnset"
+      ]
+    },
+    "veteran": {
+      "read": {
+        "Metabolic Syndrome Disease Progression": [
+          "Chance_to_Onset_Hypertension",
+          "Nephropathy_Progression",
+          "No_Hypertension",
+          "Onset_Hypertension"
+        ],
+        "Osteoarthritis": [
+          "Delay_Pre_Arthritis",
+          "Veteran"
+        ],
+        "Veteran Hyperlipidemia": [
+          "veteran guard"
+        ],
+        "Veteran MDD": [
+          "Female",
+          "Male",
+          "veteran guard"
+        ],
+        "Veteran PTSD": [
+          "age guard"
+        ],
+        "Veteran Prostate Cancer": [
+          "veteran_status"
+        ],
+        "Veteran Suicide Probabilities": [
+          "Veteran check"
+        ],
+        "Veteran mild TBI ": [
+          "veteran delay"
+        ]
+      },
+      "write": {
+        "Veteran": [
+          "Set_Veteran_Between_KW_and_VW",
+          "Set_Veteran_Between_VW_and_GW",
+          "Set_Veteran_Between_WW2_and_KW",
+          "Set_Veteran_Early_Gulf_War",
+          "Set_Veteran_Korean_War",
+          "Set_Veteran_Late_Gulf_War",
+          "Set_Veteran_Pre_WW2",
+          "Set_Veteran_Vietnam_War",
+          "Set_Veteran_WW2"
+        ]
+      },
+      "example_values": [
+        "\"Between_KW_and_VW\"",
+        "\"Between_VW_and_GW\"",
+        "\"Between_WW2_and_KW\"",
+        "\"Early_Gulf_War\"",
+        "\"Korean_War\"",
+        "\"Late_Gulf_War\"",
+        "\"Pre_WW2\"",
+        "\"Vietnam_War\"",
+        "\"WW2\""
+      ]
+    },
+    "veteran_population_override": {
+      "read": {
+        "Veteran": [
+          "Between_KW_and_VW",
+          "Between_VW_and_GW",
+          "Between_WW2_and_KW",
+          "Early_Gulf_War",
+          "Korean_War",
+          "Late_Gulf_War",
+          "Pre_WW2",
+          "Vietnam_War",
+          "WW2"
+        ]
+      },
+      "write": {},
+      "example_values": []
+    },
+    "visit_allergist": {
+      "read": {},
+      "write": {
+        "Allergic Rhinitis": [
+          "Advise_To_Visit_Allergist"
+        ],
+        "Dermatitis": [
+          "Advise_To_Visit_Allergist"
+        ],
+        "Food Allergies": [
+          "Advise_To_Visit_Allergist"
+        ]
+      },
+      "example_values": [
+        "true"
+      ]
+    },
+    "watchful_waiting": {
+      "read": {
+        "Veteran Prostate Cancer": [
+          "end_cancer_therapy encounter"
+        ]
+      },
+      "write": {
+        "Veteran Prostate Cancer": [
+          "Watchful_Waiting_Careplan"
+        ]
+      },
+      "example_values": [
+        "CarePlanStart"
+      ]
+    },
+    "zip": {
+      "read": {},
+      "write": {
+        "LifecycleModule": []
+      },
+      "example_values": [
+        "01730"
+      ]
+    }
+  }
