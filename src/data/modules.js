@@ -5423,24 +5423,16 @@ export default {"allergic_rhinitis":{
         "my extrapolation based on the AAAAI's estimates: (1/14 had asthma in 2001, 1/12 in 2009, so I extrapolate",
         "1/11 for 2016)."
       ],
-      "table_transition": {
-        "type": "Table",
-        "transitions": [
-          {
-            "transition": "Delay_For_Childhood_Asthma",
-            "default_probability": 0.5,
-            "lookup_table_name": "asthma.csv"
-          },
-          {
-            "transition": "Delay_Until_Adulthood",
-            "default_probability": 0.5,
-            "lookup_table_name": "asthma.csv"
-          }
-        ],
-        "lookup_table_name_ModuleBuilder": "asthma.csv",
-        "lookuptable": "age,Delay_For_Childhood_Asthma,Delay_Until_Adulthood\r\n0-50,.5,.5\r\n51-140,.2,.8"
-      },
-      "viewTable": false
+      "distributed_transition": [
+        {
+          "distribution": 0.95,
+          "transition": "Delay_For_Childhood_Asthma"
+        },
+        {
+          "distribution": 0.05,
+          "transition": "Delay_Until_Adulthood"
+        }
+      ]
     },
     "Delay_For_Childhood_Asthma": {
       "type": "Delay",
