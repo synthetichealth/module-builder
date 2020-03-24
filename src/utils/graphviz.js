@@ -396,7 +396,7 @@ const stateDescription = (state) =>{
 
     case 'Device':
       const c = state.code;
-      details = `Assign device\\l${c['system']}[${c['code']}]: ${c['display']}\\l`;
+      details = `${c['system']}[${c['code']}]: ${c['display']}\\l`;
 
       if (state.manufacturer) {
         details += `Manufacturer: ${state.manufacturer}\\l`;
