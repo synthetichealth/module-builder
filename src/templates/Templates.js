@@ -322,6 +322,11 @@ const AttributeTemplates = {
     attribute: "attribute",
     default: 1.0
   },
+  Supply: {
+    category: 'device',
+    quantity: 1,
+    code: {...TypeTemplates.Code.Snomed}
+  },
 
   ImagingStudy: {
     Instance: {
@@ -493,6 +498,16 @@ const StateTemplates = {
     cause: "",
     probability: 1.0,
     exact: {...AttributeTemplates.Exact}
+  },
+
+  Device: {
+    type: "Device",
+    code: {...TypeTemplates.Code.Snomed}
+  },
+
+  SupplyList: {
+    type: "SupplyList",
+    supplies: [{...AttributeTemplates.Supply}]
   },
 
   Death: {

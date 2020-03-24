@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber, RIEToggle, RIETextArea } from 'riek';
 import _ from 'lodash';
 
-import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, ImagingStudyState, SymptomState, DeathState } from '../../types/State';
+import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, ImagingStudyState, SymptomState, SupplyListState, DeviceState, DeathState } from '../../types/State';
 
 import { Code, Codes } from './Code';
 import { Goals } from './Goal';
@@ -97,6 +97,10 @@ class StateEditor extends Component<Props> {
         return <ImagingStudy {...props} />
       case "Symptom":
         return <Symptom {...props} />
+      case "Device":
+        return <Device {...props} />
+      case "SupplyList":
+        return <SupplyList {...props} />
       case "Death":
         return <Death {...props} />
       default:
@@ -2623,6 +2627,93 @@ class Symptom extends Component<Props> {
     }
   }
 
+}
+
+class SupplyList extends Component<Props> {
+  render() {
+    let state = ((this.props.state: any): SupplyListState);
+    let supplyCount = (state.supplies && state.supplies.length) || 0;
+    return (
+      <div>
+        <b>Supplies</b>
+        <br />
+        {state.supplies && state.supplies.map((supply, i) => {
+          return (
+            <div className='section' key={i}>
+              Supply #{i+1} (<a className='editable-text delete-button' onClick={() => this.props.onChange(`supplies.[${i}]`)({val: {id: null}})}>remove</a>)
+              { this.renderSupply(supply, i) }
+            </div>
+          )
+        })}
+        <a className='editable-text' onClick={() => this.props.onChange(`supplies.[${supplyCount}]`)({val: {id: _.cloneDeep(getTemplate('Attribute.Supply'))}})}>+</a>
+      </div>
+    );
+  }
+
+  renderSupply(supply, i) {
+    const onChange = this.props.onChange(`supplies[${i}]`);
+    return (
+      <div>
+        Quantity: <RIENumber className='editable-text' value={supply.quantity} propName='quantity' change={onChange('quantity')} />
+        <br />
+        Code:
+        <div className='section'>
+          <Code code={supply.code} system={"SNOMED-CT"} onChange={onChange('code')} />
+        </div>
+      </div>
+      );
+  }
+}
+
+class Device extends Component<Props> {
+  render() {
+    let state = ((this.props.state: any): DeviceState);
+
+    return (
+      <div>
+        Code:
+        <div className='section'>
+          <Code code={state.code} system={"SNOMED-CT"} onChange={this.props.onChange('code')} />
+        </div>
+        { this.renderManufacturer(state) }
+        { this.renderModel(state) }         
+      </div>
+      );
+  }
+
+  renderManufacturer(state) {
+    if (state.manufacturer) {
+      return (
+        <div>
+          Manufacturer: <RIEInput className='editable-text' value={state.manufacturer} propName={'manufacturer'} change={this.props.onChange('manufacturer')} /><br/>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <a className='editable-text' onClick={() => this.props.onChange('manufacturer')({val: {id: "text"}})}>Add Manufacturer</a>
+          <br />
+        </div>
+      );
+    }
+  }
+
+  renderModel(state) {
+    if (state.model) {
+      return (
+        <div>
+          Model: <RIEInput className='editable-text' value={state.model} propName={'model'} change={this.props.onChange('model')} /><br/>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <a className='editable-text' onClick={() => this.props.onChange('model')({val: {id: "text"}})}>Add Model</a>
+          <br />
+        </div>
+      );
+    }
+  }
 }
 
 class Death extends Component<Props> {
