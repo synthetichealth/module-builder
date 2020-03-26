@@ -323,7 +323,6 @@ const AttributeTemplates = {
     default: 1.0
   },
   Supply: {
-    category: 'device',
     quantity: 1,
     code: {...TypeTemplates.Code.Snomed}
   },
