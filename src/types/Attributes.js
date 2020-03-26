@@ -21,3 +21,8 @@ export type Series = {
   modality: Code,
   instances: Instance[]
 }
+
+export type Supply = {
+  quantity: number,
+  item: Code
+}

@@ -393,6 +393,36 @@ const stateDescription = (state) =>{
       }
 
       break;
+
+    case 'Device':
+      const c = state.code;
+      details = `${c['system']}[${c['code']}]: ${c['display']}\\l`;
+
+      if (state.manufacturer) {
+        details += `Manufacturer: ${state.manufacturer}\\l`;
+      }
+      if (state.model) {
+        details += `Model: ${state.model}\\l`;
+      }
+      break;
+
+    case 'SupplyList':
+      if(state.supplies && state.supplies.length > 0){
+        let supplyQuantity = ['Quantity']
+        let supplyCode = ['Code'];
+        state.supplies.forEach( (s,i) => {
+          supplyQuantity.push(s.quantity);
+          const c = s.code;
+          supplyCode.push(`${c['system']}[${c['code']}]: ${c['display']}`);
+        });
+        
+        details += `{${supplyCode.map(t => t).join('|')}}|`;
+        details += `{${supplyQuantity.map(t => t).join('|')}}|`;
+      } else {
+        details = `No Supplies\\l`;
+      }
+      break;
+
     default:
       break;
 

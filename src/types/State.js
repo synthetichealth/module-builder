@@ -2,7 +2,7 @@
 import type { Transition } from './Transition';
 import type { Conditional } from './Conditional';
 import type { Code } from './Code';
-import type { Goal, Series } from './Attributes';
+import type { Goal, Series, Supply } from './Attributes';
 import type { UnitOfTime } from './Units';
 
 export type InitialState = {
@@ -260,6 +260,25 @@ export type DiagnosticReportState = {
   type: 'DiagnosticReport',
   number_of_observations: number,
   codes: Code[],
+  transition?: Transition
+}
+
+export type DeviceState = {
+  name: string,
+  remarks: string[],
+  type: 'Device',
+  code: Code,
+  manufacturer?: string,
+  model?: string,
+  assign_to_attribute?: string,
+  transition?: Transition
+}
+
+export type SupplyListState = {
+  name: string,
+  remarks: string[],
+  type: 'SupplyList',
+  supplies: Supply[],
   transition?: Transition
 }
 
