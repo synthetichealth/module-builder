@@ -83,10 +83,10 @@ export default (state = initialState, action) => {
           alteredState.distributed_transition[action.data.selectedStateTransition] = {...alteredState.distributed_transition[action.data.selectedStateTransition], transition: action.data.stateKey}
           newState.modules[action.data.currentModuleKey].states[action.data.stateKey].direct_transition = oldTransitionPoint;
           newState.modules[action.data.currentModuleKey].states[action.data.selectedState] = alteredState;
-        } else if(alteredState.table_transition){
-          let oldTransitionPoint = alteredState.table_transition[action.data.selectedStateTransition].transition;
-          alteredState.table_transition = [...alteredState.table_transition]
-          alteredState.table_transition[action.data.selectedStateTransition] = {...alteredState.table_transition[action.data.selectedStateTransition], transition: action.data.stateKey}
+        } else if(alteredState.lookup_table_transition){
+          let oldTransitionPoint = alteredState.lookup_table_transition[action.data.selectedStateTransition].transition;
+          alteredState.lookup_table_transition = [...alteredState.lookup_table_transition]
+          alteredState.lookup_table_transition[action.data.selectedStateTransition] = {...alteredState.lookup_table_transition[action.data.selectedStateTransition], transition: action.data.stateKey}
           newState.modules[action.data.currentModuleKey].states[action.data.stateKey].direct_transition = oldTransitionPoint;
           newState.modules[action.data.currentModuleKey].states[action.data.selectedState] = alteredState;
         } else if(alteredState.conditional_transition){
@@ -150,7 +150,7 @@ export default (state = initialState, action) => {
         delete newState.modules[action.data.currentModuleKey].states[action.data.stateKey]['conditional_transition']
         delete newState.modules[action.data.currentModuleKey].states[action.data.stateKey]['distributed_transition']
         delete newState.modules[action.data.currentModuleKey].states[action.data.stateKey]['complex_transition']
-        delete newState.modules[action.data.currentModuleKey].states[action.data.stateKey]['table_transition']
+        delete newState.modules[action.data.currentModuleKey].states[action.data.stateKey]['lookup_table_transition']
 
 
         if(alteredState.direct_transition){
@@ -158,9 +158,9 @@ export default (state = initialState, action) => {
         } else if(alteredState.distributed_transition){
           newState.modules[action.data.currentModuleKey].states[action.data.stateKey].distributed_transition = _.cloneDeep(alteredState.distributed_transition);
           delete alteredState['distributed_transition']
-        } else if(alteredState.table_transition){
-          newState.modules[action.data.currentModuleKey].states[action.data.stateKey].table_transition = _.cloneDeep(alteredState.table_transition);
-          delete alteredState['table_transition']
+        } else if(alteredState.lookup_table_transition){
+          newState.modules[action.data.currentModuleKey].states[action.data.stateKey].lookup_table_transition = _.cloneDeep(alteredState.lookup_table_transition);
+          delete alteredState['lookup_table_transition']
         } else if(alteredState.conditional_transition){
           newState.modules[action.data.currentModuleKey].states[action.data.stateKey].conditional_transition = _.cloneDeep(alteredState.conditional_transition);
           delete alteredState['conditional_transition']
@@ -282,7 +282,7 @@ export default (state = initialState, action) => {
       else{
         _.unset(newState.modules, path);
         let parent = [...action.data.path].splice(0, action.data.path.length -1).join(".");
-        if (action.data.path[2] == 'table_transition'){
+        if (action.data.path[2] == 'lookup_table_transition'){
          parent  += '.transitions'
         }
         let newVal = _.get(newState.modules, parent);
@@ -320,7 +320,7 @@ export default (state = initialState, action) => {
         Distributed: 'distributed_transition',
         Direct: 'direct_transition',
         Complex: 'complex_transition',
-        Table: 'table_transition',
+        Table: 'lookup_table_transition',
       };
 
       let transitionName = transitionMapping[action.data.transitionType];
@@ -348,7 +348,7 @@ export default (state = initialState, action) => {
         case 'complex_transition':
           transitionTo = _.get(action, 'data.nodeName.transition.transition[0].distributions[0].to', null);
           break;
-        case 'table_transition':
+        case 'lookup_table_transition':
           transitionTo = _.get(action, 'data.nodeName.transition.transitions.transition[0].to', null);
           break;
       }
@@ -366,7 +366,7 @@ export default (state = initialState, action) => {
           case 'complex_transition':
             newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName][0].distributions[0].transition = transitionTo;
             break;
-          case 'table_transition':
+          case 'lookup_table_transition':
             newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName].transitions[0].transition = transitionTo;
             break;
         }
@@ -432,7 +432,7 @@ export default (state = initialState, action) => {
       // TODO figure out how to remove unused fields
       newState.modules[action.data.targetModuleKey].states[action.data.targetNode.name] =
         { ...getTemplate(`State.${newType}`),
-          ..._.pick(newState.modules[action.data.targetModuleKey].states[action.data.targetNode.name], ['direct_transition', 'conditional_transition', 'distributed_transition', 'complex_transition', 'table_transition', 'remarks']),
+          ..._.pick(newState.modules[action.data.targetModuleKey].states[action.data.targetNode.name], ['direct_transition', 'conditional_transition', 'distributed_transition', 'complex_transition', 'lookup_table_transition', 'remarks']),
           type: getTemplate(`State.${newType}`).type
         };
 
@@ -525,8 +525,8 @@ const fixStateReferences = (module, stateName, newName) => {
           }
         }
       })
-    } else if (state.table_transition){
-      state.table_transition.transitions.forEach( transition => {
+    } else if (state.lookup_table_transition){
+      state.lookup_table_transition.transitions.forEach( transition => {
         if(transition.transition === stateName){
           if(newName === null){
             delete transition.transition
@@ -666,8 +666,8 @@ const renameLoopbackTransition = (state, newStateName, oldStateName) => {
         transition.transition = newStateName
       }
     })
-  } else if (state.table_transition){
-    state.table_transition.forEach( transition => {
+  } else if (state.lookup_table_transition){
+    state.lookup_table_transition.forEach( transition => {
       if(transition.transition === oldStateName){
         transition.transition = newStateName
       }

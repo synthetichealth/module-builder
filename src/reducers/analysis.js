@@ -111,12 +111,12 @@ const tableTransitionWarnings = (module) => {
     let state = module.states[stateName];
 
     // find table transitions and check table data
-    if (state.table_transition !== undefined){
+    if (state.lookup_table_transition !== undefined){
       let message = '';
-      if(state.table_transition.lookup_table_name_ModuleBuilder === ""){
+      if(state.lookup_table_transition.lookup_table_name_ModuleBuilder === ""){
         message = 'Invalid filename ';
       }
-      if (state.table_transition.lookuptable === "Enter table" || tableHasError(state.table_transition.lookuptable) ) { 
+      if (state.lookup_table_transition.lookuptable === "Enter table" || tableHasError(state.lookup_table_transition.lookuptable) ) { 
         if (message === ''){ 
           message = 'Invalid data ';
         } else {
@@ -124,16 +124,16 @@ const tableTransitionWarnings = (module) => {
         }
       }
       // check the last X columns vs X transitions
-      if (!tableHasError(state.table_transition.lookuptable)){
+      if (!tableHasError(state.lookup_table_transition.lookuptable)){
         let tableColumns = [];
-        let data = parseLookupTable(state.table_transition.lookuptable);
+        let data = parseLookupTable(state.lookup_table_transition.lookuptable);
         if (data.length > 0){ 
           tableColumns = Object.keys(data[0]);
         }
 
-        for (let i = 0; i < state.table_transition.transitions.length; i++)
+        for (let i = 0; i < state.lookup_table_transition.transitions.length; i++)
         {
-          let transition = state.table_transition.transitions[state.table_transition.transitions.length - i - 1].transition;
+          let transition = state.lookup_table_transition.transitions[state.lookup_table_transition.transitions.length - i - 1].transition;
           let column = tableColumns[tableColumns.length-i -1];
           if (transition != column)
           {
@@ -251,8 +251,8 @@ const orphanStateWarnings = (module) => {
           }
         }
       });
-    } else if(nextState.table_transition){
-      nextState.table_transition.transitions.forEach(transition => {
+    } else if(nextState.lookup_table_transition){
+      nextState.lookup_table_transition.transitions.forEach(transition => {
         if(!module.states[transition.transition]){
           warnings.push({stateName: nextStateKey, message: 'Transition to state that does not exist: ' + transition.transition});
         } else {
