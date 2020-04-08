@@ -7,3 +7,14 @@ cache:
   - node_modules
 script:
   - yarn test
+  # TODO: have to set CI=false on the build because it treats warnings as errors otherwise
+  - CI=false yarn build
+
+deploy:
+  provider: pages
+  local_dir: build
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  on:
+    branch: master
