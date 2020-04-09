@@ -56,6 +56,10 @@ export type SetAttributeState = {
   type: 'SetAttribute',
   attribute: string,
   value?: number | boolean | string,
+  range?: {
+    low: number,
+    high: number
+  },
   transition?: Transition
 }
 

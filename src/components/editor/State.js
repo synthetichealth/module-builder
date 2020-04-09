@@ -313,22 +313,23 @@ class SetAttribute extends Component<Props> {
       <div>
         Attribute: {displayAttribute}
         <br/>
-        {this.renderValue()}
+        {this.renderValueOrRange()}
       </div>
     );
   }
 
-  renderValue() {
+  renderValueOrRange() {
     let state = ((this.props.state: any): SetAttributeState);
 
-    if (state.value == null) {
+    if (state.value == null && state.range == null) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: "text"}})}>Add Value</a>
+          <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: "text"}})}>Add Value</a><br />
+          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}})}}>Add Range</a>
           <br />
         </div>
       );
-    } else {
+    } else if (state.value != null) {
       let val = state.value;
       if(typeof val === 'boolean'){
         val = String(val);
@@ -337,6 +338,20 @@ class SetAttribute extends Component<Props> {
         <div>
           Value: <RIEInput className='editable-text' value={val} propName={'value'} change={this.props.onChange('value')} />
           <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: null}})}>(remove)</a>
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('value')({val: {id: null}})}}>Change to Range</a>
+        </div>
+      );
+    } else if (state.range != null) {
+      return (
+        <div className='section'>
+          Range Low: <RIENumber className='editable-text' value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
+          <br />
+          Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
+          <br />
+          <a className='editable-text' onClick={() => this.props.onChange('range')({val: {id: null}})}>(Remove Range)</a>
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('value')({val: {id: 1}}); this.props.onChange('range')({val: {id: null}})}}>Change to Value</a>
           <br />
         </div>
       );
