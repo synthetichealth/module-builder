@@ -27,14 +27,19 @@ class LoadModule extends Component {
       // need to get the tables for any table transition
       for (var key in module.states)
       {
-        if (module.states[key].table_transition != null)
+        if (module.states[key].lookup_table_transition != null)
         { 
           tableMessage += key.toString() + ' & '
+
+          // this is an awful hack to get around a data model mismatch
+          const lttWrapper = { type: 'Table', transitions: module.states[key].lookup_table_transition };
+          module.states[key].lookup_table_transition = lttWrapper;
+
           
           // put default data in for state of the table transition
-          module.states[key].table_transition.lookup_table_name_ModuleBuilder = module.states[key].table_transition.transitions[0].lookup_table_name;
-          module.states[key].table_transition.viewTable = false;    
-          module.states[key].table_transition.lookuptable = '';
+          module.states[key].lookup_table_transition.lookup_table_name_ModuleBuilder = module.states[key].lookup_table_transition.transitions[0].lookup_table_name;
+          module.states[key].lookup_table_transition.viewTable = false;    
+          module.states[key].lookup_table_transition.lookuptable = '';
         }
       }
 

@@ -27,7 +27,7 @@ class Transition extends Component<Props> {
         case "Complex":
           return <ComplexTransition {...this.props} onChange={this.props.onChange('complex_transition')} />
         case "Table":
-          return <TableTransition {...this.props} onChange={this.props.onChange('table_transition')} />
+          return <TableTransition {...this.props} onChange={this.props.onChange('lookup_table_transition')} />
         case "None":
           return <div> No transition </div>
         default:

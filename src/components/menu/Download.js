@@ -31,8 +31,8 @@ class Download extends Component {
     Object.keys(module.states).map(k => module.states[k]).forEach( s => {
 
       // find table transitions and download the tables
-      if (s.table_transition !== undefined){
-        this.downloadCsv(s.table_transition.lookup_table_name_ModuleBuilder, s.table_transition.lookuptable);
+      if (s.lookup_table_transition !== undefined){
+        this.downloadCsv(s.lookup_table_transition.lookup_table_name_ModuleBuilder, s.lookup_table_transition.lookuptable);
       }
 
     })
@@ -64,15 +64,16 @@ class Download extends Component {
       }
 
       // find table transitions and delete state data
-      if (s.table_transition !== undefined){
-        let name = s.table_transition.lookup_table_name_ModuleBuilder;
-        s.table_transition.transitions.forEach( t => 
+      if (s.lookup_table_transition !== undefined){
+        let name = s.lookup_table_transition.lookup_table_name_ModuleBuilder;
+        s.lookup_table_transition.transitions.forEach( t => 
           {
             t.lookup_table_name = name;
           })
-        delete s.table_transition.lookup_table_name_ModuleBuilder;
-        delete s.table_transition.lookuptable;
-        delete s.table_transition.viewTable;
+        delete s.lookup_table_transition.lookup_table_name_ModuleBuilder;
+        delete s.lookup_table_transition.lookuptable;
+        delete s.lookup_table_transition.viewTable;
+        s.lookup_table_transition = s.lookup_table_transition.transitions;
       }
 
     })

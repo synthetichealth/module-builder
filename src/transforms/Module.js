@@ -42,8 +42,8 @@ export function extractTransition(state: any): ?Transition {
   if(state.complex_transition) {
     return extractComplexTransition(state.complex_transition);
   }
-  if(state.table_transition) {
-    return extractTableTransition(state.table_transition);
+  if(state.lookup_table_transition) {
+    return extractTableTransition(state.lookup_table_transition);
   }
   return null;
 }

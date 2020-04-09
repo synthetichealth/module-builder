@@ -82,17 +82,17 @@ for(var i = 0; i< files.length; i++){
     Object.keys(json.states).map(k => json.states[k]).forEach( s => {  
 
       // find table transitions and add state data
-      if (s.table_transition !== undefined){ 
+      if (s.lookup_table_transition !== undefined){ 
 
         // save the name and set the table view to be in the edit mode
-        s.table_transition.lookup_table_name_ModuleBuilder = s.table_transition.transitions[0].lookup_table_name;
+        s.lookup_table_transition.lookup_table_name_ModuleBuilder = s.lookup_table_transition.transitions[0].lookup_table_name;
         s.viewTable = false;
 
         // find the file using the table name
         var tableFiles = walkSync(tableDirectory, ".csv");
         var csvLocation = '';
         tableFiles.forEach( file => {
-          if (file.toUpperCase().includes(s.table_transition.lookup_table_name_ModuleBuilder.toUpperCase()))
+          if (file.toUpperCase().includes(s.lookup_table_transition.lookup_table_name_ModuleBuilder.toUpperCase()))
           {
             csvLocation = file;
           }
@@ -102,14 +102,14 @@ for(var i = 0; i< files.length; i++){
         if (csvLocation === '')
         {      
           console.log('\x1b[1m')
-          console.log('\n\nLookup Table \'' + s.table_transition.lookup_table_name_ModuleBuilder + '\' not found.\n')
+          console.log('\n\nLookup Table \'' + s.lookup_table_transition.lookup_table_name_ModuleBuilder + '\' not found.\n')
           console.log('Please ensure the table exists in the directory ' + tableDirectory)
           console.log('\x1b[0m')
           process.exit()
         }
         
         // read the csv and save it
-        s.table_transition.lookuptable = fs.readFileSync(csvLocation, 'utf8');
+        s.lookup_table_transition.lookuptable = fs.readFileSync(csvLocation, 'utf8');
       }
     });
 
