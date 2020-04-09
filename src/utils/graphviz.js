@@ -434,6 +434,16 @@ const stateDescription = (state) =>{
     })
   }
 
+  if(state.valueSets !== undefined){
+    state['valueSets'].forEach( valueSet => {
+      details = details + valueSet['url'] + ': ' + valueSet['display'] + "\\l"
+    })
+  }
+
+  // if(state.valueSet !== undefined){
+  //     details = details + state.valueSet['url'] + ': ' + state.valueSet['display'] + "\\l"
+  // }
+
   if(state.target_encounter !== undefined){
    let verb = 'Perform'
 

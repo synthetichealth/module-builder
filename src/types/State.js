@@ -84,6 +84,7 @@ export type EncounterState = {
   encounter_class: 'emergency' | 'inpatient' | 'ambulatory',
   reason?: string,
   codes: Code[],
+  valueSet: ValueSet,
   transition?: Transition
 }
 

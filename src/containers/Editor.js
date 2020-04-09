@@ -319,6 +319,8 @@ class Editor extends Component {
         return <StateList selectedState={this.props.moduleState} states={this.props.moduleStates} onClick={this.props.selectNode} />
       case 'code':
         return <JsonEditor onChange={(value) => {this.props.jsonEdit(value)}} module={this.props.module} refreshCodeFlag={this.props.refreshCodeFlag}/>
+      case 'valueset':
+        return <JsonEditor onChange={(value) => {this.props.jsonEdit(value)}} module={this.props.module} refreshCodeFlag={this.props.refreshCodeFlag}/>
       case 'attribute':
         // The attribute list does not show attributes that are referenced 
         // for example BMI is not in the attribute list in the Metabolic Syndrome Standards of Care Module but the state 'Obese Check' uses BMI in the transition

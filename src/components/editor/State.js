@@ -6,6 +6,7 @@ import _ from 'lodash';
 import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, ImagingStudyState, SymptomState, SupplyListState, DeviceState, DeathState } from '../../types/State';
 
 import { Code, Codes } from './Code';
+import { ValueSet, ValueSets } from './ValueSet';
 import { Goals } from './Goal';
 import { SeriesList } from './ImagingStudyAttributes';
 import ConditionalEditor from './Conditional';
@@ -513,11 +514,7 @@ class Encounter extends Component<Props> {
           Encounter Class: <RIESelect className='editable-text' value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
           <br />
           {this.renderReason()}
-          <div className='section'>
-            Codes
-            <br />
-            <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-          </div>
+          {this.renderCodeOrValueSet()}
         </div>
       );
     } else {
@@ -530,6 +527,48 @@ class Encounter extends Component<Props> {
     }
 
   }
+
+  renderCodeOrValueSet() {
+    let state = ((this.props.state: any): EncounterState);
+    if (state.codes != null) {
+      return (
+        <div className='section'>
+          Codes <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: null}});}}>Add ValueSets</a>
+          <br />
+          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
+        </div>
+      );
+    } else {
+      return (
+        <div className='section'>
+          <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}}); this.props.onChange('valueSets')({val: {id: null}})}}>Add Codes</a> ValueSets
+          <br />
+          <ValueSets valueSets={state.valueSets} onChange={this.props.onChange('valueSets')} />
+        </div> 
+      );
+    }
+  }
+
+  // renderCodeOrValueSet() {
+  //   let state = ((this.props.state: any): EncounterState);
+  //   if (state.codes != null) {
+  //     return (
+  //       <div className='section'>
+  //         Codes <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: null}});}}>Add ValueSets</a>
+  //         <br />
+  //         <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
+  //       </div>
+  //     );
+  //   } else {
+  //     return (
+  //       <div className='section'>
+  //         <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}}); this.props.onChange('valueSets')({val: {id: null}})}}>Add Codes</a> ValueSets
+  //         <br />
+  //         <ValueSet valueSet={state.valueSet} onChange={this.props.onChange('valueSet')} />
+  //       </div> 
+  //     );
+  //   }
+  // }
 
   renderWellness() {
     let state = ((this.props.state: any): EncounterState);
