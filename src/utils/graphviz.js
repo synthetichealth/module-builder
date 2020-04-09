@@ -287,6 +287,11 @@ const stateDescription = (state) =>{
       }
       break;
     case 'SetAttribute':
+      if (state.range) {
+        const r = state.range;
+        details = `Set '${state["attribute"]}': ${r['low']} - ${r['high']}`;
+        break;
+      }
       let v = state['value']
       details = `Set '${state["attribute"]}' = ${(v === undefined || v === null || v === "") ? 'nil' : v}`
       break;
