@@ -504,6 +504,10 @@ const StateTemplates = {
     code: {...TypeTemplates.Code.Snomed}
   },
 
+  DeviceEnd: {
+    type: "DeviceEnd"
+  },
+
   SupplyList: {
     type: "SupplyList",
     supplies: [{...AttributeTemplates.Supply}]

@@ -278,6 +278,16 @@ export type DeviceState = {
   transition?: Transition
 }
 
+export type DeviceEndState = {
+  name: string,
+  remarks: string[],
+  type: 'DeviceEnd',
+  device?: string,
+  referenced_by_attribute?: string,
+  codes?: Code[],
+  transition?: Transition
+}
+
 export type SupplyListState = {
   name: string,
   remarks: string[],
