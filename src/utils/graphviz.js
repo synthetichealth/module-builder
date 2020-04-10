@@ -411,6 +411,12 @@ const stateDescription = (state) =>{
       }
       break;
 
+    case 'DeviceEnd':
+      if (state.device) {
+        details = `Added at: ${state.device}\\l`;
+      }
+      break;
+
     case 'SupplyList':
       if(state.supplies && state.supplies.length > 0){
         let supplyQuantity = ['Quantity']

@@ -3,7 +3,17 @@ import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber, RIEToggle, RIETextArea } from 'riek';
 import _ from 'lodash';
 
-import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, ImagingStudyState, SymptomState, SupplyListState, DeviceState, DeathState } from '../../types/State';
+import type { 
+  State, InitialState, TerminalState, SimpleState,
+  GuardState, DelayState, SetAttributeState, CounterState,
+  CallSubmoduleState, EncounterState, EncounterEndState,
+  ConditionOnsetState, ConditionEndState, AllergyOnsetState,
+  AllergyEndState, MedicationOrderState, MedicationEndState,
+  CarePlanStartState, CarePlanEndState, ProcedureState,
+  VitalSignState, ObservationState, MultiObservationState,
+  DiagnosticReportState, ImagingStudyState, SymptomState,
+  SupplyListState, DeviceState, DeviceEndState, DeathState
+} from '../../types/State';
 
 import { Code, Codes } from './Code';
 import { Goals } from './Goal';
@@ -99,6 +109,8 @@ class StateEditor extends Component<Props> {
         return <Symptom {...props} />
       case "Device":
         return <Device {...props} />
+      case "DeviceEnd":
+        return <DeviceEnd {...props} />
       case "SupplyList":
         return <SupplyList {...props} />
       case "Death":
@@ -2681,7 +2693,23 @@ class SupplyList extends Component<Props> {
 }
 
 class Device extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.assign_to_attribute,//'',
+      lastSubmitted : this.props.state.assign_to_attribute,
+      displayLabel : true,
+    }
+  }
+
   render() {
+    // check for undo/redo
+    if (this.props.state.assign_to_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
     let state = ((this.props.state: any): DeviceState);
 
     return (
@@ -2691,7 +2719,8 @@ class Device extends Component<Props> {
           <Code code={state.code} system={"SNOMED-CT"} onChange={this.props.onChange('code')} />
         </div>
         { this.renderManufacturer(state) }
-        { this.renderModel(state) }         
+        { this.renderModel(state) }
+        { this.renderAssignToAttribute(state) }
       </div>
       );
   }
@@ -2728,6 +2757,227 @@ class Device extends Component<Props> {
         </div>
       );
     }
+  }
+
+  renderAssignToAttribute() {
+    let state = ((this.props.state: any): DeviceState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.assign_to_attribute]!= undefined) 
+        {
+          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.assign_to_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.assign_to_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.assign_to_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
+    if (!state.assign_to_attribute) {
+      return (
+        <div>
+          <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: "text"}})}>Add Assign to Attribute</a>
+          <br />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          Assign to Attribute: {displayAttribute}
+          <a className='editable-text' onClick={() => this.props.onChange('assign_to_attribute')({val: {id: null}})}>(remove)</a>
+          <br/>
+        </div>
+      );
+    }
+  }
+
+  handleTextChange(value) {
+    this.setState({value: value});
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.assign_to_attribute != this.state.value)
+    {
+      this.props.onChange('assign_to_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.assign_to_attribute});      
+    this.setState({lastSubmitted: this.props.state.assign_to_attribute})
+  }
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
+  }
+}
+
+class DeviceEnd extends Component<Props> {
+  constructor (props) {
+    super(props)
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value : this.props.state.referenced_by_attribute,
+      lastSubmitted : this.props.state.referenced_by_attribute,
+      displayLabel : true,
+    }
+  }
+
+  render() {
+    // check for undo/redo
+    if (this.props.state.referenced_by_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    {
+      this.fixTextBox();
+    }
+    let state = ((this.props.state: any): DeviceEndState);
+    return (
+      <div>
+        {this.renderDevice()}
+        {this.renderReferencedByAttribute()}
+        {this.renderCodes()}
+      </div>
+    );
+  }
+
+  renderDevice() {
+    let state = ((this.props.state: any): DeviceEndState);
+    let deviceStates = this.props.otherStates.filter((s) => {return s.type === "Device"});
+    let options = deviceStates.map((e) => {return {id: e.name, text: e.name}});
+    if (options.length === 1) {
+      options.unshift({}); // blank to make sure the dropdown works when there's only one choice
+    }
+    if (!state.device) {
+      return (
+        <div>
+          <a className='editable-text' onClick={() => this.props.onChange('device')({val: {id: "text"}})}>Add Device State</a>
+          <br />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          Device: <RIESelect className='editable-text' value={{id: state.device, text: state.device}} propName={'device'}  change={this.props.onChange('device')} options={options} />
+          <a className='editable-text' onClick={() => this.props.onChange('device')({val: {id: null}})}>(remove)</a>
+          <br/>
+        </div>
+      );
+    }
+  }
+
+  renderReferencedByAttribute() {
+    let state = ((this.props.state: any): DeviceEndState);
+    let displayAttribute;
+    if (this.state.displayLabel)
+    {
+        const data = AttributeData;      
+        let others = [this.props.moduleName];
+        if (data[state.referenced_by_attribute]!= undefined) 
+        {
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
+        }
+        others = others.filter((x, i, a) => a.indexOf(x) == i)
+        others.splice(others.indexOf[this.props.moduleName], 1);
+
+        if (others.length > 0)
+        {
+          displayAttribute = <span><label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+          <button className="attribute-button" onClick={this.props.displayAttributes}>See other uses</button>
+          </span>
+        }
+        else{
+          displayAttribute = <label class="editable-text" onClick={this.toggleLabel}>{state.referenced_by_attribute}</label>
+        }
+
+    }
+    else
+    {
+     displayAttribute = <AutoCompleteText onChange={this.handleTextChange} onBlur={this.handleSubmit} text={this.state.value} items={Attributes}/>
+    }
+    if (!state.referenced_by_attribute) {
+      return (
+        <div>
+          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: "text"}})}>Add Referenced by Attribute</a>
+          <br />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          Referenced by Attribute: {displayAttribute}
+          <a className='editable-text' onClick={() => this.props.onChange('referenced_by_attribute')({val: {id: null}})}>(remove)</a>
+          <br/>
+        </div>
+      );
+    }
+  }
+
+  renderCodes() {
+    let state = ((this.props.state: any): DeviceEndState);
+    if (!state.codes) {
+      return (
+        <div>
+          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
+          <br />
+        </div>
+      );
+    } else {
+      return (
+        <div className='section'>
+          Codes
+          <br />
+          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
+          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: null}})}>Remove Codes</a>
+          <br />
+        </div>
+      );
+    }
+  }
+  
+  handleTextChange(value) {
+    this.setState({value: value});
+      
+  }
+
+  handleSubmit(save) {
+    if (save && this.props.state.referenced_by_attribute != this.state.value)
+    {
+      this.props.onChange('referenced_by_attribute')({val: this.state.value})
+      this.setState({lastSubmitted: this.state.value})      
+    }
+    else {
+      this.setState({value: this.state.lastSubmitted})
+    }
+    this.toggleLabel();
+  }
+
+  fixTextBox() {    
+    this.setState({value: this.props.state.referenced_by_attribute});      
+    this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
+  }
+  toggleLabel = () =>  {
+    this.setState({displayLabel: !this.state.displayLabel});
   }
 }
 
