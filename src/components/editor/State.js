@@ -47,6 +47,7 @@ class StateEditor extends Component<Props> {
     let props = {...this.props};
     props.state.name = props.state.name || 'Unnamed_State';
     props.onChange = this.props.onChange(`states.${props.state.name}`);
+    props.renderCodesOrValueSet = this.renderCodesOrValueSet;
     switch (this.props.state.type) {
       case "Initial":
         return <Initial {...props} />
@@ -106,6 +107,27 @@ class StateEditor extends Component<Props> {
         return <Death {...props} />
       default:
         return this.props.state.type
+    }
+  }
+
+  renderCodesOrValueSet(parentProps, code, typeCode) {
+    let state = parentProps.state
+    if (state.codes != null) {
+      return (
+        <div className='section'>
+          Codes <a className='editable-text' onClick={() => {parentProps.onChange('codes')({val: {id: null}}); parentProps.onChange('valueSet')({val: {id: {url: '', display: ''}}})}}>Add ValueSet</a>
+          <br />
+          <Codes codes={state.codes} system={code} onChange={parentProps.onChange('codes')} />
+        </div>
+      );
+    } else {
+      return (
+        <div className='section'>
+          <a className='editable-text' onClick={() => {parentProps.onChange('codes')({val: {id: [getTemplate(typeCode)]}}); parentProps.onChange('valueSet')({val: {id: null}})}}>Add Codes</a> ValueSet
+          <br />
+          <ValueSet valueSet={state.valueSet} onChange={parentProps.onChange('valueSet')} />
+        </div>
+      );
     }
   }
 
@@ -514,7 +536,7 @@ class Encounter extends Component<Props> {
           Encounter Class: <RIESelect className='editable-text' value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
           <br />
           {this.renderReason()}
-          {this.renderCodeOrValueSet()}
+          {this.props.renderCodesOrValueSet(this.props, "SNOMED-CT", "Type.Code.Snomed")}
         </div>
       );
     } else {
@@ -527,48 +549,6 @@ class Encounter extends Component<Props> {
     }
 
   }
-
-  renderCodeOrValueSet() {
-    let state = ((this.props.state: any): EncounterState);
-    if (state.codes != null) {
-      return (
-        <div className='section'>
-          Codes <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: null}});}}>Add ValueSets</a>
-          <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-        </div>
-      );
-    } else {
-      return (
-        <div className='section'>
-          <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}}); this.props.onChange('valueSets')({val: {id: null}})}}>Add Codes</a> ValueSets
-          <br />
-          <ValueSets valueSets={state.valueSets} onChange={this.props.onChange('valueSets')} />
-        </div> 
-      );
-    }
-  }
-
-  // renderCodeOrValueSet() {
-  //   let state = ((this.props.state: any): EncounterState);
-  //   if (state.codes != null) {
-  //     return (
-  //       <div className='section'>
-  //         Codes <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: null}});}}>Add ValueSets</a>
-  //         <br />
-  //         <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-  //       </div>
-  //     );
-  //   } else {
-  //     return (
-  //       <div className='section'>
-  //         <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}}); this.props.onChange('valueSets')({val: {id: null}})}}>Add Codes</a> ValueSets
-  //         <br />
-  //         <ValueSet valueSet={state.valueSet} onChange={this.props.onChange('valueSet')} />
-  //       </div> 
-  //     );
-  //   }
-  // }
 
   renderWellness() {
     let state = ((this.props.state: any): EncounterState);
@@ -711,7 +691,7 @@ class EncounterEnd extends Component<Props> {
     } else {
       return (
         <div>
-          <Code code={state.discharge_disposition} system={"NUBC"} onChange={this.props.onChange('discharge_disposition')} />
+          {this.renderCodeOrValueSetForDischargeDisposition()}
           <a className='editable-text' onClick={() => this.props.onChange('discharge_disposition')({val: {id: null}})}>Remove Discharge Disposition</a>
           <br />
         </div>
@@ -719,6 +699,26 @@ class EncounterEnd extends Component<Props> {
     }
   }
 
+  renderCodeOrValueSetForDischargeDisposition() {
+   let state = ((this.props.state: any): EncounterEndState);
+    if (state.discharge_disposition.system) {
+      return (
+        <div className='section'>
+          Code <a className='editable-text' onClick={() => {this.props.onChange('discharge_disposition')({val: {id: {url: '', display: ''}}})}}>Add ValueSet</a>
+          <br />
+          <Code code={state.discharge_disposition} system={"NUBC"} onChange={this.props.onChange('discharge_disposition')} />
+        </div>
+      );
+    } else {
+      return (
+        <div className='section'>
+          <a className='editable-text' onClick={() => {this.props.onChange('discharge_disposition')({val: {id: null}}); this.props.onChange('discharge_disposition')({val: {id: getTemplate('Type.Code.Nubc')}}); }}>Add Code</a> ValueSet
+          <br />
+          <ValueSet valueSet={state.discharge_disposition} onChange={this.props.onChange('discharge_disposition')} />
+        </div> 
+      );
+    }
+  }
 }
 
 class ConditionOnset extends Component<Props> {
@@ -745,11 +745,7 @@ class ConditionOnset extends Component<Props> {
       <div>
         {this.renderTargetEncounter()}
         {this.renderAssignToAttribute()}
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-        </div>
+        {this.props.renderCodesOrValueSet(this.props, "SNOMED-CT", "Type.Code.Snomed")}
       </div>
     );
   }
@@ -954,7 +950,7 @@ class ConditionEnd extends Component<Props> {
 
   renderCodes() {
     let state = ((this.props.state: any): ConditionEndState);
-    if (!state.codes) {
+    if (!state.codes && !state.valueSet) {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
@@ -963,17 +959,14 @@ class ConditionEnd extends Component<Props> {
       );
     } else {
       return (
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: null}})}>Remove Codes</a>
-          <br />
+        <div>
+          {this.props.renderCodesOrValueSet(this.props, "SNOMED-CT", "Type.Code.Snomed")}
+          <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: null}}); this.props.onChange('valueSet')({val: {id: null}})}}>Remove Codes</a>
         </div>
       );
     }
   }
-  
+
   handleTextChange(value) {
     this.setState({value: value});
       
@@ -1027,11 +1020,7 @@ class AllergyOnset extends Component<Props> {
         Target Encounter: <RIESelect className='editable-text' value={{id: state.target_encounter, text: state.target_encounter}} propName={'target_encounter'} change={this.props.onChange('target_encounter')} options={options} />
         <br />
         {this.renderAssignToAttribute()}
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-        </div>
+        {this.props.renderCodesOrValueSet(this.props, "SNOMED-CT", "Type.Code.Snomed")}
       </div>
     );
   }
@@ -1083,7 +1072,7 @@ class AllergyOnset extends Component<Props> {
       );
     }
   }
-  
+
   handleTextChange(value) {
     this.setState({value: value});
       
@@ -1211,7 +1200,7 @@ class AllergyEnd extends Component<Props> {
 
   renderCodes() {
     let state = ((this.props.state: any): AllergyEndState);
-    if (!state.codes) {
+    if (!state.codes && !state.valueSet) {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
@@ -1220,12 +1209,9 @@ class AllergyEnd extends Component<Props> {
       );
     } else {
       return (
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: null}})}>Remove Codes</a>
-          <br />
+        <div>
+          {this.props.renderCodesOrValueSet(this.props, "SNOMED-CT", "Type.Code.Snomed")}
+          <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: null}}); this.props.onChange('valueSet')({val: {id: null}})}}>Remove Codes</a>
         </div>
       );
     }
@@ -1286,12 +1272,7 @@ class MedicationOrder extends Component<Props> {
       <div>
         {this.renderAssignToAttribute()}
         {this.renderReason()}
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"RxNorm"} onChange={this.props.onChange('codes')} />
-          <br />
-        </div>
+        {this.props.renderCodesOrValueSet(this.props, "RxNorm", "Type.Code.RxNorm")}
         {this.renderPrescription()}
         {this.renderChronicMed()}
         {this.renderCreateAdministration()}
@@ -1684,7 +1665,7 @@ class MedicationEnd extends Component<Props> {
 
   renderCodes() {
     let state = ((this.props.state: any): MedicationEndState);
-    if (!state.codes) {
+    if (!state.codes || !state.valueSet) {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.RxNorm')]}})}>Add Codes</a>
@@ -1693,12 +1674,9 @@ class MedicationEnd extends Component<Props> {
       );
     } else {
       return (
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: null}})}>Remove Codes</a>
-          <br />
+        <div>
+        {this.props.renderCodesOrValueSet(this.props, "RxNorm", "Type.Code.RxNorm")}
+        <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: null}}); this.props.onChange('valueSet')({val: {id: null}})}}>Remove Codes</a>
         </div>
       );
     }
@@ -1759,12 +1737,7 @@ class CarePlanStart extends Component<Props> {
       <div>
         {this.renderAssignToAttribute()}
         {this.renderReason()}
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-          <br />
-        </div>
+        {this.props.renderCodesOrValueSet(this.props, "SNOMED-CT", "Type.Code.Snomed")}
         {this.renderActivities()}
         {this.renderGoals()}
       </div>
@@ -1883,14 +1856,33 @@ class CarePlanStart extends Component<Props> {
       return (
         <div className='section'>
           Activities
-          <br />
-          <Codes codes={state.activities} system={"SNOMED-CT"} onChange={this.props.onChange('activities')} />
+          {this.renderCodeOrValueSetForActivities()}
           <a className='editable-text' onClick={() => this.props.onChange('activities')({val: {id: null}})}>Remove Activities</a>
-          <br />
         </div>
       );
     }
   }
+
+  renderCodeOrValueSetForActivities() {
+    let state = ((this.props.state: any): CarePlanStartState);
+     if (state.activities[0].system) {
+       return (
+         <div>
+           Code <a className='editable-text' onClick={() => {this.props.onChange('activities')({val: {id: [{url: '', display: ''}]}})}}>Add ValueSet</a>
+           <br />
+           <Codes codes={state.activities} system={"SNOMED-CT"} onChange={this.props.onChange('activities')} />
+         </div>
+       );
+     } else {
+       return (
+         <div>
+           <a className='editable-text' onClick={() => {this.props.onChange('activities')({val: {id: null}}); this.props.onChange('activities')({val: {id: [getTemplate('Type.Code.Snomed')]}}); }}>Add Code</a> ValueSet
+           <br />
+           <ValueSets valueSets={state.activities} onChange={this.props.onChange('activities')} />
+         </div>
+       );
+     }
+   }
 
   renderGoals() {
     let state = ((this.props.state: any): CarePlanStartState);
@@ -2061,7 +2053,7 @@ class CarePlanEnd extends Component<Props> {
 
   renderCodes() {
     let state = ((this.props.state: any): CarePlanEndState);
-    if (!state.codes) {
+    if (!state.codes && !state.valueSet) {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
@@ -2070,12 +2062,9 @@ class CarePlanEnd extends Component<Props> {
       );
     } else {
       return (
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: null}})}>Remove Codes</a>
-          <br />
+        <div>
+          {this.props.renderCodesOrValueSet(this.props, "SNOMED-CT", "Type.Code.Snomed")}
+          <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: null}}); this.props.onChange('valueSet')({val: {id: null}})}}>Remove Codes</a>
         </div>
       );
     }
@@ -2126,12 +2115,7 @@ class Procedure extends Component<Props> {
     return (
       <div>
         {this.renderReason()}
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-          <br />
-        </div>
+        {this.props.renderCodesOrValueSet(this.props, "SNOMED-CT", "Type.Code.Snomed")}
         {this.renderDuration()}
       </div>
     );
@@ -2314,11 +2298,8 @@ class Observation extends Component<Props> {
         <br/>
         Unit: <RIEInput className='editable-text' value={state.unit} propName={'unit'} change={this.props.onChange('unit')} />
         <br/>
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
-          <br/>
+        <div>
+          {this.props.renderCodesOrValueSet(this.props, "LOINC", "Type.Code.Loinc")}
         </div>
         {this.renderValueContainer()}
       </div>
@@ -2388,7 +2369,7 @@ class Observation extends Component<Props> {
     } else if (state.value_code) {
       return (
         <div className='section'>
-          <Code code={state.value_code} system={"SNOMED-CT"} onChange={this.props.onChange('value_code')} />
+          {this.renderCodeOrValueSetForValueCode()}
           { this.renderToggles('value_code') }
         </div>
       );
@@ -2401,6 +2382,27 @@ class Observation extends Component<Props> {
       );
     }
   }
+
+  renderCodeOrValueSetForValueCode() {
+    let state = ((this.props.state: any): ObservationState);
+     if (state.value_code.system) {
+       return (
+         <div className='section'>
+           Code <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id: {url: '', display: ''}}})}}>Add ValueSet</a>
+           <br />
+           <Code code={state.value_code} system={"SNOMED-CT"} onChange={this.props.onChange('value_code')} />
+         </div>
+       );
+     } else {
+       return (
+         <div className='section'>
+           <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id: null}}); this.props.onChange('value_code')({val: {id: getTemplate('Type.Code.Snomed')}}); }}>Add Code</a> ValueSet
+           <br />
+           <ValueSet valueSet={state.value_code} onChange={this.props.onChange('value_code')} />
+         </div>
+       );
+     }
+   }
 
   renderToggles(currentItem) {
     console.log(currentItem);
@@ -2501,11 +2503,8 @@ class MultiObservation extends Component<Props> {
       <div>
         Category: <RIESelect className='editable-text' value={{id: state.category, text: state.category}} propName="category" change={this.props.onChange('category')} options={options} />
         <br />
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
-          <br />
+        <div>
+          {this.props.renderCodesOrValueSet(this.props, "LOINC", "Type.Code.Loinc")}
         </div>
         <div className='section'>
           <b>Observations</b>
@@ -2533,10 +2532,8 @@ class DiagnosticReport extends Component<Props> {
     let observationCount = (state.observations && state.observations.length) || 0;
     return (
       <div>
-        <div className='section'>
-          <b>Codes</b>
-          <br />
-          <Codes codes={state.codes} system={"LOINC"} onChange={this.props.onChange('codes')} />
+        <div>
+          {this.props.renderCodesOrValueSet(this.props, "LOINC", "Type.Code.Loinc")}
         </div>
         <div className='section'>
           <b>Observations</b>
@@ -2566,7 +2563,7 @@ class ImagingStudy extends Component<Props> {
       <div>
         <div className='section'>
           <b>Procedure Code:</b>
-          <Code code={state.procedure_code} system={"SNOMED-CT"} onChange={this.props.onChange('procedure_code')} />
+          {this.renderCodeOrValueSetForProcedure()}
           <br />
         </div>
         <div className='section'>
@@ -2578,6 +2575,27 @@ class ImagingStudy extends Component<Props> {
       </div>
     );
   }
+
+  renderCodeOrValueSetForProcedure() {
+    let state = ((this.props.state: any): ImagingStudyState);
+     if (state.procedure_code.system) {
+       return (
+         <div className='section'>
+           Code <a className='editable-text' onClick={() => {this.props.onChange('procedure_code')({val: {id: {url: '', display: ''}}})}}>Add ValueSet</a>
+           <br />
+           <Code code={state.procedure_code} system={"SNOMED-CT"} onChange={this.props.onChange('procedure_code')} />
+         </div>
+       );
+     } else {
+       return (
+         <div className='section'>
+           <a className='editable-text' onClick={() => {this.props.onChange('procedure_code')({val: {id: null}}); this.props.onChange('procedure_code')({val: {id: getTemplate('Type.Code.Snomed')}}); }}>Add Code</a> ValueSet
+           <br />
+           <ValueSet valueSet={state.procedure_code} onChange={this.props.onChange('procedure_code')} />
+         </div>
+       );
+     }
+   }
 
 }
 
@@ -2696,12 +2714,34 @@ class SupplyList extends Component<Props> {
         Quantity: <RIENumber className='editable-text' value={supply.quantity} propName='quantity' change={onChange('quantity')} />
         <br />
         Code:
-        <div className='section'>
-          <Code code={supply.code} system={"SNOMED-CT"} onChange={onChange('code')} />
+        <div>
+          {this.renderCodeOrValueSetForSupply()}
         </div>
       </div>
       );
   }
+
+  renderCodeOrValueSetForSupply() {
+    let state = ((this.props.state: any): SupplyListState);
+     if (state.code) {
+       return (
+         <div className='section'>
+           Code <a className='editable-text' onClick={() => {this.props.onChange('code')({val: {id: null}});this.props.onChange('valueSet')({val: {id: {url: '', display: ''}}})}}>Add ValueSet</a>
+           <br />
+           <Code code={state.code} system={"SNOMED-CT"} onChange={this.props.onChange('code')} />
+         </div>
+       );
+     } else {
+       return (
+         <div className='section'>
+           <a className='editable-text' onClick={() => {this.props.onChange('valueSet')({val: {id: null}}); this.props.onChange('code')({val: {id: getTemplate('Type.Code.Snomed')}}); }}>Add Code</a> ValueSet
+           <br />
+           <ValueSet valueSet={state.valueSet} onChange={this.props.onChange('valueSet')} />
+         </div>
+       );
+     }
+   }
+
 }
 
 class Device extends Component<Props> {
@@ -2710,15 +2750,32 @@ class Device extends Component<Props> {
 
     return (
       <div>
-        Code:
-        <div className='section'>
-          <Code code={state.code} system={"SNOMED-CT"} onChange={this.props.onChange('code')} />
-        </div>
+        { this.renderCodeOrValueSetForDevice(state) }
         { this.renderManufacturer(state) }
         { this.renderModel(state) }         
       </div>
       );
   }
+
+  renderCodeOrValueSetForDevice(state) {
+    if (state.code) {
+      return (
+        <div className='section'>
+          Code <a className='editable-text' onClick={() => {this.props.onChange('code')({val: {id: null}});this.props.onChange('valueSet')({val: {id: {url: '', display: ''}}})}}>Add ValueSet</a>
+          <br />
+          <Code code={state.code} system={"SNOMED-CT"} onChange={this.props.onChange('code')} />
+        </div>
+      );
+    } else {
+      return (
+        <div className='section'>
+          <a className='editable-text' onClick={() => {this.props.onChange('valueSet')({val: {id: null}}); this.props.onChange('code')({val: {id: getTemplate('Type.Code.Snomed')}}); }}>Add Code</a> ValueSet
+          <br />
+          <ValueSet valueSet={state.valueSet} onChange={this.props.onChange('valueSet')} />
+        </div>
+      );
+    }
+   }
 
   renderManufacturer(state) {
     if (state.manufacturer) {
@@ -2827,7 +2884,7 @@ class Death extends Component<Props> {
 
   renderCodes() {
     let state = ((this.props.state: any): DeathState);
-    if (!state.codes) {
+    if (!state.codes && !state.valueSet) {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
@@ -2836,12 +2893,9 @@ class Death extends Component<Props> {
       );
     } else {
       return (
-        <div className='section'>
-          Codes
-          <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
-          <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: null}})}>Remove Codes</a>
-          <br />
+        <div>
+          {this.props.renderCodesOrValueSet(this.props, "SNOMED-CT", "Type.Code.Snomed")}
+          <a className='editable-text' onClick={() => {this.props.onChange('codes')({val: {id: null}}); this.props.onChange('valueSet')({val: {id: null}})}}>Remove Codes</a>
         </div>
       );
     }

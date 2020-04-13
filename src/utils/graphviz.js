@@ -282,8 +282,13 @@ const stateDescription = (state) =>{
     case 'EncounterEnd':
       details = 'End the current encounter'
       if(state['discharge_disposition']){
-       let code = state['discharge_disposition']
-       details += `\\lDischarge Disposition: [${code['code']}] ${code['display']}`
+        if(state['discharge_disposition']['system']){
+          let code = state['discharge_disposition']
+          details += `\\lDischarge Disposition: [${code['code']}] ${code['display']}`
+        } else{
+          let valueSet = state['discharge_disposition']
+          details += `\\lDischarge Disposition: [${valueSet['url']}] ${valueSet['display']}`
+        }
       }
       break;
     case 'SetAttribute':
@@ -323,7 +328,11 @@ const stateDescription = (state) =>{
         details = `Record value ${e['quantity']} ${unit}\\l`
       } else if (state.value_code !== undefined) {
         let v = state['value_code']
-        details = `Record value ${v['system']}[${v['code']}]: ${v['display']}\\l`
+        if(v.system !== undefined) {
+          details = `Record value ${v['system']}[${v['code']}]: ${v['display']}\\l`
+        } else {
+          details = `Record value ${v['url']}: ${v['display']}\\l`
+        }
       }
       break;
 
@@ -395,9 +404,10 @@ const stateDescription = (state) =>{
       break;
 
     case 'Device':
-      const c = state.code;
-      details = `${c['system']}[${c['code']}]: ${c['display']}\\l`;
-
+      if (state.code) {
+        const c = state.code;
+        details = `${c['system']}[${c['code']}]: ${c['display']}\\l`;
+      }
       if (state.manufacturer) {
         details += `Manufacturer: ${state.manufacturer}\\l`;
       }
@@ -434,15 +444,9 @@ const stateDescription = (state) =>{
     })
   }
 
-  if(state.valueSets !== undefined){
-    state['valueSets'].forEach( valueSet => {
-      details = details + valueSet['url'] + ': ' + valueSet['display'] + "\\l"
-    })
+  if(state.valueSet !== undefined){
+      details = details + state.valueSet['url'] + ': ' + state.valueSet['display'] + "\\l"
   }
-
-  // if(state.valueSet !== undefined){
-  //     details = details + state.valueSet['url'] + ': ' + state.valueSet['display'] + "\\l"
-  // }
 
   if(state.target_encounter !== undefined){
    let verb = 'Perform'
@@ -489,7 +493,11 @@ const stateDescription = (state) =>{
   if(state.activities){
     details = details + "\\lActivities:\\l"
     state['activities'].forEach( activity => {
-      details = details + activity['system'] + "[" + activity['code'] + "]: " + activity['display'] + "\\l"
+      if(activity['system']){
+        details = details + activity['system'] + "[" + activity['code'] + "]: " + activity['display'] + "\\l"
+      } else {
+        details = details + activity['url'] + ": " + activity['display'] + "\\l"
+      }
     })
   }
   if(state.goals){
