@@ -7,19 +7,19 @@ import _ from 'lodash';
 import type { ValueSet as ValueSetType } from '../../types/ValueSet';
 
 type Props = {
-  valueSet: ValueSetType,
+  valueset: ValueSetType,
   onChange: any
 }
 
 export class ValueSet extends Component<Props> {
 
   render() {
-    let valueSet = this.props.valueSet;
+    let valueset = this.props.valueset;
     return (
       <div>
-        Url: <RIEInput className='editable-text' value={valueSet ? valueSet.url : ''} propName="url" change={this.props.onChange('url')} />
+        Url: <RIEInput className='editable-text' value={valueset ? valueset.url : ''} propName="url" change={this.props.onChange('url')} />
         <br />
-        Display: <RIEInput className='editable-text' value={valueSet ? valueSet.display : ''} propName="display" change={this.props.onChange('display')} />
+        Display: <RIEInput className='editable-text' value={valueset ? valueset.display : ''} propName="display" change={this.props.onChange('display')} />
       </div>
     );
   }
@@ -27,17 +27,17 @@ export class ValueSet extends Component<Props> {
 }
 
 type ValueSetsProps = {
-    valueSets: ValueSetType[],
+    valuesets: ValueSetType[],
     onChange: any
 }
 export class ValueSets extends Component<ValueSetsProps> {
     render() {
       return (
         <div>
-          {this.props.valueSets && this.props.valueSets.map((valueSet, i) => {
+          {this.props.valuesets && this.props.valuesets.map((valueset, i) => {
             return (
               <div className='section' key={i}>
-                <ValueSet onChange={this.props.onChange(i)} valueSet={valueSet} />
+                <ValueSet onChange={this.props.onChange(i)} valueset={valueset} />
               </div>
             )
           })}
