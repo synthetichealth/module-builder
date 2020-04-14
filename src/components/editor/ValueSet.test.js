@@ -15,5 +15,5 @@ it('renders without crashing', () => {
 })
 
 it('renders multiple codes without crashing', () => {
-  renderComponent(ValueSets, {valuesets, onChange});
+  renderComponent(ValueSets, {valueSets, onChange});
 })
