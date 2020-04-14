@@ -1665,7 +1665,7 @@ class MedicationEnd extends Component<Props> {
 
   renderCodes() {
     let state = ((this.props.state: any): MedicationEndState);
-    if (!state.codes || !state.valueSet) {
+    if (!state.codes && !state.valueset) {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.RxNorm')]}})}>Add Codes</a>
