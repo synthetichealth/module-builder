@@ -950,7 +950,7 @@ class ConditionEnd extends Component<Props> {
 
   renderCodes() {
     let state = ((this.props.state: any): ConditionEndState);
-    if (!state.codes && !state.valueSet) {
+    if (!state.codes && !state.valueset) {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
@@ -1200,7 +1200,7 @@ class AllergyEnd extends Component<Props> {
 
   renderCodes() {
     let state = ((this.props.state: any): AllergyEndState);
-    if (!state.codes && !state.valueSet) {
+    if (!state.codes && !state.valueset) {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
@@ -2053,7 +2053,7 @@ class CarePlanEnd extends Component<Props> {
 
   renderCodes() {
     let state = ((this.props.state: any): CarePlanEndState);
-    if (!state.codes && !state.valueSet) {
+    if (!state.codes && !state.valueset) {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
@@ -2882,7 +2882,7 @@ class Death extends Component<Props> {
 
   renderCodes() {
     let state = ((this.props.state: any): DeathState);
-    if (!state.codes && !state.valueSet) {
+    if (!state.codes && !state.valueset) {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('codes')({val: {id: [getTemplate('Type.Code.Snomed')]}})}>Add Codes</a>
