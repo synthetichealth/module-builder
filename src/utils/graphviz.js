@@ -342,9 +342,17 @@ const stateDescription = (state) =>{
         let primarySeries = series[0];
         let primaryModality = primarySeries['modality'];
         let primaryBodySite = primarySeries['body_site'];
+        if(primaryModality['code']) {
+          details = `DICOM-DCM[${primaryModality['code']}]: ${primaryModality['display']}\\l`
+        } else {
+          details = `${primaryModality['url']}: ${primaryModality['display']}\\l`
+        }
 
-        details = `DICOM-DCM[${primaryModality['code']}]: ${primaryModality['display']}\\l`
-        details += `SNOMED-CT[${primaryBodySite['code']}]: Body Site: ${primaryBodySite['display']}\\l`
+        if(primaryBodySite['code']){
+          details += `SNOMED-CT[${primaryBodySite['code']}]: Body Site: ${primaryBodySite['display']}\\l`
+        } else {
+          details += `${primaryBodySite['url']}: Body Site: ${primaryBodySite['display']}\\l`
+        }
       }
       break;
 
@@ -376,7 +384,12 @@ const stateDescription = (state) =>{
           if(unit){
             unit = unit.replace('{','(').replace('}',')')
           }
-          diagType.push(s.codes.map(c => c.display).join('\\l'))
+          if(s.codes){
+            diagType.push(s.codes.map(c => c.display).join('\\l'))
+          }
+          if(s.valueset){
+            diagType.push(s.valueset.display + "\\l")
+          }
           diagUnits.push(unit)
 
           if(s.vital_sign !== undefined) {
@@ -621,7 +634,11 @@ const logicDetails = logic => {
 const findReferencedType = (logic) => {
   if(logic['codes']){
     let code = logic['codes'][0]
-    return `'${code['system']} [${code['code']}]: ${code['display']}'`
+    if(code.system){
+      return `'${code['system']} [${code['code']}]: ${code['display']}'`
+    } else {
+      return `'${code['url']}: ${code['display']}'`
+    }
   } else if (logic['referenced_by_attribute']) {
     return `Referenced By Attribute: '${logic['referenced_by_attribute']}'`
   }

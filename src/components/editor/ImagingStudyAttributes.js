@@ -7,6 +7,7 @@ import _ from 'lodash';
 import type { Instance as InstanceType, Series as SeriesType } from '../../types/Attributes';
 
 import { Code } from './Code';
+import { ValueSet } from './ValueSet';
 import { getTemplate } from '../../templates/Templates';
 
 type InstanceProps = {
@@ -27,9 +28,30 @@ export class Instance extends Component<InstanceProps> {
         <br />
         <b>SOP Class:</b>
         <br />
-        <Code code={sop_class} system={"DICOM-SOP"} onChange={this.props.onChange('sop_class')} />
+        {this.renderCodeOrValueSet()}
       </div>
     );
+  }
+
+  renderCodeOrValueSet() {
+    let sop_class = this.props.sop_class;
+    if (sop_class.system) {
+      return (
+        <div className='section'>
+          Code <a className='editable-text' onClick={() => {this.props.onChange('sop_class')({val: {id: {url: '', display: ''}}})}}>Add ValueSet</a>
+          <br />
+          <Code code={sop_class} system={'DICOM-SOP'} onChange={this.props.onChange('sop_class')} />
+        </div>
+      );
+    } else {
+      return (
+        <div className='section'>
+          <a className='editable-text' onClick={() => {this.props.onChange('sop_class')({val: {id: null}}); this.props.onChange('sop_class')({val: {id: getTemplate("Type.Code.DicomSOP")}}); }}>Add Code</a> ValueSet
+          <br />
+          <ValueSet valueset={sop_class} onChange={this.props.onChange('sop_class')} />
+        </div>
+      );
+    }
   }
 
 }
@@ -78,18 +100,34 @@ export class Series extends Component<SeriesProps> {
     return (
       <div className='section'>
         <b>Body Site:</b>
-        <br />
-        <Code code={body_site} system={"SNOMED-CT"} onChange={this.props.onChange('body_site')} />
-        <br/>
+        {this.renderCodeOrValueSet(body_site, 'body_site', "SNOMED-CT", "Type.Code.Snomed")}
         <b>Modality:</b>
-        <br />
-        <Code code={modality} system={"DICOM-DCM"} onChange={this.props.onChange('modality')} />
-        <br />
+        {this.renderCodeOrValueSet(modality, 'modality', "DICOM-DCM", "Type.Code.DicomDCM")}
         <b>Instances:</b>
         <InstanceList instances={instances} onChange={this.props.onChange('instances')} />
       </div>
     )
   }
+
+  renderCodeOrValueSet(attribute, attributeName, codeSystem, codeName) {
+     if (attribute.system) {
+       return (
+         <div className='section'>
+           Code <a className='editable-text' onClick={() => {this.props.onChange(attributeName)({val: {id: {url: '', display: ''}}})}}>Add ValueSet</a>
+           <br />
+           <Code code={attribute} system={codeSystem} onChange={this.props.onChange(attributeName)} />
+         </div>
+       );
+     } else {
+       return (
+         <div className='section'>
+           <a className='editable-text' onClick={() => {this.props.onChange(attributeName)({val: {id: null}}); this.props.onChange(attributeName)({val: {id: getTemplate(codeName)}}); }}>Add Code</a> ValueSet
+           <br />
+           <ValueSet valueset={attribute} onChange={this.props.onChange(attributeName)} />
+         </div>
+       );
+     }
+   }
 
 }
 

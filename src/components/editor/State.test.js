@@ -12,7 +12,7 @@ const onChange = () => () => onChange;
 let renameNode = () => null;
 let changeType = () => null;
 let helpFunction = () => null;
-
+const renderCodeOrValueSet = () => null;
 
 
 describe(`renders state editor for all states in all modules propertly without errors`, () => {
@@ -20,7 +20,7 @@ describe(`renders state editor for all states in all modules propertly without e
       let moduleStates = extractStates(module);
         moduleStates.forEach(state => {
           it(`renders ${module.name}:${state.name}`, () => {
-            renderComponent(StateEditor, {  moduleName: module.name, state, otherStates: moduleStates, onChange, renameNode, changeType, helpFunction })
+            renderComponent(StateEditor, {  moduleName: module.name, state, otherStates: moduleStates, onChange, renameNode, changeType, helpFunction, renderCodeOrValueSet })
           });
         });
   });

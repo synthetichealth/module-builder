@@ -1878,7 +1878,7 @@ class CarePlanStart extends Component<Props> {
          <div>
            <a className='editable-text' onClick={() => {this.props.onChange('activities')({val: {id: null}}); this.props.onChange('activities')({val: {id: [getTemplate('Type.Code.Snomed')]}}); }}>Add Code</a> ValueSet
            <br />
-           <ValueSets valueSets={state.activities} onChange={this.props.onChange('activities')} />
+           <ValueSets valuesets={state.activities} onChange={this.props.onChange('activities')} />
          </div>
        );
      }
@@ -2511,7 +2511,7 @@ class MultiObservation extends Component<Props> {
             return (
               <div className='section' key={i}>
                 Observation #{i+1} (<a className='editable-text delete-button' onClick={() => this.props.onChange(`observations.[${i}]`)({val: {id: null}})}>remove</a>)
-                <Observation state={observation} onChange={this.props.onChange(`observations.[${i}]`)} />
+                <Observation renderCodesOrValueSet={this.props.renderCodesOrValueSet} state={observation} onChange={this.props.onChange(`observations.[${i}]`)} />
               </div>
             )
           })}
@@ -2540,7 +2540,7 @@ class DiagnosticReport extends Component<Props> {
             return (
               <div className='section' key={i}>
                 Observation #{i+1} (<a className='editable-text delete-button' onClick={() => this.props.onChange(`observations.[${i}]`)({val: {id: null}})}>remove</a>)
-                <Observation state={observation} onChange={this.props.onChange(`observations.[${i}]`)} />
+                <Observation renderCodesOrValueSet={this.props.renderCodesOrValueSet} state={observation} onChange={this.props.onChange(`observations.[${i}]`)} />
               </div>
             )
           })}
