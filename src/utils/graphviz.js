@@ -457,8 +457,8 @@ const stateDescription = (state) =>{
     })
   }
 
-  if(state.valueSet !== undefined){
-      details = details + state.valueSet['url'] + ': ' + state.valueSet['display'] + "\\l"
+  if(state.valueset !== undefined){
+      details = details + state.valueset['url'] + ': ' + state.valueset['display'] + "\\l"
   }
 
   if(state.target_encounter !== undefined){
