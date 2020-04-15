@@ -88,6 +88,7 @@ export type EncounterState = {
   encounter_class: 'emergency' | 'inpatient' | 'ambulatory',
   reason?: string,
   codes: Code[],
+  valueSet: ValueSet,
   transition?: Transition
 }
 
@@ -95,7 +96,7 @@ export type EncounterEndState = {
   name: string,
   remarks: string[],
   type: 'EncounterEnd',
-  discharge_disposition?: Code,
+  discharge_disposition?: Code | ValueSet,
   transition?: Transition
 }
 
@@ -106,6 +107,7 @@ export type ConditionOnsetState = {
   target_encounter: string,
   assign_to_attribute?: string,
   codes: Code[],
+  valueSet: ValueSet,
   transition?: Transition
 }
 
@@ -116,6 +118,7 @@ export type ConditionEndState = {
   condition_onset?: string,
   referenced_by_attribute?: string,
   codes?: Code[],
+  valueSet?: ValueSet,
   transition?: Transition
 }
 
@@ -126,6 +129,7 @@ export type AllergyOnsetState = {
   target_encounter: string,
   assign_to_attribute?: string,
   codes: Code[],
+  valueSet: ValueSet,
   transition?: Transition
 }
 
@@ -136,6 +140,7 @@ export type AllergyEndState = {
   allergy_onset?: string,
   referenced_by_attribute?: string,
   codes?: Code[],
+  valueSet?: ValueSet,
   transition?: Transition
 }
 
@@ -148,6 +153,7 @@ export type MedicationOrderState = {
   chronic?: boolean,
   reason?: string,
   codes: Code[],
+  valueSet: ValueSet,
   prescription?: {
     refills?: number,
     as_needed?: boolean,
@@ -173,6 +179,7 @@ export type MedicationEndState = {
   medication_order?: string,
   referenced_by_attribute?: string,
   codes?: Code[],
+  valueSet?: ValueSet,
   transition?: Transition
 }
 
@@ -183,7 +190,7 @@ export type CarePlanStartState = {
   assign_to_attribute?: string,
   reason?: string,
   codes: Code[],
-  activities?: Code[],
+  activities?: Code[] | ValueSet,
   goals?: Goal[],
   transition?: Transition
 }
@@ -195,6 +202,7 @@ export type CarePlanEndState = {
   careplan?: string,
   referenced_by_attribute?: string,
   codes?: Code[],
+  valueSet?: ValueSet,
   transition?: Transition
 }
 
@@ -204,6 +212,7 @@ export type ProcedureState = {
   type: 'Procedure',
   reason?: string,
   codes: Code[],
+  valueSet: ValueSet,
   duration: {
     low: number,
     high: number,
@@ -244,7 +253,7 @@ export type ObservationState = {
   },
   attribute?: string,
   vital_sign?: string,
-  value_code?: Code,
+  value_code?: Code | ValueSet,
   transition?: Transition
 }
 
@@ -255,6 +264,7 @@ export type MultiObservationState = {
   category: string,
   number_of_observations: number,
   codes: Code[],
+  valueSet: ValueSet,
   transition?: Transition
 }
 
@@ -264,6 +274,7 @@ export type DiagnosticReportState = {
   type: 'DiagnosticReport',
   number_of_observations: number,
   codes: Code[],
+  valueSet: ValueSet,
   transition?: Transition
 }
 
@@ -272,6 +283,7 @@ export type DeviceState = {
   remarks: string[],
   type: 'Device',
   code: Code,
+  valueSet: ValueSet,
   manufacturer?: string,
   model?: string,
   assign_to_attribute?: string,
@@ -300,7 +312,7 @@ export type ImagingStudyState = {
   name: string,
   remarks: string[],
   type: 'ImagingStudy',
-  procedure_code: Code,
+  procedure_code: Code | ValueSet,
   series: Series[],
   transition?: Transition
 }
@@ -336,6 +348,7 @@ export type DeathState = {
     unit: UnitOfTime
   },
   codes?: Code[],
+  valueSet?: ValueSet,
   condition_onset?: string,
   referenced_by_attribute?: string,
   transition?: Transition

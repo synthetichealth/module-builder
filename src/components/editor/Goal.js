@@ -6,6 +6,7 @@ import _ from 'lodash';
 
 import type { Goal as GoalType } from '../../types/Attributes';
 import { Codes } from './Code';
+import { ValueSets } from './ValueSet';
 import { StringsEditor } from './String';
 import { getTemplate } from '../../templates/Templates';
 
@@ -66,11 +67,8 @@ export class Goal extends Component<Props> {
         <div className='section'>
           Observation
           <br />
-          <div className='section'>
-            Codes
-            <br />
-            <Codes codes={goal.observation.codes} system={"LOINC"} onChange={this.props.onChange('observation.codes')} />
-            <br />
+          <div>
+            {this.renderCodeOrValueSetForObservation()}
           </div>
           Goal Observation Operator: <RIESelect className='editable-text' value={{id: goal.observation.operator, text: goal.observation.operator}} propName={'operator'} change={this.props.onChange('observation.operator')} options={options} />
           {goalObservationValue}
@@ -81,6 +79,27 @@ export class Goal extends Component<Props> {
       );
     }
   }
+
+  renderCodeOrValueSetForObservation() {
+    let goal = this.props.goal;
+     if (goal.observation.codes && goal.observation.codes[0].system) {
+       return (
+         <div className='section'>
+           Codes <a className='editable-text' onClick={() => {this.props.onChange('observation.codes')({val: {id: [{url: '', display: ''}]}})}}>Add ValueSet</a>
+           <br />
+           <Codes codes={goal.observation.codes} system={"LOINC"} onChange={this.props.onChange('observation.codes')} />
+         </div>
+       );
+     } else {
+       return (
+         <div className='section'>
+           <a className='editable-text' onClick={() => {this.props.onChange('observation.codes')({val: {id: null}}); this.props.onChange('observation.codes')({val: {id: [getTemplate('Type.Code.Loinc')]}}); }}>Add Code</a> ValueSet
+           <br />
+           <ValueSets valuesets={goal.observation.codes} onChange={this.props.onChange('observation.codes')} />
+         </div>
+       );
+     }
+   }
 
   renderText() {
     let goal = this.props.goal;

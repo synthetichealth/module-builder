@@ -282,8 +282,13 @@ const stateDescription = (state) =>{
     case 'EncounterEnd':
       details = 'End the current encounter'
       if(state['discharge_disposition']){
-       let code = state['discharge_disposition']
-       details += `\\lDischarge Disposition: [${code['code']}] ${code['display']}`
+        if(state['discharge_disposition']['system']){
+          let code = state['discharge_disposition']
+          details += `\\lDischarge Disposition: [${code['code']}] ${code['display']}`
+        } else{
+          let valueSet = state['discharge_disposition']
+          details += `\\lDischarge Disposition: [${valueSet['url']}] ${valueSet['display']}`
+        }
       }
       break;
     case 'SetAttribute':
@@ -328,7 +333,11 @@ const stateDescription = (state) =>{
         details = `Record value ${e['quantity']} ${unit}\\l`
       } else if (state.value_code !== undefined) {
         let v = state['value_code']
-        details = `Record value ${v['system']}[${v['code']}]: ${v['display']}\\l`
+        if(v.system !== undefined) {
+          details = `Record value ${v['system']}[${v['code']}]: ${v['display']}\\l`
+        } else {
+          details = `Record value ${v['url']}: ${v['display']}\\l`
+        }
       }
       break;
 
@@ -338,9 +347,17 @@ const stateDescription = (state) =>{
         let primarySeries = series[0];
         let primaryModality = primarySeries['modality'];
         let primaryBodySite = primarySeries['body_site'];
+        if(primaryModality['code']) {
+          details = `DICOM-DCM[${primaryModality['code']}]: ${primaryModality['display']}\\l`
+        } else {
+          details = `${primaryModality['url']}: ${primaryModality['display']}\\l`
+        }
 
-        details = `DICOM-DCM[${primaryModality['code']}]: ${primaryModality['display']}\\l`
-        details += `SNOMED-CT[${primaryBodySite['code']}]: Body Site: ${primaryBodySite['display']}\\l`
+        if(primaryBodySite['code']){
+          details += `SNOMED-CT[${primaryBodySite['code']}]: Body Site: ${primaryBodySite['display']}\\l`
+        } else {
+          details += `${primaryBodySite['url']}: Body Site: ${primaryBodySite['display']}\\l`
+        }
       }
       break;
 
@@ -372,7 +389,12 @@ const stateDescription = (state) =>{
           if(unit){
             unit = unit.replace('{','(').replace('}',')')
           }
-          diagType.push(s.codes.map(c => c.display).join('\\l'))
+          if(s.codes){
+            diagType.push(s.codes.map(c => c.display).join('\\l'))
+          }
+          if(s.valueset){
+            diagType.push(s.valueset.display + "\\l")
+          }
           diagUnits.push(unit)
 
           if(s.vital_sign !== undefined) {
@@ -400,9 +422,10 @@ const stateDescription = (state) =>{
       break;
 
     case 'Device':
-      const c = state.code;
-      details = `${c['system']}[${c['code']}]: ${c['display']}\\l`;
-
+      if (state.code) {
+        const c = state.code;
+        details = `${c['system']}[${c['code']}]: ${c['display']}\\l`;
+      }
       if (state.manufacturer) {
         details += `Manufacturer: ${state.manufacturer}\\l`;
       }
@@ -443,6 +466,10 @@ const stateDescription = (state) =>{
     state['codes'].forEach( code => {
       details = details + code['system'] + "[" + code['code'] + "]: " + code['display'] + "\\l"
     })
+  }
+
+  if(state.valueset !== undefined){
+      details = details + state.valueset['url'] + ': ' + state.valueset['display'] + "\\l"
   }
 
   if(state.target_encounter !== undefined){
@@ -490,7 +517,11 @@ const stateDescription = (state) =>{
   if(state.activities){
     details = details + "\\lActivities:\\l"
     state['activities'].forEach( activity => {
-      details = details + activity['system'] + "[" + activity['code'] + "]: " + activity['display'] + "\\l"
+      if(activity['system']){
+        details = details + activity['system'] + "[" + activity['code'] + "]: " + activity['display'] + "\\l"
+      } else {
+        details = details + activity['url'] + ": " + activity['display'] + "\\l"
+      }
     })
   }
   if(state.goals){
@@ -614,7 +645,11 @@ const logicDetails = logic => {
 const findReferencedType = (logic) => {
   if(logic['codes']){
     let code = logic['codes'][0]
-    return `'${code['system']} [${code['code']}]: ${code['display']}'`
+    if(code.system){
+      return `'${code['system']} [${code['code']}]: ${code['display']}'`
+    } else {
+      return `'${code['url']}: ${code['display']}'`
+    }
   } else if (logic['referenced_by_attribute']) {
     return `Referenced By Attribute: '${logic['referenced_by_attribute']}'`
   }
