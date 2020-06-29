@@ -245,6 +245,8 @@ export type ObservationState = {
   attribute?: string,
   vital_sign?: string,
   value_code?: Code,
+  sampled_data?: string,
+  attachment?: string,
   transition?: Transition
 }
 
