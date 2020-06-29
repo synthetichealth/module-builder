@@ -121,7 +121,7 @@ export default {"allergic_rhinitis":{
           "display": "Seasonal allergic rhinitis"
         }
       ],
-      "direct_transition": "Allergic_Rhinitis_Diagnosis"
+      "direct_transition": "Allergic_Rhinitis_Symptom1"
     },
     "Has_Perennial_Allergic_Rhinitis": {
       "type": "ConditionOnset",
@@ -134,7 +134,7 @@ export default {"allergic_rhinitis":{
           "display": "Perennial allergic rhinitis"
         }
       ],
-      "direct_transition": "Allergic_Rhinitis_Diagnosis"
+      "direct_transition": "Allergic_Rhinitis_Symptom1"
     },
     "Has_Perennial_And_Seasonal_Allergic_Rhinitis": {
       "type": "ConditionOnset",
@@ -147,7 +147,7 @@ export default {"allergic_rhinitis":{
           "display": "Perennial allergic rhinitis with seasonal variation"
         }
       ],
-      "direct_transition": "Allergic_Rhinitis_Diagnosis"
+      "direct_transition": "Allergic_Rhinitis_Symptom1"
     },
     "Allergic_Rhinitis_Diagnosis": {
       "type": "Encounter",
@@ -160,7 +160,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for symptom"
         }
       ],
-      "direct_transition": "Allergic_Rhinitis_Symptom1"
+      "direct_transition": "Prescribe_OTC_Antihistamine"
     },
     "Allergic_Rhinitis_Symptom1": {
       "type": "Symptom",
@@ -214,7 +214,7 @@ export default {"allergic_rhinitis":{
         "high": 3,
         "unit": "weeks"
       },
-      "direct_transition": "Prescribe_OTC_Antihistamine"
+      "direct_transition": "Allergic_Rhinitis_Diagnosis"
     },
     "Prescribe_OTC_Antihistamine": {
       "type": "CallSubmodule",
@@ -4983,7 +4983,8 @@ export default {"allergic_rhinitis":{
         {
           "transition": "Terminal"
         }
-      ]
+      ],
+      "name": "Initial"
     },
     "Male": {
       "type": "Simple",
@@ -4999,7 +5000,8 @@ export default {"allergic_rhinitis":{
       ],
       "remarks": [
         "Men have an approx lifetime risk of appendicitis of 8.6%. Ref: http://www.ncbi.nlm.nih.gov/pubmed/2239906"
-      ]
+      ],
+      "name": "Male"
     },
     "Female": {
       "type": "Simple",
@@ -5015,7 +5017,8 @@ export default {"allergic_rhinitis":{
       ],
       "remarks": [
         "Women have an approx lifetime risk of appendicitis of 6.7%. Ref: http://www.ncbi.nlm.nih.gov/pubmed/2239906"
-      ]
+      ],
+      "name": "Female"
     },
     "Pre_appendicitis": {
       "type": "Simple",
@@ -5039,7 +5042,8 @@ export default {"allergic_rhinitis":{
       ],
       "remarks": [
         "Age distribution of appendicitis from https://www.ncbi.nlm.nih.gov/books/NBK169006/ , Table 1"
-      ]
+      ],
+      "name": "Pre_appendicitis"
     },
     "Ages_1_17": {
       "type": "Delay",
@@ -5048,7 +5052,8 @@ export default {"allergic_rhinitis":{
         "high": 17,
         "unit": "years"
       },
-      "direct_transition": "Appendicitis_Symptom1"
+      "direct_transition": "Appendicitis_Symptom1",
+      "name": "Ages_1_17"
     },
     "Ages_18_44": {
       "type": "Delay",
@@ -5057,7 +5062,8 @@ export default {"allergic_rhinitis":{
         "high": 44,
         "unit": "years"
       },
-      "direct_transition": "Appendicitis_Symptom1"
+      "direct_transition": "Appendicitis_Symptom1",
+      "name": "Ages_18_44"
     },
     "Ages_45_64": {
       "type": "Delay",
@@ -5066,7 +5072,8 @@ export default {"allergic_rhinitis":{
         "high": 64,
         "unit": "years"
       },
-      "direct_transition": "Appendicitis_Symptom1"
+      "direct_transition": "Appendicitis_Symptom1",
+      "name": "Ages_45_64"
     },
     "Ages_65_Plus": {
       "type": "Delay",
@@ -5075,7 +5082,8 @@ export default {"allergic_rhinitis":{
         "high": 99,
         "unit": "years"
       },
-      "direct_transition": "Appendicitis_Symptom1"
+      "direct_transition": "Appendicitis_Symptom1",
+      "name": "Ages_65_Plus"
     },
     "Appendicitis_Symptom1": {
       "type": "Symptom",
@@ -5084,7 +5092,8 @@ export default {"allergic_rhinitis":{
         "low": 50,
         "high": 150
       },
-      "direct_transition": "Appendicitis_Symptom2"
+      "direct_transition": "Appendicitis_Symptom2",
+      "name": "Appendicitis_Symptom1"
     },
     "Appendicitis_Symptom2": {
       "type": "Symptom",
@@ -5093,7 +5102,8 @@ export default {"allergic_rhinitis":{
         "low": 50,
         "high": 100
       },
-      "direct_transition": "Appendicitis_Symptom3"
+      "direct_transition": "Appendicitis_Symptom3",
+      "name": "Appendicitis_Symptom2"
     },
     "Appendicitis_Symptom3": {
       "type": "Symptom",
@@ -5102,7 +5112,8 @@ export default {"allergic_rhinitis":{
         "low": 50,
         "high": 100
       },
-      "direct_transition": "Appendicitis_Symptom4"
+      "direct_transition": "Appendicitis_Symptom4",
+      "name": "Appendicitis_Symptom3"
     },
     "Appendicitis_Symptom4": {
       "type": "Symptom",
@@ -5111,7 +5122,8 @@ export default {"allergic_rhinitis":{
         "low": 0,
         "high": 50
       },
-      "direct_transition": "Appendicitis_Symptom5"
+      "direct_transition": "Appendicitis_Symptom5",
+      "name": "Appendicitis_Symptom4"
     },
     "Appendicitis_Symptom5": {
       "type": "Symptom",
@@ -5120,7 +5132,8 @@ export default {"allergic_rhinitis":{
         "low": 0,
         "high": 50
       },
-      "direct_transition": "Appendicitis_Symptom6"
+      "direct_transition": "Appendicitis_Symptom6",
+      "name": "Appendicitis_Symptom5"
     },
     "Appendicitis_Symptom6": {
       "type": "Symptom",
@@ -5129,7 +5142,8 @@ export default {"allergic_rhinitis":{
         "low": 0,
         "high": 50
       },
-      "direct_transition": "Appendicitis_Symptom7"
+      "direct_transition": "Appendicitis_Symptom7",
+      "name": "Appendicitis_Symptom6"
     },
     "Appendicitis_Symptom7": {
       "type": "Symptom",
@@ -5138,7 +5152,8 @@ export default {"allergic_rhinitis":{
         "low": 0,
         "high": 50
       },
-      "direct_transition": "Symptom_Period"
+      "direct_transition": "Symptom_Period",
+      "name": "Appendicitis_Symptom7"
     },
     "Symptom_Period": {
       "type": "Delay",
@@ -5147,7 +5162,8 @@ export default {"allergic_rhinitis":{
         "high": 3,
         "unit": "days"
       },
-      "direct_transition": "Appendicitis"
+      "direct_transition": "Appendicitis",
+      "name": "Symptom_Period"
     },
     "Appendicitis": {
       "type": "ConditionOnset",
@@ -5175,7 +5191,8 @@ export default {"allergic_rhinitis":{
         "(ref: http://emedicine.medscape.com/article/773895-overview#a7 )",
         "From table 1 here: https://www.ncbi.nlm.nih.gov/books/NBK169006/ it's about 30%",
         "For simplicity here I just round to 30% for all age groups."
-      ]
+      ],
+      "name": "Appendicitis"
     },
     "Rupture": {
       "type": "ConditionOnset",
@@ -5187,7 +5204,8 @@ export default {"allergic_rhinitis":{
           "display": "Rupture of appendix"
         }
       ],
-      "direct_transition": "Appendicitis_Encounter"
+      "direct_transition": "Appendicitis_Encounter",
+      "name": "Rupture"
     },
     "Appendicitis_Encounter": {
       "type": "Encounter",
@@ -5204,7 +5222,8 @@ export default {"allergic_rhinitis":{
           "display": "Emergency Room Admission"
         }
       ],
-      "direct_transition": "History_of_Appendectomy"
+      "direct_transition": "History_of_Appendectomy",
+      "name": "Appendicitis_Encounter"
     },
     "History_of_Appendectomy": {
       "type": "ConditionOnset",
@@ -5216,7 +5235,8 @@ export default {"allergic_rhinitis":{
           "display": "History of appendectomy"
         }
       ],
-      "direct_transition": "Appendectomy_Encounter"
+      "direct_transition": "Transfer_To_Inpatient",
+      "name": "History_of_Appendectomy"
     },
     "Appendectomy_Encounter": {
       "type": "Encounter",
@@ -5229,7 +5249,8 @@ export default {"allergic_rhinitis":{
           "display": "Encounter Inpatient"
         }
       ],
-      "direct_transition": "Appendectomy"
+      "direct_transition": "Appendectomy",
+      "name": "Appendectomy_Encounter"
     },
     "Appendectomy": {
       "type": "Procedure",
@@ -5250,7 +5271,8 @@ export default {"allergic_rhinitis":{
         "Avg operative time is ~55 minutes",
         "https://www.ncbi.nlm.nih.gov/pubmed/17658102"
       ],
-      "direct_transition": "Appendicitis_Symptom1_Ends"
+      "direct_transition": "Appendicitis_Symptom1_Ends",
+      "name": "Appendectomy"
     },
     "Appendicitis_Symptom1_Ends": {
       "type": "Symptom",
@@ -5258,7 +5280,8 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
-      "direct_transition": "Appendicitis_Symptom2_Ends"
+      "direct_transition": "Appendicitis_Symptom2_Ends",
+      "name": "Appendicitis_Symptom1_Ends"
     },
     "Appendicitis_Symptom2_Ends": {
       "type": "Symptom",
@@ -5266,7 +5289,8 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
-      "direct_transition": "Appendicitis_Symptom3_Ends"
+      "direct_transition": "Appendicitis_Symptom3_Ends",
+      "name": "Appendicitis_Symptom2_Ends"
     },
     "Appendicitis_Symptom3_Ends": {
       "type": "Symptom",
@@ -5274,7 +5298,8 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
-      "direct_transition": "Appendicitis_Symptom4_Ends"
+      "direct_transition": "Appendicitis_Symptom4_Ends",
+      "name": "Appendicitis_Symptom3_Ends"
     },
     "Appendicitis_Symptom4_Ends": {
       "type": "Symptom",
@@ -5282,7 +5307,8 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
-      "direct_transition": "Appendicitis_Symptom5_Ends"
+      "direct_transition": "Appendicitis_Symptom5_Ends",
+      "name": "Appendicitis_Symptom4_Ends"
     },
     "Appendicitis_Symptom5_Ends": {
       "type": "Symptom",
@@ -5290,7 +5316,8 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
-      "direct_transition": "Appendicitis_Symptom6_Ends"
+      "direct_transition": "Appendicitis_Symptom6_Ends",
+      "name": "Appendicitis_Symptom5_Ends"
     },
     "Appendicitis_Symptom6_Ends": {
       "type": "Symptom",
@@ -5298,7 +5325,8 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
-      "direct_transition": "Appendicitis_Symptom7_Ends"
+      "direct_transition": "Appendicitis_Symptom7_Ends",
+      "name": "Appendicitis_Symptom6_Ends"
     },
     "Appendicitis_Symptom7_Ends": {
       "type": "Symptom",
@@ -5306,7 +5334,8 @@ export default {"allergic_rhinitis":{
       "exact": {
         "quantity": 0
       },
-      "direct_transition": "Recovery"
+      "direct_transition": "Recovery",
+      "name": "Appendicitis_Symptom7_Ends"
     },
     "Recovery": {
       "type": "Delay",
@@ -5321,7 +5350,8 @@ export default {"allergic_rhinitis":{
         "Forty-two patients were dismissed on the day of surgery and 77 were admitted for 1 to 5 days postoperatively.",
         "https://www.ncbi.nlm.nih.gov/pubmed/22369831"
       ],
-      "direct_transition": "End_Appendectomy_Encounter"
+      "direct_transition": "End_Appendectomy_Encounter",
+      "name": "Recovery"
     },
     "End_Appendectomy_Encounter": {
       "type": "EncounterEnd",
@@ -5330,10 +5360,17 @@ export default {"allergic_rhinitis":{
         "code": "01",
         "display": "Discharged to home care or self care (routine discharge)"
       },
-      "direct_transition": "Terminal"
+      "direct_transition": "Terminal",
+      "name": "End_Appendectomy_Encounter"
     },
     "Terminal": {
-      "type": "Terminal"
+      "type": "Terminal",
+      "name": "Terminal"
+    },
+    "Transfer_To_Inpatient": {
+      "type": "EncounterEnd",
+      "direct_transition": "Appendectomy_Encounter",
+      "name": "Transfer_To_Inpatient"
     }
   }
 }
@@ -5776,7 +5813,7 @@ export default {"allergic_rhinitis":{
           "display": "Asthma"
         }
       ],
-      "direct_transition": "Maintaining_Asthma"
+      "direct_transition": "End_Wellness_1"
     },
     "Potential_Asthma_Attack": {
       "type": "Simple",
@@ -5935,10 +5972,18 @@ export default {"allergic_rhinitis":{
     "End_Asthma_CarePlan": {
       "type": "CarePlanEnd",
       "referenced_by_attribute": "asthma_careplan",
-      "direct_transition": "Terminal"
+      "direct_transition": "End_Wellness_2"
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "End_Wellness_1": {
+      "type": "EncounterEnd",
+      "direct_transition": "Maintaining_Asthma"
+    },
+    "End_Wellness_2": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   }
 }
@@ -6918,6 +6963,437 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"breast_cancer/hormone_diagnosis":{
+  "name": "Hormone_Diagnosis",
+  "remarks": [
+    "This module checks for HER2 and then assigns either HER2 positive/negative. This follows suit for ER and PR. Finally, it accounts for the Triple negative factor at the end. "
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Human_Epidermal_Growth_Factor_Receptor_2__HER2__Detection___Fluorescence_in_situ_Hybridization__FISH_"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Human_Epidermal_Growth_Factor_Receptor_2__HER2__Detection___Fluorescence_in_situ_Hybridization__FISH_": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 434363004,
+          "display": "Human epidermal growth factor receptor 2 gene detection by fluorescence in situ hybridization (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 1,
+        "high": 2,
+        "unit": "days"
+      },
+      "remarks": [
+        "Fluorescence in situ hybridization (FISH), which detects the number of HER2 genes in the cancer cells:",
+        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html",
+        "",
+        "FISH results are usually available from the lab within a few days:",
+        "https://www.verywellhealth.com/fish-test-2252457"
+      ],
+      "direct_transition": "Human_Epidermal_Growth_Factor_Receptor_2_HER2_Detection_Immunochemistry",
+      "reason": "breast_cancer_condition"
+    },
+    "HER2_negative": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85319-2",
+          "display": "HER2 [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "direct_transition": "HER2 ratio less than 1point8"
+    },
+    "HER2_positive": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85319-2",
+          "display": "HER2 [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      },
+      "direct_transition": "HER2_ratio_greater_than_2point2"
+    },
+    "Tumor_Biopsy_to_Test_Estrogen_Receptor_Status": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "ER_negative",
+          "distribution": 0.2
+        },
+        {
+          "transition": "ER_positive",
+          "distribution": 0.8
+        }
+      ],
+      "remarks": [
+        "About 80% of all breast cancers are “ER-positive.” That means the cancer cells grow in response to the hormone estrogen.:",
+        "https://www.webmd.com/breast-cancer/breast-cancer-types-er-positive-her2-positive#1"
+      ]
+    },
+    "ER_negative": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85337-4",
+          "display": "Estrogen receptor Ag [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "direct_transition": "ER-"
+    },
+    "ER_positive": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85337-4",
+          "display": "Estrogen receptor Ag [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      },
+      "direct_transition": "ER+"
+    },
+    "Tumor_Biopsy_to_Test_Progesterone_Receptor_Status": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "PR_negative",
+          "distribution": 0.35
+        },
+        {
+          "transition": "PR_positive",
+          "distribution": 0.65
+        }
+      ],
+      "remarks": [
+        "About 80% of all breast cancers are “ER-positive.” That means the cancer cells grow in response to the hormone estrogen. About 65% of these are also “PR-positive.” They grow in response to another hormone, progesterone.:",
+        "https://www.webmd.com/breast-cancer/breast-cancer-types-er-positive-her2-positive#1"
+      ]
+    },
+    "PR_negative": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85339-0",
+          "display": "Progesterone receptor Ag [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "direct_transition": "PR-"
+    },
+    "PR_positive": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85339-0",
+          "display": "Progesterone receptor Ag [Presence] in Breast cancer specimen by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      },
+      "direct_transition": "PR+"
+    },
+    "Overall_Receptor_Analysis": {
+      "type": "Simple",
+      "remarks": [
+        "If all hormones are negative transition to triple negative"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Hormone Receptor Negative",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_ER",
+                "operator": "==",
+                "value": "ER-negative"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_PR",
+                "operator": "==",
+                "value": "PR-negative"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Hormone Receptor Positive",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_ER",
+                "operator": "==",
+                "value": "ER-positive"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "breast_cancer_PR",
+                "operator": "==",
+                "value": "PR-positive"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "HER2-": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_HER2",
+      "direct_transition": "Tumor_Biopsy_to_Test_Estrogen_Receptor_Status",
+      "value": "HER2-negative"
+    },
+    "HER2+": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_HER2",
+      "value": "HER2-positive",
+      "direct_transition": "Tumor_Biopsy_to_Test_Estrogen_Receptor_Status"
+    },
+    "ER-": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_ER",
+      "direct_transition": "Tumor_Biopsy_to_Test_Progesterone_Receptor_Status",
+      "value": "ER-negative"
+    },
+    "ER+": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_ER",
+      "direct_transition": "Tumor_Biopsy_to_Test_Progesterone_Receptor_Status",
+      "value": "ER-positive"
+    },
+    "PR-": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_PR",
+      "direct_transition": "Overall_Receptor_Analysis",
+      "value": "PR-negative"
+    },
+    "PR+": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_PR",
+      "direct_transition": "Overall_Receptor_Analysis",
+      "value": "PR-positive"
+    },
+    "Triple_Negative": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "21924-6",
+          "display": "Tumor marker Cancer"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "direct_transition": "Triple_Negative_Patient",
+      "remarks": [
+        "In women with triple-negative breast cancer, the malignant cells do not contain receptors for estrogen, progesterone or HER2. Breast cancer that is ER-, PR- and HER2-negative cannot be treated with hormone therapy or medications that work by blocking HER2, such as trastuzumab."
+      ]
+    },
+    "Hormone Receptor Positive": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "10480-2",
+          "display": "Estrogen+Progesterone receptor Ag [Presence] in Tissue by Immune stain"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      },
+      "remarks": [
+        "Hormone receptor-positive (estrogen receptor-positive (ER-positive)/progesterone receptor-positive (PR-positive)) tumors express (have a lot of) hormone receptors.:",
+        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html"
+      ]
+    },
+    "Hormone Receptor Negative": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": 417181009,
+          "display": "Estrogen+Progesterone receptor Ag [Presence] in Tissue by Immune stain"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Triple_Negative",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "breast_cancer_HER2",
+            "operator": "==",
+            "value": "HER2-negative"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ],
+      "remarks": [
+        "Hormone receptor-negative (estrogen receptor-negative (ER-negative)/progesterone receptor-negative (PR- negative)) tumors do not express (have few or no) hormone receptors.:",
+        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html"
+      ]
+    },
+    "Human_Epidermal_Growth_Factor_Receptor_2_HER2_Detection_Immunochemistry": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 433114000,
+          "display": "Human epidermal growth factor receptor 2 gene detection by immunohistochemistry (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 2,
+        "high": 4,
+        "unit": "hours"
+      },
+      "remarks": [
+        "Immunohistochemistry (IHC), which detects the number of HER2 protein receptors in the cancer cells:",
+        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html",
+        "",
+        "In about 20% of breast cancers, the cells make too much of a protein known as HER2. These cancers tend to be aggressive and fast-growing:",
+        "https://www.webmd.com/breast-cancer/breast-cancer-types-er-positive-her2-positive#1",
+        "",
+        "All antibody-antigen interactions investigated in this study, both the primary antibody binding to its target and the secondary antibody binding to the primary, require several hours to reach equilibrium at the concentrations used:",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3878317/"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "HER2_negative",
+          "distribution": 0.8
+        },
+        {
+          "transition": "HER2_positive",
+          "distribution": 0.2
+        }
+      ],
+      "reason": "breast_cancer_condition"
+    },
+    "Triple_Negative_Patient": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_triple_negative",
+      "direct_transition": "Terminal",
+      "value": true
+    },
+    "HER2 ratio less than 1point8": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ratio",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85318-4",
+          "display": "HER2 [Presence] in Breast cancer specimen by FISH"
+        }
+      ],
+      "direct_transition": "HER2-",
+      "remarks": [
+        "Title of the article: HER2 Evaluation and Its Impact on Breast Cancer Treatment Decisions",
+        "",
+        "https://wwwncbinlmnihgov/pmc/articles/PMC3225235/"
+      ],
+      "exact": {
+        "quantity": "less than 1.8"
+      }
+    },
+    "HER2_ratio_greater_than_2point2": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ratio",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85318-4",
+          "display": "HER2 [Presence] in Breast cancer specimen by FISH"
+        }
+      ],
+      "direct_transition": "HER2+",
+      "remarks": [
+        "Title of the article: HER2 Evaluation and Its Impact on Breast Cancer Treatment Decisions",
+        "",
+        "https://wwwncbinlmnihgov/pmc/articles/PMC3225235/"
+      ],
+      "exact": {
+        "quantity": "greater than 2.2"
+      }
+    }
+  }
+}
+,
 "breast_cancer/hormonetherapy_breast":{
   "name": "hormonetherapy_breast",
   "remarks": [
@@ -7446,437 +7922,6 @@ export default {"allergic_rhinitis":{
       "type": "MedicationEnd",
       "referenced_by_attribute": "ER_PR_medication",
       "direct_transition": "end_encounter"
-    }
-  }
-}
-,
-"breast_cancer/hormone_diagnosis":{
-  "name": "Hormone_Diagnosis",
-  "remarks": [
-    "This module checks for HER2 and then assigns either HER2 positive/negative. This follows suit for ER and PR. Finally, it accounts for the Triple negative factor at the end. "
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Human_Epidermal_Growth_Factor_Receptor_2__HER2__Detection___Fluorescence_in_situ_Hybridization__FISH_"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Human_Epidermal_Growth_Factor_Receptor_2__HER2__Detection___Fluorescence_in_situ_Hybridization__FISH_": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 434363004,
-          "display": "Human epidermal growth factor receptor 2 gene detection by fluorescence in situ hybridization (procedure)"
-        }
-      ],
-      "duration": {
-        "low": 1,
-        "high": 2,
-        "unit": "days"
-      },
-      "remarks": [
-        "Fluorescence in situ hybridization (FISH), which detects the number of HER2 genes in the cancer cells:",
-        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html",
-        "",
-        "FISH results are usually available from the lab within a few days:",
-        "https://www.verywellhealth.com/fish-test-2252457"
-      ],
-      "direct_transition": "Human_Epidermal_Growth_Factor_Receptor_2_HER2_Detection_Immunochemistry",
-      "reason": "breast_cancer_condition"
-    },
-    "HER2_negative": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "85319-2",
-          "display": "HER2 [Presence] in Breast cancer specimen by Immune stain"
-        }
-      ],
-      "value_code": {
-        "system": "SNOMED-CT",
-        "code": 260385009,
-        "display": "Negative (qualifier value)"
-      },
-      "direct_transition": "HER2 ratio less than 1point8"
-    },
-    "HER2_positive": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "85319-2",
-          "display": "HER2 [Presence] in Breast cancer specimen by Immune stain"
-        }
-      ],
-      "value_code": {
-        "system": "SNOMED-CT",
-        "code": 10828004,
-        "display": "Positive (qualifier value)"
-      },
-      "direct_transition": "HER2_ratio_greater_than_2point2"
-    },
-    "Tumor_Biopsy_to_Test_Estrogen_Receptor_Status": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "ER_negative",
-          "distribution": 0.2
-        },
-        {
-          "transition": "ER_positive",
-          "distribution": 0.8
-        }
-      ],
-      "remarks": [
-        "About 80% of all breast cancers are “ER-positive.” That means the cancer cells grow in response to the hormone estrogen.:",
-        "https://www.webmd.com/breast-cancer/breast-cancer-types-er-positive-her2-positive#1"
-      ]
-    },
-    "ER_negative": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "85337-4",
-          "display": "Estrogen receptor Ag [Presence] in Breast cancer specimen by Immune stain"
-        }
-      ],
-      "value_code": {
-        "system": "SNOMED-CT",
-        "code": 260385009,
-        "display": "Negative (qualifier value)"
-      },
-      "direct_transition": "ER-"
-    },
-    "ER_positive": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "85337-4",
-          "display": "Estrogen receptor Ag [Presence] in Breast cancer specimen by Immune stain"
-        }
-      ],
-      "value_code": {
-        "system": "SNOMED-CT",
-        "code": 10828004,
-        "display": "Positive (qualifier value)"
-      },
-      "direct_transition": "ER+"
-    },
-    "Tumor_Biopsy_to_Test_Progesterone_Receptor_Status": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "PR_negative",
-          "distribution": 0.35
-        },
-        {
-          "transition": "PR_positive",
-          "distribution": 0.65
-        }
-      ],
-      "remarks": [
-        "About 80% of all breast cancers are “ER-positive.” That means the cancer cells grow in response to the hormone estrogen. About 65% of these are also “PR-positive.” They grow in response to another hormone, progesterone.:",
-        "https://www.webmd.com/breast-cancer/breast-cancer-types-er-positive-her2-positive#1"
-      ]
-    },
-    "PR_negative": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "85339-0",
-          "display": "Progesterone receptor Ag [Presence] in Breast cancer specimen by Immune stain"
-        }
-      ],
-      "value_code": {
-        "system": "SNOMED-CT",
-        "code": 260385009,
-        "display": "Negative (qualifier value)"
-      },
-      "direct_transition": "PR-"
-    },
-    "PR_positive": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "85339-0",
-          "display": "Progesterone receptor Ag [Presence] in Breast cancer specimen by Immune stain"
-        }
-      ],
-      "value_code": {
-        "system": "SNOMED-CT",
-        "code": 10828004,
-        "display": "Positive (qualifier value)"
-      },
-      "direct_transition": "PR+"
-    },
-    "Overall_Receptor_Analysis": {
-      "type": "Simple",
-      "remarks": [
-        "If all hormones are negative transition to triple negative"
-      ],
-      "conditional_transition": [
-        {
-          "transition": "Hormone Receptor Negative",
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "breast_cancer_ER",
-                "operator": "==",
-                "value": "ER-negative"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "breast_cancer_PR",
-                "operator": "==",
-                "value": "PR-negative"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Hormone Receptor Positive",
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "breast_cancer_ER",
-                "operator": "==",
-                "value": "ER-positive"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "breast_cancer_PR",
-                "operator": "==",
-                "value": "PR-positive"
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Terminal"
-        }
-      ]
-    },
-    "HER2-": {
-      "type": "SetAttribute",
-      "attribute": "breast_cancer_HER2",
-      "direct_transition": "Tumor_Biopsy_to_Test_Estrogen_Receptor_Status",
-      "value": "HER2-negative"
-    },
-    "HER2+": {
-      "type": "SetAttribute",
-      "attribute": "breast_cancer_HER2",
-      "value": "HER2-positive",
-      "direct_transition": "Tumor_Biopsy_to_Test_Estrogen_Receptor_Status"
-    },
-    "ER-": {
-      "type": "SetAttribute",
-      "attribute": "breast_cancer_ER",
-      "direct_transition": "Tumor_Biopsy_to_Test_Progesterone_Receptor_Status",
-      "value": "ER-negative"
-    },
-    "ER+": {
-      "type": "SetAttribute",
-      "attribute": "breast_cancer_ER",
-      "direct_transition": "Tumor_Biopsy_to_Test_Progesterone_Receptor_Status",
-      "value": "ER-positive"
-    },
-    "PR-": {
-      "type": "SetAttribute",
-      "attribute": "breast_cancer_PR",
-      "direct_transition": "Overall_Receptor_Analysis",
-      "value": "PR-negative"
-    },
-    "PR+": {
-      "type": "SetAttribute",
-      "attribute": "breast_cancer_PR",
-      "direct_transition": "Overall_Receptor_Analysis",
-      "value": "PR-positive"
-    },
-    "Triple_Negative": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "21924-6",
-          "display": "Tumor marker Cancer"
-        }
-      ],
-      "value_code": {
-        "system": "SNOMED-CT",
-        "code": 260385009,
-        "display": "Negative (qualifier value)"
-      },
-      "direct_transition": "Triple_Negative_Patient",
-      "remarks": [
-        "In women with triple-negative breast cancer, the malignant cells do not contain receptors for estrogen, progesterone or HER2. Breast cancer that is ER-, PR- and HER2-negative cannot be treated with hormone therapy or medications that work by blocking HER2, such as trastuzumab."
-      ]
-    },
-    "Hormone Receptor Positive": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "10480-2",
-          "display": "Estrogen+Progesterone receptor Ag [Presence] in Tissue by Immune stain"
-        }
-      ],
-      "direct_transition": "Terminal",
-      "value_code": {
-        "system": "SNOMED-CT",
-        "code": 10828004,
-        "display": "Positive (qualifier value)"
-      },
-      "remarks": [
-        "Hormone receptor-positive (estrogen receptor-positive (ER-positive)/progesterone receptor-positive (PR-positive)) tumors express (have a lot of) hormone receptors.:",
-        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html"
-      ]
-    },
-    "Hormone Receptor Negative": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": 417181009,
-          "display": "Estrogen+Progesterone receptor Ag [Presence] in Tissue by Immune stain"
-        }
-      ],
-      "value_code": {
-        "system": "SNOMED-CT",
-        "code": 260385009,
-        "display": "Negative (qualifier value)"
-      },
-      "conditional_transition": [
-        {
-          "transition": "Triple_Negative",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "breast_cancer_HER2",
-            "operator": "==",
-            "value": "HER2-negative"
-          }
-        },
-        {
-          "transition": "Terminal"
-        }
-      ],
-      "remarks": [
-        "Hormone receptor-negative (estrogen receptor-negative (ER-negative)/progesterone receptor-negative (PR- negative)) tumors do not express (have few or no) hormone receptors.:",
-        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html"
-      ]
-    },
-    "Human_Epidermal_Growth_Factor_Receptor_2_HER2_Detection_Immunochemistry": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 433114000,
-          "display": "Human epidermal growth factor receptor 2 gene detection by immunohistochemistry (procedure)"
-        }
-      ],
-      "duration": {
-        "low": 2,
-        "high": 4,
-        "unit": "hours"
-      },
-      "remarks": [
-        "Immunohistochemistry (IHC), which detects the number of HER2 protein receptors in the cancer cells:",
-        "https://ww5.komen.org/BreastCancer/TumorCharacteristics.html",
-        "",
-        "In about 20% of breast cancers, the cells make too much of a protein known as HER2. These cancers tend to be aggressive and fast-growing:",
-        "https://www.webmd.com/breast-cancer/breast-cancer-types-er-positive-her2-positive#1",
-        "",
-        "All antibody-antigen interactions investigated in this study, both the primary antibody binding to its target and the secondary antibody binding to the primary, require several hours to reach equilibrium at the concentrations used:",
-        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3878317/"
-      ],
-      "distributed_transition": [
-        {
-          "transition": "HER2_negative",
-          "distribution": 0.8
-        },
-        {
-          "transition": "HER2_positive",
-          "distribution": 0.2
-        }
-      ],
-      "reason": "breast_cancer_condition"
-    },
-    "Triple_Negative_Patient": {
-      "type": "SetAttribute",
-      "attribute": "breast_cancer_triple_negative",
-      "direct_transition": "Terminal",
-      "value": true
-    },
-    "HER2 ratio less than 1point8": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "ratio",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "85318-4",
-          "display": "HER2 [Presence] in Breast cancer specimen by FISH"
-        }
-      ],
-      "direct_transition": "HER2-",
-      "remarks": [
-        "Title of the article: HER2 Evaluation and Its Impact on Breast Cancer Treatment Decisions",
-        "",
-        "https://wwwncbinlmnihgov/pmc/articles/PMC3225235/"
-      ],
-      "exact": {
-        "quantity": "less than 1.8"
-      }
-    },
-    "HER2_ratio_greater_than_2point2": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "ratio",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "85318-4",
-          "display": "HER2 [Presence] in Breast cancer specimen by FISH"
-        }
-      ],
-      "direct_transition": "HER2+",
-      "remarks": [
-        "Title of the article: HER2 Evaluation and Its Impact on Breast Cancer Treatment Decisions",
-        "",
-        "https://wwwncbinlmnihgov/pmc/articles/PMC3225235/"
-      ],
-      "exact": {
-        "quantity": "greater than 2.2"
-      }
     }
   }
 }
@@ -12258,6 +12303,10 @@ export default {"allergic_rhinitis":{
     "End_Bronchitis_CarePlan": {
       "type": "CarePlanEnd",
       "referenced_by_attribute": "bronchitis_careplan",
+      "direct_transition": "End_Wellness_Visit"
+    },
+    "End_Wellness_Visit": {
+      "type": "EncounterEnd",
       "direct_transition": "Potential_Infection"
     }
   }
@@ -15808,6 +15857,508 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"contraceptive_maintenance":{
+  "name": "Contraceptive Maintenance",
+  "remarks": [
+    "Three types of contraceptives require periodic renewal to be effective: ",
+    "1. 'iud' - requires replacement every 5-10 years ",
+    "2. 'implant' - requires replacement every 3-4 years ",
+    "3. 'injectable' - requires another injection every 3 months ",
+    "Each of these contraceptives is initially implanted/injected by the prescribing ",
+    "submodule. Subsequent renewal or removal of these contraceptives is handled ",
+    "by this maintenance module.",
+    "Contraceptive maintenance automatically cancelled if either: ",
+    "1. 'pregnant' == true ",
+    "2. 'contraceptive_type' == nil "
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "transition": "Terminal"
+        },
+        {
+          "transition": "Contraceptive_Type_Guard"
+        }
+      ]
+    },
+    "Clear_Contraceptive": {
+      "type": "CallSubmodule",
+      "submodule": "contraceptives/clear_contraceptive",
+      "direct_transition": "Contraceptive_Type_Guard"
+    },
+    "Contraceptive_Type_Guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Or",
+        "conditions": [
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "iud"
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "implant"
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "injectable"
+          }
+        ]
+      },
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "iud"
+          },
+          "transition": "IUD_Maintenance"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "implant"
+          },
+          "transition": "Implant_Maintenance"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "==",
+            "value": "injectable"
+          },
+          "transition": "Injectable_Maintenance"
+        }
+      ]
+    },
+    "IUD_Maintenance": {
+      "type": "Guard",
+      "remarks": [
+        "======================================================================",
+        " IUD CONTRACEPTIVE MAINTENANCE                                        ",
+        "======================================================================",
+        "Allow module progression if the IUD's lifetime is up (~4 years) ",
+        "or if the patient becomes pregnant."
+      ],
+      "allow": {
+        "condition_type": "Or",
+        "conditions": [
+          {
+            "condition_type": "Attribute",
+            "attribute": "pregnant",
+            "operator": "==",
+            "value": true
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "is nil"
+          },
+          {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Contraceptive_Type_Guard",
+                  "within": {
+                    "quantity": 5,
+                    "unit": "years"
+                  }
+                }
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "IUD_Replacement",
+                  "within": {
+                    "quantity": 5,
+                    "unit": "years"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "pregnant",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "contraceptive_type",
+                "operator": "is nil"
+              }
+            ]
+          },
+          "transition": "Remove_IUD_Encounter"
+        },
+        {
+          "transition": "Renew_IUD_Encounter"
+        }
+      ]
+    },
+    "Renew_IUD_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "308335008",
+          "display": "Patient encounter procedure"
+        }
+      ],
+      "direct_transition": "IUD_Replacement"
+    },
+    "IUD_Replacement": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "46706006",
+          "display": "Replacement of contraceptive intrauterine device"
+        }
+      ],
+      "duration": {
+        "low": 40,
+        "high": 70,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_IUD_Replacement_Encounter"
+    },
+    "End_IUD_Replacement_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "IUD_Maintenance"
+    },
+    "Remove_IUD_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "308335008",
+          "display": "Patient encounter procedure"
+        }
+      ],
+      "direct_transition": "IUD_Removal"
+    },
+    "IUD_Removal": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "68254000",
+          "display": "Removal of intrauterine device"
+        }
+      ],
+      "duration": {
+        "low": 40,
+        "high": 70,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_IUD_Removal_Encounter"
+    },
+    "End_IUD_Removal_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Clear_Contraceptive"
+    },
+    "Implant_Maintenance": {
+      "type": "Guard",
+      "remarks": [
+        "======================================================================",
+        " IMPLANT CONTRACEPTIVE MAINTENANCE                                    ",
+        "======================================================================",
+        "Every 3-4 years the implant must be removed or replaced."
+      ],
+      "allow": {
+        "condition_type": "Or",
+        "conditions": [
+          {
+            "condition_type": "Attribute",
+            "attribute": "pregnant",
+            "operator": "==",
+            "value": true
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "is nil"
+          },
+          {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Contraceptive_Type_Guard",
+                  "within": {
+                    "quantity": 4,
+                    "unit": "years"
+                  }
+                }
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Replace_Contraceptive_Implant",
+                  "within": {
+                    "quantity": 4,
+                    "unit": "years"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "pregnant",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "contraceptive_type",
+                "operator": "is nil"
+              }
+            ]
+          },
+          "transition": "Remove_Implant_Encounter"
+        },
+        {
+          "transition": "Renew_Implant_Encounter"
+        }
+      ]
+    },
+    "Renew_Implant_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "308335008",
+          "display": "Patient encounter procedure"
+        }
+      ],
+      "direct_transition": "Remove_Implant_Before_Replacement"
+    },
+    "End_Renew_Implant_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Implant_Maintenance"
+    },
+    "Remove_Implant_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "308335008",
+          "display": "Patient encounter procedure"
+        }
+      ],
+      "direct_transition": "Remove_Implant"
+    },
+    "Remove_Implant": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "301807007",
+          "display": "Removal of subcutaneous contraceptive"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Remove_Implant_Encounter"
+    },
+    "End_Remove_Implant_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Clear_Contraceptive"
+    },
+    "Injectable_Maintenance": {
+      "type": "Guard",
+      "remarks": [
+        "======================================================================",
+        " INJECTABLE CONTRACEPTIVE MAINTENANCE                                 ",
+        "======================================================================",
+        "Every 3 months an additional dose is given. If the age limit for the current ",
+        "age bracket is reached, no more additional doses are given."
+      ],
+      "allow": {
+        "condition_type": "Or",
+        "conditions": [
+          {
+            "condition_type": "Attribute",
+            "attribute": "pregnant",
+            "operator": "==",
+            "value": true
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "contraceptive_type",
+            "operator": "is nil"
+          },
+          {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Contraceptive_Type_Guard",
+                  "within": {
+                    "quantity": 3,
+                    "unit": "months"
+                  }
+                }
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Regular_Injection_Encounter",
+                  "within": {
+                    "quantity": 3,
+                    "unit": "months"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "pregnant",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "contraceptive_type",
+                "operator": "is nil"
+              }
+            ]
+          },
+          "transition": "Clear_Contraceptive"
+        },
+        {
+          "transition": "Regular_Injection_Encounter"
+        }
+      ]
+    },
+    "Regular_Injection_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "308335008",
+          "display": "Patient encounter procedure"
+        }
+      ],
+      "direct_transition": "Regular_Contraceptive_Injection"
+    },
+    "Regular_Contraceptive_Injection": {
+      "type": "Procedure",
+      "duration": {
+        "low": 10,
+        "high": 20,
+        "unit": "minutes"
+      },
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "76601001",
+          "display": "Intramuscular injection"
+        }
+      ],
+      "direct_transition": "End_Regular_Injection_Encounter"
+    },
+    "End_Regular_Injection_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Injectable_Maintenance"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Replace_Contraceptive_Implant": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 169553002,
+          "display": "Insertion of subcutaneous contraceptive"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Renew_Implant_Encounter"
+    },
+    "Remove_Implant_Before_Replacement": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 301807007,
+          "display": "Removal of subcutaneous contraceptive"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "Replace_Contraceptive_Implant"
+    }
+  }
+}
+,
 "contraceptives/clear_contraceptive":{
   "name": "Clear Contraceptive",
   "remarks": [
@@ -18038,508 +18589,6 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
-"contraceptive_maintenance":{
-  "name": "Contraceptive Maintenance",
-  "remarks": [
-    "Three types of contraceptives require periodic renewal to be effective: ",
-    "1. 'iud' - requires replacement every 5-10 years ",
-    "2. 'implant' - requires replacement every 3-4 years ",
-    "3. 'injectable' - requires another injection every 3 months ",
-    "Each of these contraceptives is initially implanted/injected by the prescribing ",
-    "submodule. Subsequent renewal or removal of these contraceptives is handled ",
-    "by this maintenance module.",
-    "Contraceptive maintenance automatically cancelled if either: ",
-    "1. 'pregnant' == true ",
-    "2. 'contraceptive_type' == nil "
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          },
-          "transition": "Terminal"
-        },
-        {
-          "transition": "Contraceptive_Type_Guard"
-        }
-      ]
-    },
-    "Clear_Contraceptive": {
-      "type": "CallSubmodule",
-      "submodule": "contraceptives/clear_contraceptive",
-      "direct_transition": "Contraceptive_Type_Guard"
-    },
-    "Contraceptive_Type_Guard": {
-      "type": "Guard",
-      "allow": {
-        "condition_type": "Or",
-        "conditions": [
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "iud"
-          },
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "implant"
-          },
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "injectable"
-          }
-        ]
-      },
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "iud"
-          },
-          "transition": "IUD_Maintenance"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "implant"
-          },
-          "transition": "Implant_Maintenance"
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "==",
-            "value": "injectable"
-          },
-          "transition": "Injectable_Maintenance"
-        }
-      ]
-    },
-    "IUD_Maintenance": {
-      "type": "Guard",
-      "remarks": [
-        "======================================================================",
-        " IUD CONTRACEPTIVE MAINTENANCE                                        ",
-        "======================================================================",
-        "Allow module progression if the IUD's lifetime is up (~4 years) ",
-        "or if the patient becomes pregnant."
-      ],
-      "allow": {
-        "condition_type": "Or",
-        "conditions": [
-          {
-            "condition_type": "Attribute",
-            "attribute": "pregnant",
-            "operator": "==",
-            "value": true
-          },
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "is nil"
-          },
-          {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "Contraceptive_Type_Guard",
-                  "within": {
-                    "quantity": 5,
-                    "unit": "years"
-                  }
-                }
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "IUD_Replacement",
-                  "within": {
-                    "quantity": 5,
-                    "unit": "years"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "pregnant",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "contraceptive_type",
-                "operator": "is nil"
-              }
-            ]
-          },
-          "transition": "Remove_IUD_Encounter"
-        },
-        {
-          "transition": "Renew_IUD_Encounter"
-        }
-      ]
-    },
-    "Renew_IUD_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "308335008",
-          "display": "Patient encounter procedure"
-        }
-      ],
-      "direct_transition": "IUD_Replacement"
-    },
-    "IUD_Replacement": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "46706006",
-          "display": "Replacement of contraceptive intrauterine device"
-        }
-      ],
-      "duration": {
-        "low": 40,
-        "high": 70,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_IUD_Replacement_Encounter"
-    },
-    "End_IUD_Replacement_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "IUD_Maintenance"
-    },
-    "Remove_IUD_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "308335008",
-          "display": "Patient encounter procedure"
-        }
-      ],
-      "direct_transition": "IUD_Removal"
-    },
-    "IUD_Removal": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "68254000",
-          "display": "Removal of intrauterine device"
-        }
-      ],
-      "duration": {
-        "low": 40,
-        "high": 70,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_IUD_Removal_Encounter"
-    },
-    "End_IUD_Removal_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Clear_Contraceptive"
-    },
-    "Implant_Maintenance": {
-      "type": "Guard",
-      "remarks": [
-        "======================================================================",
-        " IMPLANT CONTRACEPTIVE MAINTENANCE                                    ",
-        "======================================================================",
-        "Every 3-4 years the implant must be removed or replaced."
-      ],
-      "allow": {
-        "condition_type": "Or",
-        "conditions": [
-          {
-            "condition_type": "Attribute",
-            "attribute": "pregnant",
-            "operator": "==",
-            "value": true
-          },
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "is nil"
-          },
-          {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "Contraceptive_Type_Guard",
-                  "within": {
-                    "quantity": 4,
-                    "unit": "years"
-                  }
-                }
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "Replace_Contraceptive_Implant",
-                  "within": {
-                    "quantity": 4,
-                    "unit": "years"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "pregnant",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "contraceptive_type",
-                "operator": "is nil"
-              }
-            ]
-          },
-          "transition": "Remove_Implant_Encounter"
-        },
-        {
-          "transition": "Renew_Implant_Encounter"
-        }
-      ]
-    },
-    "Renew_Implant_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "308335008",
-          "display": "Patient encounter procedure"
-        }
-      ],
-      "direct_transition": "Remove_Implant_Before_Replacement"
-    },
-    "End_Renew_Implant_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Implant_Maintenance"
-    },
-    "Remove_Implant_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "308335008",
-          "display": "Patient encounter procedure"
-        }
-      ],
-      "direct_transition": "Remove_Implant"
-    },
-    "Remove_Implant": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "301807007",
-          "display": "Removal of subcutaneous contraceptive"
-        }
-      ],
-      "duration": {
-        "low": 20,
-        "high": 40,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_Remove_Implant_Encounter"
-    },
-    "End_Remove_Implant_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Clear_Contraceptive"
-    },
-    "Injectable_Maintenance": {
-      "type": "Guard",
-      "remarks": [
-        "======================================================================",
-        " INJECTABLE CONTRACEPTIVE MAINTENANCE                                 ",
-        "======================================================================",
-        "Every 3 months an additional dose is given. If the age limit for the current ",
-        "age bracket is reached, no more additional doses are given."
-      ],
-      "allow": {
-        "condition_type": "Or",
-        "conditions": [
-          {
-            "condition_type": "Attribute",
-            "attribute": "pregnant",
-            "operator": "==",
-            "value": true
-          },
-          {
-            "condition_type": "Attribute",
-            "attribute": "contraceptive_type",
-            "operator": "is nil"
-          },
-          {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "Contraceptive_Type_Guard",
-                  "within": {
-                    "quantity": 3,
-                    "unit": "months"
-                  }
-                }
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "PriorState",
-                  "name": "Regular_Injection_Encounter",
-                  "within": {
-                    "quantity": 3,
-                    "unit": "months"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "pregnant",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "contraceptive_type",
-                "operator": "is nil"
-              }
-            ]
-          },
-          "transition": "Clear_Contraceptive"
-        },
-        {
-          "transition": "Regular_Injection_Encounter"
-        }
-      ]
-    },
-    "Regular_Injection_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "outpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "308335008",
-          "display": "Patient encounter procedure"
-        }
-      ],
-      "direct_transition": "Regular_Contraceptive_Injection"
-    },
-    "Regular_Contraceptive_Injection": {
-      "type": "Procedure",
-      "duration": {
-        "low": 10,
-        "high": 20,
-        "unit": "minutes"
-      },
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "76601001",
-          "display": "Intramuscular injection"
-        }
-      ],
-      "direct_transition": "End_Regular_Injection_Encounter"
-    },
-    "End_Regular_Injection_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Injectable_Maintenance"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Replace_Contraceptive_Implant": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 169553002,
-          "display": "Insertion of subcutaneous contraceptive"
-        }
-      ],
-      "duration": {
-        "low": 20,
-        "high": 40,
-        "unit": "minutes"
-      },
-      "direct_transition": "End_Renew_Implant_Encounter"
-    },
-    "Remove_Implant_Before_Replacement": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 301807007,
-          "display": "Removal of subcutaneous contraceptive"
-        }
-      ],
-      "duration": {
-        "low": 20,
-        "high": 40,
-        "unit": "minutes"
-      },
-      "direct_transition": "Replace_Contraceptive_Implant"
-    }
-  }
-}
-,
 "copd":{
   "name": "COPD",
   "remarks": [
@@ -19254,7 +19303,7 @@ export default {"allergic_rhinitis":{
           "display": "FEV1/FVC"
         }
       ],
-      "direct_transition": "Loop_back_to_Living_with_COPD"
+      "direct_transition": "End_COPD_Followup_Enc2"
     },
     "Stage2_FEV_Result": {
       "type": "Observation",
@@ -19327,7 +19376,7 @@ export default {"allergic_rhinitis":{
               }
             ]
           },
-          "transition": "Consider_Surgery"
+          "transition": "End_COPD_Followup_Enc1"
         },
         {
           "transition": "Prescribe_Medication"
@@ -19344,7 +19393,7 @@ export default {"allergic_rhinitis":{
           "display": "60 ACTUAT Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT Dry Powder Inhaler"
         }
       ],
-      "direct_transition": "Consider_Surgery",
+      "direct_transition": "End_COPD_Followup_Enc1",
       "chronic": true
     },
     "Consider_Surgery": {
@@ -19539,6 +19588,8913 @@ export default {"allergic_rhinitis":{
           "transition": "Living_with_COPD"
         }
       ]
+    },
+    "End_COPD_Followup_Enc2": {
+      "type": "EncounterEnd",
+      "direct_transition": "Loop_back_to_Living_with_COPD"
+    },
+    "End_COPD_Followup_Enc1": {
+      "type": "EncounterEnd",
+      "direct_transition": "Consider_Surgery"
+    }
+  }
+}
+,
+"covid19/admission":{
+  "name": "admission",
+  "remarks": [
+    "Hospitalization and ICU admission for survivors and non-survivors. Timelines from Table 1 and Table 2, and outcomes and complications according to Table 2, from https://doi.org/10.1016/S0140-6736(20)30566-3"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Hospital Inpatient Admission"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Hospital Inpatient Admission": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "1505002",
+          "display": "Hospital admission for isolation (procedure)"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Non Survivor Stay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Survivor Stay"
+        }
+      ],
+      "reason": "covid19"
+    },
+    "Survivor Stay": {
+      "type": "SetAttribute",
+      "attribute": "covid19_hospitalization_days",
+      "direct_transition": "Admission Days",
+      "range": {
+        "low": 9,
+        "high": 15
+      }
+    },
+    "Non Survivor Stay": {
+      "type": "SetAttribute",
+      "attribute": "covid19_hospitalization_days",
+      "direct_transition": "Admission Days",
+      "range": {
+        "low": 5,
+        "high": 11
+      }
+    },
+    "ICU Admission": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "covid19",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "305351004",
+          "display": "Admission to intensive care unit (procedure)"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Non Survivor ICU Stay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Survivor ICU Stay"
+        }
+      ]
+    },
+    "End Symptoms": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/end_symptoms",
+      "direct_transition": "End_Outcomes"
+    },
+    "Survivor ICU Stay": {
+      "type": "SetAttribute",
+      "attribute": "covid19_icu_days",
+      "direct_transition": "ICU First Day",
+      "range": {
+        "low": 2,
+        "high": 9
+      }
+    },
+    "Non Survivor ICU Stay": {
+      "type": "SetAttribute",
+      "attribute": "covid19_icu_days",
+      "range": {
+        "low": 4,
+        "high": 12
+      },
+      "direct_transition": "ICU First Day"
+    },
+    "Death": {
+      "type": "Death",
+      "direct_transition": "Terminal",
+      "referenced_by_attribute": "covid19"
+    },
+    "Hospitalization Day End": {
+      "type": "Counter",
+      "attribute": "covid19_hospitalization_days",
+      "action": "decrement",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_hospitalization_days",
+            "operator": ">",
+            "value": 0
+          },
+          "transition": "Hospitalization Next Day"
+        },
+        {
+          "transition": "Determine Discharge"
+        }
+      ]
+    },
+    "Hospitalization Day Begin": {
+      "type": "Counter",
+      "attribute": "covid19_admission_days",
+      "action": "increment",
+      "direct_transition": "Hospitalization Set Daily Labs"
+    },
+    "ICU Day Begin": {
+      "type": "Counter",
+      "attribute": "covid19_admission_days",
+      "action": "increment",
+      "direct_transition": "ICU Set Daily Labs"
+    },
+    "ICU Day End": {
+      "type": "Counter",
+      "attribute": "covid19_icu_days",
+      "action": "decrement",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_icu_days",
+            "operator": ">",
+            "value": 0
+          },
+          "transition": "ICU Next Day"
+        },
+        {
+          "transition": "Extubation_Check",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "Wait For End"
+        }
+      ]
+    },
+    "Hospitalization Daily Lab Values Non-Survivor": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/nonsurvivor_lab_values",
+      "direct_transition": "Hospitalization Daily Labs"
+    },
+    "Hospitalization Daily Lab Values Survivor": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/survivor_lab_values",
+      "direct_transition": "Hospitalization Daily Labs"
+    },
+    "ICU Labs": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/measurements_daily",
+      "conditional_transition": [
+        {
+          "transition": "ICU Frequent Labs",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_all_labs",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Next_Time"
+        }
+      ]
+    },
+    "Hospitalization Set Daily Labs": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Hospitalization Daily Lab Values Non-Survivor",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Hospitalization Daily Lab Values Survivor"
+        }
+      ]
+    },
+    "ICU Set Daily Labs": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "ICU Daily Lab Values Non Survivor",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "ICU Daily Lab Values Survivor"
+        }
+      ]
+    },
+    "ICU Daily Lab Values Non Survivor": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/nonsurvivor_lab_values",
+      "direct_transition": "ICU Labs"
+    },
+    "ICU Daily Lab Values Survivor": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/survivor_lab_values",
+      "direct_transition": "ICU Labs"
+    },
+    "Hospitalization First Day": {
+      "type": "SetAttribute",
+      "attribute": "covid19_all_labs",
+      "direct_transition": "Chest_X_Ray",
+      "value": true
+    },
+    "Chest_X_Ray": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "399208008",
+          "display": "Plain chest X-ray (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 45,
+        "unit": "minutes"
+      },
+      "direct_transition": "Determine Outcomes"
+    },
+    "Determine Outcomes": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/outcomes",
+      "direct_transition": "Hospitalization Day Begin"
+    },
+    "Hospitalization Medications": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Metered_Dose_Inhaler",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "asthma_condition",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "copd_variant",
+                    "operator": "is not nil"
+                  },
+                  {
+                    "condition_type": "Active Condition",
+                    "codes": [
+                      {
+                        "system": "SNOMED-CT",
+                        "code": 56018004,
+                        "display": "Wheezing (finding)"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Daily_Acetaminophen_for_Fever"
+        }
+      ]
+    },
+    "Hospitalization Supplies": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/supplies_hospitalization",
+      "direct_transition": "Hospitalization Day End"
+    },
+    "Hospitalization Next Day": {
+      "type": "Delay",
+      "direct_transition": "Hospitalization Day Begin",
+      "exact": {
+        "quantity": 1,
+        "unit": "days"
+      }
+    },
+    "ICU Next Day": {
+      "type": "Delay",
+      "direct_transition": "ICU Day Begin",
+      "exact": {
+        "quantity": 1,
+        "unit": "days"
+      }
+    },
+    "ICU Procedures": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Ventilation",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "65710008",
+                    "display": "Acute respiratory failure (disorder)"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "76571007",
+                    "display": "Septic shock (disorder)"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "ICU Oxygen"
+        }
+      ]
+    },
+    "ICU Medications": {
+      "type": "Simple",
+      "direct_transition": "Clinical_Trial_Medications"
+    },
+    "ICU Supplies": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/supplies_icu",
+      "direct_transition": "ICU Day End"
+    },
+    "Metered_Dose_Inhaler": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "2123111",
+          "display": "NDA020503 200 ACTUAT Albuterol 0.09 MG/ACTUAT Metered Dose Inhaler"
+        }
+      ],
+      "administration": true,
+      "reason": "Hypoxemia",
+      "direct_transition": "Daily_Acetaminophen_for_Fever",
+      "prescription": {
+        "dosage": {
+          "amount": 4,
+          "frequency": 1,
+          "period": 4,
+          "unit": "hours"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      }
+    },
+    "Oxygen": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "371908008",
+          "display": "Oxygen administration by mask (procedure)"
+        }
+      ],
+      "reason": "Hypoxemia",
+      "direct_transition": "Move to Prone Position",
+      "remarks": [
+        "Oxygen administration by mask refers to supplemental O2 via nasal cannula or mask, continuous positive airway pressure (CPAP), high flow nasal cannula (HFNC), or non-invasive ventilation (NIV)."
+      ]
+    },
+    "Daily_Acetaminophen_for_Fever": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "198440",
+          "display": "Acetaminophen 500 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "direct_transition": "Clinical Trial Medications"
+    },
+    "Ventilation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "26763009",
+          "display": "Controlled ventilation procedure and therapy, initiation and management (procedure)"
+        }
+      ],
+      "reason": "Ventilator Reason",
+      "direct_transition": "Dialysis Check"
+    },
+    "ICU First Day": {
+      "type": "Simple",
+      "direct_transition": "Intubation Check"
+    },
+    "Intubation Supplies": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/supplies_intubation",
+      "direct_transition": "Intubation"
+    },
+    "Intubation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "112798008",
+          "display": "Insertion of endotracheal tube (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "reason": "Ventilator Reason",
+      "direct_transition": "Remove_Laryngoscope"
+    },
+    "ICU Oxygen": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "371908008",
+          "display": "Oxygen administration by mask (procedure)"
+        }
+      ],
+      "reason": "Hypoxemia",
+      "direct_transition": "Dialysis Check"
+    },
+    "Daily_Acetaminophen_for_Fever_ICU": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "198440",
+          "display": "Acetaminophen 500 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "direct_transition": "ICU Supplies"
+    },
+    "Extubation_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Extubation",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Intubation"
+          }
+        },
+        {
+          "transition": "Discharge from ICU"
+        }
+      ]
+    },
+    "Extubation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "271280005",
+          "display": "Removal of endotracheal tube (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 20,
+        "high": 40,
+        "unit": "minutes"
+      },
+      "direct_transition": "Reclaim Ventilator"
+    },
+    "Wait For End": {
+      "type": "Delay",
+      "direct_transition": "Reclaim Ventilator at Death",
+      "range": {
+        "low": 1,
+        "high": 8,
+        "unit": "hours"
+      }
+    },
+    "End_Outcomes": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/end_outcomes",
+      "direct_transition": "End_Encounter"
+    },
+    "Transfer": {
+      "type": "EncounterEnd",
+      "direct_transition": "ICU Admission"
+    },
+    "Determine Discharge": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "Transfer",
+              "distribution": 0.72
+            },
+            {
+              "transition": "Wait For End",
+              "distribution": 0.28
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Transfer",
+              "distribution": 0.08
+            },
+            {
+              "transition": "End Symptoms",
+              "distribution": 0.9199999999999999
+            }
+          ]
+        }
+      ]
+    },
+    "Admission Days": {
+      "type": "SetAttribute",
+      "attribute": "covid19_admission_days",
+      "direct_transition": "Hospitalization First Day",
+      "value": 0
+    },
+    "Vasopressor A": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "242969",
+          "display": "4 ML Norepinephrine 1 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Vasopressor B",
+      "administration": true,
+      "reason": "Septic Shock"
+    },
+    "Vasopressor B": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "2103182",
+          "display": "1 ML Vasopressin (USP) 20 UNT/ML Injection"
+        }
+      ],
+      "administration": true,
+      "direct_transition": "Daily_Acetaminophen_for_Fever_ICU",
+      "reason": "Septic Shock"
+    },
+    "Hospitalization Daily Labs": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/measurements_daily",
+      "conditional_transition": [
+        {
+          "transition": "Hospitalization Frequent Labs",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_all_labs",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Next Time"
+        }
+      ]
+    },
+    "Hospitalization Frequent Labs": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/measurements_frequent",
+      "direct_transition": "Skip Next Time"
+    },
+    "Next Time": {
+      "type": "SetAttribute",
+      "attribute": "covid19_all_labs",
+      "direct_transition": "Check for Clots",
+      "value": true
+    },
+    "Skip Next Time": {
+      "type": "SetAttribute",
+      "attribute": "covid19_all_labs",
+      "direct_transition": "Check for Clots",
+      "value": false
+    },
+    "ICU Frequent Labs": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/measurements_frequent",
+      "direct_transition": "Skip_Next_Time"
+    },
+    "Next_Time": {
+      "type": "SetAttribute",
+      "attribute": "covid19_all_labs",
+      "value": true,
+      "direct_transition": "Check for Clots ICU"
+    },
+    "Skip_Next_Time": {
+      "type": "SetAttribute",
+      "attribute": "covid19_all_labs",
+      "value": true,
+      "direct_transition": "Check for Clots ICU"
+    },
+    "ICU_Oxygen": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "371908008",
+          "display": "Oxygen administration by mask (procedure)"
+        }
+      ],
+      "direct_transition": "Recovery",
+      "reason": "Hypoxemia"
+    },
+    "Recovery": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "days"
+      },
+      "direct_transition": "Recovery Next Day"
+    },
+    "Recovery Days": {
+      "type": "SetAttribute",
+      "attribute": "covid19_extubation_recovery_days",
+      "direct_transition": "Recovery Oxygen Check",
+      "range": {
+        "low": 1,
+        "high": 3
+      }
+    },
+    "Recovery Next Day": {
+      "type": "Counter",
+      "attribute": "covid19_extubation_recovery_days",
+      "action": "decrement",
+      "conditional_transition": [
+        {
+          "transition": "Recovery Oxygen Check",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_extubation_recovery_days",
+            "operator": ">",
+            "value": 0
+          }
+        },
+        {
+          "transition": "End Symptoms"
+        }
+      ]
+    },
+    "Reclaim Ventilator": {
+      "type": "DeviceEnd",
+      "direct_transition": "Discharge from ICU",
+      "referenced_by_attribute": "covid19_ventilator"
+    },
+    "Reclaim Ventilator at Death": {
+      "type": "DeviceEnd",
+      "direct_transition": "End Encounter at Death",
+      "referenced_by_attribute": "covid19_ventilator"
+    },
+    "End Encounter at Death": {
+      "type": "EncounterEnd",
+      "direct_transition": "Death"
+    },
+    "Clinical Trial Medications": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/medications",
+      "direct_transition": "Hospitalization Supplies"
+    },
+    "Clinical_Trial_Medications": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/medications",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "asthma_condition",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "copd_variant",
+                    "operator": "is not nil"
+                  },
+                  {
+                    "condition_type": "Active Condition",
+                    "codes": [
+                      {
+                        "system": "SNOMED-CT",
+                        "code": 267036007,
+                        "display": "Dyspnea (finding)"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "Albuterol Administration"
+        },
+        {
+          "transition": "Treat Bacterial Infection"
+        }
+      ]
+    },
+    "Remove_Laryngoscope": {
+      "type": "DeviceEnd",
+      "direct_transition": "Chest X Ray to confirm intubation",
+      "referenced_by_attribute": "covid19_laryngoscope"
+    },
+    "Hospitalization Procedures": {
+      "type": "Simple",
+      "direct_transition": "Oxygen"
+    },
+    "Check for Clots": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/diagnose_blood_clot",
+      "direct_transition": "Treat Clots"
+    },
+    "Check for Clots ICU": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/diagnose_blood_clot",
+      "direct_transition": "Treat Clots ICU"
+    },
+    "Treat Clots": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/treat_blood_clot",
+      "direct_transition": "Hospitalization Procedures"
+    },
+    "Treat Clots ICU": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/treat_blood_clot",
+      "direct_transition": "Check for Bacterial Infection"
+    },
+    "Dialysis Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "ckd",
+                    "operator": "is not nil"
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "ckd",
+                    "operator": ">=",
+                    "value": 4
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 40095003,
+                    "display": "Injury of kidney (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "Dialysis Machine"
+        },
+        {
+          "transition": "ICU Medications"
+        }
+      ]
+    },
+    "Hemodialysis": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 302497006,
+          "display": "Hemodialysis (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 2,
+        "high": 4,
+        "unit": "hours"
+      },
+      "direct_transition": "Dialysis Machine Stop"
+    },
+    "Dialysis Machine": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": 36965003,
+        "display": "Hemodialysis machine, device (physical object)"
+      },
+      "direct_transition": "Hemodialysis"
+    },
+    "Dialysis Machine Stop": {
+      "type": "DeviceEnd",
+      "direct_transition": "ICU Medications",
+      "device": "Dialysis Machine"
+    },
+    "Discharge from ICU": {
+      "type": "EncounterEnd",
+      "direct_transition": "Back into Inpatient"
+    },
+    "Back into Inpatient": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 76464004,
+          "display": "Hospital admission, for observation (procedure)"
+        }
+      ],
+      "reason": "covid19",
+      "direct_transition": "Recovery Days"
+    },
+    "Albuterol Administration": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Albuterol Nebulizer on Ventilation",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 65710008,
+                    "display": "Acute respiratory failure (disorder)"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 76571007,
+                    "display": "Septic shock (disorder)"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Metered_Dose_Inhaler_ICU"
+        }
+      ]
+    },
+    "Metered_Dose_Inhaler_ICU": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "2123111",
+          "display": "NDA020503 200 ACTUAT Albuterol 0.09 MG/ACTUAT Metered Dose Inhaler"
+        }
+      ],
+      "administration": true,
+      "reason": "Hypoxemia",
+      "prescription": {
+        "dosage": {
+          "amount": 4,
+          "frequency": 1,
+          "period": 4,
+          "unit": "hours"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "direct_transition": "Treat Bacterial Infection"
+    },
+    "Albuterol Nebulizer on Ventilation": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 245314,
+          "display": "Albuterol 5 MG/ML Inhalation Solution"
+        }
+      ],
+      "administration": true,
+      "reason": "Hypoxemia",
+      "direct_transition": "Treat Bacterial Infection",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 4,
+          "unit": "hours"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      }
+    },
+    "Recovery Oxygen Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "ICU_Oxygen",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Intubation"
+          }
+        },
+        {
+          "transition": "Recovery"
+        }
+      ]
+    },
+    "Move to Prone Position": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 431182000,
+          "display": "Placing subject in prone position (procedure)"
+        }
+      ],
+      "direct_transition": "Hospitalization Medications",
+      "reason": "Hypoxemia"
+    },
+    "Intubation Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Intubation Supplies",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 65710008,
+                    "display": "Acute respiratory failure (disorder)"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 76571007,
+                    "display": "Septic shock (disorder)"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "ICU Day Begin"
+        }
+      ]
+    },
+    "Chest X Ray to confirm intubation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "399208008",
+          "display": "Plain chest X-ray (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 45,
+        "unit": "minutes"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Intubation Supplies",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 65710008,
+                    "display": "Acute respiratory failure (disorder)"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 76571007,
+                    "display": "Septic shock (disorder)"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "ICU Day Begin"
+        }
+      ],
+      "direct_transition": "ICU Day Begin"
+    },
+    "Check for Bacterial Infection": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/diagnose_bacterial_infection",
+      "direct_transition": "ICU Procedures"
+    },
+    "Treat Bacterial Infection": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Vancomycin",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_bacterial_infection",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 76571007,
+                    "display": "Septic shock (disorder)"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Check for Septic Shock"
+        }
+      ]
+    },
+    "Check for Septic Shock": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Vasopressor A",
+          "condition": {
+            "condition_type": "Active Condition",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": 76571007,
+                "display": "Septic shock (disorder)"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Daily_Acetaminophen_for_Fever_ICU"
+        }
+      ]
+    },
+    "Vancomycin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1807513,
+          "display": "vancomycin 1000 MG Injection"
+        }
+      ],
+      "direct_transition": "piperacillin-tazobactam",
+      "reason": "covid19_bacterial_infection",
+      "administration": true
+    },
+    "piperacillin-tazobactam": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1659149,
+          "display": "piperacillin 4000 MG / tazobactam 500 MG Injection"
+        }
+      ],
+      "reason": "covid19_bacterial_infection",
+      "direct_transition": "Check for Septic Shock",
+      "administration": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        },
+        "refills": 4
+      },
+      "remarks": [
+        "Every 6 hours."
+      ]
+    },
+    "End_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    }
+  }
+}
+,
+"covid19/determine_risk":{
+  "name": "determine_risk",
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Determine Risk",
+      "remarks": [
+        "Assess patient comorbidities and set attribute (covid19_risk):",
+        "  - (high) if patient has comorbidity impacting risks",
+        "  - (low) if patient has no comorbidity impacting risks"
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Determine Risk": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "High Risk of Severe Disease",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "diabetes",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "hypertension",
+                    "operator": "==",
+                    "value": true
+                  },
+                  {
+                    "condition_type": "Or",
+                    "conditions": [
+                      {
+                        "condition_type": "Attribute",
+                        "attribute": "copd_variant",
+                        "operator": "is not nil"
+                      },
+                      {
+                        "condition_type": "Or",
+                        "conditions": [
+                          {
+                            "condition_type": "Attribute",
+                            "attribute": "Cystic_Fibrosis",
+                            "operator": "is not nil"
+                          },
+                          {
+                            "condition_type": "Or",
+                            "conditions": [
+                              {
+                                "condition_type": "Attribute",
+                                "attribute": "asthma_condition",
+                                "operator": "is not nil"
+                              },
+                              {
+                                "condition_type": "Or",
+                                "conditions": [
+                                  {
+                                    "condition_type": "Attribute",
+                                    "attribute": "smoker",
+                                    "operator": "==",
+                                    "value": true
+                                  },
+                                  {
+                                    "condition_type": "Or",
+                                    "conditions": [
+                                      {
+                                        "condition_type": "Attribute",
+                                        "attribute": "coronary_heart_disease",
+                                        "operator": "==",
+                                        "value": true
+                                      },
+                                      {
+                                        "condition_type": "Or",
+                                        "conditions": [
+                                          {
+                                            "condition_type": "Attribute",
+                                            "attribute": "chf",
+                                            "operator": "is not nil"
+                                          },
+                                          {
+                                            "condition_type": "Or",
+                                            "conditions": [
+                                              {
+                                                "condition_type": "Attribute",
+                                                "attribute": "homelessness_category",
+                                                "operator": "==",
+                                                "value": "chronic"
+                                              },
+                                              {
+                                                "condition_type": "Or",
+                                                "conditions": [
+                                                  {
+                                                    "condition_type": "Attribute",
+                                                    "attribute": "lung_cancer",
+                                                    "operator": "==",
+                                                    "value": true
+                                                  },
+                                                  {
+                                                    "condition_type": "Or",
+                                                    "conditions": [
+                                                      {
+                                                        "condition_type": "Attribute",
+                                                        "attribute": "colorectal_cancer_stage",
+                                                        "operator": "is not nil"
+                                                      },
+                                                      {
+                                                        "condition_type": "Or",
+                                                        "conditions": [
+                                                          {
+                                                            "condition_type": "Attribute",
+                                                            "attribute": "breast_cancer_condition",
+                                                            "operator": "is not nil"
+                                                          },
+                                                          {
+                                                            "condition_type": "Or",
+                                                            "conditions": [
+                                                              {
+                                                                "condition_type": "Attribute",
+                                                                "attribute": "lupus_careplan",
+                                                                "operator": "is not nil"
+                                                              },
+                                                              {
+                                                                "condition_type": "Or",
+                                                                "conditions": [
+                                                                  {
+                                                                    "condition_type": "Attribute",
+                                                                    "attribute": "ra_careplan",
+                                                                    "operator": "is not nil"
+                                                                  },
+                                                                  {
+                                                                    "condition_type": "Vital Sign",
+                                                                    "vital_sign": "BMI",
+                                                                    "operator": ">=",
+                                                                    "value": 40
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ]
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Low Risk of Severe Disease"
+        }
+      ]
+    },
+    "High Risk of Severe Disease": {
+      "type": "SetAttribute",
+      "attribute": "covid19_risk",
+      "direct_transition": "Determine Severity",
+      "value": "high"
+    },
+    "Low Risk of Severe Disease": {
+      "type": "SetAttribute",
+      "attribute": "covid19_risk",
+      "direct_transition": "Determine Severity",
+      "value": "low"
+    },
+    "Determine Severity": {
+      "type": "Simple",
+      "lookup_table_transition": {
+        "transitions": [
+          {
+            "transition": "Negative Severity",
+            "lookup_table_name": "covid-19-severity-outcomes.csv",
+            "default_probability": 0.85
+          },
+          {
+            "transition": "General Severity",
+            "lookup_table_name": "covid-19-severity-outcomes.csv",
+            "default_probability": 0.05
+          },
+          {
+            "transition": "Severe Severity",
+            "lookup_table_name": "covid-19-severity-outcomes.csv",
+            "default_probability": 0.05
+          },
+          {
+            "transition": "Critical Severity",
+            "default_probability": 0.05,
+            "lookup_table_name": "covid-19-severity-outcomes.csv"
+          }
+        ],
+        "viewTable": false,
+        "lookup_table_name_ModuleBuilder": "covid-19-severity-outcomes.csv",
+        "lookuptable": "age,covid19_risk,Negative Severity,General Severity,Severe Severity,Critical Severity\n50-110,high,0,0.58,0.21,0.21\n20-49,high,0,0.76,0.12,0.12\n0-19,high,0,0.9,0.05,0.05\n50-110,low,0.05,0.74,0.21,0\n20-49,low,0.05,0.83,0.12,0\n0-19,low,0.05,0.9,0.05,0"
+      }
+    },
+    "Negative Severity": {
+      "type": "SetAttribute",
+      "attribute": "covid19_severity",
+      "direct_transition": "Survival: Survivor",
+      "value": "negative"
+    },
+    "Severe Severity": {
+      "type": "SetAttribute",
+      "attribute": "covid19_severity",
+      "direct_transition": "Determine Survival",
+      "value": "severe"
+    },
+    "Determine Survival": {
+      "type": "Simple",
+      "lookup_table_transition": {
+        "transitions": [
+          {
+            "transition": "Survival: Survivor",
+            "lookup_table_name": "covid-19-survival-outcomes.csv",
+            "default_probability": 0.8
+          },
+          {
+            "transition": "Survival: Non-Survivor",
+            "lookup_table_name": "covid-19-survival-outcomes.csv",
+            "default_probability": 0.2
+          }
+        ],
+        "viewTable": false,
+        "lookup_table_name_ModuleBuilder": "covid-19-survival-outcomes.csv",
+        "lookuptable": "age,gender,covid19_severity,Survival: Survivor,Survival: Non-Survivor\n0-9,M,critical,0.95,0.05\n10-19,M,critical,0.95,0.05\n20-29,M,critical,0.858,0.142\n30-39,M,critical,0.908,0.092\n40-49,M,critical,0.836,0.164\n50-59,M,critical,0.756,0.244\n60-69,M,critical,0.626,0.374\n70-79,M,critical,0.284,0.716\n80-89,M,critical,0,1\n90-110,M,critical,0,1\n0-9,M,severe,1,0\n10-19,M,severe,1,0\n20-29,M,severe,0.929,0.071\n30-39,M,severe,0.954,0.046\n40-49,M,severe,0.918,0.082\n50-59,M,severe,0.878,0.122\n60-69,M,severe,0.813,0.187\n70-79,M,severe,0.642,0.358\n80-89,M,severe,0.394,0.606\n90-110,M,severe,0.364,0.636\n0-110,M,general,1,0\n0-110,M,negative,1,0\n0-9,F,critical,0.98,0.02\n10-19,F,critical,0.98,0.02\n20-29,F,critical,0.964,0.036\n30-39,F,critical,0.95,0.05\n40-49,F,critical,0.95,0.05\n50-59,F,critical,0.862,0.138\n60-69,F,critical,0.76,0.24\n70-79,F,critical,0.452,0.548\n80-89,F,critical,0.038,0.962\n90-110,F,critical,0.072,0.928\n0-9,F,severe,1,0\n10-19,F,severe,1,0\n20-29,F,severe,0.982,0.018\n30-39,F,severe,0.975,0.025\n40-49,F,severe,0.975,0.025\n50-59,F,severe,0.931,0.069\n60-69,F,severe,0.88,0.12\n70-79,F,severe,0.726,0.274\n80-89,F,severe,0.519,0.481\n90-110,F,severe,0.536,0.464\n0-110,F,general,1,0\n0-110,F,negative,1,0"
+      }
+    },
+    "Survival: Survivor": {
+      "type": "SetAttribute",
+      "attribute": "covid19_death",
+      "direct_transition": "Terminal",
+      "value": false
+    },
+    "Survival: Non-Survivor": {
+      "type": "SetAttribute",
+      "attribute": "covid19_death",
+      "direct_transition": "Terminal",
+      "value": true
+    },
+    "General Severity": {
+      "type": "SetAttribute",
+      "attribute": "covid19_severity",
+      "direct_transition": "Determine Survival",
+      "value": "general"
+    },
+    "Critical Severity": {
+      "type": "SetAttribute",
+      "attribute": "covid19_severity",
+      "direct_transition": "Determine Survival",
+      "value": "critical"
+    }
+  },
+  "remarks": [
+    "This submodule determines covid19 risk, severity, and death."
+  ]
+}
+,
+"covid19/diagnose_bacterial_infection":{
+  "name": "diagnose_bacterial_infection",
+  "remarks": [
+    "Zhou shows that only 15% (survivors + non-survivors) of patients had a secondary bacterial infection (positive culture). Given a daily probability of 2.5%, this should result around 13% for survivors and 18% for non-survivors, based on length of stay."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "Check for Bacterial Infection",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_bacterial_infection",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Check for Bacterial Infection": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "distribution": 0.025,
+          "transition": "Take Culture"
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9750000000000001
+        }
+      ]
+    },
+    "Bacterial Infection": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "covid19_bacterial_infection",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 87628006,
+          "display": "Bacterial infectious disease (disorder)"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Take Culture": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 61594008,
+          "display": "Microbial culture (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 5,
+        "high": 10,
+        "unit": "minutes"
+      },
+      "direct_transition": "Bacterial Infection"
+    }
+  }
+}
+,
+"covid19/diagnose_blood_clot":{
+  "name": "diagnose_blood_clot",
+  "remarks": [
+    "At some point, both patients on the floor and ICU should develop a clot (i.e. the following diagnoses)",
+    "•\tAcute pulmonary embolism (PE) ",
+    "•\tAcute deep venous thrombosis (VT)",
+    "**Coagulopathy is not sufficient, see discussion below. ",
+    "",
+    "Suggestion would be to have individuals with higher d-dimers develop clots since d-dimer increases are associated with clot formation. Normal d-dimer range is 0.0 - 0.49.",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "Initialize",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_diagnosed_clot",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_diagnosed_clot",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Check D-Dimer"
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Initialize": {
+      "type": "Simple",
+      "direct_transition": "No Diagnosed Clots"
+    },
+    "Check D-Dimer": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Diagnose Clot",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_ddimer",
+            "operator": ">=",
+            "value": 0.5
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Diagnose Clot": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Diagnose Acute Pulmonary Embolism",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Diagnose Acute Deep Venous Thrombosis",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.8
+        }
+      ]
+    },
+    "Diagnose Acute Pulmonary Embolism": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "covid19_clot",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 706870000,
+          "display": "Acute pulmonary embolism (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosed Clots"
+    },
+    "Diagnose Acute Deep Venous Thrombosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "covid19_clot",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 132281000119108,
+          "display": "Acute deep venous thrombosis (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosed Clots"
+    },
+    "Diagnosed Clots": {
+      "type": "SetAttribute",
+      "attribute": "covid19_diagnosed_clot",
+      "direct_transition": "Terminal",
+      "value": true
+    },
+    "No Diagnosed Clots": {
+      "type": "SetAttribute",
+      "attribute": "covid19_diagnosed_clot",
+      "value": false,
+      "direct_transition": "Check D-Dimer"
+    }
+  }
+}
+,
+"covid19/end_outcomes":{
+  "name": "end_outcomes",
+  "remarks": [
+    "This module ends patient outcomes from covid19 according to Table 2 from https://doi.org/10.1016/S0140-6736(20)30566-3"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "End ARDS"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "End Pneumonia": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "233604007",
+          "display": "Pneumonia (disorder)"
+        }
+      ],
+      "direct_transition": "End Mild Respiratory Distress"
+    },
+    "End ARDS": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "67782005",
+          "display": "Acute respiratory distress syndrome (disorder)"
+        }
+      ],
+      "direct_transition": "End Acute Cardiac Injury"
+    },
+    "End Sepsis": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "770349000",
+          "display": "Sepsis caused by virus (disorder)"
+        }
+      ],
+      "direct_transition": "End Septic Shock"
+    },
+    "End Septic Shock": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "76571007",
+          "display": "Septic shock (disorder)"
+        }
+      ],
+      "direct_transition": "End Covid19"
+    },
+    "End Heart Failure": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "84114007",
+          "display": "Heart failure (disorder)"
+        }
+      ],
+      "direct_transition": "End Pneumonia"
+    },
+    "End Acute Cardiac Injury": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "86175003",
+          "display": "Injury of heart (disorder)"
+        }
+      ],
+      "direct_transition": "End Acute Kidney Injury"
+    },
+    "End Acute Kidney Injury": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "40095003",
+          "display": "Injury of kidney (disorder)"
+        }
+      ],
+      "direct_transition": "End Coagulopathy"
+    },
+    "End Coagulopathy": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "234466008",
+          "display": "Acquired coagulation disorder (disorder)"
+        }
+      ],
+      "direct_transition": "End Pulmonary Embolism"
+    },
+    "End Mild Respiratory Distress": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "271825005",
+          "display": "Respiratory distress (finding)"
+        }
+      ],
+      "direct_transition": "End Respiratory Failure"
+    },
+    "End Respiratory Failure": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "65710008",
+          "display": "Acute respiratory failure (disorder)"
+        }
+      ],
+      "remarks": [
+        "67 of 173 (38.7% round up to 40%) severe patients required mechanical ventilation."
+      ],
+      "direct_transition": "End Sepsis"
+    },
+    "End Covid19": {
+      "type": "ConditionEnd",
+      "direct_transition": "Terminal",
+      "referenced_by_attribute": "covid19"
+    },
+    "End Pulmonary Embolism": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 706870000,
+          "display": "Acute pulmonary embolism (disorder)"
+        }
+      ],
+      "direct_transition": "End Venous Thrombosis"
+    },
+    "End Venous Thrombosis": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 132281000119108,
+          "display": "Acute deep venous thrombosis (disorder)"
+        }
+      ],
+      "direct_transition": "End Heart Failure"
+    }
+  }
+}
+,
+"covid19/end_symptoms":{
+  "name": "end_symptoms",
+  "remarks": [
+    "This submodule ends symptoms of COVID19 according to the rates documented in Table 1 of https://www.nejm.org/doi/full/10.1056/NEJMoa2002032",
+    "",
+    "Loss of taste from Table 2 of ",
+    "https://jamanetwork.com/journals/jama/fullarticle/2765183"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Chills End"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Conjunctival Congestion End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 246677007,
+          "display": "Passive conjunctival congestion (finding)"
+        }
+      ],
+      "direct_transition": "Cough End"
+    },
+    "Nasal Congestion End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 68235000,
+          "display": "Nasal congestion (finding)"
+        }
+      ],
+      "direct_transition": "Nausea End"
+    },
+    "Headache End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 25064002,
+          "display": "Headache (finding)"
+        }
+      ],
+      "direct_transition": "Hemoptysis End"
+    },
+    "Cough End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 49727002,
+          "display": "Cough (finding)"
+        }
+      ],
+      "direct_transition": "Diarrhea End"
+    },
+    "Sore Throat End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 267102003,
+          "display": "Sore throat symptom (finding)"
+        }
+      ],
+      "direct_transition": "Sputum Production End"
+    },
+    "Sputum Production End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 248595008,
+          "display": "Sputum finding (finding)"
+        }
+      ],
+      "direct_transition": "Vomiting End"
+    },
+    "Fatigue End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 84229001,
+          "display": "Fatigue (finding)"
+        }
+      ],
+      "direct_transition": "Fever End"
+    },
+    "Hemoptysis End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 66857006,
+          "display": "Hemoptysis (finding)"
+        }
+      ],
+      "direct_transition": "Joint Pain End"
+    },
+    "Shortness of Breath End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 267036007,
+          "display": "Dyspnea (finding)"
+        }
+      ],
+      "direct_transition": "Wheezing End"
+    },
+    "Nausea End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 422587007,
+          "display": "Nausea (finding)"
+        }
+      ],
+      "direct_transition": "Shortness of Breath End"
+    },
+    "Vomiting End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 249497008,
+          "display": "Vomiting symptom (finding)"
+        }
+      ],
+      "direct_transition": "Loss of Taste End"
+    },
+    "Diarrhea End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 267060006,
+          "display": "Diarrhea symptom (finding)"
+        }
+      ],
+      "direct_transition": "Fatigue End"
+    },
+    "Muscle Pain End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 68962001,
+          "display": "Muscle pain (finding)"
+        }
+      ],
+      "direct_transition": "Nasal Congestion End"
+    },
+    "Joint Pain End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 57676002,
+          "display": "Joint pain (finding)"
+        }
+      ],
+      "direct_transition": "Muscle Pain End"
+    },
+    "Chills End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 43724002,
+          "display": "Chill (finding)"
+        }
+      ],
+      "direct_transition": "Conjunctival Congestion End"
+    },
+    "Fever End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 386661006,
+          "display": "Fever (finding)"
+        }
+      ],
+      "direct_transition": "Headache End"
+    },
+    "Loss of Taste End": {
+      "type": "ConditionEnd",
+      "direct_transition": "Terminal",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 36955009,
+          "display": "Loss of taste (finding)"
+        }
+      ]
+    },
+    "Wheezing End": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 56018004,
+          "display": "Wheezing (finding)"
+        }
+      ],
+      "direct_transition": "Sore Throat End"
+    }
+  }
+}
+,
+"covid19/infection":{
+  "name": "infection",
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Determine Risk"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Encounter for Test": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom (procedure)"
+        }
+      ],
+      "direct_transition": "Catalog Symptoms"
+    },
+    "End Exposure": {
+      "type": "ConditionEnd",
+      "condition_onset": "Suspected COVID",
+      "conditional_transition": [
+        {
+          "transition": "Administer COVID-19 Test Negative",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_severity",
+            "operator": "==",
+            "value": "negative"
+          }
+        },
+        {
+          "transition": "Administer COVID-19 Test Positive"
+        }
+      ]
+    },
+    "Diagnosed COVID": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "covid19",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 840539006,
+          "display": "COVID-19"
+        }
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "End Encounter and Admit Immediately",
+              "distribution": 0.97
+            },
+            {
+              "transition": "Self Isolation At Home",
+              "distribution": 0.03
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "Self Isolation At Home"
+        }
+      ]
+    },
+    "Suspected COVID": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 840544004,
+          "display": "Suspected COVID-19"
+        }
+      ],
+      "direct_transition": "Apply Face Mask to Patient"
+    },
+    "Admission": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/admission",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Take Normal Temperature"
+        }
+      ]
+    },
+    "Death": {
+      "type": "Death",
+      "direct_transition": "Terminal",
+      "referenced_by_attribute": "covid19"
+    },
+    "Wait for Admission": {
+      "type": "Delay",
+      "direct_transition": "Admission",
+      "range": {
+        "low": 5,
+        "high": 8,
+        "unit": "days"
+      }
+    },
+    "Discharge": {
+      "type": "EncounterEnd",
+      "direct_transition": "End Self Isolation At Home"
+    },
+    "Apply Face Mask to Patient": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 261352009,
+          "display": "Face mask (physical object)"
+        }
+      ],
+      "duration": {
+        "low": 10,
+        "high": 15,
+        "unit": "minutes"
+      },
+      "remarks": [
+        "This should really be a \"Device\" or \"Supply\" state."
+      ],
+      "reason": "Suspected COVID",
+      "conditional_transition": [
+        {
+          "transition": "Child or Immunocompromised",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_risk",
+                "operator": "==",
+                "value": "high"
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<=",
+                "quantity": 18,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Co-Infection Rate"
+        }
+      ]
+    },
+    "Isolation in Negative Pressure": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736376001,
+          "display": "Infectious disease care plan (record artifact)"
+        }
+      ],
+      "direct_transition": "Wait for Test",
+      "reason": "Suspected COVID",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 444908001,
+          "display": "Isolation nursing in negative pressure isolation environment (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 409524006,
+          "display": "Airborne precautions (procedure)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 409526008,
+          "display": "Personal protective equipment (physical object)"
+        }
+      ],
+      "assign_to_attribute": "covid19_careplan"
+    },
+    "Self Isolation At Home": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736376001,
+          "display": "Infectious disease care plan (record artifact)"
+        }
+      ],
+      "reason": "Diagnosed COVID",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 409524006,
+          "display": "Airborne precautions (procedure)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 361235007,
+          "display": "Isolation of infected patient (procedure)"
+        }
+      ],
+      "goals": [
+        {
+          "addresses": [
+            "covid19"
+          ],
+          "text": "Self isolation and social distancing for 14 days."
+        }
+      ],
+      "assign_to_attribute": "covid19_careplan",
+      "direct_transition": "End Encounter and Discharge Home"
+    },
+    "End Self Isolation At Home": {
+      "type": "CarePlanEnd",
+      "direct_transition": "Terminal",
+      "referenced_by_attribute": "covid19_careplan"
+    },
+    "Self Isolation Delay": {
+      "type": "Delay",
+      "direct_transition": "End Symptoms",
+      "range": {
+        "low": 14,
+        "high": 37,
+        "unit": "days"
+      },
+      "remarks": [
+        "Median duration of viral shedding was 20 days, and longest observed duration of viral shedding was 37 days.",
+        "https://doi.org/10.1016/S0140-6736(20)30566-3"
+      ]
+    },
+    "Wait for Death": {
+      "type": "Delay",
+      "direct_transition": "Death",
+      "range": {
+        "low": 5,
+        "high": 8,
+        "unit": "days"
+      }
+    },
+    "End Encounter and Admit Immediately": {
+      "type": "EncounterEnd",
+      "direct_transition": "Admission"
+    },
+    "End Encounter and Discharge Home": {
+      "type": "EncounterEnd",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "Wait for Admission",
+              "distribution": 0.95
+            },
+            {
+              "transition": "Wait for Death",
+              "distribution": 0.05
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "Wait for Admission"
+        },
+        {
+          "distributions": [],
+          "transition": "Self Isolation Delay"
+        }
+      ],
+      "remarks": [
+        "Transition probabilities need adjustment."
+      ]
+    },
+    "Retest Negative": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "94531-1",
+          "display": "SARS-CoV-2 RNA Pnl Resp NAA+probe"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "94531-1",
+              "display": "SARS-CoV-2 RNA Pnl Resp NAA+probe"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260415000,
+            "display": "Not detected (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "Wait for retest"
+    },
+    "Second Negative Test": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "94531-1",
+          "display": "SARS-CoV-2 RNA Pnl Resp NAA+probe"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "94531-1",
+              "display": "SARS-CoV-2 RNA Pnl Resp NAA+probe"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260415000,
+            "display": "Not detected (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "Discharge"
+    },
+    "Wait for retest": {
+      "type": "Delay",
+      "direct_transition": "Second Normal Temperature",
+      "range": {
+        "low": 18,
+        "high": 30,
+        "unit": "hours"
+      }
+    },
+    "Take Normal Temperature": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "Cel",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "8310-5",
+          "display": "Body temperature"
+        },
+        {
+          "system": "LOINC",
+          "code": "8331-1",
+          "display": "Oral temperature"
+        }
+      ],
+      "direct_transition": "Retest Negative",
+      "range": {
+        "low": 36.1,
+        "high": 37.2
+      }
+    },
+    "Second Normal Temperature": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "Cel",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "8310-5",
+          "display": "Body temperature"
+        },
+        {
+          "system": "LOINC",
+          "code": "8331-1",
+          "display": "Oral temperature"
+        }
+      ],
+      "range": {
+        "low": 36.1,
+        "high": 37.2
+      },
+      "direct_transition": "Second Negative Test"
+    },
+    "Determine Risk": {
+      "submodule": "covid19/determine_risk",
+      "type": "CallSubmodule",
+      "direct_transition": "Encounter for Test",
+      "remarks": [
+        "Assess patient comorbidities and set attribute (covid19_risk):",
+        "  - (high) if patient has comorbidity impacting risks",
+        "  - (low) if patient has no comorbidity impacting risks"
+      ]
+    },
+    "Severity Assessment": {
+      "type": "Simple",
+      "remarks": [
+        "Does patient need negative pressure room?",
+        "Stable patients go into regular room with mask, contact and droplet precautions.",
+        "Risky patients with tracheostomy or will require procedures with aerosolation (high flow nasal canula, immediate intubation, or non-invasive positive pressure ventilation, or immediate nebulizer).",
+        "Risky patients: if no negative pressure rooms available, then staff need to wear PPE (N95 or PAPR)"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Isolation in Negative Pressure",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Isolation"
+        }
+      ]
+    },
+    "Isolation": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736376001,
+          "display": "Infectious disease care plan (record artifact)"
+        }
+      ],
+      "reason": "Suspected COVID",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 409524006,
+          "display": "Airborne precautions (procedure)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 409526008,
+          "display": "Personal protective equipment (physical object)"
+        }
+      ],
+      "assign_to_attribute": "covid19_careplan",
+      "direct_transition": "Wait for Test"
+    },
+    "Wait for Test": {
+      "type": "Delay",
+      "range": {
+        "low": 30,
+        "high": 90,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Plan"
+    },
+    "Administer COVID-19 Test Negative": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "94531-1",
+          "display": "SARS-CoV-2 RNA Pnl Resp NAA+probe"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "94531-1",
+              "display": "SARS-CoV-2 RNA Pnl Resp NAA+probe"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260415000,
+            "display": "Not detected (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "End Encounter Testing Negative"
+    },
+    "Administer COVID-19 Test Positive": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "94531-1",
+          "display": "SARS-CoV-2 RNA Pnl Resp NAA+probe"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "94531-1",
+              "display": "SARS-CoV-2 RNA Pnl Resp NAA+probe"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260373001,
+            "display": "Detected (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "Diagnosed COVID"
+    },
+    "End Plan": {
+      "type": "CarePlanEnd",
+      "direct_transition": "End Exposure",
+      "referenced_by_attribute": "covid19_careplan"
+    },
+    "End Encounter Testing Negative": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "Influenza B Detected": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "80381-7",
+          "display": "Influenza virus A and B Ag panel - Nasopharynx by Rapid immunoassay"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "80382-5",
+              "display": "Influenza virus A Ag [Presence] in Nasopharynx by Rapid immunoassay"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260415000,
+            "display": "Not detected (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "80383-3",
+              "display": "Influenza virus B Ag [Presence] in Nasopharynx by Rapid immunoassay"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260373001,
+            "display": "Detected (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "Severity Assessment"
+    },
+    "Influenza A Detected": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "80381-7",
+          "display": "Influenza virus A and B Ag panel - Nasopharynx by Rapid immunoassay"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "80382-5",
+              "display": "Influenza virus A Ag [Presence] in Nasopharynx by Rapid immunoassay"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260373001,
+            "display": "Detected (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "80383-3",
+              "display": "Influenza virus B Ag [Presence] in Nasopharynx by Rapid immunoassay"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260415000,
+            "display": "Not detected (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "Severity Assessment"
+    },
+    "Influenza Not Detected": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "80381-7",
+          "display": "Influenza virus A and B Ag panel - Nasopharynx by Rapid immunoassay"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "80382-5",
+              "display": "Influenza virus A Ag [Presence] in Nasopharynx by Rapid immunoassay"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260415000,
+            "display": "Not detected (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "80383-3",
+              "display": "Influenza virus B Ag [Presence] in Nasopharynx by Rapid immunoassay"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260415000,
+            "display": "Not detected (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "Severity Assessment"
+    },
+    "Child or Immunocompromised": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Respiratory Virus Panel Not Detected",
+          "distribution": 0.92
+        },
+        {
+          "transition": "Respiratory Virus Panel Influenza A Detected",
+          "distribution": 0.04
+        },
+        {
+          "transition": "Respiratory Virus Panel Influenza B Detected",
+          "distribution": 0.04
+        }
+      ]
+    },
+    "Co-Infection Rate": {
+      "type": "Simple",
+      "remarks": [
+        "Approximately 8% co-infection rate with influenza."
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Influenza Not Detected",
+          "distribution": 0.92
+        },
+        {
+          "transition": "Influenza A Detected",
+          "distribution": 0.04
+        },
+        {
+          "transition": "Influenza B Detected",
+          "distribution": 0.04
+        }
+      ]
+    },
+    "Respiratory Virus Panel Not Detected": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "92143-7",
+          "display": "Respiratory pathogens DNA and RNA panel - Respiratory specimen by NAA with probe detection"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92142-9",
+              "display": "Influenza virus A RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92141-1",
+              "display": "Influenza virus B RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92131-2",
+              "display": "Respiratory syncytial virus RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92140-3",
+              "display": "Parainfluenza virus 1 RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92139-5",
+              "display": "Parainfluenza virus 2 RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92138-7",
+              "display": "Parainfluenza virus 3 RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92130-4",
+              "display": "Rhinovirus RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92134-6",
+              "display": "Human metapneumovirus RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "94040-3",
+              "display": "Adenovirus A+B+C+D+E DNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "Severity Assessment"
+    },
+    "Respiratory Virus Panel Influenza A Detected": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "92143-7",
+          "display": "Respiratory pathogens DNA and RNA panel - Respiratory specimen by NAA with probe detection"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92142-9",
+              "display": "Influenza virus A RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 10828004,
+            "display": "Positive (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92141-1",
+              "display": "Influenza virus B RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92131-2",
+              "display": "Respiratory syncytial virus RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92140-3",
+              "display": "Parainfluenza virus 1 RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92139-5",
+              "display": "Parainfluenza virus 2 RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92138-7",
+              "display": "Parainfluenza virus 3 RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92130-4",
+              "display": "Rhinovirus RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92134-6",
+              "display": "Human metapneumovirus RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "94040-3",
+              "display": "Adenovirus A+B+C+D+E DNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "Severity Assessment"
+    },
+    "Respiratory Virus Panel Influenza B Detected": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "92143-7",
+          "display": "Respiratory pathogens DNA and RNA panel - Respiratory specimen by NAA with probe detection"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92142-9",
+              "display": "Influenza virus A RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92141-1",
+              "display": "Influenza virus B RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 10828004,
+            "display": "Positive (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92131-2",
+              "display": "Respiratory syncytial virus RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92140-3",
+              "display": "Parainfluenza virus 1 RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92139-5",
+              "display": "Parainfluenza virus 2 RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92138-7",
+              "display": "Parainfluenza virus 3 RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92130-4",
+              "display": "Rhinovirus RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "92134-6",
+              "display": "Human metapneumovirus RNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "94040-3",
+              "display": "Adenovirus A+B+C+D+E DNA [Presence] in Respiratory specimen by NAA with probe detection"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 260385009,
+            "display": "Negative (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "Severity Assessment"
+    },
+    "Catalog Symptoms": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/symptoms",
+      "direct_transition": "Poor Oxygen Saturation"
+    },
+    "End Symptoms": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/end_symptoms",
+      "direct_transition": "End Outcomes"
+    },
+    "End Outcomes": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/end_outcomes",
+      "direct_transition": "End Self Isolation At Home"
+    },
+    "Poor Oxygen Saturation": {
+      "type": "VitalSign",
+      "vital_sign": "Oxygen Saturation",
+      "unit": "%",
+      "range": {
+        "low": 75,
+        "high": 89
+      },
+      "direct_transition": "Record Vitals"
+    },
+    "Record Vitals": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/measurements_vitals",
+      "direct_transition": "Suspected COVID"
+    }
+  }
+}
+,
+"covid19/measurements_daily":{
+  "name": "measurements_daily",
+  "remarks": [
+    "Daily observations and labs during hospitalization and ICU."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Record Vitals"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "CBC": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 3,
+            "high": 4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*6/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 3.77,
+            "high": 5.8
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 11.1,
+            "high": 14.1
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "4544-3",
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 37.5,
+            "high": 46.6
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 79,
+            "high": 97
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 26.6,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 31.5,
+            "high": 35.7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "788-0",
+              "display": "Erythrocyte distribution width [Ratio] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 12.3,
+            "high": 15.4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 99,
+            "high": 150
+          }
+        }
+      ],
+      "remarks": [
+        "In the most severe patients, white-cell counts should be less than 4000 per mm3",
+        "In the most severe patients, platelet counts should also trend towards being less than 150K per mm3",
+        "In the most severe patients, median hemoglobin should be around 12.8 g/dL"
+      ],
+      "direct_transition": "CBC_Differential"
+    },
+    "CBC_Differential": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "57023-4",
+          "display": "Auto Differential panel - Blood"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "770-8",
+              "display": "Neutrophils/100 leukocytes in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 10,
+            "high": 45
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "736-9",
+              "display": "Lymphocytes/100 leukocytes in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 25
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5905-5",
+              "display": "Monocytes/100 leukocytes in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 15
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "713-8",
+              "display": "Eosinophils/100 leukocytes in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 3,
+            "high": 6
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "706-2",
+              "display": "Basophils/100 leukocytes in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "751-8",
+              "display": "Neutrophils [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 1.4,
+            "high": 4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "731-0",
+              "display": "Lymphocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "attribute": "covid19_lymphocytes"
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "742-7",
+              "display": "Monocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 0.5,
+            "high": 1.4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "711-2",
+              "display": "Eosinophils [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 0.2,
+            "high": 0.6
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "704-7",
+              "display": "Basophils [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 0.2,
+            "high": 0.4
+          }
+        }
+      ],
+      "remarks": [
+        "Viral infection should show DECREASES in neutro and lymph, and INCREASES in mono, eosino, and baso."
+      ],
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "ckd",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 40095003,
+                    "display": "Injury of kidney (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "Comprehensive Metabolic Panel with Kidney Damage"
+        },
+        {
+          "transition": "Comprehensive Metabolic Panel with Normal Kidney"
+        }
+      ]
+    },
+    "Ventilation Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Arterial Blood Gas",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 65710008,
+                    "display": "Acute respiratory failure (disorder)"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 76571007,
+                    "display": "Septic shock (disorder)"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Arterial Blood Gas": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24336-0",
+          "display": "Gas panel - Arterial blood"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "[pH]",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2744-1",
+              "display": "pH of Arterial blood"
+            }
+          ],
+          "range": {
+            "low": 6.8,
+            "high": 7.3
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mm[Hg]",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2019-8",
+              "display": "Carbon dioxide [Partial pressure] in Arterial blood"
+            }
+          ],
+          "range": {
+            "low": 35,
+            "high": 45
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mm[Hg]",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2703-7",
+              "display": "Oxygen [Partial pressure] in Arterial blood"
+            }
+          ],
+          "attribute": "covid19_pao2"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mmol/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1960-4",
+              "display": "Bicarbonate [Moles/volume] in Arterial blood"
+            }
+          ],
+          "range": {
+            "low": 22,
+            "high": 27
+          }
+        },
+        {
+          "category": "vital-signs",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2708-6",
+              "display": "Oxygen saturation in Arterial blood"
+            },
+            {
+              "system": "LOINC",
+              "code": "59408-5",
+              "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+            }
+          ],
+          "vital_sign": "Oxygen Saturation"
+        }
+      ],
+      "direct_transition": "Record FiO2"
+    },
+    "Comprehensive Metabolic Panel with Normal Kidney": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "3094-0",
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL",
+          "vital_sign": "Creatinine"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "17861-6",
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2951-2",
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2823-3",
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2075-0",
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2028-9",
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "vital_sign": "EGFR"
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 5.5,
+            "high": 8
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.3,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 117
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 44
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Ventilation Check"
+    },
+    "Comprehensive Metabolic Panel with Kidney Damage": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "3094-0",
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "17861-6",
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2951-2",
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2823-3",
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2075-0",
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2028-9",
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 14
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 5.5,
+            "high": 8
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 15
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 117
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 44
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Ventilation Check"
+    },
+    "Record FiO2": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "%",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "19994-3",
+          "display": "Oxygen/Inspired gas setting [Volume Fraction] Ventilator"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "range": {
+        "low": 30,
+        "high": 100
+      }
+    },
+    "Record Vitals": {
+      "type": "CallSubmodule",
+      "submodule": "covid19/measurements_vitals",
+      "direct_transition": "CBC"
+    }
+  }
+}
+,
+"covid19/measurements_frequent":{
+  "name": "measurements_frequent",
+  "remarks": [
+    "Frequent observations and labs during hospitalization and ICU."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "D_Dimer"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "D_Dimer": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ug/mL",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "48065-7",
+          "display": "Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma"
+        }
+      ],
+      "attribute": "covid19_ddimer",
+      "conditional_transition": [
+        {
+          "transition": "Interleukin_6_Rarely_Used_Clinical_Trial_Patients_Only",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "toclizumab"
+          }
+        },
+        {
+          "transition": "Serum_Ferritin"
+        }
+      ]
+    },
+    "Interleukin_6_Rarely_Used_Clinical_Trial_Patients_Only": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "82335-1",
+          "display": "Cytokines panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "pg/mL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "26881-3",
+              "display": "Interleukin 6 [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "attribute": "covid19_interleukin6"
+        }
+      ],
+      "remarks": [
+        "Small percentage of patients will have this. 3%"
+      ],
+      "direct_transition": "Serum_Ferritin"
+    },
+    "Serum_Ferritin": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75689-0",
+          "display": "Iron panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "ug/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2276-4",
+              "display": "Ferritin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "attribute": "covid19_ferritin"
+        }
+      ],
+      "direct_transition": "High_Sensitivity_Cardiac_Troponin_I"
+    },
+    "High_Sensitivity_Cardiac_Troponin_I": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "89577-1",
+          "display": "Troponin I.cardiac panel - Serum or Plasma by High sensitivity method"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "pg/mL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "89579-7",
+              "display": "Troponin I.cardiac [Mass/volume] in Serum or Plasma by High sensitivity method"
+            }
+          ],
+          "attribute": "covid19_cardiac_troponin"
+        }
+      ],
+      "direct_transition": "Lactate_Dehydrogenase"
+    },
+    "Lactate_Dehydrogenase": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "U/L",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "14804-9",
+          "display": "Lactate dehydrogenase [Enzymatic activity/volume] in Serum or Plasma by Lactate to pyruvate reaction"
+        },
+        {
+          "system": "LOINC",
+          "code": "2532-0",
+          "display": "Lactate dehydrogenase [Enzymatic activity/volume] in Serum or Plasma"
+        }
+      ],
+      "attribute": "covid19_lactate_dehydrogenase",
+      "remarks": [
+        "TODO: Should be part of the Panel 42929-0 Lactate dehydrogenase panel - Serum or Plasma, but there are too many other required values that we do not know the ranges for."
+      ],
+      "direct_transition": "Creatine Kinase"
+    },
+    "C-Reactive Protein": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "mg/L",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "1988-5",
+          "display": "C reactive protein [Mass/volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "Prothrombin_Time",
+      "attribute": "covid19_c_reactive_protein"
+    },
+    "Creatine Kinase": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "U/L",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "2157-6",
+          "display": "Creatine kinase [Enzymatic activity/volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "C-Reactive Protein",
+      "attribute": "covid19_creatine_kinase"
+    },
+    "Prothrombin_Time": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "34528-0",
+          "display": "PT panel - Platelet poor plasma by Coagulation assay"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "s",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5902-2",
+              "display": "Prothrombin time (PT)"
+            }
+          ],
+          "attribute": "covid19_pt"
+        },
+        {
+          "category": "laboratory",
+          "unit": "{INR}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6301-6",
+              "display": "INR in Platelet poor plasma by Coagulation assay"
+            }
+          ],
+          "attribute": "covid19_inr"
+        }
+      ],
+      "direct_transition": "Procalcitonin"
+    },
+    "Procalcitonin": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "ng/mL",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "33959-8",
+          "display": "Procalcitonin [Mass/volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "attribute": "covid19_procalcitonin"
+    }
+  }
+}
+,
+"covid19/measurements_vitals":{
+  "name": "measurements_vitals",
+  "remarks": [
+    "Vitals taken in the covid19 module."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Temperature"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Temperature": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "Cel",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "8310-5",
+          "display": "Body temperature"
+        },
+        {
+          "system": "LOINC",
+          "code": "8331-1",
+          "display": "Oral temperature"
+        }
+      ],
+      "range": {
+        "low": 37.7,
+        "high": 42.2
+      },
+      "direct_transition": "Respiratory Rate"
+    },
+    "Oxygen Saturation": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "%",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "2708-6",
+          "display": "Oxygen saturation in Arterial blood"
+        },
+        {
+          "system": "LOINC",
+          "code": "59408-5",
+          "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+        }
+      ],
+      "vital_sign": "Oxygen Saturation",
+      "direct_transition": "Blood Pressure"
+    },
+    "Blood Pressure": {
+      "type": "MultiObservation",
+      "category": "vital-signs",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85354-9",
+          "display": "Blood Pressure"
+        }
+      ],
+      "observations": [
+        {
+          "category": "vital-signs",
+          "vital_sign": "Systolic Blood Pressure",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8480-6",
+              "display": "Systolic Blood Pressure"
+            }
+          ],
+          "unit": "mm[Hg]"
+        },
+        {
+          "category": "vital-signs",
+          "vital_sign": "Diastolic Blood Pressure",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8462-4",
+              "display": "Diastolic Blood Pressure"
+            }
+          ],
+          "unit": "mm[Hg]"
+        }
+      ],
+      "direct_transition": "Body Weight"
+    },
+    "Body Weight": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "vital_sign": "Weight",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "29463-7",
+          "display": "Body Weight"
+        }
+      ],
+      "unit": "kg",
+      "direct_transition": "Terminal"
+    },
+    "Respiratory Rate": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "/min",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "9279-1",
+          "display": "Respiratory rate"
+        }
+      ],
+      "direct_transition": "Heart Rate",
+      "range": {
+        "low": 12,
+        "high": 40
+      }
+    },
+    "Heart Rate": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "/min",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "8867-4",
+          "display": "Heart rate"
+        }
+      ],
+      "direct_transition": "Oxygen Saturation",
+      "range": {
+        "low": 50,
+        "high": 200
+      }
+    }
+  }
+}
+,
+"covid19/medications":{
+  "name": "medications",
+  "remarks": [
+    "This submodule determines clinical trial medication treatments for covid19.",
+    "These treatments were selected on location (EU, Canada, US), clinicaltrials.gov, and:",
+    "",
+    "Sanders JM, Monogue ML, Jodlowski TZ, Cutrell JB. Pharmacologic Treatments for Coronavirus Disease 2019 (COVID-19): A Review. JAMA. Published online April 13, 2020. doi:10.1001/jama.2020.6019",
+    "",
+    "Some of these medications do not have RXNORM codes.",
+    "",
+    "In light of the significant number of therapeutic agents currently being tested via clinical research trials, the team opted to include one agent representative of a potential drug target (e.g., IL-6)  therapeutic class (e.g., antimalarial), or pharmacologic class (e.g., JAK inhibitor) based on limited knowledge of SARS-CoV-2 virology and potential drug targets. The agent selected for inclusion in the model is the agent with the earliest posting date on clinical trials.gov. As protocols differ across clinical trials, treatment dose does not denote a specific protocol but rather the minimum ordering dose at the time of review (April 2020). Additionally, treatment duration denotes the maximum duration noted among protocols that were available to the public. We anticipate updating the submodule as clinical trial results become available."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "Determine Clinical Trial Eligibility",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "none"
+          }
+        },
+        {
+          "transition": "Administer Medications"
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Determine Clinical Trial Eligibility": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Determine Clinical Trial Enrollment",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Age",
+                    "operator": ">=",
+                    "quantity": 18,
+                    "unit": "years",
+                    "value": 0
+                  },
+                  {
+                    "condition_type": "Or",
+                    "conditions": [
+                      {
+                        "condition_type": "Attribute",
+                        "attribute": "pregnant",
+                        "operator": "is nil"
+                      },
+                      {
+                        "condition_type": "Attribute",
+                        "attribute": "pregnant",
+                        "operator": "==",
+                        "value": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Or",
+                    "conditions": [
+                      {
+                        "condition_type": "Attribute",
+                        "attribute": "ckd",
+                        "operator": "is nil"
+                      },
+                      {
+                        "condition_type": "Attribute",
+                        "attribute": "ckd",
+                        "operator": "<",
+                        "value": 4
+                      }
+                    ]
+                  },
+                  {
+                    "condition_type": "And",
+                    "conditions": [
+                      {
+                        "condition_type": "Attribute",
+                        "attribute": "lung_cancer",
+                        "operator": "is nil"
+                      },
+                      {
+                        "condition_type": "And",
+                        "conditions": [
+                          {
+                            "condition_type": "Attribute",
+                            "attribute": "colorectal_cancer_stage",
+                            "operator": "is nil"
+                          },
+                          {
+                            "condition_type": "Attribute",
+                            "attribute": "breast_cancer_condition",
+                            "operator": "is nil"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "No Clinical Trial"
+        }
+      ]
+    },
+    "Severity Breakdown": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "General",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_severity",
+            "operator": "==",
+            "value": "general"
+          }
+        },
+        {
+          "transition": "Severe",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_severity",
+            "operator": "==",
+            "value": "severe"
+          }
+        },
+        {
+          "transition": "Critical",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_severity",
+            "operator": "==",
+            "value": "critical"
+          }
+        }
+      ]
+    },
+    "Determine Clinical Trial Enrollment": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Severity Breakdown",
+          "distribution": 0.1
+        },
+        {
+          "transition": "No Clinical Trial",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "General": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Losartan Trial",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Hydroxychloroquine Trial",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Hydroxychloroquine and Azithromycin Trial",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Chloroquine Phosphate Trial",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Chloroquine Phosphate and Azithromycin Trial",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Anakinra Trial",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Sirolimus Trial",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Tranexamic Acid Trial",
+          "distribution": 0.1
+        },
+        {
+          "transition": "CM4620 Trial",
+          "distribution": 0.1
+        },
+        {
+          "transition": "CD24Fc Trial",
+          "distribution": 0.1
+        }
+      ]
+    },
+    "Hydroxychloroquine": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "979092",
+          "display": "Hydroxychloroquine Sulfate 200 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        },
+        "refills": 2
+      }
+    },
+    "Azithromycin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 308460,
+          "display": "Azithromycin 250 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "remarks": [
+        "Really this is only administered if there is an additional bacterial infection in the lungs."
+      ],
+      "direct_transition": "Hydroxychloroquine"
+    },
+    "Administer Medications": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial_duration",
+            "operator": ">",
+            "value": 0
+          },
+          "transition": "Check Clinical Trial"
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "No Clinical Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "direct_transition": "Terminal",
+      "value": "none"
+    },
+    "Severe": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Losartan Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Hydroxychloroquine Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Hydroxychloroquine and Azithromycin Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Plasma Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Lopinavir Ritonavir Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Remdesivir Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Toclizumab Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Leronlimab Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Baricitinib Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Chloroquine Phosphate Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Chloroquine Phosphate and Azithromycin Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Anakinra Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "Lenzilumab Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "CM4620 Trial",
+          "distribution": 0.067
+        },
+        {
+          "transition": "CD24Fc Trial",
+          "distribution": 0.067
+        }
+      ]
+    },
+    "Critical": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Plasma Trial",
+          "distribution": 0.167
+        },
+        {
+          "transition": "Remdesivir Trial",
+          "distribution": 0.167
+        },
+        {
+          "transition": "Toclizumab Trial",
+          "distribution": 0.167
+        },
+        {
+          "transition": "Leronlimab Trial",
+          "distribution": 0.167
+        },
+        {
+          "transition": "Baricitinib Trial",
+          "distribution": 0.167
+        },
+        {
+          "transition": "Aviptadil Trial",
+          "distribution": 0.167
+        }
+      ]
+    },
+    "Losartan Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "value": "losartan",
+      "conditional_transition": [
+        {
+          "transition": "Hydroxychloroquine Trial",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Duration 14 days"
+        }
+      ]
+    },
+    "Hydroxychloroquine Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "value": "hydroxychloroquine",
+      "direct_transition": "Duration 14 days"
+    },
+    "Hydroxychloroquine and Azithromycin Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "value": "hydroxychloroquine+azithromycin",
+      "direct_transition": "Duration 14 days"
+    },
+    "Duration 14 days": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial_duration",
+      "direct_transition": "Administer Medications",
+      "value": 14
+    },
+    "Duration 10 days": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial_duration",
+      "value": 10,
+      "direct_transition": "Administer Medications"
+    },
+    "Plasma Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "direct_transition": "Single Dose",
+      "value": "convalescent_plasma"
+    },
+    "Lopinavir Ritonavir Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "value": "lopinavir_ritonavir",
+      "direct_transition": "Duration 14 days"
+    },
+    "Remdesivir Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "value": "remdesivir",
+      "direct_transition": "Duration 10 days"
+    },
+    "Toclizumab Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "value": "toclizumab",
+      "direct_transition": "Double Dose"
+    },
+    "Leronlimab Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "value": "leronlimab",
+      "direct_transition": "Double Dose"
+    },
+    "Baricitinib Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "value": "baricitinib",
+      "direct_transition": "Duration 14 days"
+    },
+    "Single Dose": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial_duration",
+      "value": 1,
+      "direct_transition": "Administer Medications"
+    },
+    "Double Dose": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial_duration",
+      "value": 2,
+      "direct_transition": "Administer Medications"
+    },
+    "Subtract Dose": {
+      "type": "Counter",
+      "attribute": "covid19_clinical_trial_duration",
+      "action": "decrement",
+      "direct_transition": "Terminal"
+    },
+    "Check Clinical Trial": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Losartan",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "losartan"
+          }
+        },
+        {
+          "transition": "Hydroxychloroquine",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "hydroxychloroquine"
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "hydroxychloroquine+azithromycin"
+          },
+          "transition": "First Five Days"
+        },
+        {
+          "transition": "Human Plasma",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "convalescent_plasma"
+          }
+        },
+        {
+          "transition": "Lopinavir Rotinavir",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "lopinavir_rotinavir"
+          }
+        },
+        {
+          "transition": "Remdesivir",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "remdesivir"
+          }
+        },
+        {
+          "transition": "Toclizumab",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "toclizumab"
+          }
+        },
+        {
+          "transition": "Leronlimab",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "leronlimab"
+          }
+        },
+        {
+          "transition": "Baricitinib",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "baricitinib"
+          }
+        },
+        {
+          "transition": "Chloroquine Phosphate",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "chloroquine_phosphate"
+          }
+        },
+        {
+          "transition": "Azithromycin_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "chloroquine_phosphate+azithromycin"
+          }
+        },
+        {
+          "transition": "Anakinra",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "anakinra"
+          }
+        },
+        {
+          "transition": "Lenzilumab",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "lenzilumab"
+          }
+        },
+        {
+          "transition": "Sirolimus",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "sirolimus"
+          }
+        },
+        {
+          "transition": "Tranexamic Acid",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "tranexamic_acid"
+          }
+        },
+        {
+          "transition": "CM4620",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "cm4620"
+          }
+        },
+        {
+          "transition": "Aviptadil",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "aviptadil"
+          }
+        },
+        {
+          "transition": "CD24Fc",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial",
+            "operator": "==",
+            "value": "cd24fc"
+          }
+        },
+        {
+          "transition": "Subtract Dose"
+        }
+      ]
+    },
+    "Lopinavir Rotinavir": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 597730,
+          "display": "lopinavir 200 MG / Ritonavir 50 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        },
+        "refills": 2
+      }
+    },
+    "Losartan": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 979485,
+          "display": "Losartan Potassium 25 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose"
+    },
+    "Plasma Transfusion": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 13569004,
+          "display": "Transfusion of plasma (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "Subtract Dose",
+      "reason": "covid19"
+    },
+    "Human Plasma": {
+      "type": "SupplyList",
+      "supplies": [
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": 84879009,
+            "display": "Human plasma, blood product (product)"
+          }
+        }
+      ],
+      "direct_transition": "Plasma Transfusion"
+    },
+    "Remdesivir": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2284960,
+          "display": "remdesivir 100 MG Injection"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose"
+    },
+    "Toclizumab": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "1657981",
+          "display": "20 ML tocilizumab 20 MG/ML Injection"
+        }
+      ],
+      "remarks": [
+        "Tocilizumab injection to prevent cytokine storms."
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 8,
+          "unit": "hours"
+        },
+        "duration": {
+          "quantity": 24,
+          "unit": "hours"
+        }
+      },
+      "direct_transition": "Subtract Dose"
+    },
+    "Leronlimab": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 999998,
+          "display": "Leronlimab 700 MG Injection"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose"
+    },
+    "Baricitinib": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2047241,
+          "display": "baricitinib 2 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose"
+    },
+    "First Five Days": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Azithromycin",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_clinical_trial_duration",
+            "operator": ">=",
+            "value": 9
+          }
+        },
+        {
+          "transition": "Hydroxychloroquine"
+        }
+      ]
+    },
+    "Chloroquine Phosphate and Azithromycin Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "direct_transition": "Duration 5 days",
+      "value": "chloroquine_phosphate+azithromycin"
+    },
+    "Chloroquine Phosphate Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "direct_transition": "Duration 5 days",
+      "value": "chloroquine_phosphate"
+    },
+    "Duration 5 days": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial_duration",
+      "direct_transition": "Administer Medications",
+      "value": 5
+    },
+    "Chloroquine Phosphate": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1116758,
+          "display": "chloroquine phosphate 500 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        },
+        "refills": 2
+      },
+      "direct_transition": "Subtract Dose"
+    },
+    "Azithromycin_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 308460,
+          "display": "Azithromycin 250 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "remarks": [
+        "Really this is only administered if there is an additional bacterial infection in the lungs."
+      ],
+      "direct_transition": "Chloroquine Phosphate"
+    },
+    "Duration 15 days": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial_duration",
+      "direct_transition": "Administer Medications",
+      "value": 15
+    },
+    "Anakinra Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "direct_transition": "Duration 15 days",
+      "value": "anakinra"
+    },
+    "Anakinra": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 727711,
+          "display": "0.67 ML anakinra 149 MG/ML Prefilled Syringe"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        },
+        "refills": 4
+      },
+      "direct_transition": "Subtract Dose"
+    },
+    "Lenzilumab Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "direct_transition": "Single Dose",
+      "value": "lenzilumab"
+    },
+    "Lenzilumab": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 999999,
+          "display": "Lenzilumab 200 MG IV"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose"
+    },
+    "Sirolimus Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "value": "sirolimus",
+      "direct_transition": "Duration 14 days"
+    },
+    "Sirolimus": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 360110,
+          "display": "Sirolimus 2 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose"
+    },
+    "Tranexamic Acid Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "direct_transition": "Duration 5 days",
+      "value": "tranexamic_acid"
+    },
+    "Tranexamic Acid": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 883826,
+          "display": "Tranexamic Acid 650 MG Oral Tablet"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        },
+        "refills": 6
+      }
+    },
+    "CM4620": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 999999,
+          "display": "CM4620 Injectable Emulsion"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose"
+    },
+    "Duration 3 days": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial_duration",
+      "direct_transition": "Administer Medications",
+      "value": 3
+    },
+    "CM4620 Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "direct_transition": "Duration 3 days",
+      "value": "cm4620"
+    },
+    "Aviptadil": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 999999,
+          "display": "Aviptadil Infusion"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose",
+      "prescription": {
+        "dosage": {
+          "amount": 150,
+          "frequency": 1,
+          "period": 1,
+          "unit": "hours"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        },
+        "as_needed": true,
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 261754007,
+            "display": "Continuous infusion (qualifier value)"
+          }
+        ]
+      }
+    },
+    "Aviptadil Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "direct_transition": "Duration 5 days",
+      "value": "aviptadil"
+    },
+    "CD24Fc Trial": {
+      "type": "SetAttribute",
+      "attribute": "covid19_clinical_trial",
+      "value": "cd24fc",
+      "direct_transition": "Single Dose"
+    },
+    "CD24Fc": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 999999,
+          "display": "CD24Fc 480 MG IV"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19",
+      "direct_transition": "Subtract Dose"
+    }
+  }
+}
+,
+"covid19/nonsurvivor_lab_values":{
+  "name": "nonsurvivor_lab_values",
+  "remarks": [
+    "Based on Figure 2 from https://doi.org/10.1016/S0140-6736(20)30566-3"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Set Creatine Kinase"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Day": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "DDimer_4",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "<",
+            "value": 7
+          }
+        },
+        {
+          "transition": "DDimer_7",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "<",
+            "value": 10
+          }
+        },
+        {
+          "transition": "DDimer_10",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "<",
+            "value": 13
+          }
+        },
+        {
+          "transition": "DDimer_13",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "<",
+            "value": 16
+          }
+        },
+        {
+          "transition": "DDimer_16",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "<",
+            "value": 19
+          }
+        },
+        {
+          "transition": "DDimer_19",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "==",
+            "value": 22
+          }
+        },
+        {
+          "transition": "DDimer_22"
+        }
+      ]
+    },
+    "DDimer_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 1,
+        "high": 2
+      },
+      "direct_transition": "Lymphocytes_4"
+    },
+    "DDimer_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 2,
+        "high": 3
+      },
+      "direct_transition": "Lymphocytes_7"
+    },
+    "DDimer_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 12,
+        "high": 16
+      },
+      "direct_transition": "Lymphocytes_10"
+    },
+    "DDimer_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 14,
+        "high": 19
+      },
+      "direct_transition": "Lymphocytes_13"
+    },
+    "DDimer_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 20,
+        "high": 26
+      },
+      "direct_transition": "Lymphocytes_16"
+    },
+    "DDimer_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 33,
+        "high": 38
+      },
+      "direct_transition": "Lymphocytes_19"
+    },
+    "DDimer_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 39,
+        "high": 45
+      },
+      "direct_transition": "Lymphocytes_22"
+    },
+    "Lymphocytes_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "direct_transition": "Interleukin6_4",
+      "range": {
+        "low": 0.4,
+        "high": 0.8
+      }
+    },
+    "Lymphocytes_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 0.3,
+        "high": 0.6
+      },
+      "direct_transition": "Interleukin6_19"
+    },
+    "Lymphocytes_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 0.3,
+        "high": 0.6
+      },
+      "direct_transition": "Interleukin6_16"
+    },
+    "Lymphocytes_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 0.4,
+        "high": 0.6
+      },
+      "direct_transition": "Interleukin6_13"
+    },
+    "Lymphocytes_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 0.4,
+        "high": 0.7
+      },
+      "direct_transition": "Interleukin6_10"
+    },
+    "Lymphocytes_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 0.5,
+        "high": 0.8
+      },
+      "direct_transition": "Interleukin6_7"
+    },
+    "Interleukin6_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "direct_transition": "Ferritin_4",
+      "range": {
+        "low": 7.5,
+        "high": 11.5
+      }
+    },
+    "Lymphocytes_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 0.3,
+        "high": 0.5
+      },
+      "direct_transition": "Interleukin6_22"
+    },
+    "Interleukin6_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 26,
+        "high": 30
+      },
+      "direct_transition": "Ferritin_22"
+    },
+    "Interleukin6_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 24,
+        "high": 28
+      },
+      "direct_transition": "Ferritin_19"
+    },
+    "Interleukin6_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 15,
+        "high": 19
+      },
+      "direct_transition": "Ferritin_16"
+    },
+    "Interleukin6_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 9,
+        "high": 13
+      },
+      "direct_transition": "Ferritin_13"
+    },
+    "Interleukin6_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 8,
+        "high": 12
+      },
+      "direct_transition": "Ferritin_10"
+    },
+    "Interleukin6_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 10,
+        "high": 14
+      },
+      "direct_transition": "Ferritin_7"
+    },
+    "Ferritin_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "direct_transition": "Cardiac_Troponin_4",
+      "range": {
+        "low": 800,
+        "high": 1200
+      }
+    },
+    "Ferritin_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "value": 2000,
+      "direct_transition": "Cardiac_Troponin_22"
+    },
+    "Ferritin_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "value": 2000,
+      "direct_transition": "Cardiac_Troponin_19"
+    },
+    "Ferritin_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "range": {
+        "low": 1800,
+        "high": 2000
+      },
+      "direct_transition": "Cardiac_Troponin_16"
+    },
+    "Ferritin_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "range": {
+        "low": 1500,
+        "high": 1900
+      },
+      "direct_transition": "Cardiac_Troponin_13"
+    },
+    "Ferritin_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "range": {
+        "low": 1400,
+        "high": 1800
+      },
+      "direct_transition": "Cardiac_Troponin_10"
+    },
+    "Ferritin_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "range": {
+        "low": 1400,
+        "high": 1800
+      },
+      "direct_transition": "Cardiac_Troponin_7"
+    },
+    "Cardiac_Troponin_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "direct_transition": "Lactate_Dehydrogenase_4",
+      "range": {
+        "low": 6,
+        "high": 10
+      }
+    },
+    "Cardiac_Troponin_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 250,
+        "high": 350
+      },
+      "direct_transition": "Lactate_Dehydrogenase_22"
+    },
+    "Cardiac_Troponin_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 130,
+        "high": 160
+      },
+      "direct_transition": "Lactate_Dehydrogenase_19"
+    },
+    "Cardiac_Troponin_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 55,
+        "high": 65
+      },
+      "direct_transition": "Lactate_Dehydrogenase_16"
+    },
+    "Cardiac_Troponin_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 50,
+        "high": 60
+      },
+      "direct_transition": "Lactate_Dehydrogenase_13"
+    },
+    "Cardiac_Troponin_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 20,
+        "high": 24
+      },
+      "direct_transition": "Lactate_Dehydrogenase_10"
+    },
+    "Cardiac_Troponin_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 22,
+        "high": 26
+      },
+      "direct_transition": "Lactate_Dehydrogenase_7"
+    },
+    "Lactate_Dehydrogenase_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "direct_transition": "Terminal",
+      "range": {
+        "low": 315,
+        "high": 345
+      }
+    },
+    "Lactate_Dehydrogenase_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 500,
+        "high": 600
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lactate_Dehydrogenase_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 390,
+        "high": 430
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lactate_Dehydrogenase_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 370,
+        "high": 390
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lactate_Dehydrogenase_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 390,
+        "high": 410
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lactate_Dehydrogenase_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 380,
+        "high": 400
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lactate_Dehydrogenase_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 300,
+        "high": 330
+      },
+      "direct_transition": "Terminal"
+    },
+    "Set Creatine Kinase": {
+      "type": "SetAttribute",
+      "attribute": "covid19_creatine_kinase",
+      "direct_transition": "Set C-Reactive Protein",
+      "range": {
+        "low": 20,
+        "high": 204
+      }
+    },
+    "Set C-Reactive Protein": {
+      "type": "SetAttribute",
+      "attribute": "covid19_c_reactive_protein",
+      "direct_transition": "Set PT",
+      "range": {
+        "low": 8,
+        "high": 18
+      }
+    },
+    "Set PT": {
+      "type": "SetAttribute",
+      "attribute": "covid19_pt",
+      "range": {
+        "low": 11,
+        "high": 14
+      },
+      "direct_transition": "Set INR"
+    },
+    "Set INR": {
+      "type": "SetAttribute",
+      "attribute": "covid19_inr",
+      "range": {
+        "low": 3,
+        "high": 5
+      },
+      "direct_transition": "Set Procalitonin"
+    },
+    "Set Procalitonin": {
+      "type": "SetAttribute",
+      "attribute": "covid19_procalcitonin",
+      "direct_transition": "Poor Oxygen Saturation",
+      "range": {
+        "low": 0,
+        "high": 0.5
+      }
+    },
+    "Poor Oxygen Saturation": {
+      "type": "VitalSign",
+      "vital_sign": "Oxygen Saturation",
+      "unit": "%",
+      "range": {
+        "low": 75,
+        "high": 89
+      },
+      "direct_transition": "Set PaO2"
+    },
+    "Set PaO2": {
+      "type": "SetAttribute",
+      "attribute": "covid19_pao2",
+      "direct_transition": "Day",
+      "range": {
+        "low": 37,
+        "high": 60
+      }
+    }
+  }
+}
+,
+"covid19/outcomes":{
+  "name": "outcomes",
+  "remarks": [
+    "This module determines patient outcomes from covid19 according to Table 2 from https://doi.org/10.1016/S0140-6736(20)30566-3"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Pneumonia"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Pneumonia": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "233604007",
+          "display": "Pneumonia (disorder)"
+        }
+      ],
+      "direct_transition": "Hypoxemia",
+      "target_encounter": "Hospital Inpatient Admission"
+    },
+    "ARDS": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "67782005",
+          "display": "Acute respiratory distress syndrome (disorder)"
+        }
+      ],
+      "direct_transition": "Check Heart Failure",
+      "target_encounter": "ICU Admission"
+    },
+    "Sepsis": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "770349000",
+          "display": "Sepsis caused by virus (disorder)"
+        }
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "Septic Shock",
+              "distribution": 0.7
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.3
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "Terminal"
+        }
+      ],
+      "target_encounter": "Hospital Inpatient Admission"
+    },
+    "Septic Shock": {
+      "assign_to_attribute": "Ventilator Reason",
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "76571007",
+          "display": "Septic shock (disorder)"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "target_encounter": "ICU Admission"
+    },
+    "Check Heart Failure": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "Heart Failure",
+              "distribution": 0.52
+            },
+            {
+              "transition": "Check Acute Cardiac Injury",
+              "distribution": 0.48
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Heart Failure",
+              "distribution": 0.12
+            },
+            {
+              "transition": "Check Acute Cardiac Injury",
+              "distribution": 0.88
+            }
+          ]
+        }
+      ]
+    },
+    "Heart Failure": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "84114007",
+          "display": "Heart failure (disorder)"
+        }
+      ],
+      "direct_transition": "Check Acute Cardiac Injury",
+      "target_encounter": "ICU Admission"
+    },
+    "Acute Cardiac Injury": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "86175003",
+          "display": "Injury of heart (disorder)"
+        }
+      ],
+      "direct_transition": "Check Acute Kidney Injury",
+      "target_encounter": "ICU Admission"
+    },
+    "Check Acute Cardiac Injury": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "Acute Cardiac Injury",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Check Acute Kidney Injury",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Acute Cardiac Injury",
+              "distribution": 0.01
+            },
+            {
+              "transition": "Check Acute Kidney Injury",
+              "distribution": 1
+            }
+          ]
+        }
+      ]
+    },
+    "Check Acute Kidney Injury": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "Acute Kidney Injury",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Check Coagulopathy",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Acute Kidney Injury",
+              "distribution": 0.01
+            },
+            {
+              "transition": "Check Coagulopathy",
+              "distribution": 0.99
+            }
+          ]
+        }
+      ]
+    },
+    "Check Coagulopathy": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "Coagulopathy",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Determine Sepsis",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Coagulopathy",
+              "distribution": 0.07
+            },
+            {
+              "transition": "Determine Sepsis",
+              "distribution": 0.9299999999999999
+            }
+          ]
+        }
+      ]
+    },
+    "Acute Kidney Injury": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "40095003",
+          "display": "Injury of kidney (disorder)"
+        }
+      ],
+      "direct_transition": "Check Coagulopathy",
+      "target_encounter": "ICU Admission"
+    },
+    "Coagulopathy": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "234466008",
+          "display": "Acquired coagulation disorder (disorder)"
+        }
+      ],
+      "direct_transition": "Determine Sepsis",
+      "target_encounter": "ICU Admission"
+    },
+    "Determine Sepsis": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Sepsis",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_death",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "PriorState",
+                    "name": "ARDS"
+                  },
+                  {
+                    "condition_type": "Or",
+                    "conditions": [
+                      {
+                        "condition_type": "PriorState",
+                        "name": "Heart Failure"
+                      },
+                      {
+                        "condition_type": "PriorState",
+                        "name": "Coagulopathy"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Respiratory Failure": {
+      "assign_to_attribute": "Ventilator Reason",
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "65710008",
+          "display": "Acute respiratory failure (disorder)"
+        }
+      ],
+      "remarks": [
+        "67 of 173 (38.7% round up to 40%) severe patients required mechanical ventilation."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "ARDS",
+              "distribution": 0.94
+            },
+            {
+              "transition": "Check Heart Failure",
+              "distribution": 0.06
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "ARDS",
+              "distribution": 0.18
+            },
+            {
+              "transition": "Check Heart Failure",
+              "distribution": 0.8200000000000001
+            }
+          ]
+        }
+      ],
+      "target_encounter": "Hospital Inpatient Admission"
+    },
+    "Mild Respiratory Distress": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "271825005",
+          "display": "Respiratory distress (finding)"
+        }
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_death",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "Respiratory Failure",
+              "distribution": 0.98
+            },
+            {
+              "transition": "Check Heart Failure",
+              "distribution": 0.02
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Respiratory Failure",
+              "distribution": 0.36
+            },
+            {
+              "transition": "Check Heart Failure",
+              "distribution": 0.64
+            }
+          ]
+        }
+      ],
+      "target_encounter": "Hospital Inpatient Admission"
+    },
+    "Hypoxemia": {
+      "type": "ConditionOnset",
+      "target_encounter": "Hospital Inpatient Admission",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 389087006,
+          "display": "Hypoxemia (disorder)"
+        }
+      ],
+      "direct_transition": "Mild Respiratory Distress"
+    }
+  }
+}
+,
+"covid19/supplies_hospitalization":{
+  "name": "Supplies - Hospitalization",
+  "remarks": [
+    "This module includes the supplies needed during daily treatment of COVID-19 in a basic hospital inpatient setting, not the ICU.",
+    "",
+    "Daily Hospitalization Assumptions: For continency capacity for the daily hospitalization, the following assumptions apply per patient per 24-hour period:  ",
+    "•\tBasic strategy:",
+    "o\tAdministrative and engineering measures have already been implemented (e.g. reducing visitors, excluding non-essential personnel, and cohorting patients, etc.)",
+    "o\tNursing staff uses a bundling care model (e.g. vitals/assessments, etc. done at once) and assists with meal tray delivery and basic environmental services to reduce room entry. ",
+    "o\tConsulting physicians/APPs rely on the physical examination of the primary physician/APP to reduce room entry.",
+    "•\tPPE Strategy for encounters with all COVID/PUI patients:",
+    "o\tSingle-use isolation gowns: changed with each room entry",
+    "o\tGloves: changed with each room entry",
+    "o\tFace shields: approved for extended wear with a max of 1 per physician/APP and nurse per 24 hours. ",
+    "o\tN95s: approved for extended wear with a max of 1 per physician/APP and nurse per 24 hours. ",
+    "•\tRoom entry assumptions: ",
+    "o\tPhysician/APP staff maximum room entry per 24 hours is 3.",
+    "o\tPrimary nurse maximum room entry per 24 hours is 6.",
+    "o\tAdditional nursing staff maximum room entry per 24 hours is 2.",
+    "o\tAllied staff maximum room entry per 24 hours is 1",
+    "",
+    "",
+    "| Staff Type                              | Assumed Ratios* | N95Mask**  | Face shield**  | Gowns*** | Wipes***  | Gloves*** | Alcohol*** |",
+    "|-----------------------------------------|-----------------|------------|----------------|----------|-----------|-----------|------------|",
+    "| Primary Physician or APP                | 16:1            | 2          | 2              | 3        | 2         | 6         |            |",
+    "| Primary Nurse                           | 4:1             | 2          | 2              | 6        | 2         | 12        |            |",
+    "| Additional Nursing Staff                | 6:1             | 2          | 2              | 2        | 2         | 4         |            |",
+    "| Other allied health and ancillary staff | 25:1            | 2          | 2              | 1        | 2         | 2         |            |",
+    "| Quantity for supply list                | N/A             | 2          | 2              | 12       | 8         | 24        | 1          |",
+    "",
+    "*Ratios crowdsourced with colleagues across the country (MD, RNs, CNA, Nurse Techs)",
+    "** When calculating total PPE use, these items are not 1:1 with patients, but are determined based on the number of each staff present caring for COVID/PUI patients each 24 hours. (i.e. # staff type X 2)",
+    "*** When calculating total PPE use, these items are 1:1 for patients for every 24 hours (i.e. every COVID patient uses 8 gowns, 4 wipes, etc. every 24 hours)",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Precautions_Baseline"
+    },
+    "Precautions_Baseline": {
+      "type": "SupplyList",
+      "supplies": [
+        {
+          "quantity": 2,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": 409534002,
+            "display": "Disposable air-purifying respirator (physical object)"
+          }
+        },
+        {
+          "quantity": 24,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "713779008",
+            "display": "Nitrile examination/treatment glove, non-powdered, sterile (physical object)"
+          }
+        },
+        {
+          "quantity": 12,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "469673003",
+            "display": "Isolation gown, single-use (physical object)"
+          }
+        },
+        {
+          "quantity": 2,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": 706724001,
+            "display": "Face shield (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "419343004",
+            "display": "Alcohol disinfectant (substance)"
+          }
+        },
+        {
+          "quantity": 8,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": 470618009,
+            "display": "Antiseptic towelette (physical object)"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    }
+  }
+}
+,
+"covid19/supplies_icu":{
+  "name": "Supplies - ICU",
+  "remarks": [
+    "This module includes the supplies needed during daily treatment of COVID-19 in an intensive care setting.  These supplies offer a higher level of protection to the health care provider than the general inpatient setting. ",
+    "",
+    "Daily ICU Assumptions:",
+    "•\tBasic strategy = Same as hospitalization",
+    "•\tPPE strategy = Same as hospitalization, with the exception of gowns. ",
+    "o\tReusable isolation gowns are approved for extended wear with a max of 2 per patient per 24 hours (i.e. one for day shift nurse and one for night shift nurse) ",
+    "•\tRoom entry assumptions:",
+    "o\tICU physician maximum room entry per 24 hours is 4",
+    "o\tICU nurse maximum room entry per 24 hours is 12",
+    "o\tRespiratory therapist maximum room entry per 24 hours is 4",
+    "o\tAllied health/support maximum room entry per 24 hours is 2",
+    "",
+    "| Staff Type                      | Assumed Ratios  | N95 Mask** | Face shield** | Gowns Reusable*** | Gowns single use*** | Wipes*** | Gloves***  | Alcohol*** |",
+    "|---------------------------------|-----------------|------------|---------------|-------------------|---------------------|----------|------------|------------|",
+    "| ICU physician                   | 1:10            | 2          | 2             | 0                 | 4                   | 4        | 8          |            |",
+    "| ICU Nurse                       | 2:1             | 2          | 2             | 2                 | 0                   | 5        | 24         |            |",
+    "| Respiratory Therapist           | 5:1             | 2          | 2             | 0                 | 4                   | 5        | 8          |            |",
+    "| Allied Health/care team support | 24:1            | 2          | 2             | 0                 | 2                   | 2        | 4          |            |",
+    "| Quantity for supply list        |                 | 2          | 2             | 2                 | 10                  | 16       | 44         | 2          |",
+    "",
+    "** When calculating total PPE use, these items are not 1:1 with patients, but are determined based on the number of each staff present caring for COVID/PUI patients each 24 hours. (i.e. # staff type X 2)",
+    "*** When calculating total PPE use, these items are 1:1 for patients for every 24 hours (i.e. every COVID patient uses 8 gowns, 4 wipes, etc. every 24 hours)"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Precautions_Aerosol"
+    },
+    "Precautions_Aerosol": {
+      "type": "SupplyList",
+      "supplies": [
+        {
+          "quantity": 44,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "713779008",
+            "display": "Nitrile examination/treatment glove, non-powdered, sterile (physical object)"
+          }
+        },
+        {
+          "quantity": 2,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": 469212006,
+            "display": "Isolation gown, reusable (physical object)"
+          }
+        },
+        {
+          "quantity": 10,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "469673003",
+            "display": "Isolation gown, single-use (physical object)"
+          }
+        },
+        {
+          "quantity": 2,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "409534002",
+            "display": "Disposable air-purifying respirator (physical object)"
+          }
+        },
+        {
+          "quantity": 2,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": 706724001,
+            "display": "Face shield (physical object)"
+          }
+        },
+        {
+          "quantity": 2,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "419343004",
+            "display": "Alcohol disinfectant (substance)"
+          }
+        },
+        {
+          "quantity": 16,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": 470618009,
+            "display": "Antiseptic towelette (physical object)"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    }
+  }
+}
+,
+"covid19/supplies_intubation":{
+  "name": "Supplies - Intubation",
+  "remarks": [
+    "This module includes the supplies needed during an intubation (i.e, an aerosolizing procedures) in support of the treatment of COVID-19. These are the supplies offering the highest level of protection to the health care provider, as well as the required supplies for the procedure itself. This submodule should be considered additional to the other supplies submodules as it only considers a single procedure, not the entire day. This also considers the inclusion of a respiratory therapist in addition to the 1 doctor and 1 nurse.",
+    "",
+    "Patient",
+    "- no additional supplies",
+    "",
+    "HCP",
+    " - Nurse and RT wear same as ICU PPE:",
+    "  - gloves",
+    "  - isolation gown",
+    "  - glasses/goggles/shield",
+    "- physician:",
+    "  - wears OR gown instead of isolation gown",
+    "  - surgical cap",
+    "  - extra set of gloves",
+    "",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Ventilator"
+    },
+    "Supplies_Intubation": {
+      "type": "SupplyList",
+      "supplies": [
+        {
+          "quantity": 8,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "713779008",
+            "display": "Nitrile examination/treatment glove, non-powdered, sterile (physical object)"
+          }
+        },
+        {
+          "quantity": 2,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "469673003",
+            "display": "Isolation gown, single-use (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "463983006",
+            "display": "Operating room gown, single-use (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "465668002",
+            "display": "Surgical cap, single-use (physical object)"
+          }
+        },
+        {
+          "quantity": 3,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "409534002",
+            "display": "Disposable air-purifying respirator (physical object)"
+          }
+        },
+        {
+          "quantity": 3,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "38126007",
+            "display": "Protective glasses, device (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "419343004",
+            "display": "Alcohol disinfectant (substance)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": 470618009,
+            "display": "Antiseptic towelette (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "470609007",
+            "display": "Laryngoscope blade, single-use (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "467053003",
+            "display": "Basic endotracheal tube, single-use (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "468507004",
+            "display": "Endotracheal tube stylet, single-use (physical object)"
+          }
+        },
+        {
+          "quantity": 2,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "61968008",
+            "display": "Syringe, device (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "706092000",
+            "display": "Suction system (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "706774004",
+            "display": "Lubricant (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "468601005",
+            "display": "Endotracheal tube holder (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "701434005",
+            "display": "Viral filter (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "827149008",
+            "display": "Carbon dioxide breath analyzer (physical object)"
+          }
+        },
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": "17102003",
+            "display": "Nasogastric tube, device (physical object)"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Ventilator": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": 449071006,
+        "display": "Mechanical ventilator (physical object)"
+      },
+      "direct_transition": "Laryngoscope",
+      "assign_to_attribute": "covid19_ventilator"
+    },
+    "Laryngoscope": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": "448907002",
+        "display": "Videolaryngoscope (physical object)"
+      },
+      "direct_transition": "Supplies_Intubation",
+      "assign_to_attribute": "covid19_laryngoscope"
+    }
+  }
+}
+,
+"covid19/survivor_lab_values":{
+  "name": "survivor_lab_values",
+  "remarks": [
+    "Based on Figure 2 from https://doi.org/10.1016/S0140-6736(20)30566-3"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Set_Creatine_Kinase"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Day": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "DDimer_4",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "<",
+            "value": 7
+          }
+        },
+        {
+          "transition": "DDimer_7",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "<",
+            "value": 10
+          }
+        },
+        {
+          "transition": "DDimer_10",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "<",
+            "value": 13
+          }
+        },
+        {
+          "transition": "DDimer_13",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "<",
+            "value": 16
+          }
+        },
+        {
+          "transition": "DDimer_16",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "<",
+            "value": 19
+          }
+        },
+        {
+          "transition": "DDimer_19",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_admission_days",
+            "operator": "==",
+            "value": 22
+          }
+        },
+        {
+          "transition": "DDimer_22"
+        }
+      ]
+    },
+    "DDimer_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 0.2,
+        "high": 0.4
+      },
+      "direct_transition": "Lymphocytes_4"
+    },
+    "DDimer_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 0.4,
+        "high": 0.6
+      },
+      "direct_transition": "Lymphocytes_7"
+    },
+    "DDimer_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 0.5,
+        "high": 0.7
+      },
+      "direct_transition": "Lymphocytes_10"
+    },
+    "DDimer_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 0.5,
+        "high": 0.7
+      },
+      "direct_transition": "Lymphocytes_13"
+    },
+    "DDimer_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 0.6,
+        "high": 0.8
+      },
+      "direct_transition": "Lymphocytes_16"
+    },
+    "DDimer_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 0.9,
+        "high": 1.1
+      },
+      "direct_transition": "Lymphocytes_19"
+    },
+    "DDimer_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ddimer",
+      "range": {
+        "low": 0.4,
+        "high": 0.6
+      },
+      "direct_transition": "Lymphocytes_22"
+    },
+    "Lymphocytes_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "direct_transition": "Interleukin6_4",
+      "range": {
+        "low": 1,
+        "high": 1.1
+      }
+    },
+    "Lymphocytes_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 1.3,
+        "high": 1.5
+      },
+      "direct_transition": "Interleukin6_19"
+    },
+    "Lymphocytes_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 1.1,
+        "high": 1.3
+      },
+      "direct_transition": "Interleukin6_16"
+    },
+    "Lymphocytes_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 1.1,
+        "high": 1.2
+      },
+      "direct_transition": "Interleukin6_13"
+    },
+    "Lymphocytes_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 0.9,
+        "high": 1.1
+      },
+      "direct_transition": "Interleukin6_10"
+    },
+    "Lymphocytes_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 0.8,
+        "high": 1
+      },
+      "direct_transition": "Interleukin6_7"
+    },
+    "Interleukin6_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "direct_transition": "Ferritin_4",
+      "range": {
+        "low": 4,
+        "high": 6
+      }
+    },
+    "Lymphocytes_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lymphocytes",
+      "range": {
+        "low": 1.3,
+        "high": 1.5
+      },
+      "direct_transition": "Interleukin6_22"
+    },
+    "Interleukin6_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 5,
+        "high": 7
+      },
+      "direct_transition": "Ferritin_22"
+    },
+    "Interleukin6_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 5,
+        "high": 7
+      },
+      "direct_transition": "Ferritin_19"
+    },
+    "Interleukin6_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 5,
+        "high": 7
+      },
+      "direct_transition": "Ferritin_16"
+    },
+    "Interleukin6_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 5,
+        "high": 7
+      },
+      "direct_transition": "Ferritin_13"
+    },
+    "Interleukin6_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 5,
+        "high": 7
+      },
+      "direct_transition": "Ferritin_10"
+    },
+    "Interleukin6_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_interleukin6",
+      "range": {
+        "low": 5,
+        "high": 7
+      },
+      "direct_transition": "Ferritin_7"
+    },
+    "Ferritin_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "direct_transition": "Cardiac_Troponin_4",
+      "range": {
+        "low": 300,
+        "high": 500
+      }
+    },
+    "Ferritin_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "range": {
+        "low": 300,
+        "high": 450
+      },
+      "direct_transition": "Cardiac_Troponin_22"
+    },
+    "Ferritin_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "range": {
+        "low": 400,
+        "high": 500
+      },
+      "direct_transition": "Cardiac_Troponin_19"
+    },
+    "Ferritin_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "range": {
+        "low": 400,
+        "high": 500
+      },
+      "direct_transition": "Cardiac_Troponin_16"
+    },
+    "Ferritin_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "range": {
+        "low": 550,
+        "high": 650
+      },
+      "direct_transition": "Cardiac_Troponin_13"
+    },
+    "Ferritin_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "range": {
+        "low": 450,
+        "high": 600
+      },
+      "direct_transition": "Cardiac_Troponin_10"
+    },
+    "Ferritin_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_ferritin",
+      "range": {
+        "low": 450,
+        "high": 550
+      },
+      "direct_transition": "Cardiac_Troponin_7"
+    },
+    "Cardiac_Troponin_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "direct_transition": "Lactate_Dehydrogenase_4",
+      "range": {
+        "low": 1.5,
+        "high": 3.5
+      }
+    },
+    "Cardiac_Troponin_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 3,
+        "high": 4
+      },
+      "direct_transition": "Lactate_Dehydrogenase_22"
+    },
+    "Cardiac_Troponin_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 2,
+        "high": 3
+      },
+      "direct_transition": "Lactate_Dehydrogenase_19"
+    },
+    "Cardiac_Troponin_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 2,
+        "high": 3
+      },
+      "direct_transition": "Lactate_Dehydrogenase_16"
+    },
+    "Cardiac_Troponin_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 4,
+        "high": 5
+      },
+      "direct_transition": "Lactate_Dehydrogenase_13"
+    },
+    "Cardiac_Troponin_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 3,
+        "high": 5
+      },
+      "direct_transition": "Lactate_Dehydrogenase_10"
+    },
+    "Cardiac_Troponin_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_cardiac_troponin",
+      "range": {
+        "low": 2,
+        "high": 4
+      },
+      "direct_transition": "Lactate_Dehydrogenase_7"
+    },
+    "Lactate_Dehydrogenase_4": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "direct_transition": "Terminal",
+      "range": {
+        "low": 200,
+        "high": 250
+      }
+    },
+    "Lactate_Dehydrogenase_22": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 180,
+        "high": 220
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lactate_Dehydrogenase_19": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 200,
+        "high": 250
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lactate_Dehydrogenase_16": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 200,
+        "high": 300
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lactate_Dehydrogenase_13": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 250,
+        "high": 350
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lactate_Dehydrogenase_10": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 250,
+        "high": 350
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lactate_Dehydrogenase_7": {
+      "type": "SetAttribute",
+      "attribute": "covid19_lactate_dehydrogenase",
+      "range": {
+        "low": 225,
+        "high": 250
+      },
+      "direct_transition": "Terminal"
+    },
+    "Set_Creatine_Kinase": {
+      "type": "SetAttribute",
+      "attribute": "covid19_creatine_kinase",
+      "range": {
+        "low": 12,
+        "high": 53
+      },
+      "direct_transition": "Set_C_Reactive_Protein"
+    },
+    "Set_C_Reactive_Protein": {
+      "type": "SetAttribute",
+      "attribute": "covid19_c_reactive_protein",
+      "range": {
+        "low": 8,
+        "high": 12
+      },
+      "direct_transition": "Set_PT"
+    },
+    "Set_PT": {
+      "type": "SetAttribute",
+      "attribute": "covid19_pt",
+      "range": {
+        "low": 10,
+        "high": 13
+      },
+      "direct_transition": "Set_INR"
+    },
+    "Set_INR": {
+      "type": "SetAttribute",
+      "attribute": "covid19_inr",
+      "range": {
+        "low": 1,
+        "high": 3
+      },
+      "direct_transition": "Set_Procalitonin"
+    },
+    "Set_Procalitonin": {
+      "type": "SetAttribute",
+      "attribute": "covid19_procalcitonin",
+      "range": {
+        "low": 0,
+        "high": 0.2
+      },
+      "conditional_transition": [
+        {
+          "transition": "Recovered Oxygen Saturation",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_icu_days",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_icu_days",
+                "operator": "<",
+                "value": 2
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Poor Oxygen Saturation"
+        }
+      ]
+    },
+    "Poor Oxygen Saturation": {
+      "type": "VitalSign",
+      "vital_sign": "Oxygen Saturation",
+      "unit": "%",
+      "direct_transition": "Set Poor PaO2",
+      "range": {
+        "low": 75,
+        "high": 89
+      }
+    },
+    "Recovered Oxygen Saturation": {
+      "type": "VitalSign",
+      "vital_sign": "Oxygen Saturation",
+      "unit": "%",
+      "direct_transition": "Set Recovered PaO2",
+      "range": {
+        "low": 90,
+        "high": 100
+      }
+    },
+    "Set Poor PaO2": {
+      "type": "SetAttribute",
+      "attribute": "covid19_pao2",
+      "range": {
+        "low": 37,
+        "high": 60
+      },
+      "direct_transition": "Day"
+    },
+    "Set Recovered PaO2": {
+      "type": "SetAttribute",
+      "attribute": "covid19_pao2",
+      "range": {
+        "low": 60,
+        "high": 98
+      },
+      "direct_transition": "Day"
+    }
+  }
+}
+,
+"covid19/symptoms":{
+  "name": "symptoms",
+  "remarks": [
+    "This submodule sets symptoms of COVID19 according to the rates documented in Table 1 of https://www.nejm.org/doi/full/10.1056/NEJMoa2002032"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Determine Conjunctival Congestion"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Determine Headache": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Headache",
+              "distribution": 0.15
+            },
+            {
+              "transition": "Determine Cough",
+              "distribution": 0.8500000000000001
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Headache",
+              "distribution": 0.134
+            },
+            {
+              "transition": "Determine Cough",
+              "distribution": 0.866
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Cough": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Cough",
+              "distribution": 0.705
+            },
+            {
+              "transition": "Determine Sore Throat",
+              "distribution": 0.29500000000000004
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Cough",
+              "distribution": 0.673
+            },
+            {
+              "transition": "Determine Sore Throat",
+              "distribution": 0.32699999999999996
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Sore Throat": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Sore Throat",
+              "distribution": 0.133
+            },
+            {
+              "transition": "Determine Sputum Production",
+              "distribution": 0.867
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Sore Throat",
+              "distribution": 0.14
+            },
+            {
+              "transition": "Determine Sputum Production",
+              "distribution": 0.86
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Sputum Production": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Sputum Production",
+              "distribution": 0.353
+            },
+            {
+              "transition": "Determine Fatigue",
+              "distribution": 0.647
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Sputum Production",
+              "distribution": 0.334
+            },
+            {
+              "transition": "Determine Fatigue",
+              "distribution": 0.6659999999999999
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Fatigue": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Fatigue",
+              "distribution": 0.399
+            },
+            {
+              "transition": "Determine Hemoptysis",
+              "distribution": 0.601
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Fatigue",
+              "distribution": 0.378
+            },
+            {
+              "transition": "Determine Hemoptysis",
+              "distribution": 0.6219999999999999
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Hemoptysis": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Hemoptysis",
+              "distribution": 0.023
+            },
+            {
+              "transition": "Determine Shortness of Breath",
+              "distribution": 0.9770000000000001
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Hemoptysis",
+              "distribution": 0.006
+            },
+            {
+              "transition": "Determine Shortness of Breath",
+              "distribution": 0.994
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Shortness of Breath": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Shortness of Breath",
+              "distribution": 0.376
+            },
+            {
+              "transition": "Determine Nausea or Vomiting",
+              "distribution": 0.6240000000000001
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Shortness of Breath",
+              "distribution": 0.151
+            },
+            {
+              "transition": "Determine Nausea or Vomiting",
+              "distribution": 0.849
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Nausea or Vomiting": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Nausea",
+              "distribution": 0.069
+            },
+            {
+              "transition": "Determine Diarrhea",
+              "distribution": 0.931
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Nausea",
+              "distribution": 0.046
+            },
+            {
+              "transition": "Determine Diarrhea",
+              "distribution": 0.954
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Diarrhea": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Diarrhea",
+              "distribution": 0.058
+            },
+            {
+              "transition": "Determine Myalgia or Arthralgia",
+              "distribution": 0.942
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Diarrhea",
+              "distribution": 0.035
+            },
+            {
+              "transition": "Determine Myalgia or Arthralgia",
+              "distribution": 0.9650000000000001
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Myalgia or Arthralgia": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Muscle Pain",
+              "distribution": 0.173
+            },
+            {
+              "transition": "Determine Chills",
+              "distribution": 0.827
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Muscle Pain",
+              "distribution": 0.145
+            },
+            {
+              "transition": "Determine Chills",
+              "distribution": 0.855
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Chills": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Chills",
+              "distribution": 0.15
+            },
+            {
+              "transition": "Determine Fever",
+              "distribution": 0.8500000000000001
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Chills",
+              "distribution": 0.108
+            },
+            {
+              "transition": "Determine Fever",
+              "distribution": 0.8919999999999999
+            }
+          ]
+        }
+      ]
+    },
+    "Determine Conjunctival Congestion": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Conjunctival Congestion",
+              "distribution": 0.023
+            },
+            {
+              "transition": "Determine Nasal Congestion",
+              "distribution": 0.977
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Conjunctival Congestion",
+              "distribution": 0.005
+            },
+            {
+              "transition": "Determine Nasal Congestion",
+              "distribution": 0.995
+            }
+          ]
+        }
+      ]
+    },
+    "Conjunctival Congestion": {
+      "type": "Symptom",
+      "symptom": "conjunctival congestion",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Conjunctival Congestion Onset"
+    },
+    "Conjunctival Congestion Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 246677007,
+          "display": "Passive conjunctival congestion (finding)"
+        }
+      ],
+      "direct_transition": "Determine Nasal Congestion"
+    },
+    "Determine Nasal Congestion": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Nasal Congestion",
+              "distribution": 0.035
+            },
+            {
+              "transition": "Determine Headache",
+              "distribution": 0.965
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Nasal Congestion",
+              "distribution": 0.051
+            },
+            {
+              "transition": "Determine Headache",
+              "distribution": 0.9490000000000001
+            }
+          ]
+        }
+      ]
+    },
+    "Nasal Congestion": {
+      "type": "Symptom",
+      "symptom": "nasal congestion",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Nasal Congestion Onset"
+    },
+    "Nasal Congestion Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 68235000,
+          "display": "Nasal congestion (finding)"
+        }
+      ],
+      "direct_transition": "Determine Headache"
+    },
+    "Headache": {
+      "type": "Symptom",
+      "symptom": "headache",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Headache Onset"
+    },
+    "Headache Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 25064002,
+          "display": "Headache (finding)"
+        }
+      ],
+      "direct_transition": "Determine Cough"
+    },
+    "Cough": {
+      "type": "Symptom",
+      "symptom": "cough",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Cough Onset"
+    },
+    "Cough Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 49727002,
+          "display": "Cough (finding)"
+        }
+      ],
+      "direct_transition": "Determine Sore Throat"
+    },
+    "Sore Throat": {
+      "type": "Symptom",
+      "symptom": "sore throat",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Sore Throat Onset"
+    },
+    "Sore Throat Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 267102003,
+          "display": "Sore throat symptom (finding)"
+        }
+      ],
+      "direct_transition": "Determine Sputum Production"
+    },
+    "Sputum Production": {
+      "type": "Symptom",
+      "symptom": "sputum production",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Sputum Production Onset"
+    },
+    "Sputum Production Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 248595008,
+          "display": "Sputum finding (finding)"
+        }
+      ],
+      "direct_transition": "Determine Fatigue"
+    },
+    "Fatigue": {
+      "type": "Symptom",
+      "symptom": "fatigue",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Fatigue Onset"
+    },
+    "Fatigue Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 84229001,
+          "display": "Fatigue (finding)"
+        }
+      ],
+      "direct_transition": "Determine Hemoptysis"
+    },
+    "Hemoptysis": {
+      "type": "Symptom",
+      "symptom": "hemoptysis",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Hemoptysis Onset"
+    },
+    "Hemoptysis Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 66857006,
+          "display": "Hemoptysis (finding)"
+        }
+      ],
+      "direct_transition": "Determine Shortness of Breath"
+    },
+    "Shortness of Breath": {
+      "type": "Symptom",
+      "symptom": "dyspnea",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Shortness of Breath Onset"
+    },
+    "Shortness of Breath Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 267036007,
+          "display": "Dyspnea (finding)"
+        }
+      ],
+      "direct_transition": "Wheezing"
+    },
+    "Nausea": {
+      "type": "Symptom",
+      "symptom": "nausea",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Nausea Onset"
+    },
+    "Nausea Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 422587007,
+          "display": "Nausea (finding)"
+        }
+      ],
+      "direct_transition": "Vomiting"
+    },
+    "Vomiting": {
+      "type": "Symptom",
+      "symptom": "vomiting",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Vomiting Onset"
+    },
+    "Vomiting Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 249497008,
+          "display": "Vomiting symptom (finding)"
+        }
+      ],
+      "direct_transition": "Determine Diarrhea"
+    },
+    "Diarrhea": {
+      "type": "Symptom",
+      "symptom": "diarrhea",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Diarrhea Onset"
+    },
+    "Diarrhea Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 267060006,
+          "display": "Diarrhea symptom (finding)"
+        }
+      ],
+      "direct_transition": "Determine Myalgia or Arthralgia"
+    },
+    "Muscle Pain": {
+      "type": "Symptom",
+      "symptom": "myalgia",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Muscle Pain Onset"
+    },
+    "Muscle Pain Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 68962001,
+          "display": "Muscle pain (finding)"
+        }
+      ],
+      "direct_transition": "Joint Pain"
+    },
+    "Joint Pain": {
+      "type": "Symptom",
+      "symptom": "arthralgia",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Joint Pain Onset"
+    },
+    "Joint Pain Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 57676002,
+          "display": "Joint pain (finding)"
+        }
+      ],
+      "direct_transition": "Determine Chills"
+    },
+    "Chills": {
+      "type": "Symptom",
+      "symptom": "chills",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Chills Onset"
+    },
+    "Chills Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 43724002,
+          "display": "Chill (finding)"
+        }
+      ],
+      "direct_transition": "Determine Fever"
+    },
+    "Determine Fever": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "severe"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "covid19_severity",
+                "operator": "==",
+                "value": "critical"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Fever",
+              "distribution": 0.919
+            },
+            {
+              "transition": "Determine Loss of Taste",
+              "distribution": 0.08099999999999996
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Fever",
+              "distribution": 0.881
+            },
+            {
+              "transition": "Determine Loss of Taste",
+              "distribution": 0.119
+            }
+          ]
+        }
+      ]
+    },
+    "Fever": {
+      "type": "Symptom",
+      "symptom": "fever",
+      "cause": "covid19",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Fever Onset"
+    },
+    "Fever Onset": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 386661006,
+          "display": "Fever (finding)"
+        }
+      ],
+      "direct_transition": "Determine Loss of Taste"
+    },
+    "Determine Loss of Taste": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Loss of Taste",
+          "distribution": 0.506
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.494
+        }
+      ],
+      "remarks": [
+        "In a survey, 50.6% of patients reported loss of taste as moderate, severe, or As bad as it can be, from Table 2 in Spinato G, Fabbris C, Polesel J, et al. Alterations in Smell or Taste in Mildly Symptomatic Outpatients With SARS-CoV-2 Infection. JAMA. Published online April 22, 2020. doi:10.1001/jama.2020.6771"
+      ]
+    },
+    "Loss of Taste": {
+      "type": "Symptom",
+      "symptom": "loss_of_taste",
+      "cause": "",
+      "probability": 1,
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "Loss of Taste Onset",
+      "remarks": [
+        "In a survey, 50.6% of patients reported loss of taste as moderate, severe, or As bad as it can be, from Table 2 in Spinato G, Fabbris C, Polesel J, et al. Alterations in Smell or Taste in Mildly Symptomatic Outpatients With SARS-CoV-2 Infection. JAMA. Published online April 22, 2020. doi:10.1001/jama.2020.6771"
+      ]
+    },
+    "Loss of Taste Onset": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 36955009,
+          "display": "Loss of taste (finding)"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "remarks": [
+        "In a survey, 50.6% of patients reported loss of taste as moderate, severe, or As bad as it can be, from Table 2 in Spinato G, Fabbris C, Polesel J, et al. Alterations in Smell or Taste in Mildly Symptomatic Outpatients With SARS-CoV-2 Infection. JAMA. Published online April 22, 2020. doi:10.1001/jama.2020.6771"
+      ]
+    },
+    "Wheezing": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 56018004,
+          "display": "Wheezing (finding)"
+        }
+      ],
+      "direct_transition": "Determine Nausea or Vomiting"
+    }
+  }
+}
+,
+"covid19/treat_blood_clot":{
+  "name": "treat_blood_clot",
+  "remarks": [
+    "All patients admitted to the hospital should be placed on prophylaxis for venous thromboembolism (blood clots).",
+    "",
+    "At some point, both patients on the floor and ICU should develop a clot (see the diagnose_blood_clot submodule), at which point they should be treated differently."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_diagnosed_clot",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Blood Clot Treatment",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_diagnosed_clot",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Blood Clot Prophylaxis",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "covid19_diagnosed_clot",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Blood Clot Prophylaxis": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Heparin",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "ckd",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "ckd",
+                "operator": ">=",
+                "value": 4
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Enoxaparin 30",
+          "condition": {
+            "condition_type": "Active Condition",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": 40095003,
+                "display": "Injury of kidney (disorder)"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Enoxaparin 40"
+        }
+      ]
+    },
+    "Blood Clot Treatment": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Heparin Single Dose",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "ckd",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "ckd",
+                "operator": ">=",
+                "value": 4
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Enoxaparin",
+          "condition": {
+            "condition_type": "Active Condition",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": 40095003,
+                "display": "Injury of kidney (disorder)"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Enoxaparin Double"
+        }
+      ]
+    },
+    "Heparin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1659263,
+          "display": "1 ML heparin sodium, porcine 5000 UNT/ML Injection"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "administration": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        },
+        "refills": 2
+      }
+    },
+    "Enoxaparin 30": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 854228,
+          "display": "0.3 ML Enoxaparin sodium 100 MG/ML Prefilled Syringe"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "administration": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        },
+        "refills": 2
+      }
+    },
+    "Enoxaparin 40": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 854235,
+          "display": "0.4 ML Enoxaparin sodium 100 MG/ML Prefilled Syringe"
+        }
+      ],
+      "administration": true,
+      "direct_transition": "Terminal"
+    },
+    "Heparin Infusion": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 103746007,
+          "display": "Heparin therapy (procedure)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 36576007,
+          "display": "Infusion (procedure)"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "covid19_clot"
+    },
+    "Heparin Single Dose": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1659263,
+          "display": "1 ML heparin sodium, porcine 5000 UNT/ML Injection"
+        }
+      ],
+      "direct_transition": "Heparin Infusion",
+      "administration": true,
+      "reason": "covid19_clot"
+    },
+    "Enoxaparin Double": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 854252,
+          "display": "1 ML Enoxaparin sodium 150 MG/ML Prefilled Syringe"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "administration": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        },
+        "refills": 2
+      },
+      "reason": "covid19_clot"
+    },
+    "Enoxaparin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 854252,
+          "display": "1 ML Enoxaparin sodium 150 MG/ML Prefilled Syringe"
+        }
+      ],
+      "administration": true,
+      "reason": "covid19_clot",
+      "direct_transition": "Terminal"
+    }
+  }
+}
+,
+"covid19":{
+  "name": "covid19",
+  "remarks": [
+    "This is module for the treatment of COVID-19 has estimates for rates of infection, rates of admission, and probabilities.",
+    "",
+    "Treatments are based on many sources, many of which are updating. Many pathways are missing.",
+    "",
+    "Daily lab values and measurements are missing."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Wait Until Exposure"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Wait Until Exposure": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 4,
+        "unit": "days"
+      },
+      "lookup_table_transition": {
+        "transitions": [
+          {
+            "transition": "Wait Until Exposure",
+            "default_probability": "1",
+            "lookup_table_name": "covid19_prob.csv"
+          },
+          {
+            "transition": "Call Infection Submodule",
+            "default_probability": "0",
+            "lookup_table_name": "covid19_prob.csv"
+          },
+          {
+            "transition": "Terminal",
+            "default_probability": "0",
+            "lookup_table_name": "covid19_prob.csv"
+          }
+        ],
+        "viewTable": false,
+        "lookup_table_name_ModuleBuilder": "covid19_prob.csv",
+        "lookuptable": "time,Call Infection Submodule,Terminal,Wait Until Exposure\r\n1579496400000-1579841999999,0.0001,0.01,0.9899\r\n1579842000000-1580187599999,0.0002,0.01,0.9898\r\n1580187600000-1580533199999,0.0004,0.01,0.9896\r\n1580533200000-1580878799999,0.0008,0.01,0.9892\r\n1580878800000-1581224399999,0.0016,0.01,0.9884\r\n1581224400000-1581569999999,0.0032,0.01,0.9868\r\n1581570000000-1581915599999,0.0064,0.01,0.9836\r\n1581915600000-1582261199999,0.0128,0.01,0.9772\r\n1582261200000-1582606799999,0.0256,0.01,0.9644\r\n1582606800000-1582952399999,0.0512,0.01,0.9388\r\n1582952400000-1583297999999,0.1024,0.01,0.8876\r\n1583298000000-1583643599999,0.2048,0.01,0.7852\r\n1583643600000-1583985599999,0.4096,0.01,0.5804\r\n1583985600000-1584331199999,0.75,0.01,0.24\r\n1584331200000-1584676799999,0.75,0.01,0.24\r\n1584676800000-1585022399999,0.75,0.01,0.24\r\n1585022400000-1585367999999,0.75,0.01,0.24\r\n1585368000000-1585713599999,0.75,0.01,0.24\r\n"
+      }
+    },
+    "Call Infection Submodule": {
+      "submodule": "covid19/infection",
+      "type": "CallSubmodule",
+      "direct_transition": "Terminal"
     }
   }
 }
@@ -21622,7 +30578,7 @@ export default {"allergic_rhinitis":{
           ]
         },
         {
-          "transition": "ModerateDecline",
+          "transition": "End_Diagnosis_Encounter",
           "remarks": [
             "before 1993 there were no specific drugs approved for Alzheimer’s by the fda"
           ]
@@ -21640,7 +30596,7 @@ export default {"allergic_rhinitis":{
           "display": "Galantamine 4 MG Oral Tablet"
         }
       ],
-      "direct_transition": "ModerateDecline"
+      "direct_transition": "End_Diagnosis_Encounter"
     },
     "FirstPrescription2": {
       "type": "MedicationOrder",
@@ -21653,7 +30609,7 @@ export default {"allergic_rhinitis":{
           "display": "Donepezil hydrochloride 10 MG Oral Tablet"
         }
       ],
-      "direct_transition": "ModerateDecline"
+      "direct_transition": "End_Diagnosis_Encounter"
     },
     "FirstPrescription3": {
       "type": "MedicationOrder",
@@ -21666,7 +30622,7 @@ export default {"allergic_rhinitis":{
           "display": "Tacrine 10 MG Oral Capsule"
         }
       ],
-      "direct_transition": "ModerateDecline"
+      "direct_transition": "End_Diagnosis_Encounter"
     },
     "ModerateDecline": {
       "type": "Delay",
@@ -22024,6 +30980,10 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "End_Diagnosis_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "ModerateDecline"
     }
   }
 }
@@ -23143,7 +32103,7 @@ export default {"allergic_rhinitis":{
       "prescription": {
         "as_needed": true
       },
-      "direct_transition": "Treating_Flare_Up"
+      "direct_transition": "End_Flare_Up_Encounter"
     },
     "Treating_Flare_Up": {
       "type": "Delay",
@@ -23230,6 +32190,10 @@ export default {"allergic_rhinitis":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "End_Flare_Up_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Treating_Flare_Up"
     }
   }
 }
@@ -24217,10 +33181,10 @@ export default {"allergic_rhinitis":{
     "Ear_Infection_End": {
       "type": "ConditionEnd",
       "condition_onset": "Gets_Ear_Infection",
-      "direct_transition": "Loopback_No_Infection"
+      "direct_transition": "End_Wellness_No_Infection"
     },
-    "Loopback_No_Infection": {
-      "type": "Simple",
+    "End_Wellness_No_Infection": {
+      "type": "EncounterEnd",
       "direct_transition": "No_Infection",
       "remarks": [
         "this state only exists to make the graph look nicer"
@@ -26974,6 +35938,79 @@ export default {"allergic_rhinitis":{
         "high": 10,
         "unit": "minutes"
       },
+      "direct_transition": "ECG_Sim"
+    },
+    "ECG_Sim": {
+      "type": "Physiology",
+      "model": "circulation/McSharry2003_Synthetic_ECG.xml",
+      "solver": "runge_kutta",
+      "step_size": 0.01,
+      "sim_duration": 4,
+      "lead_time": 0,
+      "inputs": [
+        {
+          "from_exp": "#{BMI} * 0.497 + 56.15",
+          "to": "hrmean"
+        }
+      ],
+      "outputs": [
+        {
+          "from_list": "zf",
+          "to": "ecg_result",
+          "type": "Attribute"
+        }
+      ],
+      "direct_transition": "ECG_Data",
+      "alt_direct_transition": "Gall_Bladder_Imaging"
+    },
+    "ECG_Data": {
+      "type": "Observation",
+      "category": "procedure",
+      "unit": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 29303009,
+          "display": "Electrocardiographic procedure"
+        }
+      ],
+      "sampled_data": {
+        "attributes": [
+          "ecg_result"
+        ]
+      },
+      "direct_transition": "ECG_Chart"
+    },
+    "ECG_Chart": {
+      "type": "Observation",
+      "category": "procedure",
+      "unit": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 29303009,
+          "display": "Electrocardiographic procedure"
+        }
+      ],
+      "attachment": {
+        "chart": {
+          "type": "line",
+          "title": "Electrocardiogram",
+          "axis_attribute_x": "time",
+          "width": 400,
+          "height": 200,
+          "series": [
+            {
+              "attribute": "ecg_result"
+            }
+          ]
+        }
+      },
+      "direct_transition": "Clear_ECG_result"
+    },
+    "Clear_ECG_result": {
+      "type": "SetAttribute",
+      "attribute": "ecg_result",
       "direct_transition": "Gall_Bladder_Imaging"
     },
     "Heparin": {
@@ -28126,7 +37163,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "Wellness_Encounter"
+          "transition": "End_Wellness_No_Action"
         }
       ]
     },
@@ -28354,6 +37391,10 @@ export default {"allergic_rhinitis":{
       "attribute": "blood_pressure_controlled",
       "value": true,
       "direct_transition": "Delay_2_Month_2"
+    },
+    "End_Wellness_No_Action": {
+      "type": "EncounterEnd",
+      "direct_transition": "Wellness_Encounter"
     }
   }
 }
@@ -34387,6 +43428,134 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"mTBI":{
+  "name": "Veteran mild TBI ",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "veteran delay"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "veteran delay": {
+      "type": "Delay",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Loss of Consciousness",
+              "distribution": 0.0094
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.9906
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Terminal",
+              "distribution": 1
+            }
+          ]
+        }
+      ],
+      "range": {
+        "low": 18,
+        "high": 21,
+        "unit": "years"
+      }
+    },
+    "Loss of Consciousness": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "mTBI",
+      "target_encounter": "Wellness Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 127295002,
+          "display": "Traumatic brain injury (disorder)"
+        }
+      ],
+      "direct_transition": "Wellness Encounter"
+    },
+    "Wellness Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "mTBI",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom (procedure)"
+        }
+      ],
+      "direct_transition": "end encounter",
+      "wellness": true
+    },
+    "end encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    }
+  }
+}
+,
+"med_rec":{
+  "name": "Medication Reconciliation",
+  "remarks": [
+    "This module will generate a documentation of current medications procedure at 45% of",
+    "wellness encounters. Through the Meaningful Use program, ONC is striving for",
+    "medication reconciliation at 50% of encounters. This assumes that we are not",
+    "at the goal level yet.",
+    "Source: https://www.healthit.gov/providers-professionals/achieve-meaningful-use/core-measures-2/medication-reconciliation"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Wellness_Encounter"
+    },
+    "Wellness_Encounter": {
+      "type": "Encounter",
+      "wellness": true,
+      "distributed_transition": [
+        {
+          "distribution": 0.45,
+          "transition": "Med_Rec"
+        },
+        {
+          "distribution": 0.55,
+          "transition": "End_Wellness_Encounter"
+        }
+      ]
+    },
+    "Med_Rec": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "430193006",
+          "display": "Medication Reconciliation (procedure)"
+        }
+      ],
+      "direct_transition": "End_Wellness_Encounter"
+    },
+    "End_Wellness_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Initial"
+    }
+  }
+}
+,
 "medications/ear_infection_antibiotic":{
   "name": "Ear Infection Antibiotic",
   "remarks": [
@@ -35982,48 +45151,6 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
-"med_rec":{
-  "name": "Medication Reconciliation",
-  "remarks": [
-    "This module will generate a documentation of current medications procedure at 45% of",
-    "wellness encounters. Through the Meaningful Use program, ONC is striving for",
-    "medication reconciliation at 50% of encounters. This assumes that we are not",
-    "at the goal level yet.",
-    "Source: https://www.healthit.gov/providers-professionals/achieve-meaningful-use/core-measures-2/medication-reconciliation"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Wellness_Encounter"
-    },
-    "Wellness_Encounter": {
-      "type": "Encounter",
-      "wellness": true,
-      "distributed_transition": [
-        {
-          "distribution": 0.45,
-          "transition": "Med_Rec"
-        },
-        {
-          "distribution": 0.55,
-          "transition": "Initial"
-        }
-      ]
-    },
-    "Med_Rec": {
-      "type": "Procedure",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "430193006",
-          "display": "Medication Reconciliation (procedure)"
-        }
-      ],
-      "direct_transition": "Initial"
-    }
-  }
-}
-,
 "metabolic_syndrome_care":{
   "name": "Metabolic Syndrome Standards of Care",
   "remarks": [],
@@ -36212,7 +45339,7 @@ export default {"allergic_rhinitis":{
           "remarks": [
             "Normal level"
           ],
-          "transition": "Wellness_Encounter"
+          "transition": "End_Wellness_Encounter"
         },
         {
           "condition": {
@@ -38210,7 +47337,7 @@ export default {"allergic_rhinitis":{
     },
     "Living_With_Diabetes": {
       "type": "Simple",
-      "direct_transition": "Wellness_Encounter"
+      "direct_transition": "End_Wellness_Encounter"
     },
     "check CKD": {
       "type": "Simple",
@@ -38324,7 +47451,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "Wellness_Encounter"
+          "transition": "End_Wellness_Encounter"
         }
       ]
     },
@@ -38338,7 +47465,7 @@ export default {"allergic_rhinitis":{
           "display": "Body mass index 30+ - obesity (finding)"
         }
       ],
-      "direct_transition": "Wellness_Encounter",
+      "direct_transition": "End_Wellness_Encounter",
       "assign_to_attribute": "obesity"
     },
     "Severe Obesity": {
@@ -38352,7 +47479,7 @@ export default {"allergic_rhinitis":{
           "display": "Body mass index 40+ - severely obese (finding)"
         }
       ],
-      "direct_transition": "Wellness_Encounter"
+      "direct_transition": "End_Wellness_Encounter"
     },
     "Record_MetabolicPanel": {
       "type": "DiagnosticReport",
@@ -40130,6 +49257,10 @@ export default {"allergic_rhinitis":{
         "",
         ""
       ]
+    },
+    "End_Wellness_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Wellness_Encounter"
     }
   }
 }
@@ -41304,88 +50435,6 @@ export default {"allergic_rhinitis":{
         "low": 45,
         "high": 100
       }
-    }
-  }
-}
-,
-"mTBI":{
-  "name": "Veteran mild TBI ",
-  "remarks": [
-    "A blank module"
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "veteran delay"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "veteran delay": {
-      "type": "Delay",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "transition": "Loss of Consciousness",
-              "distribution": 0.0094
-            },
-            {
-              "transition": "Terminal",
-              "distribution": 0.9906
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "transition": "Terminal",
-              "distribution": 1
-            }
-          ]
-        }
-      ],
-      "range": {
-        "low": 18,
-        "high": 21,
-        "unit": "years"
-      }
-    },
-    "Loss of Consciousness": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "mTBI",
-      "target_encounter": "Wellness Encounter",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 127295002,
-          "display": "Traumatic brain injury (disorder)"
-        }
-      ],
-      "direct_transition": "Wellness Encounter"
-    },
-    "Wellness Encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "mTBI",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185345009,
-          "display": "Encounter for symptom (procedure)"
-        }
-      ],
-      "direct_transition": "end encounter",
-      "wellness": true
-    },
-    "end encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
     }
   }
 }
@@ -42892,7 +51941,7 @@ export default {"allergic_rhinitis":{
           "transition": "Prescribe_Bisphosphate"
         },
         {
-          "transition": "Terminal",
+          "transition": "End_Diagnosis_Encounter",
           "remarks": "bisphosphates are the best medicine for osteoporosis, but not available until ~1995"
         }
       ]
@@ -42906,10 +51955,14 @@ export default {"allergic_rhinitis":{
           "display": "Alendronic acid 10 MG Oral Tablet"
         }
       ],
-      "direct_transition": "Terminal"
+      "direct_transition": "End_Diagnosis_Encounter"
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "End_Diagnosis_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   }
 }
@@ -49554,7 +58607,7 @@ export default {"allergic_rhinitis":{
           "display": "Escherichia coli urinary tract infection"
         }
       ],
-      "direct_transition": "UTI_Diagnosis"
+      "direct_transition": "UTI_Symptom1"
     },
     "Cystitis": {
       "type": "ConditionOnset",
@@ -49567,7 +58620,7 @@ export default {"allergic_rhinitis":{
           "display": "Cystitis"
         }
       ],
-      "direct_transition": "UTI_Diagnosis"
+      "direct_transition": "UTI_Symptom1"
     },
     "Pyelonephritis": {
       "type": "ConditionOnset",
@@ -49580,7 +58633,7 @@ export default {"allergic_rhinitis":{
           "display": "Pyelonephritis"
         }
       ],
-      "direct_transition": "UTI_Diagnosis"
+      "direct_transition": "UTI_Symptom1"
     },
     "UTI_Diagnosis": {
       "type": "Encounter",
@@ -49593,7 +58646,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for symptom"
         }
       ],
-      "direct_transition": "UTI_Symptom1"
+      "direct_transition": "Prescribe_UTI_Antibiotic"
     },
     "UTI_Symptom1": {
       "type": "Symptom",
@@ -49665,7 +58718,7 @@ export default {"allergic_rhinitis":{
         "high": 48,
         "unit": "days"
       },
-      "direct_transition": "Prescribe_UTI_Antibiotic"
+      "direct_transition": "UTI_Diagnosis"
     },
     "Prescribe_UTI_Antibiotic": {
       "type": "MedicationOrder",
@@ -50544,106 +59597,6 @@ export default {"allergic_rhinitis":{
       "attribute": "veteran",
       "value": "Late_Gulf_War",
       "direct_transition": "Terminal"
-    }
-  }
-}
-,
-"veterans/veteran_suicide_probabilities":{
-  "name": "Veteran Suicide Probabilities",
-  "remarks": [
-    ""
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Veteran check"
-    },
-    "Terminal": {
-      "type": "Terminal"
-    },
-    "Veteran": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "PTSD",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ptsd",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "SUD",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "opioid_addiction",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "MDD",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "mdd",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "Baseline"
-        }
-      ]
-    },
-    "PTSD": {
-      "type": "SetAttribute",
-      "attribute": "probability_of_suicide",
-      "direct_transition": "Terminal",
-      "value": 0.006,
-      "remarks": [
-        "50 deaths / 100k * 12 attempts / completion == 600 attempts / 100k == .006 == .6 % lifetime probability"
-      ]
-    },
-    "SUD": {
-      "type": "SetAttribute",
-      "attribute": "probability_of_suicide",
-      "direct_transition": "Terminal",
-      "value": 0.0144,
-      "remarks": [
-        "120 deaths / 100k * 12 attempts / completion == 1440 attempts / 100k == .0144 == 1.44 % lifetime probability"
-      ]
-    },
-    "Veteran check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          },
-          "transition": "Veteran"
-        },
-        {
-          "transition": "Terminal"
-        }
-      ]
-    },
-    "MDD": {
-      "type": "SetAttribute",
-      "attribute": "probability_of_suicide",
-      "direct_transition": "Terminal",
-      "value": 0.0072,
-      "remarks": [
-        "60 deaths / 100k * 12 attempts / completion == 720 attempts / 100k == .0072 == .72 % lifetime probability"
-      ]
-    },
-    "Baseline": {
-      "type": "SetAttribute",
-      "attribute": "probability_of_suicide",
-      "direct_transition": "Terminal",
-      "value": 0.003072,
-      "remarks": [
-        "25.6 deaths / 100k * 12 attempts / completion == 307.2 attempts / 100k == .003072 == .3 % lifetime probability"
-      ]
     }
   }
 }
@@ -54927,10 +63880,19 @@ export default {"allergic_rhinitis":{
         {
           "transition": "Evaluation Gate delay",
           "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ptsd_careplan",
-            "operator": "==",
-            "value": "PTSD_Careplan_Rx_ONLY"
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "PriorState",
+                "name": "PTSD_Careplan_Rx_ONLY",
+                "since": "PTSD_Re_evaluation Encounter"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "SSRI",
+                "operator": "is not nil"
+              }
+            ]
           }
         },
         {
@@ -55292,19 +64254,17 @@ export default {"allergic_rhinitis":{
         {
           "transition": "Therapy_Visit_Telehealth",
           "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ptsd_careplan",
-            "operator": "==",
-            "value": "PTSD_Careplan_Telehealth_Psych"
+            "condition_type": "PriorState",
+            "name": "PTSD_Careplan_Telehealth_Psych",
+            "since": "PTSD_Re_evaluation Encounter"
           }
         },
         {
           "transition": "Therapy_Visit_Telehealth",
           "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ptsd_careplan",
-            "operator": "==",
-            "value": "PTSD_Careplan_Telehealth_Psych_and_Rx"
+            "condition_type": "PriorState",
+            "name": "PTSD_Careplan_Telehealth_Psych_and_Rx",
+            "since": "PTSD_Re_evaluation Encounter"
           }
         },
         {
@@ -56665,6 +65625,106 @@ export default {"allergic_rhinitis":{
   }
 }
 ,
+"veterans/veteran_suicide_probabilities":{
+  "name": "Veteran Suicide Probabilities",
+  "remarks": [
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Veteran check"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Veteran": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "PTSD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ptsd",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "SUD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "opioid_addiction",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "MDD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "mdd",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Baseline"
+        }
+      ]
+    },
+    "PTSD": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.006,
+      "remarks": [
+        "50 deaths / 100k * 12 attempts / completion == 600 attempts / 100k == .006 == .6 % lifetime probability"
+      ]
+    },
+    "SUD": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.0144,
+      "remarks": [
+        "120 deaths / 100k * 12 attempts / completion == 1440 attempts / 100k == .0144 == 1.44 % lifetime probability"
+      ]
+    },
+    "Veteran check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          },
+          "transition": "Veteran"
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "MDD": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.0072,
+      "remarks": [
+        "60 deaths / 100k * 12 attempts / completion == 720 attempts / 100k == .0072 == .72 % lifetime probability"
+      ]
+    },
+    "Baseline": {
+      "type": "SetAttribute",
+      "attribute": "probability_of_suicide",
+      "direct_transition": "Terminal",
+      "value": 0.003072,
+      "remarks": [
+        "25.6 deaths / 100k * 12 attempts / completion == 307.2 attempts / 100k == .003072 == .3 % lifetime probability"
+      ]
+    }
+  }
+}
+,
 "wellness_encounters":{
   "name": "Wellness Encounters",
   "remarks": [
@@ -57143,7 +66203,7 @@ export default {"allergic_rhinitis":{
         "code": 449868002,
         "display": "Current every day smoker"
       },
-      "direct_transition": "Wellness_Encounter"
+      "direct_transition": "End_Of_Wellness_Encounter"
     },
     "Record_Former_Smoker": {
       "type": "Observation",
@@ -57156,7 +66216,7 @@ export default {"allergic_rhinitis":{
           "display": "Tobacco smoking status NHIS"
         }
       ],
-      "direct_transition": "Wellness_Encounter",
+      "direct_transition": "End_Of_Wellness_Encounter",
       "value_code": {
         "system": "SNOMED-CT",
         "code": 8517006,
@@ -57174,7 +66234,7 @@ export default {"allergic_rhinitis":{
           "display": "Tobacco smoking status NHIS"
         }
       ],
-      "direct_transition": "Wellness_Encounter",
+      "direct_transition": "End_Of_Wellness_Encounter",
       "value_code": {
         "system": "SNOMED-CT",
         "code": 266919005,
@@ -57515,6 +66575,10 @@ export default {"allergic_rhinitis":{
       ],
       "direct_transition": "Lab_MetabolicPanel",
       "vital_sign": "Respiration Rate"
+    },
+    "End_Of_Wellness_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Wellness_Encounter"
     }
   }
 }

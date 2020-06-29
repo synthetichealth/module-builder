@@ -2380,11 +2380,23 @@ class Observation extends Component<Props> {
           { this.renderToggles('value_code') }
         </div>
       );
-    } else { // vital_sign
+    } else if (state.vital_sign) {
       return (
         <div className='section'>
           Vital Sign: <RIEInput className='editable-text' value={state.vital_sign} propName={'vital_sign'}  change={this.props.onChange('vital_sign')} />
           { this.renderToggles('vital_sign') }
+        </div>
+      );
+    } else if (state.attachment) {
+      return (
+        <div className='section'>
+          Observation Attachments Not Supported.
+        </div>
+      );
+    } else if (state.sampled_data) {
+      return (
+        <div className='section'>
+          Observation Sampled Data Not Supported.
         </div>
       );
     }
