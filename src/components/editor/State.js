@@ -84,7 +84,7 @@ class StateEditor extends Component<Props> {
       case "AllergyOnset":
         return <AllergyOnset {...props} />
       case "AllergyEnd":
-        return <AllergyEnd {...props} />
+        return <AllergyEnd {...props} />  
       case "MedicationOrder":
         return <MedicationOrder {...props} />
       case "MedicationEnd":
@@ -533,11 +533,24 @@ class Encounter extends Component<Props> {
       {id: 'inpatient', text: 'inpatient'},
       {id: 'ambulatory', text: 'ambulatory'}
     ];
+    let statusoptions = [
+      {id: 'planned', text: 'Planned'},
+      {id: 'arrived', text: 'Arrived'},
+      {id: 'triaged', text: 'Triaged'},
+      {id: 'in-progress', text: 'In Progress'},
+      {id: 'onleave', text: 'On Leave'},
+      {id: 'finished', text: 'Finished'},
+      {id: 'cancelled', text: 'Cancelled'},
+      {id: 'entered-in-error', text: 'Entered in Error'},
+      {id: 'unknown', text: 'Unknown'}
+    ];
     if (state.wellness == null) {
       return (
         <div>
           {this.renderWellness()}
           Encounter Class: <RIESelect className='editable-text' value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
+          <br />
+          Encounter Status: <RIESelect className='editable-text' value={{id: state.encounter_status, text: state.encounter_status}} propName="encounter_status" change={this.props.onChange('encounter_status')} options={statusoptions} />
           <br />
           {this.renderReason()}
           <div className='section'>

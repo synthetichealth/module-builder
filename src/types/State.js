@@ -86,6 +86,7 @@ export type EncounterState = {
   type: 'Encounter',
   wellness?: boolean,
   encounter_class: 'emergency' | 'inpatient' | 'ambulatory',
+  encounter_status: 'planned' | 'arrived' | 'triaged'|'in-progress'| 'onleave' | 'finished'| 'cancelled' | 'entered-in-error'| 'unknown',
   reason?: string,
   codes: Code[],
   transition?: Transition
