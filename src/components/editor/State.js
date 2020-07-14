@@ -1866,6 +1866,7 @@ class MedicationOrder extends Component<Props> {
           <br />
         </div>
         {this.renderPrescription()}
+        {this.renderEncounter()}
         {this.renderChronicMed()}
         {this.renderCreateAdministration()}
       </div>
@@ -2316,6 +2317,50 @@ class MedicationOrder extends Component<Props> {
             }
           >
             Remove Instructions
+          </a>
+          <br />
+        </div>
+      );
+    }
+  }
+
+  renderEncounter() {
+    let state = ((this.props.state: any): MedicationOrderState);
+    if (!state.encounter) {
+      return (
+        <div>
+          <a
+            className="editable-text"
+            onClick={() =>
+              this.props.onChange("encounter")({
+                val: { id: [getTemplate("Type.Code.Snomed")] },
+              })
+            }
+          >
+            Add Encounter
+          </a>
+          <br />
+        </div>
+      );
+    } else {
+      return (
+        <div className="section">
+          Encounter
+          <br />
+          <Codes
+            codes={state.encounter}
+            system={"SNOMED-CT"}
+            onChange={this.props.onChange("encounter")}
+          />
+          <a
+            className="editable-text"
+            onClick={() =>
+              this.props.onChange("encounter")({
+                val: { id: null },
+              })
+            }
+          >
+            Remove Encounter
           </a>
           <br />
         </div>

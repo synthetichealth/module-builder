@@ -173,6 +173,7 @@ export type MedicationOrderState = {
     },
     instructions?: Code[],
   },
+  encounter?: Code[],
   transition?: Transition,
 };
 
