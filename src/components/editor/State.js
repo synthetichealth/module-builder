@@ -1853,6 +1853,7 @@ class MedicationOrder extends Component<Props> {
     let state = ((this.props.state: any): MedicationOrderState);
     return (
       <div>
+        {this.renderTargetEncounter()}
         {this.renderAssignToAttribute()}
         {this.renderReason()}
         <div className="section">
@@ -1866,11 +1867,60 @@ class MedicationOrder extends Component<Props> {
           <br />
         </div>
         {this.renderPrescription()}
-        {this.renderEncounter()}
         {this.renderChronicMed()}
         {this.renderCreateAdministration()}
       </div>
     );
+  }
+
+  renderTargetEncounter() {
+    let state = ((this.props.state: any): MedicationOrderState);
+    let encounters = this.props.otherStates.filter((s) => {
+      return s.type === "Encounter";
+    });
+    let options = encounters.map((e) => {
+      return { id: e.name, text: e.name };
+    });
+    let targetEncounter = (
+      <RIESelect
+        className="editable-text"
+        value={{ id: state.target_encounter, text: state.target_encounter }}
+        propName={"target_encounter"}
+        change={this.props.onChange("target_encounter")}
+        options={options}
+      />
+    );
+    if (state.target_encounter) {
+      return (
+        <div>
+          Target Encounter: {targetEncounter}
+          <br />
+          <a
+            className="editable-text"
+            onClick={() =>
+              this.props.onChange("target_encounter")({ val: { id: null } })
+            }
+          >
+            (remove to diagnose immediately)
+          </a>
+          <br />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <a
+            className="editable-text"
+            onClick={() =>
+              this.props.onChange("target_encounter")({ val: { id: "text" } })
+            }
+          >
+            Add Target Encounter
+          </a>
+          <br />
+        </div>
+      );
+    }
   }
 
   renderChronicMed() {
@@ -2317,50 +2367,6 @@ class MedicationOrder extends Component<Props> {
             }
           >
             Remove Instructions
-          </a>
-          <br />
-        </div>
-      );
-    }
-  }
-
-  renderEncounter() {
-    let state = ((this.props.state: any): MedicationOrderState);
-    if (!state.encounter) {
-      return (
-        <div>
-          <a
-            className="editable-text"
-            onClick={() =>
-              this.props.onChange("encounter")({
-                val: { id: [getTemplate("Type.Code.Snomed")] },
-              })
-            }
-          >
-            Add Encounter
-          </a>
-          <br />
-        </div>
-      );
-    } else {
-      return (
-        <div className="section">
-          Encounter
-          <br />
-          <Codes
-            codes={state.encounter}
-            system={"SNOMED-CT"}
-            onChange={this.props.onChange("encounter")}
-          />
-          <a
-            className="editable-text"
-            onClick={() =>
-              this.props.onChange("encounter")({
-                val: { id: null },
-              })
-            }
-          >
-            Remove Encounter
           </a>
           <br />
         </div>

@@ -153,6 +153,7 @@ export type MedicationOrderState = {
   name: string,
   remarks: string[],
   type: "MedicationOrder",
+  target_encounter: string,
   assign_to_attribute?: string,
   administration?: boolean,
   chronic?: boolean,
@@ -173,7 +174,6 @@ export type MedicationOrderState = {
     },
     instructions?: Code[],
   },
-  encounter?: Code[],
   transition?: Transition,
 };
 
