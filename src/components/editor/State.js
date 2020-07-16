@@ -1853,6 +1853,7 @@ class MedicationOrder extends Component<Props> {
     let state = ((this.props.state: any): MedicationOrderState);
     return (
       <div>
+        {this.renderTargetEncounter()}
         {this.renderAssignToAttribute()}
         {this.renderReason()}
         <div className="section">
@@ -1870,6 +1871,56 @@ class MedicationOrder extends Component<Props> {
         {this.renderCreateAdministration()}
       </div>
     );
+  }
+
+  renderTargetEncounter() {
+    let state = ((this.props.state: any): MedicationOrderState);
+    let encounters = this.props.otherStates.filter((s) => {
+      return s.type === "Encounter";
+    });
+    let options = encounters.map((e) => {
+      return { id: e.name, text: e.name };
+    });
+    let targetEncounter = (
+      <RIESelect
+        className="editable-text"
+        value={{ id: state.target_encounter, text: state.target_encounter }}
+        propName={"target_encounter"}
+        change={this.props.onChange("target_encounter")}
+        options={options}
+      />
+    );
+    if (state.target_encounter) {
+      return (
+        <div>
+          Target Encounter: {targetEncounter}
+          <br />
+          <a
+            className="editable-text"
+            onClick={() =>
+              this.props.onChange("target_encounter")({ val: { id: null } })
+            }
+          >
+            (remove to diagnose immediately)
+          </a>
+          <br />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <a
+            className="editable-text"
+            onClick={() =>
+              this.props.onChange("target_encounter")({ val: { id: "text" } })
+            }
+          >
+            Add Target Encounter
+          </a>
+          <br />
+        </div>
+      );
+    }
   }
 
   renderChronicMed() {
