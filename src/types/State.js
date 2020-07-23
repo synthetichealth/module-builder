@@ -98,6 +98,11 @@ export type EncounterState = {
     | "unknown",
   reason?: string,
   codes: Code[],
+  duration: {
+    low: number,
+    high: number,
+    unit: UnitOfTime,
+  },
   transition?: Transition,
 };
 

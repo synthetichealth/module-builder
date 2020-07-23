@@ -780,6 +780,7 @@ class Encounter extends Component<Props> {
               onChange={this.props.onChange("codes")}
             />
           </div>
+          <div>{this.renderDuration()}</div> 
         </div>
       );
     } else {
@@ -787,6 +788,7 @@ class Encounter extends Component<Props> {
         <div>
           {this.renderWellness()}
           {this.renderReason()}
+          {this.renderDuration()}
         </div>
       );
     }
@@ -953,6 +955,67 @@ class Encounter extends Component<Props> {
       }
     }
   }
+
+  renderDuration() {
+    let state = ((this.props.state: any): EncounterState);
+    if (!state.duration) {
+      return (
+        <div>
+          <a
+            className="editable-text"
+            onClick={() =>
+              this.props.onChange("duration")({
+                val: { id: { low: 10, high: 20, unit: "days" } },
+              })
+            }
+          >
+            Add Duration
+          </a>
+          <br />
+        </div>
+      );
+      return null;
+    } else {
+      return (
+        <div className="section">
+          Duration Low:{" "}
+          <RIENumber
+            className="editable-text"
+            value={state.duration.low}
+            propName={"low"}
+            change={this.props.onChange("duration.low")}
+          />
+          <br />
+          Duration High:{" "}
+          <RIENumber
+            className="editable-text"
+            value={state.duration.high}
+            propName={"high"}
+            change={this.props.onChange("duration.high")}
+          />
+          <br />
+          Duration Unit:{" "}
+          <RIESelect
+            className="editable-text"
+            value={{ id: state.duration.unit, text: state.duration.unit }}
+            propName="unit"
+            change={this.props.onChange("duration.unit")}
+            options={unitOfTimeOptions}
+          />
+          <br />
+          <a
+            className="editable-text"
+            onClick={() =>
+              this.props.onChange("duration")({ val: { id: null } })
+            }
+          >
+            (remove)
+          </a>
+        </div>
+      );
+    }
+  }
+
   handleTextChange(value) {
     this.setState({ value: value });
   }
