@@ -121,6 +121,7 @@ export type ConditionOnsetState = {
   target_encounter: string,
   assign_to_attribute?: string,
   codes: Code[],
+  bodySite: Code[],
   transition?: Transition,
 };
 

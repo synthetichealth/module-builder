@@ -1124,6 +1124,9 @@ class ConditionOnset extends Component<Props> {
             onChange={this.props.onChange("codes")}
           />
         </div>
+        <div>
+          {this.renderbodySite()}
+        </div>
       </div>
     );
   }
@@ -1253,6 +1256,48 @@ class ConditionOnset extends Component<Props> {
             }
           >
             (remove)
+          </a>
+          <br />
+        </div>
+      );
+    }
+  }
+
+  renderbodySite() {
+    let state = ((this.props.state: any): ConditionOnsetState);
+    if (!state.bodySite) {
+      return (
+        <div>
+          <a
+            className="editable-text"
+            onClick={() =>
+              this.props.onChange("bodySite")({
+                val: { id: getTemplate("Type.Code.Snomed") },
+              })
+            }
+          >
+            Add Body Site
+          </a>
+          <br />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Code
+            code={state.bodySite}
+            system={"SNOMED"}
+            onChange={this.props.onChange("bodySite")}
+          />
+          <a
+            className="editable-text"
+            onClick={() =>
+              this.props.onChange("bodySite")({
+                val: { id: null },
+              })
+            }
+          >
+            Remove Body Site
           </a>
           <br />
         </div>
