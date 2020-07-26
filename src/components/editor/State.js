@@ -1265,13 +1265,13 @@ class ConditionOnset extends Component<Props> {
 
   renderbodySite() {
     let state = ((this.props.state: any): ConditionOnsetState);
-    if (!state.bodySite) {
+    if (!state.body_site) {
       return (
         <div>
           <a
             className="editable-text"
             onClick={() =>
-              this.props.onChange("bodySite")({
+              this.props.onChange("body_site")({
                 val: { id: getTemplate("Type.Code.Snomed") },
               })
             }
@@ -1285,14 +1285,14 @@ class ConditionOnset extends Component<Props> {
       return (
         <div>
           <Code
-            code={state.bodySite}
+            code={state.body_site}
             system={"SNOMED"}
-            onChange={this.props.onChange("bodySite")}
+            onChange={this.props.onChange("body_site")}
           />
           <a
             className="editable-text"
             onClick={() =>
-              this.props.onChange("bodySite")({
+              this.props.onChange("body_site")({
                 val: { id: null },
               })
             }
