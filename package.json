@@ -14,7 +14,7 @@
     "jquery": "^3.5.0",
     "jsdom": "^15.1.1",
     "jsoneditor-react": "^1.0.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "papaparse": "^5.1.0",
     "react": "^16.8.6",
     "react-addons-test-utils": "^15.6.2",
