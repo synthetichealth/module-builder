@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/module-builder/static/css/main.6220da83.chunk.css",
-    "main.js": "/module-builder/static/js/main.9606a3a1.chunk.js",
-    "main.js.map": "/module-builder/static/js/main.9606a3a1.chunk.js.map",
+    "main.js": "/module-builder/static/js/main.d18c1fa9.chunk.js",
+    "main.js.map": "/module-builder/static/js/main.d18c1fa9.chunk.js.map",
     "runtime~main.js": "/module-builder/static/js/runtime~main.ef160282.js",
     "runtime~main.js.map": "/module-builder/static/js/runtime~main.ef160282.js.map",
     "static/css/2.f4b59a32.chunk.css": "/module-builder/static/css/2.f4b59a32.chunk.css",
@@ -11,7 +11,7 @@
     "static/js/3.90effab4.chunk.js": "/module-builder/static/js/3.90effab4.chunk.js",
     "static/js/3.90effab4.chunk.js.map": "/module-builder/static/js/3.90effab4.chunk.js.map",
     "index.html": "/module-builder/index.html",
-    "precache-manifest.b56fac08a67da3a44b02456541bff8a9.js": "/module-builder/precache-manifest.b56fac08a67da3a44b02456541bff8a9.js",
+    "precache-manifest.47ff893e889881724a96ef87cfaf3357.js": "/module-builder/precache-manifest.47ff893e889881724a96ef87cfaf3357.js",
     "service-worker.js": "/module-builder/service-worker.js",
     "static/css/2.f4b59a32.chunk.css.map": "/module-builder/static/css/2.f4b59a32.chunk.css.map",
     "static/css/main.6220da83.chunk.css.map": "/module-builder/static/css/main.6220da83.chunk.css.map",
