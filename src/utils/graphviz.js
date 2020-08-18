@@ -450,7 +450,10 @@ const stateDescription = (state) =>{
       let display_val = escapeVerticalBar(code['display']);
       let valuSet_val = escapeVerticalBar(code['value_set']);
 
-      details = details + system_val + "[" + code_val + "]: " + display_val  + "\\l" + "Value Set:" + "[" + valuSet_val +"] " + "\\l"
+      details = details + system_val + "[" + code_val + "]: " + display_val  + "\\l";
+      if (valuSet_val) {
+      	details += "Value Set:" + "[" + valuSet_val +"] " + "\\l";
+      }
     })
   }
 
