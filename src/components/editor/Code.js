@@ -20,13 +20,13 @@ export class Code extends Component<Props> {
     if(this.props.code.value_set) {
       return (
         <div>
-        Value Set: <RIEInput className='editable-text' value={this.props.code.value_set} propName="value_set" change={this.props.onChange('value_set')} />
+        Value Set (Optional): <RIEInput className='editable-text' value={this.props.code.value_set} propName="value_set" change={this.props.onChange('value_set')} />
         </div>
       );
     }else {
       return (
         <div>
-        Value Set: <RIEInput className='editable-text' value="" propName="value_set" change={this.props.onChange('value_set')} />
+        Value Set (Optional): <RIEInput className='editable-text' value="" propName="value_set" change={this.props.onChange('value_set')} />
         </div>
       );
     }
