@@ -441,7 +441,19 @@ const stateDescription = (state) =>{
 
   if(state.codes !== undefined){
     state['codes'].forEach( code => {
-      details = details + code['system'] + "[" + code['code'] + "]: " + code['display'] + "\\l"
+      if(code['value_set'] === undefined){
+        code['value_set'] = "";
+      }
+
+      let system_val = escapeVerticalBar(code['system']);
+      let code_val = escapeVerticalBar(code['code']);
+      let display_val = escapeVerticalBar(code['display']);
+      let valuSet_val = escapeVerticalBar(code['value_set']);
+
+      details = details + system_val + "[" + code_val + "]: " + display_val  + "\\l";
+      if (valuSet_val) {
+      	details += "Value Set:" + "[" + valuSet_val +"] " + "\\l";
+      }
     })
   }
 
@@ -675,6 +687,11 @@ const escapeLabel = (label) => {
   return cleanString(label, mapObj);
 
 }
+
+const escapeVerticalBar = (inputStr) => {
+  inputStr = inputStr.toString();
+  return inputStr.replace(/\|/g, "\\|")
+};
 
 export const svgDefs = `<defs>
 

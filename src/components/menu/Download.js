@@ -63,6 +63,15 @@ class Download extends Component {
         delete s.name;
       }
 
+      // Remove empty code value sets
+      if(s['codes'] !== undefined){
+        s['codes'].forEach( c => {
+          if (c.value_set !== undefined && !c.value_set){
+            delete c.value_set;
+          }
+        })
+      }
+
       // find table transitions and delete state data
       if (s.lookup_table_transition !== undefined){
         let name = s.lookup_table_transition.lookup_table_name_ModuleBuilder;

@@ -10,10 +10,27 @@ import { getTemplate } from '../../templates/Templates';
 type Props = {
   code: CodeType,
   system: string,
-  onChange: any
+  onChange: any,
+  value_set: string
 }
 
 export class Code extends Component<Props> {
+
+  checkValueSetKey() {
+    if(this.props.code.value_set) {
+      return (
+        <div>
+        Value Set (Optional): <RIEInput className='editable-text' value={this.props.code.value_set} propName="value_set" change={this.props.onChange('value_set')} />
+        </div>
+      );
+    }else {
+      return (
+        <div>
+        Value Set (Optional): <RIEInput className='editable-text' value="" propName="value_set" change={this.props.onChange('value_set')} />
+        </div>
+      );
+    }
+  }
 
   render() {
     let code = this.props.code;
@@ -25,6 +42,7 @@ export class Code extends Component<Props> {
         Code: <RIEInput className='editable-text' value={code.code} propName="code" change={this.props.onChange('code')} />
         <br />
         Display: <RIEInput className='editable-text' value={code.display} propName="display" change={this.props.onChange('display')} />
+        {this.checkValueSetKey()}
       </div>
     );
   }
