@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber, RIEToggle, RIETextArea } from 'riek';
 import _ from 'lodash';
 
-import type { 
+import type {
   State, InitialState, TerminalState, SimpleState,
   GuardState, DelayState, SetAttributeState, CounterState,
   CallSubmoduleState, EncounterState, EncounterEndState,
@@ -253,18 +253,35 @@ class Delay extends Component<Props> {
       );
     }
     else {
-      return (
-        <div>
-          Range Low: <RIENumber className='editable-text' value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
-          <br />
-          Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
-          <br />
-          Range Unit: <RIESelect className='editable-text' value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
-          <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.ExactWithUnit')}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
-          <br />
-        </div>
-      );
+      if (state.range.low) {
+        return (
+          <div>
+            Range Low: <RIENumber className='editable-text' value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
+            <br />
+            Range High: <RIENumber className='editable-text' value={state.range.high} propName='high' change={this.props.onChange('range.high')} />
+            <br />
+            Range Unit: <RIESelect className='editable-text' value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
+            <br />
+            <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.ExactWithUnit')}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
+            <br />
+            <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.GaussianWithUnit')}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Gaussian</a>
+            <br />
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            Distribution Mean: <RIENumber className='editable-text' value={state.range.mean} propName='mean' change={this.props.onChange('range.mean')} />
+            <br />
+            Distribution Standard Deviation: <RIENumber className='editable-text' value={state.range.standardDeviation} propName='standardDeviation' change={this.props.onChange('range.standardDeviation')} />
+            <br />
+            Distribution Unit: <RIESelect className='editable-text' value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
+            <br />
+            <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.ExactWithUnit')}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
+            <br />
+          </div>
+        );
+      }
     }
   }
 
@@ -292,11 +309,11 @@ class SetAttribute extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.attribute]!= undefined) 
+        if (data[state.attribute]!= undefined)
         {
-          Object.keys(data[state.attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -372,14 +389,14 @@ class SetAttribute extends Component<Props> {
 
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.attribute != this.state.value)
     {
       this.props.onChange('attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -387,8 +404,8 @@ class SetAttribute extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.attribute});
     this.setState({lastSubmitted: this.props.state.attribute})
   }
 
@@ -420,16 +437,16 @@ class Counter extends Component<Props> {
     let options = [
       {id: 'increment', text: 'increment'},
       {id: 'decrement', text: 'decrement'}
-    ]; 
-    
+    ];
+
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.attribute]!= undefined) 
+        if (data[state.attribute]!= undefined)
         {
-          Object.keys(data[state.attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -466,14 +483,14 @@ class Counter extends Component<Props> {
   }
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.attribute != this.state.value)
     {
       this.props.onChange('attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -481,8 +498,8 @@ class Counter extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.attribute});
     this.setState({lastSubmitted: this.props.state.attribute})
   }
 
@@ -598,16 +615,16 @@ class Encounter extends Component<Props> {
         let displayAttribute;
         if (this.state.displayLabel)
         {
-            const data = AttributeData;      
+            const data = AttributeData;
             let others = [this.props.moduleName];
-            if (data[state.reason]!= undefined) 
+            if (data[state.reason]!= undefined)
             {
-              Object.keys(data[state.reason].read).forEach(i => {others.push(i)})                
+              Object.keys(data[state.reason].read).forEach(i => {others.push(i)})
               Object.keys(data[state.reason].write).forEach(i => {others.push(i)})
             }
             others = others.filter((x, i, a) => a.indexOf(x) == i)
             others.splice(others.indexOf[this.props.moduleName], 1);
-    
+
             if (state.reason === '')
             {
               state.reason = 'text';
@@ -621,7 +638,7 @@ class Encounter extends Component<Props> {
             else{
               displayAttribute = <label className="editable-text" onClick={this.toggleLabel}>{state.reason}</label>
             }
-    
+
         }
         else
         {
@@ -649,14 +666,14 @@ class Encounter extends Component<Props> {
   }
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.reason != this.state.value)
     {
       this.props.onChange('reason')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -664,8 +681,8 @@ class Encounter extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.reason});      
+  fixTextBox() {
+    this.setState({value: this.props.state.reason});
     this.setState({lastSubmitted: this.props.state.reason})
   }
 
@@ -771,11 +788,11 @@ class ConditionOnset extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.assign_to_attribute]!= undefined) 
+        if (data[state.assign_to_attribute]!= undefined)
         {
-          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.assign_to_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -813,17 +830,17 @@ class ConditionOnset extends Component<Props> {
       );
     }
   }
-  
+
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.assign_to_attribute != this.state.value)
     {
       this.props.onChange('assign_to_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -831,8 +848,8 @@ class ConditionOnset extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.assign_to_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.assign_to_attribute});
     this.setState({lastSubmitted: this.props.state.assign_to_attribute})
   }
   toggleLabel = () =>  {
@@ -897,11 +914,11 @@ class ConditionEnd extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.referenced_by_attribute]!= undefined) 
+        if (data[state.referenced_by_attribute]!= undefined)
         {
-          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -961,17 +978,17 @@ class ConditionEnd extends Component<Props> {
       );
     }
   }
-  
+
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.referenced_by_attribute != this.state.value)
     {
       this.props.onChange('referenced_by_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -979,8 +996,8 @@ class ConditionEnd extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.referenced_by_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.referenced_by_attribute});
     this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
   }
   toggleLabel = () =>  {
@@ -1029,11 +1046,11 @@ class AllergyOnset extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.assign_to_attribute]!= undefined) 
+        if (data[state.assign_to_attribute]!= undefined)
         {
-          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.assign_to_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -1071,17 +1088,17 @@ class AllergyOnset extends Component<Props> {
       );
     }
   }
-  
+
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.assign_to_attribute != this.state.value)
     {
       this.props.onChange('assign_to_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -1089,8 +1106,8 @@ class AllergyOnset extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.assign_to_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.assign_to_attribute});
     this.setState({lastSubmitted: this.props.state.assign_to_attribute})
   }
   toggleLabel = () =>  {
@@ -1154,11 +1171,11 @@ class AllergyEnd extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.referenced_by_attribute]!= undefined) 
+        if (data[state.referenced_by_attribute]!= undefined)
         {
-          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -1218,17 +1235,17 @@ class AllergyEnd extends Component<Props> {
       );
     }
   }
-  
+
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.referenced_by_attribute != this.state.value)
     {
       this.props.onChange('referenced_by_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -1236,8 +1253,8 @@ class AllergyEnd extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.referenced_by_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.referenced_by_attribute});
     this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
   }
   toggleLabel = () =>  {
@@ -1310,11 +1327,11 @@ class MedicationOrder extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.assign_to_attribute]!= undefined) 
+        if (data[state.assign_to_attribute]!= undefined)
         {
-          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.assign_to_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -1377,7 +1394,7 @@ class MedicationOrder extends Component<Props> {
         if (this.state.displayLabelReason)
         {
           displayAttribute = <label className="editable-text" onClick={this.toggleLabelReason}>{state.reason}</label>
-    
+
         }
         else
         {
@@ -1525,14 +1542,14 @@ class MedicationOrder extends Component<Props> {
   }
 
   handleTextChange(value) {
-    this.setState({value: value});      
+    this.setState({value: value});
   }
 
   handleSubmit(save) {
     if (save && this.props.state.assign_to_attribute != this.state.value)
     {
       this.props.onChange('assign_to_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -1540,25 +1557,25 @@ class MedicationOrder extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.assign_to_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.assign_to_attribute});
     this.setState({lastSubmitted: this.props.state.assign_to_attribute})
   }
-  
+
   toggleLabel = () =>  {
     this.setState({displayLabel: !this.state.displayLabel});
   }
 
   handleTextChangeReason(value) {
     this.setState({valueReason: value});
-      
+
   }
 
   handleSubmitReason(save) {
     if (save && this.props.state.reason != this.state.valueReason)
     {
       this.props.onChange('reason')({val: this.state.valueReason})
-      this.setState({lastSubmittedReason: this.state.valueReason})      
+      this.setState({lastSubmittedReason: this.state.valueReason})
     }
     else {
       this.setState({valueReason: this.state.lastSubmittedReason})
@@ -1627,11 +1644,11 @@ class MedicationEnd extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.referenced_by_attribute]!= undefined) 
+        if (data[state.referenced_by_attribute]!= undefined)
         {
-          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -1693,14 +1710,14 @@ class MedicationEnd extends Component<Props> {
   }
 
   handleTextChange(value) {
-    this.setState({value: value});      
+    this.setState({value: value});
   }
 
   handleSubmit(save) {
     if (save && this.props.state.referenced_by_attribute != this.state.value)
     {
       this.props.onChange('referenced_by_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -1708,11 +1725,11 @@ class MedicationEnd extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.referenced_by_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.referenced_by_attribute});
     this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
   }
-  
+
   toggleLabel = () =>  {
     this.setState({displayLabel: !this.state.displayLabel});
   }
@@ -1721,7 +1738,7 @@ class MedicationEnd extends Component<Props> {
 
 class CarePlanStart extends Component<Props> {
   constructor (props) {
-    super(props)    
+    super(props)
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTextChangeReason = this.handleTextChangeReason.bind(this);
@@ -1764,11 +1781,11 @@ class CarePlanStart extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.assign_to_attribute]!= undefined) 
+        if (data[state.assign_to_attribute]!= undefined)
         {
-          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.assign_to_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -1828,10 +1845,10 @@ class CarePlanStart extends Component<Props> {
       let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
       if (state.reason === "*Input Attribute*") {
         let displayAttribute;
-        
+
         if (this.state.displayLabelReason)
-        {            
-            displayAttribute = <label className="editable-text" onClick={this.toggleLabelReason}>{state.reason}</label>    
+        {
+            displayAttribute = <label className="editable-text" onClick={this.toggleLabelReason}>{state.reason}</label>
         }
         else
         {
@@ -1846,7 +1863,7 @@ class CarePlanStart extends Component<Props> {
             <br/>
           </div>
         );
-      } else {           
+      } else {
         return (
           <div>
             Reason: {reason}
@@ -1903,14 +1920,14 @@ class CarePlanStart extends Component<Props> {
   }
 
   handleTextChange(value) {
-    this.setState({value: value});      
+    this.setState({value: value});
   }
 
   handleSubmit(save) {
     if (save && this.props.state.assign_to_attribute != this.state.value)
     {
       this.props.onChange('assign_to_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -1918,8 +1935,8 @@ class CarePlanStart extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.assign_to_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.assign_to_attribute});
     this.setState({lastSubmitted: this.props.state.assign_to_attribute})
   }
 
@@ -1928,14 +1945,14 @@ class CarePlanStart extends Component<Props> {
   }
   handleTextChangeReason(value) {
     this.setState({valueReason: value});
-      
+
   }
 
   handleSubmitReason(save) {
     if (save && this.props.state.reason != this.state.valueReason)
     {
       this.props.onChange('reason')({val: this.state.valueReason})
-      this.setState({lastSubmittedReason: this.state.valueReason})      
+      this.setState({lastSubmittedReason: this.state.valueReason})
     }
     else {
       this.setState({valueReason: this.state.lastSubmittedReason})
@@ -2004,11 +2021,11 @@ class CarePlanEnd extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.referenced_by_attribute]!= undefined) 
+        if (data[state.referenced_by_attribute]!= undefined)
         {
-          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -2071,14 +2088,14 @@ class CarePlanEnd extends Component<Props> {
 
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.referenced_by_attribute != this.state.value)
     {
       this.props.onChange('referenced_by_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -2086,8 +2103,8 @@ class CarePlanEnd extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.referenced_by_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.referenced_by_attribute});
     this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
   }
 
@@ -2099,7 +2116,7 @@ class CarePlanEnd extends Component<Props> {
 
 class Procedure extends Component<Props> {
   constructor (props) {
-    super(props)    
+    super(props)
     this.handleTextChangeReason = this.handleTextChangeReason.bind(this);
     this.handleSubmitReason = this.handleSubmitReason.bind(this);
     this.state = {
@@ -2146,10 +2163,10 @@ class Procedure extends Component<Props> {
       let reason = <RIESelect className='editable-text' value={{id: state.reason, text: state.reason}} propName={'reason'}  change={this.props.onChange('reason')} options={allOptions} />
       if (state.reason === "*Input Attribute*") {
         let displayAttribute;
-        
+
         if (this.state.displayLabelReason)
-        {            
-            displayAttribute = <label className="editable-text" onClick={this.toggleLabelReason}>{state.reason}</label>    
+        {
+            displayAttribute = <label className="editable-text" onClick={this.toggleLabelReason}>{state.reason}</label>
         }
         else
         {
@@ -2200,17 +2217,17 @@ class Procedure extends Component<Props> {
       );
     }
   }
-  
+
   handleTextChangeReason(value) {
     this.setState({valueReason: value});
-      
+
   }
 
   handleSubmitReason(save) {
     if (save && this.props.state.reason != this.state.valueReason)
     {
       this.props.onChange('reason')({val: this.state.valueReason})
-      this.setState({lastSubmittedReason: this.state.valueReason})      
+      this.setState({lastSubmittedReason: this.state.valueReason})
     }
     else {
       this.setState({valueReason: this.state.lastSubmittedReason})
@@ -2341,16 +2358,16 @@ class Observation extends Component<Props> {
       let displayAttribute;
       if (this.state.displayLabel)
       {
-          const data = AttributeData;      
+          const data = AttributeData;
           let others = [this.props.moduleName];
-          if (data[state.attribute]!= undefined) 
+          if (data[state.attribute]!= undefined)
           {
-            Object.keys(data[state.attribute].read).forEach(i => {others.push(i)})                
+            Object.keys(data[state.attribute].read).forEach(i => {others.push(i)})
             Object.keys(data[state.attribute].write).forEach(i => {others.push(i)})
           }
           others = others.filter((x, i, a) => a.indexOf(x) == i)
           others.splice(others.indexOf[this.props.moduleName], 1);
-  
+
           if (others.length > 0)
           {
             displayAttribute = <span><label className="editable-text" onClick={this.toggleLabel}>{state.attribute}</label>
@@ -2360,7 +2377,7 @@ class Observation extends Component<Props> {
           else{
             displayAttribute = <label className="editable-text" onClick={this.toggleLabel}>{state.attribute}</label>
           }
-  
+
       }
       else
       {
@@ -2456,14 +2473,14 @@ class Observation extends Component<Props> {
   }
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.attribute != this.state.value)
     {
       this.props.onChange('attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -2471,8 +2488,8 @@ class Observation extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.attribute});
     this.setState({lastSubmitted: this.props.state.attribute})
   }
 
@@ -2776,11 +2793,11 @@ class Device extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.assign_to_attribute]!= undefined) 
+        if (data[state.assign_to_attribute]!= undefined)
         {
-          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.assign_to_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.assign_to_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -2827,7 +2844,7 @@ class Device extends Component<Props> {
     if (save && this.props.state.assign_to_attribute != this.state.value)
     {
       this.props.onChange('assign_to_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -2835,8 +2852,8 @@ class Device extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.assign_to_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.assign_to_attribute});
     this.setState({lastSubmitted: this.props.state.assign_to_attribute})
   }
   toggleLabel = () =>  {
@@ -2902,11 +2919,11 @@ class DeviceEnd extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.referenced_by_attribute]!= undefined) 
+        if (data[state.referenced_by_attribute]!= undefined)
         {
-          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -2966,17 +2983,17 @@ class DeviceEnd extends Component<Props> {
       );
     }
   }
-  
+
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.referenced_by_attribute != this.state.value)
     {
       this.props.onChange('referenced_by_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -2984,8 +3001,8 @@ class DeviceEnd extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.referenced_by_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.referenced_by_attribute});
     this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
   }
   toggleLabel = () =>  {
@@ -3112,11 +3129,11 @@ class Death extends Component<Props> {
     let displayAttribute;
     if (this.state.displayLabel)
     {
-        const data = AttributeData;      
+        const data = AttributeData;
         let others = [this.props.moduleName];
-        if (data[state.referenced_by_attribute]!= undefined) 
+        if (data[state.referenced_by_attribute]!= undefined)
         {
-          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})                
+          Object.keys(data[state.referenced_by_attribute].read).forEach(i => {others.push(i)})
           Object.keys(data[state.referenced_by_attribute].write).forEach(i => {others.push(i)})
         }
         others = others.filter((x, i, a) => a.indexOf(x) == i)
@@ -3154,17 +3171,17 @@ class Death extends Component<Props> {
       );
     }
   }
-   
+
   handleTextChange(value) {
     this.setState({value: value});
-      
+
   }
 
   handleSubmit(save) {
     if (save && this.props.state.referenced_by_attribute != this.state.value)
     {
       this.props.onChange('referenced_by_attribute')({val: this.state.value})
-      this.setState({lastSubmitted: this.state.value})      
+      this.setState({lastSubmitted: this.state.value})
     }
     else {
       this.setState({value: this.state.lastSubmitted})
@@ -3172,8 +3189,8 @@ class Death extends Component<Props> {
     this.toggleLabel();
   }
 
-  fixTextBox() {    
-    this.setState({value: this.props.state.referenced_by_attribute});      
+  fixTextBox() {
+    this.setState({value: this.props.state.referenced_by_attribute});
     this.setState({lastSubmitted: this.props.state.referenced_by_attribute})
   }
 

@@ -292,6 +292,11 @@ const AttributeTemplates = {
     high: 2,
     unit: "days"
   },
+  GaussianWithUnit: {
+    mean: 10,
+    standardDeviation: 1,
+    unit: "days"
+  },
   Prescription: {
     dosage: {
       amount: 1,

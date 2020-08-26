@@ -268,7 +268,11 @@ const stateDescription = (state) =>{
     case 'Death':
       if(state['range'] !== undefined){
         let r = state['range']
-        details = `${r['low']} - ${r['high']} ${r['unit']}`
+        if (r['low'] !== undefined) {
+          details = `${r['low']} - ${r['high']} ${r['unit']}`
+        } else {
+          details = `Mean ${r['mean']}, SD ${r['standardDeviation']} ${r['unit']}`
+        }
       } else if (state['exact'] !== undefined) {
         let e = state['exact']
         details = `${e['quantity']} ${e['unit']}`
@@ -426,7 +430,7 @@ const stateDescription = (state) =>{
           const c = s.code;
           supplyCode.push(`${c['system']}[${c['code']}]: ${c['display']}`);
         });
-        
+
         details += `{${supplyCode.map(t => t).join('|')}}|`;
         details += `{${supplyQuantity.map(t => t).join('|')}}|`;
       } else {

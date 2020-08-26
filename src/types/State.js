@@ -45,7 +45,9 @@ export type DelayState = {
   range?: {
     low: number,
     high: number,
-    unit: UnitOfTime
+    unit: UnitOfTime,
+    mean: number,
+    standardDeviation: number
   },
   transition?: Transition
 }
@@ -207,7 +209,9 @@ export type ProcedureState = {
   duration: {
     low: number,
     high: number,
-    unit: UnitOfTime
+    unit: UnitOfTime,
+    mean: number,
+    standardDeviation: number
   },
   transition?: Transition
 }

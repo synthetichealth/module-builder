@@ -18,8 +18,8 @@ export type AgeConditional = {
 export type DateConditional = {
   condition_type: "Date",
   operator: '==' | '!=' | "<" | "<=" | ">" | ">=",
-  year?: number
-  month?: number
+  year?: number,
+  month?: number,
   date?: DateInput
 }
 
