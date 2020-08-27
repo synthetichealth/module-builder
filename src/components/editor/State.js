@@ -249,6 +249,8 @@ class Delay extends Component<Props> {
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.RangeWithUnit')}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Range</a>
           <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.GaussianWithUnit')}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Gaussian</a>
+          <br />
         </div>
       );
     }
@@ -278,6 +280,8 @@ class Delay extends Component<Props> {
             Distribution Unit: <RIESelect className='editable-text' value={{id: state.range.unit, text: state.range.unit}} propName="unit" change={this.props.onChange('range.unit')} options={unitOfTimeOptions} />
             <br />
             <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.ExactWithUnit')}}); this.props.onChange('range')({val: {id: null}})}}>Change to Exact</a>
+            <br />
+            <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.RangeWithUnit')}}); this.props.onChange('exact')({val: {id: null}})}}>Change to Range</a>
             <br />
           </div>
         );
@@ -2198,23 +2202,44 @@ class Procedure extends Component<Props> {
     if (!state.duration) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('duration')({val: {id: {low: 10, high: 20, unit: 'days'}}})}>Add Duration</a>
+          <a className='editable-text' onClick={() => this.props.onChange('duration')({val: {id: {low: 10, high: 20, unit: 'hours'}}})}>Add Duration Range</a>
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('duration')({val: {id: {mean: 10, standardDeviation: 1, unit: 'hours'}}})}}>Add Gaussian Duration</a>
           <br />
         </div>
       );
       return null;
     } else {
-      return (
-        <div className='section'>
-          Duration Low: <RIENumber className='editable-text' value={state.duration.low} propName={'low'}  change={this.props.onChange('duration.low')} />
-          <br />
-          Duration High: <RIENumber className='editable-text' value={state.duration.high} propName={'high'}  change={this.props.onChange('duration.high')} />
-          <br />
-          Duration Unit: <RIESelect className='editable-text' value={{id: state.duration.unit, text: state.duration.unit}} propName="unit" change={this.props.onChange('duration.unit')} options={unitOfTimeOptions} />
-          <br />
-          <a className='editable-text' onClick={() => this.props.onChange('duration')({val: {id: null}})}>(remove)</a>
-        </div>
-      );
+      if (state.duration !== undefined && state.duration.low !== undefined) {
+        return (
+          <div className='section'>
+            Duration Low: <RIENumber className='editable-text' value={state.duration.low} propName={'low'}  change={this.props.onChange('duration.low')} />
+            <br />
+            Duration High: <RIENumber className='editable-text' value={state.duration.high} propName={'high'}  change={this.props.onChange('duration.high')} />
+            <br />
+            Duration Unit: <RIESelect className='editable-text' value={{id: state.duration.unit, text: state.duration.unit}} propName="unit" change={this.props.onChange('duration.unit')} options={unitOfTimeOptions} />
+            <br />
+            <a className='editable-text' onClick={() => {this.props.onChange('duration')({val: {id: {mean: 10, standardDeviation: 1, unit: 'hours'}}})}}>Change to Gaussian</a>
+            <br />
+            <a className='editable-text' onClick={() => this.props.onChange('duration')({val: {id: null}})}>(remove)</a>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            Duration Mean: <RIENumber className='editable-text' value={state.duration.mean} propName='mean' change={this.props.onChange('duration.mean')} />
+            <br />
+            Duration Standard Deviation: <RIENumber className='editable-text' value={state.duration.standardDeviation} propName='standardDeviation' change={this.props.onChange('duration.standardDeviation')} />
+            <br />
+            Duration Unit: <RIESelect className='editable-text' value={{id: state.duration.unit, text: state.duration.unit}} propName="unit" change={this.props.onChange('duration.unit')} options={unitOfTimeOptions} />
+            <br />
+            <a className='editable-text' onClick={() => {this.props.onChange('duration')({val: {id: {low: 10, high: 20, unit: 'hours'}}});}}>Change to Range</a>
+            <br />
+            <a className='editable-text' onClick={() => this.props.onChange('duration')({val: {id: null}})}>(remove)</a>
+            <br />
+          </div>
+        );
+      }
     }
   }
 

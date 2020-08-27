@@ -526,7 +526,12 @@ const stateDescription = (state) =>{
   }
   if(state.duration){
     let d = state['duration']
-    details = `${details}\\lDuration: ${d['low']} - ${d['high']} ${d['unit']}\\l`
+    if(state.duration.low !== undefined) {
+      details = `${details}\\lDuration: ${d['low']} - ${d['high']} ${d['unit']}\\l`
+    } else {
+      details = `${details}\\lDuration: Mean ${d['mean']}, SD ${d['standardDeviation']} ${d['unit']}\\l`
+    }
+
   }
   if(state.category){
     details = `${details}Category: ${state['category']}\\l`
