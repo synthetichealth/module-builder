@@ -253,7 +253,7 @@ class Delay extends Component<Props> {
       );
     }
     else {
-      if (state.range.low) {
+      if (state.range !== undefined && state.range.low !== undefined) {
         return (
           <div>
             Range Low: <RIENumber className='editable-text' value={state.range.low} propName='low' change={this.props.onChange('range.low')} />

@@ -43,11 +43,11 @@ export type DelayState = {
     unit: UnitOfTime
   },
   range?: {
-    low: number,
-    high: number,
+    low?: number,
+    high?: number,
     unit: UnitOfTime,
-    mean: number,
-    standardDeviation: number
+    mean?: number,
+    standardDeviation?: number
   },
   transition?: Transition
 }
