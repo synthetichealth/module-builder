@@ -28,17 +28,17 @@ class LoadModule extends Component {
       for (var key in module.states)
       {
         if (module.states[key].lookup_table_transition != null)
-        { 
+        {
           tableMessage += key.toString() + ' & '
 
           // this is an awful hack to get around a data model mismatch
           const lttWrapper = { type: 'Table', transitions: module.states[key].lookup_table_transition };
           module.states[key].lookup_table_transition = lttWrapper;
 
-          
+
           // put default data in for state of the table transition
           module.states[key].lookup_table_transition.lookup_table_name_ModuleBuilder = module.states[key].lookup_table_transition.transitions[0].lookup_table_name;
-          module.states[key].lookup_table_transition.viewTable = false;    
+          module.states[key].lookup_table_transition.viewTable = false;
           module.states[key].lookup_table_transition.lookuptable = '';
         }
       }
@@ -64,7 +64,7 @@ class LoadModule extends Component {
   onClick = (key) => {
     return () => {
       this.setState({...this.state, json: '', selectedOption: 'core'})
-      this.props.push('#' + key);   
+      this.props.push('#' + key);
     }
   }
 
@@ -178,13 +178,13 @@ class LoadModule extends Component {
           }
         }
         return(
-        <div className='row'>  
+        <div className='row'>
           <ul className='LoadModule-list'>
-            {this.state.Branches}  
+            {this.state.Branches}
           </ul>
           {moduleList}
           {submoduleList}
-        </div>  
+        </div>
         )
 
     default:
@@ -213,9 +213,9 @@ class LoadModule extends Component {
       if (i.props.id !== ID) {
         document.getElementById(i.props.id).style.backgroundColor = "#eee";
       }
-    }) 
+    })
   }
-  
+
   fetchBranchList() {
     fetch(`https://api.github.com/repos/synthetichealth/synthea/branches`)
     .then(response => response.json())
@@ -225,8 +225,8 @@ class LoadModule extends Component {
           <li key={i} id={branch.name}><button className='btn btn-link' onClick={() => {this.changeColor(branch.name, 'branch');this.fetchModuleList(branch.name)}}>{branch.name}</button></li>
         ))
       })
-    })  
-    .catch(error => console.log('error: ', error)); 
+    })
+    .catch(error => console.log('error: ', error));
   }
 
   fetchModuleList(branch) {
@@ -246,7 +246,7 @@ class LoadModule extends Component {
           <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'module');this.fetchModule(name.name)}}>{name.name}</button></li>
         ))
         })
-      })  
+      })
       .catch(error => console.log('error: ', error));
   }
 
@@ -255,7 +255,7 @@ class LoadModule extends Component {
       currentModule: name
     })
     if (name.includes(".json")) {
-      fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + name)  
+      fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + name)
         .then(response => response.text())
         .then(data => this.loadModule(data))
         .then(this.setState ({
@@ -263,7 +263,7 @@ class LoadModule extends Component {
         }))
         .catch(error => console.log('error: ', error));
     } else {
-      fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + name + `?ref=` + this.state.currentBranch)  
+      fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + name + `?ref=` + this.state.currentBranch)
       .then(response => response.json())
       .then(data => this.setState({
         Submodules: data.map((name, i) => (
@@ -275,7 +275,7 @@ class LoadModule extends Component {
   }
 
   fetchSubmodule(name) {
-    fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + this.state.currentModule + `/` + name)  
+    fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + this.state.currentModule + `/` + name)
       .then(response => response.text())
       .then(data => this.loadModule(data))
       .then(this.setState ({
@@ -283,7 +283,7 @@ class LoadModule extends Component {
         Modules: null
       }))
       .catch(error => console.log('error: ', error));
-  }    
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.selectedOption === 'git' && prevState.selectedOption !== 'git') {
