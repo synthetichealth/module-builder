@@ -378,7 +378,12 @@ const StateTemplates = {
 
   Delay: {
     type: "Delay",
-    exact: {...AttributeTemplates.ExactWithUnit}
+    distribution: {"kind": "EXACT",
+                   "parameters": {
+                     "value": 1
+                   }
+    },
+    "unit": "years"             
   },
 
   SetAttribute: {
