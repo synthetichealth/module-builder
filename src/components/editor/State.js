@@ -40,6 +40,11 @@ type Props = {
   displayAttributes: any
 }
 
+type Distro = {
+  kind: string,
+  parameters: any
+}
+
 const unitOfTimeOptions = [
   {id: 'years', text: 'years'},
   {id: 'months', text: 'months'},
@@ -227,18 +232,91 @@ class Guard extends Component<Props> {
 
 }
 
+class Distribution extends Component<Distro> {
+  render() {
+    switch (this.props.kind) {
+      case "EXACT":
+        return <Exact {...this.props} onChange={this.props.onChange} />
+      case "GAUSSIAN":
+        return <Gaussian {...this.props} onChange={this.props.onChange} />
+      case "UNIFORM":
+        return <Uniform {...this.props} onChange={this.props.onChange} />
+    }
+  }
+}
+
+class Exact extends Component {
+  render() {
+    return (
+      <div>
+        Exact Quantity: <RIENumber className='editable-text' value={this.props.parameters.value} propName='value' change={this.props.onChange('parameters.value')} />
+        <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'UNIFORM'}}); this.props.onChange('parameters')({val: {id: {high: 20, low: 10}}})}}>Change to Range</a>
+        <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'GAUSSIAN'}}); this.props.onChange('parameters')({val: {id: {mean: 10, standardDeviation: 1}}})}}>Change to Gaussian</a>
+        <br />
+      </div>
+    );
+  }
+}
+
+class Uniform extends Component {
+  render() {
+    return (
+      <div>
+        Range Low: <RIENumber className='editable-text' value={this.props.parameters.low} propName='low' change={this.props.onChange('parameters.low')} />
+        <br />
+        Range High: <RIENumber className='editable-text' value={this.props.parameters.high} propName='high' change={this.props.onChange('parameters.high')} />
+        <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'EXACT'}}); this.props.onChange('parameters')({val: {id: {value: 10}}})}}>Change to Exact</a>
+        <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'GAUSSIAN'}}); this.props.onChange('parameters')({val: {id: {mean: 10, standardDeviation: 1}}})}}>Change to Gaussian</a>
+        <br />
+      </div>
+    );
+  }
+}
+class Gaussian extends Component {
+  render() {
+    return (
+      <div>
+        Median: <RIENumber className='editable-text' value={this.props.parameters.mean} propName='mean' change={this.props.onChange('parameters.mean')} />
+        <br />
+        Standard Deviation: <RIENumber className='editable-text' value={this.props.parameters.standardDeviation} propName='standardDeviation' change={this.props.onChange('parameters.standardDeviation')} />
+        <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'EXACT'}}); this.props.onChange('parameters')({val: {id: {value: 10}}})}}>Change to Exact</a>
+        <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'UNIFORM'}}); this.props.onChange('parameters')({val: {id: {high: 20, low: 10}}})}}>Change to Range</a>
+        <br />
+      </div>
+    );
+  }
+}
+
+
 class Delay extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): DelayState);
+    let form;
+    if (this.legacyGMF()) {
+      form = this.renderLegacyExactOrRange();
+    } else {
+      form = this.renderExactOrRange();
+    }
     return (
       <div>
-        {this.renderExactOrRange()}
+        {form}
       </div>
     );
   }
 
   renderExactOrRange() {
+    let state = ((this.props.state: any): DelayState);
+    return <Distribution kind={state.distribution.kind} parameters={state.distribution.parameters} onChange={this.props.onChange('distribution')} />
+  }
+  
+  renderLegacyExactOrRange() {
     let state = ((this.props.state: any): DelayState);
     if (state.exact) {
       return (
@@ -267,7 +345,15 @@ class Delay extends Component<Props> {
       );
     }
   }
-
+  
+  legacyGMF() {
+    let state = ((this.props.state: any): DelayState);
+    if (state.exact || state.range) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 class SetAttribute extends Component<Props> {
