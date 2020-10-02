@@ -42,7 +42,8 @@ type Props = {
 
 type Distro = {
   kind: string,
-  parameters: any
+  parameters: any,
+  otherToggles: Component
 }
 
 const unitOfTimeOptions = [
@@ -178,8 +179,6 @@ class StateEditor extends Component<Props> {
           </div>
           <br/>
           <a onClick={this.props.helpFunction(EditTutorial)}>Help</a>
-
-
         </div>
     )
   }
@@ -255,6 +254,7 @@ class Exact extends Component<Distro> {
         <br />
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'GAUSSIAN'}}); this.props.onChange('parameters')({val: {id: {mean: 10, standardDeviation: 1}}})}}>Change to Gaussian</a>
         <br />
+        {this.props.otherToggles}
       </div>
     );
   }
@@ -272,6 +272,7 @@ class Uniform extends Component<Distro> {
         <br />
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'GAUSSIAN'}}); this.props.onChange('parameters')({val: {id: {mean: 10, standardDeviation: 1}}})}}>Change to Gaussian</a>
         <br />
+        {this.props.otherToggles}
       </div>
     );
   }
@@ -289,6 +290,7 @@ class Gaussian extends Component<Distro> {
         <br />
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'UNIFORM'}}); this.props.onChange('parameters')({val: {id: {high: 20, low: 10}}})}}>Change to Range</a>
         <br />
+        {this.props.otherToggles}
       </div>
     );
   }
@@ -2412,9 +2414,18 @@ class Observation extends Component<Props> {
     );
   }
 
+  legacyGMF() {
+    let state = ((this.props.state: any): ObservationState);
+    if (state.exact || state.range) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   renderValueContainer() { // renders exact, range, attribute, or vital_sign
     let state = ((this.props.state: any): ObservationState);
-    if (state.exact) {
+    if (this.legacyGMF() && state.exact) {
       let value = state.exact.quantity;
       if(typeof value === 'boolean'){
         value = String(value);
@@ -2426,7 +2437,7 @@ class Observation extends Component<Props> {
           { this.renderToggles('exact') }
         </div>
       );
-    } else if (state.range) {
+    } else if (this.legacyGMF() && state.range) {
       return (
         <div className='section'>
           Range Low: <RIENumber className='editable-text' value={state.range.low} propName='low' change={this.props.onChange('range.low')} />
@@ -2435,6 +2446,13 @@ class Observation extends Component<Props> {
           <br />
           { this.renderToggles('range') }
         </div>
+      );
+    } else if (state.distribution) {
+      return (
+        <Distribution kind={state.distribution.kind}
+                      parameters={state.distribution.parameters}
+                      onChange={this.props.onChange('distribution')}
+                      otherToggles={this.renderToggles('distribution')} />
       );
     } else if (state.attribute) {
       let displayAttribute;
@@ -2501,24 +2519,30 @@ class Observation extends Component<Props> {
     }
   }
 
+  clearProps(...propsToClear) {
+    propsToClear.forEach((propName) => {
+      this.props.onChange(propName)({val: {id: null}});
+    })
+  }
+
   renderToggles(currentItem) {
     console.log(currentItem);
 
     let toggles = [];
 
-    if (currentItem !== 'exact') {
+    if (currentItem !== 'exact' && currentItem !== 'distribution') {
       toggles.push(
                 <div key='exact'>
-                  <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Exact</a>
+                  <a className='editable-text' onClick={() => {this.props.onChange('exact')({val: {id: getTemplate('Attribute.Exact')}}); this.clearProps('range', 'attribute', 'vital_sign', 'value_code', 'distribution')}}>Change to Exact</a>
                   <br />
                 </div>
         );
     }
 
-    if (currentItem !== 'range') {
+    if (currentItem !== 'range' && currentItem !== 'distribution') {
       toggles.push(
                 <div key='range'>
-                  <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Range</a>
+                  <a className='editable-text' onClick={() => {this.props.onChange('range')({val: {id: getTemplate('Attribute.Range')}}); this.clearProps('exact', 'attribute', 'vital_sign', 'value_code', 'distribution')}}>Change to Range</a>
                   <br />
                 </div>
         );
@@ -2527,7 +2551,7 @@ class Observation extends Component<Props> {
     if (currentItem !== 'attribute') {
       toggles.push(
                 <div key='attribute'>
-                  <a className='editable-text' onClick={() => {this.props.onChange('attribute')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Attribute</a>
+                  <a className='editable-text' onClick={() => {this.props.onChange('attribute')({val: {id: "text"}}); this.clearProps('exact', 'range', 'vital_sign', 'value_code', 'distribution')}}>Change to Attribute</a>
                   <br />
                 </div>
         );
@@ -2536,7 +2560,7 @@ class Observation extends Component<Props> {
     if (currentItem !== 'vital_sign') {
       toggles.push(
                 <div key='vital_sign'>
-                  <a className='editable-text' onClick={() => {this.props.onChange('vital_sign')({val: {id: "text"}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Vital Sign</a>
+                  <a className='editable-text' onClick={() => {this.props.onChange('vital_sign')({val: {id: "text"}}); this.clearProps('exact', 'range', 'attribute', 'value_code', 'distribution')}}>Change to Vital Sign</a>
                   <br />
                 </div>
         );
@@ -2545,7 +2569,7 @@ class Observation extends Component<Props> {
     if (currentItem !== 'value_code') {
       toggles.push(
                 <div key='value_code'>
-                  <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id:  getTemplate('Type.Code.Snomed')}}); this.props.onChange('exact')({val: {id: null}}); this.props.onChange('range')({val: {id: null}}); this.props.onChange('attribute')({val: {id: null}}); this.props.onChange('vital_sign')({val: {id: null}})}}>Change to Value Code</a>
+                  <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id:  getTemplate('Type.Code.Snomed')}}); this.clearProps('exact', 'range', 'attribute', 'vital_sign', 'distribution')}}>Change to Value Code</a>
                   <br />
                 </div>
         );
