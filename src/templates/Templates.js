@@ -504,7 +504,7 @@ const StateTemplates = {
     symptom: "",
     cause: "",
     probability: 1.0,
-    exact: {...AttributeTemplates.Exact}
+    distribution: {kind: "EXACT", parameters: {value: 1}}
   },
 
   Device: {

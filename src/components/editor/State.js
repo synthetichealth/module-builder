@@ -2808,15 +2808,42 @@ class Symptom extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): SymptomState);
+    let distroForm;
+    if (this.legacyGMF()) {
+      distroForm = this.renderExactOrRange();
+    } else {
+      distroForm = this.renderDistribution();
+    }
     return (
       <div>
         Symptom: <RIEInput className='editable-text' value={state.symptom} propName={'symptom'} change={this.props.onChange('symptom')} />
         <br/>
         {this.renderProbability()}
         {this.renderCause()}
-        {this.renderExactOrRange()}
+        {distroForm}
       </div>
     );
+  }
+
+  renderDistribution() {
+    let state = ((this.props.state: any): SymptomState);
+    return (
+      <div>
+        <Distribution kind={state.distribution.kind}
+                      parameters={state.distribution.parameters}
+                      onChange={this.props.onChange('distribution')} />
+        <br />
+      </div>
+    );
+  }
+
+  legacyGMF() {
+    let state = ((this.props.state: any): SymptomState);
+    if (state.exact || state.range) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   renderProbability() {
