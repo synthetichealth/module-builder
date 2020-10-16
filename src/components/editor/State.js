@@ -391,6 +391,12 @@ class SetAttribute extends Component<Props> {
     }
     let state = ((this.props.state: any): SetAttributeState);
     let displayAttribute;
+    let valueForm;
+    if (this.legacyGMF()) {
+      valueForm = this.renderLegacyValueOrRange();
+    } else {
+      valueForm = this.renderValueOrDistribution()
+    }
     if (this.state.displayLabel)
     {
         const data = AttributeData;
@@ -426,12 +432,61 @@ class SetAttribute extends Component<Props> {
       <div>
         Attribute: {displayAttribute}
         <br/>
-        {this.renderValueOrRange()}
+        {valueForm}
       </div>
     );
   }
 
-  renderValueOrRange() {
+  legacyGMF() {
+    let state = ((this.props.state: any): SetAttributeState);
+    if (state.range) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  renderValueOrDistribution() {
+    let state = ((this.props.state: any): SetAttributeState);
+    if (state.distribution) {
+      return (
+        <div>
+          <Distribution kind={state.distribution.kind}
+                        parameters={state.distribution.parameters}
+                        onChange={this.props.onChange('distribution')} />
+          <br />
+          <a className='editable-text' onClick={() => this.props.onChange('distribution')({val: {id: null}})}>(remove)</a>
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('value')({val: {id: "text"}}); this.props.onChange('distribution')({val: {id: null}})}}>Change to Value</a>
+        </div>
+      );
+    } else if (state.value) {
+      let val = state.value;
+      if(typeof val === 'boolean'){
+        val = String(val);
+      }
+      return (
+        <div>
+          Value: <RIEInput className='editable-text' value={val} propName={'value'} change={this.props.onChange('value')} />
+          <br />
+          <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: null}})}>(remove)</a>
+          <br />
+          <a className='editable-text' onClick={() => {this.props.onChange('distribution')({val: {id: {kind: "EXACT", parameters: {value: 1}}}}); this.props.onChange('value')({val: {id: null}})}}>Change to Distribution</a>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: "text"}})}>Add Value</a><br />
+          <a className='editable-text' onClick={() => this.props.onChange('distribution')({val: {id: {kind: "EXACT", parameters: {value: 1}}}})}>Add Distribution</a><br />
+          <br />
+        </div>
+      );
+    }
+
+  }
+
+  renderLegacyValueOrRange() {
     let state = ((this.props.state: any): SetAttributeState);
 
     if (state.value == null && state.range == null) {
