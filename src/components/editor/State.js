@@ -2210,8 +2210,23 @@ class Procedure extends Component<Props> {
     }
   }
 
+  legacyGMF() {
+    let state = ((this.props.state: any): ProcedureState);
+    if (state.duration) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     let state = ((this.props.state: any): ProcedureState);
+    let durationEditor;
+    if (this.legacyGMF()) {
+      durationEditor = this.renderLegacyDuration();
+    } else {
+      durationEditor = this.renderDuration();
+    }
     return (
       <div>
         {this.renderReason()}
@@ -2221,7 +2236,7 @@ class Procedure extends Component<Props> {
           <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
           <br />
         </div>
-        {this.renderDuration()}
+        {durationEditor}
       </div>
     );
   }
@@ -2278,6 +2293,36 @@ class Procedure extends Component<Props> {
   }
 
   renderDuration() {
+    let state = ((this.props.state: any): ProcedureState);
+    if (state.distribution) {
+      return (
+        <div>
+          <Distribution kind={state.distribution.kind}
+                        parameters={state.distribution.parameters}
+                        onChange={this.props.onChange('distribution')} />
+          Unit: <RIESelect className='editable-text'
+                          value={{id: state.unit, text: state.unit}}
+                          propName="unit"
+                          change={this.props.onChange('unit')}
+                          options={unitOfTimeOptions} />
+          <br />
+          <a className='editable-text' onClick={() => this.props.onChange('distribution')({val: {id: null}})}>(remove)</a>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <a className='editable-text' onClick={() => {
+            this.props.onChange('distribution')({val: {id: {kind: "UNIFORM", parameters:{low: 30, high: 60}}}});
+            this.props.onChange('unit')({val: {id: "minutes"}});
+          }}>Add Duration</a>
+          <br />
+        </div>
+      );
+    }
+  }
+
+  renderLegacyDuration() {
     let state = ((this.props.state: any): ProcedureState);
     if (!state.duration) {
       return (

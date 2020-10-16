@@ -383,7 +383,7 @@ const StateTemplates = {
                      "value": 1
                    }
     },
-    "unit": "years"             
+    "unit": "years"
   },
 
   SetAttribute: {
@@ -455,11 +455,14 @@ const StateTemplates = {
   Procedure: {
     type: "Procedure",
     codes: [{...TypeTemplates.Code.Snomed}],
-    duration: {
-      low: 30,
-      high: 30,
-      unit: 'minutes'
-    }
+    distribution: {
+      "kind": "UNIFORM",
+      "parameters": {
+        "high": 60,
+        "low": 30
+      }
+    },
+    "unit": "minutes"
   },
 
   VitalSign: {
