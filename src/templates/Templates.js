@@ -469,7 +469,7 @@ const StateTemplates = {
     type: "VitalSign",
     vital_sign: "",
     unit: "",
-    exact: {...AttributeTemplates.Exact}
+    distribution: {kind: "EXACT", parameters: {value: 1}}
   },
 
   Observation: {

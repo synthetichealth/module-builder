@@ -2429,13 +2429,40 @@ class VitalSign extends Component<Props> {
 
   render() {
     let state = ((this.props.state: any): VitalSignState);
+    let distroForm;
+    if (this.legacyGMF()) {
+      distroForm = this.renderExactOrRange();
+    } else {
+      distroForm = this.renderDistribution();
+    }
     return (
       <div>
         Vital Sign: <RIEInput className='editable-text' value={state.vital_sign} propName={'vital_sign'} change={this.props.onChange('vital_sign')} />
         <br/>
         Unit: <RIEInput className='editable-text' value={state.unit} propName={'unit'} change={this.props.onChange('unit')} />
         <br/>
-        {this.renderExactOrRange()}
+        {distroForm}
+      </div>
+    );
+  }
+
+  legacyGMF() {
+    let state = ((this.props.state: any): VitalSignState);
+    if (state.exact || state.range) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  renderDistribution() {
+    let state = ((this.props.state: any): SymptomState);
+    return (
+      <div>
+        <Distribution kind={state.distribution.kind}
+                      parameters={state.distribution.parameters}
+                      onChange={this.props.onChange('distribution')} />
+        <br />
       </div>
     );
   }
