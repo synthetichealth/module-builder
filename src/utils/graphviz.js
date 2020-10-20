@@ -251,6 +251,18 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
 
 }
 
+const distributionString = (distro) => {
+  switch(distro['kind']) {
+    case 'EXACT':
+      return distro['parameters']['value'];
+    case 'UNIFORM':
+      return `${distro['parameters']['low']} - ${distro['parameters']['high']}`;
+    case 'GAUSSIAN':
+      return `Mean: ${distro['parameters']['mean']}, SD: ${distro['parameters']['standardDeviation']}`
+  }
+  return '';
+}
+
 const stateDescription = (state) =>{
 
   let details = ''
@@ -272,6 +284,8 @@ const stateDescription = (state) =>{
       } else if (state['exact'] !== undefined) {
         let e = state['exact']
         details = `${e['quantity']} ${e['unit']}`
+      } else if (state['distribution'] !== undefined && state['unit'] !== undefined) {
+        details = `${distributionString(state['distribution'])} ${state['unit']}`
       }
       break;
     case 'Encounter':
@@ -290,11 +304,14 @@ const stateDescription = (state) =>{
       if (state.range) {
         const r = state.range;
         details = `Set '${state["attribute"]}': ${r['low']} - ${r['high']}`;
-        break;
+      } else if (state['value']) {
+        let v = state['value']
+        details = `Set '${state["attribute"]}' = ${(v === undefined || v === null || v === "") ? 'nil' : v}`
+      } else if (state['distribution'] !== undefined ) {
+        details = `Set '${state["attribute"]}': ${distributionString(state['distribution'])}}`
       }
-      let v = state['value']
-      details = `Set '${state["attribute"]}' = ${(v === undefined || v === null || v === "") ? 'nil' : v}`
       break;
+
     case 'Symptom':
      let s = state['symptom']
      let p = state['probability']
@@ -304,12 +321,15 @@ const stateDescription = (state) =>{
       } else if (state.exact !== undefined) {
         let e = state['exact']
         details = `${s}: ${e['quantity']}`
+      } else if (state['distribution'] !== undefined ) {
+        details = `${s}: ${distributionString(state['distribution'])}}`
       }
       if (p && p < 1.0 && p > 0) {
         let pct = p*100;
         details += ` (${pct}%)`
       }
       break;
+
     case 'Observation':
       let unit = state['unit']
       if(unit){
@@ -329,6 +349,14 @@ const stateDescription = (state) =>{
       } else if (state.value_code !== undefined) {
         let v = state['value_code']
         details = `Record value ${v['system']}[${v['code']}]: ${v['display']}\\l`
+      } else if (state['distribution'] !== undefined && state['unit'] !== undefined) {
+        details = `Record value ${distributionString(state['distribution'])} ${state['unit']}`
+      }
+      break;
+
+    case 'Procedure':
+      if (state['distribution'] !== undefined && state['unit'] !== undefined) {
+        details = `Duration: ${distributionString(state['distribution'])} ${state['unit']}\\l`
       }
       break;
 
@@ -356,6 +384,8 @@ const stateDescription = (state) =>{
       } else if (state.exact !== undefined) {
         let e = state['exact']
         details = `Set ${vs}: ${e['quantity']} ${unitv}`
+      } else if (state['distribution'] !== undefined ) {
+        details = `Set ${vs}: ${distributionString(state['distribution'])} ${unitv}`
       }
       break;
     case 'CallSubmodule':
@@ -426,7 +456,7 @@ const stateDescription = (state) =>{
           const c = s.code;
           supplyCode.push(`${c['system']}[${c['code']}]: ${c['display']}`);
         });
-        
+
         details += `{${supplyCode.map(t => t).join('|')}}|`;
         details += `{${supplyQuantity.map(t => t).join('|')}}|`;
       } else {
