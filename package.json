@@ -9,6 +9,7 @@
     "chai": "^4.2.0",
     "chai-jquery": "^2.1.0",
     "connected-react-router": "^6.5.2",
+    "ecqm-module-generator": "git+https://github.com/projecttacoma/ecqm-module-generator.git",
     "file-saver": "^2.0.2",
     "history": "^4.9.0",
     "jquery": "^3.4.1",
