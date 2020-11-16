@@ -12,7 +12,7 @@ const initialState = {
   attributes: []
 };
 
-const CURRENT_GMF_VERSION = 2.0;
+export const CURRENT_GMF_VERSION = 2.0;
 
 const attributes = module => {
   const attributes = [];
