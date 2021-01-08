@@ -360,7 +360,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "allergies/allergy_incidence":{
@@ -1192,7 +1193,8 @@ export default {"allergic_rhinitis":{
     "Allergy_Incidence_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "allergies/allergy_panel":{
@@ -2120,7 +2122,8 @@ export default {"allergic_rhinitis":{
     "Allergy_Test_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "allergies/immunotherapy":{
@@ -2384,7 +2387,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "allergies/outgrow_env_allergies":{
@@ -2657,7 +2661,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "allergies/outgrow_food_allergies":{
@@ -2998,7 +3003,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "allergies/severe_allergic_reaction":{
@@ -3105,7 +3111,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "allergies":{
@@ -3344,7 +3351,8 @@ export default {"allergic_rhinitis":{
       "submodule": "allergies/immunotherapy",
       "direct_transition": "Living_With_Allergies"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "anemia/anemia_sub":{
@@ -4566,7 +4574,8 @@ export default {"allergic_rhinitis":{
       },
       "direct_transition": "Consult_Referral_to_Experts_Encounter"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "anemia___unknown_etiology":{
@@ -4957,7 +4966,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Terminal",
       "referenced_by_attribute": "anemia"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "appendicitis":{
@@ -5372,7 +5382,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Appendectomy_Encounter",
       "name": "Transfer_To_Inpatient"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "asthma":{
@@ -5985,7 +5996,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "atopy":{
@@ -6181,7 +6193,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "attention_deficit_disorder":{
@@ -6643,7 +6656,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "breast_cancer/chemotherapy_breast":{
@@ -6960,7 +6974,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "End Current Chemo Treatment",
       "referenced_by_attribute": "chemoMed"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "breast_cancer/hormone_diagnosis":{
@@ -7391,7 +7406,8 @@ export default {"allergic_rhinitis":{
         "quantity": "greater than 2.2"
       }
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "breast_cancer/hormonetherapy_breast":{
@@ -7923,7 +7939,8 @@ export default {"allergic_rhinitis":{
       "referenced_by_attribute": "ER_PR_medication",
       "direct_transition": "end_encounter"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "breast_cancer/surgery_therapy_breast":{
@@ -9011,7 +9028,8 @@ export default {"allergic_rhinitis":{
       ],
       "value": 0
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "breast_cancer/tnm_diagnosis":{
@@ -9582,7 +9600,7 @@ export default {"allergic_rhinitis":{
     "No Regional Lymph Node Metastasis": {
       "type": "Observation",
       "category": "imaging",
-      "unit": "#",
+      "unit": "{#}",
       "codes": [
         {
           "system": "LOINC",
@@ -9608,7 +9626,7 @@ export default {"allergic_rhinitis":{
     "Micrometastasis in 1 - 3 Lymph Nodes": {
       "type": "Observation",
       "category": "imaging",
-      "unit": "#",
+      "unit": "{#}",
       "codes": [
         {
           "system": "LOINC",
@@ -9629,7 +9647,7 @@ export default {"allergic_rhinitis":{
     "Macrometastases in 4 - 9 Lymph Nodes": {
       "type": "Observation",
       "category": "imaging",
-      "unit": "#",
+      "unit": "{#}",
       "codes": [
         {
           "system": "LOINC",
@@ -9650,7 +9668,7 @@ export default {"allergic_rhinitis":{
     "Macrometastases in 10+ Lymph Nodes": {
       "type": "Observation",
       "category": "imaging",
-      "unit": "#",
+      "unit": "{#}",
       "codes": [
         {
           "system": "LOINC",
@@ -9669,7 +9687,8 @@ export default {"allergic_rhinitis":{
         "https://www.medicalnewstoday.com/articles/319713.php"
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "breast_cancer":{
@@ -11769,7 +11788,8 @@ export default {"allergic_rhinitis":{
       },
       "direct_transition": "Sit-Down with Oncologist to Discuss Treatment Options"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "bronchitis":{
@@ -12309,7 +12329,1564 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Potential_Infection"
     }
-  }
+  },
+  "gmf_version": 1
+}
+,
+"cerebral_palsy":{
+  "name": "Cerebral Palsy",
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "remarks": [
+        "Prevalence was higher for males than females (prevalence ratio 1.5:1; 95% CI 1.2–1.8), higher for black non‐Hispanic children than for white non‐Hispanic children (prevalence ratio 1.5:1; 95% CI 1.2–1.8), and similar for Hispanic children compared with White non‐Hispanic children (prevalence ratio 0.9:1; 95% CI 0.6–1.3). Ref: https://onlinelibrary.wiley.com/doi/full/10.1111/dmcn.12268"
+      ],
+      "direct_transition": "Age_and_Applicable_Time_Guard"
+    },
+    "Oral_Appliance_Fitting": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 234817001,
+          "display": "Insertion of oral appliance for the handicapped (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Pharmacologic_Interventions",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Rx_Glycopyrrolate": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1437975,
+          "display": "Glycopyrrolate 1.5 MG Oral Tablet [Glycate]"
+        }
+      ],
+      "direct_transition": "End_Cerebral_Palsy_Encounter1",
+      "assign_to_attribute": "Rx_Glycopyrrolate",
+      "remarks": [
+        "Patient will receive prescription for Glycopyrrolate. No prevalence data is available to determine distribution probability. Assigned 40% of CP population based on TEP member expert feedback received which states this may be the currently most prescribed anticholinergic for sialorrhea . "
+      ],
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Rx_Scopolamine": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 351875,
+          "display": "72 HR Scopolamine 0.0139 MG/HR Transdermal System [Transdermal Scop]"
+        }
+      ],
+      "direct_transition": "End_Cerebral_Palsy_Encounter1",
+      "remarks": [
+        "It has been suggested that anticholinergic drugs such as benztropine, glycopyrrolate and scopolamine could be useful in the treatment of drooling. However, to date it has not been shown that any one anticholinergic is more effective than another. Scopolamine skin patches for transdermal administration could be a useful alternative in the treatment of these patients, and a number of studies have detected a reduction in saliva secretion with this treatment, although efficacy varies between patients  Ref: Mato A, Limeres J, Tomas I, Munos M, Abuin C, Feijoo J,Diz P. Management of drooling in disabled patients withscopolamine patches. British Journal of Clinical Pharmacology2010;69:684-688."
+      ],
+      "assign_to_attribute": "Rx_Scopolamine",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Rx_Benztropine": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 885219,
+          "display": "Benztropine mesylate 0.5 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "End_Cerebral_Palsy_Encounter1",
+      "remarks": [
+        "A significant decrease in drooling during the benztropine condition relative to placebo was demonstrated and conservative response rates (calculated by deleting placebo responders), ranged up to 65 to 70 per cent. Ref: Camp-Bruno JA, Winsberg BG, Green-Parsons AP, Abrams JP.Efficacy of benztropine therapy for drooling. DevelopmentalMedicine and Child Neurology 1989;31:309-319."
+      ],
+      "assign_to_attribute": "Rx_Benztropine"
+    },
+    "Male": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Pre-Cerebral Palsy",
+          "distribution": 0.0034
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9966
+        }
+      ]
+    },
+    "Female": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Pre-Cerebral Palsy",
+          "distribution": 0.003
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.997
+        }
+      ]
+    },
+    "Age_and_Applicable_Time_Guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": "<=",
+        "quantity": 18,
+        "unit": "years",
+        "value": 0
+      },
+      "remarks": [
+        "Since 2000, MADDSP and research has focused on 8-year-old children for all developmental disabilities monitored by the CDC. Previous studies have shown that, by this age, most children with developmental disabilities had been identified for services. Ref: https://www.cdc.gov/ncbddd/developmentaldisabilities/maddsp.html"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Male",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          }
+        }
+      ]
+    },
+    "Condition_Onset_Cerebral Palsy": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 128188000,
+          "display": "Cerebral palsy (disorder)"
+        }
+      ],
+      "direct_transition": "Cerebral_Palsy_Encounter1",
+      "target_encounter": "Cerebral_Palsy_Encounter1"
+    },
+    "Cerebral_Palsy_Encounter1": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 108219001,
+          "display": "Physician visit with evaluation AND/OR management service (procedure)"
+        }
+      ],
+      "reason": "Condition_Onset_Cerebral Palsy",
+      "direct_transition": "Check_Dystonia"
+    },
+    "Flexible _Fiberoptic_Endoscopic_Evaluation_of_Swallowing_FEES": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 311834001,
+          "display": "Fiberoptic Endoscopic Evaluation of Swallowing"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Posterior_Drooling",
+      "reason": "Condition_Onset_Cerebral Palsy"
+    },
+    "Posterior_Drooling": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "Posterior_Drooling",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 288959006,
+          "display": "Unable to swallow saliva (finding)"
+        }
+      ],
+      "direct_transition": "Medication_Review2"
+    },
+    "Medication_Review2": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 182836005,
+          "display": "Review of Medication (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Oral_Hygiene2",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Oral_Hygiene2": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 717778001,
+          "display": "Mouth care (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Posture_Training2",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Posture_Training2": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 229069003,
+          "display": "Posture training (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Pharmacologic_Interventions",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Pharmacologic_Interventions": {
+      "type": "Simple",
+      "remarks": [
+        "It has been suggested that anticholinergic drugs such as benztropine, glycopyrrolate and scopolamine could be useful in the treatment of drooling. However, to date it has not been shown that any one anticholinergic is more effective than another. Ref: \tMato A, Limeres J, Tomás I, et al. Management of drooling in disabled patients with scopolamine patches. Br J Clin Pharmacol. 2010;69(6):684-688. doi:10.1111/j.1365-2125.2010.03659.x. Technical Expert Panel (TEP) Feedback provided in June 2020 suggested Glycopyrrolate is prescribed more often than other anticholinergics, so probabilities were set at 40% Glycopyrrolate and 20% for each of the others. ",
+        ""
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "asthma_condition",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Rx_Glycopyrrolate",
+              "distribution": 0.3
+            },
+            {
+              "transition": "Rx_Scopolamine",
+              "distribution": 0.2
+            },
+            {
+              "transition": "Rx_Benztropine",
+              "distribution": 0.25
+            },
+            {
+              "transition": "Rx_Benzhexol_Hydrochloride",
+              "distribution": 0.25
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "asthma_condition",
+            "operator": "is nil"
+          },
+          "distributions": [
+            {
+              "transition": "Monitoring",
+              "distribution": 0.25
+            },
+            {
+              "transition": "Rx_Glycopyrrolate",
+              "distribution": 0.25
+            },
+            {
+              "transition": "Rx_Scopolamine",
+              "distribution": 0.15
+            },
+            {
+              "transition": "Rx_Benztropine",
+              "distribution": 0.15
+            },
+            {
+              "transition": "Rx_Benzhexol_Hydrochloride",
+              "distribution": 0.15
+            },
+            {
+              "transition": "Rx_Atropine",
+              "distribution": 0.05
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Rx_Glycopyrrolate",
+              "distribution": 0.35
+            },
+            {
+              "transition": "Rx_Scopolamine",
+              "distribution": 0.3
+            },
+            {
+              "transition": "Rx_Benztropine",
+              "distribution": 0.15
+            },
+            {
+              "transition": "Rx_Benzhexol_Hydrochloride",
+              "distribution": 0.25
+            }
+          ],
+          "condition": {
+            "condition_type": "Symptom",
+            "symptom": "Cerebral_Palsy_Pneumonia",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Monitoring",
+              "distribution": 0.4
+            },
+            {
+              "transition": "Rx_Glycopyrrolate",
+              "distribution": 0.2
+            },
+            {
+              "transition": "Rx_Benztropine",
+              "distribution": 0.1
+            },
+            {
+              "transition": "Rx_Benzhexol_Hydrochloride",
+              "distribution": 0.1
+            },
+            {
+              "transition": "Rx_Scopolamine",
+              "distribution": 0.2
+            }
+          ],
+          "condition": {
+            "condition_type": "Symptom",
+            "symptom": "Cerebral_Palsy_Pneumonia",
+            "operator": "==",
+            "value": 0
+          }
+        }
+      ]
+    },
+    "Behavioral_Therapy": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 166001,
+          "display": "Behavioral therapy (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Pharmacologic_Interventions",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Behavioral_and_Non_Pharmacologic_Interventions": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Oromotor_Exercises",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Behavioral_Therapy",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Oral_Appliance_Fitting",
+          "distribution": 0.33999999999999986
+        }
+      ]
+    },
+    "Oromotor_Exercises": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 311707005,
+          "display": "Oromotor Exercises"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Pharmacologic_Interventions",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Salivagram_Radionuclide_Imaging": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 312421008,
+          "display": "Radionuclide Imaging"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Posterior_Drooling",
+      "reason": "Condition_Onset_Cerebral Palsy"
+    },
+    "Anterior_Drooling": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "Anterior_Drooling",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 62718007,
+          "display": "Dribbling from mouth (finding)"
+        }
+      ],
+      "direct_transition": "Medication_Review1"
+    },
+    "Medication_Review1": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 182836005,
+          "display": "Review of medication (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Oral_Hygiene1",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Oral_Hygiene1": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 717778001,
+          "display": "Mouth care (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Posture_Training1",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Posture_Training1": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 229069003,
+          "display": "Posture training (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Behavioral_and_Non_Pharmacologic_Interventions",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "End_Cerebral_Palsy_Encounter1": {
+      "type": "EncounterEnd",
+      "direct_transition": "Living_with_CP"
+    },
+    "Surgical_Interventions": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Posterior_Drooling",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Duct_Ligation_Surgery",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Submandibular_Gland_Excision_Surgery",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Anterior_Drooling",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Submandibular_Duct_Relocation_Surgery",
+              "distribution": 0.33
+            },
+            {
+              "transition": "Submandibular_Gland_Excision_Surgery",
+              "distribution": 0.33
+            },
+            {
+              "transition": "Duct_Ligation_Surgery",
+              "distribution": 0.33999999999999986
+            }
+          ]
+        }
+      ]
+    },
+    "Submandibular_Duct_Relocation_Surgery": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 173521004,
+          "display": "Transposition of submandibular duct (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Surgical_Encounter2",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Submandibular_Gland_Excision_Surgery": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 7227006,
+          "display": "Excision of submandibular gland (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Surgical_Encounter2",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Duct_Ligation_Surgery": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 302351005,
+          "display": "Ligation of salivary duct (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Surgical_Encounter2",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Rx_Benzhexol_Hydrochloride": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 905269,
+          "display": "Trihexyphenidyl Hydrochloride 2 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "End_Cerebral_Palsy_Encounter1",
+      "assign_to_attribute": "Rx_Benzhexol_Hydrochloride",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Cerebral_Palsy_Sialorrhea": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 53827007,
+          "display": "Excessive salivation (disorder)"
+        }
+      ],
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "distributed_transition": [
+        {
+          "distribution": 0.05,
+          "transition": "Videofluoroscopic_Swallowing_Study_VFSS"
+        },
+        {
+          "transition": "Anterior_Drooling",
+          "distribution": 0.4
+        },
+        {
+          "transition": "Salivagram_Radionuclide_Imaging",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Flexible _Fiberoptic_Endoscopic_Evaluation_of_Swallowing_FEES",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Posterior_Drooling",
+          "distribution": 0.25
+        },
+        {
+          "transition": "Anterior_and_Posterior_Drooling",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "End_Followup_Encounter": {
+      "type": "EncounterEnd",
+      "distributed_transition": [
+        {
+          "transition": "Living_with_CP",
+          "distribution": 0.8
+        },
+        {
+          "transition": "Delay_Surgical Encounter",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "Followup_Cerebral_Palsy_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 390906007,
+          "display": "Follow-up encounter (procedure)"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Constipation",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 905269,
+                "display": "trihexyphenidyl hydrochloride 2 MG Oral Tablet"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Urinary_Retention",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 351875,
+                "display": "72 HR scopolamine 0.0139 MG/HR Transdermal System [Transderm Scop]"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Constipation",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 885219,
+                "display": "benztropine mesylate 0.5 MG Oral Tablet"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Monitoring2",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Monitoring"
+          }
+        }
+      ]
+    },
+    "Delay_Surgical Encounter": {
+      "type": "Delay",
+      "range": {
+        "low": 7,
+        "high": 10,
+        "unit": "days"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Living_with_CP",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Submandibular_Duct_Relocation_Surgery"
+          }
+        },
+        {
+          "transition": "Living_with_CP",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Submandibular_Gland_Excision_Surgery"
+          }
+        },
+        {
+          "transition": "Living_with_CP",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Duct_Ligation_Surgery"
+          }
+        },
+        {
+          "transition": "Surgical_Encounter2",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">",
+            "quantity": 4,
+            "unit": "years"
+          }
+        },
+        {
+          "transition": "Surgical_Encounter1",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">",
+            "quantity": 0,
+            "unit": "years"
+          }
+        },
+        {
+          "transition": "Living_with_CP",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Monitoring2"
+          }
+        },
+        {
+          "transition": "Living_with_CP",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Monitoring"
+          }
+        }
+      ]
+    },
+    "Urinary_Retention": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "Urinary Retention",
+      "target_encounter": "Followup_Cerebral_Palsy_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 267064002,
+          "display": "Retention of urine (disorder)"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "End_Rx_Scopolamine",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 351875,
+                "display": "72 HR scopolamine 0.0139 MG/HR Transdermal System"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Constipation": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "Constipation",
+      "target_encounter": "Followup_Cerebral_Palsy_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 14760008,
+          "display": "Constipation (finding)"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "End_Rx_Benzhexol",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 905269,
+                "display": "trihexyphenidyl hydrochloride 2 MG Oral Tablet"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "End_ Rx_Benztropine",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 885219,
+                "display": "benztropine mesylate 0.5 MG Oral Tablet"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Care_Plan_Constipation": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 389082000,
+          "display": "Constipation Care (regime/therapy)"
+        }
+      ],
+      "assign_to_attribute": "Care_Plan_Constipation",
+      "conditional_transition": [
+        {
+          "transition": "Rx_Glycopyrrolate2",
+          "condition": {
+            "condition_type": "Not",
+            "condition": {
+              "condition_type": "Active Medication",
+              "codes": [
+                {
+                  "system": "RxNorm",
+                  "code": 1437975,
+                  "display": "glycopyrrolate 1.5 MG Oral Tablet [Glycate]"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "transition": "Care_Plan_Constipation_End",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 1437975,
+                "display": "glycopyrrolate 1.5 MG Oral Tablet [Glycate]"
+              }
+            ]
+          }
+        }
+      ],
+      "reason": "Constipation"
+    },
+    "Care_Plan_Urinary_Retention": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 386490009,
+          "display": "Urinary retention care (regime/therapy)"
+        }
+      ],
+      "assign_to_attribute": "Care_Plan_Urinary_Retention",
+      "conditional_transition": [
+        {
+          "transition": "Care_Plan_Urinary Retention_End",
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 1437975,
+                "display": "glycopyrrolate 1.5 MG Oral Tablet [Glycate]"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Rx_Glycopyrrolate2",
+          "condition": {
+            "condition_type": "Not",
+            "condition": {
+              "condition_type": "Active Medication",
+              "codes": [
+                {
+                  "system": "RxNorm",
+                  "code": 1437975,
+                  "display": "glycopyrrolate 1.5 MG Oral Tablet [Glycate]"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "reason": "Urinary_Retention"
+    },
+    "Rx_Glycopyrrolate2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 143975,
+          "display": "glycopyrrolate 1.5 MG Oral Tablet [Glycate]"
+        }
+      ],
+      "reason": "Cerebral_Palsy_Sialorrhea",
+      "conditional_transition": [
+        {
+          "transition": "Care_Plan_Urinary Retention_End",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Care_Plan_Urinary_Retention",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Care_Plan_Constipation_End",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "Care_Plan_Constipation",
+            "operator": "is not nil"
+          }
+        }
+      ],
+      "chronic": false
+    },
+    "Surgical_Encounter1": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 40274000,
+          "display": "General outpatient clinic admission (procedure)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Rx_Botulinum_Toxin_A",
+          "distribution": 0.75
+        },
+        {
+          "transition": "Rx_Botulinum_Toxin_B",
+          "distribution": 0.25
+        }
+      ],
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "End_Surgical_Encounter1": {
+      "type": "EncounterEnd",
+      "direct_transition": "Living_with_CP"
+    },
+    "Postoperative_Visit": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Cerebral_Palsy_Sialorrhea",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 183646003,
+          "display": "Postoperative visit (finding)"
+        }
+      ],
+      "direct_transition": "End_Postoperative_Visit"
+    },
+    "Delay_Postoperative Visit": {
+      "type": "Delay",
+      "direct_transition": "Postoperative_Visit",
+      "range": {
+        "low": 2,
+        "high": 7,
+        "unit": "days"
+      }
+    },
+    "Care_Plan_Urinary Retention_End": {
+      "type": "CarePlanEnd",
+      "direct_transition": "End_Followup_Encounter",
+      "careplan": "Care_Plan_Urinary_Retention"
+    },
+    "Care_Plan_Constipation_End": {
+      "type": "CarePlanEnd",
+      "direct_transition": "End_Followup_Encounter",
+      "careplan": "Care_Plan_Constipation"
+    },
+    "End_Rx_Benzhexol": {
+      "type": "MedicationEnd",
+      "direct_transition": "Care_Plan_Constipation",
+      "medication_order": "Rx_Benzhexol_Hydrochloride"
+    },
+    "End_ Rx_Benztropine": {
+      "type": "MedicationEnd",
+      "direct_transition": "Care_Plan_Constipation",
+      "medication_order": "Rx_Benztropine"
+    },
+    "End_Rx_Scopolamine": {
+      "type": "MedicationEnd",
+      "medication_order": "Rx_Scopolamine",
+      "direct_transition": "Care_Plan_Urinary_Retention"
+    },
+    "Cerebral_Palsy_Dystonia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 15802004,
+          "display": "Dystonia (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Pain",
+      "remarks": [
+        "In around one in six cases, cerebral palsy causes involuntary muscle spasms and unwanted movement - this is described as dystonic cerebral palsy (or alternatively dyskinetic or choreoathetoid cerebral palsy). Ref: https://www.dystonia.org.uk/dystonic-cerebral-palsy"
+      ]
+    },
+    "Cerebral_Palsy_Pain": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 22253000,
+          "display": "Pain (finding)"
+        }
+      ],
+      "direct_transition": "Check_Central_Hypotonia",
+      "remarks": [
+        "We included 2777 children (57% boys) at a median age of 7 years; 32.4% reported pain, with significantly more girls than boys experiencing pain  Ref: Alriksson-Schmidt A, Hägglund G. Pain in children and adolescents with cerebral palsy: a population-based registry study. Acta Paediatr. 2016;105(6):665‐670. doi:10.1111/apa.13368"
+      ]
+    },
+    "Cerebral_Palsy_Central_Hypotonia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 398152000,
+          "display": "Poor muscle tone (finding)"
+        }
+      ],
+      "direct_transition": "Check_Spasticity",
+      "remarks": [
+        "Hypotonic CP is marked by extremely loose and floppy muscle tone.  This type of CP accounts for less than half of all cases. Ref: https://www.birthinjuryguide.org/cerebral-palsy/types/hypertonic-and-hypotonic-cerebral-palsy/"
+      ]
+    },
+    "Cerebral_Palsy_Spasticity": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 221360009,
+          "display": "Spasticity (finding)"
+        }
+      ],
+      "direct_transition": "Check_Osteoporosis",
+      "remarks": [
+        "Most (77.4%) of the children identified with CP had spastic CP. Ref: https://www.cdc.gov/ncbddd/cp/data.html"
+      ]
+    },
+    "Cerebral_Palsy_Osteoporosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 64859006,
+          "display": "Osteoporosis (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Epilepsy",
+      "remarks": [
+        "Low bone mineral density is found in more than 50% of adults with a variety of disabilities, including CP. Numbers of children with osteoporosis from CP is still being evaluated, but preventative measures are recommended due to the high number of adults with CP and Osteoporosis. Ref: https://www.ncbi.nlm.nih.gov/pubmed/19740209. "
+      ]
+    },
+    "Cerebral_Palsy_Epilepsy": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 84757009,
+          "display": "Epilepsy (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Intellectual_Disability",
+      "remarks": [
+        "As many as half of all children with CP have one or more seizures. Children with both cerebral palsy and epilepsy are more likely to have intellectual disability. Ref: https://www.ninds.nih.gov/Disorders/Patient-Caregiver-Education/Hope-Through-Research/Cerebral-Palsy-Hope-Through-Research"
+      ]
+    },
+    "Cerebral_Palsy_Intellectual_Disability": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 110359009,
+          "display": "Intellectual disability (disorder)"
+        }
+      ],
+      "remarks": [
+        "1 in 2 people with cerebral palsy have an intellectual disability. 1 in 5 people have a moderate to severe intellectual disability. Generally, the greater the level of a person’s physical impairment, the more likely it is that they will have an intellectual disability. However, there are people who have a profound level of physical impairment, who do not have an intellectual disability. Conversely, there can be others with a mild physical impairment who have an intellectual disability. Ref: https://cerebralpalsy.org.au/our-research/about-cerebral-palsy/what-is-cerebral-palsy/how-cerebral-palsy-affects-people/#:~:text=1%20in%202%20people%20with,will%20have%20an%20intellectual%20disability."
+      ],
+      "direct_transition": "Check_GERD"
+    },
+    "Cerebral_Palsy_GERD": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 235595009,
+          "display": "Gastroesophageal reflux disease (disorder)"
+        }
+      ],
+      "direct_transition": "Hip_Surveillance",
+      "remarks": [
+        "Gastroesophageal reflux (GERD) is an involuntary passage of the gastric contents into the esophagus. It has been found in a higher prevalence (up to 75 percent) in cerebral palsy patients.  ",
+        "Reference: https://pubmed.ncbi.nlm.nih.gov/12886578/#:~:text=Gastroesophageal%20reflux%20(GER)%20is%20an,and%20can%20cause%20dental%20erosion."
+      ]
+    },
+    "Surgical_Encounter2": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Cerebral_Palsy_Sialorrhea",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 371883000,
+          "display": "Outpatient Procedure (procedure)"
+        }
+      ],
+      "direct_transition": "Surgical_Interventions"
+    },
+    "End_Surgical_Encounter2": {
+      "type": "EncounterEnd",
+      "direct_transition": "Delay_Postoperative Visit"
+    },
+    "End_Postoperative_Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Living_with_CP"
+    },
+    "Botulinum_Toxin_B_Injection": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 404909007,
+          "display": "Injection of botulinum toxin (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Rx_Botulinum_Toxin_B",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Botulinum_Toxin_A_Injection": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 404909007,
+          "display": "Injection of botulinum toxin (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Rx_Botulinum_Toxin_A",
+      "remarks": [
+        "Botulinum toxin A (BoNT-A) is the most common neurotoxin used to treat drooling. Some researchers have also used Botulinum Toxin B (BoNT-B) (Berweck 2007; Witherow 2008). Botulinum toxins act by inhibiting the release of acetylcholine at the neuromuscular junction and reducing the amount of saliva produced by the salivary glands.  Ref: Walshe  M, Smith  M, Pennington  L. Interventions for drooling in children with cerebral palsy. Cochrane Database of Systematic Reviews 2012, Issue 11. Art. No.: CD008624. DOI: 10.1002/14651858.CD008624.pub3"
+      ],
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Rx_Botulinum_Toxin_A": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1789958,
+          "display": "Dysport botulinum toxin A 300 UNT Injection"
+        }
+      ],
+      "direct_transition": "Botulinum_Toxin_A_Injection",
+      "administration": true,
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Rx_Botulinum_Toxin_B": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 860182,
+          "display": "rimabotulinumtoxinB 5000 UNT/ML [Myobloc]"
+        }
+      ],
+      "direct_transition": "Botulinum_Toxin_B_Injection",
+      "administration": true,
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Living_with_CP": {
+      "type": "Delay",
+      "direct_transition": "Followup_Cerebral_Palsy_Encounter",
+      "range": {
+        "low": 3,
+        "high": 12,
+        "unit": "months"
+      }
+    },
+    "Anterior_and_Posterior_Drooling": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "Anterior_Drooling",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 62718007,
+          "display": "Dribbling from mouth (finding)"
+        }
+      ],
+      "direct_transition": "Anterior_and_Posterior_Drooling2"
+    },
+    "Anterior_and_Posterior_Drooling2": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "Posterior_Drooling",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 288959006,
+          "display": "Unable to swallow saliva (finding)"
+        }
+      ],
+      "direct_transition": "Medication_Review1"
+    },
+    "Pre-Cerebral Palsy": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "months"
+      },
+      "direct_transition": "Condition_Onset_Cerebral Palsy",
+      "remarks": [
+        "The delay is set to one month so the initial encounter does not  collide with other module encounters. ",
+        "",
+        ""
+      ]
+    },
+    "Videofluoroscopic_Swallowing_Study_VFSS": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 241149003,
+          "display": "Videofluoroscopy swallow (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Posterior_Drooling",
+      "reason": "Condition_Onset_Cerebral Palsy"
+    },
+    "Monitoring": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 182777000,
+          "display": "Monitoring of patient (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Living_with_CP"
+    },
+    "Cerebral_Palsy_Pneumonia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 233604007,
+          "display": "Pneumonia (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Sialorrhea",
+      "remarks": [
+        "Ref: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5297954/#:~:text=In%20a%20survey%20performed%20in,%25%20had%20wound%2Drelated%20issues."
+      ]
+    },
+    "Rx_Atropine": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1190766,
+          "display": "atropine sulfate 0.31 MG/ML Ophthalmic Solution (used Sublingual)"
+        }
+      ],
+      "direct_transition": "End_Cerebral_Palsy_Encounter1",
+      "remarks": [
+        "In conclusion, intraoral sublingual administration of atropine eyedrops decreased drooling and reduced salivary secretion rate in children with disabilities. A majority of the parents considered the method to be efficient but sometimes not practical. No irreversible side effects were noted. Ref: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5324542/ "
+      ],
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "Monitoring2": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 182777000,
+          "display": "Monitoring of patient (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Followup_Encounter",
+      "reason": "Cerebral_Palsy_Sialorrhea"
+    },
+    "End_Rx_Botulinum_Toxin_A": {
+      "type": "MedicationEnd",
+      "direct_transition": "End_Surgical_Encounter1",
+      "medication_order": "Rx_Botulinum_Toxin_A"
+    },
+    "End_Rx_Botulinum_Toxin_B": {
+      "type": "MedicationEnd",
+      "direct_transition": "End_Surgical_Encounter1",
+      "medication_order": "Rx_Botulinum_Toxin_B"
+    },
+    "Check_Dystonia": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_Dystonia",
+          "distribution": 0.166
+        },
+        {
+          "transition": "Check_Pain",
+          "distribution": 0.8340000000000001
+        }
+      ]
+    },
+    "Check_Pain": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_Pain",
+          "distribution": 0.324
+        },
+        {
+          "transition": "Check_Central_Hypotonia",
+          "distribution": 0.6759999999999999
+        }
+      ]
+    },
+    "Check_Central_Hypotonia": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_Central_Hypotonia",
+          "distribution": 0.45
+        },
+        {
+          "transition": "Check_Spasticity",
+          "distribution": 0.55
+        }
+      ]
+    },
+    "Check_Spasticity": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_Spasticity",
+          "distribution": 0.774
+        },
+        {
+          "transition": "Check_Osteoporosis",
+          "distribution": 0.22599999999999998
+        }
+      ]
+    },
+    "Check_Osteoporosis": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_Osteoporosis",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Check_Epilepsy",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Check_Epilepsy": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_Epilepsy",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Check_Intellectual_Disability",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Check_Intellectual_Disability": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_Intellectual_Disability",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Check_GERD",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Check_GERD": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_GERD",
+          "distribution": 0.75
+        },
+        {
+          "transition": "Hip_Surveillance",
+          "distribution": 0.25
+        }
+      ]
+    },
+    "Hip_Surveillance": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_Hip_Dislocation",
+          "distribution": 0.175
+        },
+        {
+          "transition": "Check_Pneumonia",
+          "distribution": 0.825
+        }
+      ]
+    },
+    "Cerebral_Palsy_Hip_Dislocation": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Cerebral_Palsy_Encounter1",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 157265008,
+          "display": "Dislocation of hip joint (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Pneumonia",
+      "remarks": [
+        "The risk of progression to hip dislocation is 15–20% in the total population of children with CP. Ref: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2194677/ "
+      ]
+    },
+    "Check_Pneumonia": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_Pneumonia",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Check_Sialorrhea",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Check_Sialorrhea": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cerebral_Palsy_Sialorrhea",
+          "distribution": 0.4
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.6000000000000001
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    }
+  },
+  "remarks": [
+    "Module Title: Treatment of Sialorrhea in Cerebral Palsy",
+    "Version Number: 1.0",
+    "Last Updated: 10/28/2020",
+    "Module Steward: ONC",
+    "Module Developer: Clinovations Government + Health",
+    "Description: This module models the treatment of Sialorrhea in Cerebral Palsy in patients age <=18 years of age. It is based on the American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) clinical care pathway for Sialorrhea. This guideline provides recommendations for treatment of Sialorrhea in outpatient settings for the pediatric patient with cerebral palsy. ",
+    "While this module contains other conditions, which may occur in the cerebral palsy patient such as dystonia, pain, spasticity, central hypotonia and osteoporosis, treatments for these conditions is not yet modeled in the module. ",
+    "",
+    "Reference: AACPDM Clinical Care Pathway for Sialorrhea in Cerebral Palsy  (September 2017, AACPDM Care Pathways, for review 2020) https://www.aacpdm.org/publications/care-pathways/sialorrhea",
+    "",
+    ""
+  ]
 }
 ,
 "colorectal_cancer":{
@@ -14395,44 +15972,12 @@ export default {"allergic_rhinitis":{
         }
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "congestive_heart_failure":{
   "name": "Congestive Heart Failure",
-  "remarks": [
-    "REFERENCES",
-    "This module was built based on the following references:",
-    "1. the existing synthea congestive_heartfailure_module",
-    "2. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5494150/",
-    "3. https://www.acc.org/tools-and-practice-support/clinical-toolkits/~/media/1E4D8F9B69D14F55821BFE642FBFA221.ashx",
-    "4. https://r.details.loinc.org/LOINC/55405-5.html?sections=Comprehensive",
-    "5. https://www.nbt.nhs.uk/sites/default/files/BNP%20fact%20sheet.pdf",
-    "6. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4254520/",
-    "7. http://heartfailure.onlinejacc.org/content/jhf/2/3/278.full.pdf",
-    "8. https://www.ahajournals.org/doi/full/10.1161/JAHA.117.007569",
-    "",
-    "GOALS",
-    "- Simulate entire lifecycle of HF from onset to death",
-    "- Simulate disease progression through NYHA II-IV",
-    "- Include telemedicine (remote monitoring)",
-    "",
-    "LIMITATIONS",
-    "- Age-specific prevalences are based on numbers from Portugal",
-    "",
-    "IN PROGRESS",
-    "- EF observations",
-    "- Reporting on imaging procedures",
-    "- Implement full LOINC heart failure tracking panel",
-    "",
-    "",
-    "TODO:",
-    "- NYHA classification",
-    "- Adopt medications to severity",
-    "- send patients to observation unit ([6])",
-    "- Better modelling of mortality (e.g. clustered ED visits [8])",
-    "- What is a documented probability of acute exacerbations per 6 months? 1% was too low. But what is good number?"
-  ],
   "states": {
     "Initial": {
       "type": "Initial",
@@ -14440,7 +15985,7 @@ export default {"allergic_rhinitis":{
     },
     "CHF symptom onset 1": {
       "type": "Symptom",
-      "symptom": "shortness of breath",
+      "symptom": "Dyspnea on exertion (finding)",
       "cause": "",
       "exact": {
         "quantity": 1
@@ -14449,7 +15994,7 @@ export default {"allergic_rhinitis":{
     },
     "CHF symptom onset 2": {
       "type": "Symptom",
-      "symptom": "swelling",
+      "symptom": "Dyspnea (finding)",
       "cause": "",
       "exact": {
         "quantity": 1
@@ -14458,12 +16003,12 @@ export default {"allergic_rhinitis":{
     },
     "CHF symptom onset 3": {
       "type": "Symptom",
-      "symptom": "exercise intolerance",
+      "symptom": "Paroxysmal dyspnea (finding)",
       "cause": "",
       "exact": {
         "quantity": 1
       },
-      "direct_transition": "CHF Condition Start"
+      "direct_transition": "CHF symptom onset 4"
     },
     "CHF Condition Start": {
       "type": "ConditionOnset",
@@ -14489,129 +16034,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for problem"
         }
       ],
-      "direct_transition": "NTproBNP lab workup"
-    },
-    "Record_MetabolicPanel": {
-      "type": "DiagnosticReport",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "51990-0",
-          "display": "Basic Metabolic Panel"
-        }
-      ],
-      "observations": [
-        {
-          "category": "laboratory",
-          "vital_sign": "Glucose",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "2339-0",
-              "display": "Glucose"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Urea Nitrogen",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "6299-2",
-              "display": "Urea Nitrogen"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Creatinine",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "38483-4",
-              "display": "Creatinine"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Calcium",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "49765-1",
-              "display": "Calcium"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Sodium",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "2947-0",
-              "display": "Sodium"
-            }
-          ],
-          "unit": "mmol/L"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Potassium",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "6298-4",
-              "display": "Potassium"
-            }
-          ],
-          "unit": "mmol/L"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Chloride",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "2069-3",
-              "display": "Chloride"
-            }
-          ],
-          "unit": "mmol/L"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Carbon Dioxide",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "20565-8",
-              "display": "Carbon Dioxide"
-            }
-          ],
-          "unit": "mmol/L"
-        }
-      ],
-      "direct_transition": "initial encounter end"
-    },
-    "followup_CHF_encounter": {
-      "type": "Encounter",
-      "encounter_class": "ambulatory",
-      "reason": "chf",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185347001,
-          "display": "Encounter for problem"
-        }
-      ],
-      "direct_transition": "Workup imaging for CHF"
+      "direct_transition": "Recorded Symptom 1"
     },
     "CHF careplan": {
       "type": "CarePlanStart",
@@ -14637,123 +16060,9 @@ export default {"allergic_rhinitis":{
         }
       ]
     },
-    "initial encounter end": {
-      "type": "EncounterEnd",
-      "distributed_transition": [
-        {
-          "transition": "Check_Anemia_Exist",
-          "distribution": 0.2
-        },
-        {
-          "transition": "intra_encounter time gate",
-          "distribution": 0.8
-        }
-      ],
-      "remarks": [
-        "Anemia prevalence for CHF - https://www.ncbi.nlm.nih.gov/pubmed/20630401",
-        ""
-      ]
-    },
-    "intra_encounter time gate": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 3,
-        "unit": "weeks"
-      },
-      "direct_transition": "followup_CHF_encounter"
-    },
-    "CHF Medication Start 1": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 866414,
-          "display": "24 HR metoprolol succinate 100 MG Extended Release Oral Tablet [Toprol]"
-        }
-      ],
-      "direct_transition": "CHF Medication Start 2",
-      "reason": "chf",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 30,
-          "unit": "days"
-        },
-        "refills": 12
-      }
-    },
-    "CHF Medication Start 2": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "313988",
-          "display": "Furosemide 40 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "Assign CHF care plan",
-      "reason": "chf",
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        },
-        "duration": {
-          "quantity": 30,
-          "unit": "days"
-        },
-        "refills": 10
-      }
-    },
     "end_followup_encounter": {
       "type": "EncounterEnd",
       "direct_transition": "Maintaining CHF"
-    },
-    "chance of CHF": {
-      "type": "Delay",
-      "exact": {
-        "quantity": 1,
-        "unit": "years"
-      },
-      "conditional_transition": [
-        {
-          "transition": "Age_80-Chance of CHF",
-          "condition": {
-            "condition_type": "Age",
-            "operator": ">",
-            "quantity": 80,
-            "unit": "years"
-          }
-        },
-        {
-          "transition": "Age_70-79-Chance of CHF",
-          "condition": {
-            "condition_type": "Age",
-            "operator": ">",
-            "quantity": 70,
-            "unit": "years"
-          }
-        },
-        {
-          "transition": "Age_60-69-Chance of CHF",
-          "condition": {
-            "condition_type": "Age",
-            "operator": ">",
-            "quantity": 60,
-            "unit": "years"
-          }
-        },
-        {
-          "transition": "Age_50-59-Chance of CHF"
-        }
-      ]
     },
     "Maintaining CHF": {
       "type": "Delay",
@@ -14761,20 +16070,76 @@ export default {"allergic_rhinitis":{
         "quantity": 6,
         "unit": "months"
       },
-      "conditional_transition": [
+      "complex_transition": [
         {
-          "transition": "Potential CHF Flare",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "chf_stage_d",
+                    "operator": "is not nil"
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "chf_admissions",
+                    "operator": ">=",
+                    "value": 2
+                  }
+                ]
+              },
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "nyha_class",
+                    "operator": ">=",
+                    "value": 3
+                  },
+                  {
+                    "condition_type": "Vital Sign",
+                    "vital_sign": "Left ventricular Ejection fraction",
+                    "operator": "<=",
+                    "value": 35
+                  }
+                ]
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Progress to Stage D",
+              "distribution": 0.065
+            },
+            {
+              "transition": "Potential CHF Flare",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Followup CHF Encounter",
+              "distribution": 0.43500000000000005
+            }
+          ]
+        },
+        {
           "condition": {
             "condition_type": "PriorState",
-            "name": "followup_CHF_encounter",
+            "name": "Followup CHF Encounter",
             "within": {
               "quantity": 1,
               "unit": "years"
             }
-          }
+          },
+          "distributions": [],
+          "transition": "Potential CHF Flare"
         },
         {
-          "transition": "followup_CHF_encounter"
+          "distributions": [],
+          "transition": "Followup CHF Encounter"
         }
       ]
     },
@@ -14782,18 +16147,14 @@ export default {"allergic_rhinitis":{
       "type": "Simple",
       "distributed_transition": [
         {
-          "transition": "acute inpatient CHF flare",
+          "transition": "acute CHF flare",
           "distribution": 0.5
         },
         {
-          "transition": "Maintaining CHF",
+          "transition": "Followup CHF Encounter",
           "distribution": 0.5
         }
       ]
-    },
-    "acute inpatient CHF flare": {
-      "type": "Simple",
-      "direct_transition": "CHF ED Visit"
     },
     "CHF ED Visit": {
       "type": "Encounter",
@@ -14805,7 +16166,7 @@ export default {"allergic_rhinitis":{
           "display": "Encounter for Problem"
         }
       ],
-      "direct_transition": "Record_CMP",
+      "direct_transition": "Oxygen_Saturation",
       "reason": "CHF Condition Start"
     },
     "CXR_ED": {
@@ -14839,7 +16200,16 @@ export default {"allergic_rhinitis":{
           ]
         }
       ],
-      "direct_transition": "ED_End"
+      "distributed_transition": [
+        {
+          "transition": "ED_End",
+          "distribution": 0.95
+        },
+        {
+          "transition": "Shock Disorder",
+          "distribution": 0.05
+        }
+      ]
     },
     "ED_End": {
       "type": "EncounterEnd",
@@ -14847,32 +16217,59 @@ export default {"allergic_rhinitis":{
     },
     "Admit_Discharge Transition": {
       "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Inpatient_admittance",
-          "distribution": 0.84
-        },
-        {
-          "transition": "Maintaining CHF",
-          "distribution": 0.16000000000000014
-        }
-      ],
       "remarks": [
         "Different studies suggest numbers from 74% to 84% for inpatient admittance."
-      ]
-    },
-    "Inpatient_admittance": {
-      "type": "Encounter",
-      "encounter_class": "inpatient",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 308540004,
-          "display": "Inpatient stay (finding)"
-        }
       ],
-      "direct_transition": "Inpatient LOS",
-      "reason": "CHF Condition Start"
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Vital Sign",
+                "vital_sign": "Systolic Blood Pressure",
+                "operator": "<",
+                "value": 90
+              },
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "PriorState",
+                    "name": "Oxygen",
+                    "within": {
+                      "quantity": 1,
+                      "unit": "days"
+                    }
+                  },
+                  {
+                    "condition_type": "PriorState",
+                    "name": "Shock Disorder",
+                    "within": {
+                      "quantity": 1,
+                      "unit": "days"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "ICU Admission"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Inpatient Admission",
+              "distribution": 0.84
+            },
+            {
+              "transition": "Maintaining CHF",
+              "distribution": 0.16
+            }
+          ]
+        }
+      ]
     },
     "Inpatient CarePlan": {
       "type": "CarePlanStart",
@@ -14883,7 +16280,7 @@ export default {"allergic_rhinitis":{
           "display": "Inpatient care plan (record artifact)"
         }
       ],
-      "direct_transition": "Inpatient daily routine",
+      "direct_transition": "Med_Rec_2",
       "activities": [
         {
           "system": "SNOMED-CT",
@@ -14899,33 +16296,18 @@ export default {"allergic_rhinitis":{
       "goals": [
         {
           "addresses": [
-            "blood pressure"
+            "chf"
           ],
-          "text": "improved systolic function"
+          "text": "Decongestion"
         },
         {
           "addresses": [
-            "blood pressure"
+            "chf"
           ],
-          "text": "improved diastolic function"
-        },
-        {
-          "addresses": [
-            "text"
-          ],
-          "observation": {
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "59408-5",
-                "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
-              }
-            ],
-            "operator": ">",
-            "value": 85
-          }
+          "text": "Assess goals of care"
         }
-      ]
+      ],
+      "reason": "chf"
     },
     "Furosemide": {
       "type": "MedicationOrder",
@@ -14937,111 +16319,24 @@ export default {"allergic_rhinitis":{
         }
       ],
       "reason": "chf",
-      "conditional_transition": [
-        {
-          "transition": "Inpatient 3D Echo",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "3decho",
-            "operator": "is nil"
-          }
-        },
-        {
-          "transition": "O2 Vitals"
-        }
-      ]
-    },
-    "Inpatient 3D Echo": {
-      "type": "ImagingStudy",
-      "procedure_code": {
-        "system": "SNOMED-CT",
-        "code": 433236007,
-        "display": "Transthoracic echocardiography"
-      },
-      "series": [
-        {
-          "body_site": {
-            "system": "SNOMED-CT",
-            "code": 261179002,
-            "display": "Thoracic"
-          },
-          "modality": {
-            "system": "DICOM-DCM",
-            "code": "US",
-            "display": "Ultrasound"
-          },
-          "instances": [
-            {
-              "title": "Transthoracic echocardiography",
-              "sop_class": {
-                "system": "DICOM-SOP",
-                "code": "1.2.840.10008.5.1.4.1.1.3.1",
-                "display": "Ultrasound Multiframe Image Storage"
-              }
-            }
-          ]
-        }
-      ],
-      "direct_transition": "Set 3D Echo"
-    },
-    "O2 Vitals": {
-      "type": "VitalSign",
-      "vital_sign": "Oxygen Saturation",
-      "unit": "%",
-      "direct_transition": "Record O2",
-      "range": {
-        "low": 65,
-        "high": 85
-      }
-    },
-    "CXR_Inpt_daily": {
-      "type": "ImagingStudy",
-      "procedure_code": {
-        "system": "SNOMED-CT",
-        "code": 399208008,
-        "display": "Plain chest X-ray"
-      },
-      "series": [
-        {
-          "body_site": {
-            "system": "SNOMED-CT",
-            "code": 51185008,
-            "display": "Thoracic structure"
-          },
-          "modality": {
-            "system": "DICOM-DCM",
-            "code": "DX",
-            "display": "Digital Radiography"
-          },
-          "instances": [
-            {
-              "title": "Plain chest X-ray",
-              "sop_class": {
-                "system": "DICOM-SOP",
-                "code": "1.2.840.10008.5.1.4.1.1.1.1",
-                "display": "Digital X-Ray Image Storage – for Presentation"
-              }
-            }
-          ]
-        }
-      ],
-      "direct_transition": "inpatient daily labs"
+      "administration": true,
+      "direct_transition": "Oxygen_Saturation_Admission"
     },
     "Inpatient Daily Transition": {
       "type": "Delay",
       "exact": {
-        "quantity": 1,
-        "unit": "days"
+        "quantity": 12,
+        "unit": "hours"
       },
       "direct_transition": "Inpatient Death decision"
     },
     "Inpatient Discharge": {
       "type": "Simple",
-      "direct_transition": "End Inpatient Care Plan"
+      "direct_transition": "Heart Failure Education"
     },
     "End Inpatient Care Plan": {
       "type": "CarePlanEnd",
-      "direct_transition": "Reset 3D Echo",
+      "direct_transition": "Check Outcome",
       "careplan": "Inpatient CarePlan"
     },
     "End Inpatient Encounter": {
@@ -15078,409 +16373,16 @@ export default {"allergic_rhinitis":{
         "Discharge the patient. Starting since the early 2000s this has a likelihood of being an enrollment into a telemedical home monitoring program, designed to prevent readmissions."
       ]
     },
-    "inpatient daily labs": {
-      "type": "DiagnosticReport",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "51990-0",
-          "display": "Basic Metabolic Panel"
-        }
-      ],
-      "observations": [
-        {
-          "category": "laboratory",
-          "vital_sign": "Glucose",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "2339-0",
-              "display": "Glucose"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Urea Nitrogen",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "6299-2",
-              "display": "Urea Nitrogen"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Creatinine",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "38483-4",
-              "display": "Creatinine"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Calcium",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "49765-1",
-              "display": "Calcium"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Sodium",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "2947-0",
-              "display": "Sodium"
-            }
-          ],
-          "unit": "mmol/L"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Potassium",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "6298-4",
-              "display": "Potassium"
-            }
-          ],
-          "unit": "mmol/L"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Chloride",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "2069-3",
-              "display": "Chloride"
-            }
-          ],
-          "unit": "mmol/L"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Carbon Dioxide",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "20565-8",
-              "display": "Carbon Dioxide"
-            }
-          ],
-          "unit": "mmol/L"
-        }
-      ],
-      "direct_transition": "Inpatient Daily Transition"
-    },
-    "Record_CMP": {
-      "type": "DiagnosticReport",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "24323-8",
-          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
-        }
-      ],
-      "observations": [
-        {
-          "category": "laboratory",
-          "vital_sign": "Glucose",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "2339-0",
-              "display": "Glucose"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Urea Nitrogen",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "6299-2",
-              "display": "Urea Nitrogen"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "38483-4",
-              "display": "Creatinine"
-            }
-          ],
-          "unit": "mg/dL",
-          "vital_sign": "Creatinine"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Calcium",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "49765-1",
-              "display": "Calcium"
-            }
-          ],
-          "unit": "mg/dL"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Sodium",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "2947-0",
-              "display": "Sodium"
-            }
-          ],
-          "unit": "mmol/L"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Potassium",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "6298-4",
-              "display": "Potassium"
-            }
-          ],
-          "unit": "mmol/L"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Chloride",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "2069-3",
-              "display": "Chloride"
-            }
-          ],
-          "unit": "mmol/L"
-        },
-        {
-          "category": "laboratory",
-          "vital_sign": "Carbon Dioxide",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "20565-8",
-              "display": "Carbon Dioxide"
-            }
-          ],
-          "unit": "mmol/L"
-        },
-        {
-          "category": "laboratory",
-          "unit": "mL/min",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
-            }
-          ],
-          "range": {
-            "low": 4,
-            "high": 29
-          }
-        },
-        {
-          "category": "laboratory",
-          "unit": "g/dL",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "2885-2",
-              "display": "Protein [Mass/volume] in Serum or Plasma"
-            }
-          ],
-          "range": {
-            "low": 60,
-            "high": 80
-          }
-        },
-        {
-          "category": "laboratory",
-          "unit": "g/dL",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "1751-7",
-              "display": "Albumin [Mass/volume] in Serum or Plasma"
-            }
-          ],
-          "range": {
-            "low": 3.5,
-            "high": 5.5
-          }
-        },
-        {
-          "category": "laboratory",
-          "unit": "g/L",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "10834-0",
-              "display": "Globulin [Mass/volume] in Serum by calculation"
-            }
-          ],
-          "range": {
-            "low": 2,
-            "high": 3.5
-          }
-        },
-        {
-          "category": "laboratory",
-          "unit": "mg/dL",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "1975-2",
-              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
-            }
-          ],
-          "range": {
-            "low": 0.1,
-            "high": 1.2
-          }
-        },
-        {
-          "category": "laboratory",
-          "unit": "U/L",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "6768-6",
-              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
-            }
-          ],
-          "range": {
-            "low": 20,
-            "high": 140
-          }
-        },
-        {
-          "category": "laboratory",
-          "unit": "U/L",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "1742-6",
-              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
-            }
-          ],
-          "range": {
-            "low": 20,
-            "high": 60
-          }
-        },
-        {
-          "category": "laboratory",
-          "unit": "U/L",
-          "codes": [
-            {
-              "system": "LOINC",
-              "code": "1920-8",
-              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
-            }
-          ],
-          "range": {
-            "low": 6,
-            "high": 40
-          }
-        }
-      ],
-      "direct_transition": "CXR_ED"
-    },
     "Age Guard": {
       "type": "Guard",
       "allow": {
         "condition_type": "Age",
-        "operator": ">",
-        "quantity": 50,
-        "unit": "years"
+        "operator": ">=",
+        "quantity": 20,
+        "unit": "years",
+        "value": 0
       },
-      "direct_transition": "chance of CHF"
-    },
-    "Age_50-59-Chance of CHF": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "CHF onset",
-          "distribution": 0.003
-        },
-        {
-          "transition": "chance of CHF",
-          "distribution": 0.9970000000000001
-        }
-      ]
-    },
-    "Age_60-69-Chance of CHF": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "CHF onset",
-          "distribution": 0.008
-        },
-        {
-          "transition": "chance of CHF",
-          "distribution": 0.992
-        }
-      ]
-    },
-    "Age_70-79-Chance of CHF": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "CHF onset",
-          "distribution": 0.013
-        },
-        {
-          "transition": "chance of CHF",
-          "distribution": 0.9870000000000001
-        }
-      ]
-    },
-    "Age_80-Chance of CHF": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "CHF onset",
-          "distribution": 0.02
-        },
-        {
-          "transition": "chance of CHF",
-          "distribution": 0.98
-        }
-      ]
-    },
-    "CHF onset": {
-      "type": "Simple",
-      "direct_transition": "Reset inpatient count"
+      "direct_transition": "Determine CHF"
     },
     "CHF careplan for smokers": {
       "type": "CarePlanStart",
@@ -15515,6 +16417,19 @@ export default {"allergic_rhinitis":{
       "type": "Simple",
       "conditional_transition": [
         {
+          "transition": "Wrap up follow-up encounter",
+          "condition": {
+            "condition_type": "Active CarePlan",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": 735984001,
+                "display": "Heart failure self management plan"
+              }
+            ]
+          }
+        },
+        {
           "transition": "CHF careplan for smokers",
           "condition": {
             "condition_type": "Attribute",
@@ -15533,8 +16448,9 @@ export default {"allergic_rhinitis":{
       "direct_transition": "end_followup_encounter"
     },
     "Order medications": {
-      "type": "Simple",
-      "direct_transition": "CHF Medication Start 1"
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_meds",
+      "direct_transition": "Med_Rec"
     },
     "Report workup imaging": {
       "type": "DiagnosticReport",
@@ -15559,98 +16475,24 @@ export default {"allergic_rhinitis":{
           "vital_sign": "Left ventricular Ejection fraction"
         }
       ],
-      "direct_transition": "Order medications"
-    },
-    "Workup imaging for CHF": {
-      "type": "ImagingStudy",
-      "procedure_code": {
-        "system": "SNOMED-CT",
-        "code": "434158009",
-        "display": "Transthoracic three dimensional ultrasonography of heart (procedure)"
-      },
-      "series": [
-        {
-          "body_site": {
-            "system": "SNOMED-CT",
-            "code": "261179002",
-            "display": "thoracic"
-          },
-          "modality": {
-            "system": "DICOM-DCM",
-            "code": "US",
-            "display": "Ultrasound"
-          },
-          "instances": [
-            {
-              "title": "Ultrasound Multiframe Image Storage",
-              "sop_class": {
-                "system": "DICOM-SOP",
-                "code": "1.2.840.10008.5.1.4.1.1.3.1",
-                "display": "Ultrasound Multiframe Image Storage"
-              }
-            }
-          ]
-        }
-      ],
-      "direct_transition": "Read workup imaging"
-    },
-    "Calculate LVEF": {
-      "type": "VitalSign",
-      "vital_sign": "Left ventricular Ejection fraction",
-      "unit": "%",
-      "direct_transition": "CHF symptom onset 1",
-      "range": {
-        "low": 30,
-        "high": 49
-      }
-    },
-    "Read workup imaging": {
-      "type": "Observation",
-      "category": "imaging",
-      "unit": "%",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "10230-1",
-          "display": "Left ventricular Ejection fraction"
-        }
-      ],
-      "direct_transition": "Report workup imaging",
-      "vital_sign": "Left ventricular Ejection fraction"
-    },
-    "NTproBNP lab workup": {
-      "type": "Observation",
-      "category": "laboratory",
-      "unit": "pg/mL",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "33762-6",
-          "display": "NT-proBNP"
-        }
-      ],
-      "direct_transition": "Record_MetabolicPanel",
-      "range": {
-        "low": 200,
-        "high": 2000
-      }
+      "direct_transition": "Record_MetabolicPanel"
     },
     "Count inpatient stays": {
       "type": "Counter",
-      "attribute": "inpatient-count",
+      "attribute": "chf_inpatient_admissions",
       "action": "increment",
-      "direct_transition": "Inpatient CarePlan"
+      "direct_transition": "Inpatient LOS"
     },
     "Inpatient LOS": {
       "type": "SetAttribute",
       "attribute": "inpatient-los",
-      "direct_transition": "Count inpatient stays",
+      "direct_transition": "Inpatient CarePlan",
       "value": 0
     },
     "Reset inpatient count": {
       "type": "SetAttribute",
-      "attribute": "inpatient-count",
-      "direct_transition": "Calculate LVEF",
+      "attribute": "chf_inpatient_admissions",
+      "direct_transition": "Reset emergency count",
       "value": 0
     },
     "Inpatient daily routine": {
@@ -15659,11 +16501,13 @@ export default {"allergic_rhinitis":{
     },
     "Death": {
       "type": "Death",
-      "exact": {
-        "quantity": 1,
-        "unit": "days"
-      },
-      "direct_transition": "Terminal"
+      "direct_transition": "Terminal",
+      "referenced_by_attribute": "chf",
+      "range": {
+        "low": 1,
+        "high": 12,
+        "unit": "hours"
+      }
     },
     "Terminal": {
       "type": "Terminal"
@@ -15702,7 +16546,7 @@ export default {"allergic_rhinitis":{
         {
           "condition": {
             "condition_type": "Attribute",
-            "attribute": "inpatient-count",
+            "attribute": "chf_admissions",
             "operator": ">=",
             "value": 4
           },
@@ -15713,7 +16557,19 @@ export default {"allergic_rhinitis":{
             },
             {
               "transition": "Inpatient Discharge decision",
-              "distribution": 0.19999999999999996
+              "distribution": 0.2
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.03,
+              "transition": "Death"
+            },
+            {
+              "transition": "Inpatient Discharge decision",
+              "distribution": 0.97
             }
           ]
         }
@@ -15803,39 +16659,773 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Daily self-measurement",
       "reason": "chf"
     },
-    "Set 3D Echo": {
-      "type": "SetAttribute",
-      "attribute": "3decho",
-      "direct_transition": "O2 Vitals",
-      "value": true
-    },
-    "Reset 3D Echo": {
-      "type": "SetAttribute",
-      "attribute": "3decho",
-      "direct_transition": "End Inpatient Encounter"
-    },
-    "Anemia_Submodule": {
-      "type": "CallSubmodule",
-      "submodule": "anemia/anemia_sub",
-      "direct_transition": "intra_encounter time gate"
-    },
-    "Check_Anemia_Exist": {
+    "Determine CHF": {
       "type": "Simple",
-      "conditional_transition": [
+      "complex_transition": [
         {
-          "transition": "Anemia_Submodule",
           "condition": {
-            "condition_type": "Attribute",
-            "attribute": "anemia",
-            "operator": "is nil"
-          }
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Age 20-39",
+              "distribution": 0.002
+            },
+            {
+              "transition": "Age 40-59",
+              "distribution": 0.017
+            },
+            {
+              "transition": "Age 50-79",
+              "distribution": 0.048
+            },
+            {
+              "transition": "Age 80+",
+              "distribution": 0.12
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.813
+            }
+          ]
         },
         {
-          "transition": "intra_encounter time gate"
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Age 20-39",
+              "distribution": 0.003
+            },
+            {
+              "transition": "Age 40-59",
+              "distribution": 0.012
+            },
+            {
+              "transition": "Age 50-79",
+              "distribution": 0.069
+            },
+            {
+              "transition": "Age 80+",
+              "distribution": 0.128
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.788
+            }
+          ]
         }
       ]
     },
-    "Record O2": {
+    "Age 20-39": {
+      "type": "Delay",
+      "range": {
+        "low": 0,
+        "high": 19,
+        "unit": "years"
+      },
+      "direct_transition": "Determine Type"
+    },
+    "Age 40-59": {
+      "type": "Delay",
+      "range": {
+        "low": 20,
+        "high": 39,
+        "unit": "years"
+      },
+      "direct_transition": "Determine Type"
+    },
+    "Age 50-79": {
+      "type": "Delay",
+      "range": {
+        "low": 30,
+        "high": 59,
+        "unit": "years"
+      },
+      "direct_transition": "Determine Type"
+    },
+    "Age 80+": {
+      "type": "Delay",
+      "range": {
+        "low": 60,
+        "high": 65,
+        "unit": "years"
+      },
+      "direct_transition": "Determine Type"
+    },
+    "CHF symptom onset 4": {
+      "type": "Symptom",
+      "symptom": "Orthopnea (finding)",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "CHF symptom onset 5"
+    },
+    "CHF symptom onset 5": {
+      "type": "Symptom",
+      "symptom": "Edema (finding)",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "CHF symptom onset 6"
+    },
+    "CHF symptom onset 6": {
+      "type": "Symptom",
+      "symptom": "Rales (finding)",
+      "cause": "",
+      "exact": {
+        "quantity": 1
+      },
+      "direct_transition": "CHF Condition Start"
+    },
+    "Recorded Symptom 1": {
+      "type": "Observation",
+      "category": "exam",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75325-1",
+          "display": "Symptom"
+        }
+      ],
+      "direct_transition": "Recorded Symptom 2",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 60845006,
+        "display": "Dyspnea on exertion (finding)"
+      }
+    },
+    "Recorded Symptom 2": {
+      "type": "Observation",
+      "category": "exam",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75325-1",
+          "display": "Symptom"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 267036007,
+        "display": "Dyspnea (finding)"
+      },
+      "direct_transition": "Recorded Symptom 3"
+    },
+    "Recorded Symptom 3": {
+      "type": "Observation",
+      "category": "exam",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75325-1",
+          "display": "Symptom"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 59265000,
+        "display": "Paroxysmal dyspnea (finding)"
+      },
+      "direct_transition": "Recorded Symptom 4"
+    },
+    "Recorded Symptom 4": {
+      "type": "Observation",
+      "category": "exam",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75325-1",
+          "display": "Symptom"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 62744007,
+        "display": "Orthopnea (finding)"
+      },
+      "direct_transition": "Recorded Symptom 5"
+    },
+    "Recorded Symptom 5": {
+      "type": "Observation",
+      "category": "exam",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75325-1",
+          "display": "Symptom"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 267038008,
+        "display": "Edema (finding)"
+      },
+      "direct_transition": "Recorded Symptom 6"
+    },
+    "Recorded Symptom 6": {
+      "type": "Observation",
+      "category": "exam",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75325-1",
+          "display": "Symptom"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 19283009,
+        "display": "Rales (finding)"
+      },
+      "direct_transition": "Initial Lab Work"
+    },
+    "Initial Lab Work": {
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_lab_work",
+      "direct_transition": "ECG"
+    },
+    "Initial Encounter End": {
+      "type": "EncounterEnd",
+      "remarks": [
+        "Anemia prevalence for CHF - https://www.ncbi.nlm.nih.gov/pubmed/20630401",
+        ""
+      ],
+      "direct_transition": "Intra Encounter Time Gate"
+    },
+    "Intra Encounter Time Gate": {
+      "type": "Delay",
+      "direct_transition": "Followup CHF Encounter",
+      "range": {
+        "low": 2,
+        "high": 3,
+        "unit": "weeks"
+      }
+    },
+    "Followup CHF Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "chf",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Echocardiography"
+    },
+    "CHF onset": {
+      "type": "Simple",
+      "direct_transition": "Reset inpatient count"
+    },
+    "HFrEF": {
+      "type": "SetAttribute",
+      "attribute": "chf_type",
+      "value": "HFrEF",
+      "distributed_transition": [
+        {
+          "transition": "LVEF HFrEF Low",
+          "distribution": 0.2
+        },
+        {
+          "transition": "LVEF HFrEF Mid",
+          "distribution": 0.4
+        },
+        {
+          "transition": "LVEF HFrEF High",
+          "distribution": 0.4
+        }
+      ]
+    },
+    "HFpEF": {
+      "type": "SetAttribute",
+      "attribute": "chf_type",
+      "direct_transition": "LVEF HFpEF",
+      "value": "HFpEF"
+    },
+    "Determine Type": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "HFrEF",
+          "distribution": 0.39
+        },
+        {
+          "transition": "HFmEF",
+          "distribution": 0.13
+        },
+        {
+          "transition": "HFpEF",
+          "distribution": 0.48
+        }
+      ]
+    },
+    "LVEF HFpEF": {
+      "type": "VitalSign",
+      "vital_sign": "Left ventricular Ejection fraction",
+      "unit": "",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "distributed_transition": [
+        {
+          "transition": "NYHA Class 1",
+          "distribution": 0.2
+        },
+        {
+          "transition": "NYHA Class 2",
+          "distribution": 0.55
+        },
+        {
+          "transition": "NYHA Class 3",
+          "distribution": 0.2
+        },
+        {
+          "transition": "NYHA Class 4",
+          "distribution": 0.05
+        }
+      ]
+    },
+    "NYHA Class 1": {
+      "type": "SetAttribute",
+      "attribute": "nyha_class",
+      "direct_transition": "CHF onset",
+      "value": 1
+    },
+    "NYHA Class 2": {
+      "type": "SetAttribute",
+      "attribute": "nyha_class",
+      "value": 2,
+      "direct_transition": "CHF onset"
+    },
+    "NYHA Class 3": {
+      "type": "SetAttribute",
+      "attribute": "nyha_class",
+      "value": 3,
+      "direct_transition": "CHF onset"
+    },
+    "NYHA Class 4": {
+      "type": "SetAttribute",
+      "attribute": "nyha_class",
+      "value": 4,
+      "direct_transition": "CHF onset"
+    },
+    "Echocardiography": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": 40701008,
+        "display": "Echocardiography (procedure)"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": 80891009,
+            "display": "Heart structure (body structure)"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "US",
+            "display": "Ultrasound"
+          },
+          "instances": [
+            {
+              "title": "Ultrasound Multiframe Image Storage",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.3.1",
+                "display": "Ultrasound Multiframe Image Storage"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Report workup imaging"
+    },
+    "HFmEF": {
+      "type": "SetAttribute",
+      "attribute": "chf_type",
+      "direct_transition": "LVEF HFmEF",
+      "value": "HFmEF"
+    },
+    "LVEF HFmEF": {
+      "type": "VitalSign",
+      "vital_sign": "Left ventricular Ejection fraction",
+      "unit": "",
+      "range": {
+        "low": 41,
+        "high": 49
+      },
+      "distributed_transition": [
+        {
+          "transition": "NYHA Class 1",
+          "distribution": 0.2
+        },
+        {
+          "transition": "NYHA Class 2",
+          "distribution": 0.55
+        },
+        {
+          "transition": "NYHA Class 3",
+          "distribution": 0.2
+        },
+        {
+          "transition": "NYHA Class 4",
+          "distribution": 0.05
+        }
+      ]
+    },
+    "LVEF HFrEF Low": {
+      "type": "VitalSign",
+      "vital_sign": "Left ventricular Ejection fraction",
+      "unit": "",
+      "range": {
+        "low": 5,
+        "high": 19
+      },
+      "distributed_transition": [
+        {
+          "transition": "NYHA Class 3",
+          "distribution": 0.75
+        },
+        {
+          "transition": "NYHA Class 4",
+          "distribution": 0.25
+        }
+      ]
+    },
+    "LVEF HFrEF Mid": {
+      "type": "VitalSign",
+      "vital_sign": "Left ventricular Ejection fraction",
+      "unit": "",
+      "range": {
+        "low": 20,
+        "high": 35
+      },
+      "distributed_transition": [
+        {
+          "transition": "NYHA Class 2",
+          "distribution": 0.65
+        },
+        {
+          "transition": "NYHA Class 3",
+          "distribution": 0.35
+        }
+      ]
+    },
+    "LVEF HFrEF High": {
+      "type": "VitalSign",
+      "vital_sign": "Left ventricular Ejection fraction",
+      "unit": "",
+      "range": {
+        "low": 36,
+        "high": 40
+      },
+      "distributed_transition": [
+        {
+          "transition": "NYHA Class 1",
+          "distribution": 0.25
+        },
+        {
+          "transition": "NYHA Class 2",
+          "distribution": 0.75
+        }
+      ]
+    },
+    "Stop Ibuprofen": {
+      "type": "MedicationEnd",
+      "direct_transition": "Assign CHF care plan",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 198405,
+          "display": "Ibuprofen 100 MG Oral Tablet"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 310965,
+          "display": "Ibuprofen 200 MG Oral Tablet"
+        }
+      ]
+    },
+    "Med_Rec": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "430193006",
+          "display": "Medication Reconciliation (procedure)"
+        }
+      ],
+      "direct_transition": "Stop Ibuprofen"
+    },
+    "Record_MetabolicPanel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 8,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "51990-0",
+          "display": "Basic Metabolic Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Creatinine",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        }
+      ],
+      "direct_transition": "Order medications"
+    },
+    "Repeat Lab Work": {
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_lab_work",
+      "direct_transition": "CXR_ED"
+    },
+    "Progress to Stage D": {
+      "type": "SetAttribute",
+      "attribute": "chf_stage_d",
+      "value": true,
+      "distributed_transition": [
+        {
+          "transition": "Stage D Hospice",
+          "distribution": 0.04
+        },
+        {
+          "transition": "Stage D LVAD",
+          "distribution": 0.04
+        },
+        {
+          "transition": "Stage D Transplant",
+          "distribution": 0.04
+        },
+        {
+          "transition": "Potential CHF Flare",
+          "distribution": 0.88
+        }
+      ]
+    },
+    "ICU Admission": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 305351004,
+          "display": "Admission to intensive care unit (procedure)"
+        }
+      ],
+      "reason": "chf",
+      "direct_transition": "Count ICU stays"
+    },
+    "Inpatient Admission": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 308540004,
+          "display": "Inpatient stay (finding)"
+        }
+      ],
+      "direct_transition": "Count inpatient stays",
+      "reason": "chf"
+    },
+    "Wait 12 hours": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 12,
+        "unit": "hours"
+      },
+      "direct_transition": "Repeat_Lab_Work"
+    },
+    "Furosemide_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1719286,
+          "display": "10 ML Furosemide 10 MG/ML Injection"
+        }
+      ],
+      "reason": "chf",
+      "administration": true,
+      "direct_transition": "Inpatient Daily Transition"
+    },
+    "Repeat_Lab_Work": {
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_lab_work",
+      "direct_transition": "Furosemide_2"
+    },
+    "Dead within 28 days": {
+      "type": "Death",
+      "direct_transition": "End Inpatient Encounter",
+      "range": {
+        "low": 1,
+        "high": 28,
+        "unit": "days"
+      },
+      "referenced_by_attribute": "chf"
+    },
+    "Dead within 1 year": {
+      "type": "Death",
+      "direct_transition": "End Inpatient Encounter",
+      "range": {
+        "low": 29,
+        "high": 364,
+        "unit": "days"
+      },
+      "referenced_by_attribute": "chf"
+    },
+    "Reset ICU count": {
+      "type": "SetAttribute",
+      "attribute": "chf_icu_admissions",
+      "value": 0,
+      "direct_transition": "Reset admission count"
+    },
+    "Reset emergency count": {
+      "type": "SetAttribute",
+      "attribute": "chf_emergency_admissions",
+      "value": 0,
+      "direct_transition": "Reset ICU count"
+    },
+    "Reset admission count": {
+      "type": "SetAttribute",
+      "attribute": "chf_admissions",
+      "value": 0,
+      "direct_transition": "CHF symptom onset 1"
+    },
+    "acute CHF flare": {
+      "type": "Counter",
+      "attribute": "chf_admissions",
+      "action": "increment",
+      "direct_transition": "acute_CHF_flare",
+      "remarks": [
+        "Pregnant patients and patients with Acute myocardial infarction should be excluded and moved down an alternative pathway. "
+      ]
+    },
+    "acute_CHF_flare": {
+      "type": "Counter",
+      "attribute": "chf_emergency_admissions",
+      "action": "increment",
+      "remarks": [
+        "Pregnant patients and patients with Acute myocardial infarction should be excluded and moved down an alternative pathway. "
+      ],
+      "direct_transition": "CHF ED Visit"
+    },
+    "Count ICU stays": {
+      "type": "Counter",
+      "attribute": "chf_icu_admissions",
+      "action": "increment",
+      "direct_transition": "Inpatient LOS"
+    },
+    "Oxygen_Saturation": {
       "type": "Observation",
       "category": "vital-signs",
       "unit": "%",
@@ -15851,10 +17441,431 @@ export default {"allergic_rhinitis":{
           "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
         }
       ],
-      "direct_transition": "CXR_Inpt_daily",
-      "vital_sign": "Oxygen Saturation"
+      "vital_sign": "Oxygen Saturation",
+      "conditional_transition": [
+        {
+          "transition": "Oxygen",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Oxygen Saturation",
+            "operator": "<",
+            "value": 90
+          }
+        },
+        {
+          "transition": "Repeat Lab Work"
+        }
+      ]
+    },
+    "Oxygen": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "371908008",
+          "display": "Oxygen administration by mask (procedure)"
+        }
+      ],
+      "remarks": [
+        "Oxygen administration by mask refers to supplemental O2 via nasal cannula or mask, continuous positive airway pressure (CPAP), high flow nasal cannula (HFNC), or non-invasive ventilation (NIV)."
+      ],
+      "direct_transition": "Move_to_Prone_Position"
+    },
+    "Move_to_Prone_Position": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 431182000,
+          "display": "Placing subject in prone position (procedure)"
+        }
+      ],
+      "direct_transition": "Repeat Lab Work"
+    },
+    "Shock Disorder": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 27942005,
+          "display": "Shock (disorder)"
+        }
+      ],
+      "direct_transition": "ED_End"
+    },
+    "Oxygen_Saturation_Admission": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "%",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "2708-6",
+          "display": "Oxygen saturation in Arterial blood"
+        },
+        {
+          "system": "LOINC",
+          "code": "59408-5",
+          "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+        }
+      ],
+      "vital_sign": "Oxygen Saturation",
+      "conditional_transition": [
+        {
+          "transition": "Oxygen_Admission",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Oxygen Saturation",
+            "operator": "<",
+            "value": 90
+          }
+        },
+        {
+          "transition": "Wait 12 hours"
+        }
+      ]
+    },
+    "Oxygen_Admission": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "371908008",
+          "display": "Oxygen administration by mask (procedure)"
+        }
+      ],
+      "remarks": [
+        "Oxygen administration by mask refers to supplemental O2 via nasal cannula or mask, continuous positive airway pressure (CPAP), high flow nasal cannula (HFNC), or non-invasive ventilation (NIV)."
+      ],
+      "direct_transition": "Move_to_Prone_Position_Admission"
+    },
+    "Move_to_Prone_Position_Admission": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 431182000,
+          "display": "Placing subject in prone position (procedure)"
+        }
+      ],
+      "direct_transition": "Wait 12 hours"
+    },
+    "ECG": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 29303009,
+          "display": "Electrocardiographic procedure"
+        }
+      ],
+      "duration": {
+        "low": 5,
+        "high": 10,
+        "unit": "minutes"
+      },
+      "direct_transition": "ECG_Data",
+      "reason": "chf"
+    },
+    "ECG_Data": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Cardiovascular_Stress_Test",
+          "distribution": 0.25
+        },
+        {
+          "distribution": 0.75,
+          "transition": "Chest X-Ray Check"
+        }
+      ]
+    },
+    "Cardiovascular_Stress_Test": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 76746007,
+          "display": "Cardiovascular stress testing (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "reason": "chf",
+      "direct_transition": "Chest X-Ray Check"
+    },
+    "Chest X-Ray Check": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Chest X-Ray",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Assessment Procedure",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Chest X-Ray": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": 399208008,
+        "display": "Plain chest X-ray (procedure)"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": 51185008,
+            "display": "Thoracic structure (body structure)"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "CR",
+            "display": "Computed Radiography"
+          },
+          "instances": [
+            {
+              "title": "Title of this image",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.1.1",
+                "display": "Digital X-Ray Image Storage – for Presentation"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Assessment Procedure"
+    },
+    "Inpatient_Echocardiography": {
+      "type": "ImagingStudy",
+      "procedure_code": {
+        "system": "SNOMED-CT",
+        "code": 40701008,
+        "display": "Echocardiography (procedure)"
+      },
+      "series": [
+        {
+          "body_site": {
+            "system": "SNOMED-CT",
+            "code": 80891009,
+            "display": "Heart structure (body structure)"
+          },
+          "modality": {
+            "system": "DICOM-DCM",
+            "code": "US",
+            "display": "Ultrasound"
+          },
+          "instances": [
+            {
+              "title": "Ultrasound Multiframe Image Storage",
+              "sop_class": {
+                "system": "DICOM-SOP",
+                "code": "1.2.840.10008.5.1.4.1.1.3.1",
+                "display": "Ultrasound Multiframe Image Storage"
+              }
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Report_workup_imaging"
+    },
+    "Report_workup_imaging": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "55405-5",
+          "display": "Heartfailure Tracking Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "10230-1",
+              "display": "Left ventricular Ejection fraction"
+            }
+          ],
+          "vital_sign": "Left ventricular Ejection fraction"
+        }
+      ],
+      "direct_transition": "Inpatient daily routine"
+    },
+    "Inpatient_ECG": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 29303009,
+          "display": "Electrocardiographic procedure"
+        }
+      ],
+      "duration": {
+        "low": 5,
+        "high": 10,
+        "unit": "minutes"
+      },
+      "reason": "chf",
+      "distributed_transition": [
+        {
+          "transition": "Inpatient_Echocardiography",
+          "distribution": 0.25
+        },
+        {
+          "transition": "Inpatient daily routine",
+          "distribution": 0.75
+        }
+      ]
+    },
+    "Check Outcome": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Dead within 28 days",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Dead within 1 year",
+          "distribution": 0.3
+        },
+        {
+          "transition": "End Inpatient Encounter",
+          "distribution": 0.6
+        }
+      ]
+    },
+    "Med_Rec_2": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "430193006",
+          "display": "Medication Reconciliation (procedure)"
+        }
+      ],
+      "direct_transition": "Inpatient_ECG"
+    },
+    "Heart Failure Education": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 423475008,
+          "display": "Heart failure education (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "End Inpatient Care Plan",
+      "reason": "CHF Condition Start"
+    },
+    "Assessment Procedure": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 762998009,
+          "display": "Assessment using New York Heart Association Classification (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Assessment Result",
+      "reason": "chf"
+    },
+    "Assessment Result": {
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_nyha_panel",
+      "direct_transition": "Initial Encounter End"
+    },
+    "Stage D Transplant": {
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_transplant",
+      "direct_transition": "Followup CHF Encounter"
+    },
+    "Stage D LVAD": {
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_lvad",
+      "direct_transition": "Followup CHF Encounter"
+    },
+    "Stage D Hospice": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "chf",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 305336008,
+          "display": "Admission to hospice (procedure)"
+        }
+      ],
+      "direct_transition": "Hospice Death"
+    },
+    "Hospice Death": {
+      "type": "Death",
+      "range": {
+        "low": 3,
+        "high": 60,
+        "unit": "days"
+      },
+      "referenced_by_attribute": "chf",
+      "direct_transition": "Terminal"
     }
-  }
+  },
+  "remarks": [
+    "This module was last updated in 2020 based on the existing Synthea congestive_heartfailure_module. ",
+    "The goal of the module is to simulate the life cycle of heart failure (HF) from onset to death, including hospitalizations for acute decompensations and procedural/interventions. ",
+    "",
+    "The module includes the following representations: ",
+    "- HF ACC/AHA Stages C & D",
+    "- NYHA Functional Classification I, II, III, and IV ",
+    "- HF definitions of HF reduced ejection fraction (HFrEF), HF midrange/borderline EF (HFmEF), and HF preserved EF (HFpEF), defined as an EF of <=40, 41-49, and >=50 respectively. For treatment and disease progression purposes, HFrEF is divided into subcategories of EF <20, EF 20-35, and EF 36-40. ",
+    "- Goal directed medical therapy with diuretics, ACE inhibitors, ARBs, ARNIs, beta-blockers, mineralocorticoid receptor agonists (MRA), hydralazine-isosorbide, ivabradine, and digoxin, with treatment based on EF and evidence for use in the NYHA class. ",
+    "- Non-pharmacological interventions for HF management (e.g., exercise, sodium restriction, smoking cessation etc.)",
+    "- Procedural interventions based on clinical indications: ICD, CRT, LVAD, CABG, PCI, transplant",
+    "",
+    "This following model assumptions apply: ",
+    "",
+    "Prevalence: HF prevalence is informed by the Heart disease and stroke statistics—2020 update: a report from the American Heart Association. https://doi.org/10.1161/CIR.0000000000000757 , Circulation 2020;141:e139–e596 ",
+    "",
+    "Pharmacotherapy: A single drug is used to represent a pharmacologic category (e.g., lisinopril for ACE inhibitors). The medication dose represented in the module is inclusive of all medication dosages, including titration to the maximum dose based on HF treatment recommendations. Although hydralazine-isosorbide has been recommended for individuals who identify as African American, we did not make this distinction in the module in light of recent discussions regarding the use of race—a  sociological construct—to  guide medication therapy, as well as clinical observations/discussions with frontline physicians noting that this medication is used across races. Additionally, the module at present does not reflect the use of SGLT-2 inhibitors (i.e., dapagliflozin) for patients with HFrEF and Type 2 diabetes mellitus (DM); however, individuals with Type 2 DM and HFrEF may receive an SGLT-2 as part of the metabolic disease module in Synthea. Medication utilization represented in the module is reflective of undertreatment and medication adherence observed in clinical practice. ",
+    "",
+    "Clinical Population Exclusions: The module care pathway excludes pregnant individuals and individuals <18 years of age. While treatment options for HF therapy during pregnancy are similar to non-pregnant individuals, certain treatments are avoided due to risk of teratogenicity and/or certain treatment considerations are made to prevent the risk of poor fetal outcomes. Individuals <18 patients were excluded considering the impact of congenital heart disease on disease prevalence and treatment options. ",
+    "",
+    "Module references: ",
+    "",
+    "1.  The previous existing synthea congestive_heartfailure_module",
+    "2.  Heart disease and stroke statistics—2020 update: a report from the American Heart Association. https://doi.org/10.1161/CIR.0000000000000757",
+    "3.  Savarese G, Lund LH. Global Public Health Burden of Heart Failure. Card Fail Rev. 2017 Apr;3(1):7-11. doi:10.15420/cfr.2016:25:2. PMID: 28785469; PMCID: PMC5494150.",
+    "4.  https://r.details.loinc.org/LOINC/55405-5.html?sections=Comprehensive",
+    "5.  Yancy, C.W., Jessup, M., Bozkurt, B., Butler, J., Casey, D.E., Drazner, M.H., Fonarow, G.C., Geraci, S.A., Horwich, T., Januzzi, J.L. and Johnson, M.R., 2013. 2013 ACCF/AHA guideline for the management of heart failure: a report of the American College of Cardiology Foundation/American Heart Association Task Force on Practice Guidelines. Journal of the American College of Cardiology, 62(16), pp.e147-e239, DOI: 10.1016/j.jacc.2013.05.019",
+    "6.  Yancy, C.W., Jessup, M., Bozkurt, B., Butler, J., Casey, D.E., Colvin, M.M., Drazner, M.H., Filippatos, G.S., Fonarow, G.C., Givertz, M.M. and Hollenberg, S.M., 2017. 2017 ACC/AHA/HFSA focused update of the 2013 ACCF/AHA guideline for the management of heart failure: a report of the American College of Cardiology/American Heart Association Task Force on Clinical Practice Guidelines and the Heart Failure Society of America. Journal of the American College of Cardiology, 70(6), pp.776-803, DOI: 10.1016/j.jacc.2017.04.025.",
+    "7.  Hollenberg, S.M., Stevenson, L.W., Ahmad, T., Amin, V.J., Bozkurt, B., Butler, J., Davis, L.L., Drazner, M.H., Kirkpatrick, J.N., Peterson, P.N. and Reed, B.N., 2019. 2019 ACC expert consensus decision pathway on risk assessment, management, and clinical trajectory of patients hospitalized with heart failure: a report of the American College of Cardiology Solution Set Oversight Committee. Journal of the American College of Cardiology, 74(15), pp.1966-2011, DOI: 10.1016/j.jacc.2019.08.001.",
+    "8.  Blecker, S., Ladapo, J.A., Doran, K.M., Goldfeld, K.S. and Katz, S., 2014. Emergency department visits for heart failure and subsequent hospitalization or observation unit admission. American heart journal, 168(6), pp.901-908.",
+    "9.  Chang, P.P., Wruck, L.M., Shahar, E., Rossi, J.S., Loehr, L.R., Russell, S.D., Agarwal, S.K., Konety, S.H., Rodriguez, C.J. and Rosamond, W.D., 2018. Trends in hospitalizations and survival of acute decompensated heart failure in four US communities (2005–2014) ARIC study community surveillance. Circulation, 138(1), pp.12-24, https://doi.org/10.1161/CIRCULATIONAHA.117.027551",
+    "10. Kalogeropoulos, A.P., Samman-Tahhan, A., Hedley, J.S., McCue, A.A., Bjork, J.B., Markham, D.W., Bhatt, K.N., Georgiopoulou, V.V., Smith, A.L. and Butler, J., 2017. Progression to stage D heart failure among outpatients with stage C heart failure and reduced ejection fraction. JACC: Heart Failure, 5(7), pp.528-537, DOI: 10.1016/j.jchf.2017.02.020.",
+    "11. CHAMP-HF Registry studies",
+    "12. Get With The Guidelines–Heart Failure Registry studies",
+    ""
+  ],
+  "gmf_version": 1
 }
 ,
 "contraceptive_maintenance":{
@@ -16356,7 +18367,8 @@ export default {"allergic_rhinitis":{
       },
       "direct_transition": "Replace_Contraceptive_Implant"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "contraceptives/clear_contraceptive":{
@@ -16409,7 +18421,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "contraceptives/female_sterilization":{
@@ -16532,7 +18545,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "contraceptives/implant_contraceptive":{
@@ -16733,7 +18747,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "contraceptives/injectable_contraceptive":{
@@ -16891,7 +18906,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "contraceptives/intrauterine_device":{
@@ -17223,7 +19239,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "contraceptives/male_sterilization":{
@@ -17344,7 +19361,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "contraceptives/oral_contraceptive":{
@@ -17854,7 +19872,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "contraceptives/patch_contraceptive":{
@@ -17940,7 +19959,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "contraceptives/ring_contraceptive":{
@@ -18025,7 +20045,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "contraceptives":{
@@ -18586,7 +20607,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "copd":{
@@ -19597,7 +21619,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Consider_Surgery"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/admission":{
@@ -20786,7 +22809,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/determine_risk":{
@@ -21068,7 +23092,8 @@ export default {"allergic_rhinitis":{
   },
   "remarks": [
     "This submodule determines covid19 risk, severity, and death."
-  ]
+  ],
+  "gmf_version": 1
 }
 ,
 "covid19/diagnose_bacterial_infection":{
@@ -21137,7 +23162,8 @@ export default {"allergic_rhinitis":{
       },
       "direct_transition": "Bacterial Infection"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/diagnose_blood_clot":{
@@ -21254,7 +23280,8 @@ export default {"allergic_rhinitis":{
       "value": false,
       "direct_transition": "Check D-Dimer"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/end_outcomes":{
@@ -21410,7 +23437,8 @@ export default {"allergic_rhinitis":{
       ],
       "direct_transition": "End Heart Failure"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/end_symptoms":{
@@ -21627,7 +23655,8 @@ export default {"allergic_rhinitis":{
       ],
       "direct_transition": "Sore Throat End"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/infection":{
@@ -22883,7 +24912,8 @@ export default {"allergic_rhinitis":{
       "submodule": "covid19/measurements_vitals",
       "direct_transition": "Suspected COVID"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/measurements_daily":{
@@ -23815,7 +25845,8 @@ export default {"allergic_rhinitis":{
       "submodule": "covid19/measurements_vitals",
       "direct_transition": "CBC"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/measurements_frequent":{
@@ -24037,7 +26068,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Terminal",
       "attribute": "covid19_procalcitonin"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/measurements_vitals":{
@@ -24180,7 +26212,8 @@ export default {"allergic_rhinitis":{
         "high": 200
       }
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/medications":{
@@ -25234,7 +27267,8 @@ export default {"allergic_rhinitis":{
       "reason": "covid19",
       "direct_transition": "Subtract Dose"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/nonsurvivor_lab_values":{
@@ -25748,7 +27782,8 @@ export default {"allergic_rhinitis":{
         "high": 60
       }
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/outcomes":{
@@ -26170,7 +28205,8 @@ export default {"allergic_rhinitis":{
       ],
       "direct_transition": "Mild Respiratory Distress"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/supplies_hospitalization":{
@@ -26270,7 +28306,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/supplies_icu":{
@@ -26369,7 +28406,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/supplies_intubation":{
@@ -26570,7 +28608,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Supplies_Intubation",
       "assign_to_attribute": "covid19_laryngoscope"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/survivor_lab_values":{
@@ -27132,7 +29171,8 @@ export default {"allergic_rhinitis":{
       },
       "direct_transition": "Day"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/symptoms":{
@@ -28183,7 +30223,8 @@ export default {"allergic_rhinitis":{
       ],
       "direct_transition": "Determine Nausea or Vomiting"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19/treat_blood_clot":{
@@ -28442,7 +30483,8 @@ export default {"allergic_rhinitis":{
       "reason": "covid19_clot",
       "direct_transition": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "covid19":{
@@ -28496,7 +30538,8 @@ export default {"allergic_rhinitis":{
       "type": "CallSubmodule",
       "direct_transition": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "cystic_fibrosis":{
@@ -30249,7 +32292,8 @@ export default {"allergic_rhinitis":{
         }
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "dementia":{
@@ -30502,7 +32546,7 @@ export default {"allergic_rhinitis":{
         "also available is the Clinical Dementia Rating (CDR)",
         "http://alzheimer.wustl.edu/cdr/cdr.htm"
       ],
-      "unit": "(score)",
+      "unit": "{score}",
       "codes": [
         {
           "system": "LOINC",
@@ -30705,7 +32749,7 @@ export default {"allergic_rhinitis":{
         "13 to 20 suggests moderate dementia, and less than 12 indicates severe dementia",
         "http://www.alz.org/alzheimers_disease_steps_to_diagnosis.asp"
       ],
-      "unit": "(score)",
+      "unit": "{score}",
       "conditional_transition": [
         {
           "condition": {
@@ -30851,7 +32895,7 @@ export default {"allergic_rhinitis":{
         "13 to 20 suggests moderate dementia, and less than 12 indicates severe dementia",
         "http://www.alz.org/alzheimers_disease_steps_to_diagnosis.asp"
       ],
-      "unit": "(score)",
+      "unit": "{score}",
       "direct_transition": "End_Severe_Encounter"
     },
     "End_Severe_Encounter": {
@@ -30902,7 +32946,7 @@ export default {"allergic_rhinitis":{
         "13 to 20 suggests moderate dementia, and less than 12 indicates severe dementia",
         "http://www.alz.org/alzheimers_disease_steps_to_diagnosis.asp"
       ],
-      "unit": "(score)",
+      "unit": "{score}",
       "direct_transition": "End_VerySevere_Encounter"
     },
     "End_VerySevere_Encounter": {
@@ -30985,7 +33029,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "ModerateDecline"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "dermatitis/early_moderate_eczema_obs":{
@@ -31073,7 +33118,8 @@ export default {"allergic_rhinitis":{
     "Eczema_Obs_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "dermatitis/early_severe_eczema_obs":{
@@ -31161,7 +33207,8 @@ export default {"allergic_rhinitis":{
     "Eczema_Obs_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "dermatitis/mid_moderate_eczema_obs":{
@@ -31249,7 +33296,8 @@ export default {"allergic_rhinitis":{
     "Eczema_Obs_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "dermatitis/mid_severe_eczema_obs":{
@@ -31337,7 +33385,8 @@ export default {"allergic_rhinitis":{
     "Eczema_Obs_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "dermatitis/moderate_cd_obs":{
@@ -31422,7 +33471,8 @@ export default {"allergic_rhinitis":{
     "Eczema_Obs_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "dermatitis/severe_cd_obs":{
@@ -31507,7 +33557,8 @@ export default {"allergic_rhinitis":{
     "Eczema_Obs_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "dermatitis":{
@@ -32195,7 +34246,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Treating_Flare_Up"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "dialysis":{
@@ -32942,7 +34994,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Dialysis weight record",
       "referenced_by_attribute": "anemia_medication"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "ear_infections":{
@@ -33190,7 +35243,8 @@ export default {"allergic_rhinitis":{
         "this state only exists to make the graph look nicer"
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "epilepsy":{
@@ -33658,7 +35712,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "female_reproduction":{
@@ -34019,7 +36074,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "fibromyalgia":{
@@ -34423,7 +36479,8 @@ export default {"allergic_rhinitis":{
       },
       "direct_transition": "Strong_NSAID"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "food_allergies":{
@@ -34707,7 +36764,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "gallstones":{
@@ -35512,7 +37570,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "laboratory",
-          "unit": "IU/L",
+          "unit": "[iU]/L",
           "codes": [
             {
               "system": "LOINC",
@@ -35527,7 +37585,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "laboratory",
-          "unit": "IU/L",
+          "unit": "[iU]/L",
           "codes": [
             {
               "system": "LOINC",
@@ -35698,7 +37756,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "laboratory",
-          "unit": "IU/L",
+          "unit": "[iU]/L",
           "codes": [
             {
               "system": "LOINC",
@@ -35747,7 +37805,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "laboratory",
-          "unit": "M/uL",
+          "unit": "10*6/uL",
           "codes": [
             {
               "system": "LOINC",
@@ -36092,7 +38150,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Complete_Blood_Count",
       "medication_order": "Antiemetic"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "gout":{
@@ -36397,7 +38456,3503 @@ export default {"allergic_rhinitis":{
         }
       ]
     }
-  }
+  },
+  "gmf_version": 1
+}
+,
+"heart/chf_lab_work":{
+  "name": "chf_lab_work",
+  "remarks": [
+    "This submodule captures all the initial lab work based on the STS data dictionary and standard of care.",
+    "",
+    "- CBC",
+    "- CMP",
+    "- Magnesium ",
+    "- Lipids",
+    "- A1c ",
+    "- Troponin I ",
+    "- Ferritin",
+    "- Iron Panel= iron, TIBC and iron (transferrin) % saturation.",
+    "- ECG:  12 lead electrocardiogram (procedure)",
+    "- Cardiovascular stress testing (procedure); only about 25% of pop receive)",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Body_Weight"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "NTproBNP_lab_workup": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "pg/mL",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "33762-6",
+          "display": "NT-proBNP"
+        }
+      ],
+      "range": {
+        "low": 200,
+        "high": 2000
+      },
+      "direct_transition": "CBC"
+    },
+    "CBC": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 3.4,
+            "high": 10.8
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*6/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 3.77,
+            "high": 5.8
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 11.1,
+            "high": 17.7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "4544-3",
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 34,
+            "high": 51
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 79,
+            "high": 97
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 26.6,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 31.5,
+            "high": 35.7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "788-0",
+              "display": "Erythrocyte distribution width [Ratio] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 12.3,
+            "high": 15.4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        }
+      ],
+      "direct_transition": "Comprehensive_Metabolic_Panel_with_Normal_Kidney"
+    },
+    "Comprehensive_Metabolic_Panel_with_Normal_Kidney": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "3094-0",
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL",
+          "vital_sign": "Creatinine"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "17861-6",
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2951-2",
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2823-3",
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2075-0",
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2028-9",
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "vital_sign": "EGFR"
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 8.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.3,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 117
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 44
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Magnesium"
+    },
+    "Serum_Ferritin": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75689-0",
+          "display": "Iron panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "ug/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2276-4",
+              "display": "Ferritin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 30,
+            "high": 150
+          }
+        }
+      ],
+      "direct_transition": "Iron Panel"
+    },
+    "Magnesium": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "mg/dL",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "19123-9",
+          "display": "Magnesium [Mass/volume] in Serum or Plasma"
+        }
+      ],
+      "direct_transition": "Record_LipidPanel",
+      "range": {
+        "low": 1.6,
+        "high": 2.3
+      }
+    },
+    "Record_LipidPanel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 4,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "57698-3",
+          "display": "Lipid Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Total Cholesterol",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2093-3",
+              "display": "Total Cholesterol"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Triglycerides",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2571-8",
+              "display": "Triglycerides"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "LDL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "18262-6",
+              "display": "Low Density Lipoprotein Cholesterol"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "HDL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2085-9",
+              "display": "High Density Lipoprotein Cholesterol"
+            }
+          ],
+          "unit": "mg/dL"
+        }
+      ],
+      "direct_transition": "Record_HA1C"
+    },
+    "Record_HA1C": {
+      "type": "Observation",
+      "vital_sign": "Blood Glucose",
+      "category": "laboratory",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "4548-4",
+          "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+        }
+      ],
+      "unit": "%",
+      "direct_transition": "High_Sensitivity_Cardiac_Troponin_I"
+    },
+    "High_Sensitivity_Cardiac_Troponin_I": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "89577-1",
+          "display": "Troponin I.cardiac panel - Serum or Plasma by High sensitivity method"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "pg/mL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "89579-7",
+              "display": "Troponin I.cardiac [Mass/volume] in Serum or Plasma by High sensitivity method"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 0.04
+          }
+        }
+      ],
+      "direct_transition": "Serum_Ferritin"
+    },
+    "Iron Panel": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "50190-8",
+          "display": "Iron and Iron binding capacity panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "ug/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2498-4",
+              "display": "Iron [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 35,
+            "high": 165
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "ug/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2500-7",
+              "display": "Iron binding capacity [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 250,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2502-3",
+              "display": "Iron saturation [Mass Fraction] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 15,
+            "high": 55
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Body_Weight": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "vital_sign": "Weight",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "29463-7",
+          "display": "Body Weight"
+        }
+      ],
+      "unit": "kg",
+      "direct_transition": "NTproBNP_lab_workup"
+    }
+  },
+  "gmf_version": 1
+}
+,
+"heart/chf_lvad":{
+  "name": "chf_lvad",
+  "remarks": [
+    "LVAD Insertion Surgery"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Surgical Encounter"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "LVAD Insertion": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 232967006,
+          "display": "Implantation of left ventricular assist device (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 4,
+        "high": 8,
+        "unit": "hours"
+      },
+      "direct_transition": "LVAD Device",
+      "reason": "chf"
+    },
+    "LVAD Device": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": 360066001,
+        "display": "Left ventricular assist device (physical object)"
+      },
+      "direct_transition": "Recovery"
+    },
+    "Recovery": {
+      "type": "Delay",
+      "direct_transition": "Heart Failure Education",
+      "range": {
+        "low": 2,
+        "high": 3,
+        "unit": "weeks"
+      }
+    },
+    "Preop Delay": {
+      "type": "Delay",
+      "direct_transition": "LVAD Insertion",
+      "range": {
+        "low": 30,
+        "high": 90,
+        "unit": "minutes"
+      }
+    },
+    "Surgical Encounter": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "chf",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 387713003,
+          "display": "Surgical procedure (procedure)"
+        }
+      ],
+      "direct_transition": "Preop Delay"
+    },
+    "Heart Failure Education": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 423475008,
+          "display": "Heart failure education (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "reason": "chf",
+      "direct_transition": "Discharge"
+    },
+    "Discharge": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    }
+  },
+  "gmf_version": 1
+}
+,
+"heart/chf_meds":{
+  "name": "chf_meds",
+  "remarks": [
+    "Congestive Heart Failure Medications."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Initialize Check"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Initialize Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Initialize",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_check",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Advance"
+        }
+      ]
+    },
+    "Initialize": {
+      "type": "SetAttribute",
+      "attribute": "chf_med_step",
+      "direct_transition": "Branch",
+      "value": 1
+    },
+    "Branch": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": ">",
+            "value": 3
+          }
+        },
+        {
+          "transition": "HFmEF",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFmEF"
+          }
+        },
+        {
+          "transition": "HFpEF",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFpEF"
+          }
+        },
+        {
+          "transition": "HFrEF Branch",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFrEF"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Advance": {
+      "type": "Counter",
+      "attribute": "chf_med_step",
+      "action": "increment",
+      "direct_transition": "Branch"
+    },
+    "HFmEF": {
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_meds_hfmef",
+      "direct_transition": "Terminal"
+    },
+    "HFpEF": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Diuretic",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Diuretic": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "313988",
+          "display": "Furosemide 40 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "HFrEF Branch": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "HFrEF NYHA 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nyha_class",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "HFrEF NYHA 2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nyha_class",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "HFrEF NYHA 3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nyha_class",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "transition": "HFrEF NYHA 4",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nyha_class",
+            "operator": "==",
+            "value": 4
+          }
+        }
+      ]
+    },
+    "HFrEF NYHA 1": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "BB",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "HFrEF NYHA 2": {
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_meds_hfref_nyha2",
+      "direct_transition": "Terminal"
+    },
+    "HFrEF NYHA 3": {
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_meds_hfref_nyha3",
+      "direct_transition": "Terminal"
+    },
+    "HFrEF NYHA 4": {
+      "type": "CallSubmodule",
+      "submodule": "heart/chf_meds_hfref_nyha4",
+      "direct_transition": "Terminal"
+    },
+    "BB": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200033,
+          "display": "carvedilol 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "distributed_transition": [
+        {
+          "transition": "ACE",
+          "distribution": 0.4
+        },
+        {
+          "transition": "ARB",
+          "distribution": 0.4
+        },
+        {
+          "transition": "Diuretic",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "ACE": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 314077,
+          "display": "lisinopril 20 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Diuretic"
+    },
+    "ARB": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 979492,
+          "display": "losartan potassium 50 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Diuretic"
+    }
+  },
+  "gmf_version": 1
+}
+,
+"heart/chf_meds_hfmef":{
+  "name": "chf_meds_HFmEF",
+  "remarks": [
+    "Congestive Heart Failure Medications for HFmEF."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "CKD Check"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "CKD Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CKD Path",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": ">=",
+            "value": 4
+          }
+        },
+        {
+          "transition": "Other Path"
+        }
+      ]
+    },
+    "CKD Path": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Other Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "CKD Step 2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Other Path": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Other Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Other Step 2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Other Step 3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Other Step 1": {
+      "type": "Simple",
+      "direct_transition": "Diuretic"
+    },
+    "Other Step 2": {
+      "type": "Simple",
+      "direct_transition": "MRA"
+    },
+    "Other Step 3": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "BiDil",
+          "distribution": 0.99
+        },
+        {
+          "distribution": 0.01,
+          "transition": "Dig"
+        }
+      ]
+    },
+    "CKD Step 2": {
+      "type": "Simple",
+      "direct_transition": "BiDil"
+    },
+    "Diuretic": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "313988",
+          "display": "Furosemide 40 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "direct_transition": "BB",
+      "chronic": true
+    },
+    "BB": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200033,
+          "display": "carvedilol 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "distributed_transition": [
+        {
+          "transition": "ACE",
+          "distribution": 0.48
+        },
+        {
+          "transition": "ARB",
+          "distribution": 0.48
+        },
+        {
+          "transition": "ARNI",
+          "distribution": 0.04
+        }
+      ]
+    },
+    "ACE": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 314077,
+          "display": "lisinopril 20 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "ARB": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 979492,
+          "display": "losartan potassium 50 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "ARNI": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1656354,
+          "display": "sacubitril 97 MG / valsartan 103 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "MRA": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313096,
+          "display": "spironolactone 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "BiDil": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 905377,
+          "display": "hydralazine hydrochloride 37.5 MG / isosorbide dinitrate 20 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 3,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "Dig": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 197604,
+          "display": "digoxin 0.125 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    }
+  },
+  "gmf_version": 1
+}
+,
+"heart/chf_meds_hfref_nyha2":{
+  "name": "chf_meds_HFrEF_NYHA2",
+  "remarks": [
+    "Congestive Heart Failure Medications for HFrEF NYHA II."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "EF Check"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Diuretic": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "313988",
+          "display": "Furosemide 40 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "direct_transition": "BB",
+      "chronic": true
+    },
+    "BB": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200033,
+          "display": "carvedilol 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "distributed_transition": [
+        {
+          "transition": "ACE",
+          "distribution": 0.45
+        },
+        {
+          "transition": "ARB",
+          "distribution": 0.45
+        },
+        {
+          "transition": "ARNI",
+          "distribution": 0.1
+        }
+      ]
+    },
+    "ACE": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 314077,
+          "display": "lisinopril 20 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "ARB": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 979492,
+          "display": "losartan potassium 50 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "ARNI": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1656354,
+          "display": "sacubitril 97 MG / valsartan 103 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "Step 1": {
+      "type": "Simple",
+      "direct_transition": "Diuretic"
+    },
+    "Step 2": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 979492,
+                "display": "losartan potassium 50 MG Oral Tablet"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Stop ARB",
+              "distribution": 0.2
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.8
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 314077,
+                "display": "lisinopril 20 MG Oral Tablet"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Stop ACE",
+              "distribution": 0.2
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.8
+            }
+          ]
+        }
+      ]
+    },
+    "Stop ARB": {
+      "type": "MedicationEnd",
+      "direct_transition": "ARNI",
+      "medication_order": "ARB"
+    },
+    "Stop ACE": {
+      "type": "MedicationEnd",
+      "direct_transition": "ARNI",
+      "medication_order": "ACE"
+    },
+    "EF Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CKD Check",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Left ventricular Ejection fraction",
+            "operator": "<=",
+            "value": 35
+          }
+        },
+        {
+          "transition": "EF 36-40"
+        }
+      ]
+    },
+    "CKD Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CKD Path",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": ">=",
+            "value": 4
+          }
+        },
+        {
+          "transition": "Other Path"
+        }
+      ]
+    },
+    "EF 36-40": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Step 2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Other Path": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Other Step 2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "IVA Step",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "CKD Path": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "IVA Step",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Other Step 2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "MRA",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "MRA": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313096,
+          "display": "spironolactone 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "IVA": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1649485,
+          "display": "ivabradine 5 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "IVA Step": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "MRA"
+          },
+          "distributions": [
+            {
+              "transition": "IVA",
+              "distribution": 0.01
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.99
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "Terminal"
+        }
+      ]
+    }
+  },
+  "gmf_version": 1
+}
+,
+"heart/chf_meds_hfref_nyha3":{
+  "name": "chf_meds_HFrEF_NYHA3",
+  "remarks": [
+    "Congestive Heart Failure Medications for HFrEF NYHA III."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "EF Check"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Diuretic": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "313988",
+          "display": "Furosemide 40 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "direct_transition": "BB",
+      "chronic": true
+    },
+    "BB": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200033,
+          "display": "carvedilol 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "distributed_transition": [
+        {
+          "transition": "ACE",
+          "distribution": 0.45
+        },
+        {
+          "transition": "ARB",
+          "distribution": 0.45
+        },
+        {
+          "transition": "ARNI",
+          "distribution": 0.1
+        }
+      ]
+    },
+    "ACE": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 314077,
+          "display": "lisinopril 20 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "ARB": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 979492,
+          "display": "losartan potassium 50 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "ARNI": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1656354,
+          "display": "sacubitril 97 MG / valsartan 103 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "Step 1": {
+      "type": "Simple",
+      "direct_transition": "Diuretic"
+    },
+    "Step 2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "BiDil",
+          "distribution": 0.98
+        },
+        {
+          "transition": "Dig",
+          "distribution": 0.02
+        }
+      ]
+    },
+    "EF Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CKD Check",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Left ventricular Ejection fraction",
+            "operator": "<=",
+            "value": 35
+          }
+        },
+        {
+          "transition": "EF 36-40"
+        }
+      ]
+    },
+    "CKD Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CKD Path",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": ">=",
+            "value": 4
+          }
+        },
+        {
+          "transition": "Other Path"
+        }
+      ]
+    },
+    "EF 36-40": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 2
+          },
+          "transition": "Filter"
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Other Path": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Other Step 2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Other Step 3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "CKD Path": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "IVA or BiDil Filter",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Other Step 2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "MRA",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "MRA": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313096,
+          "display": "spironolactone 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "IVA": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1649485,
+          "display": "ivabradine 5 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "Filter": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Step 2",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.95
+        }
+      ]
+    },
+    "BiDil": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 905377,
+          "display": "hydralazine hydrochloride 37.5 MG / isosorbide dinitrate 20 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 3,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "Dig": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 197604,
+          "display": "digoxin 0.125 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "IVA or BiDil Step": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "BiDil",
+          "distribution": 0.99
+        },
+        {
+          "transition": "IVA",
+          "distribution": 0.01
+        }
+      ]
+    },
+    "IVA or BiDil Filter": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "IVA or BiDil Step",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.95
+        }
+      ]
+    },
+    "Other Step 3": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Other Step 3 Filter",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "MRA"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Other Step 3 Filter": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "BiDil or IVA or Dig",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.95
+        }
+      ]
+    },
+    "BiDil or IVA or Dig": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "BiDil",
+          "distribution": 0.98
+        },
+        {
+          "transition": "IVA",
+          "distribution": 0.01
+        },
+        {
+          "transition": "Dig",
+          "distribution": 0.01
+        }
+      ]
+    }
+  },
+  "gmf_version": 1
+}
+,
+"heart/chf_meds_hfref_nyha4":{
+  "name": "chf_meds_HFrEF_NYHA4",
+  "remarks": [
+    "Congestive Heart Failure Medications for HFrEF NYHA IV."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "CKD Check"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Diuretic": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "313988",
+          "display": "Furosemide 40 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "direct_transition": "BB",
+      "chronic": true
+    },
+    "BB": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200033,
+          "display": "carvedilol 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "distributed_transition": [
+        {
+          "transition": "ACE",
+          "distribution": 0.45
+        },
+        {
+          "transition": "ARB",
+          "distribution": 0.45
+        },
+        {
+          "transition": "ARNI",
+          "distribution": 0.1
+        }
+      ]
+    },
+    "ACE": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 314077,
+          "display": "lisinopril 20 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "ARB": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 979492,
+          "display": "losartan potassium 50 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "ARNI": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1656354,
+          "display": "sacubitril 97 MG / valsartan 103 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "Step 1": {
+      "type": "Simple",
+      "direct_transition": "Diuretic"
+    },
+    "CKD Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CKD Path",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": ">=",
+            "value": 4
+          }
+        },
+        {
+          "transition": "Other Path"
+        }
+      ]
+    },
+    "Other Path": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Other Step 2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Other Step 3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "CKD Path": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "BiDil Filter",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_med_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Other Step 2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "MRA",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "MRA": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313096,
+          "display": "spironolactone 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "BiDil": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 905377,
+          "display": "hydralazine hydrochloride 37.5 MG / isosorbide dinitrate 20 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 3,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "Dig": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 197604,
+          "display": "digoxin 0.125 MG Oral Tablet"
+        }
+      ],
+      "reason": "chf",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 30,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "chronic": true,
+      "direct_transition": "Terminal"
+    },
+    "Other Step 3": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Other Step 3 Filter",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "MRA"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Other Step 3 Filter": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "BiDil or Dig",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.95
+        }
+      ]
+    },
+    "BiDil Filter": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "BiDil",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.95
+        }
+      ]
+    },
+    "BiDil or Dig": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "BiDil",
+          "distribution": 0.99
+        },
+        {
+          "transition": "Dig",
+          "distribution": 0.01
+        }
+      ]
+    }
+  },
+  "gmf_version": 1
+}
+,
+"heart/chf_nyha_panel":{
+  "name": "chf_nyha_panel",
+  "remarks": [
+    "Create NYHA Panel"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Check Class"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Check Class": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Class 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nyha_class",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Class 2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nyha_class",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Class 3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nyha_class",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "transition": "Class 4",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nyha_class",
+            "operator": "==",
+            "value": 4
+          }
+        }
+      ]
+    },
+    "Class 1": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Result 1B",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFpEF"
+          }
+        },
+        {
+          "transition": "Result 1C",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFmEF"
+          }
+        },
+        {
+          "transition": "Result 1D",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFrEF"
+          }
+        }
+      ]
+    },
+    "Class 2": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Result 2B",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFpEF"
+          }
+        },
+        {
+          "transition": "Result 2C",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFmEF"
+          }
+        },
+        {
+          "transition": "Result 2D",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFrEF"
+          }
+        }
+      ]
+    },
+    "Class 3": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Result 3B",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFpEF"
+          }
+        },
+        {
+          "transition": "Result 3C",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFmEF"
+          }
+        },
+        {
+          "transition": "Result 3D",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFrEF"
+          }
+        }
+      ]
+    },
+    "Class 4": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Result 4B",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFpEF"
+          }
+        },
+        {
+          "transition": "Result 4C",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFmEF"
+          }
+        },
+        {
+          "transition": "Result 4D",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chf_type",
+            "operator": "==",
+            "value": "HFrEF"
+          }
+        }
+      ]
+    },
+    "Result 1B": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28404-4",
+            "display": "Class I"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28409-3",
+            "display": "Objective evidence of minimal cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 1C": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28404-4",
+            "display": "Class I"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28410-1",
+            "display": "Objective evidence of moderately severe cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 1D": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28404-4",
+            "display": "Class I"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28411-9",
+            "display": "Objective evidence of severe cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 2B": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28405-1",
+            "display": "Class II"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28409-3",
+            "display": "Objective evidence of minimal cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 2C": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28405-1",
+            "display": "Class II"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28410-1",
+            "display": "Objective evidence of moderately severe cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 2D": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28405-1",
+            "display": "Class II"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28411-9",
+            "display": "Objective evidence of severe cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 3B": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28406-9",
+            "display": "Class III"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28409-3",
+            "display": "Objective evidence of minimal cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 3C": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28406-9",
+            "display": "Class III"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28410-1",
+            "display": "Objective evidence of moderately severe cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 3D": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28406-9",
+            "display": "Class III"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28411-9",
+            "display": "Objective evidence of severe cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 4B": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28407-7",
+            "display": "Class IV"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28409-3",
+            "display": "Objective evidence of minimal cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 4C": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28407-7",
+            "display": "Class IV"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28410-1",
+            "display": "Objective evidence of moderately severe cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Result 4D": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93124-6",
+          "display": "New York Heart Association Functional Classification panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88020-3",
+              "display": "Functional capacity NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28407-7",
+            "display": "Class IV"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88021-1",
+              "display": "Objective assessment of cardiovascular disease NYHA"
+            }
+          ],
+          "value_code": {
+            "system": "LOINC",
+            "code": "LA28411-9",
+            "display": "Objective evidence of severe cardiovascular disease"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    }
+  },
+  "gmf_version": 1
+}
+,
+"heart/chf_transplant":{
+  "name": "chf_transplant",
+  "remarks": [
+    "CHF Transplant Surgery"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Surgical Encounter"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Recovery": {
+      "type": "Delay",
+      "direct_transition": "Education",
+      "range": {
+        "low": 2,
+        "high": 3,
+        "unit": "weeks"
+      }
+    },
+    "Preop Delay": {
+      "type": "Delay",
+      "direct_transition": "Transplant Procedure",
+      "range": {
+        "low": 30,
+        "high": 90,
+        "unit": "minutes"
+      }
+    },
+    "Surgical Encounter": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "chf",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 387713003,
+          "display": "Surgical procedure (procedure)"
+        }
+      ],
+      "direct_transition": "Preop Delay"
+    },
+    "Discharge": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "Transplant Procedure": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 32413006,
+          "display": "Transplantation of heart (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 4,
+        "high": 8,
+        "unit": "hours"
+      },
+      "direct_transition": "Recovery",
+      "reason": "chf"
+    },
+    "Education": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 243063003,
+          "display": "Postoperative procedure education (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "reason": "chf",
+      "direct_transition": "Discharge"
+    }
+  },
+  "gmf_version": 1
 }
 ,
 "homelessness":{
@@ -36840,17 +42395,37 @@ export default {"allergic_rhinitis":{
       "value": false,
       "direct_transition": "Potential_Homelessness"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "hypertension":{
   "name": "Hypertension",
   "remarks": [
-    "Hypertension modelled after the JNC 8 Hypertension Guideline Algorithm.",
+    "This Hypertension model reflects the treatment of Primary Hypertension (HTN) in Adults. ",
     "",
-    "The hypertension model section located in the beginning of the Metabolic Syndrome Standard of Care   ",
+    "Overview",
+    "Hypertension diagnosis definitions, pharmacologic treatment thresholds, and control target recommendations diverge across clinical guidelines. However, the model was informed by the following hypertension guidelines and subsequent updates:",
+    "2018 ESC/ESH Guidelines for the management of arterial hypertension: The Task Force for the management of arterial hypertension of the European Society of Cardiology (ESC) and the European Society of Hypertension (ESH)",
+    "2017 ACC/AHA/AAPA/ABC/ACPM/AGS/APhA/ASH/ASPC/NMA/PCNA guideline for the prevention, detection, evaluation, and management of high blood pressure in adults: a report of the American College of Cardiology/American Heart Association Task Force on Clinical Practice Guidelines. ",
+    "2017 Pharmacologic treatment of hypertension in adults aged 60 years or older to higher versus lower blood pressure targets: a clinical practice guideline from the American College of Physicians and the American Academy of Family Physicians.",
+    "2014 evidence-based guideline for the management of high blood pressure in adults: report from the panel members appointed to the Eighth Joint National Committee (JNC 8). ",
+    "Canadian Hypertension Guidelines",
     "",
-    "The recommendation for first-line therapy for hypertension remains a beta blocker or diuretic given in a low dosage. A target blood pressure of less than 140/90 mm Hg is achieved in about 50 percent of patients treated with monotherapy; two or more agents from different pharmacologic classes are often needed to achieve adequate blood pressure control. Single-dose combination antihypertension therapy is an important option that combines efficacy of blood pressure reduction and a low side effect profile with convenient once-daily dosing to enhance compliance. Combination antihypertensives include combined agents from the following pharmacologic classes: diuretics and potassium-sparing diuretics, beta blockers and diuretics, angiotensin-converting enzyme (ACE) inhibitors and diuretics, angiotensin-II antagonists and diuretics, and calcium channel blockers and ACE inhibitors - https://www.aafp.org/afp/2000/0515/p3049.html"
+    "",
+    "The following model assumptions apply: ",
+    "HTN Definitions: Our model definition of HTN is >= 140/90 for all populations, given general agreement of this threshold for pharmacotherapy across most clinical guidelines. Our model threshold for use of pharmacotherapy is SBP >= 140. We define control as SBP < 140. All individuals do NOT achieve control consistent with epidemiological studies. We acknowledge that HTN may be defined using a lower blood pressure (see ACC/AHA) and that lower pharmacotherapy thresholds and targets may be used for populations with certain comorbid conditions, cardiovascular risk, and/or of a certain age. This model does not reflect all primary HTN care pathways, as individual decision making that accounts for benefits, harms, treatment burden and other factors is a critical part of hypertension management. ",
+    " ",
+    "Pharmacotherapy: Pharmacotherapy represented in the submodule 'medications/hypertension_medication' includes ACE inhibitors/ angiotensin receptor blockers (ARBs), thiazide diuretics, and calcium channel blockers (CCB). The drug representing the pharmacologic category, is the medication most commonly prescribed, rather than the agent used in clinical trials (e.g. hydrochlorothiazide vs chlorthalidone). The use of an ACE-inhibitor is inclusive of the use of an ARB. The model only represents the use of dihydropyridine CCBs. Beta-blockers (BBs) are not represented in the model, as the use of BBs for hypertension management is often guided by other compelling clinical indications such as those noted in the clinical exclusions below. Additionally, evidence suggest that in populations without these comorbid conditions, beta‐blockers may not have the same benefits in preventing death and stroke as CCB, thiazides, and ACE/ARBS. The medication dose represented in the model represents the minimum dose of the usual dose range for HTN treatment. This medication dose is inclusive of a lower dose and/or titration to the maximum dose prior to adding another agent.",
+    "",
+    "Pathway: Once individuals require >= 4 medications for HTN treatment, their treatment is no longer represented in the model; these individuals meet the definition of resistant hypertension often requiring further evaluation and/or use of additional HTN medications. Evidence suggests this is a small percentage of individuals (~5-13%).",
+    "",
+    "Clinical Population Exclusions: The care pathway excludes individuals with ASCVD (e.g coronary heart disease, MI), heart failure, pregnancy, age < 18 years, or CKD > Stage III. Rationale: Recommendations for hypertension treatment differ in pregnancy due to risk of teratogenic effects with certain medications and associated pregnancy complications. In pediatrics, hypertension diagnosis is established based on age, sex, and height percentiles with limited evidence regarding long-term outcomes. For co-morbid cardiovascular conditions, we address hypertension management in current (or future) cardiovascular models since similar medications are used to manage cardiovascular disease and hypertension. For advanced CKD/ESRD, hypertension management pathways often differ with the use of additional medications. ",
+    "",
+    "Additional references to inform population probabilities and pharmacotherapy utilization: ",
+    "- Derington, C.G., King, J.B., Herrick, J.S., Shimbo, D., Kronish, I.M., Saseen, J.J., Muntner, P., Moran, A.E. and Bress, A.P., 2020. Trends in antihypertensive medication monotherapy and combination use among US adults, National Health and Nutrition Examination Survey 2005–2016. Hypertension, 75(4), pp.973-981.",
+    "- Shah, S.J. and Stafford, R.S., 2017. Current trends of hypertension treatment in the United States. American journal of hypertension, 30(10), pp.1008-1014.",
+    ""
   ],
   "states": {
     "Initial": {
@@ -36872,54 +42447,10 @@ export default {"allergic_rhinitis":{
       "assign_to_attribute": "hypertension_dx",
       "direct_transition": "Set_BP_Not Controlled"
     },
-    "Hypertension_Medication_Low": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 429503,
-          "display": "Hydrochlorothiazide 12.5 MG"
-        }
-      ],
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        }
-      },
-      "chronic": true,
-      "direct_transition": "End_Wellness_Encounter",
-      "assign_to_attribute": "hypertension_medication",
-      "reason": "hypertension_dx"
-    },
-    "Hypertension_Medication_High": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 310798,
-          "display": "Hydrochlorothiazide 25 MG Oral Tablet"
-        }
-      ],
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        }
-      },
-      "chronic": true,
-      "direct_transition": "End_Wellness_Encounter",
-      "assign_to_attribute": "hypertension_medication",
-      "reason": "hypertension_dx"
-    },
     "Hypertension_Followup_Encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
+      "reason": "hypertension_dx",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -36937,83 +42468,53 @@ export default {"allergic_rhinitis":{
             "condition_type": "Attribute",
             "attribute": "blood_pressure_controlled",
             "operator": "==",
-            "value": false
+            "value": true
+          },
+          "distributions": [],
+          "transition": "Delay 2_Month"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
           },
           "distributions": [
             {
-              "transition": "Set_BP_Controlled_2",
-              "distribution": 0.49
+              "distribution": 0.643,
+              "transition": "Set_BP_Controlled_2"
             },
             {
-              "transition": "Delay 2_Month",
-              "distribution": 0.51
+              "distribution": 0.357,
+              "transition": "Delay 2_Month"
             }
           ]
         },
         {
-          "distributions": [],
-          "transition": "Wellness_Encounter"
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": false
+          },
+          "distributions": [
+            {
+              "distribution": 0.53,
+              "transition": "Set_BP_Controlled_2"
+            },
+            {
+              "distribution": 0.47,
+              "transition": "Delay 2_Month"
+            }
+          ]
         }
-      ]
-    },
-    "Hypertension_Combination_Medication": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 746030,
-          "display": "Atenolol 50 MG / Chlorthalidone 25 MG Oral Tablet"
-        }
-      ],
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        }
-      },
-      "chronic": true,
-      "assign_to_attribute": "hypertension_medication_2",
-      "reason": "hypertension_dx",
-      "direct_transition": "End_Hypertension_Followup_Encounter"
-    },
-    "End_Hypertension_Comb_Medication": {
-      "type": "MedicationEnd",
-      "referenced_by_attribute": "hypertension_medication_2",
-      "direct_transition": "Hypertension_Combination_Medication_2"
-    },
-    "Hypertension_Combination_Medication_2": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 999967,
-          "display": "amLODIPine 5 MG / Hydrochlorothiazide 12.5 MG / Olmesartan medoxomil 20 MG Oral Tablet"
-        }
-      ],
-      "prescription": {
-        "dosage": {
-          "amount": 1,
-          "frequency": 1,
-          "period": 1,
-          "unit": "days"
-        }
-      },
-      "chronic": true,
-      "assign_to_attribute": "hypertension_medication_3",
-      "reason": "hypertension_dx",
-      "direct_transition": "End_Hypertension_Followup_Encounter_2",
-      "remarks": [
-        "Olmesartan is an angiotensin II receptor blocker (ARB) that relaxes the blood vessels.",
-        "Amlodipine is a calcium channel blocker that relaxes the blood vessels.",
-        "Hydrochlorothiazide is a thiazide diuretic (water pill). It is used to help reduce the amount of water in the body by increasing the flow of urine."
       ]
     },
     "Hypertension_Followup_Encounter_2": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
+      "reason": "hypertension_dx",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -37026,7 +42527,6 @@ export default {"allergic_rhinitis":{
     "Hypertension_Followup_Encounter_3": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -37034,7 +42534,8 @@ export default {"allergic_rhinitis":{
           "display": "Hypertension follow-up encounter"
         }
       ],
-      "direct_transition": "Record_BP_3"
+      "direct_transition": "Record_BP_3",
+      "reason": "hypertension_dx"
     },
     "End_Hypertension_Followup_Encounter_2": {
       "type": "EncounterEnd",
@@ -37044,28 +42545,48 @@ export default {"allergic_rhinitis":{
             "condition_type": "Attribute",
             "attribute": "blood_pressure_controlled",
             "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "Delay_2_Month_2"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "Delay_2_Month_2"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
             "value": false
           },
           "distributions": [
             {
-              "transition": "Set_BP_Controlled_3",
-              "distribution": 0.49
+              "distribution": 0.643,
+              "transition": "Set_BP_Controlled_3"
             },
             {
-              "transition": "Delay_2_Month_2",
-              "distribution": 0.51
+              "distribution": 0.357,
+              "transition": "Delay_2_Month_2"
             }
           ]
         },
         {
           "distributions": [],
-          "transition": "Wellness_Encounter"
+          "transition": "Delay_2_Month_2"
         }
       ]
     },
     "End_Hypertension_Followup_Encounter_3": {
       "type": "EncounterEnd",
-      "direct_transition": "Wellness_Encounter"
+      "direct_transition": "Terminal"
     },
     "LifeStyle_Modifications_Hypertension_CarePlan": {
       "type": "CarePlanStart",
@@ -37113,70 +42634,138 @@ export default {"allergic_rhinitis":{
         }
       ],
       "reason": "hypertension_dx",
-      "conditional_transition": [
-        {
-          "transition": "Hypertension_Medication_Low",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Systolic Blood Pressure",
-            "operator": "<",
-            "value": 160
-          }
-        },
-        {
-          "transition": "Hypertension_Medication_High",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Systolic Blood Pressure",
-            "operator": ">=",
-            "value": 160
-          }
-        }
-      ]
-    },
-    "End_Hypertension_Medication": {
-      "type": "MedicationEnd",
-      "referenced_by_attribute": "hypertension_medication",
-      "direct_transition": "Hypertension_Combination_Medication"
+      "direct_transition": "Prescribe_Medication"
     },
     "Wellness_Encounter": {
       "type": "Encounter",
-      "wellness": true,
       "conditional_transition": [
         {
-          "transition": "Diagnose_Hypertension",
+          "transition": "Excluded",
           "condition": {
-            "condition_type": "And",
+            "condition_type": "Or",
             "conditions": [
               {
-                "condition_type": "Attribute",
-                "attribute": "hypertension",
-                "operator": "==",
-                "value": true
+                "condition_type": "Age",
+                "operator": "<",
+                "quantity": 18,
+                "unit": "years",
+                "value": 0
               },
               {
-                "condition_type": "Attribute",
-                "attribute": "hypertension_dx",
-                "operator": "is nil"
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "ckd",
+                    "operator": ">",
+                    "value": 3
+                  },
+                  {
+                    "condition_type": "Or",
+                    "conditions": [
+                      {
+                        "condition_type": "Attribute",
+                        "attribute": "pregnant",
+                        "operator": "==",
+                        "value": true
+                      },
+                      {
+                        "condition_type": "Or",
+                        "conditions": [
+                          {
+                            "condition_type": "Attribute",
+                            "attribute": "coronary_heart_disease",
+                            "operator": "==",
+                            "value": true
+                          },
+                          {
+                            "condition_type": "Or",
+                            "conditions": [
+                              {
+                                "condition_type": "Or",
+                                "conditions": [
+                                  {
+                                    "condition_type": "Active Condition",
+                                    "codes": [
+                                      {
+                                        "system": "SNOMED-CT",
+                                        "code": 22298006,
+                                        "display": "Myocardial Infarction"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "condition_type": "Active Condition",
+                                    "codes": [
+                                      {
+                                        "system": "SNOMED-CT",
+                                        "code": 399211009,
+                                        "display": "History of myocardial infarction (situation)"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "condition_type": "Attribute",
+                                "attribute": "chf",
+                                "operator": "is not nil"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
         },
         {
-          "transition": "End_Wellness_No_Action"
+          "transition": "Included"
         }
-      ]
+      ],
+      "wellness": true
     },
     "End_Wellness_Encounter": {
       "type": "EncounterEnd",
-      "distributed_transition": [
+      "complex_transition": [
         {
-          "transition": "Set_BP_Controlled",
-          "distribution": 0.49
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "Set_BP_Controlled",
+              "distribution": 0.342
+            },
+            {
+              "transition": "Delay_One_Month",
+              "distribution": 0.6579999999999999
+            }
+          ]
         },
         {
-          "transition": "Delay_One_Month",
-          "distribution": 0.51
+          "distributions": [
+            {
+              "transition": "Set_BP_Controlled",
+              "distribution": 0.363
+            },
+            {
+              "transition": "Delay_One_Month",
+              "distribution": 0.637
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": false
+          }
         }
       ]
     },
@@ -37186,7 +42775,54 @@ export default {"allergic_rhinitis":{
         "quantity": 1,
         "unit": "months"
       },
-      "direct_transition": "Hypertension_Followup_Encounter"
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "blood_pressure_controlled",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "Hypertension_Followup_Encounter"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "distribution": 0.322,
+              "transition": "Drop Outs"
+            },
+            {
+              "distribution": 0.6779999999999999,
+              "transition": "Hypertension_Followup_Encounter"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": false
+          },
+          "distributions": [
+            {
+              "distribution": 0.267,
+              "transition": "Drop Outs"
+            },
+            {
+              "distribution": 0.7330000000000001,
+              "transition": "Hypertension_Followup_Encounter"
+            }
+          ]
+        }
+      ]
     },
     "Record_BP": {
       "type": "MultiObservation",
@@ -37226,13 +42862,13 @@ export default {"allergic_rhinitis":{
       ],
       "conditional_transition": [
         {
-          "transition": "End_Hypertension_Medication",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "blood_pressure_controlled",
             "operator": "==",
             "value": false
-          }
+          },
+          "transition": "Prescribe_Medication_2"
         },
         {
           "transition": "End_Hypertension_Followup_Encounter"
@@ -37277,13 +42913,13 @@ export default {"allergic_rhinitis":{
       ],
       "conditional_transition": [
         {
-          "transition": "End_Hypertension_Comb_Medication",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "blood_pressure_controlled",
             "operator": "==",
             "value": false
-          }
+          },
+          "transition": "Prescribe_Medication_3"
         },
         {
           "transition": "End_Hypertension_Followup_Encounter_2"
@@ -37364,7 +43000,46 @@ export default {"allergic_rhinitis":{
         "quantity": 2,
         "unit": "months"
       },
-      "direct_transition": "Hypertension_Followup_Encounter_2"
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "blood_pressure_controlled",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "Hypertension_Followup_Encounter_2"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "Hypertension_Followup_Encounter_2"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": false
+          },
+          "distributions": [
+            {
+              "transition": "Drop Outs",
+              "distribution": 0.322
+            },
+            {
+              "transition": "Hypertension_Followup_Encounter_2",
+              "distribution": 0.6779999999999999
+            }
+          ]
+        }
+      ]
     },
     "Delay_2_Month_2": {
       "type": "Delay",
@@ -37392,11 +43067,65 @@ export default {"allergic_rhinitis":{
       "value": true,
       "direct_transition": "Delay_2_Month_2"
     },
-    "End_Wellness_No_Action": {
+    "Excluded": {
+      "type": "Simple",
+      "direct_transition": "Wait Until Next Checkup"
+    },
+    "Prescribe_Medication_3": {
+      "type": "CallSubmodule",
+      "submodule": "medications/hypertension_medication",
+      "direct_transition": "End_Hypertension_Followup_Encounter_2"
+    },
+    "Prescribe_Medication_2": {
+      "type": "CallSubmodule",
+      "submodule": "medications/hypertension_medication",
+      "direct_transition": "End_Hypertension_Followup_Encounter"
+    },
+    "Prescribe_Medication": {
+      "type": "CallSubmodule",
+      "submodule": "medications/hypertension_medication",
+      "direct_transition": "End_Wellness_Encounter"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Included": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Diagnose_Hypertension",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension_dx",
+                "operator": "is nil"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Wait Until Next Checkup"
+        }
+      ]
+    },
+    "Wait Until Next Checkup": {
       "type": "EncounterEnd",
       "direct_transition": "Wellness_Encounter"
+    },
+    "Drop Outs": {
+      "type": "Simple",
+      "direct_transition": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "hypothyroidism":{
@@ -37640,7 +43369,8 @@ export default {"allergic_rhinitis":{
         }
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "injuries":{
@@ -40392,7 +46122,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "lung_cancer/lung_cancer_probabilities":{
@@ -40528,7 +46259,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Terminal",
       "value": 0.004
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "lung_cancer":{
@@ -43091,7 +48823,8 @@ export default {"allergic_rhinitis":{
         }
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "lupus":{
@@ -43425,7 +49158,8 @@ export default {"allergic_rhinitis":{
         }
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "mTBI":{
@@ -43507,7 +49241,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "med_rec":{
@@ -43553,7 +49288,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Initial"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "medications/ear_infection_antibiotic":{
@@ -44079,7 +49815,1146 @@ export default {"allergic_rhinitis":{
     "Ear_Infection_Antibiotic_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
+}
+,
+"medications/hypertension_medication":{
+  "name": "hypertension_medication",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Initialize"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Initialize Step": {
+      "type": "SetAttribute",
+      "attribute": "hypertension_medication_step",
+      "value": 0,
+      "conditional_transition": [
+        {
+          "transition": "High BP",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Systolic Blood Pressure",
+            "operator": "<",
+            "value": 160
+          }
+        },
+        {
+          "transition": "Very High BP",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Systolic Blood Pressure",
+            "operator": ">=",
+            "value": 160
+          }
+        }
+      ]
+    },
+    "Check Step": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_medication_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Step 2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_medication_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Step 3"
+        }
+      ]
+    },
+    "Initialize": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Initialize Step",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_medication_step",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Increase Step"
+        }
+      ]
+    },
+    "Increase Step": {
+      "type": "Counter",
+      "attribute": "hypertension_medication_step",
+      "action": "increment",
+      "direct_transition": "Check Race"
+    },
+    "Step 1": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 1 High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "Step 1 Very High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
+          }
+        }
+      ]
+    },
+    "Step 2": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 2 High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "Step 2 Very High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
+          }
+        }
+      ]
+    },
+    "Step 3": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step 3 High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "Step 3 Very High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
+          }
+        }
+      ]
+    },
+    "Step 1 High": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "HCTZ",
+          "distribution": 0.6
+        },
+        {
+          "transition": "Amlodipine",
+          "distribution": 0.4
+        }
+      ]
+    },
+    "Step 1 Very High": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "microalbuminuria",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "proteinuria",
+                "operator": "==",
+                "value": true
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "distribution": 0.67,
+              "transition": "HCTZ+"
+            },
+            {
+              "transition": "Lisinopril+",
+              "distribution": 0.33
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "HCTZ+",
+              "distribution": 0.6
+            },
+            {
+              "transition": "Lisinopril+",
+              "distribution": 0.3
+            },
+            {
+              "transition": "Amlodipine+",
+              "distribution": 0.1
+            }
+          ]
+        }
+      ]
+    },
+    "Step 2 High": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "microalbuminuria",
+                    "operator": "==",
+                    "value": true
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "proteinuria",
+                    "operator": "==",
+                    "value": true
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 310798,
+                    "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "Lisinopril_2"
+        },
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 310798,
+                "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "distribution": 0.5,
+              "transition": "Amlodipine_2"
+            },
+            {
+              "distribution": 0.5,
+              "transition": "Lisinopril_2"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "microalbuminuria",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "proteinuria",
+                "operator": "==",
+                "value": true
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "Lisinopril_2"
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.5,
+              "transition": "Lisinopril_2"
+            },
+            {
+              "distribution": 0.5,
+              "transition": "HCTZ_2"
+            }
+          ]
+        }
+      ]
+    },
+    "Step 2 Very High": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Amlodipine_3",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 314076,
+                    "display": "lisinopril 10 MG Oral Tablet"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 310798,
+                    "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "HCTZ_3",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 314076,
+                    "display": "lisinopril 10 MG Oral Tablet"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 308136,
+                    "display": "amLODIPine 2.5 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Lisinopril_3",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 308136,
+                    "display": "amLODIPine 2.5 MG Oral Tablet"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 310798,
+                    "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Step 3 High": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Amlodipine_3",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 310798,
+                    "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 314076,
+                    "display": "lisinopril 10 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Lisinopril_3",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 310798,
+                    "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 308136,
+                    "display": "amLODIPine 2.5 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "HCTZ_3",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 308136,
+                    "display": "amLODIPine 2.5 MG Oral Tablet"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 314076,
+                    "display": "lisinopril 10 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Step 3 Very High": {
+      "type": "Simple",
+      "direct_transition": "Refer to HTN Clinic"
+    },
+    "Check Race": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Non Hispanic Black",
+          "condition": {
+            "condition_type": "Race",
+            "race": "Black"
+          }
+        },
+        {
+          "transition": "All Others"
+        }
+      ]
+    },
+    "Non Hispanic Black": {
+      "type": "Simple",
+      "direct_transition": "Check Step"
+    },
+    "All Others": {
+      "type": "Simple",
+      "direct_transition": "Check_Step"
+    },
+    "Amlodipine": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 308136,
+          "display": "amLODIPine 2.5 MG Oral Tablet"
+        }
+      ],
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "direct_transition": "Terminal"
+    },
+    "Amlodipine_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 308136,
+          "display": "amLODIPine 2.5 MG Oral Tablet"
+        }
+      ],
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication_2",
+      "reason": "hypertension_dx",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lisinopril_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 314076,
+          "display": "lisinopril 10 MG Oral Tablet"
+        }
+      ],
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication_2",
+      "reason": "hypertension_dx",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "direct_transition": "Terminal"
+    },
+    "HCTZ": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310798,
+          "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+        }
+      ],
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        }
+      },
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx",
+      "direct_transition": "Terminal"
+    },
+    "HCTZ_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310798,
+          "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+        }
+      ],
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        }
+      },
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication_2",
+      "reason": "hypertension_dx",
+      "direct_transition": "Terminal"
+    },
+    "HCTZ_3": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310798,
+          "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+        }
+      ],
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        }
+      },
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication_3",
+      "reason": "hypertension_dx",
+      "direct_transition": "Terminal"
+    },
+    "Amlodipine_3": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 308136,
+          "display": "amLODIPine 2.5 MG Oral Tablet"
+        }
+      ],
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication_3",
+      "reason": "hypertension_dx",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "direct_transition": "Terminal"
+    },
+    "Lisinopril_3": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 314076,
+          "display": "lisinopril 10 MG Oral Tablet"
+        }
+      ],
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication_3",
+      "reason": "hypertension_dx",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "direct_transition": "Terminal"
+    },
+    "HCTZ+": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310798,
+          "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+        }
+      ],
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        }
+      },
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx",
+      "direct_transition": "Lisinopril_2"
+    },
+    "Lisinopril+": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 314076,
+          "display": "lisinopril 10 MG Oral Tablet"
+        }
+      ],
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "direct_transition": "Amlodipine_2"
+    },
+    "Amlodipine+": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 308136,
+          "display": "amLODIPine 2.5 MG Oral Tablet"
+        }
+      ],
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "direct_transition": "HCTZ_2"
+    },
+    "Refer to HTN Clinic": {
+      "type": "Simple",
+      "direct_transition": "Terminal"
+    },
+    "Check_Step": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step_1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_medication_step",
+            "operator": "==",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Step_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_medication_step",
+            "operator": "==",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Step_3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_medication_step",
+            "operator": "==",
+            "value": 3
+          }
+        }
+      ]
+    },
+    "Step_1": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step_1_High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "Step 1 Very High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
+          }
+        }
+      ]
+    },
+    "Step_2": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step_2_High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "Step 2 Very High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
+          }
+        }
+      ]
+    },
+    "Step_3": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Step_3_High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": false
+          }
+        },
+        {
+          "transition": "Step 3 Very High",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension_severe",
+            "operator": "==",
+            "value": true
+          }
+        }
+      ]
+    },
+    "Step_1_High": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "microalbuminuria",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "proteinuria",
+                "operator": "==",
+                "value": true
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "Lisinopril"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Lisinopril",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Amlodipine",
+              "distribution": 0.25
+            },
+            {
+              "transition": "HCTZ",
+              "distribution": 0.25
+            }
+          ]
+        }
+      ]
+    },
+    "Step_2_High": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 314076,
+                "display": "lisinopril 10 MG Oral Tablet"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "HCTZ_2",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Amlodipine_2",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Active Condition",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": 308136,
+                "display": "amLODIPine 2.5 MG Oral Tablet"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Lisinopril_2",
+              "distribution": 0.5
+            },
+            {
+              "transition": "HCTZ_2",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 310798,
+                "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Lisinopril_2",
+              "distribution": 0.5
+            },
+            {
+              "transition": "Amlodipine_2",
+              "distribution": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    "Step_3_High": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Amlodipine_3",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 314076,
+                    "display": "lisinopril 10 MG Oral Tablet"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 310798,
+                    "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "HCTZ_3",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 314076,
+                    "display": "lisinopril 10 MG Oral Tablet"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 308136,
+                    "display": "amLODIPine 2.5 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Lisinopril_3",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 308136,
+                    "display": "amLODIPine 2.5 MG Oral Tablet"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": 310798,
+                    "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Lisinopril": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 314076,
+          "display": "lisinopril 10 MG Oral Tablet"
+        }
+      ],
+      "chronic": true,
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "direct_transition": "Terminal"
+    },
+    "High BP": {
+      "type": "SetAttribute",
+      "attribute": "hypertension_severe",
+      "direct_transition": "Increase Step",
+      "value": false
+    },
+    "Very High BP": {
+      "type": "SetAttribute",
+      "attribute": "hypertension_severe",
+      "value": true,
+      "direct_transition": "Increase Step"
+    }
+  },
+  "gmf_version": 1
 }
 ,
 "medications/moderate_opioid_pain_reliever":{
@@ -44253,7 +51128,8 @@ export default {"allergic_rhinitis":{
     "Moderate_Opioid_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "medications/otc_antihistamine":{
@@ -44703,7 +51579,8 @@ export default {"allergic_rhinitis":{
     "OTC_Anthistamine_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "medications/otc_pain_reliever":{
@@ -45003,7 +51880,8 @@ export default {"allergic_rhinitis":{
     "OTC_Pain_Reliever_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "medications/strong_opioid_pain_reliever":{
@@ -45148,7 +52026,8 @@ export default {"allergic_rhinitis":{
     "Strong_Opioid_Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "metabolic_syndrome_care":{
@@ -49262,7 +56141,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Wellness_Encounter"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "metabolic_syndrome_disease":{
@@ -50436,7 +57316,8 @@ export default {"allergic_rhinitis":{
         "high": 100
       }
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "opioid_addiction":{
@@ -50453,7 +57334,9 @@ export default {"allergic_rhinitis":{
     "addiction rates using a modified model adapted from Project SAMMI: ",
     "http://projectsammi.github.io/",
     "Prior to 1990 we don't model opioid addiction - prescription rates were far lower and the ",
-    "'opioid crisis' of today is seen as beginning in the 90's and 00's."
+    "'opioid crisis' of today is seen as beginning in the 90's and 00's.",
+    "",
+    "09/16/2020: updated to apply this module from year >=1990 to <2014"
   ],
   "states": {
     "Initial": {
@@ -50476,9 +57359,21 @@ export default {"allergic_rhinitis":{
             "unit": "years"
           },
           {
-            "condition_type": "Date",
-            "operator": ">=",
-            "year": 1990
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Date",
+                "operator": ">=",
+                "year": 1990,
+                "value": 0
+              },
+              {
+                "condition_type": "Date",
+                "operator": "<",
+                "year": 2014,
+                "value": 0
+              }
+            ]
           }
         ]
       },
@@ -51290,7 +58185,8 @@ export default {"allergic_rhinitis":{
       },
       "direct_transition": "End_Addiction_Treatment_Encounter"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "osteoarthritis":{
@@ -51723,7 +58619,8 @@ export default {"allergic_rhinitis":{
         "high": 10
       }
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "osteoporosis":{
@@ -51964,7 +58861,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "pregnancy":{
@@ -54282,6 +61180,3214 @@ export default {"allergic_rhinitis":{
       "value": 0,
       "direct_transition": "Unset_Pregnant_Attribute"
     }
+  },
+  "gmf_version": 1
+}
+,
+"prescribing_opioids_for_chronic_pain_and_treatment_of_oud":{
+  "name": "Prescribing Opioids for Chronic Pain and Treatment of OUD",
+  "remarks": [
+    "Module Title: Prescribing Opioids for Chronic Pain and Treatment of Opioids Use Disorder",
+    "",
+    "Version Number: 1.0",
+    "",
+    "Last Updated: 11/02/2020",
+    "",
+    "Module Steward: Office of the National Coordinator for Health Information Technology (ONC)",
+    "",
+    "Module Developer: Clinovations Government + Health",
+    "",
+    "Description: This module models the prescribing of opioids for chronic pain and treatment of opioid use disorder (OUD) for patients age >= 18. It is based on the Centers for Disease Control (CDC) Guideline for Prescribing Opioids for Chronic Pain. This CDC guideline provides recommendations for the prescribing of opioid pain medication by primary care clinicians for chronic pain (i.e., pain conditions that typically last >3 months or past the time of normal tissue healing) in outpatient settings outside of active cancer treatment, palliative care, and end-of-life care. The applicable year of this module is set to 2014 and after. This module does not address the transition from acute pain to chronic pain. The Treatment of OUD component of this module is modeled based on the American Society of Addiction Medicine (ASAM) National Practice Guideline for the Use of Medications in the Treatment of Addiction Involving Opioid Use.",
+    "",
+    "Disclaimer: SyntheaTM is an open-source synthetic patient generator, created by MITRE, that models the medical history of synthetic patients. This module is developed using the Synthea Module Builder and is limited to the capabilities of Synthea and the Synthea Module Builder. ",
+    "This Synthea module is not a clinical guideline, does not establish a standard of medical care, and has not been tested for all potential applications. THIS MODULE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND.",
+    "",
+    "Related Module(s): The Opioid Addiction (opioid_addiction.json) module applies to the period prior to 2014. ",
+    "",
+    "Reference: CDC Guideline for Prescribing Opioids for Chronic Pain — United States, 2016.",
+    "",
+    "Reference: The ASAM National Practice Guideline for the Use of Medications in the Treatment of Addiction Involving Opioid Use, June 1, 2015. ",
+    "",
+    "",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Age_and_Module_Effective_Time_Guard"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "General_Adult_Population": {
+      "type": "Delay",
+      "distributed_transition": [
+        {
+          "transition": "Condition_Chronic_Low_Back_Pain",
+          "distribution": 0.09
+        },
+        {
+          "transition": "Condition_Chronic_Neck_Pain",
+          "distribution": 0.12
+        },
+        {
+          "transition": "Condition_Migraine",
+          "distribution": 0.01
+        },
+        {
+          "transition": "Condition_Fibromyalgia",
+          "distribution": 0.03
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.72
+        },
+        {
+          "transition": "Condition_Chronic_Neck_Pain_3",
+          "distribution": 0.03
+        }
+      ],
+      "exact": {
+        "quantity": 1,
+        "unit": "months"
+      }
+    },
+    "Nonpharmacologic_Treatment_Careplan_1": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 276239002,
+          "display": "Therapy (regime/therapy)"
+        }
+      ],
+      "assign_to_attribute": "therapy_referral",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 91251008,
+          "display": "Physical therapy procedure (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 228557008,
+          "display": "Cognitive and behavior therapy"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "End_Initial_Chronic_Pain_Encounter",
+          "distribution": 0.44
+        },
+        {
+          "transition": "Enter_Nonopioid_Pharmacologic_Treatment_1",
+          "distribution": 0.29
+        },
+        {
+          "transition": "Enter_IR/SA_Opioid_Directed_Use_1",
+          "distribution": 0.27
+        }
+      ]
+    },
+    "Enter_Nonopioid_Pharmacologic_Treatment_1": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Rx_Ibuprofen_1",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Rx_Acetaminophen_1",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Enter_IR/SA_Opioid_Directed_Use_1": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Rx_Percocet_1",
+          "distribution": 0.2325
+        },
+        {
+          "transition": "Rx_Codeine_1",
+          "distribution": 0.0925
+        },
+        {
+          "transition": "Rx_Vicodin_1",
+          "distribution": 0.5525
+        },
+        {
+          "transition": "Rx_Tramadol_1",
+          "distribution": 0.1225
+        }
+      ]
+    },
+    "Rx_Vicodin_1": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 856987,
+          "display": "Acetaminophen 300 MG / Hydrocodone Bitartrate 5 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "End_Initial_Chronic_Pain_Encounter",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 225757006,
+            "display": "Every four to six hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      },
+      "assign_to_attribute": "IR_opioid_Rx_1",
+      "chronic": true
+    },
+    "Rx_Percocet_1": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1049625,
+          "display": "Acetaminophen 325 MG / Oxycodone Hydrochloride 10 MG Oral Tablet [Percocet]"
+        }
+      ],
+      "direct_transition": "End_Initial_Chronic_Pain_Encounter",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 307468000,
+            "display": "Every six hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      },
+      "assign_to_attribute": "IR_opioid_Rx_1",
+      "chronic": true
+    },
+    "Rx_Ibuprofen_1": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 206905,
+          "display": "Ibuprofen 400 MG Oral Tablet [Ibu]"
+        }
+      ],
+      "direct_transition": "End_Initial_Chronic_Pain_Encounter",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 225757006,
+            "display": "Every four to six hours (qualifier value)"
+          }
+        ],
+        "as_needed": true,
+        "refills": 3
+      },
+      "assign_to_attribute": "nonopioid_Rx_1"
+    },
+    "Rx_Acetaminophen_1": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 209387,
+          "display": "Acetaminophen 325 MG Oral Tablet [Tylenol]"
+        }
+      ],
+      "direct_transition": "End_Initial_Chronic_Pain_Encounter",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 225757006,
+            "display": "Every four to six hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      },
+      "assign_to_attribute": "nonopioid_Rx_1",
+      "administration": false,
+      "chronic": true
+    },
+    "PEG_Assessment_Score_1": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 0,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "91148-7",
+          "display": "Pain intensity, Enjoyment of life, General activity (PEG) 3 item pain scale"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "75893-8",
+              "display": "What number best describes your pain on average in the past week?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "91145-3",
+              "display": "What number best describes how, during the past week, pain has interfered with your enjoyment of life?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "91146-1",
+              "display": "What number best describes how, during the past week, pain has interfered with your general activity?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Without_Urine_Drug_Testing",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Enter_Urine_Drug_Testing",
+          "distribution": 0.8
+        }
+      ]
+    },
+    "Condition_Chronic_Low_Back_Pain": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "chronic_low_back_pain_only",
+      "target_encounter": "Initial_Prescribing_Encounter_for_Chronic_Pain",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 278860009,
+          "display": "Chronic low back pain (finding)"
+        }
+      ],
+      "direct_transition": "Initial_Prescribing_Encounter_for_Chronic_Pain"
+    },
+    "End_Initial_Chronic_Pain_Encounter": {
+      "type": "EncounterEnd",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "therapy_referral",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.8,
+              "transition": "Enter_Physical_Therapy_1"
+            },
+            {
+              "distribution": 0.2,
+              "transition": "Enter_CBT_Therapy_1"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "therapy_referral",
+            "operator": "is nil"
+          },
+          "distributions": [
+            {
+              "distribution": 1,
+              "transition": "On_Opioid_Or_Nonopioid_1"
+            }
+          ]
+        }
+      ]
+    },
+    "Chronic_Pain_Population": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "months"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Condition_Chronic_Neck_Pain_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chronic_neck_pain_only",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Condition_Chronic_Low_Back_Pain_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chronic_low_back_pain_only",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Condition_Migraine_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "migraine_only",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Condition_Fibromyalgia_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chronic_low_back_pain_with_fibromyalgia",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Condition_Chronic_Neck_Pain_4",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "chronic_neck_and_low_back_pain",
+            "operator": "is not nil"
+          }
+        }
+      ]
+    },
+    "Cognitive Behavior Therapy (CBT)_1": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 228557008,
+          "display": "Cognitive and behavioral therapy (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_CBT_Therapy_Encounter_1"
+    },
+    "Condition_Chronic_Neck_Pain": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "chronic_neck_and_low_back_pain",
+      "target_encounter": "Initial_Prescribing_Encounter_for_Chronic_Pain",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 1121000119107,
+          "display": "Chronic neck pain (finding)"
+        }
+      ],
+      "direct_transition": "Condition_Chronic_Low_Back_Pain_3"
+    },
+    "Condition_Fibromyalgia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "chronic_low_back_pain_with_fibromyalgia",
+      "target_encounter": "Initial_Prescribing_Encounter_for_Chronic_Pain",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 203082005,
+          "display": "Fibromyalgia (disorder)"
+        }
+      ],
+      "direct_transition": "Condition_Chronic_Low_Back_Pain_3"
+    },
+    "Condition_Chronic_Low_Back_Pain_2": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "chronic_low_back_pain",
+      "target_encounter": "Follow_Up_Encounter_for_Chronic_Pain",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 278860009,
+          "display": "Chronic low back pain (finding)"
+        }
+      ],
+      "direct_transition": "Follow_Up_Encounter_for_Chronic_Pain"
+    },
+    "Condition_Chronic_Neck_Pain_2": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "chronic_neck_pain",
+      "target_encounter": "Follow_Up_Encounter_for_Chronic_Pain",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 1121000119107,
+          "display": "Chronic neck pain (finding)"
+        }
+      ],
+      "direct_transition": "Follow_Up_Encounter_for_Chronic_Pain"
+    },
+    "Condition_Fibromyalgia_2": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "fibromyalgia",
+      "target_encounter": "Follow_Up_Encounter_for_Chronic_Pain",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 203082005,
+          "display": "Fibromyalgia (disorder)"
+        }
+      ],
+      "direct_transition": "Condition_Chronic_Low_Back_Pain_2"
+    },
+    "Condition_Migraine": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "migraine_only",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 427419006,
+          "display": "Transformed migraine (disorder)"
+        }
+      ],
+      "direct_transition": "Initial_Prescribing_Encounter_for_Chronic_Pain",
+      "target_encounter": "Initial_Prescribing_Encounter_for_Chronic_Pain"
+    },
+    "Condition_Migraine_2": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "migraine",
+      "target_encounter": "Follow_Up_Encounter_for_Chronic_Pain",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 427419006,
+          "display": "Transformed migraine (disorder)"
+        }
+      ],
+      "direct_transition": "Follow_Up_Encounter_for_Chronic_Pain"
+    },
+    "Follow_Up_Encounter_for_Chronic_Pain": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 390906007,
+          "display": "Follow-up encounter (procedure)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Enter_Urine_Drug_Testing_2",
+          "distribution": 0.5
+        },
+        {
+          "transition": "PEG_Assessment_Score_2",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "End_Follow_Up_Encounter_for_Chronic_Pain": {
+      "type": "EncounterEnd",
+      "direct_transition": "On_Opioid_Or_Nonopioid_2"
+    },
+    "Enter_ER/LA_Opioid_Directed_Use": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Rx_12HR_Hydrocodone",
+          "distribution": 0.3
+        },
+        {
+          "transition": "Rx_Oxycontin",
+          "distribution": 0.3
+        },
+        {
+          "transition": "Rx_Duragesic",
+          "distribution": 0.4
+        }
+      ]
+    },
+    "Rx_12HR_Hydrocodone": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1860491,
+          "display": "12 HR Hydrocodone Bitartrate 10 MG Extended Release Oral Capsule"
+        }
+      ],
+      "direct_transition": "End_Follow_Up_Encounter_for_Chronic_Pain",
+      "assign_to_attribute": "ER_opioid_Rx",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 1831000175103,
+            "display": "Every 12 hours as needed (qualifier value)"
+          }
+        ],
+        "refills": 3
+      }
+    },
+    "Rx_Oxycontin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1049504,
+          "display": "Abuse-Deterrent 12 HR Oxycodone Hydrochloride 10 MG Extended Release Oral Tablet [Oxycontin]"
+        }
+      ],
+      "direct_transition": "End_Follow_Up_Encounter_for_Chronic_Pain",
+      "assign_to_attribute": "ER_opioid_Rx",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "refills": 3
+      }
+    },
+    "Rx_Duragesic": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 245134,
+          "display": "72 HR Fentanyl 0.025 MG/HR Transdermal System"
+        }
+      ],
+      "direct_transition": "End_Follow_Up_Encounter_for_Chronic_Pain",
+      "assign_to_attribute": "ER_opioid_Rx",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 3,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 396143001,
+            "display": "Every seventy two hours as needed (qualifier value)"
+          }
+        ],
+        "refills": 3
+      }
+    },
+    "Enter_Nonopioid_Pharmacologic_Treatment_2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Rx_Ibuprofen_2",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Rx_Acetaminophen_2",
+          "distribution": 0.5
+        }
+      ],
+      "assign_to_attribute": "on_opioid_or_nonopioid"
+    },
+    "Rx_Acetaminophen_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 209387,
+          "display": "Acetaminophen 325 MG Oral Tablet [Tylenol]"
+        }
+      ],
+      "direct_transition": "End_Follow_Up_Encounter_for_Chronic_Pain",
+      "assign_to_attribute": "nonopioid_Rx_2",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 225757006,
+            "display": "Every four to six hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      },
+      "chronic": true
+    },
+    "Rx_Ibuprofen_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 206905,
+          "display": "Ibuprofen 400 MG Oral Tablet [Ibu]"
+        }
+      ],
+      "direct_transition": "End_Follow_Up_Encounter_for_Chronic_Pain",
+      "assign_to_attribute": "nonopioid_Rx_2",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 225757006,
+            "display": "Every four to six hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      }
+    },
+    "Nonpharmacologic_Treatment_Careplan_2": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 276239002,
+          "display": "Therapy (regime/therapy)"
+        }
+      ],
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 91251008,
+          "display": "Physical therapy procedure (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 228557008,
+          "display": "Cognitive and behavioral therapy (regime/therapy)"
+        }
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "IR_opioid_Rx_1",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Enter_IR/SA_Opioid_Directed_Use_2",
+              "distribution": 0.2
+            },
+            {
+              "transition": "Enter_ER/LA_Opioid_Directed_Use",
+              "distribution": 0.8
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nonopioid_Rx_1",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Enter_Nonopioid_Pharmacologic_Treatment_2",
+              "distribution": 0.2
+            },
+            {
+              "transition": "Enter_IR/SA_Opioid_Directed_Use_2",
+              "distribution": 0.8
+            }
+          ]
+        }
+      ]
+    },
+    "Physical_Therapy_1": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 229064008,
+          "display": "Movement therapy (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "PT_Pain_Observation"
+    },
+    "Enter_CBT_Therapy_1": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 3,
+        "unit": "days"
+      },
+      "direct_transition": "CBT_Therapy_Counter_1"
+    },
+    "CBT_Encounter_1": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 308335008,
+          "display": "Patient encounter procedure (procedure)"
+        }
+      ],
+      "direct_transition": "CBT_Pain_Observation"
+    },
+    "Enter_Physical_Therapy_1": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 3,
+        "unit": "days"
+      },
+      "direct_transition": "Physical_Therapy_Counter_1"
+    },
+    "CBT_Therapy_Counter_1": {
+      "type": "Counter",
+      "attribute": "number_of_CBT",
+      "action": "increment",
+      "direct_transition": "CBT_Encounter_1"
+    },
+    "End_CBT_Therapy_Encounter_1": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Enter_CBT_Therapy_1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "number_of_CBT",
+            "operator": "<",
+            "value": 8
+          }
+        },
+        {
+          "transition": "End_Nonpharmacologic_Treatment_Careplan_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "number_of_CBT",
+            "operator": "==",
+            "value": 8
+          }
+        }
+      ]
+    },
+    "Physical_Therapy_Counter_1": {
+      "type": "Counter",
+      "attribute": "number_of_PT",
+      "action": "increment",
+      "direct_transition": "Physical_Therapy_Encounter_1"
+    },
+    "Physical_Therapy_Encounter_1": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 308335008,
+          "display": "Patient encounter procedure (procedure)"
+        }
+      ],
+      "direct_transition": "Physical_Therapy_1"
+    },
+    "PT_Pain_Observation": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "38208-5",
+          "display": "Pain severity - Reported"
+        }
+      ],
+      "direct_transition": "End_Physical_Therapy_Encounter_1",
+      "range": {
+        "low": 1,
+        "high": 10
+      }
+    },
+    "CBT_Pain_Observation": {
+      "type": "Observation",
+      "category": "survey",
+      "unit": "{score}",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "38208-5",
+          "display": "Pain severity - Reported"
+        }
+      ],
+      "range": {
+        "low": 1,
+        "high": 10
+      },
+      "direct_transition": "Cognitive Behavior Therapy (CBT)_1"
+    },
+    "End_Physical_Therapy_Encounter_1": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "End_Nonpharmacologic_Treatment_Careplan_1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "number_of_PT",
+            "operator": "==",
+            "value": 10
+          }
+        },
+        {
+          "transition": "Enter_Physical_Therapy_1",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "number_of_PT",
+            "operator": "<",
+            "value": 10
+          }
+        }
+      ]
+    },
+    "PEG_Assessment_Score_2": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 0,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "91148-7",
+          "display": "Pain intensity, Enjoyment of life, General activity (PEG) 3 item pain scale"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "75893-8",
+              "display": "What number best describes your pain on average in the past week?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "91145-3",
+              "display": "What number best describes how, during the past week, pain has interfered with your enjoyment of life?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "91146-1",
+              "display": "What number best describes how, during the past week, pain has interfered with your general activity?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        }
+      ],
+      "direct_transition": "Nonpharmacologic_Treatment_Careplan_2"
+    },
+    "Enter_IR/SA_Opioid_Directed_Use_2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Rx_Percocet_2",
+          "distribution": 0.2325
+        },
+        {
+          "transition": "Rx_Vicodin_2",
+          "distribution": 0.5525
+        },
+        {
+          "transition": "Rx_Tramadol_2",
+          "distribution": 0.1225
+        },
+        {
+          "transition": "Rx_Codeine_2",
+          "distribution": 0.0925
+        }
+      ]
+    },
+    "Rx_Vicodin_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 856987,
+          "display": "Acetaminophen 300 MG / Hydrocodone Bitartrate 5 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "End_Follow_Up_Encounter_for_Chronic_Pain",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 225757006,
+            "display": "Every four to six hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      },
+      "assign_to_attribute": "IR_opioid_Rx_2"
+    },
+    "Rx_Percocet_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1049625,
+          "display": "Acetaminophen 325 MG / Oxycodone Hydrochloride 10 MG Oral Tablet [Percocet]"
+        }
+      ],
+      "direct_transition": "End_Follow_Up_Encounter_for_Chronic_Pain",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 307468000,
+            "display": "Every six hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      },
+      "assign_to_attribute": "IR_opioid_Rx_2",
+      "chronic": true
+    },
+    "On_Opioid_Or_Nonopioid_1": {
+      "type": "Delay",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nonopioid_Rx_1",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "On_Nonopioid_Prescription_1",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "IR_opioid_Rx_1",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "On_IR_Opioid_Prescription_1",
+              "distribution": 1
+            }
+          ]
+        }
+      ],
+      "range": {
+        "low": 10,
+        "high": 30,
+        "unit": "days"
+      }
+    },
+    "On_Opioid_Or_Nonopioid_2": {
+      "type": "Delay",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "IR_opioid_Rx_2",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "On_IR_Opioid_Prescription_2",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "On_Nonopioid_Prescription_2",
+              "distribution": 1
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "nonopioid_Rx_2",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "On_ER_Opioid_Prescription",
+              "distribution": 1
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ER_opioid_Rx",
+            "operator": "is not nil"
+          }
+        }
+      ],
+      "exact": {
+        "quantity": 30,
+        "unit": "days"
+      }
+    },
+    "Rx_Tramadol_1": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 835603,
+          "display": "tramadol hydrochloride 50 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "End_Initial_Chronic_Pain_Encounter",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "as_needed": true,
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 225757006,
+            "display": "Every four to six hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      },
+      "assign_to_attribute": "IR_opioid_Rx_1",
+      "chronic": true
+    },
+    "Rx_Codeine_1": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 993770,
+          "display": "Acetaminophen 300 MG / Codeine Phosphate 15 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "End_Initial_Chronic_Pain_Encounter",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 225756002,
+            "display": "Every four hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      },
+      "assign_to_attribute": "IR_opioid_Rx_1",
+      "remarks": [
+        "Acetaminophen / Codeine"
+      ],
+      "chronic": true
+    },
+    "Rx_Tramadol_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 835603,
+          "display": "tramadol hydrochloride 50 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "End_Follow_Up_Encounter_for_Chronic_Pain",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "as_needed": true,
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 225757006,
+            "display": "Every four to six hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      },
+      "assign_to_attribute": "IR_opioid_Rx_2",
+      "chronic": true
+    },
+    "Rx_Codeine_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 993770,
+          "display": "Acetaminophen 300 MG / Codeine Phosphate 15 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "End_Follow_Up_Encounter_for_Chronic_Pain",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 4,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 225756002,
+            "display": "Every four hours (qualifier value)"
+          }
+        ],
+        "refills": 3
+      },
+      "assign_to_attribute": "IR_opioid_Rx_2",
+      "chronic": true
+    },
+    "PEG_Assessment_Score_3": {
+      "type": "MultiObservation",
+      "category": "vital-signs",
+      "number_of_observations": 0,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "91148-7",
+          "display": "Pain intensity, Enjoyment of life, General activity (PEG) 3 item pain scale"
+        }
+      ],
+      "direct_transition": "Addiction",
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "75893-8",
+              "display": "What number best describes your pain on average in the past week?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "91145-3",
+              "display": "What number best describes how, during the past week, pain has interfered with your enjoyment of life?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "91146-1",
+              "display": "What number best describes how, during the past week, pain has interfered with your general activity?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        }
+      ]
+    },
+    "Enter_Urine_Drug_Testing_2": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 18,
+                "unit": "years",
+                "value": 0
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<=",
+                "quantity": 44,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Urine_Drug_Testing_Aberrant_Positive_2",
+              "distribution": 0.093
+            },
+            {
+              "transition": "Urine_Drug_Testing_Negative_2",
+              "distribution": 0.907
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">",
+                "quantity": 45,
+                "unit": "years"
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<",
+                "quantity": 64,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Urine_Drug_Testing_Aberrant_Positive_2",
+              "distribution": 0.05
+            },
+            {
+              "transition": "Urine_Drug_Testing_Negative_2",
+              "distribution": 0.95
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 65,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Urine_Drug_Testing_Aberrant_Positive_2",
+              "distribution": 0.039
+            },
+            {
+              "transition": "Urine_Drug_Testing_Negative_2",
+              "distribution": 0.961
+            }
+          ]
+        }
+      ]
+    },
+    "Urine_Drug_Testing_Aberrant_Positive_2": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "n/a",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "65750-2",
+          "display": "Drugs of abuse 5 panel - Urine by Screen method"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      },
+      "direct_transition": "PEG_Assessment_Score_3"
+    },
+    "Urine_Drug_Testing_Negative_2": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "n/a",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "65750-2",
+          "display": "Drugs of abuse 5 panel - Urine by Screen method"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "direct_transition": "PEG_Assessment_Score_2"
+    },
+    "Urine_Drug_Testing_Negative_1": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "n/a",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "65750-2",
+          "display": "Drugs of abuse 5 panel - Urine by Screen method"
+        }
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 260385009,
+        "display": "Negative (qualifier value)"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Nonpharmacologic_Treatment_Careplan_1",
+          "distribution": 0.6
+        },
+        {
+          "transition": "Enter_Nonopioid_Pharmacologic_Treatment_1",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Enter_IR/SA_Opioid_Directed_Use_1",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "Urine_Drug_Testing_Aberrant_Positive_1": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "n/a",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "65750-2",
+          "display": "Drugs of abuse 5 panel - Urine by Screen method"
+        }
+      ],
+      "direct_transition": "Addiction",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      }
+    },
+    "Initial_Prescribing_Encounter_for_Chronic_Pain": {
+      "type": "Encounter",
+      "encounter_class": "outpatient",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "PEG_Assessment_Score_1"
+    },
+    "Addiction": {
+      "type": "Delay",
+      "range": {
+        "low": 0,
+        "high": 60,
+        "unit": "days"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Start_Treatment_Opioid_Use_Disorder",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Chronic_Pain_Population",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "Enter_Urine_Drug_Testing": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 18,
+                "unit": "years",
+                "value": 0
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<=",
+                "quantity": 44,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Urine_Drug_Testing_Negative_1",
+              "distribution": 0.907
+            },
+            {
+              "transition": "Urine_Drug_Testing_Aberrant_Positive_1",
+              "distribution": 0.093
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Urine_Drug_Testing_Negative_1",
+              "distribution": 0.95
+            },
+            {
+              "transition": "Urine_Drug_Testing_Aberrant_Positive_1",
+              "distribution": 0.05
+            }
+          ],
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">",
+                "quantity": 45,
+                "unit": "years"
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<",
+                "quantity": 64,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Urine_Drug_Testing_Negative_1",
+              "distribution": 0.961
+            },
+            {
+              "transition": "Urine_Drug_Testing_Aberrant_Positive_1",
+              "distribution": 0.039
+            }
+          ],
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 65,
+            "unit": "years",
+            "value": 0
+          }
+        }
+      ]
+    },
+    "Condition_Chronic_Neck_Pain_3": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "chronic_neck_pain_only",
+      "target_encounter": "Initial_Prescribing_Encounter_for_Chronic_Pain",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 1121000119107,
+          "display": "Chronic neck pain (finding)"
+        }
+      ],
+      "direct_transition": "Initial_Prescribing_Encounter_for_Chronic_Pain"
+    },
+    "Condition_Chronic_Neck_Pain_4": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 1121000119107,
+          "display": "Chronic neck pain (finding)"
+        }
+      ],
+      "direct_transition": "Condition_Chronic_Low_Back_Pain_2",
+      "target_encounter": "Follow_Up_Encounter_for_Chronic_Pain"
+    },
+    "Condition_Chronic_Low_Back_Pain_3": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 278860009,
+          "display": "Chronic low back pain (finding)"
+        }
+      ],
+      "direct_transition": "Initial_Prescribing_Encounter_for_Chronic_Pain",
+      "target_encounter": "Initial_Prescribing_Encounter_for_Chronic_Pain"
+    },
+    "Without_Urine_Drug_Testing": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Enter_IR/SA_Opioid_Directed_Use_1",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Nonpharmacologic_Treatment_Careplan_1",
+          "distribution": 0.6
+        },
+        {
+          "transition": "Enter_Nonopioid_Pharmacologic_Treatment_1",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "End_Nonpharmacologic_Treatment_Careplan_1": {
+      "type": "CarePlanEnd",
+      "careplan": "Nonpharmacologic_Treatment_Careplan_1",
+      "distributed_transition": [
+        {
+          "transition": "Terminal",
+          "distribution": 0.8
+        },
+        {
+          "transition": "Chronic_Pain_Population",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "End_Nonpharmacologic_Treatment_Careplan_2": {
+      "type": "CarePlanEnd",
+      "distributed_transition": [
+        {
+          "transition": "Chronic_Pain_Population",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.8
+        }
+      ],
+      "careplan": "Nonpharmacologic_Treatment_Careplan_1"
+    },
+    "Enter_Overdose": {
+      "type": "Simple",
+      "direct_transition": "Opioid_Addiction_Symptom_1"
+    },
+    "ED_Visit": {
+      "type": "Encounter",
+      "encounter_class": "emergency",
+      "reason": "Condition_Drug_Overdose",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 50849002,
+          "display": "Emergency room admission (procedure)"
+        }
+      ],
+      "direct_transition": "Naloxone"
+    },
+    "Opioid_Addiction_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Anxiety",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Confusion",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_3",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Cognitive Difficulties",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_4",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_5",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_5": {
+      "type": "Symptom",
+      "symptom": "Constipation",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_6",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_6": {
+      "type": "Symptom",
+      "symptom": "Reduced Sex Drive",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_7",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_7": {
+      "type": "Symptom",
+      "symptom": "Slurred Speech",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_8",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_8": {
+      "type": "Symptom",
+      "symptom": "Shallow Breathing",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_9",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_9": {
+      "type": "Symptom",
+      "symptom": "Mood Swing",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_10",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_10": {
+      "type": "Symptom",
+      "symptom": "Sensitivity to Pain",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_11",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_11": {
+      "type": "Symptom",
+      "symptom": "Yawning",
+      "cause": "Opioid_Addiction",
+      "probability": 0.5,
+      "direct_transition": "Opioid_Addiction_Symptom_12",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_12": {
+      "type": "Symptom",
+      "symptom": "Sweating",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Condition_Drug_Overdose",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Death": {
+      "type": "Death",
+      "direct_transition": "End_ED_Visit_Disposition_Death",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 55680006,
+          "display": "Drug overdose (disorder)"
+        }
+      ]
+    },
+    "Naloxone": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1191222,
+          "display": "naloxone hydrochloride 0.4 MG/ML Injectable Solution"
+        }
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "readmit_2_days",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Death",
+              "distribution": 0.0025
+            },
+            {
+              "transition": "End_ED_Visit",
+              "distribution": 0.9750000000000001
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "readmit_1_month",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.011,
+              "transition": "Death"
+            },
+            {
+              "transition": "End_ED_Visit",
+              "distribution": 0.9890000000000001
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "readmit_1_year",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.055,
+              "transition": "Death"
+            },
+            {
+              "transition": "End_ED_Visit",
+              "distribution": 0.9450000000000001
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "history_nonfatal_ED_overdose",
+            "operator": "is nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.0002,
+              "transition": "Death"
+            },
+            {
+              "distribution": 0.9997999999999999,
+              "transition": "End_ED_Visit"
+            }
+          ]
+        }
+      ],
+      "administration": true,
+      "chronic": false,
+      "reason": "Condition_Drug_Overdose"
+    },
+    "End_ED_Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Set_Attribute_Hx_Nonfatal_ED_Overdose"
+    },
+    "Encounter_OUD": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "PEG_Assessment_Score_4",
+      "reason": "Condition_OUD"
+    },
+    "Urine_Drug_Testing_Positive": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "n/a",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "65750-2",
+          "display": "Drugs of abuse 5 panel - Urine by Screen method"
+        }
+      ],
+      "direct_transition": "DSM-5_OUD_Diagnostic_Criteria",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 10828004,
+        "display": "Positive (qualifier value)"
+      }
+    },
+    "Opioid_Addiction_Symptom_2_1": {
+      "type": "Symptom",
+      "symptom": "Anxiety",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_2",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_2": {
+      "type": "Symptom",
+      "symptom": "Confusion",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_3",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_3": {
+      "type": "Symptom",
+      "symptom": "Cognitive Difficulties",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_4",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_4": {
+      "type": "Symptom",
+      "symptom": "Nausea/Vomiting",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_5",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_5": {
+      "type": "Symptom",
+      "symptom": "Constipation",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_6",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_6": {
+      "type": "Symptom",
+      "symptom": "Reduced Sex Drive",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_7",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_7": {
+      "type": "Symptom",
+      "symptom": "Slurred Speech",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_8",
+      "range": {
+        "low": 80,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_8": {
+      "type": "Symptom",
+      "symptom": "Shallow Breathing",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_9",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_9": {
+      "type": "Symptom",
+      "symptom": "Mood Swing",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_10",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_10": {
+      "type": "Symptom",
+      "symptom": "Sensitivity to Pain",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_11",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_11": {
+      "type": "Symptom",
+      "symptom": "Yawning",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Opioid_Addiction_Symptom_2_12",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "Opioid_Addiction_Symptom_2_12": {
+      "type": "Symptom",
+      "symptom": "Sweating",
+      "cause": "Opioid_Addiction",
+      "probability": 0.3,
+      "direct_transition": "Encounter_OUD",
+      "range": {
+        "low": 1,
+        "high": 100
+      }
+    },
+    "DSM-5_OUD_Diagnostic_Criteria": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 0,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "99999-0",
+          "display": "DSM-5 Clinical Diagnostic Criteria for Opioid Use Disorder"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-1",
+              "display": "Opioids are often taken in larger amounts or over a longer period than was intended"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-2",
+              "display": "There is a persistent desire or unsuccessful efforts to cut down or control opioid use"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-3",
+              "display": "A great deal of time is spent in activities necessary to obtain the opioid, use the opioid, or recover from its effects"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-4",
+              "display": "Craving or a strong desire to use opioids"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-5",
+              "display": "Recurrent opioid use resulting in a failure to fulfill major role obligations at work, school, or home"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-6",
+              "display": "Continued opioid use despite having persistent or recurrent social or interpersonal problems caused or exacerbated by the effects of opioids"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-7",
+              "display": "Important social, occupational, or recreational activities are given up or reduced because of opioid use"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-8",
+              "display": "Recurrent opioid use in situations in which it is physically hazardous"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-9",
+              "display": "Continued use despite knowledge of having a persistent or recurrent physical or psychological problem that is likely to have been caused or exacerbated by opioids."
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-10",
+              "display": "Tolerance,as defined by either of the following: a) Need for markedly increased amounts of opioids to achieve intoxication or desired effect b) Markedly diminished effect with continued use of the same amount of opioid"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "99999-11",
+              "display": "Withdrawal,* as manifested by either of the following: a) Characteristic opioid withdrawal syndrome b) Same (or a closely related) substance is taken to relieve or avoid withdrawal symptoms"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 1
+          }
+        }
+      ],
+      "direct_transition": "Condition_OUD"
+    },
+    "Condition_Drug_Overdose": {
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 55680006,
+          "display": "Drug overdose (disorder)"
+        }
+      ],
+      "direct_transition": "ED_Visit"
+    },
+    "End_Encounter_OUD": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "no_treatment",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Enter_Continued_OUD_Treatment",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "no_treatment",
+            "operator": "is nil"
+          }
+        }
+      ]
+    },
+    "Set_Attribute_Hx_Nonfatal_ED_Overdose": {
+      "type": "SetAttribute",
+      "attribute": "history_nonfatal_ED_overdose",
+      "value": true,
+      "distributed_transition": [
+        {
+          "transition": "No_OUD_Treatment",
+          "distribution": 0.25
+        },
+        {
+          "transition": "Enter_OUD_Treatment_1",
+          "distribution": 0.75
+        }
+      ]
+    },
+    "End_ED_Visit_Disposition_Death": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal",
+      "discharge_disposition": {
+        "system": "NUBC",
+        "code": 41,
+        "display": "Expired in a medical facility, such as a hospital, SNF, ICF or freestanding hospice"
+      }
+    },
+    "Enter_OUD_Treatment_1": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "weeks"
+      },
+      "direct_transition": "Enter_Evaluate Opioid_Use_Disorder"
+    },
+    "Delay_Within_2_Days": {
+      "type": "Delay",
+      "direct_transition": "Set_Attribute_Readmit_1",
+      "range": {
+        "low": 0,
+        "high": 2,
+        "unit": "days"
+      }
+    },
+    "No_OUD_Treatment": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Delay_Within_2_Days",
+          "distribution": 0.046
+        },
+        {
+          "transition": "Delay_Within_1_Month",
+          "distribution": 0.205
+        },
+        {
+          "transition": "Delay_Within_1_Year",
+          "distribution": 0.749
+        }
+      ]
+    },
+    "Delay_Within_1_Month": {
+      "type": "Delay",
+      "direct_transition": "Set_Attribute_Readmit_3",
+      "range": {
+        "low": 3,
+        "high": 30,
+        "unit": "days"
+      }
+    },
+    "Delay_Within_1_Year": {
+      "type": "Delay",
+      "direct_transition": "Set_Attribute_Readmit_2",
+      "range": {
+        "low": 1,
+        "high": 12,
+        "unit": "months"
+      }
+    },
+    "Set_Attribute_Readmit_2": {
+      "type": "SetAttribute",
+      "attribute": "readmit_1_year",
+      "direct_transition": "Enter_Overdose",
+      "value": true
+    },
+    "Set_Attribute_Readmit_1": {
+      "type": "SetAttribute",
+      "attribute": "readmit_2_days",
+      "direct_transition": "Enter_Overdose",
+      "value": true
+    },
+    "Enter_Treatment_Options": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Buprenorphine_Or_Methadone_Or_Naltrexone",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "pharmaco",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Psychosocial_Therapy_4",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "pharmaco_and_psychosocial",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Psychosocial_Therapy_3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "psychosocial",
+            "operator": "is not nil"
+          }
+        }
+      ]
+    },
+    "Psychosocial_Therapy_1": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 408919008,
+          "display": "Psychosocial care (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "Rx_Buprenorphine_2",
+      "reason": "Condition_OUD"
+    },
+    "Psychosocial_Therapy_2": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 408919008,
+          "display": "Psychosocial care (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "Set_Attribute_Treatment_Pshychosocial_Only",
+      "reason": "Condition_OUD"
+    },
+    "Rx_Buprenorphine_1": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 351266,
+          "display": "buprenorphine 2 MG / naloxone 0.5 MG Sublingual Tablet"
+        }
+      ],
+      "direct_transition": "Set_Attribute_Treatment_Pharmaco_Only",
+      "assign_to_attribute": "on_buprenorphine",
+      "reason": "Condition_OUD"
+    },
+    "Rx_Buprenorphine_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 351266,
+          "display": "buprenorphine 2 MG / naloxone 0.5 MG Sublingual Tablet"
+        }
+      ],
+      "direct_transition": "Set_Attribute_Treatment_Pharmaco_Psychosocial",
+      "assign_to_attribute": "on_buprenorphine",
+      "reason": "Condition_OUD"
+    },
+    "Condition_OUD": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Encounter_OUD",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 5602001,
+          "display": "Opioid abuse (disorder)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Psychosocial_Therapy_1",
+          "distribution": 0.6
+        },
+        {
+          "transition": "Psychosocial_Therapy_2",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Rx_Buprenorphine_1",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Set_Attribute_No_Treatment",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Rx_Methadone_1",
+          "distribution": 0.01
+        },
+        {
+          "transition": "Psychosocial_Therapy_5",
+          "distribution": 0.01
+        },
+        {
+          "transition": "Rx_Naltrexone_1",
+          "distribution": 0.01
+        },
+        {
+          "transition": "Psychosocial_Therapy_6",
+          "distribution": 0.02
+        }
+      ]
+    },
+    "Set_Attribute_Readmit_3": {
+      "type": "SetAttribute",
+      "attribute": "readmit_1_month",
+      "direct_transition": "Enter_Overdose",
+      "value": true
+    },
+    "Enter_Continued_OUD_Treatment": {
+      "type": "Delay",
+      "direct_transition": "Encounter_OUD_Treatment_Cont",
+      "exact": {
+        "quantity": 1,
+        "unit": "weeks"
+      }
+    },
+    "Encounter_OUD_Treatment_Cont": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Condition_OUD_2",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 1853470,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Condition_OUD_2"
+    },
+    "Condition_OUD_2": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Encounter_OUD_Treatment_Cont",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 5602001,
+          "display": "Opioid abuse (disorder)"
+        }
+      ],
+      "direct_transition": "Enter_Treatment_Options"
+    },
+    "Rx_Buprenorphine_3": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 351266,
+          "display": "buprenorphine 2 MG / naloxone 0.5 MG Sublingual Tablet"
+        }
+      ],
+      "direct_transition": "End_Encounter_OUD_Treatment_Cont",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "refills": 3
+      },
+      "chronic": true,
+      "reason": "Condition_OUD_2"
+    },
+    "Rx_Buprenorphine_4": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 351266,
+          "display": "buprenorphine 2 MG / naloxone 0.5 MG Sublingual Tablet"
+        }
+      ],
+      "direct_transition": "End_Encounter_OUD_Treatment_Cont",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 10,
+          "unit": "days"
+        },
+        "refills": 3
+      },
+      "reason": "Condition_OUD_2"
+    },
+    "End_Encounter_OUD_Treatment_Cont": {
+      "type": "EncounterEnd",
+      "direct_transition": "Counter_Treatment_Visit"
+    },
+    "Enter_Next_Treatment_Visit": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "months"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Encounter_OUD_Treatment_Cont",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "num_oud_treatment_visit",
+            "operator": "<",
+            "value": 5
+          }
+        },
+        {
+          "transition": "Enter_Evaluate_OUD_Or_Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "num_oud_treatment_visit",
+            "operator": ">",
+            "value": 5
+          }
+        }
+      ]
+    },
+    "Counter_Treatment_Visit": {
+      "type": "Counter",
+      "attribute": "num_oud_treatment_visit",
+      "action": "increment",
+      "direct_transition": "Enter_Next_Treatment_Visit"
+    },
+    "Enter_Evaluate Opioid_Use_Disorder": {
+      "type": "Simple",
+      "direct_transition": "Opioid_Addiction_Symptom_2_1"
+    },
+    "Set_Attribute_No_Treatment": {
+      "type": "SetAttribute",
+      "attribute": "no_treatment",
+      "direct_transition": "End_Encounter_OUD",
+      "value": true
+    },
+    "Set_Attribute_Treatment_Pshychosocial_Only": {
+      "type": "SetAttribute",
+      "attribute": "psychosocial",
+      "direct_transition": "End_Encounter_OUD",
+      "value": true
+    },
+    "Set_Attribute_Treatment_Pharmaco_Psychosocial": {
+      "type": "SetAttribute",
+      "attribute": "pharmaco_and_psychosocial",
+      "direct_transition": "End_Encounter_OUD",
+      "value": true
+    },
+    "Set_Attribute_Treatment_Pharmaco_Only": {
+      "type": "SetAttribute",
+      "attribute": "pharmaco",
+      "direct_transition": "End_Encounter_OUD",
+      "value": true
+    },
+    "Enter_Evaluate_OUD_Or_Terminal": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Terminal",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Enter_Evaluate Opioid_Use_Disorder",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Psychosocial_Therapy_4": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 408919008,
+          "display": "Psychosocial care (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "conditional_transition": [
+        {
+          "transition": "Rx_Buprenorphine_4",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "on_buprenorphine",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Rx_Methadone_4",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "on_methadone",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Rx_Naltrexone_4",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "on_naltrexone",
+            "operator": "is not nil"
+          }
+        }
+      ],
+      "reason": "Condition_OUD_2"
+    },
+    "Psychosocial_Therapy_3": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 408919008,
+          "display": "Psychosocial care (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Encounter_OUD_Treatment_Cont",
+      "reason": "Condition_OUD_2"
+    },
+    "PEG_Assessment_Score_4": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 0,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "91148-7",
+          "display": "Pain intensity, Enjoyment of life, General activity (PEG) 3 item pain scale"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "75893-8",
+              "display": "What number best describes your pain on average in the past week?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "91145-3",
+              "display": "What number best describes how, during the past week, pain has interfered with your enjoyment of life?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        },
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "91146-1",
+              "display": "What number best describes how, during the past week, pain has interfered with your general activity?"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 10
+          }
+        }
+      ],
+      "direct_transition": "Urine_Drug_Testing_Positive"
+    },
+    "On_Nonopioid_Prescription_1": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Chronic_Pain_Population",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "On_IR_Opioid_Prescription_1": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Addiction",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Chronic_Pain_Population",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "On_IR_Opioid_Prescription_2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Terminal",
+          "distribution": 0.4
+        },
+        {
+          "transition": "Chronic_Pain_Population",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Addiction",
+          "distribution": 0.1
+        }
+      ]
+    },
+    "On_ER_Opioid_Prescription": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Terminal",
+          "distribution": 0.28
+        },
+        {
+          "transition": "Chronic_Pain_Population",
+          "distribution": 0.6
+        },
+        {
+          "transition": "Addiction",
+          "distribution": 0.12
+        }
+      ]
+    },
+    "On_Nonopioid_Prescription_2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Terminal",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Chronic_Pain_Population",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Start_Treatment_Opioid_Use_Disorder": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "IR_opioid_Rx_1",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "IR_opioid_Rx_2",
+                "operator": "is not nil"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "distribution": 0.0015,
+              "transition": "Enter_Overdose"
+            },
+            {
+              "transition": "Enter_Evaluate Opioid_Use_Disorder",
+              "distribution": 0.9985
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ER_opioid_Rx",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "transition": "Enter_Overdose",
+              "distribution": 0.0035
+            },
+            {
+              "transition": "Enter_Evaluate Opioid_Use_Disorder",
+              "distribution": 0.9965
+            }
+          ]
+        }
+      ]
+    },
+    "Rx_Methadone_1": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 864706,
+          "display": "methadone hydrochloride 10 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Set_Attribute_Treatment_Pharmaco_Only",
+      "assign_to_attribute": "on_methadone",
+      "reason": "Condition_OUD"
+    },
+    "Rx_Methadone_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 864706,
+          "display": "methadone hydrochloride 10 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Set_Attribute_Treatment_Pharmaco_Psychosocial",
+      "assign_to_attribute": "on_methadone",
+      "reason": "Condition_OUD"
+    },
+    "Psychosocial_Therapy_5": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 408919008,
+          "display": "Psychosocial care (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "Rx_Methadone_2",
+      "reason": "Condition_OUD"
+    },
+    "Rx_Methadone_3": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 864706,
+          "display": "methadone hydrochloride 10 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "End_Encounter_OUD_Treatment_Cont",
+      "reason": "Condition_OUD_2"
+    },
+    "Rx_Methadone_4": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 864706,
+          "display": "methadone hydrochloride 10 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "End_Encounter_OUD_Treatment_Cont",
+      "reason": "Condition_OUD_2"
+    },
+    "Age_and_Module_Effective_Time_Guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "And",
+        "conditions": [
+          {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 18,
+            "unit": "years",
+            "value": 0
+          },
+          {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2014,
+            "value": 0
+          }
+        ]
+      },
+      "direct_transition": "General_Adult_Population"
+    },
+    "Rx_Naltrexone_1": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1483744,
+          "display": "Naltrexone hydrochloride 50 MG Oral Tablet"
+        }
+      ],
+      "assign_to_attribute": "on_naltrexone",
+      "reason": "Condition_OUD",
+      "direct_transition": "Set_Attribute_Treatment_Pharmaco_Only"
+    },
+    "Psychosocial_Therapy_6": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 408919008,
+          "display": "Psychosocial care (regime/therapy)"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "reason": "Condition_OUD",
+      "direct_transition": "Rx_Naltrexone_2"
+    },
+    "Rx_Naltrexone_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1483744,
+          "display": "Naltrexone hydrochloride 50 MG Oral Tablet"
+        }
+      ],
+      "assign_to_attribute": "on_naltrexone",
+      "reason": "Condition_OUD",
+      "direct_transition": "Set_Attribute_Treatment_Pharmaco_Psychosocial"
+    },
+    "Buprenorphine_Or_Methadone_Or_Naltrexone": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Rx_Buprenorphine_3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "on_buprenorphine",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Rx_Methadone_3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "on_methadone",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Rx_Naltrexone_3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "on_naltrexone",
+            "operator": "is not nil"
+          }
+        }
+      ]
+    },
+    "Rx_Naltrexone_3": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1483744,
+          "display": "Naltrexone hydrochloride 50 MG Oral Tablet"
+        }
+      ],
+      "reason": "Condition_OUD_2",
+      "direct_transition": "End_Encounter_OUD_Treatment_Cont"
+    },
+    "Rx_Naltrexone_4": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1483744,
+          "display": "Naltrexone hydrochloride 50 MG Oral Tablet"
+        }
+      ],
+      "reason": "Condition_OUD_2",
+      "direct_transition": "End_Encounter_OUD_Treatment_Cont"
+    }
   }
 }
 ,
@@ -54656,7 +64762,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "self_harm":{
@@ -55322,6 +65429,593 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
+  },
+  "gmf_version": 1
+}
+,
+"sepsis":{
+  "name": "Sepsis",
+  "remarks": [
+    "Module Title: Sepsis",
+    "Version Number: 1.0",
+    "Last Updated: 12/15/2020",
+    "Module Steward: ONC",
+    "Module Developer: Clinovations Government + Health",
+    "Description: Sepsis is a leading cause of death in critically ill patients in the United States. This module models the treatment of sepsis in patients >=18 years of age. It is based on the Surviving Sepsis Campaign clinical care guidelines for sepsis, particularly the guidelines for the Hour-1 Bundle for initial resuscitation of sepsis and septic shock. ",
+    "",
+    "References: ",
+    "1. Hotchkiss RS, Karl IE. The Pathophysiology and Treatment of Sepsis. N Engl J Med. 2003 Jan 9;348(2):138–50. ",
+    "2. \tSurviving Sepsis Campaign: International Guidelines for Mana... : Critical Care Medicine [Internet]. [cited 2020 Oct 16]. Available from: https://journals.lww.com/ccmjournal/Fulltext/2017/03000/Surviving_Sepsis_Campaign___International.15.aspx",
+    "3. \tDellinger RP, Schorr CA, Levy MM. A Users’ Guide to the 2016 Surviving Sepsis Guidelines. Crit Care Med. 2017 Mar;45(3):381–385. ",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Age_Guard"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Sepsis": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 91302008,
+          "display": "Sepsis (disorder)"
+        }
+      ],
+      "direct_transition": "Sepsis_ED_Encounter",
+      "target_encounter": "Sepsis_ED_Encounter"
+    },
+    "Administer_Broad_Spectrum_Abx": {
+      "type": "Simple",
+      "direct_transition": "Piperacillin_Tazobactam"
+    },
+    "Age_Guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 18,
+        "unit": "years",
+        "value": 0
+      },
+      "remarks": [
+        "Sepsis shown to be present in 6% of hospital admissions, with a sensitivity of 69.7% (95% confidence interval [CI] 52.9% to 92.0%), 98.1% specificity (95% CI 97.7% to 98.5%),",
+        "70.4% positive predictive value (95% CI 64.0% to 78.8%), and 98.0% negative predictive value (95% CI 95.9% to",
+        "99.6%) when using Sepsis-3 criteria as the reference standard. ",
+        "Ref: https://www.cdc.gov/sepsis/clinicaltools/index.html?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fsepsis%2Fdatareports%2Findex.html"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Delay",
+          "distribution": 0.06
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.94
+        }
+      ]
+    },
+    "Piperacillin_Tazobactam": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1659131,
+          "display": "piperacillin 2000 MG / tazobactam 250 MG Injection"
+        }
+      ],
+      "reason": "Sepsis",
+      "administration": true,
+      "direct_transition": "Vancomycin"
+    },
+    "Vancomycin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1807510,
+          "display": "150 ML vancomycin 5 MG/ML Injection"
+        }
+      ],
+      "reason": "Sepsis",
+      "administration": true,
+      "direct_transition": "Vitals_and_Labs"
+    },
+    "Fluid_Resuscitation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 430701006,
+          "display": "Resuscitation using intravenous fluid (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Check_Septic_Shock",
+      "reason": "Sepsis"
+    },
+    "Lactate_Level": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "mmol/L",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "59032-3",
+          "display": "Lactate [Mass/volume] in Blood"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Administer_Vasopressors",
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "59032-3",
+                "display": "Lactate [Mass/volume] in Blood"
+              }
+            ],
+            "operator": ">=",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Set_Systolic"
+        }
+      ],
+      "range": {
+        "low": 0,
+        "high": 4
+      }
+    },
+    "Administer_Vasopressors": {
+      "type": "Simple",
+      "direct_transition": "Norepinephrine"
+    },
+    "Vitals_and_Labs": {
+      "type": "Simple",
+      "direct_transition": "Capillary_Refill"
+    },
+    "Blood_Cultures": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "600-7",
+          "display": "Blood Culture, Routine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "88262-1",
+              "display": "Gram positive blood culture panel by Probe in Positive blood culture"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 10828004,
+            "display": "Positive (qualifier value)"
+          }
+        }
+      ],
+      "direct_transition": "Administer_Broad_Spectrum_Abx"
+    },
+    "Discharge_to_Home": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal",
+      "discharge_disposition": {
+        "system": "NUBC",
+        "code": 1,
+        "display": "Discharge to home"
+      }
+    },
+    "Delay_3-10_days": {
+      "type": "Delay",
+      "range": {
+        "low": 3,
+        "high": 10,
+        "unit": "days"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Discharge_to_Home",
+          "distribution": 0.6
+        },
+        {
+          "transition": "Admit_to_ICU",
+          "distribution": 0.4
+        }
+      ]
+    },
+    "Delay_in_ICU": {
+      "type": "Delay",
+      "range": {
+        "low": 1,
+        "high": 2,
+        "unit": "days"
+      },
+      "remarks": [
+        "Overall mortality of sepsis is 12.5% among patients with sepsis. Ref: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6250243/#:~:text=The%20higher%20prevalence%20of%20sepsis,sepsis%20and%20septic%20shock%2C%20respectively."
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Death",
+          "distribution": 0.125
+        },
+        {
+          "transition": "Admit_to_Inpatient",
+          "distribution": 0.875
+        }
+      ]
+    },
+    "Death": {
+      "type": "Death",
+      "exact": {
+        "quantity": 1,
+        "unit": "days"
+      },
+      "direct_transition": "Terminal",
+      "remarks": [
+        "Overall mortality of sepsis is 12.5% among patients with sepsis. Ref: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6250243/#:~:text=The%20higher%20prevalence%20of%20sepsis,sepsis%20and%20septic%20shock%2C%20respectively."
+      ]
+    },
+    "Septic_Shock": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 76571007,
+          "display": "Septic shock (disorder)"
+        }
+      ],
+      "direct_transition": "Admit_to_ICU"
+    },
+    "Capillary_Refill": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "44963-7",
+          "display": "Capillary refill [Time] of Nail bed"
+        }
+      ],
+      "direct_transition": "Pulse_Oximetry",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 50427001,
+        "display": "Increased capillary filling time (finding)"
+      }
+    },
+    "Pulse_Oximetry": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "%",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "2713-6",
+          "display": "Oxygen Saturation"
+        }
+      ],
+      "direct_transition": "Lactate_Level1",
+      "vital_sign": "Oxygen Saturation"
+    },
+    "Check_Septic_Shock": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Low_MAP",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Normal_MAP",
+          "distribution": 0.8
+        }
+      ],
+      "remarks": [
+        "Twenty percent of sepsis patients develop septic shock which can involve cardiovascular failure. Ref: https://pubmed.ncbi.nlm.nih.gov/22734959/ "
+      ]
+    },
+    "Acute_Respiratory_Distress_Syndrome_ARDS": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "ARDS",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 67782005,
+          "display": "Acute respiratory distress syndrome (disorder)"
+        }
+      ],
+      "direct_transition": "Ventilator"
+    },
+    "Check_ARDS": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Acute_Respiratory_Distress_Syndrome_ARDS",
+          "distribution": 0.18
+        },
+        {
+          "transition": "Delay_in_ICU",
+          "distribution": 0.8200000000000001
+        }
+      ],
+      "remarks": [
+        "The incidence of ARDS is approximately 18% in patients with septic shock, and mortality approaches 50%. ",
+        "",
+        "Ref: https://www.medscape.com/answers/168402-27366/what-is-the-incidence-of-acute-respiratory-distress-syndrome-ards-in-sepsisseptic-shock-and-what-are-the-potential-outcomes#:~:text=The%20patients%20demonstrate%20severe%20dyspnea,sepsis%2C%2018%2D25%25).",
+        ""
+      ]
+    },
+    "Ventilator": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 40617009,
+          "display": "Artificial respiration (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Ventilator_Weaning",
+      "reason": "Acute_Respiratory_Distress_Syndrome_ARDS"
+    },
+    "Norepinephrine": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 242969,
+          "display": "4 ML norepinephrine 1 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Set_Systolic",
+      "administration": true,
+      "remarks": [
+        "Among them, NE remains the most commonly used vasopressor and is recommended as the first-line agent by the Surviving Sepsis Campaign (SSC) experts (2). As a strong α-adrenergic agonist, NE increases blood pressure primarily through its vasoconstrictive properties with little effect on heart rate. Ref: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7333107/#:~:text=Among%20them%2C%20NE%20remains%20the,little%20effect%20on%20heart%20rate.",
+        ""
+      ],
+      "reason": "Septic_Shock"
+    },
+    "Admit_to_ICU": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 305351004,
+          "display": "Admit to ICU (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Fluid_Resuscitation2",
+      "reason": "Septic_Shock"
+    },
+    "Admit_to_Inpatient": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 449214001,
+          "display": "Transfer to stepdown unit (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Delay_3-10_days",
+      "reason": "Sepsis"
+    },
+    "Sepsis_ED_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "emergency",
+      "reason": "Sepsis",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "Blood_Cultures"
+    },
+    "Lactate_Level1": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "mmol/L",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "59032-3",
+          "display": "Lactate [Mass/volume] in Blood"
+        }
+      ],
+      "direct_transition": "Fluid_Resuscitation",
+      "range": {
+        "low": 1,
+        "high": 4
+      }
+    },
+    "Low_MAP": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "8478-0",
+          "display": "Mean blood pressure"
+        }
+      ],
+      "direct_transition": "Septic_Shock",
+      "range": {
+        "low": 20,
+        "high": 60
+      }
+    },
+    "Normal_MAP": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "8478-0",
+          "display": "Mean blood pressure"
+        }
+      ],
+      "direct_transition": "Admit_to_Inpatient",
+      "range": {
+        "low": 70,
+        "high": 100
+      }
+    },
+    "Set_Diastolic": {
+      "type": "VitalSign",
+      "vital_sign": "Diastolic Blood Pressure",
+      "unit": "mm[Hg]",
+      "direct_transition": "Record_Blood_Pressure",
+      "range": {
+        "low": 40,
+        "high": 120
+      }
+    },
+    "Set_Systolic": {
+      "type": "VitalSign",
+      "vital_sign": "Systolic Blood Pressure",
+      "unit": "mm[Hg]",
+      "direct_transition": "Set_Diastolic",
+      "range": {
+        "low": 40,
+        "high": 120
+      }
+    },
+    "Record_Blood_Pressure": {
+      "type": "MultiObservation",
+      "category": "vital-signs",
+      "number_of_observations": 0,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85354-9",
+          "display": "Blood Pressure"
+        }
+      ],
+      "observations": [
+        {
+          "category": "vital-signs",
+          "unit": "mm[Hg]",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8480-6",
+              "display": "Systolic Blood Pressure"
+            }
+          ],
+          "vital_sign": "Systolic Blood Pressure"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mm[Hg]",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8462-4",
+              "display": "Diastolic Blood Pressure"
+            }
+          ],
+          "vital_sign": "Diastolic Blood Pressure"
+        }
+      ],
+      "direct_transition": "Check_ARDS"
+    },
+    "Ventilator_Weaning": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 243174005,
+          "display": "Weaning from mechanically assisted ventilation (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 3,
+        "high": 10,
+        "unit": "days"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Delay_in_ICU",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Death",
+          "distribution": 0.5
+        }
+      ],
+      "remarks": [
+        "The incidence of ARDS is approximately 18% in patients with septic shock, and mortality approaches 50%.  Ref: https://www.medscape.com/answers/168402-27366/what-is-the-incidence-of-acute-respiratory-distress-syndrome-ards-in-sepsisseptic-shock-and-what-are-the-potential-outcomes#:~:text=The%20patients%20demonstrate%20severe%20dyspnea,sepsis%2C%2018%2D25%25).",
+        ""
+      ],
+      "reason": "Acute_Respiratory_Distress_Syndrome_ARDS"
+    },
+    "Fluid_Resuscitation2": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 430701006,
+          "display": "Resuscitation using intravenous fluid (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Lactate_Level",
+      "reason": "Septic_Shock"
+    },
+    "Delay": {
+      "type": "Delay",
+      "direct_transition": "Sepsis",
+      "range": {
+        "low": 2,
+        "high": 40,
+        "unit": "years"
+      }
+    }
   }
 }
 ,
@@ -55816,7 +66510,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "sinusitis":{
@@ -56329,7 +67024,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Chronic_Sinusitis_Continues"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "sore_throat":{
@@ -56954,6 +67650,1002 @@ export default {"allergic_rhinitis":{
       "referenced_by_attribute": "Sore Throat Antibiotic",
       "direct_transition": "Potential_Infection"
     }
+  },
+  "gmf_version": 1
+}
+,
+"spina_bifida":{
+  "name": "Spina Bifida",
+  "remarks": [
+    "Module Title: Spina Bifida",
+    "",
+    "Version Number: 1.0",
+    "",
+    "Last Updated: 11/30/2020",
+    "",
+    "Module Steward: Office of the National Coordinator for Health Information Technology (ONC)",
+    "",
+    "Module Developer: Clinovations Government + Health",
+    "",
+    "Description: Spina bifida is the most common permanently disabling birth defect that is associated with life (1). It is a condition that affects the spine and a type of neural tube detect. The three most common types of spina bifida are myelomeningocele, meningocele, spina bifida occulta. This module models myelomeningocele, the most severe form of spina bifida, for patients age < 18.",
+    "",
+    "Disclaimer: SyntheaTM is an open-source synthetic patient generator, created by MITRE, that models the medical history of synthetic patients. This module is developed using the Synthea Module Builder and is limited to the capabilities of Synthea and the Synthea Module Builder. ",
+    "This Synthea module is not a clinical guideline, does not establish a standard of medical care, and has not been tested for all potential applications. THIS MODULE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND.",
+    "",
+    "Related Module(s): None ",
+    "",
+    "Reference(s): list of references are available in the Synthea Module Companion Guide for Spina Bifida.",
+    "",
+    "",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Enter_Spina_Bifida"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Myelomeningocele": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Encounter_NICU",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 414667000,
+          "display": "Meningomyelocele (disorder)"
+        }
+      ],
+      "direct_transition": "Encounter_NICU"
+    },
+    "Meningocele": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 171131006,
+          "display": "Meningocele (disorder)"
+        }
+      ],
+      "direct_transition": "Delay_Meningocele",
+      "target_encounter": "Encounter_Meningocele"
+    },
+    "Spina_Bifida_Occulta": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Encounter_Occulta",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 76916001,
+          "display": "Spina bifida occulta (disorder)"
+        }
+      ],
+      "direct_transition": "Delay_Occulta"
+    },
+    "Encounter_NICU": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "Myelomeningocele",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 32485007,
+          "display": "Hospital admission (procedure)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Chiari_II_Malformation",
+          "distribution": 0.9
+        },
+        {
+          "transition": "Neurological_Exam",
+          "distribution": 0.1
+        }
+      ]
+    },
+    "Myelomeningocele_Repair": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 42839003,
+          "display": "Repair of myelomeningocele (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 4,
+        "high": 6,
+        "unit": "hours"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Hydrocephalus",
+          "distribution": 0.85
+        },
+        {
+          "transition": "Delay_Discharge",
+          "distribution": 0.15
+        }
+      ],
+      "reason": "Myelomeningocele"
+    },
+    "Encounter_Occulta": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Spina_Bifida_Occulta",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 308335008,
+          "display": "Patient encounter procedure (procedure)"
+        }
+      ],
+      "direct_transition": "End_Encounter_Occulta"
+    },
+    "Delay_Occulta": {
+      "type": "Delay",
+      "direct_transition": "Encounter_Occulta",
+      "range": {
+        "low": 10,
+        "high": 30,
+        "unit": "years"
+      }
+    },
+    "End_Encounter_Occulta": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "Encounter_Meningocele": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Meningocele",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 308335008,
+          "display": "Patient encounter procedure (procedure)"
+        }
+      ],
+      "direct_transition": "End_Encounter_Meningocele"
+    },
+    "Delay_Meningocele": {
+      "type": "Delay",
+      "direct_transition": "Encounter_Meningocele",
+      "range": {
+        "low": 0,
+        "high": 2,
+        "unit": "years"
+      }
+    },
+    "End_Encounter_Meningocele": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "Delay_Myelomeningocele": {
+      "type": "Delay",
+      "range": {
+        "low": 24,
+        "high": 48,
+        "unit": "hours"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Myelomeningocele_Repair",
+          "distribution": 0.96
+        },
+        {
+          "transition": "Had_Fetal_Surgery",
+          "distribution": 0.04
+        }
+      ]
+    },
+    "Hydrocephalus": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Encounter_NICU",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 230745008,
+          "display": "Hydrocephalus (disorder)"
+        }
+      ],
+      "direct_transition": "Delay_Shunt_Placement"
+    },
+    "Ventriculoperitoneal_Shunt": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 47020004,
+          "display": "Ventriculoperitoneal shunt (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "Delay_Discharge",
+      "reason": "Hydrocephalus"
+    },
+    "Orthopedic_Exam": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 36321500,
+          "display": "Musculoskeletal system physical examination (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 45,
+        "unit": "minutes"
+      },
+      "direct_transition": "Foot_Deformity",
+      "reason": "Myelomeningocele"
+    },
+    "Scoliosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Encounter_NICU",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 298382003,
+          "display": "Scoliosis deformity of spine (disorder)"
+        }
+      ],
+      "remarks": [
+        "It resulted in six articles, two concerning diastematomyelia (103 patients, 82 females and 21 males) and four about myelomeningocele (479 patients, 283 females and 196 males) with an overall weighted prevalence of scoliosis (20-degree Cobb angle cutoff) of 44.4% and 52.5%, respectively.",
+        "",
+        "https://thejns.org/pediatrics/view/journals/j-neurosurg-pediatr/20/1/article-p99.xml#:~:text=Pooled%20statistical%20analysis%20of%20the,MMC%20and%20scoliosis%20than%20males.",
+        "Pooled statistical analysis of the included articles revealed the prevalence of scoliosis in MMC patients to be 53% (95% CI 0.42–0.64). Slightly more females (56%) are affected with both MMC and scoliosis than males."
+      ],
+      "direct_transition": "Chance_of_Kyphosis"
+    },
+    "Foot_Deformity": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Encounter_NICU",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 302297009,
+          "display": "Congenital deformity of foot (disorder)"
+        }
+      ],
+      "remarks": [
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3221758/",
+        "Almost all patients with spina bifida will experience ",
+        "problems with foot deformity"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Scoliosis",
+          "distribution": 0.53
+        },
+        {
+          "transition": "Chance_of_Kyphosis",
+          "distribution": 0.37
+        }
+      ]
+    },
+    "Enter_Spina_Bifida": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Myelomeningocele",
+          "distribution": 0.00035
+        },
+        {
+          "transition": "Meningocele",
+          "distribution": 0.0001
+        },
+        {
+          "transition": "Spina_Bifida_Occulta",
+          "distribution": 0.00025
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.9993
+        }
+      ]
+    },
+    "Delay_Shunt_Placement": {
+      "type": "Delay",
+      "range": {
+        "low": 2,
+        "high": 5,
+        "unit": "days"
+      },
+      "remarks": [
+        "Usually a shunt is placed several days",
+        "after the initial repair, although infrequently this may need to be done at the same",
+        "time as the repair"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Ventriculoperitoneal_Shunt",
+          "distribution": 0.8
+        },
+        {
+          "transition": "ETV",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "Had_Fetal_Surgery": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Encounter_NICU",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 120991000119102,
+          "display": "History of undergoing in utero procedure while a fetus (situation)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Hydrocephalus",
+          "distribution": 0.45
+        },
+        {
+          "transition": "Delay_Discharge",
+          "distribution": 0.55
+        }
+      ]
+    },
+    "Neurological_Exam": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 84728005,
+          "display": "Neurological examination (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 45,
+        "unit": "minutes"
+      },
+      "direct_transition": "Orthopedic_Exam",
+      "reason": "Myelomeningocele"
+    },
+    "Chiari_II_Malformation": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Encounter_NICU",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 373587001,
+          "display": "Chiari malformation type II (disorder)"
+        }
+      ],
+      "direct_transition": "Neurological_Exam"
+    },
+    "SB_Visit_1st": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Myelomeningocele",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 308335008,
+          "display": "Patient encounter procedure (procedure)"
+        }
+      ],
+      "direct_transition": "Urodynamic_Test"
+    },
+    "ETV": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 441763001,
+          "display": "Endoscopic third ventriculostomy (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 60,
+        "high": 90,
+        "unit": "minutes"
+      },
+      "direct_transition": "CPC",
+      "reason": "Hydrocephalus"
+    },
+    "CPC": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 17881005,
+          "display": "Cauterization of choroid plexus (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 15,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Delay_Discharge",
+      "reason": "Hydrocephalus"
+    },
+    "Kyphosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "Encounter_NICU",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 414564002,
+          "display": "Kyphosis deformity of spine (disorder)"
+        }
+      ],
+      "remarks": [
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3069279/#:~:text=Spinal%20deformity%20is%20a%20common,9%2C%2021%2C%2025%5D.",
+        "",
+        "Spinal deformity is a common problem in myelomeningocele. Although it is less common than scoliosis, rigid kyphosis reportedly occurs in 8% to 20% of patients with myelomeningocele [1–3, 6, 9, 21, 25]. "
+      ],
+      "direct_transition": "Chance_of_Survival_Day1"
+    },
+    "Delay_Discharge": {
+      "type": "Delay",
+      "direct_transition": "Chance_of_Survival_2",
+      "range": {
+        "low": 3,
+        "high": 7,
+        "unit": "days"
+      }
+    },
+    "End_Encounter_NICU": {
+      "type": "EncounterEnd",
+      "direct_transition": "Delay_SB_Visit"
+    },
+    "Delay_SB_Visit": {
+      "type": "Delay",
+      "direct_transition": "SB_Visit_1st",
+      "range": {
+        "low": 2,
+        "high": 3,
+        "unit": "months"
+      }
+    },
+    "CT_Head": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 303653007,
+          "display": "Computed tomography of head (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "MRI_Spine",
+      "reason": "Myelomeningocele"
+    },
+    "MRI_Spine": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 241645008,
+          "display": "Magnetic resonance imaging of spine (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Muscle_Testing",
+      "reason": "Myelomeningocele"
+    },
+    "Muscle_Testing": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 9002005,
+          "display": "Manual testing of muscle function (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Latex_Allergy",
+          "distribution": 0.6
+        },
+        {
+          "transition": "End_SB_Visit_1st",
+          "distribution": 0.4
+        }
+      ],
+      "reason": "Myelomeningocele"
+    },
+    "End_SB_Visit_1st": {
+      "type": "EncounterEnd",
+      "direct_transition": "Living_With_SB"
+    },
+    "Living_With_SB": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Delay_3_Months",
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<",
+            "quantity": 1,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Living_With_SB_2",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 1,
+            "unit": "years",
+            "value": 0
+          }
+        }
+      ]
+    },
+    "End_SB_Visit_Under_Age_5": {
+      "type": "EncounterEnd",
+      "distributed_transition": [
+        {
+          "transition": "Living_With_SB_3",
+          "distribution": 0.99
+        },
+        {
+          "transition": "Death",
+          "distribution": 0.01
+        }
+      ]
+    },
+    "SB_Visit_Under_Age_5": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Myelomeningocele",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 308335008,
+          "display": "Patient encounter procedure (procedure)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Condition_UTI_3",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Condition_Pressure_Ulcer_3",
+          "distribution": 0.106
+        },
+        {
+          "transition": "End_SB_Visit_Under_Age_5",
+          "distribution": 0.394
+        }
+      ]
+    },
+    "SB_Visit_After_Age_5": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Myelomeningocele",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 308335008,
+          "display": "Patient encounter procedure (procedure)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Condition_UTI_2",
+          "distribution": 0.5
+        },
+        {
+          "transition": "End_SB_Visit_After_Age_5",
+          "distribution": 0.394
+        },
+        {
+          "transition": "Condition_Pressure_Ulcer",
+          "distribution": 0.106
+        }
+      ]
+    },
+    "End_SB_Visit_After_Age_5": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 18,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Living_With_SB_4",
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<",
+            "quantity": 18,
+            "unit": "years",
+            "value": 0
+          }
+        }
+      ]
+    },
+    "Living_With_SB_2": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Living_With_SB",
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<",
+            "quantity": 1,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Delay_6_Months",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 1,
+                "unit": "years",
+                "value": 0
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<",
+                "quantity": 5,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Delay_1_Year",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 5,
+            "unit": "years",
+            "value": 0
+          }
+        }
+      ]
+    },
+    "Living_With_SB_3": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Living_With_SB_2",
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<",
+            "quantity": 5,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Delay_1_Year",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 5,
+            "unit": "years",
+            "value": 0
+          }
+        }
+      ]
+    },
+    "Latex_Allergy": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "SB_Visit_1st",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 300916003,
+          "display": "Allergy to latex (finding)"
+        }
+      ],
+      "direct_transition": "End_SB_Visit_1st"
+    },
+    "Chance_of_Kyphosis": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Kyphosis",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Chance_of_Survival_Day1",
+          "distribution": 0.8
+        }
+      ]
+    },
+    "Office_Visit_Under_Age_1": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Myelomeningocele",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 308335008,
+          "display": "Patient encounter procedure (procedure)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Condition_UTI",
+          "distribution": 0.5
+        },
+        {
+          "transition": "End_Office_Visit_Under_Age_1",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "End_Office_Visit_Under_Age_1": {
+      "type": "EncounterEnd",
+      "direct_transition": "Living_With_SB_2"
+    },
+    "Death": {
+      "type": "Death",
+      "direct_transition": "Terminal",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 414667000,
+          "display": "Meningomyelocele (disorder)"
+        }
+      ],
+      "remarks": [
+        "https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1469-8749.2009.03543.x",
+        "One in three of the cohort (40 ⁄ 117) died before the age of 5 years."
+      ]
+    },
+    "Living_With_SB_4": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Death",
+          "distribution": 0.005
+        },
+        {
+          "transition": "Delay_1_Year",
+          "distribution": 0.995
+        }
+      ]
+    },
+    "Urodynamic_Test": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 252895004,
+          "display": "Urodynamic studies (procedure"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "Renal_Ultrasound",
+      "reason": "Myelomeningocele"
+    },
+    "Renal_Ultrasound": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 709640007,
+          "display": "Doppler ultrasonography of renal vein (procedure)"
+        }
+      ],
+      "duration": {
+        "low": 30,
+        "high": 30,
+        "unit": "minutes"
+      },
+      "direct_transition": "CT_Head",
+      "reason": "Myelomeningocele"
+    },
+    "Delay_3_Months": {
+      "type": "Delay",
+      "direct_transition": "Office_Visit_Under_Age_1",
+      "exact": {
+        "quantity": 3,
+        "unit": "months"
+      }
+    },
+    "Delay_6_Months": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 6,
+        "unit": "months"
+      },
+      "direct_transition": "SB_Visit_Under_Age_5"
+    },
+    "Delay_1_Year": {
+      "type": "Delay",
+      "direct_transition": "SB_Visit_After_Age_5",
+      "exact": {
+        "quantity": 1,
+        "unit": "years"
+      }
+    },
+    "Chance_of_Survival_Day1": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Death",
+          "distribution": 0.061
+        },
+        {
+          "transition": "Delay_Myelomeningocele",
+          "distribution": 0.939
+        }
+      ],
+      "remarks": [
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6899817/"
+      ]
+    },
+    "Chance_of_Survival_2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "End_Encounter_NICU",
+          "distribution": 0.98
+        },
+        {
+          "transition": "Death",
+          "distribution": 0.02
+        }
+      ]
+    },
+    "Condition_UTI": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 68566005,
+          "display": "Urinary tract infectious disease (disorder)"
+        }
+      ],
+      "direct_transition": "End_Office_Visit_Under_Age_1",
+      "target_encounter": "Office_Visit_Under_Age_1"
+    },
+    "Condition_UTI_3": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "SB_Visit_Under_Age_5",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 68566005,
+          "display": "Urinary tract infectious disease (disorder)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "End_SB_Visit_Under_Age_5",
+          "distribution": 0.9
+        },
+        {
+          "transition": "Condition_Pressure_Ulcer_4",
+          "distribution": 0.1
+        }
+      ]
+    },
+    "Condition_Pressure_Ulcer_3": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "SB_Visit_Under_Age_5",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 399912005,
+          "display": "Pressure ulcer (disorder)"
+        }
+      ],
+      "direct_transition": "End_SB_Visit_Under_Age_5"
+    },
+    "Condition_Pressure_Ulcer_4": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "SB_Visit_Under_Age_5",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 399912005,
+          "display": "Pressure ulcer (disorder)"
+        }
+      ],
+      "direct_transition": "End_SB_Visit_Under_Age_5"
+    },
+    "Condition_UTI_2": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "SB_Visit_After_Age_5",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 68566005,
+          "display": "Urinary tract infectious disease (disorder)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Condition_Pressure_Ulcer_2",
+          "distribution": 0.1
+        },
+        {
+          "transition": "End_SB_Visit_After_Age_5",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "Condition_Pressure_Ulcer": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "SB_Visit_After_Age_5",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 399912005,
+          "display": "Pressure ulcer (disorder)"
+        }
+      ],
+      "direct_transition": "End_SB_Visit_After_Age_5"
+    },
+    "Condition_Pressure_Ulcer_2": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "target_encounter": "SB_Visit_After_Age_5",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 399912005,
+          "display": "Pressure ulcer (disorder)"
+        }
+      ],
+      "direct_transition": "End_SB_Visit_After_Age_5"
+    }
   }
 }
 ,
@@ -57303,7 +68995,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Terminal",
       "medication_order": "Sufentanil"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "total_joint_replacement/functional_status_assessments":{
@@ -58153,7 +69846,8 @@ export default {"allergic_rhinitis":{
         }
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "total_joint_replacement":{
@@ -58468,7 +70162,8 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Delay_Until_New_Replacement_Needed"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "urinary_tract_infections":{
@@ -58964,7 +70659,8 @@ export default {"allergic_rhinitis":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "veteran":{
@@ -59598,7 +71294,8 @@ export default {"allergic_rhinitis":{
       "value": "Late_Gulf_War",
       "direct_transition": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "veteran_hyperlipidemia":{
@@ -60439,7 +72136,8 @@ export default {"allergic_rhinitis":{
       "assign_to_attribute": "statin_renewal",
       "direct_transition": "end encounter"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "veteran_lung_cancer":{
@@ -61406,7 +73104,8 @@ export default {"allergic_rhinitis":{
         }
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "veteran_mdd":{
@@ -62168,7 +73867,8 @@ export default {"allergic_rhinitis":{
         }
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "veteran_prostate_cancer":{
@@ -63423,7 +75123,8 @@ export default {"allergic_rhinitis":{
       ],
       "direct_transition": "Chemotherapy_Hormone Order"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "veteran_ptsd":{
@@ -64642,7 +76343,8 @@ export default {"allergic_rhinitis":{
       ],
       "direct_transition": "Therapy Note"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "veteran_self_harm":{
@@ -65219,7 +76921,8 @@ export default {"allergic_rhinitis":{
       },
       "direct_transition": "MH & SUD Comorbidty Check"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "veteran_substance_abuse_conditions":{
@@ -65373,7 +77076,8 @@ export default {"allergic_rhinitis":{
       "attribute": "opioid_addiction",
       "direct_transition": "Terminal"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "veteran_substance_abuse_treatment":{
@@ -65622,7 +77326,8 @@ export default {"allergic_rhinitis":{
         "Added this state just so that only one path goes back up to the top"
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "veterans/veteran_suicide_probabilities":{
@@ -65722,7 +77427,8 @@ export default {"allergic_rhinitis":{
         "25.6 deaths / 100k * 12 attempts / completion == 307.2 attempts / 100k == .003072 == .3 % lifetime probability"
       ]
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,
 "wellness_encounters":{
@@ -66580,6 +78286,7 @@ export default {"allergic_rhinitis":{
       "type": "EncounterEnd",
       "direct_transition": "Wellness_Encounter"
     }
-  }
+  },
+  "gmf_version": 1
 }
 ,};
