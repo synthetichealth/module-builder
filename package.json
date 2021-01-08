@@ -45,7 +45,7 @@
     "reformat-modules": "node scripts/reformat-modules.js"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
+    "@babel/cli": "^7.12.10",
     "@babel/core": "^7.5.5",
     "@babel/preset-flow": "^7.0.0",
     "flow-bin": "^0.104.0",
