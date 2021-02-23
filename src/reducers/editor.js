@@ -1,12 +1,13 @@
 import _ from 'lodash';
 import { getTemplate } from '../templates/Templates';
 import { normalizeType, cleanString } from '../utils/stringUtils';
+import { CURRENT_GMF_VERSION } from './analysis'
 
 const initialState = {
-    selectedStateKey: null, 
-    selectedStateTransition: null, 
-    selectedModuleKey: null, 
-    loadModuleVisible: false, 
+    selectedStateKey: null,
+    selectedStateTransition: null,
+    selectedModuleKey: null,
+    loadModuleVisible: false,
     downloadVisible: false,
     selectedModulePanel: 'info',
     modulePanelVisible: true,
@@ -22,6 +23,9 @@ export default (state = initialState, action) => {
   let newState = {...state}
 
   switch (action.type) {
+    case 'ADD_GMF_VERSION':
+      newState.modules[action.data.targetModuleKey]['gmf_version'] = CURRENT_GMF_VERSION;
+      return newState;
     case 'SELECT_NODE':
       let selectedModulePanel = state.selectedModulePanel;
       if(action.data.key){
@@ -236,7 +240,7 @@ export default (state = initialState, action) => {
 
       let tempModule = {}; // put in the right order in the object for the tabs
       tempModule[action.data.key] = action.data.module;
-    
+
 
       newState.history = [];
       newState.historyIndex = 0;
@@ -463,7 +467,7 @@ export default (state = initialState, action) => {
 
     case 'HIDE_LOAD_MODULE':
       return { ...newState, loadModuleVisible: false};
-          
+
     case 'SHOW_DOWNLOAD':
       return { ...newState, downloadVisible: true};
 
@@ -473,7 +477,7 @@ export default (state = initialState, action) => {
     case 'CHANGE_MODULE_PANEL':
       return { ...newState, selectedModulePanel: action.data.targetPanel, modulePanelVisible: action.data.targetPanel !== 'hide'};
 
-    case 'REFRESH_CODE_FLAG': 
+    case 'REFRESH_CODE_FLAG':
       return {...newState, refreshCodeFlag: action.data.flag}
 
     case 'UNDO':

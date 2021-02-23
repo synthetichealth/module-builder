@@ -47,6 +47,11 @@ export type DelayState = {
     high: number,
     unit: UnitOfTime
   },
+  distribution?: {
+    kind: string,
+    parameters: any
+  },
+  unit?: UnitOfTime,
   transition?: Transition
 }
 
@@ -59,6 +64,10 @@ export type SetAttributeState = {
   range?: {
     low: number,
     high: number
+  },
+  distribution?: {
+    kind: string,
+    parameters: any
   },
   transition?: Transition
 }
@@ -209,6 +218,11 @@ export type ProcedureState = {
     high: number,
     unit: UnitOfTime
   },
+  distribution?: {
+    kind: string,
+    parameters: any
+  },
+  unit?: UnitOfTime,
   transition?: Transition
 }
 
@@ -224,6 +238,10 @@ export type VitalSignState = {
   range?: {
     low: number,
     high: number
+  },
+  distribution?: {
+    kind: string,
+    parameters: any
   },
   transition?: Transition
 }
@@ -241,6 +259,10 @@ export type ObservationState = {
   range?: {
     low: number,
     high: number
+  },
+  distribution?: {
+    kind: string,
+    parameters: any
   },
   attribute?: string,
   vital_sign?: string,
@@ -320,6 +342,10 @@ export type SymptomState = {
   range?: {
     low: number,
     high: number
+  },
+  distribution?: {
+    kind: string,
+    parameters: any
   },
   transition?: Transition
 }

@@ -12,11 +12,13 @@ const initialState = {
   attributes: []
 };
 
+export const CURRENT_GMF_VERSION = 2.0;
+
 const attributes = module => {
   const attributes = [];
   Object.keys(module.states).forEach(stateName => {
     let state = module.states[stateName];
-    
+
      if(state.type === 'SetAttribute'){
        attributes.push({attribute: state.attribute, stateName: state.name, stateType: state.type});
      } else if(state.assign_to_attribute){
@@ -60,7 +62,7 @@ const placeholderCodeWarnings = (module) => {
           })
         })}
 
-        break; 
+        break;
       case 'ImagingStudy':
         if(state.procedure_code){
             if(templateCodes[`${state.procedure_code.code}-${state.procedure_code.system}-${state.procedure_code.display}`]){
@@ -104,7 +106,7 @@ const placeholderCodeWarnings = (module) => {
 }
 
 const tableTransitionWarnings = (module) => {
-  
+
   const warnings = [];
 
   Object.keys(module.states).forEach(stateName => {
@@ -116,8 +118,8 @@ const tableTransitionWarnings = (module) => {
       if(state.lookup_table_transition.lookup_table_name_ModuleBuilder === ""){
         message = 'Invalid filename ';
       }
-      if (state.lookup_table_transition.lookuptable === "Enter table" || tableHasError(state.lookup_table_transition.lookuptable) ) { 
-        if (message === ''){ 
+      if (state.lookup_table_transition.lookuptable === "Enter table" || tableHasError(state.lookup_table_transition.lookuptable) ) {
+        if (message === ''){
           message = 'Invalid data ';
         } else {
           message += 'and invalid data '
@@ -127,7 +129,7 @@ const tableTransitionWarnings = (module) => {
       if (!tableHasError(state.lookup_table_transition.lookuptable)){
         let tableColumns = [];
         let data = parseLookupTable(state.lookup_table_transition.lookuptable);
-        if (data.length > 0){ 
+        if (data.length > 0){
           tableColumns = Object.keys(data[0]);
         }
 
@@ -151,7 +153,7 @@ const tableTransitionWarnings = (module) => {
       if (message !== ''){
         message += 'for table in ';
         warnings.push({stateName, message: message + stateName + '. '});
-      }        
+      }
     }
   });
 
@@ -170,11 +172,11 @@ const parseLookupTable = (data) => {
     parsed=results;
   }
   });
-      
-  return parsed.data;
-}    
 
-const tableHasError = (lookuptable) =>{    
+  return parsed.data;
+}
+
+const tableHasError = (lookuptable) =>{
   let data = parseLookupTable(lookuptable);
   let textOk = !(lookuptable == 'Enter table' || lookuptable == '')
   let parseOk = (data.length > 0 && Object.keys(data[0]).length > 0)
@@ -182,7 +184,15 @@ const tableHasError = (lookuptable) =>{
     return false;
   } else {
     return true;
-  } 
+  }
+}
+
+const gmfVersionWarnings = (module) => {
+  if(module.gmf_version === undefined || module.gmf_version < CURRENT_GMF_VERSION) {
+    return [{stateName: 'None', message: 'Module is using an older or undeclared version of GMF'}];
+  } else {
+    return [];
+  }
 }
 
 const stateCollisionWarnings = (module, globalCodes) => {
@@ -261,7 +271,7 @@ const orphanStateWarnings = (module) => {
           }
         }
       });
-    } 
+    }
     else if(nextState.conditional_transition){
       nextState.conditional_transition.forEach(transition => {
         if(!module.states[transition.transition]){
@@ -353,7 +363,7 @@ const relatedBySubmodule = (moduleKey, module, relatedMap) => {
   if(relatedMap[moduleKey]){
     related = _.cloneDeep(relatedMap[moduleKey]);
   }
-  
+
   Object.keys(module.states).forEach(stateName => {
     const moduleState = module.states[stateName];
      if(moduleState.type === 'CallSubmodule'){
@@ -372,7 +382,8 @@ export default (state = initialState, action) => {
       newState.warnings = [...stateCollisionWarnings(action.data.module, newState.libraryModuleCodes),
                            ...orphanStateWarnings(action.data.module),
                            ...placeholderCodeWarnings(action.data.module),
-                           ...tableTransitionWarnings(action.data.module)];
+                           ...tableTransitionWarnings(action.data.module),
+                           ...gmfVersionWarnings(action.data.module)];
 
       newState.relatedModules = [...relatedBySubmodule(action.data.moduleKey, action.data.module, newState.libraryRelatedModules)];
 

@@ -6,7 +6,11 @@ const dispatchThenAnalyze = (action) => {
     dispatch(action);
     let moduleKey = getState().editor.selectedModuleKey;
     let module = getState().editor.modules[moduleKey];
+
     if(module){
+      if (module.gmf_version === undefined) {
+        dispatch(addGMFVersion(moduleKey))
+      }
       dispatch(analyze(moduleKey, module));
     }
 
@@ -16,6 +20,13 @@ const dispatchThenAnalyze = (action) => {
     }
 
   }
+}
+
+export const addGMFVersion = (targetModuleKey) => {
+  return ({
+    type: 'ADD_GMF_VERSION',
+    data: {targetModuleKey}
+  })
 }
 
 export const selectNode = (key, transitionIndex) => {

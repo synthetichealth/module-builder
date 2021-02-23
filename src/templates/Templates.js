@@ -378,7 +378,12 @@ const StateTemplates = {
 
   Delay: {
     type: "Delay",
-    exact: {...AttributeTemplates.ExactWithUnit}
+    distribution: {"kind": "EXACT",
+                   "parameters": {
+                     "value": 1
+                   }
+    },
+    "unit": "years"
   },
 
   SetAttribute: {
@@ -450,18 +455,21 @@ const StateTemplates = {
   Procedure: {
     type: "Procedure",
     codes: [{...TypeTemplates.Code.Snomed}],
-    duration: {
-      low: 30,
-      high: 30,
-      unit: 'minutes'
-    }
+    distribution: {
+      "kind": "UNIFORM",
+      "parameters": {
+        "high": 60,
+        "low": 30
+      }
+    },
+    "unit": "minutes"
   },
 
   VitalSign: {
     type: "VitalSign",
     vital_sign: "",
     unit: "",
-    exact: {...AttributeTemplates.Exact}
+    distribution: {kind: "EXACT", parameters: {value: 1}}
   },
 
   Observation: {
@@ -469,7 +477,7 @@ const StateTemplates = {
     category: "vital-signs",
     unit: "",
     codes: [{...TypeTemplates.Code.Loinc}],
-    exact: {...AttributeTemplates.Exact}
+    distribution: {kind: "EXACT", parameters: {value: 1}}
   },
 
   MultiObservation: {
@@ -496,7 +504,7 @@ const StateTemplates = {
     symptom: "",
     cause: "",
     probability: 1.0,
-    exact: {...AttributeTemplates.Exact}
+    distribution: {kind: "EXACT", parameters: {value: 1}}
   },
 
   Device: {
