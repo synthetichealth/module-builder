@@ -307,6 +307,9 @@ const stateDescription = (state) =>{
       } else if (state['value']) {
         let v = state['value']
         details = `Set '${state["attribute"]}' = ${(v === undefined || v === null || v === "") ? 'nil' : v}`
+      } else if (state.value_code !== undefined) {
+        let v = state['value_code']
+        details = `Set '${state["attribute"]}' = ${v['system']}[${v['code']}]: ${v['display']}\\l`
       } else if (state['distribution'] !== undefined ) {
         details = `Set '${state["attribute"]}': ${distributionString(state['distribution'])}}`
       }

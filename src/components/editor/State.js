@@ -380,6 +380,7 @@ class SetAttribute extends Component<Props> {
       value : this.props.state.attribute,
       lastSubmitted : this.props.state.attribute,
       displayLabel : true,
+      value_code : this.props.state.value_code
     }
   }
 
@@ -395,7 +396,7 @@ class SetAttribute extends Component<Props> {
     if (this.legacyGMF()) {
       valueForm = this.renderLegacyValueOrRange();
     } else {
-      valueForm = this.renderValueOrDistribution()
+      valueForm = this.renderValueContainer()
     }
     if (this.state.displayLabel)
     {
@@ -446,7 +447,7 @@ class SetAttribute extends Component<Props> {
     }
   }
 
-  renderValueOrDistribution() {
+  renderValueContainer() {
     let state = ((this.props.state: any): SetAttributeState);
     if (state.distribution) {
       return (
@@ -474,11 +475,18 @@ class SetAttribute extends Component<Props> {
           <a className='editable-text' onClick={() => {this.props.onChange('distribution')({val: {id: {kind: "EXACT", parameters: {value: 1}}}}); this.props.onChange('value')({val: {id: null}})}}>Change to Distribution</a>
         </div>
       );
+    } else if (state.value_code) {
+      return (
+        <div className='section'>
+          <Code code={state.value_code} system={"LOINC"} onChange={this.props.onChange('value_code')} />
+        </div>
+      );
     } else {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: "text"}})}>Add Value</a><br />
           <a className='editable-text' onClick={() => this.props.onChange('distribution')({val: {id: {kind: "EXACT", parameters: {value: 1}}}})}>Add Distribution</a><br />
+          <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id:  getTemplate('Type.Code.Loinc')}});}}>Add Code</a>
           <br />
         </div>
       );
