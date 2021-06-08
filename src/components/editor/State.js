@@ -688,7 +688,7 @@ class Encounter extends Component<Props> {
       {id: 'emergency', text: 'emergency'},
       {id: 'inpatient', text: 'inpatient'},
       {id: 'ambulatory', text: 'ambulatory'},
-      {id: 'urgent', text: 'urgent'},
+      {id: 'urgentcare', text: 'urgentcare'},
       {id: 'hospice', text: 'hospice'},
       {id: 'home', text: 'home'},
       {id: 'snf', text: 'snf'}
