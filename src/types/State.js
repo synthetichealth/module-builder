@@ -67,6 +67,7 @@ export type SetAttributeState = {
   },
   distribution?: {
     kind: string,
+    round?: false,
     parameters: any
   },
   transition?: Transition
@@ -262,6 +263,7 @@ export type ObservationState = {
   },
   distribution?: {
     kind: string,
+    round?: false,
     parameters: any
   },
   attribute?: string,
