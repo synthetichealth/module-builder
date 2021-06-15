@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
 import _ from 'lodash';
-import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
+import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveAllergyConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
 import type { State } from '../../types/State';
 import { Codes } from './Code';
 import { Code } from './Code';
@@ -54,6 +54,8 @@ class ConditionalEditor extends Component<Props> {
         return <Observation {...this.props} />
       case "Vital Sign":
         return <VitalSign {...this.props} />
+      case "Active Allergy":
+        return <ActiveAllergy {...this.props} />
       case "Active Condition":
         return <ActiveCondition {...this.props} />
       case "Active Medication":
@@ -146,18 +148,18 @@ class Date extends Component<Props> {
 
   renderType() {
     let conditional = ((this.props.conditional: any): DateConditional);
-    
+
     if(conditional.month) {
       let month = <RIENumber className='editable-text' value={conditional.month} propName='month' change={this.props.onChange('month')} />
       return (
         <div>
-          Month: 
+          Month:
           {month}
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('month')({val: {id: null}}); this.props.onChange('date')({val: {id: null}})}}>Change to Year</a>
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('date.year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('date.month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('date.day')({val: {id: getTemplate('Type.Date.Day')}}); this.props.onChange('date.hour')({val: {id: getTemplate('Type.Date.Hour')}}); this.props.onChange('date.minute')({val: {id: getTemplate('Type.Date.Minute')}}); this.props.onChange('date.second')({val: {id: getTemplate('Type.Date.Second')}}); this.props.onChange('date.millisecond')({val: {id: getTemplate('Type.Date.Millisecond')}}); this.props.onChange('month')({val: {id: null}}); this.props.onChange('year')({val: {id: null}})}}>Change to Date</a>
-        </div>  
+        </div>
       );
     } else if (conditional.date) {
       let yearInput = <RIENumber className='editable-text' value={conditional.date.year} propName='date.year' change={this.props.onChange('date.year')} />
@@ -167,32 +169,32 @@ class Date extends Component<Props> {
       let minuteInput = <RIENumber className='editable-text' value={conditional.date.minute} propName='date.minute' change={this.props.onChange('date.minute')} />
       let secondInput = <RIENumber className='editable-text' value={conditional.date.second} propName='date.second' change={this.props.onChange('date.second')} />
       let millisecondInput = <RIENumber className='editable-text' value={conditional.date.millisecond} propName='date.millisecond' change={this.props.onChange('date.millisecond')} />
-      
+
       return (
         <div>
           Date:
           <br />
           {yearInput}/{monthInput}/{dayInput} {hourInput}:{minuteInput}:{secondInput}.{millisecondInput}
-          <br /> 
+          <br />
           (yyyy/MM/dd HH:mm:ss.SSS)
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('month')({val: {id: null}}); this.props.onChange('date')({val: {id: null}})}}>Change to Year</a>
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('date')({val: {id: null}}); this.props.onChange('year')({val: {id: null}})}}>Change to Month</a>
-        </div>  
+        </div>
       );
-      
+
     } else { //year
       let year = <RIENumber className='editable-text' value={conditional.year} propName='year' change={this.props.onChange('year')} />
       return (
         <div>
-          Year: 
+          Year:
           {year}
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('year')({val: {id: null}}); this.props.onChange('date')({val: {id: null}})}}>Change to Month</a>
           <br />
           <a className='editable-text' onClick={() => {this.props.onChange('date.year')({val: {id: getTemplate('Type.Date.Year')}}); this.props.onChange('date.month')({val: {id: getTemplate('Type.Date.Month')}}); this.props.onChange('date.day')({val: {id: getTemplate('Type.Date.Day')}}); this.props.onChange('date.hour')({val: {id: getTemplate('Type.Date.Hour')}}); this.props.onChange('date.minute')({val: {id: getTemplate('Type.Date.Minute')}}); this.props.onChange('date.second')({val: {id: getTemplate('Type.Date.Second')}}); this.props.onChange('date.millisecond')({val: {id: getTemplate('Type.Date.Millisecond')}}); this.props.onChange('year')({val: {id: null}}); this.props.onChange('month')({val: {id: null}})}}>Change to Date</a>
-        </div>  
+        </div>
       );
     }
   }
@@ -330,7 +332,7 @@ class Observation extends Component<Props> {
     }
     let valueInput = <RIEInput className='editable-text' value={value} propName='value' change={this.props.onChange('value')} />
     if (conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){
-      if (conditional.value_code) { 
+      if (conditional.value_code) {
         return (
           <div>
             Value Code:
@@ -339,8 +341,8 @@ class Observation extends Component<Props> {
             </div>
             <a className='editable-text' onClick={() => {this.props.onChange('value')({val: {id: "0"}}); this.props.onChange('value_code')({val: {id: null}})}}>Change to Numeric Value</a>
           </div>
-        );  
-      } else { 
+        );
+      } else {
         return (
           <div>
             Value:
@@ -350,7 +352,7 @@ class Observation extends Component<Props> {
             <br />
           </div>
         );
-      }  
+      }
     } else {
       return (
         <div>
@@ -358,7 +360,7 @@ class Observation extends Component<Props> {
         </div>
       )
     }
-  }  
+  }
 }
 
 class VitalSign extends Component<Props> {
@@ -386,6 +388,20 @@ class ActiveCondition extends Component<Props> {
 
     return (
       <label> Active Condition:
+        <Codes system={getTemplate('Type.Code.Snomed.system')} codes={conditional.codes} onChange={this.props.onChange('codes')} />
+      </label>
+    );
+  }
+
+}
+
+class ActiveAllergy extends Component<Props> {
+
+  render() {
+    let conditional = ((this.props.conditional: any): ActiveAllergyConditional);
+
+    return (
+      <label> Active Allergy:
         <Codes system={getTemplate('Type.Code.Snomed.system')} codes={conditional.codes} onChange={this.props.onChange('codes')} />
       </label>
     );
@@ -495,7 +511,7 @@ class Attribute extends Component<Props> {
 
     // It appears that conditional is inconsistent, sometimes values are in ids
     // This should be tracked down
-    if(conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){ 
+    if(conditional.operator !== 'is nil' && conditional.operator !== 'is not nil' && conditional.operator.id !== 'is nil' && conditional.operator.id !== 'is not nil'){
       valueInput = <RIEInput className='editable-text' value={val||0} propName='value' change={this.props.onChange('value')} />
     }
 

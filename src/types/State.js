@@ -128,6 +128,14 @@ export type ConditionEndState = {
   transition?: Transition
 }
 
+export type Severity = {
+  level: string,
+  value: number
+}
+export type Reaction = {
+  reaction: Code,
+  possible_severities: Severity[]
+}
 export type AllergyOnsetState = {
   name: string,
   remarks: string[],
@@ -135,7 +143,10 @@ export type AllergyOnsetState = {
   target_encounter: string,
   assign_to_attribute?: string,
   codes: Code[],
-  transition?: Transition
+  allergy_type?: string,
+  category?: string,
+  transition?: Transition,
+  reactions?: Reaction[]
 }
 
 export type AllergyEndState = {
