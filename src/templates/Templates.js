@@ -147,6 +147,16 @@ const TypeTemplates = {
         "operator" : ">",
         "value" : 120
     },
+    "Active Allergy": {
+      "condition_type": "Active Allergy",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "7984",
+          "display": "Penicillin V"
+        }
+      ]
+    },
     "Active Medication": {
       "condition_type": "Active Medication",
       "codes": [
@@ -425,9 +435,12 @@ const StateTemplates = {
   },
 
   AllergyOnset: {
+    allergy_type: "allergy",
+    category: "food",
     type: "AllergyOnset",
     target_encounter: "",
-    codes: [{...TypeTemplates.Code.Snomed}]
+    codes: [{...TypeTemplates.Code.Snomed}],
+    reactions: []
   },
 
   AllergyEnd: {

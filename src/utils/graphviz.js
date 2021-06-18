@@ -557,6 +557,14 @@ const stateDescription = (state) =>{
   if(state.category){
     details = `${details}Category: ${state['category']}\\l`
   }
+  if(state.allergy_type && state.allergy_type.length > 0) {
+      details += `Type: ${state.allergy_type}\\l`
+  }
+  if(state.reactions && state.reactions.length > 0) {
+    state.reactions.forEach(r => {
+      details += `Reaction: ${r.reaction['system']}[${r.reaction['code']}]: ${r.reaction['display']}\\l`
+    });
+  }
 
   return details;
 }

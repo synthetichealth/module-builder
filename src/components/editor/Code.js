@@ -11,11 +11,10 @@ type Props = {
   code: CodeType,
   system: string,
   onChange: any,
-  value_set: string
+  value_set?: string
 }
 
 export class Code extends Component<Props> {
-
   checkValueSetKey() {
     if(this.props.code.value_set) {
       return (
@@ -46,7 +45,6 @@ export class Code extends Component<Props> {
       </div>
     );
   }
-
 }
 
 type CodesProps = {

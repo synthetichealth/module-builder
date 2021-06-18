@@ -16,6 +16,7 @@ import type {
 } from '../../types/State';
 
 import { Code, Codes } from './Code';
+import { Reaction } from './Reaction';
 import { Goals } from './Goal';
 import { SeriesList } from './ImagingStudyAttributes';
 import ConditionalEditor from './Conditional';
@@ -1176,8 +1177,50 @@ class AllergyOnset extends Component<Props> {
           <br />
           <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
         </div>
+        <div>
+          <label>Allergy Type:
+            <RIESelect className='editable-text'
+              propName='allergy_type'
+              value={{id: state.allergy_type, text: state.allergy_type}}
+              change={this.props.onChange('allergy_type')}
+              options={[{id:'allergy', text: 'Allergy'}, {id:'intolerance', text: 'Intolerance'}]}
+            />
+          </label>
+        </div>
+        <div>
+          <label>Category:
+            <RIESelect className='editable-text'
+              propName='category'
+              value={{id: state.category, text: state.category}}
+              change={this.props.onChange('category')}
+              options={[{id:'food', text: 'Food'},
+                        {id:'medication', text: 'Medication'},
+                        {id:'environment', text: 'Environment'}]}
+            />
+          </label>
+        </div>
+        <div className='section'>
+        Reactions:
+        {this.renderReactions(state)}
+        <a className='editable-text' onClick={() => this.props.onChange(`reactions[${this.props.state.reactions.length}]`)({val: {id: {reaction: {code: "1234", system: "SNOMED-CT", display: "SNOMED Code"}, possible_severities: [{level: "mild", value: 1}]}}})}>+</a>
+        </div>
       </div>
     );
+  }
+
+  renderReactions(state) {
+    if(state.reactions == null) {
+      return null;
+    } else {
+      return state.reactions.map((r, i) => {
+          return (
+            <div className='section' key={i}>
+              <a className='editable-text delete-button' onClick={() => this.props.onChange(`reactions[${i}]`)({val: {id: null}})}>remove</a>
+              <Reaction reaction={r} onChange={this.props.onChange(`reactions[${i}]`)}/>
+            </div>
+          );
+      });
+    }
   }
 
   renderAssignToAttribute() {

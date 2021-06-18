@@ -60,6 +60,10 @@ export type ActiveConditionConditional = {
   codes: Code[] | string,
 }
 
+export type ActiveAllergyConditional = {
+  condition_type: 'Active Allergy',
+  codes: Code[] | string,
+}
 
 export type ActiveMedicationConditional = {
   condition_type: 'Active Medication',
@@ -115,4 +119,4 @@ export type NotConditional = {
   condition: Conditional
 }
 
-export type Conditional = GenderConditional | AgeConditional | DateConditional | SocioeconomicStatusConditional | RaceConditional | SymptomConditional | ObservationConditional | VitalSignConditional | ActiveConditionConditional | ActiveMedicationConditional | ActiveCarePlanConditional | PriorStateConditional | AttributeConditional | AndConditional | OrConditional | AtLeastConditional | AtMostConditional | NotConditional;
+export type Conditional = GenderConditional | AgeConditional | DateConditional | SocioeconomicStatusConditional | RaceConditional | SymptomConditional | ObservationConditional | VitalSignConditional | ActiveAllergyConditional | ActiveConditionConditional | ActiveMedicationConditional | ActiveCarePlanConditional | PriorStateConditional | AttributeConditional | AndConditional | OrConditional | AtLeastConditional | AtMostConditional | NotConditional;
