@@ -36,7 +36,7 @@ export class Code extends Component<Props> {
     let system = this.props.system;
     return (
       <div>
-        System: {system}
+        System: { system ? system : code.system}
         <br />
         Code: <RIEInput className='editable-text' value={code.code} propName="code" change={this.props.onChange('code')} />
         <br />

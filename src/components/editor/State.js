@@ -1190,7 +1190,7 @@ class AllergyOnset extends Component<Props> {
         <div className='section'>
           Codes
           <br />
-          <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
+          { state.category == "medication" ? <Codes codes={state.codes} system={"RxNorm"} onChange={this.props.onChange('codes')} /> : <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} /> }
         </div>
         <div>
           <label>Allergy Type:
