@@ -490,7 +490,7 @@ const StateTemplates = {
     category: "vital-signs",
     unit: "",
     codes: [{...TypeTemplates.Code.Loinc}],
-    distribution: {kind: "EXACT", parameters: {value: 1}}
+    distribution: {kind: "EXACT", round: false, parameters: {value: 1}}
   },
 
   MultiObservation: {

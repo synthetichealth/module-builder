@@ -274,6 +274,7 @@ class Race extends Component<Props> {
       {id: "Hispanic", text: "Hispanic"},
       {id: "Black", text: "Black"},
       {id: "Asian", text: "Asian"},
+      {id: "Hawaiian", text: "Hawaiian"},
       {id: "Other", text: "Other"}
     ];
     return (

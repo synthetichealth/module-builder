@@ -269,6 +269,9 @@ class Uniform extends Component<Distro> {
         <br />
         Range High: <RIENumber className='editable-text' value={this.props.parameters.high} propName='high' change={this.props.onChange('parameters.high')} />
         <br />
+        {this.props.round!=null &&
+        <div>Round Result: <RIEToggle value={this.props.round} propName='round' change={this.props.onChange('round')} />
+        <br /></div> }
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'EXACT'}}); this.props.onChange('parameters')({val: {id: {value: 10}}})}}>Change to Exact</a>
         <br />
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'GAUSSIAN'}}); this.props.onChange('parameters')({val: {id: {mean: 10, standardDeviation: 1}}})}}>Change to Gaussian</a>
@@ -287,6 +290,9 @@ class Gaussian extends Component<Distro> {
         <br />
         Standard Deviation: <RIENumber className='editable-text' value={this.props.parameters.standardDeviation} propName='standardDeviation' change={this.props.onChange('parameters.standardDeviation')} />
         <br />
+        {this.props.round!=null &&
+        <div>Round Result: <RIEToggle value={this.props.round} propName='round' change={this.props.onChange('round')} />
+        <br /></div> }
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'EXACT'}}); this.props.onChange('parameters')({val: {id: {value: 10}}})}}>Change to Exact</a>
         <br />
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'UNIFORM'}}); this.props.onChange('parameters')({val: {id: {high: 20, low: 10}}})}}>Change to Range</a>
@@ -381,6 +387,7 @@ class SetAttribute extends Component<Props> {
       value : this.props.state.attribute,
       lastSubmitted : this.props.state.attribute,
       displayLabel : true,
+      value_code : this.props.state.value_code
     }
   }
 
@@ -396,7 +403,7 @@ class SetAttribute extends Component<Props> {
     if (this.legacyGMF()) {
       valueForm = this.renderLegacyValueOrRange();
     } else {
-      valueForm = this.renderValueOrDistribution()
+      valueForm = this.renderValueContainer()
     }
     if (this.state.displayLabel)
     {
@@ -447,12 +454,13 @@ class SetAttribute extends Component<Props> {
     }
   }
 
-  renderValueOrDistribution() {
+  renderValueContainer() {
     let state = ((this.props.state: any): SetAttributeState);
     if (state.distribution) {
       return (
         <div>
           <Distribution kind={state.distribution.kind}
+                        round={state.distribution.round}
                         parameters={state.distribution.parameters}
                         onChange={this.props.onChange('distribution')} />
           <br />
@@ -472,14 +480,21 @@ class SetAttribute extends Component<Props> {
           <br />
           <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: null}})}>(remove)</a>
           <br />
-          <a className='editable-text' onClick={() => {this.props.onChange('distribution')({val: {id: {kind: "EXACT", parameters: {value: 1}}}}); this.props.onChange('value')({val: {id: null}})}}>Change to Distribution</a>
+          <a className='editable-text' onClick={() => {this.props.onChange('distribution')({val: {id: {kind: "EXACT", round: false, parameters: {value: 1}}}}); this.props.onChange('value')({val: {id: null}})}}>Change to Distribution</a>
+        </div>
+      );
+    } else if (state.value_code) {
+      return (
+        <div className='section'>
+          <Code code={state.value_code} system={"LOINC"} onChange={this.props.onChange('value_code')} />
         </div>
       );
     } else {
       return (
         <div>
           <a className='editable-text' onClick={() => this.props.onChange('value')({val: {id: "text"}})}>Add Value</a><br />
-          <a className='editable-text' onClick={() => this.props.onChange('distribution')({val: {id: {kind: "EXACT", parameters: {value: 1}}}})}>Add Distribution</a><br />
+          <a className='editable-text' onClick={() => this.props.onChange('distribution')({val: {id: {kind: "EXACT", round: false, parameters: {value: 1}}}})}>Add Distribution</a><br />
+          <a className='editable-text' onClick={() => {this.props.onChange('value_code')({val: {id:  getTemplate('Type.Code.Loinc')}});}}>Add Code</a>
           <br />
         </div>
       );
@@ -2620,6 +2635,7 @@ class Observation extends Component<Props> {
     } else if (state.distribution) {
       return (
         <Distribution kind={state.distribution.kind}
+                      round={state.distribution.round}
                       parameters={state.distribution.parameters}
                       onChange={this.props.onChange('distribution')}
                       otherToggles={this.renderToggles('distribution')} />
