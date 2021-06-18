@@ -18,7 +18,7 @@ if(argv[0].endsWith('/')){
 
 var tableDirectory = argv[1]
 if(argv[1].endsWith('/')){
-  directory = argv[1].slice(0,-1)
+  tableDirectory = argv[1].slice(0,-1)
 }
 
 try {
@@ -26,7 +26,7 @@ try {
 } catch(e){
   console.log('\x1b[1m')
   console.log('\n\nNo such directory ' + directory)
-  console.log('EXAMPLE USAGE: npm run build-modules ../synthea/src/main/resources\n\n\n')
+  console.log('EXAMPLE USAGE: npm run build-modules npm run build-modules ../synthea/src/main/resources/modules ../synthea/src/test/resources/generic/lookup_tables\n\n\n')
   console.log('\x1b[0m')
   process.exit()
 }
@@ -36,7 +36,7 @@ try {
 } catch(e){
   console.log('\x1b[1m')
   console.log('\n\nNo such directory ' + tableDirectory)
-  console.log('EXAMPLE USAGE: npm run build-modules ../synthea/src/test/resources/generic/lookup_tables\n\n\n')
+  console.log('EXAMPLE USAGE: npm run build-modules npm run build-modules ../synthea/src/main/resources/modules ../synthea/src/test/resources/generic/lookup_tables\n\n\n')
   console.log('\x1b[0m')
   process.exit()
 }
@@ -63,7 +63,7 @@ var files = walkSync(directory,'.json');
 if(files.length == 0){
   console.log('\x1b[1m')
   console.log('\n\nNo json files located at ' + directory)
-  console.log('USAGE: npm run build-modules ../synthea/src/main/resources/modules\n\n\n')
+  console.log('EXAMPLE USAGE: npm run build-modules npm run build-modules ../synthea/src/main/resources/modules ../synthea/src/test/resources/generic/lookup_tables\n\n\n')
   console.log('\x1b[0m')
   process.exit()
 }

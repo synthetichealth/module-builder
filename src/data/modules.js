@@ -364,839 +364,6 @@ export default {"allergic_rhinitis":{
   "gmf_version": 1
 }
 ,
-"allergies/allergy_incidence":{
-  "name": "Allergy Incidence",
-  "remarks": [
-    "This submodule onsets various allergies and is intended to be called ",
-    "by the main allergies module."
-  ],
-  "states": {
-    "Initial": {
-      "type": "Initial",
-      "direct_transition": "Chance_of_Peanut_Allergy"
-    },
-    "Chance_of_Peanut_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " PEANUT ALLERGY                                                       ",
-        "======================================================================",
-        "Allergy to peanuts and tree nuts in the general population is, respectively, 0.6 percent and 0.4 percent, ",
-        "with the rate in children under age 18 (0.8 percent and 0.2 percent) slightly different from adults (0.6 percent and 0.5 percent respectively). "
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.25,
-              "transition": "Peanut_Allergy"
-            },
-            {
-              "distribution": 0.75,
-              "transition": "Chance_of_TreeNut_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.006,
-              "transition": "Peanut_Allergy"
-            },
-            {
-              "distribution": 0.994,
-              "transition": "Chance_of_TreeNut_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Peanut_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "assign_to_attribute": "food_allergy",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "91935009",
-          "display": "Allergy to peanuts"
-        }
-      ],
-      "direct_transition": "Chance_of_TreeNut_Allergy"
-    },
-    "Chance_of_TreeNut_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " NUT ALLERGY                                                          ",
-        "======================================================================",
-        "Allergy to peanuts and tree nuts in the general population is, respectively, 0.6 percent and 0.4 percent, ",
-        "with the rate in children under age 18 (0.8 percent and 0.2 percent) slightly different from adults (0.6 percent and 0.5 percent respectively). "
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.25,
-              "transition": "TreeNut_Allergy"
-            },
-            {
-              "distribution": 0.75,
-              "transition": "Chance_of_Fish_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.004,
-              "transition": "TreeNut_Allergy"
-            },
-            {
-              "distribution": 0.996,
-              "transition": "Chance_of_Fish_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "TreeNut_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "assign_to_attribute": "food_allergy",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "91934008",
-          "display": "Allergy to nut"
-        }
-      ],
-      "direct_transition": "Chance_of_Fish_Allergy"
-    },
-    "Chance_of_Fish_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " FISH ALLERGY                                                         ",
-        "======================================================================",
-        "The prevalence of seafood allergy in the general population is 0.4 percent to fish, 2.0 percent to shellfish and 0.2 percent to both.",
-        "Seafood allergy is less common in children (0.6 percent) than adults (2.8 percent). "
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.25,
-              "transition": "Fish_Allergy"
-            },
-            {
-              "distribution": 0.75,
-              "transition": "Chance_of_Shellfish_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.004,
-              "transition": "Fish_Allergy"
-            },
-            {
-              "distribution": 0.996,
-              "transition": "Chance_of_Shellfish_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Fish_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "assign_to_attribute": "food_allergy",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "417532002",
-          "display": "Allergy to fish"
-        }
-      ],
-      "direct_transition": "Chance_of_Shellfish_Allergy"
-    },
-    "Chance_of_Shellfish_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " SHELLFISH ALLERGY                                                    ",
-        "======================================================================",
-        "The prevalence of seafood allergy in the general population is 0.4 percent to fish, 2.0 percent to shellfish and 0.2 percent to both.",
-        "Seafood allergy is less common in children (0.6 percent) than adults (2.8 percent). "
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.25,
-              "transition": "Shellfish_Allergy"
-            },
-            {
-              "distribution": 0.75,
-              "transition": "Chance_of_Wheat_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.02,
-              "transition": "Shellfish_Allergy"
-            },
-            {
-              "distribution": 0.98,
-              "transition": "Chance_of_Wheat_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Shellfish_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "assign_to_attribute": "food_allergy",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "300913006",
-          "display": "Shellfish allergy"
-        }
-      ],
-      "direct_transition": "Chance_of_Wheat_Allergy"
-    },
-    "Chance_of_Wheat_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " WHEAT ALLERGY                                                        ",
-        "======================================================================",
-        "Wheat allergy is different than celiac disease. There are few studies on prevalence of wheat allergy.",
-        "A recent study 0.4% of US adults reported an allergy to wheat diagnosed via a doctor [6]. The prevalence ",
-        "of wheat allergy is highest amongst children in the US, ranging from 0.4% to 1.0% of the population.",
-        "http://www.drschaer-institute.com/us/wheat-allergy/epidemiology-1043.html",
-        "Wheat allergy is typically outgrown by adulthood — about 65 percent of children with a wheat allergy ",
-        "will outgrow it by the time they are 12. Based on prevalences we assume that adult onset of ",
-        "the allergy is rare enough to ignore."
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.25,
-              "transition": "Wheat_Allergy"
-            },
-            {
-              "distribution": 0.75,
-              "transition": "Chance_of_Eggs_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.006,
-              "transition": "Wheat_Allergy"
-            },
-            {
-              "distribution": 0.994,
-              "transition": "Chance_of_Eggs_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Wheat_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "assign_to_attribute": "food_allergy",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "420174000",
-          "display": "Allergy to wheat"
-        }
-      ],
-      "direct_transition": "Chance_of_Eggs_Allergy"
-    },
-    "Chance_of_Eggs_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " EGG ALLERGY                                                          ",
-        "======================================================================",
-        "Experts estimate that as many as 2 percent of children are allergic to eggs. ",
-        "Fortunately, studies show that about 70 percent of children with an egg allergy ",
-        "will outgrow the condition by age 16.",
-        "http://acaai.org/allergies/types/food-allergies/types-food-allergy/egg-allergy",
-        "Based on prevalences we assume that adult onset of the allergy is rare enough to ignore."
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.25,
-              "transition": "Eggs_Allergy"
-            },
-            {
-              "distribution": 0.75,
-              "transition": "Chance_of_Soy_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.006,
-              "transition": "Eggs_Allergy"
-            },
-            {
-              "distribution": 0.994,
-              "transition": "Chance_of_Soy_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Eggs_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "assign_to_attribute": "food_allergy",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "91930004",
-          "display": "Allergy to eggs"
-        }
-      ],
-      "direct_transition": "Chance_of_Soy_Allergy"
-    },
-    "Chance_of_Soy_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " SOY ALLERGY                                                          ",
-        "======================================================================",
-        "Soy allergies are uncommon but closely related to peanut and milk allergies. ",
-        "http://www.soyconnection.com/newsletters/soy-connection/health-nutrition/articles/Estimating-Prevalence-Of-Soy-Protein-Allergy"
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.1,
-              "transition": "Soy_Allergy"
-            },
-            {
-              "distribution": 0.9,
-              "transition": "Chance_of_Dairy_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.002,
-              "transition": "Soy_Allergy"
-            },
-            {
-              "distribution": 0.998,
-              "transition": "Chance_of_Dairy_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Soy_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "assign_to_attribute": "food_allergy",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "714035009",
-          "display": "Allergy to soya"
-        }
-      ],
-      "direct_transition": "Chance_of_Dairy_Allergy"
-    },
-    "Chance_of_Dairy_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " DAIRY ALLERGY                                                        ",
-        "======================================================================",
-        "The prevalence of dairy/milk allergy in the general population is 1-2% for young ",
-        "children and 0.2-0.4% in the general population. About 80 percent of children are ",
-        "likely to outgrow their milk allergy before they are 16. Based on prevalences we ",
-        "assume that adult onset of the allergy is rare enough to ignore."
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.25,
-              "transition": "Dairy_Allergy"
-            },
-            {
-              "distribution": 0.75,
-              "transition": "Chance_of_Tree_Pollen_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.0015,
-              "transition": "Dairy_Allergy"
-            },
-            {
-              "distribution": 0.9985,
-              "transition": "Chance_of_Tree_Pollen_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Dairy_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "assign_to_attribute": "food_allergy",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "425525006",
-          "display": "Allergy to dairy product"
-        }
-      ],
-      "direct_transition": "Chance_of_Tree_Pollen_Allergy"
-    },
-    "Chance_of_Tree_Pollen_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " TREE POLLEN ALLERGY                                                  ",
-        "======================================================================",
-        "At present, up to 20% of children are diagnosed with a tree pollen allergy. ",
-        "Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4098757/",
-        "In this model most of those children are also atopic, aligning with the ",
-        "prevalence of allergic rhinitis."
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.85,
-              "transition": "Tree_Pollen_Allergy"
-            },
-            {
-              "distribution": 0.15,
-              "transition": "Chance_of_Grass_Pollen_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.03,
-              "transition": "Tree_Pollen_Allergy"
-            },
-            {
-              "distribution": 0.97,
-              "transition": "Chance_of_Grass_Pollen_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Tree_Pollen_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "419263009",
-          "display": "Allergy to tree pollen"
-        }
-      ],
-      "direct_transition": "Chance_of_Grass_Pollen_Allergy"
-    },
-    "Chance_of_Grass_Pollen_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " GRASS POLLEN ALLERGY                                                 ",
-        "======================================================================",
-        "At present, up to 20% of children are diagnosed with a grass pollen allergy. ",
-        "Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4098757/",
-        "In this model most of those children are also atopic, aligning with the ",
-        "prevalence of allergic rhinitis."
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.85,
-              "transition": "Grass_Pollen_Allergy"
-            },
-            {
-              "distribution": 0.15,
-              "transition": "Chance_of_Pet_Dander_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.03,
-              "transition": "Grass_Pollen_Allergy"
-            },
-            {
-              "distribution": 0.97,
-              "transition": "Chance_of_Pet_Dander_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Grass_Pollen_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "418689008",
-          "display": "Allergy to grass pollen"
-        }
-      ],
-      "direct_transition": "Chance_of_Pet_Dander_Allergy"
-    },
-    "Chance_of_Pet_Dander_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " PET DANDER ALLERGY                                                   ",
-        "======================================================================",
-        "At present, up to 30% of people are diagnosed with a pet dander allergy. ",
-        "Source: http://allergicliving.com/2010/07/02/pet-allergies-a-gander-at-dander/",
-        "In this model most of these people are also atopic, aligning with the ",
-        "prevalence of allergic rhinitis and asthma."
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 1,
-              "transition": "Pet_Dander_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.1,
-              "transition": "Pet_Dander_Allergy"
-            },
-            {
-              "distribution": 0.9,
-              "transition": "Chance_of_Dust_Mite_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Pet_Dander_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "232347008",
-          "display": "Dander (animal) allergy"
-        }
-      ],
-      "direct_transition": "Chance_of_Dust_Mite_Allergy"
-    },
-    "Chance_of_Dust_Mite_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " DUST MITE ALLERGY                                                    ",
-        "======================================================================",
-        "About 85% of all atopic patients have mite allergies. ",
-        "Source: https://www.ncbi.nlm.nih.gov/pubmed/12190652"
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.85,
-              "transition": "Dust_Mite_Allergy"
-            },
-            {
-              "distribution": 0.15,
-              "transition": "Chance_of_Mold_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.02,
-              "transition": "Dust_Mite_Allergy"
-            },
-            {
-              "distribution": 0.98,
-              "transition": "Chance_of_Mold_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Dust_Mite_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "232350006",
-          "display": "House dust mite allergy"
-        }
-      ],
-      "direct_transition": "Chance_of_Mold_Allergy"
-    },
-    "Chance_of_Mold_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " MOLD ALLERGY                                                         ",
-        "======================================================================",
-        "Sensitization to mold is very common, but symptoms are usually mild.",
-        "Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1240910/"
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 1,
-              "transition": "Mold_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.15,
-              "transition": "Mold_Allergy"
-            },
-            {
-              "distribution": 0.85,
-              "transition": "Chance_of_Bee_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Mold_Allergy": {
-      "type": "AllergyOnset",
-      "remarks": [
-        "Note the British spelling of 'mold'."
-      ],
-      "target_encounter": "Allergist_Initial_Visit",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "419474003",
-          "display": "Allergy to mould"
-        }
-      ],
-      "direct_transition": "Chance_of_Bee_Allergy"
-    },
-    "Chance_of_Bee_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " BEE STING ALLERGY                                                    ",
-        "======================================================================",
-        "Estimates range from 1-7%. Source: ",
-        "http://www.worldallergy.org/professional/allergic_diseases_center/insect_allergy/"
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.33,
-              "transition": "Bee_Allergy"
-            },
-            {
-              "distribution": 0.67,
-              "transition": "Chance_of_Latex_Allergy"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.01,
-              "transition": "Bee_Allergy"
-            },
-            {
-              "distribution": 0.99,
-              "transition": "Chance_of_Latex_Allergy"
-            }
-          ]
-        }
-      ]
-    },
-    "Bee_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "424213003",
-          "display": "Allergy to bee venom"
-        }
-      ],
-      "direct_transition": "Chance_of_Latex_Allergy"
-    },
-    "Chance_of_Latex_Allergy": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " LATEX ALLERGY                                                        ",
-        "======================================================================",
-        "Estimates range from 4-9%. Prevalence is especially high in healthcare ",
-        "workers and those who had frequent surgeries during childhood.",
-        "https://www.ncbi.nlm.nih.gov/pubmed/27010091"
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "atopic",
-            "operator": "is not nil"
-          },
-          "distributions": [
-            {
-              "distribution": 0.33,
-              "transition": "Latex_Allergy"
-            },
-            {
-              "distribution": 0.67,
-              "transition": "Allergy_Incidence_Terminal"
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "distribution": 0.02,
-              "transition": "Latex_Allergy"
-            },
-            {
-              "distribution": 0.98,
-              "transition": "Allergy_Incidence_Terminal"
-            }
-          ]
-        }
-      ]
-    },
-    "Latex_Allergy": {
-      "type": "AllergyOnset",
-      "target_encounter": "Allergist_Initial_Visit",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "300916003",
-          "display": "Latex allergy"
-        }
-      ],
-      "direct_transition": "Allergy_Incidence_Terminal"
-    },
-    "Allergy_Incidence_Terminal": {
-      "type": "Terminal"
-    }
-  },
-  "gmf_version": 1
-}
-,
 "allergies/allergy_panel":{
   "name": "Allergy Panel",
   "remarks": [
@@ -2124,6 +1291,2893 @@ export default {"allergic_rhinitis":{
     }
   },
   "gmf_version": 1
+}
+,
+"allergies/drug_allergy_incidence":{
+  "name": "Drug_Allergies",
+  "remarks": [
+    "This submodule onsets various drug allergies and is intended to be called by the main allergies module."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Penicillin_Allergy"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Penicillin_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "Actual penicillin allergies happen in about 1% of individuals.",
+        "About 10% of people have a penicillin allergy listed in the medical record.",
+        "This will set an attribute indicating a real allergy on 1% of people, but ensure that 10% have allergies in their record.",
+        "https://www.cdc.gov/antibiotic-use/community/pdfs/penicillin-factsheet.pdf"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "True_Penicillin_Allergy",
+          "distribution": 0.01
+        },
+        {
+          "transition": "Penicillin_Allergy_Onset",
+          "distribution": 0.09
+        },
+        {
+          "transition": "Aspirin_Allergy_Intolerance",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "True_Penicillin_Allergy": {
+      "type": "SetAttribute",
+      "attribute": "Penicillin_Allergy",
+      "direct_transition": "Penicillin_Allergy_Onset",
+      "value": true
+    },
+    "Penicillin_Allergy_Onset": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "medication",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 7984,
+          "display": "Penicillin V"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "49727002",
+            "display": "Cough (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.05
+            },
+            {
+              "level": "none",
+              "value": 0.95
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.11
+            },
+            {
+              "level": "none",
+              "value": 0.89
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "404640003",
+            "display": "Dizziness (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.01
+            },
+            {
+              "level": "none",
+              "value": 0.99
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "267036007",
+            "display": "Dyspnea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.06
+            },
+            {
+              "level": "none",
+              "value": 0.94
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.52
+            },
+            {
+              "level": "none",
+              "value": 0.48
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.03
+            },
+            {
+              "level": "none",
+              "value": 0.97
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.34
+            },
+            {
+              "level": "none",
+              "value": 0.6599999999999999
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "878820003",
+            "display": "Rhinoconjunctivitis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.04
+            },
+            {
+              "level": "none",
+              "value": 0.96
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Aspirin_Allergy_Intolerance"
+    },
+    "Aspirin_Allergy_Intolerance": {
+      "type": "Simple",
+      "remarks": [
+        "About 1% of individuals have an allergy to aspirin",
+        "About 20% of individuals have an intolerance",
+        ""
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Aspirin_Allergy_Onset",
+          "distribution": 0.2
+        },
+        {
+          "transition": "NSAID_Allergy",
+          "distribution": 0.8
+        }
+      ]
+    },
+    "Aspirin_Allergy_Onset": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "drug",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1191,
+          "display": "Aspirin"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.19
+            },
+            {
+              "level": "none",
+              "value": 0.81
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.05
+            },
+            {
+              "level": "none",
+              "value": 0.95
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.028
+            },
+            {
+              "level": "none",
+              "value": 0.972
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "21522001",
+            "display": "Abdominal pain (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.32
+            },
+            {
+              "level": "none",
+              "value": 0.68
+            }
+          ]
+        }
+      ],
+      "direct_transition": "NSAID_Allergy"
+    },
+    "NSAID_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "1.6% of people have a Non-steroidal anti-inflammatory drugs (NSAIDs), ibuprofen allergy.",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6004000/"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Onset_Ibuprofen_Allergy",
+          "distribution": 0.016
+        },
+        {
+          "transition": "Sulfa_Drug_Allergy",
+          "distribution": 0.984
+        }
+      ]
+    },
+    "Sulfa_Drug_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "Allergy to sulfa drugs occurs in 3% - 8% of the population. We will give it to 5% of individuals.",
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6789825/",
+        ""
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Onset_Sulfa_Drug_Allergy",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Cephalosporin_Allergy",
+          "distribution": 0.95
+        }
+      ]
+    },
+    "Onset_Ibuprofen_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "medication",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "5640",
+          "display": "Ibuprofen"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "418290006",
+            "display": "Itching (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.4
+            },
+            {
+              "level": "none",
+              "value": 0.6
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.29
+            },
+            {
+              "level": "none",
+              "value": 0.71
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "270474007",
+            "display": "Flushes/goes red (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.15
+            },
+            {
+              "level": "none",
+              "value": 0.85
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "878820003",
+            "display": "Rhinoconjunctivitis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.3
+            },
+            {
+              "level": "none",
+              "value": 0.7
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Sulfa_Drug_Allergy"
+    },
+    "Onset_Sulfa_Drug_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "medication",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "10831",
+          "display": "Sulfamethoxazole / Trimethoprim"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.126
+            },
+            {
+              "level": "none",
+              "value": 0.874
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.46
+            },
+            {
+              "level": "none",
+              "value": 0.54
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.01
+            },
+            {
+              "level": "none",
+              "value": 0.99
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.63
+            },
+            {
+              "level": "none",
+              "value": 0.37
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Cephalosporin_Allergy"
+    },
+    "Cephalosporin_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "1% to 3% of individuals are allergic to cphalosporins. This module sets it fo 2% of people."
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Onset_Cephalosporin_Allergy",
+          "distribution": 0.02
+        },
+        {
+          "transition": "ACE_Inhibitor_Intolerance",
+          "distribution": 0.98
+        }
+      ]
+    },
+    "Onset_Cephalosporin_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "medication",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "25037",
+          "display": "cefdinir"
+        },
+        {
+          "system": "RxNorm",
+          "code": "25033",
+          "display": "Cefixime"
+        },
+        {
+          "system": "RxNorm",
+          "code": "20489",
+          "display": "cefpodoxime"
+        },
+        {
+          "system": "RxNorm",
+          "code": "2191",
+          "display": "Ceftazidime"
+        },
+        {
+          "system": "RxNorm",
+          "code": "2193",
+          "display": "Ceftriaxone"
+        },
+        {
+          "system": "RxNorm",
+          "code": "2180",
+          "display": "Cefazolin"
+        },
+        {
+          "system": "RxNorm",
+          "code": "2231",
+          "display": "Cephalexin"
+        },
+        {
+          "system": "RxNorm",
+          "code": "2176",
+          "display": "Cefaclor"
+        },
+        {
+          "system": "RxNorm",
+          "code": "20481",
+          "display": "cefepime"
+        },
+        {
+          "system": "RxNorm",
+          "code": "2189",
+          "display": "Cefoxitin"
+        },
+        {
+          "system": "RxNorm",
+          "code": "2194",
+          "display": "Cefuroxime"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.08
+            },
+            {
+              "level": "none",
+              "value": 0.92
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.08
+            },
+            {
+              "level": "none",
+              "value": 0.92
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.2
+            },
+            {
+              "level": "none",
+              "value": 0.8
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.2
+            },
+            {
+              "level": "none",
+              "value": 0.8
+            }
+          ]
+        }
+      ],
+      "direct_transition": "ACE_Inhibitor_Intolerance"
+    },
+    "ACE_Inhibitor_Intolerance": {
+      "type": "Simple",
+      "remarks": [
+        "11.48% of individuals have an intolerance to ACE inhibitors.",
+        "https://www.sciencedirect.com/science/article/pii/S0735109718304315?viewFullText=true"
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Onset_ACE_Inhibitor_Intolerance",
+          "distribution": 0.1148
+        },
+        {
+          "transition": "Terminal",
+          "distribution": 0.8852
+        }
+      ]
+    },
+    "Onset_ACE_Inhibitor_Intolerance": {
+      "type": "AllergyOnset",
+      "allergy_type": "intolerance",
+      "category": "medication",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "29046",
+          "display": "Lisinopril"
+        },
+        {
+          "system": "RxNorm",
+          "code": "1998",
+          "display": "Captopril"
+        },
+        {
+          "system": "RxNorm",
+          "code": "3827",
+          "display": "Enalapril"
+        },
+        {
+          "system": "RxNorm",
+          "code": "18867",
+          "display": "benazepril"
+        },
+        {
+          "system": "RxNorm",
+          "code": "35208",
+          "display": "quinapril"
+        },
+        {
+          "system": "RxNorm",
+          "code": "35296",
+          "display": "Ramipril"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "49727002",
+            "display": "Cough (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.2
+            },
+            {
+              "level": "none",
+              "value": 0.8
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.007
+            },
+            {
+              "level": "none",
+              "value": 0.993
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "404640003",
+            "display": "Dizziness (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.002
+            },
+            {
+              "level": "none",
+              "value": 0.998
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "236429004",
+            "display": "Acute drug-induced renal failure (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.008
+            },
+            {
+              "level": "none",
+              "value": 0.992
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "267036007",
+            "display": "Dyspnea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.06
+            },
+            {
+              "level": "none",
+              "value": 0.94
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "237849008",
+            "display": "Drug-induced hyperkalemia (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.04
+            },
+            {
+              "level": "none",
+              "value": 0.96
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Terminal"
+    }
+  },
+  "gmf_version": 2
+}
+,
+"allergies/environmental_allergy_incidence":{
+  "name": "Environmental Allergy Incidence",
+  "remarks": [
+    "This submodule onsets various allergies and is intended to be called ",
+    "by the main allergies module."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Chance_of_Tree_Pollen_Allergy"
+    },
+    "Chance_of_Tree_Pollen_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " TREE POLLEN ALLERGY                                                  ",
+        "======================================================================",
+        "At present, up to 20% of children are diagnosed with a tree pollen allergy. ",
+        "Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4098757/",
+        "In this model most of those children are also atopic, aligning with the ",
+        "prevalence of allergic rhinitis."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.85,
+              "transition": "Tree_Pollen_Allergy"
+            },
+            {
+              "distribution": 0.15,
+              "transition": "Chance_of_Grass_Pollen_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.03,
+              "transition": "Tree_Pollen_Allergy"
+            },
+            {
+              "distribution": 0.97,
+              "transition": "Chance_of_Grass_Pollen_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Tree_Pollen_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "environment",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "782576004",
+          "display": "Tree pollen (substance)"
+        }
+      ],
+      "direct_transition": "Chance_of_Grass_Pollen_Allergy"
+    },
+    "Chance_of_Grass_Pollen_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " GRASS POLLEN ALLERGY                                                 ",
+        "======================================================================",
+        "At present, up to 20% of children are diagnosed with a grass pollen allergy. ",
+        "Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4098757/",
+        "In this model most of those children are also atopic, aligning with the ",
+        "prevalence of allergic rhinitis."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.85,
+              "transition": "Grass_Pollen_Allergy"
+            },
+            {
+              "distribution": 0.15,
+              "transition": "Chance_of_Pet_Dander_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.03,
+              "transition": "Grass_Pollen_Allergy"
+            },
+            {
+              "distribution": 0.97,
+              "transition": "Chance_of_Pet_Dander_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Grass_Pollen_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "environment",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "256277009",
+          "display": "Grass pollen (substance)"
+        }
+      ],
+      "direct_transition": "Chance_of_Pet_Dander_Allergy"
+    },
+    "Chance_of_Pet_Dander_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " PET DANDER ALLERGY                                                   ",
+        "======================================================================",
+        "At present, up to 30% of people are diagnosed with a pet dander allergy. ",
+        "Source: http://allergicliving.com/2010/07/02/pet-allergies-a-gander-at-dander/",
+        "In this model most of these people are also atopic, aligning with the ",
+        "prevalence of allergic rhinitis and asthma."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 1,
+              "transition": "Pet_Dander_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.1,
+              "transition": "Pet_Dander_Allergy"
+            },
+            {
+              "distribution": 0.9,
+              "transition": "Chance_of_Dust_Mite_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Pet_Dander_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "environment",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "264287008",
+          "display": "Animal dander (substance)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "49727002",
+            "display": "Cough (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.23
+            },
+            {
+              "level": "none",
+              "value": 0.77
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "267036007",
+            "display": "Dyspnea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.2
+            },
+            {
+              "level": "none",
+              "value": 0.8
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.36
+            },
+            {
+              "level": "none",
+              "value": 0.64
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.53
+            },
+            {
+              "level": "none",
+              "value": 0.47
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "878820003",
+            "display": "Rhinoconjunctivitis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.8
+            },
+            {
+              "level": "none",
+              "value": 0.19999999999999996
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Chance_of_Dust_Mite_Allergy"
+    },
+    "Chance_of_Dust_Mite_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " DUST MITE ALLERGY                                                    ",
+        "======================================================================",
+        "About 85% of all atopic patients have mite allergies. ",
+        "Source: https://www.ncbi.nlm.nih.gov/pubmed/12190652"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.85,
+              "transition": "Dust_Mite_Allergy"
+            },
+            {
+              "distribution": 0.15,
+              "transition": "Chance_of_Mold_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.02,
+              "transition": "Dust_Mite_Allergy"
+            },
+            {
+              "distribution": 0.98,
+              "transition": "Chance_of_Mold_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Dust_Mite_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "environment",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "260147004",
+          "display": "House dust mite (organism)"
+        }
+      ],
+      "direct_transition": "Chance_of_Mold_Allergy"
+    },
+    "Chance_of_Mold_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " MOLD ALLERGY                                                         ",
+        "======================================================================",
+        "Sensitization to mold is very common, but symptoms are usually mild.",
+        "Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1240910/"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 1,
+              "transition": "Mold_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.15,
+              "transition": "Mold_Allergy"
+            },
+            {
+              "distribution": 0.85,
+              "transition": "Chance_of_Bee_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Mold_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "environment",
+      "remarks": [
+        "Back to the American English spelling of mold."
+      ],
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "84489001",
+          "display": "Mold (organism)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "21626009",
+            "display": "Allergic skin rash"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.292
+            },
+            {
+              "level": "none",
+              "value": 0.7
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "76067001",
+            "display": "Sneezing"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.139
+            },
+            {
+              "level": "none",
+              "value": 0.86
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "267101005",
+            "display": "Nose running"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.183
+            },
+            {
+              "level": "none",
+              "value": 0.81
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "56018004",
+            "display": "Wheezing"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.075
+            },
+            {
+              "level": "none",
+              "value": 0.92
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Chance_of_Bee_Allergy"
+    },
+    "Chance_of_Bee_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " BEE STING ALLERGY                                                    ",
+        "======================================================================",
+        "Estimates range from 1-7%. Source: ",
+        "http://www.worldallergy.org/professional/allergic_diseases_center/insect_allergy/"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.33,
+              "transition": "Bee_Allergy"
+            },
+            {
+              "distribution": 0.67,
+              "transition": "Chance_of_Latex_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.01,
+              "transition": "Bee_Allergy"
+            },
+            {
+              "distribution": 0.99,
+              "transition": "Chance_of_Latex_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Bee_Allergy": {
+      "type": "AllergyOnset",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "288328004",
+          "display": "Bee venom (substance)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.03
+            },
+            {
+              "level": "none",
+              "value": 0.96
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.264
+            },
+            {
+              "level": "none",
+              "value": 0.73
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Chance_of_Latex_Allergy"
+    },
+    "Chance_of_Latex_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " LATEX ALLERGY                                                        ",
+        "======================================================================",
+        "Estimates range from 4-9%. Prevalence is especially high in healthcare ",
+        "workers and those who had frequent surgeries during childhood.",
+        "https://www.ncbi.nlm.nih.gov/pubmed/27010091"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.33,
+              "transition": "Latex_Allergy"
+            },
+            {
+              "distribution": 0.67,
+              "transition": "Environmental_Allergy_Incidence_Terminal"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.02,
+              "transition": "Latex_Allergy"
+            },
+            {
+              "distribution": 0.98,
+              "transition": "Environmental_Allergy_Incidence_Terminal"
+            }
+          ]
+        }
+      ]
+    },
+    "Latex_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "environment",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "111088007",
+          "display": "Latex (substance)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.17
+            },
+            {
+              "level": "none",
+              "value": 0.83
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "267036007",
+            "display": "Dyspnea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.1
+            },
+            {
+              "level": "none",
+              "value": 0.9
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.8
+            },
+            {
+              "level": "none",
+              "value": 0.19999999999999996
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.13
+            },
+            {
+              "level": "none",
+              "value": 0.87
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.06
+            },
+            {
+              "level": "none",
+              "value": 0.94
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "878820003",
+            "display": "Rhinoconjunctivitis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.16
+            },
+            {
+              "level": "none",
+              "value": 0.84
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "418290006",
+            "display": "Itching (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.11
+            },
+            {
+              "level": "none",
+              "value": 0.89
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Environmental_Allergy_Incidence_Terminal"
+    },
+    "Environmental_Allergy_Incidence_Terminal": {
+      "type": "Terminal"
+    }
+  }
+}
+,
+"allergies/food_allergy_incidence":{
+  "name": "Allergy Incidence",
+  "remarks": [
+    "This submodule onsets various allergies and is intended to be called ",
+    "by the main allergies module."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Chance_of_Peanut_Allergy"
+    },
+    "Chance_of_Peanut_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " PEANUT ALLERGY                                                       ",
+        "======================================================================",
+        "Allergy to peanuts and tree nuts in the general population is, respectively, 0.6 percent and 0.4 percent, ",
+        "with the rate in children under age 18 (0.8 percent and 0.2 percent) slightly different from adults (0.6 percent and 0.5 percent respectively). "
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.25,
+              "transition": "Peanut_Allergy"
+            },
+            {
+              "distribution": 0.75,
+              "transition": "Chance_of_TreeNut_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.006,
+              "transition": "Peanut_Allergy"
+            },
+            {
+              "distribution": 0.994,
+              "transition": "Chance_of_TreeNut_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Peanut_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "food",
+      "target_encounter": "Allergist_Initial_Visit",
+      "assign_to_attribute": "food_allergy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "762952008",
+          "display": "Peanut (substance)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "49727002",
+            "display": "Cough (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.21
+            },
+            {
+              "level": "none",
+              "value": 0.79
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.58
+            },
+            {
+              "level": "none",
+              "value": 0.42000000000000004
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "267036007",
+            "display": "Dyspnea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.4
+            },
+            {
+              "level": "none",
+              "value": 0.6
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.67
+            },
+            {
+              "level": "none",
+              "value": 0.32999999999999996
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.18
+            },
+            {
+              "level": "none",
+              "value": 0.8200000000000001
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.32
+            },
+            {
+              "level": "none",
+              "value": 0.6799999999999999
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "300359004",
+            "display": "Finding of vomiting (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.27
+            },
+            {
+              "level": "none",
+              "value": 0.73
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "62315008",
+            "display": "Diarrhea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.13
+            },
+            {
+              "level": "none",
+              "value": 0.87
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "56018004",
+            "display": "Wheezing (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.37
+            },
+            {
+              "level": "none",
+              "value": 0.63
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Chance_of_TreeNut_Allergy"
+    },
+    "Chance_of_TreeNut_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " NUT ALLERGY                                                          ",
+        "======================================================================",
+        "Allergy to peanuts and tree nuts in the general population is, respectively, 0.6 percent and 0.4 percent, ",
+        "with the rate in children under age 18 (0.8 percent and 0.2 percent) slightly different from adults (0.6 percent and 0.5 percent respectively). "
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.25,
+              "transition": "TreeNut_Allergy"
+            },
+            {
+              "distribution": 0.75,
+              "transition": "Chance_of_Fish_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.004,
+              "transition": "TreeNut_Allergy"
+            },
+            {
+              "distribution": 0.996,
+              "transition": "Chance_of_Fish_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "TreeNut_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "food",
+      "target_encounter": "Allergist_Initial_Visit",
+      "assign_to_attribute": "food_allergy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "442571000124108",
+          "display": "Tree nut (substance)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "49727002",
+            "display": "Cough (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.4
+            },
+            {
+              "level": "none",
+              "value": 0.6
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.91
+            },
+            {
+              "level": "none",
+              "value": 0.08999999999999997
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "267036007",
+            "display": "Dyspnea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.48
+            },
+            {
+              "level": "none",
+              "value": 0.52
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.98
+            },
+            {
+              "level": "none",
+              "value": 0.020000000000000018
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.74
+            },
+            {
+              "level": "none",
+              "value": 0.26
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.98
+            },
+            {
+              "level": "none",
+              "value": 0.020000000000000018
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "300359004",
+            "display": "Finding of vomiting (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.24
+            },
+            {
+              "level": "none",
+              "value": 0.76
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "878820003",
+            "display": "Rhinoconjunctivitis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.33
+            },
+            {
+              "level": "none",
+              "value": 0.6699999999999999
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "418290006",
+            "display": "Itching (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.9
+            },
+            {
+              "level": "none",
+              "value": 0.09999999999999998
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Chance_of_Fish_Allergy"
+    },
+    "Chance_of_Fish_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " FISH ALLERGY                                                         ",
+        "======================================================================",
+        "The prevalence of seafood allergy in the general population is 0.4 percent to fish, 2.0 percent to shellfish and 0.2 percent to both.",
+        "Seafood allergy is less common in children (0.6 percent) than adults (2.8 percent). "
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.25,
+              "transition": "Fish_Allergy"
+            },
+            {
+              "distribution": 0.75,
+              "transition": "Chance_of_Shellfish_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.004,
+              "transition": "Fish_Allergy"
+            },
+            {
+              "distribution": 0.996,
+              "transition": "Chance_of_Shellfish_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Fish_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "food",
+      "target_encounter": "Allergist_Initial_Visit",
+      "assign_to_attribute": "food_allergy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "735971005",
+          "display": "Fish (substance)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "267036007",
+            "display": "Dyspnea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.67
+            },
+            {
+              "level": "none",
+              "value": 0.32999999999999996
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.83
+            },
+            {
+              "level": "none",
+              "value": 0.17000000000000004
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "300359004",
+            "display": "Finding of vomiting (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.33
+            },
+            {
+              "level": "none",
+              "value": 0.6699999999999999
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "878820003",
+            "display": "Rhinoconjunctivitis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.5
+            },
+            {
+              "level": "none",
+              "value": 0.5
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Chance_of_Shellfish_Allergy"
+    },
+    "Chance_of_Shellfish_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " SHELLFISH ALLERGY                                                    ",
+        "======================================================================",
+        "The prevalence of seafood allergy in the general population is 0.4 percent to fish, 2.0 percent to shellfish and 0.2 percent to both.",
+        "Seafood allergy is less common in children (0.6 percent) than adults (2.8 percent). "
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.25,
+              "transition": "Shellfish_Allergy"
+            },
+            {
+              "distribution": 0.75,
+              "transition": "Chance_of_Wheat_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.02,
+              "transition": "Shellfish_Allergy"
+            },
+            {
+              "distribution": 0.98,
+              "transition": "Chance_of_Wheat_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Shellfish_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "food",
+      "target_encounter": "Allergist_Initial_Visit",
+      "assign_to_attribute": "food_allergy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "735029006",
+          "display": "Shellfish (substance)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "49727002",
+            "display": "Cough (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.58
+            },
+            {
+              "level": "none",
+              "value": 0.42000000000000004
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.55
+            },
+            {
+              "level": "none",
+              "value": 0.44999999999999996
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "267036007",
+            "display": "Dyspnea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.27
+            },
+            {
+              "level": "none",
+              "value": 0.73
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.58
+            },
+            {
+              "level": "none",
+              "value": 0.42000000000000004
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.35
+            },
+            {
+              "level": "none",
+              "value": 0.65
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.82
+            },
+            {
+              "level": "none",
+              "value": 0.18000000000000005
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "878820003",
+            "display": "Rhinoconjunctivitis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.04
+            },
+            {
+              "level": "none",
+              "value": 0.96
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "418290006",
+            "display": "Itching (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.57
+            },
+            {
+              "level": "none",
+              "value": 0.43000000000000005
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "62315008",
+            "display": "Diarrhea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.5
+            },
+            {
+              "level": "none",
+              "value": 0.5
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "422587007",
+            "display": "Nausea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.3
+            },
+            {
+              "level": "none",
+              "value": 0.7
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Chance_of_Wheat_Allergy"
+    },
+    "Chance_of_Wheat_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " WHEAT ALLERGY                                                        ",
+        "======================================================================",
+        "Wheat allergy is different than celiac disease. There are few studies on prevalence of wheat allergy.",
+        "A recent study 0.4% of US adults reported an allergy to wheat diagnosed via a doctor [6]. The prevalence ",
+        "of wheat allergy is highest amongst children in the US, ranging from 0.4% to 1.0% of the population.",
+        "http://www.drschaer-institute.com/us/wheat-allergy/epidemiology-1043.html",
+        "Wheat allergy is typically outgrown by adulthood — about 65 percent of children with a wheat allergy ",
+        "will outgrow it by the time they are 12. Based on prevalences we assume that adult onset of ",
+        "the allergy is rare enough to ignore."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.25,
+              "transition": "Wheat_Allergy"
+            },
+            {
+              "distribution": 0.75,
+              "transition": "Chance_of_Eggs_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.006,
+              "transition": "Wheat_Allergy"
+            },
+            {
+              "distribution": 0.994,
+              "transition": "Chance_of_Eggs_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Wheat_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "food",
+      "target_encounter": "Allergist_Initial_Visit",
+      "assign_to_attribute": "food_allergy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "412071004",
+          "display": "Wheat (substance)"
+        }
+      ],
+      "reaction": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "267036007",
+            "display": "Dyspnea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.21
+            },
+            {
+              "level": "none",
+              "value": 0.79
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.25
+            },
+            {
+              "level": "none",
+              "value": 0.75
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.9
+            },
+            {
+              "level": "none",
+              "value": 0.09999999999999998
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "62315008",
+            "display": "Diarrhea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.21
+            },
+            {
+              "level": "none",
+              "value": 0.79
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Chance_of_Eggs_Allergy"
+    },
+    "Chance_of_Eggs_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " EGG ALLERGY                                                          ",
+        "======================================================================",
+        "Experts estimate that as many as 2 percent of children are allergic to eggs. ",
+        "Fortunately, studies show that about 70 percent of children with an egg allergy ",
+        "will outgrow the condition by age 16.",
+        "http://acaai.org/allergies/types/food-allergies/types-food-allergy/egg-allergy",
+        "Based on prevalences we assume that adult onset of the allergy is rare enough to ignore."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.25,
+              "transition": "Eggs_Allergy"
+            },
+            {
+              "distribution": 0.75,
+              "transition": "Chance_of_Soy_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.006,
+              "transition": "Eggs_Allergy"
+            },
+            {
+              "distribution": 0.994,
+              "transition": "Chance_of_Soy_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Eggs_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "food",
+      "target_encounter": "Allergist_Initial_Visit",
+      "assign_to_attribute": "food_allergy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "102263004",
+          "display": "Eggs (edible) (substance)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.09
+            },
+            {
+              "level": "none",
+              "value": 0.91
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.05
+            },
+            {
+              "level": "none",
+              "value": 0.95
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.12
+            },
+            {
+              "level": "none",
+              "value": 0.88
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.46
+            },
+            {
+              "level": "none",
+              "value": 0.54
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "300359004",
+            "display": "Finding of vomiting (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.05
+            },
+            {
+              "level": "none",
+              "value": 0.95
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Chance_of_Soy_Allergy"
+    },
+    "Chance_of_Soy_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " SOY ALLERGY                                                          ",
+        "======================================================================",
+        "Soy allergies are uncommon but closely related to peanut and milk allergies. ",
+        "http://www.soyconnection.com/newsletters/soy-connection/health-nutrition/articles/Estimating-Prevalence-Of-Soy-Protein-Allergy"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.1,
+              "transition": "Soy_Allergy"
+            },
+            {
+              "distribution": 0.9,
+              "transition": "Chance_of_Dairy_Allergy"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.002,
+              "transition": "Soy_Allergy"
+            },
+            {
+              "distribution": 0.998,
+              "transition": "Chance_of_Dairy_Allergy"
+            }
+          ]
+        }
+      ]
+    },
+    "Soy_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "food",
+      "target_encounter": "Allergist_Initial_Visit",
+      "assign_to_attribute": "food_allergy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "256355007",
+          "display": "Soya bean (substance)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.07
+            },
+            {
+              "level": "none",
+              "value": 0.9299999999999999
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "300359004",
+            "display": "Finding of vomiting (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.5
+            },
+            {
+              "level": "none",
+              "value": 0.5
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "62315008",
+            "display": "Diarrhea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.5
+            },
+            {
+              "level": "none",
+              "value": 0.5
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Chance_of_Dairy_Allergy"
+    },
+    "Chance_of_Dairy_Allergy": {
+      "type": "Simple",
+      "remarks": [
+        "======================================================================",
+        " DAIRY ALLERGY                                                        ",
+        "======================================================================",
+        "The prevalence of dairy/milk allergy in the general population is 1-2% for young ",
+        "children and 0.2-0.4% in the general population. About 80 percent of children are ",
+        "likely to outgrow their milk allergy before they are 16. Based on prevalence we ",
+        "assume that adult onset of the allergy is rare enough to ignore."
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "atopic",
+            "operator": "is not nil"
+          },
+          "distributions": [
+            {
+              "distribution": 0.25,
+              "transition": "Dairy_Allergy"
+            },
+            {
+              "distribution": 0.75,
+              "transition": "Food_Allergy_Incidence_Terminal"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.0015,
+              "transition": "Dairy_Allergy"
+            },
+            {
+              "distribution": 0.9985,
+              "transition": "Food_Allergy_Incidence_Terminal"
+            }
+          ]
+        }
+      ]
+    },
+    "Dairy_Allergy": {
+      "type": "AllergyOnset",
+      "allergy_type": "allergy",
+      "category": "food",
+      "target_encounter": "Allergist_Initial_Visit",
+      "assign_to_attribute": "food_allergy",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "3718001",
+          "display": "Cow's milk (substance)"
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "402387002",
+            "display": "Allergic angioedema (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.07
+            },
+            {
+              "level": "none",
+              "value": 0.9299999999999999
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "247472004",
+            "display": "Wheal (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.62
+            },
+            {
+              "level": "none",
+              "value": 0.38
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "39579001",
+            "display": "Anaphylaxis (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "severe",
+              "value": 0.09
+            },
+            {
+              "level": "none",
+              "value": 0.91
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "271807003",
+            "display": "Eruption of skin (disorder)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.04
+            },
+            {
+              "level": "none",
+              "value": 0.96
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "300359004",
+            "display": "Finding of vomiting (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "moderate",
+              "value": 0.2
+            },
+            {
+              "level": "none",
+              "value": 0.8
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "62315008",
+            "display": "Diarrhea (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.3
+            },
+            {
+              "level": "none",
+              "value": 0.7
+            }
+          ]
+        },
+        {
+          "reaction": {
+            "system": "SNOMED-CT",
+            "code": "56018004",
+            "display": "Wheezing (finding)"
+          },
+          "possible_severities": [
+            {
+              "level": "mild",
+              "value": 0.1
+            },
+            {
+              "level": "none",
+              "value": 0.9
+            }
+          ]
+        }
+      ],
+      "direct_transition": "Food_Allergy_Incidence_Terminal"
+    },
+    "Food_Allergy_Incidence_Terminal": {
+      "type": "Terminal"
+    }
+  }
 }
 ,
 "allergies/immunotherapy":{
@@ -3141,16 +5195,34 @@ export default {"allergic_rhinitis":{
         "quantity": 1,
         "unit": "weeks"
       },
-      "direct_transition": "Allergy_Incidence_Submodule"
+      "direct_transition": "Food_Allergy_Incidence_Submodule"
     },
-    "Allergy_Incidence_Submodule": {
+    "Food_Allergy_Incidence_Submodule": {
       "type": "CallSubmodule",
       "remarks": [
-        "This submodule onsets the various food and environmental allergies that ",
+        "This submodule onsets the various food allergies that ",
         "a person can get, with different incidences for atopic and non-atopic ",
         "patients."
       ],
-      "submodule": "allergies/allergy_incidence",
+      "submodule": "allergies/food_allergy_incidence",
+      "direct_transition": "Drug_Allergy_Incidence_Submodule"
+    },
+    "Drug_Allergy_Incidence_Submodule": {
+      "type": "CallSubmodule",
+      "remarks": [
+        "This submodule onsets the various drug allergies that a person can get."
+      ],
+      "submodule": "allergies/drug_allergy_incidence",
+      "direct_transition": "Environmental_Allergy_Incidence_Submodule"
+    },
+    "Environmental_Allergy_Incidence_Submodule": {
+      "type": "CallSubmodule",
+      "remarks": [
+        "This submodule onsets the various environmental allergies that ",
+        "a person can get, with different incidences for atopic and non-atopic ",
+        "patients."
+      ],
+      "submodule": "allergies/environmental_allergy_incidence",
       "direct_transition": "Allergist_Guard"
     },
     "Allergist_Guard": {
@@ -35247,6 +37319,4492 @@ export default {"allergic_rhinitis":{
   "gmf_version": 1
 }
 ,
+"encounter/anxiety_screening":{
+  "name": "anxiety_screening",
+  "remarks": [
+    "Basic anxiety screening pathway."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Check Eligibility"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Low Anxiety Score": {
+      "type": "SetAttribute",
+      "attribute": "anxiety_screening_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 4,
+          "low": 0
+        }
+      },
+      "direct_transition": "Close Severe Diagnosis"
+    },
+    "Low Anxiety": {
+      "type": "Simple",
+      "direct_transition": "Low Anxiety Score"
+    },
+    "Has Anxiety": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Mild Anxiety Score",
+          "distribution": 0.6
+        },
+        {
+          "transition": "Moderate Anxiety Score",
+          "distribution": 0.28
+        },
+        {
+          "transition": "Severe Anxiety Score",
+          "distribution": 0.12
+        }
+      ]
+    },
+    "GAD-7": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "69737-5",
+          "display": "Generalized anxiety disorder 7 item (GAD-7)"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "70274-6",
+              "display": "Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]"
+            }
+          ],
+          "attribute": "anxiety_screening_score"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Mild Anxiety Score": {
+      "type": "SetAttribute",
+      "attribute": "anxiety_screening_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 9,
+          "low": 5
+        }
+      },
+      "direct_transition": "Close Severe Diagnosis"
+    },
+    "Moderate Anxiety Score": {
+      "type": "SetAttribute",
+      "attribute": "anxiety_screening_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 14,
+          "low": 10
+        }
+      },
+      "direct_transition": "Close Severe Diagnosis"
+    },
+    "Severe Anxiety Score": {
+      "type": "SetAttribute",
+      "attribute": "anxiety_screening_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 21,
+          "low": 15
+        }
+      },
+      "direct_transition": "Severe Anxiety Diagnosis"
+    },
+    "Determine Anxiety Level": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Has Anxiety",
+              "distribution": 0.234
+            },
+            {
+              "transition": "Low Anxiety",
+              "distribution": 0.766
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Has Anxiety",
+              "distribution": 0.143
+            },
+            {
+              "transition": "Low Anxiety",
+              "distribution": 0.857
+            }
+          ]
+        }
+      ]
+    },
+    "Conduct Anxiety Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "710841007",
+          "display": "Assessment of anxiety (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 15
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Determine Anxiety Level"
+    },
+    "Severe Anxiety Diagnosis": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "80583007",
+          "display": "Severe anxiety (panic) (finding"
+        }
+      ],
+      "direct_transition": "GAD-7"
+    },
+    "Close Severe Diagnosis": {
+      "type": "ConditionEnd",
+      "direct_transition": "GAD-7",
+      "condition_onset": "Severe Anxiety Diagnosis"
+    },
+    "Check Eligibility": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "ptsd",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<",
+                "quantity": 12,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Conduct Anxiety Screening"
+        }
+      ]
+    }
+  },
+  "gmf_version": 2
+}
+,
+"encounter/depression_screening":{
+  "name": "depression screening",
+  "remarks": [
+    "A basic depression screening module."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Check Eligibility"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Check Eligibility": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "At Least",
+            "minimum": 1,
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": "<",
+                "quantity": 12,
+                "unit": "years",
+                "value": 0
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "pregnant",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 370143000,
+                    "display": "Major depression disorder"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active CarePlan",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 183401008,
+                    "display": "Anti-suicide psychotherapy"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Depression Screening"
+        }
+      ]
+    },
+    "Depression Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 171207006,
+          "display": "Depression screening (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 15,
+          "low": 10
+        }
+      },
+      "unit": "minutes",
+      "conditional_transition": [
+        {
+          "transition": "Young Adult",
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<",
+            "quantity": 18,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Adult"
+        }
+      ]
+    },
+    "Adult": {
+      "type": "Simple",
+      "direct_transition": "PHQ-2"
+    },
+    "Young Adult": {
+      "type": "Simple",
+      "direct_transition": "PHQ-9"
+    },
+    "PHQ-2": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 454711000124102,
+          "display": "Depression screening using Patient Health Questionnaire Two-Item score (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 20
+        }
+      },
+      "unit": "minutes",
+      "distributed_transition": [
+        {
+          "transition": "PHQ2 Positive",
+          "distribution": 0.06
+        },
+        {
+          "transition": "PHQ2 Negative",
+          "distribution": 0.94
+        }
+      ]
+    },
+    "YA Negative": {
+      "type": "SetAttribute",
+      "attribute": "phqa_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 4,
+          "low": 0
+        }
+      },
+      "direct_transition": "YA PHQ Results"
+    },
+    "PHQ2 Positive": {
+      "type": "SetAttribute",
+      "attribute": "phq2_score",
+      "direct_transition": "PHQ2 Results",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 6,
+          "low": 3
+        }
+      }
+    },
+    "PHQ2 Negative": {
+      "type": "SetAttribute",
+      "attribute": "phq2_score",
+      "direct_transition": "PHQ2 Results",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 2,
+          "low": 0
+        }
+      }
+    },
+    "PHQ2 Results": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "55757-9",
+          "display": "Patient Health Questionnaire 2 item (PHQ-2) [Reported]"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "55758-7",
+              "display": "Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]"
+            }
+          ],
+          "attribute": "phq2_score"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "PHQ-9",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "phq2_score",
+            "operator": ">=",
+            "value": 3
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "PHQ-9": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 715252007,
+          "display": "Depression screening using Patient Health Questionnaire Nine Item score (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 20
+        }
+      },
+      "unit": "minutes",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<",
+            "quantity": 18,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.09
+            },
+            {
+              "transition": "YA Negative",
+              "distribution": 0.91
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Negative",
+              "distribution": 0.2
+            },
+            {
+              "transition": "Positive",
+              "distribution": 0.8
+            }
+          ]
+        }
+      ]
+    },
+    "Negative": {
+      "type": "SetAttribute",
+      "attribute": "phqa_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 4,
+          "low": 3
+        }
+      },
+      "direct_transition": "Age Check"
+    },
+    "Positive": {
+      "type": "SetAttribute",
+      "attribute": "phqa_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 27,
+          "low": 5
+        }
+      },
+      "direct_transition": "Age Check"
+    },
+    "PHQ_Results": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "44249-1",
+          "display": "PHQ-9 quick depression assessment panel [Reported.PHQ]"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "44261-6",
+              "display": "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported]"
+            }
+          ],
+          "attribute": "phqa_score"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "YA PHQ Results": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "89206-7",
+          "display": "Patient Health Questionnaire-9: Modified for Teens [Reported.PHQ.Teen]"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "89204-2",
+              "display": "Patient Health Questionnaire-9: Modified for Teens total score [Reported.PHQ.Teen]"
+            }
+          ],
+          "attribute": "phqa_score"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Age Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "YA PHQ Results",
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<",
+            "quantity": 18,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "PHQ_Results"
+        }
+      ]
+    }
+  },
+  "gmf_version": 2
+}
+,
+"encounter/fall_risk_screening":{
+  "name": "fall_risk_screening",
+  "remarks": [
+    "Basic fall risk screening pathway."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Check Eligibility"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Check Eligibility": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Conduct Fall Screening",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "At Least",
+                "minimum": 1,
+                "conditions": [
+                  {
+                    "condition_type": "Active Condition",
+                    "codes": [
+                      {
+                        "system": "SNOMED-CT",
+                        "code": "65966004",
+                        "display": "Fracture of forearm"
+                      }
+                    ]
+                  },
+                  {
+                    "condition_type": "Active Condition",
+                    "codes": [
+                      {
+                        "system": "SNOMED-CT",
+                        "code": "263102004",
+                        "display": "Fracture subluxation of wrist"
+                      }
+                    ]
+                  },
+                  {
+                    "condition_type": "Active Condition",
+                    "codes": [
+                      {
+                        "system": "SNOMED-CT",
+                        "code": "16114001",
+                        "display": "Fracture of ankle"
+                      }
+                    ]
+                  },
+                  {
+                    "condition_type": "Active Condition",
+                    "codes": [
+                      {
+                        "system": "SNOMED-CT",
+                        "code": "33737001",
+                        "display": "Fracture of rib"
+                      }
+                    ]
+                  },
+                  {
+                    "condition_type": "Active Condition",
+                    "codes": [
+                      {
+                        "system": "SNOMED-CT",
+                        "code": "58150001",
+                        "display": "Fracture of clavicle"
+                      }
+                    ]
+                  },
+                  {
+                    "condition_type": "Active Condition",
+                    "codes": [
+                      {
+                        "system": "SNOMED-CT",
+                        "code": "359817006",
+                        "display": "Closed fracture of hip"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 65,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Conduct Fall Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "762993000",
+          "display": "Assessment using Morse Fall Scale (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 15
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Determine Fall Risk"
+    },
+    "Determine Fall Risk": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "High Fall Risk Score",
+          "distribution": 0.34
+        },
+        {
+          "distribution": 0.33,
+          "transition": "Low Fall Risk Score"
+        },
+        {
+          "transition": "Moderate Fall Risk Score",
+          "distribution": 0.33
+        }
+      ]
+    },
+    "Low Fall Risk Score": {
+      "type": "SetAttribute",
+      "attribute": "fall_risk_screening_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 24,
+          "low": 0
+        }
+      },
+      "direct_transition": "Low Fall Risk Code"
+    },
+    "High Fall Risk Score": {
+      "type": "SetAttribute",
+      "attribute": "fall_risk_screening_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 125,
+          "low": 50
+        }
+      },
+      "direct_transition": "High Fall Risk Code"
+    },
+    "Moderate Fall Risk Score": {
+      "type": "SetAttribute",
+      "attribute": "fall_risk_screening_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 45,
+          "low": 25
+        }
+      },
+      "direct_transition": "Moderate Fall Risk Code"
+    },
+    "Morse Fall Scale": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "59453-1",
+          "display": "Morse Fall Scale panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{#}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "59460-6",
+              "display": "Fall risk total [Morse Fall Scale]"
+            }
+          ],
+          "attribute": "fall_risk_screening_score"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "59461-4",
+              "display": "Fall risk level [Morse Fall Scale]"
+            }
+          ],
+          "attribute": "fall_risk_screening_code"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "High Fall Risk Code": {
+      "type": "SetAttribute",
+      "attribute": "fall_risk_screening_code",
+      "direct_transition": "Morse Fall Scale",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA13040-3",
+        "display": "High Risk (MFS Score 50+)"
+      }
+    },
+    "Low Fall Risk Code": {
+      "type": "SetAttribute",
+      "attribute": "fall_risk_screening_code",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA13038-7",
+        "display": "Low Risk (MFS Score 0 - 24)"
+      },
+      "direct_transition": "Morse Fall Scale"
+    },
+    "Moderate Fall Risk Code": {
+      "type": "SetAttribute",
+      "attribute": "fall_risk_screening_code",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA13039-5",
+        "display": "Moderate Risk (MFS Score 25 - 45)"
+      },
+      "direct_transition": "Morse Fall Scale"
+    }
+  },
+  "gmf_version": 2
+}
+,
+"encounter/hark_screening":{
+  "name": "hark_screening",
+  "remarks": [
+    "Basic HARK screening pathway."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Check Eligibility"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Check Eligibility": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Conduct Screening for Domestic Abuse",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "pregnant",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 18,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Conduct Screening for Domestic Abuse": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "866148006",
+          "display": "Screening for domestic abuse (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 45,
+          "low": 25
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Determine Results"
+    },
+    "Determine Results": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "High Score",
+              "distribution": 0.055
+            },
+            {
+              "transition": "Low Score",
+              "distribution": 0.945
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "High Score",
+              "distribution": 0.052
+            },
+            {
+              "transition": "Low Score",
+              "distribution": 0.948
+            }
+          ]
+        }
+      ]
+    },
+    "High Score": {
+      "type": "SetAttribute",
+      "attribute": "hark_screening_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 4,
+          "low": 1
+        }
+      },
+      "conditional_transition": [
+        {
+          "transition": "HARK Assessment",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Victim"
+          }
+        },
+        {
+          "transition": "Victim"
+        }
+      ]
+    },
+    "Low Score": {
+      "type": "SetAttribute",
+      "attribute": "hark_screening_score",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 0
+        }
+      },
+      "direct_transition": "HARK Assessment"
+    },
+    "Victim": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "706893006",
+          "display": "Victim of intimate partner abuse (finding)"
+        }
+      ],
+      "direct_transition": "HARK Assessment"
+    },
+    "HARK Assessment": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "76499-3",
+          "display": "Humiliation, Afraid, Rape, and Kick questionnaire [HARK]"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "76504-0",
+              "display": "Total score [HARK]"
+            }
+          ],
+          "attribute": "hark_screening_score"
+        }
+      ],
+      "direct_transition": "Terminal"
+    }
+  },
+  "gmf_version": 2
+}
+,
+"encounter/sdoh_hrsn":{
+  "name": "SDoH HRSN",
+  "remarks": [
+    "Social Determinants of Health (SDoH) Health Related Social Needs (HRSN) screening."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Assessment"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Assessment": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 710824005,
+          "display": "Assessment of health and social care needs (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Q1"
+    },
+    "PRAPARE": {
+      "type": "MultiObservation",
+      "category": "survey",
+      "number_of_observations": 0,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "93025-5",
+          "display": "Protocol for Responding to and Assessing Patients' Assets, Risks, and Experiences [PRAPARE]"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "56051-6",
+              "display": "Are you Hispanic or Latino?"
+            }
+          ],
+          "attribute": "prapare_a1"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32624-9",
+              "display": "Which race(s) are you?"
+            }
+          ],
+          "attribute": "prapare_a2"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "93035-4",
+              "display": "At any point in the past 2 years, has season or migrant farm work been your or your family's main source of income?"
+            }
+          ],
+          "attribute": "prapare_a3"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "93034-7",
+              "display": "Have you been discharged from the armed forces of the United States?"
+            }
+          ],
+          "attribute": "prapare_a4"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "54899-0",
+              "display": "What language are you most comfortable speaking?"
+            }
+          ],
+          "attribute": "prapare_a5"
+        },
+        {
+          "category": "survey",
+          "unit": "{#}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "63512-8",
+              "display": "How many family members, including yourself, do you currently live with?"
+            }
+          ],
+          "attribute": "household_size"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "71802-3",
+              "display": "What is your housing situation today?"
+            }
+          ],
+          "attribute": "prapare_a7"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "93033-9",
+              "display": "Are you worried about losing your housing?"
+            }
+          ],
+          "attribute": "prapare_a8"
+        },
+        {
+          "category": "laboratory",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "56799-0",
+              "display": "What address do you live at?"
+            }
+          ],
+          "attribute": "address"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "82589-3",
+              "display": "What is the highest level of school that you have finished?"
+            }
+          ],
+          "attribute": "prapare_a10"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "67875-5",
+              "display": "What is your current work situation?"
+            }
+          ],
+          "attribute": "prapare_a11"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "76437-3",
+              "display": "What is your main insurance?"
+            }
+          ],
+          "attribute": "prapare_a12"
+        },
+        {
+          "category": "survey",
+          "unit": "/a",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "63586-2",
+              "display": "During the past year, what was the total combined income for you and the family members you live with? This information will help us determine if you are eligible for any benefits."
+            }
+          ],
+          "attribute": "income"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "93031-3",
+              "display": "In the past year, have you or any family members you live with been unable to get any of the following when it was really needed?"
+            }
+          ],
+          "attribute": "prapare_a14"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "93030-5",
+              "display": "Has lack of transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living?"
+            }
+          ],
+          "attribute": "prapare_a15"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "93029-7",
+              "display": "How often do you see or talk to people that you care about and feel close to (For example: talking to friends on the phone, visiting friends or family, going to church or club meetings)?"
+            }
+          ],
+          "attribute": "prapare_a16"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "93038-8",
+              "display": "Stress is when someone feels tense, nervous, anxious or can't sleep at night because their mind is troubled. How stressed are you?"
+            }
+          ],
+          "attribute": "prapare_a17"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "93028-9",
+              "display": "In the past year, have you spent more than 2 nights in a row in a jail, prison, detention center, or juvenile correctional facility?"
+            }
+          ],
+          "attribute": "prapare_a18"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "93027-1",
+              "display": "Are you a refugee?"
+            }
+          ],
+          "attribute": "prapare_a19"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "93026-3",
+              "display": "Do you feel physically and emotionally safe where you currently live?"
+            }
+          ],
+          "attribute": "prapare_a20"
+        },
+        {
+          "category": "survey",
+          "unit": "",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "76501-6",
+              "display": "In the past year, have you been afraid of your partner or ex-partner?"
+            }
+          ],
+          "attribute": "prapare_a21"
+        }
+      ]
+    },
+    "Q1": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Race",
+            "race": "Hispanic"
+          },
+          "distributions": [],
+          "transition": "A1_Yes"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "A1_No",
+              "distribution": 0.995
+            },
+            {
+              "transition": "A1_NotAnswer",
+              "distribution": 0.005
+            }
+          ]
+        }
+      ]
+    },
+    "A1_Yes": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a1",
+      "direct_transition": "Q2",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA33-6",
+        "display": "Yes"
+      }
+    },
+    "A1_No": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a1",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA32-8",
+        "display": "No"
+      },
+      "direct_transition": "Q2"
+    },
+    "A1_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a1",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q2"
+    },
+    "Q2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A2_NotAnswer",
+          "distribution": 0.005
+        },
+        {
+          "transition": "Q2A",
+          "distribution": 0.995
+        }
+      ]
+    },
+    "Q3": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Q3Y",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "income",
+            "operator": "<=",
+            "value": 25000
+          }
+        },
+        {
+          "transition": "Q3N"
+        }
+      ]
+    },
+    "A2_Asian": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a2",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA6156-9",
+        "display": "Asian"
+      },
+      "direct_transition": "Q3"
+    },
+    "A2_Hawaiian": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a2",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA14045-1",
+        "display": "Native Hawaiian"
+      },
+      "direct_transition": "Q3"
+    },
+    "A2_PacificIslander": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a2",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30187-1",
+        "display": "Pacific Islander"
+      },
+      "direct_transition": "Q3"
+    },
+    "A2_Black": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a2",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA14042-8",
+        "display": "Black/African American"
+      },
+      "direct_transition": "Q3"
+    },
+    "A2_White": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a2",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA4457-3",
+        "display": "White"
+      },
+      "direct_transition": "Q3"
+    },
+    "A2_NativeAmerican": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a2",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA4-4",
+        "display": "American Indian/Alaskan Native"
+      },
+      "direct_transition": "Q3"
+    },
+    "A2_Other": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a2",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA46-8",
+        "display": "Other, Please write"
+      },
+      "direct_transition": "Q3"
+    },
+    "A2_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a2",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q3"
+    },
+    "Q2A": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "A2_Asian",
+          "condition": {
+            "condition_type": "Race",
+            "race": "Asian"
+          }
+        },
+        {
+          "transition": "A2_Black",
+          "condition": {
+            "condition_type": "Race",
+            "race": "Black"
+          }
+        },
+        {
+          "transition": "A2_White",
+          "condition": {
+            "condition_type": "Race",
+            "race": "White"
+          }
+        },
+        {
+          "transition": "A2_Hawaiian",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "state",
+                "operator": "==",
+                "value": "Hawaii"
+              },
+              {
+                "condition_type": "Race",
+                "race": "Hawaiian"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "A2_PacificIslander",
+          "condition": {
+            "condition_type": "Race",
+            "race": "Hawaiian"
+          }
+        },
+        {
+          "transition": "A2_NativeAmerican",
+          "condition": {
+            "condition_type": "Race",
+            "race": "Native"
+          }
+        },
+        {
+          "transition": "A2_Other"
+        }
+      ]
+    },
+    "Q4": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "A4_Yes",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "veteran",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Q4N"
+        }
+      ]
+    },
+    "A3_Yes": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a3",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA33-6",
+        "display": "Yes"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Social Migrant",
+          "distribution": 0.00174
+        },
+        {
+          "transition": "Q4",
+          "distribution": 0.9982599999999999
+        }
+      ]
+    },
+    "A3_No": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a3",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA32-8",
+        "display": "No"
+      },
+      "direct_transition": "End Migrant"
+    },
+    "A3_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a3",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q4"
+    },
+    "Q3N": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A3_No",
+          "distribution": 0.995
+        },
+        {
+          "transition": "A3_NotAnswer",
+          "distribution": 0.005
+        }
+      ]
+    },
+    "Q3Y": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 17,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "A3_Yes",
+              "distribution": 0.03
+            },
+            {
+              "transition": "Q3N",
+              "distribution": 0.97
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 19,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "A3_Yes",
+              "distribution": 0.04
+            },
+            {
+              "transition": "Q3N",
+              "distribution": 0.96
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 24,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "A3_Yes",
+              "distribution": 0.11
+            },
+            {
+              "transition": "Q3N",
+              "distribution": 0.89
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 34,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "A3_Yes",
+              "distribution": 0.26
+            },
+            {
+              "transition": "Q3N",
+              "distribution": 0.74
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 44,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "A3_Yes",
+              "distribution": 0.23
+            },
+            {
+              "transition": "Q3N",
+              "distribution": 0.77
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 54,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "A3_Yes",
+              "distribution": 0.19
+            },
+            {
+              "transition": "Q3N",
+              "distribution": 0.81
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 64,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "A3_Yes",
+              "distribution": 0.11
+            },
+            {
+              "transition": "Q3N",
+              "distribution": 0.89
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "A3_Yes",
+              "distribution": 0.04
+            },
+            {
+              "transition": "Q3N",
+              "distribution": 0.96
+            }
+          ]
+        }
+      ]
+    },
+    "Social Migrant": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 160701002,
+          "display": "Social migrant (finding)"
+        }
+      ],
+      "direct_transition": "Q4"
+    },
+    "End Migrant": {
+      "type": "ConditionEnd",
+      "direct_transition": "Q4",
+      "condition_onset": "Social Migrant"
+    },
+    "Q5": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "A5_NotAnswer",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "first_language",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "A5_English",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "first_language",
+            "operator": "==",
+            "value": "english"
+          }
+        },
+        {
+          "transition": "A5_Other"
+        }
+      ]
+    },
+    "A4_Yes": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a4",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA33-6",
+        "display": "Yes"
+      },
+      "direct_transition": "Veteran"
+    },
+    "A4_No": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a4",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA32-8",
+        "display": "No"
+      },
+      "direct_transition": "Q5"
+    },
+    "A4_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a4",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q5"
+    },
+    "Q4N": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A4_NotAnswer",
+          "distribution": 0.005
+        },
+        {
+          "transition": "A4_No",
+          "distribution": 0.995
+        }
+      ]
+    },
+    "Veteran": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 224355006,
+          "display": "Served in armed forces (finding)"
+        }
+      ],
+      "direct_transition": "Q5"
+    },
+    "Q6": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Household_Size",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "household_size",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Q7"
+        }
+      ]
+    },
+    "A5_English": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a5",
+      "direct_transition": "Q6",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA43-5",
+        "display": "English"
+      }
+    },
+    "A5_Other": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a5",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30188-9",
+        "display": "Language other than English"
+      },
+      "direct_transition": "Q6"
+    },
+    "A5_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a5",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q6"
+    },
+    "Q7": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "homeless",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "A7_Homeless"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "A7_NotAnswer",
+              "distribution": 0.005
+            },
+            {
+              "transition": "A7_NotHomeless",
+              "distribution": 0.995
+            }
+          ]
+        }
+      ]
+    },
+    "Household_Size": {
+      "type": "SetAttribute",
+      "attribute": "household_size",
+      "direct_transition": "Q7",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 8,
+          "low": 1
+        }
+      }
+    },
+    "Q8": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "severe_housing_cost_burden",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "A8_Yes"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "A8_NotAnswer",
+              "distribution": 0.005
+            },
+            {
+              "transition": "A8_No",
+              "distribution": 0.995
+            }
+          ]
+        }
+      ]
+    },
+    "A7_Homeless": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a7",
+      "direct_transition": "Homeless",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30190-5",
+        "display": "I do not have housing"
+      }
+    },
+    "A7_NotHomeless": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a7",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30189-7",
+        "display": "I have housing"
+      },
+      "direct_transition": "Not Homeless"
+    },
+    "A7_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a7",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q8"
+    },
+    "Homeless": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 32911000,
+          "display": "Homeless (finding)"
+        }
+      ],
+      "direct_transition": "Q8"
+    },
+    "Not Homeless": {
+      "type": "ConditionEnd",
+      "direct_transition": "Q8",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 32911000,
+          "display": "Homeless (finding)"
+        }
+      ]
+    },
+    "A8_Yes": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a8",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA33-6",
+        "display": "Yes"
+      },
+      "direct_transition": "Housing Issue"
+    },
+    "A8_No": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a8",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA32-8",
+        "display": "No"
+      },
+      "direct_transition": "End Housing Issue"
+    },
+    "A8_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a8",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q10"
+    },
+    "Housing Issue": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 105531004,
+          "display": "Housing unsatisfactory (finding)"
+        }
+      ],
+      "direct_transition": "Q10"
+    },
+    "End Housing Issue": {
+      "type": "ConditionEnd",
+      "direct_transition": "Q10",
+      "condition_onset": "Housing Issue"
+    },
+    "Q10": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Q10A",
+          "distribution": 0.995
+        },
+        {
+          "transition": "A10_NotAnswer",
+          "distribution": 0.005
+        }
+      ]
+    },
+    "Q11": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "A11A",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "income",
+                "operator": "<=",
+                "value": 5000
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "unemployed",
+                "operator": "==",
+                "value": true
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Q11B"
+        }
+      ]
+    },
+    "A10_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a10",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q11"
+    },
+    "A10C": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a10",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30193-9",
+        "display": "More than high school"
+      },
+      "direct_transition": "Education_Onset_2"
+    },
+    "A10B": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a10",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30192-1",
+        "display": "High school diploma or GED"
+      },
+      "direct_transition": "Education_Onset"
+    },
+    "A10A": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a10",
+      "direct_transition": "Education Onset",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30191-3",
+        "display": "Less than high school degree"
+      }
+    },
+    "Q10A": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "A10A",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "education",
+            "operator": "==",
+            "value": "less_than_hs"
+          }
+        },
+        {
+          "transition": "A10B",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "education",
+            "operator": "==",
+            "value": "hs_degree"
+          }
+        },
+        {
+          "transition": "A10C"
+        }
+      ]
+    },
+    "Education Onset": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "education_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 224295006,
+          "display": "Only received primary school education (finding)"
+        }
+      ],
+      "direct_transition": "Q11"
+    },
+    "Education_Onset": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "education_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 5251000175109,
+          "display": "Received certificate of high school equivalency (finding)"
+        }
+      ],
+      "direct_transition": "Q11"
+    },
+    "Education_Onset_2": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "education_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 224299000,
+          "display": "Received higher education (finding)"
+        }
+      ],
+      "direct_transition": "Q11"
+    },
+    "Q12": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "A12_NotAnswer",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "insurance_status",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "A12_None",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "insurance_status",
+            "operator": "==",
+            "value": "none"
+          }
+        },
+        {
+          "transition": "A12_Medicaid",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "insurance_status",
+            "operator": "==",
+            "value": "medicaid"
+          }
+        },
+        {
+          "transition": "A12_Medicare",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "insurance_status",
+            "operator": "==",
+            "value": "medicare"
+          }
+        },
+        {
+          "transition": "A12_Private",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "insurance_status",
+            "operator": "==",
+            "value": "private"
+          }
+        },
+        {
+          "transition": "A12_NotAnswer"
+        }
+      ]
+    },
+    "A11A": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a11",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA17956-6",
+        "display": "Unemployed (finding)"
+      },
+      "direct_transition": "Unemployed"
+    },
+    "Q11B": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "End Unemployment",
+          "distribution": 0.995
+        },
+        {
+          "transition": "A11_NotAnswer",
+          "distribution": 0.005
+        }
+      ]
+    },
+    "Unemployed": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "employment_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 73438004,
+          "display": "Unemployed (finding)"
+        }
+      ],
+      "direct_transition": "Q12"
+    },
+    "A11_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a11",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q12"
+    },
+    "End Unemployment": {
+      "type": "ConditionEnd",
+      "distributed_transition": [
+        {
+          "transition": "A11B",
+          "distribution": 0.7
+        },
+        {
+          "transition": "A11C",
+          "distribution": 0.2
+        },
+        {
+          "transition": "A11D",
+          "distribution": 0.1
+        }
+      ],
+      "referenced_by_attribute": "employment_condition"
+    },
+    "A11B": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a11",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30136-8",
+        "display": "Full-time work"
+      },
+      "direct_transition": "Employed Full Time"
+    },
+    "A11C": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a11",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30138-4",
+        "display": "Part-time or temporary work"
+      },
+      "direct_transition": "Employed Part Time"
+    },
+    "A11D": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a11",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30137-6",
+        "display": "Otherwise unemployed but not seeking work"
+      },
+      "direct_transition": "Employed Not"
+    },
+    "Employed Full Time": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "employment_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 160903007,
+          "display": "Full-time employment (finding)"
+        }
+      ],
+      "direct_transition": "Q12"
+    },
+    "Employed Part Time": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "employment_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 160904001,
+          "display": "Part-time employment (finding)"
+        }
+      ],
+      "direct_transition": "Q12"
+    },
+    "Employed Not": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "employment_condition",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 741062008,
+          "display": "Not in labor force (finding)"
+        }
+      ],
+      "direct_transition": "Q12"
+    },
+    "A12_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a12",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q14"
+    },
+    "A12_None": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a12",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30194-7",
+        "display": "None/uninsured"
+      },
+      "direct_transition": "Q14"
+    },
+    "A12_Medicaid": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a12",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30194-7",
+        "display": "Medicaid"
+      },
+      "direct_transition": "Q14"
+    },
+    "A12_Medicare": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a12",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA15652-3",
+        "display": "Medicare"
+      },
+      "direct_transition": "Q14"
+    },
+    "A12_Private": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a12",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA6350-8",
+        "display": "Private insurance"
+      },
+      "direct_transition": "Q14"
+    },
+    "Q14": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "A14_NotAnswer",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "food_insecurity",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "poverty_ratio",
+                "operator": "is nil"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Q14A"
+        }
+      ]
+    },
+    "Q15": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "no_vehicle_access",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "no_vehicle_access",
+                "operator": "==",
+                "value": false
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "A15_No"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "A15_YesA",
+              "distribution": 0.5
+            },
+            {
+              "transition": "A15_YesB",
+              "distribution": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    "A14_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a14",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q15"
+    },
+    "Q14A": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_NotAnswer",
+          "distribution": 0.01
+        },
+        {
+          "transition": "Q14B",
+          "distribution": 0.99
+        }
+      ]
+    },
+    "Q14B": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "A14_Food",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "food_insecurity",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Q14C"
+        }
+      ]
+    },
+    "A14_Food": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a14",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30125-1",
+        "display": "Food"
+      },
+      "direct_transition": "Q15"
+    },
+    "A14_Clothing": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a14",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30126-9",
+        "display": "Clothing"
+      },
+      "direct_transition": "Q15"
+    },
+    "A14_Utilities": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a14",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30124-4",
+        "display": "Utilities"
+      },
+      "direct_transition": "Q15"
+    },
+    "A14_Childcare": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a14",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30127-7",
+        "display": "Childcare"
+      },
+      "direct_transition": "Q15"
+    },
+    "A14_Medicine": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a14",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30128-5",
+        "display": "Medicine or Any Health Care"
+      },
+      "direct_transition": "Q15"
+    },
+    "A14_Phone": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a14",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30129-3",
+        "display": "Phone"
+      },
+      "direct_transition": "Q15"
+    },
+    "A14_Other": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a14",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA46-8",
+        "display": "Other, Please write"
+      },
+      "direct_transition": "Q15"
+    },
+    "Q14C": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Q14_Half",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "poverty_ratio",
+            "operator": "<",
+            "value": 0.5
+          }
+        },
+        {
+          "transition": "Q14_LessThanOne",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "poverty_ratio",
+            "operator": "<",
+            "value": 1
+          }
+        },
+        {
+          "transition": "Q14_LessThanTwo",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "poverty_ratio",
+            "operator": "<",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Q14_LessThanFive",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "poverty_ratio",
+            "operator": "<",
+            "value": 5
+          }
+        },
+        {
+          "transition": "Q14_FiveOrHigher"
+        }
+      ]
+    },
+    "Q14_Half": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Medicine",
+          "distribution": 0.227
+        },
+        {
+          "transition": "Q14_Half_Food?",
+          "distribution": 0.7729999999999999
+        }
+      ]
+    },
+    "Q14_LessThanOne": {
+      "type": "Simple",
+      "direct_transition": "Q14_LessThanOne_Meds?"
+    },
+    "Q14_LessThanTwo": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Medicine",
+          "distribution": 0.196
+        },
+        {
+          "transition": "Q14_LessThanTwo_Food?",
+          "distribution": 0.804
+        }
+      ]
+    },
+    "Q14_LessThanFive": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Medicine",
+          "distribution": 0.11
+        },
+        {
+          "transition": "Q14_LessThanFive_Food?",
+          "distribution": 0.89
+        }
+      ]
+    },
+    "Q14_FiveOrHigher": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Medicine",
+          "distribution": 0.043
+        },
+        {
+          "transition": "Q14_FiveOrHigher_Food?",
+          "distribution": 0.957
+        }
+      ]
+    },
+    "Q14_Durables": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Childcare",
+          "distribution": 0.25
+        },
+        {
+          "transition": "A14_Phone",
+          "distribution": 0.25
+        },
+        {
+          "transition": "A14_Other",
+          "distribution": 0.25
+        },
+        {
+          "transition": "A14_Clothing",
+          "distribution": 0.25
+        }
+      ]
+    },
+    "Q14_LessThanOne_Meds?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Medicine",
+          "distribution": 0.227
+        },
+        {
+          "transition": "Q14_LessThanOne_Food?",
+          "distribution": 0.773
+        }
+      ]
+    },
+    "Q14_LessThanOne_Food?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Food",
+          "distribution": 0.271
+        },
+        {
+          "transition": "Q14_LessThanOne_Utils?",
+          "distribution": 0.729
+        }
+      ]
+    },
+    "Q14_LessThanOne_Utils?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Utilities",
+          "distribution": 0.325
+        },
+        {
+          "transition": "Q14_LessThanOne_Durables?",
+          "distribution": 0.675
+        }
+      ]
+    },
+    "Q14_LessThanOne_Durables?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Q14_Durables",
+          "distribution": 0.325
+        },
+        {
+          "transition": "A14_NotAnswer",
+          "distribution": 0.675
+        }
+      ]
+    },
+    "Q14_LessThanTwo_Food?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Food",
+          "distribution": 0.185
+        },
+        {
+          "transition": "Q14_LessThanTwo_Utils?",
+          "distribution": 0.815
+        }
+      ]
+    },
+    "Q14_LessThanTwo_Utils?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Utilities",
+          "distribution": 0.223
+        },
+        {
+          "transition": "Q14_LessThanTwo_Durables?",
+          "distribution": 0.777
+        }
+      ]
+    },
+    "Q14_LessThanTwo_Durables?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Q14_Durables",
+          "distribution": 0.216
+        },
+        {
+          "transition": "A14_NotAnswer",
+          "distribution": 0.784
+        }
+      ]
+    },
+    "Q14_Half_Food?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Food",
+          "distribution": 0.266
+        },
+        {
+          "transition": "Q14_Half_Utils?",
+          "distribution": 0.734
+        }
+      ]
+    },
+    "Q14_Half_Utils?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Utilities",
+          "distribution": 0.328
+        },
+        {
+          "transition": "Q14_Half_Durables?",
+          "distribution": 0.672
+        }
+      ]
+    },
+    "Q14_Half_Durables?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Q14_Durables",
+          "distribution": 0.311
+        },
+        {
+          "transition": "A14_NotAnswer",
+          "distribution": 0.689
+        }
+      ]
+    },
+    "Q14_LessThanFive_Food?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Food",
+          "distribution": 0.084
+        },
+        {
+          "transition": "Q14_LessThanFive_Utils?",
+          "distribution": 0.916
+        }
+      ]
+    },
+    "Q14_LessThanFive_Utils?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Utilities",
+          "distribution": 0.124
+        },
+        {
+          "transition": "Q14_LessThanFive_Durables?",
+          "distribution": 0.876
+        }
+      ]
+    },
+    "Q14_LessThanFive_Durables?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Q14_Durables",
+          "distribution": 0.088
+        },
+        {
+          "transition": "A14_NotAnswer",
+          "distribution": 0.912
+        }
+      ]
+    },
+    "Q14_FiveOrHigher_Food?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Food",
+          "distribution": 0.027
+        },
+        {
+          "transition": "Q14_FiveOrHigher_Utils?",
+          "distribution": 0.973
+        }
+      ]
+    },
+    "Q14_FiveOrHigher_Utils?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A14_Utilities",
+          "distribution": 0.04
+        },
+        {
+          "transition": "Q14_FiveOrHigher_Durables?",
+          "distribution": 0.96
+        }
+      ]
+    },
+    "Q14_FiveOrHigher_Durables?": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Q14_Durables",
+          "distribution": 0.037
+        },
+        {
+          "transition": "A14_NotAnswer",
+          "distribution": 0.963
+        }
+      ]
+    },
+    "Q16": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Q16M",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "marital_status",
+            "operator": "==",
+            "value": "M"
+          }
+        },
+        {
+          "transition": "Q16O"
+        }
+      ]
+    },
+    "A15_YesA": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a15",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30133-5",
+        "display": "Yes, it has kept me from medical appointments or from getting my medications"
+      },
+      "direct_transition": "No Transport Access"
+    },
+    "A15_YesB": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a15",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30134-3",
+        "display": "Yes, it has kept me from non-medical meetings, appointments, work, or from getting things that I need"
+      },
+      "direct_transition": "Transport Problem"
+    },
+    "A15_No": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a15",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA32-8",
+        "display": "No"
+      },
+      "direct_transition": "Q16"
+    },
+    "Transport Problem": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 266934004,
+          "display": "Transport problems (finding)"
+        }
+      ],
+      "direct_transition": "Q16"
+    },
+    "No Transport Access": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 713458007,
+          "display": "Lack of access to transportation (finding)"
+        }
+      ],
+      "direct_transition": "Q16"
+    },
+    "Q17": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A17_NotAtAll",
+          "distribution": 0.418
+        },
+        {
+          "transition": "A17_LittleBit",
+          "distribution": 0.262
+        },
+        {
+          "transition": "A17_Somewhat",
+          "distribution": 0.1846
+        },
+        {
+          "transition": "A17_QuiteBit",
+          "distribution": 0.0793
+        },
+        {
+          "transition": "A17_VeryMuch",
+          "distribution": 0.0481
+        },
+        {
+          "transition": "A17_NotAnswer",
+          "distribution": 0.008
+        }
+      ]
+    },
+    "Q16M": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A16_LessThanOne",
+          "distribution": 0.065
+        },
+        {
+          "transition": "A16_OneOrTwo",
+          "distribution": 0.065
+        },
+        {
+          "transition": "A16_ThreeToFive",
+          "distribution": 0.4325
+        },
+        {
+          "transition": "A16_FiveOrMore",
+          "distribution": 0.4325
+        },
+        {
+          "transition": "A16_NotAnswer",
+          "distribution": 0.005
+        }
+      ]
+    },
+    "Q16O": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A16_LessThanOne",
+          "distribution": 0.165
+        },
+        {
+          "transition": "A16_OneOrTwo",
+          "distribution": 0.165
+        },
+        {
+          "transition": "A16_ThreeToFive",
+          "distribution": 0.3325
+        },
+        {
+          "transition": "A16_FiveOrMore",
+          "distribution": 0.3325
+        },
+        {
+          "transition": "A16_NotAnswer",
+          "distribution": 0.005
+        }
+      ]
+    },
+    "A16_LessThanOne": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a16",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA27722-0",
+        "display": "Less than once a week"
+      },
+      "direct_transition": "Isolation"
+    },
+    "A16_OneOrTwo": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a16",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30130-1",
+        "display": "1 or 2 times a week"
+      },
+      "direct_transition": "Limited Contact"
+    },
+    "A16_ThreeToFive": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a16",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30131-9",
+        "display": "3 to 5 times a week"
+      },
+      "direct_transition": "End Isolation"
+    },
+    "A16_FiveOrMore": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a16",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30132-7",
+        "display": "5 or more times a week"
+      },
+      "direct_transition": "End Isolation"
+    },
+    "A16_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a16",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q17"
+    },
+    "Isolation": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "social_isolation",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 422650009,
+          "display": "Social isolation (finding)"
+        }
+      ],
+      "direct_transition": "Q17"
+    },
+    "Limited Contact": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "social_isolation",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 423315002,
+          "display": "Limited social contact (finding)"
+        }
+      ],
+      "direct_transition": "Q17"
+    },
+    "End Isolation": {
+      "type": "ConditionEnd",
+      "direct_transition": "Q17",
+      "referenced_by_attribute": "social_isolation"
+    },
+    "Q18": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "criminal_record",
+            "operator": "is not nil"
+          },
+          "distributions": [],
+          "transition": "A18_Yes"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "A18_NotAnswer",
+              "distribution": 0.005
+            },
+            {
+              "transition": "A18_Yes",
+              "distribution": 0.011
+            },
+            {
+              "transition": "A18_No",
+              "distribution": 0.984
+            }
+          ]
+        }
+      ]
+    },
+    "A17_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a17",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q18"
+    },
+    "A17_NotAtAll": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a17",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA6568-5",
+        "display": "Not at all"
+      },
+      "direct_transition": "End Stress"
+    },
+    "A17_LittleBit": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a17",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA13863-8",
+        "display": "A little bit"
+      },
+      "direct_transition": "Stress"
+    },
+    "A17_Somewhat": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a17",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA13909-9",
+        "display": "Somewhat"
+      },
+      "direct_transition": "Stress"
+    },
+    "A17_QuiteBit": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a17",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA13902-4",
+        "display": "Quite a bit"
+      },
+      "direct_transition": "Stress"
+    },
+    "A17_VeryMuch": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a17",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA13914-9",
+        "display": "Very much"
+      },
+      "direct_transition": "Stress"
+    },
+    "Stress": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 73595000,
+          "display": "Stress (finding)"
+        }
+      ],
+      "direct_transition": "Q18"
+    },
+    "End Stress": {
+      "type": "ConditionEnd",
+      "direct_transition": "Q18",
+      "condition_onset": "Stress"
+    },
+    "Q19": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "refugee",
+            "operator": "is not nil"
+          },
+          "distributions": [],
+          "transition": "A19_Yes"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "A19_NotAnswer",
+              "distribution": 0.005
+            },
+            {
+              "transition": "A19_Yes",
+              "distribution": 0.00011
+            },
+            {
+              "transition": "A19_No",
+              "distribution": 0.99489
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "birth_country",
+            "operator": "==",
+            "value": "US"
+          }
+        },
+        {
+          "distributions": [
+            {
+              "transition": "A19_NotAnswer",
+              "distribution": 0.005
+            },
+            {
+              "transition": "A19_Yes",
+              "distribution": 0.05
+            },
+            {
+              "transition": "A19_No",
+              "distribution": 0.945
+            }
+          ]
+        }
+      ]
+    },
+    "A18_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a18",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q19"
+    },
+    "A18_No": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a18",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA32-8",
+        "display": "No"
+      },
+      "direct_transition": "Q19"
+    },
+    "A18_Yes": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a18",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA33-6",
+        "display": "Yes"
+      },
+      "direct_transition": "Smooth Criminal"
+    },
+    "Smooth Criminal": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "criminal_record",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 266948004,
+          "display": "Has a criminal record (finding)"
+        }
+      ],
+      "direct_transition": "Q19"
+    },
+    "Q20": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "A20_NotAnswer",
+          "distribution": 0.0023
+        },
+        {
+          "transition": "A20_Unsure",
+          "distribution": 0.0078
+        },
+        {
+          "transition": "A20_No",
+          "distribution": 0.0534
+        },
+        {
+          "transition": "A20_Yes",
+          "distribution": 0.9365
+        }
+      ]
+    },
+    "A19_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a19",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q20"
+    },
+    "A19_No": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a19",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA32-8",
+        "display": "No"
+      },
+      "direct_transition": "Q20"
+    },
+    "A19_Yes": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a19",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA33-6",
+        "display": "Yes"
+      },
+      "direct_transition": "Refugee"
+    },
+    "Refugee": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "refugee",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 446654005,
+          "display": "Refugee (person)"
+        }
+      ],
+      "direct_transition": "Q20"
+    },
+    "Q21": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "A21_Yes",
+              "distribution": 0.055
+            },
+            {
+              "transition": "A21_No",
+              "distribution": 0.945
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "A21_Yes",
+              "distribution": 0.052
+            },
+            {
+              "transition": "A21_No",
+              "distribution": 0.948
+            }
+          ]
+        }
+      ]
+    },
+    "A20_NotAnswer": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a20",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA30122-8",
+        "display": "I choose not to answer this question"
+      },
+      "direct_transition": "Q21"
+    },
+    "A20_No": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a20",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA32-8",
+        "display": "No"
+      },
+      "direct_transition": "Violence"
+    },
+    "A20_Yes": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a20",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA33-6",
+        "display": "Yes"
+      },
+      "direct_transition": "End Violence"
+    },
+    "A20_Unsure": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a20",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA14072-5",
+        "display": "Unsure"
+      },
+      "direct_transition": "Q21"
+    },
+    "Violence": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 424393004,
+          "display": "Reports of violence in the environment (finding)"
+        }
+      ],
+      "direct_transition": "Q21"
+    },
+    "End Violence": {
+      "type": "ConditionEnd",
+      "direct_transition": "Q21",
+      "condition_onset": "Violence"
+    },
+    "End Q": {
+      "type": "Simple",
+      "direct_transition": "PRAPARE"
+    },
+    "A21_Yes": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a21",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA33-6",
+        "display": "Yes"
+      },
+      "direct_transition": "Partner Violence"
+    },
+    "A21_No": {
+      "type": "SetAttribute",
+      "attribute": "prapare_a21",
+      "value_code": {
+        "system": "LOINC",
+        "code": "LA32-8",
+        "display": "No"
+      },
+      "direct_transition": "End Partner Violence"
+    },
+    "Partner Violence": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 706893006,
+          "display": "Victim of intimate partner abuse (finding)"
+        }
+      ],
+      "direct_transition": "End Q"
+    },
+    "End Partner Violence": {
+      "type": "ConditionEnd",
+      "direct_transition": "End Q",
+      "condition_onset": "Partner Violence"
+    }
+  },
+  "gmf_version": 2
+}
+,
+"encounter/substance_use_screening":{
+  "name": "substance use screening",
+  "remarks": [
+    "A basic substance use screening module."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Check Eligibility"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Check Eligibility": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "At Least",
+            "minimum": 1,
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": "<",
+                "quantity": 12,
+                "unit": "years",
+                "value": 0
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "pregnant",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "opioid_addiction_careplan",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 5602001,
+                    "display": "Opioid abuse (disorder)"
+                  }
+                ]
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": 7200002,
+                    "display": "Alcoholism"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Substance Use Screening"
+        }
+      ]
+    },
+    "Adult": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "AUDIT-C",
+          "distribution": 0.5
+        },
+        {
+          "transition": "DAST-10",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Young Adult": {
+      "type": "Simple",
+      "direct_transition": "CRAFFT"
+    },
+    "Negative": {
+      "type": "SetAttribute",
+      "attribute": "dast_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 2,
+          "low": 0
+        }
+      },
+      "direct_transition": "Cancel Drug Use"
+    },
+    "Positive": {
+      "type": "SetAttribute",
+      "attribute": "dast_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 10,
+          "low": 3
+        }
+      },
+      "direct_transition": "Drug Use"
+    },
+    "Substance Use Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 428211000124100,
+          "display": "Assessment of substance use (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 15,
+          "low": 10
+        }
+      },
+      "unit": "minutes",
+      "conditional_transition": [
+        {
+          "transition": "Adult",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 18,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Young Adult"
+        }
+      ]
+    },
+    "CRAFFT": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 868187001,
+          "display": "Assessment using Car, Relax, Alone, Forget, Friends, Trouble Screening Test (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 10
+        }
+      },
+      "unit": "minutes",
+      "distributed_transition": [
+        {
+          "transition": "Risky Activity",
+          "distribution": 0.212
+        },
+        {
+          "transition": "End Risky Activity",
+          "distribution": 0.788
+        }
+      ]
+    },
+    "Risky Activity": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 160968000,
+          "display": "Risk activity involvement (finding)"
+        }
+      ],
+      "direct_transition": "Lecture"
+    },
+    "Lecture": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 370995009,
+          "display": "Health risks education (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 20,
+          "low": 5
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Terminal",
+      "reason": "Risky Activity"
+    },
+    "Guidance": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 386516004,
+          "display": "Anticipatory guidance (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 15,
+          "low": 5
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Terminal"
+    },
+    "End Risky Activity": {
+      "type": "ConditionEnd",
+      "direct_transition": "Guidance",
+      "condition_onset": "Risky Activity"
+    },
+    "AUDIT-C": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 763302001,
+          "display": "Assessment using Alcohol Use Disorders Identification Test - Consumption (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 20
+        }
+      },
+      "unit": "minutes",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 20,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Unhealthy",
+              "distribution": 0.065
+            },
+            {
+              "transition": "Healthy",
+              "distribution": 0.935
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 25,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Unhealthy",
+              "distribution": 0.111
+            },
+            {
+              "transition": "Healthy",
+              "distribution": 0.889
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 29,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Unhealthy",
+              "distribution": 0.096
+            },
+            {
+              "transition": "Healthy",
+              "distribution": 0.904
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 34,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Unhealthy",
+              "distribution": 0.077
+            },
+            {
+              "transition": "Healthy",
+              "distribution": 0.923
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 44,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Unhealthy",
+              "distribution": 0.062
+            },
+            {
+              "transition": "Healthy",
+              "distribution": 0.938
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 49,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Unhealthy",
+              "distribution": 0.055
+            },
+            {
+              "transition": "Healthy",
+              "distribution": 0.945
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 54,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Unhealthy",
+              "distribution": 0.046
+            },
+            {
+              "transition": "Healthy",
+              "distribution": 0.954
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 59,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Unhealthy",
+              "distribution": 0.048
+            },
+            {
+              "transition": "Healthy",
+              "distribution": 0.952
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 64,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Unhealthy",
+              "distribution": 0.044
+            },
+            {
+              "transition": "Healthy",
+              "distribution": 0.956
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Unhealthy",
+              "distribution": 0.02
+            },
+            {
+              "transition": "Healthy",
+              "distribution": 0.98
+            }
+          ]
+        }
+      ]
+    },
+    "DAST-10": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 713106006,
+          "display": "Screening for drug abuse (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 20
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Check"
+    },
+    "Unhealthy Male": {
+      "type": "SetAttribute",
+      "attribute": "auditc_score",
+      "direct_transition": "Drinking",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 12,
+          "low": 4
+        }
+      }
+    },
+    "Unhealthy Female": {
+      "type": "SetAttribute",
+      "attribute": "auditc_score",
+      "direct_transition": "Drinking",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 12,
+          "low": 3
+        }
+      }
+    },
+    "Healthy Male": {
+      "type": "SetAttribute",
+      "attribute": "auditc_score",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 3,
+          "low": 0
+        }
+      },
+      "direct_transition": "Cancel Drinking"
+    },
+    "Healthy Female": {
+      "type": "SetAttribute",
+      "attribute": "auditc_score",
+      "direct_transition": "Cancel Drinking",
+      "distribution": {
+        "round": true,
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 2,
+          "low": 0
+        }
+      }
+    },
+    "Unhealthy": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Unhealthy Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Unhealthy Male"
+        }
+      ]
+    },
+    "Healthy": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Healthy Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Healthy Male"
+        }
+      ]
+    },
+    "AUDIT-C Results": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "72109-2",
+          "display": "Alcohol Use Disorder Identification Test - Consumption [AUDIT-C]"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "75626-2",
+              "display": "Total score [AUDIT-C]"
+            }
+          ],
+          "attribute": "auditc_score"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Cancel Drinking": {
+      "type": "ConditionEnd",
+      "direct_transition": "AUDIT-C Results",
+      "condition_onset": "Drinking"
+    },
+    "Drinking": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 10939881000119104,
+          "display": "Unhealthy alcohol drinking behavior (finding)"
+        }
+      ],
+      "direct_transition": "AUDIT-C Results"
+    },
+    "DAST-10 Results": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "82666-9",
+          "display": "Drug Abuse Screening Test-10 [DAST-10]"
+        }
+      ],
+      "observations": [
+        {
+          "category": "survey",
+          "unit": "{score}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "82667-7",
+              "display": "Total score [DAST-10]"
+            }
+          ],
+          "attribute": "dast_score"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Check": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 20,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.07
+            },
+            {
+              "distribution": 0.93,
+              "transition": "Negative"
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.077
+            },
+            {
+              "transition": "Negative",
+              "distribution": 0.923
+            }
+          ],
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 25,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 29,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.061
+            },
+            {
+              "transition": "Negative",
+              "distribution": 0.939
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 34,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.044
+            },
+            {
+              "transition": "Negative",
+              "distribution": 0.956
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 39,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.039
+            },
+            {
+              "transition": "Negative",
+              "distribution": 0.961
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 44,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.023
+            },
+            {
+              "transition": "Negative",
+              "distribution": 0.977
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 49,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.018
+            },
+            {
+              "transition": "Negative",
+              "distribution": 0.982
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 54,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.019
+            },
+            {
+              "transition": "Negative",
+              "distribution": 0.981
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 59,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.013
+            },
+            {
+              "transition": "Negative",
+              "distribution": 0.987
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 64,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.014
+            },
+            {
+              "transition": "Negative",
+              "distribution": 0.986
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Positive",
+              "distribution": 0.004
+            },
+            {
+              "transition": "Negative",
+              "distribution": 0.996
+            }
+          ]
+        }
+      ]
+    },
+    "Drug Use": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 361055000,
+          "display": "Misuses drugs (finding)"
+        }
+      ],
+      "direct_transition": "DAST-10 Results"
+    },
+    "Cancel Drug Use": {
+      "type": "ConditionEnd",
+      "direct_transition": "DAST-10 Results",
+      "condition_onset": "Drug Use"
+    }
+  },
+  "gmf_version": 2
+}
+,
+"encounter/vitals":{
+  "name": "Record Vitals Signs",
+  "remarks": [
+    "This submodule records height, weight, BMI and BP for the current_encounter"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "vital_sign": "Height",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "8302-2",
+          "display": "Body Height"
+        }
+      ],
+      "unit": "cm",
+      "direct_transition": "Record_Weight"
+    },
+    "Record_Weight": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "vital_sign": "Weight",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "29463-7",
+          "display": "Body Weight"
+        }
+      ],
+      "unit": "kg",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<",
+            "quantity": 2,
+            "unit": "years"
+          },
+          "remarks": [
+            "BMI is not particularly meaningful for children under 2"
+          ],
+          "transition": "Record_BP"
+        },
+        {
+          "transition": "Record_BMI"
+        }
+      ]
+    },
+    "Record_BMI": {
+      "type": "Observation",
+      "category": "vital-signs",
+      "vital_sign": "BMI",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "39156-5",
+          "display": "Body Mass Index"
+        }
+      ],
+      "unit": "kg/m2",
+      "direct_transition": "Record_BP"
+    },
+    "Record_BP": {
+      "type": "MultiObservation",
+      "category": "vital-signs",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "55284-4",
+          "display": "Blood Pressure"
+        }
+      ],
+      "observations": [
+        {
+          "category": "vital-signs",
+          "vital_sign": "Systolic Blood Pressure",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8480-6",
+              "display": "Systolic Blood Pressure"
+            }
+          ],
+          "unit": "mm[Hg]"
+        },
+        {
+          "category": "vital-signs",
+          "vital_sign": "Diastolic Blood Pressure",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8462-4",
+              "display": "Diastolic Blood Pressure"
+            }
+          ],
+          "unit": "mm[Hg]"
+        }
+      ],
+      "direct_transition": "Vitals_Terminal"
+    },
+    "Vitals_Terminal": {
+      "type": "Terminal"
+    }
+  }
+}
+,
 "epilepsy":{
   "name": "Epilepsy",
   "remarks": [
@@ -43304,8 +49862,8 @@ export default {"allergic_rhinitis":{
       ],
       "direct_transition": "encounter end",
       "range": {
-        "low": 5,
-        "high": 2
+        "low": 2,
+        "high": 5
       }
     },
     "Synthroid Medication Order": {
@@ -49330,7 +55888,8 @@ export default {"allergic_rhinitis":{
         {
           "transition": "Ear_Infection_Antibiotic_Terminal"
         }
-      ]
+      ],
+      "name": "Initial"
     },
     "Prescribe_Ear_Infection_Antibiotic": {
       "type": "Simple",
@@ -49453,7 +56012,8 @@ export default {"allergic_rhinitis":{
             }
           ]
         }
-      ]
+      ],
+      "name": "Prescribe_Ear_Infection_Antibiotic"
     },
     "Prescribe_Penicillin": {
       "type": "MedicationOrder",
@@ -49467,7 +56027,8 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "105078",
-          "display": "Penicillin G 375 MG/ML Injectable Solution"
+          "display": "Penicillin G 375 MG/ML Injectable Solution",
+          "value_set": ""
         }
       ],
       "prescription": {
@@ -49489,7 +56050,8 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "Ear_Infection_Antibiotic_Terminal"
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Prescribe_Penicillin"
     },
     "Prescribe_Ampicillin": {
       "type": "MedicationOrder",
@@ -49503,7 +56065,8 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "789980",
-          "display": "Ampicillin 100 MG/ML Injectable Solution"
+          "display": "Ampicillin 100 MG/ML Injectable Solution",
+          "value_set": ""
         }
       ],
       "prescription": {
@@ -49525,7 +56088,8 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "Ear_Infection_Antibiotic_Terminal"
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Prescribe_Ampicillin"
     },
     "Prescribe_Doxycycline": {
       "type": "Simple",
@@ -49546,7 +56110,8 @@ export default {"allergic_rhinitis":{
         {
           "transition": "Adult_Doxycycline"
         }
-      ]
+      ],
+      "name": "Prescribe_Doxycycline"
     },
     "Pediatric_Doxycycline": {
       "type": "MedicationOrder",
@@ -49555,7 +56120,8 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "1652673",
-          "display": "Doxycycline Monohydrate 50 MG Oral Tablet"
+          "display": "Doxycycline Monohydrate 50 MG Oral Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
@@ -49582,7 +56148,8 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "Ear_Infection_Antibiotic_Terminal"
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Pediatric_Doxycycline"
     },
     "Adult_Doxycycline": {
       "type": "MedicationOrder",
@@ -49591,7 +56158,8 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "1650142",
-          "display": "Doxycycline Monohydrate 100 MG Oral Tablet"
+          "display": "Doxycycline Monohydrate 100 MG Oral Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
@@ -49618,22 +56186,24 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "Ear_Infection_Antibiotic_Terminal"
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Adult_Doxycycline"
     },
     "Prescribe_Amoxicillin": {
       "type": "Simple",
+      "name": "Prescribe_Amoxicillin",
       "conditional_transition": [
         {
+          "transition": "Pediatric_Allergy_Check",
           "condition": {
             "condition_type": "Age",
-            "operator": "<",
+            "operator": ">",
             "quantity": 12,
             "unit": "years"
-          },
-          "transition": "Pediatric_Amoxicillin"
+          }
         },
         {
-          "transition": "Adult_Amoxicillin"
+          "transition": "Adult_Allergy_Check"
         }
       ]
     },
@@ -49644,7 +56214,8 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "308182",
-          "display": "Amoxicillin 250 MG Oral Capsule"
+          "display": "Amoxicillin 250 MG Oral Capsule",
+          "value_set": ""
         }
       ],
       "prescription": {
@@ -49666,7 +56237,8 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "Ear_Infection_Antibiotic_Terminal"
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Pediatric_Amoxicillin"
     },
     "Adult_Amoxicillin": {
       "type": "MedicationOrder",
@@ -49675,7 +56247,8 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "308192",
-          "display": "Amoxicillin 500 MG Oral Tablet"
+          "display": "Amoxicillin 500 MG Oral Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
@@ -49697,7 +56270,8 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "Ear_Infection_Antibiotic_Terminal"
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Adult_Amoxicillin"
     },
     "Prescribe_Cefaclor": {
       "type": "Simple",
@@ -49714,7 +56288,8 @@ export default {"allergic_rhinitis":{
         {
           "transition": "Adult_Cefaclor"
         }
-      ]
+      ],
+      "name": "Prescribe_Cefaclor"
     },
     "Pediatric_Cefaclor": {
       "type": "MedicationOrder",
@@ -49723,7 +56298,8 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "309045",
-          "display": "Cefaclor 250 MG Oral Capsule"
+          "display": "Cefaclor 250 MG Oral Capsule",
+          "value_set": ""
         }
       ],
       "prescription": {
@@ -49745,7 +56321,8 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "Ear_Infection_Antibiotic_Terminal"
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Pediatric_Cefaclor"
     },
     "Adult_Cefaclor": {
       "type": "MedicationOrder",
@@ -49754,7 +56331,8 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "309043",
-          "display": "12 HR Cefaclor 500 MG Extended Release Oral Tablet"
+          "display": "12 HR Cefaclor 500 MG Extended Release Oral Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
@@ -49776,7 +56354,8 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "Ear_Infection_Antibiotic_Terminal"
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Adult_Cefaclor"
     },
     "Prescribe_Cefuroxime": {
       "type": "MedicationOrder",
@@ -49788,7 +56367,8 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "309097",
-          "display": "Cefuroxime 250 MG Oral Tablet"
+          "display": "Cefuroxime 250 MG Oral Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
@@ -49810,13 +56390,87 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "Ear_Infection_Antibiotic_Terminal"
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Prescribe_Cefuroxime"
     },
     "Ear_Infection_Antibiotic_Terminal": {
-      "type": "Terminal"
+      "type": "Terminal",
+      "name": "Ear_Infection_Antibiotic_Terminal"
+    },
+    "Pediatric_Allergy_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "7984",
+                "display": "Penicillin V"
+              }
+            ]
+          },
+          "transition": "Pediatric_Cefdinir"
+        },
+        {
+          "transition": "Pediatric_Amoxicillin"
+        }
+      ],
+      "name": "Pediatric_Allergy_Check"
+    },
+    "Adult_Allergy_Check": {
+      "type": "Simple",
+      "name": "Adult_Allergy_Check",
+      "conditional_transition": [
+        {
+          "transition": "Adult_Azithromycin",
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "7984",
+                "display": "Penicillin V"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Adult_Amoxicillin"
+        }
+      ]
+    },
+    "Pediatric_Cefdinir": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200346,
+          "display": "Cefdinir",
+          "value_set": ""
+        }
+      ],
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Pediatric_Cefdinir",
+      "assign_to_attribute": "antibiotic_prescription"
+    },
+    "Adult_Azithromycin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 141962,
+          "display": "Azithromycin 250 MG Oral Capsule",
+          "value_set": ""
+        }
+      ],
+      "direct_transition": "Ear_Infection_Antibiotic_Terminal",
+      "name": "Adult_Azithromycin",
+      "assign_to_attribute": "antibiotic_prescription"
     }
   },
-  "gmf_version": 1
+  "gmf_version": 2
 }
 ,
 "medications/hypertension_medication":{
@@ -50014,7 +56668,7 @@ export default {"allergic_rhinitis":{
               "transition": "HCTZ+"
             },
             {
-              "transition": "Lisinopril+",
+              "transition": "ACE_Allergy_Check+",
               "distribution": 0.33
             }
           ]
@@ -50026,7 +56680,7 @@ export default {"allergic_rhinitis":{
               "distribution": 0.6
             },
             {
-              "transition": "Lisinopril+",
+              "transition": "ACE_Allergy_Check+",
               "distribution": 0.3
             },
             {
@@ -50040,64 +56694,6 @@ export default {"allergic_rhinitis":{
     "Step 2 High": {
       "type": "Simple",
       "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Or",
-                "conditions": [
-                  {
-                    "condition_type": "Attribute",
-                    "attribute": "microalbuminuria",
-                    "operator": "==",
-                    "value": true
-                  },
-                  {
-                    "condition_type": "Attribute",
-                    "attribute": "proteinuria",
-                    "operator": "==",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "condition_type": "Active Medication",
-                "codes": [
-                  {
-                    "system": "RxNorm",
-                    "code": 310798,
-                    "display": "Hydrochlorothiazide 25 MG Oral Tablet"
-                  }
-                ]
-              }
-            ]
-          },
-          "distributions": [],
-          "transition": "Lisinopril_2"
-        },
-        {
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": 310798,
-                "display": "Hydrochlorothiazide 25 MG Oral Tablet"
-              }
-            ]
-          },
-          "distributions": [
-            {
-              "distribution": 0.5,
-              "transition": "Amlodipine_2"
-            },
-            {
-              "distribution": 0.5,
-              "transition": "Lisinopril_2"
-            }
-          ]
-        },
         {
           "condition": {
             "condition_type": "Or",
@@ -50117,13 +56713,35 @@ export default {"allergic_rhinitis":{
             ]
           },
           "distributions": [],
-          "transition": "Lisinopril_2"
+          "transition": "ACE_Allergy_Check_2"
+        },
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 310798,
+                "display": "Hydrochlorothiazide 25 MG Oral Tablet"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "distribution": 0.5,
+              "transition": "Amlodipine_2"
+            },
+            {
+              "distribution": 0.5,
+              "transition": "ACE_Allergy_Check_2"
+            }
+          ]
         },
         {
           "distributions": [
             {
               "distribution": 0.5,
-              "transition": "Lisinopril_2"
+              "transition": "ACE_Allergy_Check_2"
             },
             {
               "distribution": 0.5,
@@ -50193,7 +56811,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "Lisinopril_3",
+          "transition": "ACE_Allergy_Check_3",
           "condition": {
             "condition_type": "And",
             "conditions": [
@@ -50254,7 +56872,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "Lisinopril_3",
+          "transition": "ACE_Allergy_Check_3",
           "condition": {
             "condition_type": "And",
             "conditions": [
@@ -50554,7 +57172,7 @@ export default {"allergic_rhinitis":{
       "chronic": true,
       "assign_to_attribute": "hypertension_medication",
       "reason": "hypertension_dx",
-      "direct_transition": "Lisinopril_2"
+      "direct_transition": "ACE_Allergy_Check_2"
     },
     "Lisinopril+": {
       "type": "MedicationOrder",
@@ -50735,12 +57353,12 @@ export default {"allergic_rhinitis":{
             ]
           },
           "distributions": [],
-          "transition": "Lisinopril"
+          "transition": "ACE_Allergy_Check"
         },
         {
           "distributions": [
             {
-              "transition": "Lisinopril",
+              "transition": "ACE_Allergy_Check",
               "distribution": 0.5
             },
             {
@@ -50782,10 +57400,10 @@ export default {"allergic_rhinitis":{
         },
         {
           "condition": {
-            "condition_type": "Active Condition",
+            "condition_type": "Active Medication",
             "codes": [
               {
-                "system": "SNOMED-CT",
+                "system": "RxNorm",
                 "code": 308136,
                 "display": "amLODIPine 2.5 MG Oral Tablet"
               }
@@ -50793,7 +57411,7 @@ export default {"allergic_rhinitis":{
           },
           "distributions": [
             {
-              "transition": "Lisinopril_2",
+              "transition": "ACE_Allergy_Check_2",
               "distribution": 0.5
             },
             {
@@ -50815,7 +57433,7 @@ export default {"allergic_rhinitis":{
           },
           "distributions": [
             {
-              "transition": "Lisinopril_2",
+              "transition": "ACE_Allergy_Check_2",
               "distribution": 0.5
             },
             {
@@ -50886,7 +57504,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "Lisinopril_3",
+          "transition": "ACE_Allergy_Check_3",
           "condition": {
             "condition_type": "And",
             "conditions": [
@@ -50952,9 +57570,197 @@ export default {"allergic_rhinitis":{
       "attribute": "hypertension_severe",
       "value": true,
       "direct_transition": "Increase Step"
+    },
+    "ACE_Allergy_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Losartan",
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "29046",
+                "display": "Lisinopril"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Lisinopril"
+        }
+      ]
+    },
+    "Losartan": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 979485,
+          "display": "losartan potassium 25 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "chronic": true,
+      "reason": "hypertension_dx",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "assign_to_attribute": "hypertension_medication"
+    },
+    "ACE_Allergy_Check_2": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Losartan 2",
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "29046",
+                "display": "Lisinopril"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Lisinopril_2"
+        }
+      ]
+    },
+    "Losartan 2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 979485,
+          "display": "losartan potassium 25 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "assign_to_attribute": "hypertension_medication_2",
+      "reason": "hypertension_dx",
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      },
+      "chronic": true
+    },
+    "ACE_Allergy_Check_3": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Losartan_3",
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "29046",
+                "display": "Lisinopril"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Lisinopril_3"
+        }
+      ]
+    },
+    "Losartan_3": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 979485,
+          "display": "losartan potassium 25 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "assign_to_attribute": "hypertension_medication_3",
+      "reason": "hypertension_dx",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      }
+    },
+    "ACE_Allergy_Check+": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Losartan+",
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "29046",
+                "display": "Lisinopril"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Lisinopril+"
+        }
+      ]
+    },
+    "Losartan+": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 979485,
+          "display": "losartan potassium 25 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Amlodipine_2",
+      "assign_to_attribute": "hypertension_medication",
+      "reason": "hypertension_dx",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "days"
+        }
+      }
     }
   },
-  "gmf_version": 1
+  "gmf_version": 2
 }
 ,
 "medications/moderate_opioid_pain_reliever":{
@@ -51623,7 +58429,8 @@ export default {"allergic_rhinitis":{
         {
           "transition": "OTC_Pain_Reliever_Terminal"
         }
-      ]
+      ],
+      "name": "Initial"
     },
     "Prescribe_OTC_Pain_Reliever": {
       "type": "Simple",
@@ -51712,7 +58519,8 @@ export default {"allergic_rhinitis":{
             }
           ]
         }
-      ]
+      ],
+      "name": "Prescribe_OTC_Pain_Reliever"
     },
     "Prescribe_Aspirin": {
       "type": "MedicationOrder",
@@ -51725,13 +58533,15 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "243670",
-          "display": "Aspirin 81 MG Oral Tablet"
+          "display": "Aspirin 81 MG Oral Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
         "as_needed": true
       },
-      "direct_transition": "OTC_Pain_Reliever_Terminal"
+      "direct_transition": "OTC_Pain_Reliever_Terminal",
+      "name": "Prescribe_Aspirin"
     },
     "Prescribe_Acetaminophen": {
       "type": "Simple",
@@ -51748,7 +58558,8 @@ export default {"allergic_rhinitis":{
         {
           "transition": "Adult_Acetaminophen"
         }
-      ]
+      ],
+      "name": "Prescribe_Acetaminophen"
     },
     "Pediatric_Acetaminophen": {
       "type": "MedicationOrder",
@@ -51757,13 +58568,15 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "313820",
-          "display": "Acetaminophen 160 MG Chewable Tablet"
+          "display": "Acetaminophen 160 MG Chewable Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
         "as_needed": true
       },
-      "direct_transition": "OTC_Pain_Reliever_Terminal"
+      "direct_transition": "OTC_Pain_Reliever_Terminal",
+      "name": "Pediatric_Acetaminophen"
     },
     "Adult_Acetaminophen": {
       "type": "MedicationOrder",
@@ -51772,30 +58585,53 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "313782",
-          "display": "Acetaminophen 325 MG Oral Tablet"
+          "display": "Acetaminophen 325 MG Oral Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
         "as_needed": true
       },
-      "direct_transition": "OTC_Pain_Reliever_Terminal"
+      "direct_transition": "OTC_Pain_Reliever_Terminal",
+      "name": "Adult_Acetaminophen"
     },
     "Prescribe_Ibuprofen": {
       "type": "Simple",
       "conditional_transition": [
         {
+          "transition": "Prescribe_Acetaminophen",
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "5640",
+                "display": "Ibuprofen"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Pediatric_Ibuprofen",
           "condition": {
             "condition_type": "Age",
             "operator": "<",
             "quantity": 12,
             "unit": "years"
-          },
-          "transition": "Pediatric_Ibuprofen"
+          }
         },
         {
-          "transition": "Adult_Ibuprofen"
+          "transition": "Adult_Ibuprofen",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 12,
+            "unit": "years",
+            "value": 0
+          }
         }
-      ]
+      ],
+      "name": "Prescribe_Ibuprofen"
     },
     "Pediatric_Ibuprofen": {
       "type": "MedicationOrder",
@@ -51804,13 +58640,15 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "198405",
-          "display": "Ibuprofen 100 MG Oral Tablet"
+          "display": "Ibuprofen 100 MG Oral Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
         "as_needed": true
       },
-      "direct_transition": "OTC_Pain_Reliever_Terminal"
+      "direct_transition": "OTC_Pain_Reliever_Terminal",
+      "name": "Pediatric_Ibuprofen"
     },
     "Adult_Ibuprofen": {
       "type": "MedicationOrder",
@@ -51819,13 +58657,15 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "310965",
-          "display": "Ibuprofen 200 MG Oral Tablet"
+          "display": "Ibuprofen 200 MG Oral Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
         "as_needed": true
       },
-      "direct_transition": "OTC_Pain_Reliever_Terminal"
+      "direct_transition": "OTC_Pain_Reliever_Terminal",
+      "name": "Adult_Ibuprofen"
     },
     "Prescribe_Naproxen_Sodium": {
       "type": "Simple",
@@ -51860,7 +58700,8 @@ export default {"allergic_rhinitis":{
             }
           ]
         }
-      ]
+      ],
+      "name": "Prescribe_Naproxen_Sodium"
     },
     "Naproxen_Sodium": {
       "type": "MedicationOrder",
@@ -51869,19 +58710,22 @@ export default {"allergic_rhinitis":{
         {
           "system": "RxNorm",
           "code": "849574",
-          "display": "Naproxen sodium 220 MG Oral Tablet"
+          "display": "Naproxen sodium 220 MG Oral Tablet",
+          "value_set": ""
         }
       ],
       "prescription": {
         "as_needed": true
       },
-      "direct_transition": "OTC_Pain_Reliever_Terminal"
+      "direct_transition": "OTC_Pain_Reliever_Terminal",
+      "name": "Naproxen_Sodium"
     },
     "OTC_Pain_Reliever_Terminal": {
-      "type": "Terminal"
+      "type": "Terminal",
+      "name": "OTC_Pain_Reliever_Terminal"
     }
   },
-  "gmf_version": 1
+  "gmf_version": 2
 }
 ,
 "medications/strong_opioid_pain_reliever":{
@@ -52028,6 +58872,175 @@ export default {"allergic_rhinitis":{
     }
   },
   "gmf_version": 1
+}
+,
+"mend_program":{
+  "name": "MEND Program",
+  "remarks": [
+    "This module simulates the MEND (Mind, Exercise, Nutrition, Do It!) program, described here - http://www.mendfoundation.org.",
+    "MEND is one of the world's largest evidence-based healthy lifestyle programs that empowers children, with the support of their families, to reach and maintain a healthy weight",
+    "While the program is targeted at 7 - 13 year olds, it is applied more widely in practice.",
+    "This module allows children between 5 - 17 to participate in the program.",
+    "This module depends on attributes set by the java WeightLossModule."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Wellness_Encounter",
+      "name": "Initial"
+    },
+    "Wellness_Encounter": {
+      "remarks": [
+        "Reasons"
+      ],
+      "type": "Encounter",
+      "wellness": true,
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 5,
+                "unit": "years"
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<=",
+                "quantity": 17,
+                "unit": "years"
+              },
+              {
+                "condition_type": "Attribute",
+                "operator": ">=",
+                "attribute": "bmi_percentile",
+                "value": 95
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Comprehensive_Multidisciplinary_Intervention_Care_Plan",
+              "distribution": 0.041
+            },
+            {
+              "transition": "Not_Referred",
+              "distribution": 0.959
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "End_Not_Referred_Wellness_Encounter"
+        }
+      ],
+      "name": "Wellness_Encounter"
+    },
+    "Comprehensive_Multidisciplinary_Intervention_Care_Plan": {
+      "type": "CarePlanStart",
+      "assign_to_attribute": "obesity_care_plan",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "718361005",
+          "display": "Weight management program",
+          "value_set": ""
+        }
+      ],
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": "77806000",
+          "display": "Low calorie diet"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "1171000175109",
+          "display": "Increased physical activity"
+        }
+      ],
+      "direct_transition": "End_Wellness_Encounter",
+      "name": "Comprehensive_Multidisciplinary_Intervention_Care_Plan"
+    },
+    "End_Wellness_Encounter": {
+      "type": "EncounterEnd",
+      "distributed_transition": [
+        {
+          "transition": "Wait_For_Initial_MEND_Week",
+          "distribution": 0.416
+        },
+        {
+          "transition": "End_MEND_Program",
+          "distribution": 0.584
+        }
+      ],
+      "name": "End_Wellness_Encounter"
+    },
+    "Set_MEND_Weeks": {
+      "type": "SetAttribute",
+      "attribute": "mend_weeks",
+      "direct_transition": "Increment_MEND_Week",
+      "value": 0,
+      "name": "Set_MEND_Weeks"
+    },
+    "Increment_MEND_Week": {
+      "type": "Counter",
+      "attribute": "mend_weeks",
+      "action": "increment",
+      "direct_transition": "MEND_Visits",
+      "name": "Increment_MEND_Week"
+    },
+    "MEND_Visits": {
+      "type": "CallSubmodule",
+      "submodule": "weight_loss/mend_week",
+      "direct_transition": "Check_MEND_Weeks",
+      "name": "MEND_Visits"
+    },
+    "Wait_For_Initial_MEND_Week": {
+      "type": "Delay",
+      "range": {
+        "low": 14,
+        "high": 21,
+        "unit": "days"
+      },
+      "direct_transition": "Set_MEND_Weeks",
+      "name": "Wait_For_Initial_MEND_Week"
+    },
+    "Not_Referred": {
+      "type": "Simple",
+      "direct_transition": "End_Not_Referred_Wellness_Encounter",
+      "name": "Not_Referred"
+    },
+    "End_Not_Referred_Wellness_Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Initial",
+      "name": "End_Not_Referred_Wellness_Encounter"
+    },
+    "Check_MEND_Weeks": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "End_MEND_Program",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "mend_weeks",
+            "operator": ">",
+            "value": 10
+          }
+        },
+        {
+          "transition": "Increment_MEND_Week"
+        }
+      ],
+      "name": "Check_MEND_Weeks"
+    },
+    "End_MEND_Program": {
+      "type": "Terminal",
+      "name": "End_MEND_Program"
+    }
+  }
 }
 ,
 "metabolic_syndrome_care":{
@@ -65475,7 +72488,24 @@ export default {"allergic_rhinitis":{
     },
     "Administer_Broad_Spectrum_Abx": {
       "type": "Simple",
-      "direct_transition": "Piperacillin_Tazobactam"
+      "conditional_transition": [
+        {
+          "transition": "Aztreonam",
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "7984",
+                "display": "Penicillin V"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Piperacillin_Tazobactam"
+        }
+      ]
     },
     "Age_Guard": {
       "type": "Guard",
@@ -65574,7 +72604,7 @@ export default {"allergic_rhinitis":{
           }
         },
         {
-          "transition": "Set_Systolic"
+          "transition": "Record_Blood_Pressure"
         }
       ],
       "range": {
@@ -65662,7 +72692,7 @@ export default {"allergic_rhinitis":{
           "distribution": 0.125
         },
         {
-          "transition": "Admit_to_Inpatient",
+          "transition": "Record_Blood_Pressure_2",
           "distribution": 0.875
         }
       ]
@@ -65795,7 +72825,7 @@ export default {"allergic_rhinitis":{
           "display": "4 ML norepinephrine 1 MG/ML Injection"
         }
       ],
-      "direct_transition": "Set_Systolic",
+      "direct_transition": "Record_Blood_Pressure",
       "administration": true,
       "remarks": [
         "Among them, NE remains the most commonly used vasopressor and is recommended as the first-line agent by the Surviving Sepsis Campaign (SSC) experts (2). As a strong α-adrenergic agonist, NE increases blood pressure primarily through its vasoconstrictive properties with little effect on heart rate. Ref: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7333107/#:~:text=Among%20them%2C%20NE%20remains%20the,little%20effect%20on%20heart%20rate.",
@@ -65870,7 +72900,7 @@ export default {"allergic_rhinitis":{
     "Low_MAP": {
       "type": "Observation",
       "category": "vital-signs",
-      "unit": "",
+      "unit": "mm[Hg]",
       "codes": [
         {
           "system": "LOINC",
@@ -65887,7 +72917,7 @@ export default {"allergic_rhinitis":{
     "Normal_MAP": {
       "type": "Observation",
       "category": "vital-signs",
-      "unit": "",
+      "unit": "mm[Hg]",
       "codes": [
         {
           "system": "LOINC",
@@ -65899,26 +72929,6 @@ export default {"allergic_rhinitis":{
       "range": {
         "low": 70,
         "high": 100
-      }
-    },
-    "Set_Diastolic": {
-      "type": "VitalSign",
-      "vital_sign": "Diastolic Blood Pressure",
-      "unit": "mm[Hg]",
-      "direct_transition": "Record_Blood_Pressure",
-      "range": {
-        "low": 40,
-        "high": 120
-      }
-    },
-    "Set_Systolic": {
-      "type": "VitalSign",
-      "vital_sign": "Systolic Blood Pressure",
-      "unit": "mm[Hg]",
-      "direct_transition": "Set_Diastolic",
-      "range": {
-        "low": 40,
-        "high": 120
       }
     },
     "Record_Blood_Pressure": {
@@ -65943,7 +72953,10 @@ export default {"allergic_rhinitis":{
               "display": "Systolic Blood Pressure"
             }
           ],
-          "vital_sign": "Systolic Blood Pressure"
+          "range": {
+            "low": 40,
+            "high": 120
+          }
         },
         {
           "category": "laboratory",
@@ -65955,7 +72968,10 @@ export default {"allergic_rhinitis":{
               "display": "Diastolic Blood Pressure"
             }
           ],
-          "vital_sign": "Diastolic Blood Pressure"
+          "range": {
+            "low": 40,
+            "high": 120
+          }
         }
       ],
       "direct_transition": "Check_ARDS"
@@ -66015,8 +73031,61 @@ export default {"allergic_rhinitis":{
         "high": 40,
         "unit": "years"
       }
+    },
+    "Record_Blood_Pressure_2": {
+      "type": "MultiObservation",
+      "category": "vital-signs",
+      "number_of_observations": 0,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "85354-9",
+          "display": "Blood Pressure"
+        }
+      ],
+      "observations": [
+        {
+          "category": "vital-signs",
+          "unit": "mm[Hg]",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8480-6",
+              "display": "Systolic Blood Pressure"
+            }
+          ],
+          "vital_sign": "Systolic Blood Pressure"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mm[Hg]",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "8462-4",
+              "display": "Diastolic Blood Pressure"
+            }
+          ],
+          "vital_sign": "Diastolic Blood Pressure"
+        }
+      ],
+      "direct_transition": "Admit_to_Inpatient"
+    },
+    "Aztreonam": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1664986,
+          "display": "Aztreonam 2000 MG Injection"
+        }
+      ],
+      "direct_transition": "Vancomycin",
+      "administration": true,
+      "reason": "Sepsis"
     }
-  }
+  },
+  "gmf_version": 2
 }
 ,
 "sexual_activity":{
@@ -66713,7 +73782,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "distribution": 0.2,
-          "transition": "Prescribe_Antibiotic"
+          "transition": "Penicillin_Allergy_Check"
         }
       ]
     },
@@ -67023,9 +74092,42 @@ export default {"allergic_rhinitis":{
     "Chronic_Sinusitis_Followup_without_action": {
       "type": "EncounterEnd",
       "direct_transition": "Chronic_Sinusitis_Continues"
+    },
+    "Penicillin_Allergy_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Prescribe_Alternative_Antibiotic",
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "7984",
+                "display": "Penicillin V"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Prescribe_Antibiotic"
+        }
+      ]
+    },
+    "Prescribe_Alternative_Antibiotic": {
+      "type": "MedicationOrder",
+      "reason": "Sinusitis Condition",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1649987,
+          "display": "doxycycline hyclate 100 MG"
+        }
+      ],
+      "direct_transition": "End_Encounter"
     }
   },
-  "gmf_version": 1
+  "gmf_version": 2
 }
 ,
 "sore_throat":{
@@ -67462,16 +74564,16 @@ export default {"allergic_rhinitis":{
       "type": "Simple",
       "conditional_transition": [
         {
+          "transition": "Adult_Allergy_Check",
           "condition": {
             "condition_type": "Age",
-            "operator": "<",
+            "operator": ">",
             "quantity": 18,
             "unit": "years"
-          },
-          "transition": "Prescribe_Antibiotics_Child"
+          }
         },
         {
-          "transition": "Prescribe_Antibiotics_Adult"
+          "transition": "Pediatric_Allergy_Check"
         }
       ]
     },
@@ -67649,9 +74751,75 @@ export default {"allergic_rhinitis":{
       "type": "MedicationEnd",
       "referenced_by_attribute": "Sore Throat Antibiotic",
       "direct_transition": "Potential_Infection"
+    },
+    "Pediatric_Allergy_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Prescribe_Alternate_Pediatric",
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "7984",
+                "display": "Penicillin V"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Prescribe_Antibiotics_Child"
+        }
+      ]
+    },
+    "Adult_Allergy_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Prescribe_Alternate_Adult",
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "7984",
+                "display": "Penicillin V"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Prescribe_Antibiotics_Adult"
+        }
+      ]
+    },
+    "Prescribe_Alternate_Adult": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 212446,
+          "display": "Azithromycin 250mg"
+        }
+      ],
+      "assign_to_attribute": "Sore Throat Antibiotic",
+      "direct_transition": "End_Encounter"
+    },
+    "Prescribe_Alternate_Pediatric": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 284215,
+          "display": "Clindamycin 300mg"
+        }
+      ],
+      "direct_transition": "End_Encounter",
+      "assign_to_attribute": "Sore Throat Antibiotic"
     }
   },
-  "gmf_version": 1
+  "gmf_version": 2
 }
 ,
 "spina_bifida":{
@@ -69018,7 +76186,7 @@ export default {"allergic_rhinitis":{
       "observations": [
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69033,7 +76201,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69048,7 +76216,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69063,7 +76231,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69078,7 +76246,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69111,7 +76279,7 @@ export default {"allergic_rhinitis":{
       "observations": [
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69126,7 +76294,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69158,7 +76326,7 @@ export default {"allergic_rhinitis":{
       "observations": [
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69173,7 +76341,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69188,7 +76356,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69203,7 +76371,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69218,7 +76386,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69254,7 +76422,7 @@ export default {"allergic_rhinitis":{
       "observations": [
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69269,7 +76437,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69284,7 +76452,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69299,7 +76467,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69314,7 +76482,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69329,7 +76497,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69344,7 +76512,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69359,7 +76527,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69391,7 +76559,7 @@ export default {"allergic_rhinitis":{
       "observations": [
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69406,7 +76574,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69421,7 +76589,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69436,7 +76604,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69450,7 +76618,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69465,7 +76633,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69480,7 +76648,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69635,7 +76803,7 @@ export default {"allergic_rhinitis":{
       "observations": [
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69650,7 +76818,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69665,7 +76833,7 @@ export default {"allergic_rhinitis":{
         },
         {
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69681,7 +76849,7 @@ export default {"allergic_rhinitis":{
         {
           "type": "Observation",
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69697,7 +76865,7 @@ export default {"allergic_rhinitis":{
         {
           "type": "Observation",
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69713,7 +76881,7 @@ export default {"allergic_rhinitis":{
         {
           "type": "Observation",
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69729,7 +76897,7 @@ export default {"allergic_rhinitis":{
         {
           "type": "Observation",
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -69745,7 +76913,7 @@ export default {"allergic_rhinitis":{
         {
           "type": "Observation",
           "category": "survey",
-          "unit": "units",
+          "unit": "{score}",
           "codes": [
             {
               "system": "LOINC",
@@ -77431,6 +84599,176 @@ export default {"allergic_rhinitis":{
   "gmf_version": 1
 }
 ,
+"weight_loss/mend_week":{
+  "name": "MEND Weekly Sessions",
+  "remarks": [
+    "2 intervention encounters that record vitals and provide a cooking class ",
+    "and exercise class."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Wait_For_First",
+      "name": "Initial"
+    },
+    "Nutrition_Intervention_Procedure": {
+      "type": "Procedure",
+      "reason": "obesity",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "290045001",
+          "display": "Kitchen practice"
+        }
+      ],
+      "direct_transition": "Exercise_Intervention_Procedure",
+      "duration": {
+        "low": 45,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "name": "Nutrition_Intervention_Procedure"
+    },
+    "Exercise_Intervention_Procedure": {
+      "type": "Procedure",
+      "reason": "obesity",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "229095001",
+          "display": "Exercise class"
+        }
+      ],
+      "duration": {
+        "low": 45,
+        "high": 60,
+        "unit": "minutes"
+      },
+      "direct_transition": "End_Exercise_Intervention",
+      "name": "Exercise_Intervention_Procedure"
+    },
+    "End_Exercise_Intervention": {
+      "type": "EncounterEnd",
+      "direct_transition": "Check_For_End",
+      "name": "End_Exercise_Intervention"
+    },
+    "MEND_Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "obesity",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "185347001",
+          "display": "Encounter for problem"
+        }
+      ],
+      "direct_transition": "MEND_Vitals",
+      "name": "MEND_Encounter"
+    },
+    "End_MEND_Week": {
+      "type": "Terminal",
+      "name": "End_MEND_Week"
+    },
+    "MEND_Vitals": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/vitals",
+      "direct_transition": "Nutrition_Intervention_Procedure",
+      "name": "MEND_Vitals"
+    },
+    "Reset_Visit_Counter": {
+      "type": "SetAttribute",
+      "attribute": "mend_weekly_visit_count",
+      "direct_transition": "Increment_MEND_Visit",
+      "value": 0,
+      "name": "Reset_Visit_Counter"
+    },
+    "Increment_MEND_Visit": {
+      "type": "Counter",
+      "attribute": "mend_weekly_visit_count",
+      "action": "increment",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "weight_loss_adherence",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "MEND_Encounter",
+              "distribution": 0.95
+            },
+            {
+              "transition": "Check_For_End",
+              "distribution": 0.05
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "MEND_Encounter",
+              "distribution": 0.1
+            },
+            {
+              "transition": "Check_For_End",
+              "distribution": 0.9
+            }
+          ]
+        }
+      ],
+      "name": "Increment_MEND_Visit"
+    },
+    "Wait_For_Next_Visit": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 3,
+        "unit": "days"
+      },
+      "direct_transition": "Increment_MEND_Visit",
+      "name": "Wait_For_Next_Visit"
+    },
+    "Wait_For_Week_To_End": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 2,
+        "unit": "days"
+      },
+      "direct_transition": "End_MEND_Week",
+      "name": "Wait_For_Week_To_End"
+    },
+    "Check_For_End": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Wait_For_Week_To_End",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "mend_weekly_visit_count",
+            "operator": ">",
+            "value": 2
+          }
+        },
+        {
+          "transition": "Wait_For_Next_Visit"
+        }
+      ],
+      "name": "Check_For_End"
+    },
+    "Wait_For_First": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 2,
+        "unit": "days"
+      },
+      "direct_transition": "Reset_Visit_Counter",
+      "name": "Wait_For_First"
+    }
+  }
+}
+,
 "wellness_encounters":{
   "name": "Wellness Encounters",
   "remarks": [
@@ -77909,7 +85247,7 @@ export default {"allergic_rhinitis":{
         "code": 449868002,
         "display": "Current every day smoker"
       },
-      "direct_transition": "End_Of_Wellness_Encounter"
+      "direct_transition": "SDoH Check"
     },
     "Record_Former_Smoker": {
       "type": "Observation",
@@ -77922,7 +85260,7 @@ export default {"allergic_rhinitis":{
           "display": "Tobacco smoking status NHIS"
         }
       ],
-      "direct_transition": "End_Of_Wellness_Encounter",
+      "direct_transition": "SDoH Check",
       "value_code": {
         "system": "SNOMED-CT",
         "code": 8517006,
@@ -77940,7 +85278,7 @@ export default {"allergic_rhinitis":{
           "display": "Tobacco smoking status NHIS"
         }
       ],
-      "direct_transition": "End_Of_Wellness_Encounter",
+      "direct_transition": "SDoH Check",
       "value_code": {
         "system": "SNOMED-CT",
         "code": 266919005,
@@ -78285,6 +85623,119 @@ export default {"allergic_rhinitis":{
     "End_Of_Wellness_Encounter": {
       "type": "EncounterEnd",
       "direct_transition": "Wellness_Encounter"
+    },
+    "PRAPARE": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/sdoh_hrsn",
+      "direct_transition": "Anxiety Screening Check"
+    },
+    "SDoH Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "PRAPARE",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 18,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Anxiety Screening Check"
+        }
+      ]
+    },
+    "Anxiety Screening": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/anxiety_screening",
+      "direct_transition": "Fall Risk Screening Check"
+    },
+    "Fall Risk Screening": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/fall_risk_screening",
+      "direct_transition": "HARK Screening Check"
+    },
+    "HARK Screening": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/hark_screening",
+      "direct_transition": "Depression Screening Check"
+    },
+    "Depression Screening": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/depression_screening",
+      "direct_transition": "Substance Use Screening Check"
+    },
+    "Anxiety Screening Check": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Anxiety Screening",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Fall Risk Screening Check",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Fall Risk Screening Check": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Fall Risk Screening",
+          "distribution": 0.7
+        },
+        {
+          "transition": "HARK Screening Check",
+          "distribution": 0.3
+        }
+      ]
+    },
+    "HARK Screening Check": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "HARK Screening",
+          "distribution": 0.3
+        },
+        {
+          "transition": "Depression Screening Check",
+          "distribution": 0.7
+        }
+      ]
+    },
+    "Depression Screening Check": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Depression Screening",
+          "distribution": 0.8
+        },
+        {
+          "transition": "Substance Use Screening Check",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "Substance Use Screening Check": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Substance Use Screening",
+          "distribution": 0.7
+        },
+        {
+          "transition": "End_Of_Wellness_Encounter",
+          "distribution": 0.3
+        }
+      ]
+    },
+    "Substance Use Screening": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/substance_use_screening",
+      "direct_transition": "End_Of_Wellness_Encounter"
     }
   },
   "gmf_version": 1
