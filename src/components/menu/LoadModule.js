@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './LoadModule.css';
 import {generateDOT} from '../../utils/graphviz';
 import StyledDropzone from './StyledDropZone';
+import {
+  getLocalStorageModules,
+  removeLocalStorageModule,
+} from "../../utils/localStorageHelpers";
 
 class LoadModule extends Component {
 
@@ -187,6 +191,30 @@ class LoadModule extends Component {
         </div>
         )
 
+    case 'local-storage':
+      return (
+        <div className="col-4 nopadding">
+          <ul className="LoadModule-list">
+            {Object.keys(this.state.localStorageModules || {}).map(moduleName => (
+              <li key={moduleName}>
+                <div className="btn-group">
+                  <button className='btn btn-link' onClick={() => {
+                    this.loadModule(JSON.stringify(this.state.localStorageModules[moduleName]))
+                  }}>
+                    {moduleName}
+                  </button>
+                  <button type="button" className="close" aria-label="Close" onClick={() => {
+                    removeLocalStorageModule(moduleName);
+                    this.updateLocalStorageModules();
+                  }}>
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
     default:
       return;
 
@@ -213,7 +241,15 @@ class LoadModule extends Component {
       if (i.props.id !== ID) {
         document.getElementById(i.props.id).style.backgroundColor = "#eee";
       }
-    })
+    });
+  }
+
+  updateLocalStorageModules() {
+    const existingModules = getLocalStorageModules();
+
+    this.setState({
+      localStorageModules: existingModules,
+    });
   }
 
   fetchBranchList() {
@@ -286,8 +322,16 @@ class LoadModule extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.selectedOption === 'git' && prevState.selectedOption !== 'git') {
-      this.fetchBranchList()
+    if (
+      this.state.selectedOption === "git" &&
+      prevState.selectedOption !== "git"
+    ) {
+      this.fetchBranchList();
+    } else if (
+      this.state.selectedOption === "local-storage" &&
+      prevState.selectedOption !== "local-storage"
+    ) {
+      this.updateLocalStorageModules();
     }
   }
 
@@ -331,6 +375,7 @@ class LoadModule extends Component {
                          {Object.keys(this.props.modules).length > 0 ? <li className={(this.state.selectedOption === 'my') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('my')}>My Modules</button></li> : ''}
                          <li className={(this.state.selectedOption === 'json') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('json')}>Paste JSON</button></li>
                          <li className={(this.state.selectedOption === 'git') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('git')}>GitHub Modules</button></li>
+                         <li className={this.state.selectedOption === 'local-storage' ? 'selected' : '' }><button className='btn btn-link' onClick={this.onOptionClick('local-storage')} >Local Storage</button></li>
                       </ul>
                     </div>
                     <div className='col-9 nopadding'>

@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import FileSaver from 'file-saver';
 import _ from 'lodash'
+import { saveLocalStorageModule } from '../../utils/localStorageHelpers';
 
 import './Download.css';
 
 class Download extends Component {
+  constructor(props) {
+    super(props);
+    this.onDownload = this.onDownload.bind(this);
 
-  constructor(props){
-    super(props)
-    this.onDownload = this.onDownload.bind(this)
+    this.state = {
+      saveSuccess: false,
+    };
   }
   
   onDownload(){
@@ -88,8 +92,21 @@ class Download extends Component {
     })
 
     return JSON.stringify(module, null, 2)
-
   }
+
+  saveToLocalStorage = () => {
+    saveLocalStorageModule(this.props.module);
+
+    this.setState({
+      saveSuccess: true,
+    });
+
+    setTimeout(() => {
+      this.setState({
+        saveSuccess: false,
+      });
+    }, 2000);
+  };
 
   render() {
 
@@ -114,8 +131,14 @@ class Download extends Component {
               <div className="modal-body Download-body">
               <textarea ref="codeInput" disabled value={this.prepareJSON()} />
               </div>
+              {this.state.saveSuccess && (
+                <div>
+                  Successfully saved {this.props.module.name} to local storage
+                </div>
+              )}
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onDownload}>Download</button>
+                <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.onDownload}>Download</button>
+                <button type="button" className="btn btn-secondary" onClick={this.saveToLocalStorage}>Save to Local Storage</button>
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.props.onHide}>Close</button>
               </div>
             </div>
