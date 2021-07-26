@@ -21,7 +21,9 @@ export function getLocalStorageModules() {
 export function saveLocalStorageModule(module) {
   const newModuleObject = { ...getLocalStorageModules() };
 
-  newModuleObject[module.name] = module;
+  const timestamp = new Date().toLocaleString();
+
+  newModuleObject[module.name] = { module, timestamp };
 
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newModuleObject));
 }

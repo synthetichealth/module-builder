@@ -193,31 +193,35 @@ class LoadModule extends Component {
 
     case 'local-storage':
       return (
-        <div className="col-4 nopadding">
-          <ul className="LoadModule-list">
-            {Object.keys(this.state.localStorageModules || {}).map(moduleName => (
+        <ul className="LoadModule-list">
+          {Object.keys(this.state.localStorageModules || {}).map(moduleName => { 
+            const moduleEntry = this.state.localStorageModules[moduleName]
+            return (
               <li key={moduleName}>
-                <div className="btn-group">
-                  <button className='btn btn-link' onClick={() => {
-                    this.loadModule(JSON.stringify(this.state.localStorageModules[moduleName]))
-                  }}>
-                    {moduleName}
-                  </button>
-                  <button type="button" className="close" aria-label="Close" onClick={() => {
-                    removeLocalStorageModule(moduleName);
-                    this.updateLocalStorageModules();
-                  }}>
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                <div className="d-flex">
+                  <div className="flex-grow-1">
+                    <button className='btn btn-link' onClick={() => {
+                      this.loadModule(JSON.stringify(moduleEntry.module))
+                    }}>
+                      {moduleName} (Last saved: {moduleEntry.timestamp})
+                    </button>
+                  </div>
+                  <div className="flex-shrink-1 mx-5">
+                    <button className="close h-100 w-100" aria-label="Close" onClick={() => {
+                      removeLocalStorageModule(moduleName);
+                      this.updateLocalStorageModules();
+                    }}>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
                 </div>
               </li>
-            ))}
-          </ul>
-        </div>
+            );
+          })}
+        </ul>
       );
     default:
       return;
-
     }
   }
 
