@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FileSaver from 'file-saver';
 import _ from 'lodash'
-import { saveLocalStorageModule } from '../../utils/localStorageHelpers';
+import { getLocalStorageModuleByName, saveLocalStorageModule } from '../../utils/localStorageHelpers';
 
 import './Download.css';
 
@@ -95,17 +95,26 @@ class Download extends Component {
   }
 
   saveToLocalStorage = () => {
-    saveLocalStorageModule(this.props.module);
+    let shouldSave = true;
+    const localStorageModule = getLocalStorageModuleByName(this.props.module.name)
 
-    this.setState({
-      saveSuccess: true,
-    });
+    if (localStorageModule) {
+      shouldSave = confirm(`Module named "${localStorageModule.module.name}" (Last saved: ${localStorageModule.timestamp}) already exists in local storage. Overwrite?`);
+    }
 
-    setTimeout(() => {
+    if (shouldSave) {
+      saveLocalStorageModule(this.props.module);
+
       this.setState({
-        saveSuccess: false,
+        saveSuccess: true,
       });
-    }, 2000);
+
+      setTimeout(() => {
+        this.setState({
+          saveSuccess: false,
+        });
+      }, 2000);
+    }
   };
 
   render() {

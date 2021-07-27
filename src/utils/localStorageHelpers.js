@@ -14,6 +14,18 @@ export function getLocalStorageModules() {
 }
 
 /**
+ * Get a module in local storage by name
+ *
+ * @param {string} moduleName name to lookup
+ * @returns matching entry in the modules object, or null if none found
+ */
+export function getLocalStorageModuleByName(moduleName) {
+  const allModules = getLocalStorageModules();
+
+  return allModules[moduleName] || null;
+}
+
+/**
  * Save a module to local storage
  *
  * @param {Object} module the JSON content of the module being saved
