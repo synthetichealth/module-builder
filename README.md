@@ -31,14 +31,18 @@ This will start a local copy running at `http://localhost:3000/`
 
 ## Saving Modules
 
-Modules created and edited through the Module Builder must be downloaded and saved as a JSON file.
-The Module Builder currently does not persist local changes across browser sessions, so do not close or navigate
-away from the page without first saving your work as a local file first.  Click the `Download` button at the
+### Download as JSON
+
+Modules created and edited through the Module Builder can be downloaded and saved as a JSON file. Click the `Download` button at the
 top of the interface, and you can either copy the JSON in the modal text box, or click the `Download` button on the bottom
 of the modal to save as a local file.
 
 Once saved as a JSON file (using the `.json` extension), you can use the module within your own local installation of Synthea.
 See the [Generic Module Framework](https://github.com/synthetichealth/synthea/wiki/Generic-Module-Framework#relevant-files-and-paths) for information on where to place the file.
+
+### Save to Local Storage
+
+Modules can also be saved to local storage in the browser. Click the `Download` button at the top of the interface, and click the `Save to Local Storage` button at the bottom of the modal. To load an existing module from local storage, select it from the `Local Storage` list when opening an existing module.
 
 ## Developer Tasks
 
