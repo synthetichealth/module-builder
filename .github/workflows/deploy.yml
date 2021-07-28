@@ -1,0 +1,47 @@
+name: Deploy to GH Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy-to-pages:
+    name: Deploy to GH Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm install
+      - run: npm run build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3 
+        # note: watch for v4 to be released
+        with: 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: deploying latest module builder
+
+      - name: Slack Notification on Failure
+        uses: 8398a7/action-slack@v3
+        if: failure()
+        with:
+          status: custom
+          job_name: Deploy
+          author_name: Deploy Workflow
+          fields: workflow,commit,repo,author,took
+          # see https://action-slack.netlify.app/usecase/02-custom for custom payload info
+          custom_payload: |
+            {
+              attachments: [{
+                color: 'danger',
+                text: `${process.env.AS_WORKFLOW} -- (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@master by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
