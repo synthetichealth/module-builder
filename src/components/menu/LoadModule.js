@@ -160,33 +160,30 @@ class LoadModule extends Component {
         )
 
       case 'git':
-        let moduleList = null;
-        let submoduleList = null;
-        if (this.state.Modules) {
-          moduleList = (
-          <div className='col-4 nopadding'>
+        const columns = 1 + (this.state.Modules ? 1 : 0) + (this.state.Submodules ? 1 : 0);
+        const colsize = 12 / columns;
+
+        return(
+        <div className='row'>
+          <div className={`col-${colsize} nopadding`}>
             <ul className='LoadModule-list'>
-              {this.state.Modules}
+              {this.state.Branches}
             </ul>
           </div>
-          )
-          if (this.state.Submodules) {
-            submoduleList = (
-              <div className='col-4 nopadding'>
+          {this.state.Modules && (
+            <div className={`col-${colsize} nopadding`}>
+              <ul className='LoadModule-list'>
+                {this.state.Modules}
+              </ul>
+            </div>
+            )}
+          {this.state.Submodules && (
+            <div className={`col-${colsize} nopadding`}>
                 <ul className='LoadModule-list'>
                   {this.state.Submodules}
                 </ul>
               </div>
-            )
-          }
-        }
-        return(
-        <div className='row'>
-          <ul className='LoadModule-list'>
-            {this.state.Branches}
-          </ul>
-          {moduleList}
-          {submoduleList}
+            )}
         </div>
         )
 
@@ -225,17 +222,16 @@ class LoadModule extends Component {
   }
 
   changeColor(ID, type) {
+    if (type === 'submodule') return; // as of now, the submodule panel doesn't persist so don't bother coloring it
+
     document.getElementById(ID).style.backgroundColor = "#ddd";
-    let list = null
+    let list = []
     switch(type) {
       case 'branch':
         list = this.state.Branches
         break;
       case 'module':
         list = this.state.Modules
-        break;
-      case 'folder':
-        list = this.state.Folders
         break;
       default:
         break;
@@ -275,24 +271,12 @@ class LoadModule extends Component {
     fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules?ref=` + branch)
       .then(response => response.json())
       .then(data => {
-        let folders = data.filter(name => !name.name.includes(".json"))
-        let modules = data.filter(name => name.name.includes(".json"))
         this.setState({
-        Modules: this.mapFolderContentsToList(data, [])
+          Modules: this.mapFolderContentsToList(data, [], 'module'),
+          Submodules: null // reset submodules to prevent 404 errors
         })
       })
       .catch(error => console.log('error: ', error));
-  }
-
-  fetchModule(name) {
-    this.setState({
-      currentModule: name
-    })
-    if (name.includes(".json")) {
-      this.fetchFile([name]);
-    } else {
-      this.fetchFolder([name]);
-    }
   }
 
   fetchFile(path) {
@@ -310,12 +294,12 @@ class LoadModule extends Component {
     fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + path.join('/') + `?ref=` + this.state.currentBranch)
       .then(response => response.json())
       .then(data => this.setState({
-        Submodules: this.mapFolderContentsToList(data, path)
+        Submodules: this.mapFolderContentsToList(data, path, 'submodule')
       }))
       .catch(error => console.log('error: ', error));
   }
 
-  mapFolderContentsToList(data, path) {
+  mapFolderContentsToList(data, path, type) {
     data.sort((a, b) => {
       // sort folders ahead of files, but both groups should use the usual alphabetical order
       const aIsFile = a.name.endsWith(".json");
@@ -336,7 +320,7 @@ class LoadModule extends Component {
       const displayName = isFile ? name : name + '/'; 
       return (
       <li key={i} id={item.name}>
-        <button className='btn btn-link' onClick={() => {isFile ? this.fetchFile(path.concat(name)) : this.fetchFolder(path.concat(name))}}>
+        <button className='btn btn-link' onClick={() => { this.changeColor(item.name, type); isFile ? this.fetchFile(path.concat(name)) : this.fetchFolder(path.concat(name))}}>
           {displayName}
         </button>
       </li>
