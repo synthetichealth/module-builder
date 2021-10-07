@@ -166,7 +166,6 @@ class LoadModule extends Component {
           moduleList = (
           <div className='col-4 nopadding'>
             <ul className='LoadModule-list'>
-              {this.state.Folders}
               {this.state.Modules}
             </ul>
           </div>
@@ -279,12 +278,7 @@ class LoadModule extends Component {
         let folders = data.filter(name => !name.name.includes(".json"))
         let modules = data.filter(name => name.name.includes(".json"))
         this.setState({
-        Folders: folders.map((name, i) => (
-          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'folder');this.fetchModule(name.name)}}>{name.name}/</button></li>
-        )),
-        Modules: modules.map((name, i) => (
-          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'module');this.fetchModule(name.name)}}>{name.name}</button></li>
-        ))
+        Modules: this.mapFolderContentsToList(data, [])
         })
       })
       .catch(error => console.log('error: ', error));
@@ -295,27 +289,14 @@ class LoadModule extends Component {
       currentModule: name
     })
     if (name.includes(".json")) {
-      fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + name)
-        .then(response => response.text())
-        .then(data => this.loadModule(data))
-        .then(this.setState ({
-          Modules: null
-        }))
-        .catch(error => console.log('error: ', error));
+      this.fetchFile([name]);
     } else {
-      fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + name + `?ref=` + this.state.currentBranch)
-      .then(response => response.json())
-      .then(data => this.setState({
-        Submodules: data.map((name, i) => (
-          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.fetchSubmodule(name.name)}}>{name.name}</button></li>
-        ))
-      }))
-      .catch(error => console.log('error: ', error));
+      this.fetchFolder([name]);
     }
   }
 
-  fetchSubmodule(name) {
-    fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + this.state.currentModule + `/` + name)
+  fetchFile(path) {
+    fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + path.join('/'))
       .then(response => response.text())
       .then(data => this.loadModule(data))
       .then(this.setState ({
@@ -323,6 +304,56 @@ class LoadModule extends Component {
         Modules: null
       }))
       .catch(error => console.log('error: ', error));
+  }
+
+  fetchFolder(path) {
+    fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + path.join('/') + `?ref=` + this.state.currentBranch)
+      .then(response => response.json())
+      .then(data => this.setState({
+        Submodules: this.mapFolderContentsToList(data, path)
+      }))
+      .catch(error => console.log('error: ', error));
+  }
+
+  mapFolderContentsToList(data, path) {
+    data.sort((a, b) => {
+      // sort folders ahead of files, but both groups should use the usual alphabetical order
+      const aIsFile = a.name.endsWith(".json");
+      const bIsFile = b.name.endsWith(".json");
+
+      if (aIsFile === bIsFile) return a.name.localeCompare(b.name);
+      
+      if (aIsFile) {
+        // then we know B is a folder, B is first
+        return 1;
+      }
+      // now we know A is a folder, A is first
+      return -1;
+    });
+    const list = data.map((item, i) => {
+      const name = item.name;
+      const isFile = name.endsWith(".json");
+      const displayName = isFile ? name : name + '/'; 
+      return (
+      <li key={i} id={item.name}>
+        <button className='btn btn-link' onClick={() => {isFile ? this.fetchFile(path.concat(name)) : this.fetchFolder(path.concat(name))}}>
+          {displayName}
+        </button>
+      </li>
+    )});
+
+    if (path.length > 1) {
+      // add a "go back" option at the top
+      list.unshift((
+        <li key={-1} id="go-up-one">
+          <button className='btn btn-link' onClick={() => {this.fetchFolder(path.slice(0,-1))}}>
+            ^ up one folder
+          </button>
+        </li>
+        ));
+    }
+
+    return list;
   }
 
   componentDidUpdate(prevProps, prevState) {
