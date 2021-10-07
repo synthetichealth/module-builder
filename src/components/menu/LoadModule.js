@@ -376,7 +376,7 @@ class LoadModule extends Component {
     return (
       <div>
         <div className={'modal ' +  classDetails} style={style}>
-            <div className="modal-content" style={{width:"900px", marginLeft: '15%', marginRight: '15%', marginTop: 50}}>
+            <div className="modal-content" style={{width:"1024px", marginLeft: '15%', marginRight: '15%', marginTop: 50}}>
               <div className="modal-header">
                 <h5 className="modal-title">{(!this.props.welcome ? 'Load Module' : 'Synthea Module Builder')}</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.props.onHide} style={{display: (this.props.welcome ? 'none' : '')}}>
