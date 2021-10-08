@@ -160,34 +160,30 @@ class LoadModule extends Component {
         )
 
       case 'git':
-        let moduleList = null;
-        let submoduleList = null;
-        if (this.state.Modules) {
-          moduleList = (
-          <div className='col-4 nopadding'>
+        const columns = 1 + (this.state.Modules ? 1 : 0) + (this.state.Submodules ? 1 : 0);
+        const colsize = 12 / columns;
+
+        return(
+        <div className='row'>
+          <div className={`col-${colsize} nopadding`}>
             <ul className='LoadModule-list'>
-              {this.state.Folders}
-              {this.state.Modules}
+              {this.state.Branches}
             </ul>
           </div>
-          )
-          if (this.state.Submodules) {
-            submoduleList = (
-              <div className='col-4 nopadding'>
+          {this.state.Modules && (
+            <div className={`col-${colsize} nopadding`}>
+              <ul className='LoadModule-list'>
+                {this.state.Modules}
+              </ul>
+            </div>
+            )}
+          {this.state.Submodules && (
+            <div className={`col-${colsize} nopadding`}>
                 <ul className='LoadModule-list'>
                   {this.state.Submodules}
                 </ul>
               </div>
-            )
-          }
-        }
-        return(
-        <div className='row'>
-          <ul className='LoadModule-list'>
-            {this.state.Branches}
-          </ul>
-          {moduleList}
-          {submoduleList}
+            )}
         </div>
         )
 
@@ -226,17 +222,16 @@ class LoadModule extends Component {
   }
 
   changeColor(ID, type) {
+    if (type === 'submodule') return; // as of now, the submodule panel doesn't persist so don't bother coloring it
+
     document.getElementById(ID).style.backgroundColor = "#ddd";
-    let list = null
+    let list = []
     switch(type) {
       case 'branch':
         list = this.state.Branches
         break;
       case 'module':
         list = this.state.Modules
-        break;
-      case 'folder':
-        list = this.state.Folders
         break;
       default:
         break;
@@ -276,46 +271,16 @@ class LoadModule extends Component {
     fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules?ref=` + branch)
       .then(response => response.json())
       .then(data => {
-        let folders = data.filter(name => !name.name.includes(".json"))
-        let modules = data.filter(name => name.name.includes(".json"))
         this.setState({
-        Folders: folders.map((name, i) => (
-          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'folder');this.fetchModule(name.name)}}>{name.name}/</button></li>
-        )),
-        Modules: modules.map((name, i) => (
-          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'module');this.fetchModule(name.name)}}>{name.name}</button></li>
-        ))
+          Modules: this.mapFolderContentsToList(data, [], 'module'),
+          Submodules: null // reset submodules to prevent 404 errors
         })
       })
       .catch(error => console.log('error: ', error));
   }
 
-  fetchModule(name) {
-    this.setState({
-      currentModule: name
-    })
-    if (name.includes(".json")) {
-      fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + name)
-        .then(response => response.text())
-        .then(data => this.loadModule(data))
-        .then(this.setState ({
-          Modules: null
-        }))
-        .catch(error => console.log('error: ', error));
-    } else {
-      fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + name + `?ref=` + this.state.currentBranch)
-      .then(response => response.json())
-      .then(data => this.setState({
-        Submodules: data.map((name, i) => (
-          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.fetchSubmodule(name.name)}}>{name.name}</button></li>
-        ))
-      }))
-      .catch(error => console.log('error: ', error));
-    }
-  }
-
-  fetchSubmodule(name) {
-    fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + this.state.currentModule + `/` + name)
+  fetchFile(path) {
+    fetch(`https://raw.githubusercontent.com/synthetichealth/synthea/` + this.state.currentBranch + `/src/main/resources/modules/` + path.join('/'))
       .then(response => response.text())
       .then(data => this.loadModule(data))
       .then(this.setState ({
@@ -323,6 +288,56 @@ class LoadModule extends Component {
         Modules: null
       }))
       .catch(error => console.log('error: ', error));
+  }
+
+  fetchFolder(path) {
+    fetch(`https://api.github.com/repos/synthetichealth/synthea/contents/src/main/resources/modules/` + path.join('/') + `?ref=` + this.state.currentBranch)
+      .then(response => response.json())
+      .then(data => this.setState({
+        Submodules: this.mapFolderContentsToList(data, path, 'submodule')
+      }))
+      .catch(error => console.log('error: ', error));
+  }
+
+  mapFolderContentsToList(data, path, type) {
+    data.sort((a, b) => {
+      // sort folders ahead of files, but both groups should use the usual alphabetical order
+      const aIsFile = a.name.endsWith(".json");
+      const bIsFile = b.name.endsWith(".json");
+
+      if (aIsFile === bIsFile) return a.name.localeCompare(b.name);
+      
+      if (aIsFile) {
+        // then we know B is a folder, B is first
+        return 1;
+      }
+      // now we know A is a folder, A is first
+      return -1;
+    });
+    const list = data.map((item, i) => {
+      const name = item.name;
+      const isFile = name.endsWith(".json");
+      const displayName = isFile ? name : name + '/'; 
+      return (
+      <li key={i} id={item.name}>
+        <button className='btn btn-link' onClick={() => { this.changeColor(item.name, type); isFile ? this.fetchFile(path.concat(name)) : this.fetchFolder(path.concat(name))}}>
+          {displayName}
+        </button>
+      </li>
+    )});
+
+    if (path.length > 1) {
+      // add a "go back" option at the top
+      list.unshift((
+        <li key={-1} id="go-up-one">
+          <button className='btn btn-link' onClick={() => {this.fetchFolder(path.slice(0,-1))}}>
+            ^ up one folder
+          </button>
+        </li>
+        ));
+    }
+
+    return list;
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -361,7 +376,7 @@ class LoadModule extends Component {
     return (
       <div>
         <div className={'modal ' +  classDetails} style={style}>
-            <div className="modal-content" style={{width:"900px", marginLeft: '15%', marginRight: '15%', marginTop: 50}}>
+            <div className="modal-content" style={{width:"1024px", marginLeft: '15%', marginRight: '15%', marginTop: 50}}>
               <div className="modal-header">
                 <h5 className="modal-title">{(!this.props.welcome ? 'Load Module' : 'Synthea Module Builder')}</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.props.onHide} style={{display: (this.props.welcome ? 'none' : '')}}>
