@@ -235,6 +235,7 @@ export type ProcedureState = {
     parameters: any
   },
   unit?: UnitOfTime,
+  assign_to_attribute?: string,
   transition?: Transition
 }
 
