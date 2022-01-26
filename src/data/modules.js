@@ -15006,7 +15006,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_Sialorrhea": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -15435,7 +15434,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_Dystonia": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cerebral_Palsy_Encounter1",
       "codes": [
         {
@@ -15451,7 +15449,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_Pain": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cerebral_Palsy_Encounter1",
       "codes": [
         {
@@ -15467,7 +15464,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_Central_Hypotonia": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cerebral_Palsy_Encounter1",
       "codes": [
         {
@@ -15483,7 +15479,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_Spasticity": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cerebral_Palsy_Encounter1",
       "codes": [
         {
@@ -15499,7 +15494,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_Osteoporosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cerebral_Palsy_Encounter1",
       "codes": [
         {
@@ -15515,7 +15509,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_Epilepsy": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cerebral_Palsy_Encounter1",
       "codes": [
         {
@@ -15531,7 +15524,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_Intellectual_Disability": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cerebral_Palsy_Encounter1",
       "codes": [
         {
@@ -15547,7 +15539,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_GERD": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cerebral_Palsy_Encounter1",
       "codes": [
         {
@@ -15727,7 +15718,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_Pneumonia": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cerebral_Palsy_Encounter1",
       "codes": [
         {
@@ -15902,7 +15892,6 @@ export default {"allergic_rhinitis":{
     },
     "Cerebral_Palsy_Hip_Dislocation": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Cerebral_Palsy_Encounter1",
       "codes": [
         {
@@ -19556,7 +19545,6 @@ export default {"allergic_rhinitis":{
     },
     "Shock Disorder": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -32271,7 +32259,6 @@ export default {"allergic_rhinitis":{
     },
     "Loss of Taste Onset": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -38275,7 +38262,6 @@ export default {"allergic_rhinitis":{
     },
     "Victim": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -39059,7 +39045,6 @@ export default {"allergic_rhinitis":{
     },
     "Social Migrant": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -39144,7 +39129,6 @@ export default {"allergic_rhinitis":{
     },
     "Veteran": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -39299,7 +39283,6 @@ export default {"allergic_rhinitis":{
     },
     "Homeless": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -39352,7 +39335,6 @@ export default {"allergic_rhinitis":{
     },
     "Housing Issue": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -40292,7 +40274,6 @@ export default {"allergic_rhinitis":{
     },
     "Transport Problem": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -40304,7 +40285,6 @@ export default {"allergic_rhinitis":{
     },
     "No Transport Access": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -40810,7 +40790,6 @@ export default {"allergic_rhinitis":{
     },
     "Violence": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -40851,7 +40830,6 @@ export default {"allergic_rhinitis":{
     },
     "Partner Violence": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -41044,7 +41022,6 @@ export default {"allergic_rhinitis":{
     },
     "Risky Activity": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -41434,7 +41411,6 @@ export default {"allergic_rhinitis":{
     },
     "Drinking": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -41678,7 +41654,6 @@ export default {"allergic_rhinitis":{
     },
     "Drug Use": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -69890,7 +69865,6 @@ export default {"allergic_rhinitis":{
     },
     "Condition_Chronic_Neck_Pain_4": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -69903,7 +69877,6 @@ export default {"allergic_rhinitis":{
     },
     "Condition_Chronic_Low_Back_Pain_3": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -70761,7 +70734,6 @@ export default {"allergic_rhinitis":{
     },
     "Condition_OUD": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Encounter_OUD",
       "codes": [
         {
@@ -70834,7 +70806,6 @@ export default {"allergic_rhinitis":{
     },
     "Condition_OUD_2": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Encounter_OUD_Treatment_Cont",
       "codes": [
         {
@@ -72710,7 +72681,6 @@ export default {"allergic_rhinitis":{
     },
     "Septic_Shock": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -74857,7 +74827,6 @@ export default {"allergic_rhinitis":{
     },
     "Myelomeningocele": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Encounter_NICU",
       "codes": [
         {
@@ -74870,7 +74839,6 @@ export default {"allergic_rhinitis":{
     },
     "Meningocele": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -74883,7 +74851,6 @@ export default {"allergic_rhinitis":{
     },
     "Spina_Bifida_Occulta": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Encounter_Occulta",
       "codes": [
         {
@@ -75014,7 +74981,6 @@ export default {"allergic_rhinitis":{
     },
     "Hydrocephalus": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Encounter_NICU",
       "codes": [
         {
@@ -75061,7 +75027,6 @@ export default {"allergic_rhinitis":{
     },
     "Scoliosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Encounter_NICU",
       "codes": [
         {
@@ -75080,7 +75045,6 @@ export default {"allergic_rhinitis":{
     },
     "Foot_Deformity": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Encounter_NICU",
       "codes": [
         {
@@ -75151,7 +75115,6 @@ export default {"allergic_rhinitis":{
     },
     "Had_Fetal_Surgery": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Encounter_NICU",
       "codes": [
         {
@@ -75190,7 +75153,6 @@ export default {"allergic_rhinitis":{
     },
     "Chiari_II_Malformation": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Encounter_NICU",
       "codes": [
         {
@@ -75250,7 +75212,6 @@ export default {"allergic_rhinitis":{
     },
     "Kyphosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Encounter_NICU",
       "codes": [
         {
@@ -75541,7 +75502,6 @@ export default {"allergic_rhinitis":{
     },
     "Latex_Allergy": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "SB_Visit_1st",
       "codes": [
         {
@@ -75720,7 +75680,6 @@ export default {"allergic_rhinitis":{
     },
     "Condition_UTI_3": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "SB_Visit_Under_Age_5",
       "codes": [
         {
@@ -75742,7 +75701,6 @@ export default {"allergic_rhinitis":{
     },
     "Condition_Pressure_Ulcer_3": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "SB_Visit_Under_Age_5",
       "codes": [
         {
@@ -75755,7 +75713,6 @@ export default {"allergic_rhinitis":{
     },
     "Condition_Pressure_Ulcer_4": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "SB_Visit_Under_Age_5",
       "codes": [
         {
@@ -75768,7 +75725,6 @@ export default {"allergic_rhinitis":{
     },
     "Condition_UTI_2": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "SB_Visit_After_Age_5",
       "codes": [
         {
@@ -75790,7 +75746,6 @@ export default {"allergic_rhinitis":{
     },
     "Condition_Pressure_Ulcer": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "SB_Visit_After_Age_5",
       "codes": [
         {
@@ -75803,7 +75758,6 @@ export default {"allergic_rhinitis":{
     },
     "Condition_Pressure_Ulcer_2": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "SB_Visit_After_Age_5",
       "codes": [
         {
@@ -82644,7 +82598,6 @@ export default {"allergic_rhinitis":{
     },
     "PTSD Diagnosis": {
       "type": "ConditionOnset",
-      "assign_to_attribute": "",
       "target_encounter": "Initial_Psychiatric_PTSD_Encounter",
       "codes": [
         {
