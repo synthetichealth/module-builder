@@ -238,6 +238,14 @@ export type ProcedureState = {
   transition?: Transition
 }
 
+export type VaccineState = {
+  name: string,
+  remarks: string[],
+  type: 'Vaccine',
+  codes: Code[],
+  transition?: Transition
+}
+
 export type VitalSignState = {
   name: string,
   remarks: string[],
@@ -382,4 +390,4 @@ export type DeathState = {
   transition?: Transition
 }
 
-export type State = InitialState | TerminalState | SimpleState | GuardState | DelayState | SetAttributeState | CounterState | CallSubmoduleState | EncounterState | EncounterEndState | ConditionOnsetState | ConditionEndState | AllergyOnsetState | AllergyEndState | MedicationOrderState | MedicationEndState | CarePlanStartState | CarePlanEndState | ProcedureState | VitalSignState | ObservationState | MultiObservationState | DiagnosticReportState | SymptomState | DeathState;
+export type State = InitialState | TerminalState | SimpleState | GuardState | DelayState | SetAttributeState | CounterState | CallSubmoduleState | EncounterState | EncounterEndState | ConditionOnsetState | ConditionEndState | AllergyOnsetState | AllergyEndState | MedicationOrderState | MedicationEndState | CarePlanStartState | CarePlanEndState | ProcedureState | VitalSignState | ObservationState | MultiObservationState | DiagnosticReportState | SymptomState | DeathState | VaccineState;

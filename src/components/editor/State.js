@@ -12,7 +12,8 @@ import type {
   CarePlanStartState, CarePlanEndState, ProcedureState,
   VitalSignState, ObservationState, MultiObservationState,
   DiagnosticReportState, ImagingStudyState, SymptomState,
-  SupplyListState, DeviceState, DeviceEndState, DeathState
+  SupplyListState, DeviceState, DeviceEndState, DeathState,
+  VaccineState
 } from '../../types/State';
 
 import { Code, Codes } from './Code';
@@ -122,6 +123,8 @@ class StateEditor extends Component<Props> {
         return <SupplyList {...props} />
       case "Death":
         return <Death {...props} />
+      case "Vaccine":
+        return  <Vaccine {...props} />
       default:
         return this.props.state.type
     }
@@ -2481,6 +2484,30 @@ class Procedure extends Component<Props> {
     this.setState({displayLabelReason: !this.state.displayLabelReason});
   }
 
+}
+
+class Vaccine extends Component<Props> {
+  constructor (props) {
+    super(props)
+  }
+
+  legacyGMF() {
+    let state = ((this.props.state: any): VaccineState);
+  }
+
+  render() {
+    let state = ((this.props.state: any): VaccineState);
+    return (
+      <div>
+        <div className='section'>
+          Codes
+          <br />
+          <Codes codes={state.codes} system={"CVX"} onChange={this.props.onChange('codes')} />
+          <br />
+        </div>
+      </div>
+    );
+  }
 }
 
 class VitalSign extends Component<Props> {
