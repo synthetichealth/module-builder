@@ -2500,6 +2500,8 @@ class Vaccine extends Component<Props> {
     return (
       <div>
         <div className='section'>
+          Series: <RIEInput className='editable-text' value={state.series} propName={'series'} change={this.props.onChange('series')} />
+          <br />
           Codes
           <br />
           <Codes codes={state.codes} system={"CVX"} onChange={this.props.onChange('codes')} />

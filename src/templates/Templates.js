@@ -484,6 +484,7 @@ const StateTemplates = {
 
   Vaccine: {
     type: "Vaccine",
+    series: 1,
     codes: [{...TypeTemplates.Code.Cvx}]
   },
 

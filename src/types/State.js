@@ -242,6 +242,7 @@ export type VaccineState = {
   name: string,
   remarks: string[],
   type: 'Vaccine',
+  series: number,
   codes: Code[],
   transition?: Transition
 }
