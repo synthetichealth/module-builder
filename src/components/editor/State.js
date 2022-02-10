@@ -703,7 +703,11 @@ class Encounter extends Component<Props> {
     let options = [
       {id: 'emergency', text: 'emergency'},
       {id: 'inpatient', text: 'inpatient'},
-      {id: 'ambulatory', text: 'ambulatory'}
+      {id: 'ambulatory', text: 'ambulatory'},
+      {id: 'urgentcare', text: 'urgentcare'},
+      {id: 'hospice', text: 'hospice'},
+      {id: 'home', text: 'home'},
+      {id: 'snf', text: 'snf'}
     ];
     if (state.wellness == null) {
       return (

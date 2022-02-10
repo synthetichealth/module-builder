@@ -95,7 +95,7 @@ export type EncounterState = {
   remarks: string[],
   type: 'Encounter',
   wellness?: boolean,
-  encounter_class: 'emergency' | 'inpatient' | 'ambulatory',
+  encounter_class: 'emergency' | 'inpatient' | 'ambulatory' | 'urgentcare' | 'hospice' | 'home' | 'snf',
   reason?: string,
   codes: Code[],
   transition?: Transition
