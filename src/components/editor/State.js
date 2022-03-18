@@ -721,6 +721,7 @@ class Encounter extends Component<Props> {
             <br />
             <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
           </div>
+          {this.renderTelemedicinePossibility()}
         </div>
       );
     } else {
@@ -728,6 +729,7 @@ class Encounter extends Component<Props> {
         <div>
           {this.renderWellness()}
           {this.renderReason()}
+          {this.renderTelemedicinePossibility()}
         </div>
       );
     }
@@ -753,6 +755,20 @@ class Encounter extends Component<Props> {
       );
     }
 
+  }
+
+  renderTelemedicinePossibility() {
+    let state = ((this.props.state: any): EncounterState);
+    let options = [
+      {id: 'none', text: 'none'},
+      {id: 'possible', text: 'possible'},
+      {id: 'always', text: 'always'}
+    ];
+    return (
+      <div>
+        Telemedicine Possibility: <RIESelect className='editable-text' value={{id: state.telemedicine_possibility, text: state.telemedicine_possibility}} propName="telemedicine_possibility" change={this.props.onChange('telemedicine_possibility')} options={options} />
+      </div>
+    )
   }
 
   renderReason() {

@@ -95,9 +95,10 @@ export type EncounterState = {
   remarks: string[],
   type: 'Encounter',
   wellness?: boolean,
-  encounter_class: 'emergency' | 'inpatient' | 'ambulatory' | 'urgentcare' | 'hospice' | 'home' | 'snf',
+  encounter_class: 'emergency' | 'inpatient' | 'ambulatory' | 'urgentcare' | 'hospice' | 'home' | 'snf' | 'virtual',
   reason?: string,
   codes: Code[],
+  telemedicine_possibility?: 'none' | 'possible' | 'always',
   transition?: Transition
 }
 
