@@ -195,6 +195,25 @@ const gmfVersionWarnings = (module) => {
   }
 }
 
+const telemedicineWarnings = (module) => {
+  const warnings = [];
+
+  Object.keys(module.states).forEach(stateName => {
+    let state = module.states[stateName];
+    if (state.type == 'Encounter') {
+      if ((state.telemedicine_possibility == 'possible' || state.telemedicine_possibility == 'always') &&
+         (! ['virtual', 'ambulatory'].includes(state.encounter_class))) {
+        warnings.push({stateName, message: 'Encounter class implies in-person services required, but telemedicine possibility is not "none"'});
+      }
+      if (state.encounter_class == 'virtual' && state.telemedicine_possibility != 'always') {
+        warnings.push({stateName, message: 'Encounter class is for telehealth, but telemedicine possibility is not "always"'});
+      }
+    }
+  });
+
+  return warnings;
+}
+
 const stateCollisionWarnings = (module, globalCodes) => {
   const equivalentStates = [
    ['MedicationOrder', 'MedicationEnd'],
@@ -383,7 +402,9 @@ export default (state = initialState, action) => {
                            ...orphanStateWarnings(action.data.module),
                            ...placeholderCodeWarnings(action.data.module),
                            ...tableTransitionWarnings(action.data.module),
-                           ...gmfVersionWarnings(action.data.module)];
+                           ...gmfVersionWarnings(action.data.module),
+                           ...telemedicineWarnings(action.data.module)
+                          ];
 
       newState.relatedModules = [...relatedBySubmodule(action.data.moduleKey, action.data.module, newState.libraryRelatedModules)];
 

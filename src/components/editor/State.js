@@ -707,7 +707,8 @@ class Encounter extends Component<Props> {
       {id: 'urgentcare', text: 'urgentcare'},
       {id: 'hospice', text: 'hospice'},
       {id: 'home', text: 'home'},
-      {id: 'snf', text: 'snf'}
+      {id: 'snf', text: 'snf'},
+      {id: 'virtual', text: 'virtual'}
     ];
     if (state.wellness == null) {
       return (
