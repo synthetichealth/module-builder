@@ -686,6 +686,7 @@ class Encounter extends Component<Props> {
     super(props)
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.changeEncounterClass = this.changeEncounterClass.bind(this);
     this.state = {
       value : this.props.state.reason,
       lastSubmitted : this.props.state.reason,
@@ -714,7 +715,7 @@ class Encounter extends Component<Props> {
       return (
         <div>
           {this.renderWellness()}
-          Encounter Class: <RIESelect className='editable-text' value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.props.onChange('encounter_class')} options={options} />
+          Encounter Class: <RIESelect className='editable-text' value={{id: state.encounter_class, text: state.encounter_class}} propName="encounter_class" change={this.changeEncounterClass} options={options} />
           <br />
           {this.renderReason()}
           <div className='section'>
@@ -756,6 +757,13 @@ class Encounter extends Component<Props> {
       );
     }
 
+  }
+
+  changeEncounterClass(value) {
+    this.props.onChange('encounter_class')(value);
+    if (this.props.state.telemedicine_possibility != 'always') {
+      this.props.onChange('telemedicine_possibility')({telemedicine_possibility: 'always'});
+    }
   }
 
   renderTelemedicinePossibility() {
