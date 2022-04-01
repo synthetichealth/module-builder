@@ -761,7 +761,8 @@ class Encounter extends Component<Props> {
 
   changeEncounterClass(value) {
     this.props.onChange('encounter_class')(value);
-    if (this.props.state.telemedicine_possibility != 'always') {
+    if (value.encounter_class.text == 'virtual' &&
+        this.props.state.telemedicine_possibility != 'always') {
       this.props.onChange('telemedicine_possibility')({telemedicine_possibility: 'always'});
     }
   }
