@@ -416,6 +416,7 @@ const StateTemplates = {
     type: "Encounter",
     encounter_class: "ambulatory",
     reason: "",
+    telemedicine_possibility: "none",
     codes: [{...TypeTemplates.Code.Snomed}]
   },
 
