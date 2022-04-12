@@ -724,6 +724,7 @@ class Encounter extends Component<Props> {
             <Codes codes={state.codes} system={"SNOMED-CT"} onChange={this.props.onChange('codes')} />
           </div>
           {this.renderTelemedicinePossibility()}
+          {this.renderClinicalSpecialty()}
         </div>
       );
     } else {
@@ -732,6 +733,7 @@ class Encounter extends Component<Props> {
           {this.renderWellness()}
           {this.renderReason()}
           {this.renderTelemedicinePossibility()}
+          {this.renderClinicalSpecialty()}
         </div>
       );
     }
@@ -777,6 +779,41 @@ class Encounter extends Component<Props> {
     return (
       <div>
         Telemedicine Possibility: <RIESelect className='editable-text' value={{id: state.telemedicine_possibility, text: state.telemedicine_possibility}} propName="telemedicine_possibility" change={this.props.onChange('telemedicine_possibility')} options={options} />
+      </div>
+    )
+  }
+
+  renderClinicalSpecialty() {
+    let state = ((this.props.state: any): EncounterState);
+    // Copied from org/mitre/synthea/world/concepts/ClinicianSpecialty.java
+    let specialties = ["ADDICTION MEDICINE",
+    "ADVANCED HEART FAILURE AND TRANSPLANT CARDIOLOGY", "ALLERGY/IMMUNOLOGY", "ANESTHESIOLOGY",
+    "ANESTHESIOLOGY ASSISTANT", "AUDIOLOGIST","CARDIAC ELECTROPHYSIOLOGY","CARDIAC SURGERY",
+    "CARDIOVASCULAR DISEASE (CARDIOLOGY)", "CERTIFIED NURSE MIDWIFE",
+    "CERTIFIED REGISTERED NURSE ANESTHETIST", "CHIROPRACTIC", "CLINICAL NURSE SPECIALIST",
+    "CLINICAL PSYCHOLOGIST", "CLINICAL SOCIAL WORKER", "COLORECTAL SURGERY (PROCTOLOGY)",
+    "CRITICAL CARE (INTENSIVISTS)", "DENTIST", "DERMATOLOGY",
+    "DIAGNOSTIC RADIOLOGY","EMERGENCY MEDICINE", "ENDOCRINOLOGY", "FAMILY PRACTICE",
+    "GASTROENTEROLOGY", "GENERAL PRACTICE", "GENERAL SURGERY", "GERIATRIC MEDICINE",
+    "GERIATRIC PSYCHIATRY", "GYNECOLOGICAL ONCOLOGY", "HAND SURGERY", "HEMATOLOGY",
+    "HEMATOLOGY/ONCOLOGY", "HEMATOPOIETIC CELL TRANSPLANTATION AND CELLULAR TH",
+    "HOSPICE/PALLIATIVE CARE", "HOSPITALIST", "INFECTIOUS DISEASE","INTERNAL MEDICINE",
+    "INTERVENTIONAL CARDIOLOGY", "INTERVENTIONAL PAIN MANAGEMENT", "INTERVENTIONAL RADIOLOGY",
+    "MAXILLOFACIAL SURGERY", "MEDICAL ONCOLOGY", "NEPHROLOGY", "NEUROLOGY", "NEUROPSYCHIATRY",
+    "NEUROSURGERY", "NUCLEAR MEDICINE", "NURSE PRACTITIONER", "OBSTETRICS/GYNECOLOGY",
+    "OCCUPATIONAL THERAPY", "OPHTHALMOLOGY", "OPTOMETRY", "ORAL SURGERY", "ORTHOPEDIC SURGERY",
+    "OSTEOPATHIC MANIPULATIVE MEDICINE", "OTOLARYNGOLOGY", "PAIN MANAGEMENT",
+    "PATHOLOGY", "PEDIATRIC MEDICINE", "PERIPHERAL VASCULAR DISEASE",
+    "PHYSICAL MEDICINE AND REHABILITATION","PHYSICAL THERAPY", "PHYSICIAN ASSISTANT",
+    "PLASTIC AND RECONSTRUCTIVE SURGERY", "PODIATRY", "PREVENTATIVE MEDICINE","PSYCHIATRY",
+    "PULMONARY DISEASE", "RADIATION ONCOLOGY", "REGISTERED DIETITIAN OR NUTRITION PROFESSIONAL",
+    "RHEUMATOLOGY", "SLEEP MEDICINE", "SPEECH LANGUAGE PATHOLOGIST", "SPORTS MEDICINE",
+    "SURGICAL ONCOLOGY", "THORACIC SURGERY", "UNDEFINED PHYSICIAN TYPE (SPECIFY)",
+    "UROLOGY", "VASCULAR SURGERY"]
+    let options = specialties.map((s) => {return {id: s, text: s}});
+    return (
+      <div>
+        Clinical Specialty: <RIESelect className='editable-text' value={{id: state.specialty, text: state.specialty}} propName="specialty" change={this.props.onChange('specialty')} options={options} />
       </div>
     )
   }
