@@ -88,6 +88,11 @@ const TypeTemplates = {
       system: "DICOM-SOP",
       code: "1.2.3.4.5.6.7.8",
       display: "DICOM Subject-Object Pair Code"
+    },
+    Cvx: {
+      system: "CVX",
+      code: "123",
+      display: "CVX Vaccine Code"
     }
   },
 
@@ -476,6 +481,12 @@ const StateTemplates = {
       }
     },
     "unit": "minutes"
+  },
+
+  Vaccine: {
+    type: "Vaccine",
+    series: 1,
+    codes: [{...TypeTemplates.Code.Cvx}]
   },
 
   VitalSign: {
