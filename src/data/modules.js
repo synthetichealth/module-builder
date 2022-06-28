@@ -961,6 +961,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "allergic_rhinitis",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -9271,6 +9272,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "ADHD",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -13855,6 +13857,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "breast_cancer_condition",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -13956,6 +13959,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "breast_cancer_condition",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -15888,6 +15892,7 @@ export default {"acute_myeloid_leukemia":{
     "Followup_Cerebral_Palsy_Encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -16781,6 +16786,448 @@ export default {"acute_myeloid_leukemia":{
   ]
 }
 ,
+"chronic_kidney_disease":{
+  "name": "Chronic Kidney Disease",
+  "remarks": [],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Initial_Kidney_Health"
+    },
+    "Initial_Kidney_Health": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "value": 0,
+      "direct_transition": "Guard_for_Htn_or_DM"
+    },
+    "Guard_for_Htn_or_DM": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Or",
+        "conditions": [
+          {
+            "condition_type": "Attribute",
+            "attribute": "hypertension",
+            "operator": "is not nil"
+          },
+          {
+            "condition_type": "Attribute",
+            "attribute": "diabetes",
+            "operator": "is not nil"
+          }
+        ]
+      },
+      "direct_transition": "Nephropathy_Progression"
+    },
+    "Nephropathy_Progression": {
+      "type": "Delay",
+      "exact": {
+        "quantity": 1,
+        "unit": "months"
+      },
+      "remarks": [
+        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4727808/",
+        "There are 5 defined stages of kidney disease; stage 5 is End-stage where dialysis is necessary",
+        "Prevalence of Nephropathy is 34.5% - http://link.springer.com/chapter/10.1007%2F978-1-4939-0793-9_2",
+        "Prevalence of microalbuminuria is ~ 28.8% - https://www.ncbi.nlm.nih.gov/pubmed/11877563",
+        "Prevalence of End stage renal disease is ~ .78% - ",
+        "https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf"
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "veteran",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "ckd",
+                "operator": "==",
+                "value": 0
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "distribution": 0.99,
+              "transition": "Nephropathy_Progression"
+            },
+            {
+              "distribution": 0.01,
+              "transition": "Set_CKD_1 Damage"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "distribution": 0.9992,
+              "transition": "Nephropathy_Progression"
+            },
+            {
+              "distribution": 0.0008,
+              "transition": "Set_CKD_1 Damage"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 1
+          },
+          "distributions": [
+            {
+              "distribution": 0.9865,
+              "transition": "Set_CKD_1 Damage"
+            },
+            {
+              "distribution": 0.0135,
+              "transition": "Set_CKD_2 Damage"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 2
+          },
+          "distributions": [
+            {
+              "distribution": 0.994,
+              "transition": "Set_CKD_2 Damage"
+            },
+            {
+              "distribution": 0.006,
+              "transition": "Set_CKD_3 Damage"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 3
+          },
+          "distributions": [
+            {
+              "distribution": 0.9994,
+              "transition": "Set_CKD_3 Damage"
+            },
+            {
+              "distribution": 0.0006,
+              "transition": "Set_CKD_4 Damage"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 4
+          },
+          "distributions": [
+            {
+              "distribution": 0.9994,
+              "transition": "Set_CKD_4 Damage"
+            },
+            {
+              "distribution": 0.0006,
+              "transition": "Expected_Lifespan_for_ESRD"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 5
+          },
+          "distributions": [],
+          "transition": "Expected_Lifespan_for_ESRD"
+        }
+      ]
+    },
+    "Set_Nephropathy": {
+      "type": "SetAttribute",
+      "attribute": "nephropathy",
+      "value": true,
+      "direct_transition": "CKD1_Symptom_1"
+    },
+    "Set_Microalbuminuria": {
+      "type": "SetAttribute",
+      "attribute": "microalbuminuria",
+      "value": true,
+      "direct_transition": "CKD2_Symptom_1"
+    },
+    "Set_Proteinuria": {
+      "type": "SetAttribute",
+      "attribute": "proteinuria",
+      "value": true,
+      "direct_transition": "CKD3_Symptom_1"
+    },
+    "Expected_Lifespan_for_ESRD": {
+      "type": "Death",
+      "range": {
+        "low": 4,
+        "high": 10,
+        "unit": "years"
+      },
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "46177005",
+          "display": "End stage renal disease (disorder)"
+        }
+      ],
+      "remarks": [
+        "Life expectency depends on many factors, but for patients > 40 it's generally less than 10 years with dialysis",
+        "http://link.springer.com/article/10.1007/s00467-016-3383-8 (Table 2"
+      ],
+      "direct_transition": "Set_CKD_5 Damage"
+    },
+    "Loop_back_to_Start": {
+      "type": "Simple",
+      "direct_transition": "Nephropathy_Progression"
+    },
+    "Set_CKD_1 Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "direct_transition": "Set_Nephropathy",
+      "value": 1
+    },
+    "Set_CKD_2 Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "direct_transition": "Set_Microalbuminuria",
+      "value": 2
+    },
+    "Set_CKD_3 Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "value": 3,
+      "direct_transition": "Set_Proteinuria"
+    },
+    "Set_CKD_4 Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "value": 4,
+      "direct_transition": "CKD4_Symptom_1"
+    },
+    "Set_CKD_5 Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "direct_transition": "CKD5_Symptom_1",
+      "value": 5
+    },
+    "CKD1_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Hunger",
+      "range": {
+        "low": 1,
+        "high": 100
+      },
+      "direct_transition": "CKD1_Symptom_2"
+    },
+    "CKD2_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Hunger",
+      "range": {
+        "low": 20,
+        "high": 100
+      },
+      "direct_transition": "CKD2_Symptom_2"
+    },
+    "CKD2_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 20,
+        "high": 100
+      },
+      "direct_transition": "CKD2_Symptom_3"
+    },
+    "CKD2_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "range": {
+        "low": 20,
+        "high": 100
+      },
+      "direct_transition": "CKD2_Symptom_4"
+    },
+    "CKD2_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Thirst",
+      "range": {
+        "low": 20,
+        "high": 100
+      },
+      "direct_transition": "Loop_back_to_Start"
+    },
+    "CKD1_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 1,
+        "high": 100
+      },
+      "direct_transition": "CKD1_Symptom_3"
+    },
+    "CKD1_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "range": {
+        "low": 1,
+        "high": 100
+      },
+      "direct_transition": "CKD1_Symptom_4"
+    },
+    "CKD1_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Thirst",
+      "range": {
+        "low": 1,
+        "high": 100
+      },
+      "direct_transition": "Loop_back_to_Start"
+    },
+    "CKD3_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Hunger",
+      "range": {
+        "low": 40,
+        "high": 100
+      },
+      "direct_transition": "CKD3_Symptom_2"
+    },
+    "CKD3_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 40,
+        "high": 100
+      },
+      "direct_transition": "CKD3_Symptom_3"
+    },
+    "CKD3_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "range": {
+        "low": 40,
+        "high": 100
+      },
+      "direct_transition": "CKD3_Symptom_4"
+    },
+    "CKD3_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Thirst",
+      "range": {
+        "low": 40,
+        "high": 100
+      },
+      "direct_transition": "Loop_back_to_Start"
+    },
+    "CKD5_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Hunger",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "remarks": [
+        "Without intervention, 20-40 percent of patients with type 2 diabetes/microalbuminuria, will evolve to macroalbuminuria.",
+        "Shlipak, Michael. 'Clinical Evidence Handbook: Diabetic Nephropathy: Preventing Progression - American Family Physician'. www.aafp.org."
+      ],
+      "direct_transition": "CKD5_Symptom_2"
+    },
+    "CKD5_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "CKD5_Symptom_3"
+    },
+    "CKD5_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "CKD5_Symptom_4"
+    },
+    "CKD5_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Thirst",
+      "range": {
+        "low": 50,
+        "high": 100
+      },
+      "direct_transition": "Loop_back_to_Start"
+    },
+    "CKD4_Symptom_1": {
+      "type": "Symptom",
+      "symptom": "Hunger",
+      "cause": "",
+      "direct_transition": "CKD4_Symptom_2",
+      "range": {
+        "low": 45,
+        "high": 2
+      }
+    },
+    "CKD4_Symptom_2": {
+      "type": "Symptom",
+      "symptom": "Fatigue",
+      "cause": "",
+      "direct_transition": "CKD4_Symptom_3",
+      "range": {
+        "low": 45,
+        "high": 100
+      }
+    },
+    "CKD4_Symptom_3": {
+      "type": "Symptom",
+      "symptom": "Frequent Urination",
+      "cause": "",
+      "direct_transition": "CKD4_Symptom_4",
+      "range": {
+        "low": 45,
+        "high": 100
+      }
+    },
+    "CKD4_Symptom_4": {
+      "type": "Symptom",
+      "symptom": "Thirst",
+      "cause": "",
+      "direct_transition": "Loop_back_to_Start",
+      "range": {
+        "low": 45,
+        "high": 100
+      }
+    }
+  },
+  "gmf_version": 1
+}
+,
 "colorectal_cancer":{
   "name": "Colorectal Cancer",
   "remarks": [
@@ -17204,6 +17651,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "colorectal_adenoma",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -17421,6 +17869,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "Colorectal_Cancer_Symptom_2",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -17999,8 +18448,8 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "781831000000109",
-          "display": "Major surgery care management"
+          "code": "737567002",
+          "display": "Major surgery care management (procedure)"
         }
       ],
       "activities": [
@@ -18124,8 +18573,8 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "781831000000109",
-          "display": "Major surgery care management"
+          "code": "737567002",
+          "display": "Major surgery care management (procedure)"
         }
       ],
       "activities": [
@@ -18504,8 +18953,8 @@ export default {"acute_myeloid_leukemia":{
             }
           ],
           "range": {
-            "low": 60,
-            "high": 80
+            "low": 6,
+            "high": 8
           }
         },
         {
@@ -19562,6 +20011,7 @@ export default {"acute_myeloid_leukemia":{
     "Daily Self-Measurement Encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -35612,8 +36062,8 @@ export default {"acute_myeloid_leukemia":{
       "activities": [
         {
           "system": "SNOMED-CT",
-          "code": "850261000000100",
-          "display": "Education about dementia"
+          "code": "311401005",
+          "display": "Patient education (procedure)"
         },
         {
           "system": "SNOMED-CT",
@@ -35764,6 +36214,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "Type of Alzheimer's",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -36802,6 +37253,7 @@ export default {"acute_myeloid_leukemia":{
       ],
       "encounter_class": "ambulatory",
       "reason": "dermatitis",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -36894,6 +37346,7 @@ export default {"acute_myeloid_leukemia":{
         "1/3 of all eczema cases are severe. 0.5 * 0.67 ~= 0.33"
       ],
       "encounter_class": "ambulatory",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -37129,6 +37582,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "dermatitis",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -37607,8 +38061,8 @@ export default {"acute_myeloid_leukemia":{
             }
           ],
           "range": {
-            "low": 60,
-            "high": 80
+            "low": 6,
+            "high": 8
           }
         },
         {
@@ -42732,7 +43186,7 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "LOINC",
-          "code": "55284-4",
+          "code": "85354-9",
           "display": "Blood Pressure"
         }
       ],
@@ -44124,6 +44578,7 @@ export default {"acute_myeloid_leukemia":{
         "is."
       ],
       "encounter_class": "ambulatory",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -49478,6 +49933,9638 @@ export default {"acute_myeloid_leukemia":{
   "gmf_version": 1
 }
 ,
+"hiv/art_sequence":{
+  "name": "ART Sequence",
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "pregnant",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Year Check"
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "1987 to 1994": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/art_sequence_1987_1994",
+      "direct_transition": "Set 1987"
+    },
+    "1995_to_1996": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/art_sequence_1995_1996",
+      "direct_transition": "Set 1995"
+    },
+    "1997_to_2002": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/art_sequence_1997_2002",
+      "direct_transition": "Set 1997"
+    },
+    "2003_to_2005": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/art_sequence_2003_2005",
+      "direct_transition": "Set 2003"
+    },
+    "2006_to_2014": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/art_sequence_2006_2014",
+      "direct_transition": "Set 2006"
+    },
+    "2015+": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/art_sequence_2015",
+      "direct_transition": "Set 2015"
+    },
+    "Year Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Check 2015",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2015,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Check 2006",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2006,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Check 2003",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2003,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Check 1997",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 1997,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Check 1995",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 1995,
+            "value": 0
+          }
+        },
+        {
+          "transition": "1987 to 1994",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 1987,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Set Zero"
+        }
+      ]
+    },
+    "Set 1995": {
+      "type": "SetAttribute",
+      "attribute": "art_year",
+      "direct_transition": "Terminal",
+      "value": 1995
+    },
+    "Stop All 1995": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/stop_all_art_meds",
+      "direct_transition": "1995_to_1996"
+    },
+    "Check 1995": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "art_year",
+            "operator": ">=",
+            "value": 1995
+          }
+        },
+        {
+          "transition": "Stop All 1995"
+        }
+      ]
+    },
+    "Check 2015": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "art_year",
+            "operator": "is nil"
+          },
+          "distributions": [],
+          "transition": "Stop All 2015"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "art_year",
+            "operator": ">=",
+            "value": 2015
+          },
+          "distributions": [],
+          "transition": "Terminal"
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.5,
+              "transition": "Stop All 2015"
+            },
+            {
+              "distribution": 0.5,
+              "transition": "Terminal"
+            }
+          ]
+        }
+      ]
+    },
+    "Stop All 2015": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/stop_all_art_meds",
+      "direct_transition": "2015+"
+    },
+    "Set 2015": {
+      "type": "SetAttribute",
+      "attribute": "art_year",
+      "direct_transition": "Terminal",
+      "value": 2015
+    },
+    "Check 2006": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "art_year",
+            "operator": ">=",
+            "value": 2006
+          }
+        },
+        {
+          "transition": "Stop All 2006"
+        }
+      ]
+    },
+    "Stop All 2006": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/stop_all_art_meds",
+      "direct_transition": "2006_to_2014"
+    },
+    "Set 2006": {
+      "type": "SetAttribute",
+      "attribute": "art_year",
+      "direct_transition": "Terminal",
+      "value": 2006
+    },
+    "Check 2003": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "art_year",
+            "operator": ">=",
+            "value": 2003
+          }
+        },
+        {
+          "transition": "Stop All 2003"
+        }
+      ]
+    },
+    "Stop All 2003": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/stop_all_art_meds",
+      "direct_transition": "2003_to_2005"
+    },
+    "Set 2003": {
+      "type": "SetAttribute",
+      "attribute": "art_year",
+      "direct_transition": "Terminal",
+      "value": 2003
+    },
+    "Check 1997": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "art_year",
+            "operator": ">=",
+            "value": 1997
+          }
+        },
+        {
+          "transition": "Stop All 1997"
+        }
+      ]
+    },
+    "Stop All 1997": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/stop_all_art_meds",
+      "direct_transition": "1997_to_2002"
+    },
+    "Set 1997": {
+      "type": "SetAttribute",
+      "attribute": "art_year",
+      "direct_transition": "Terminal",
+      "value": 1997
+    },
+    "Set 1987": {
+      "type": "SetAttribute",
+      "attribute": "art_year",
+      "direct_transition": "Terminal",
+      "value": 1987
+    },
+    "Set Zero": {
+      "type": "SetAttribute",
+      "attribute": "art_year",
+      "direct_transition": "Terminal",
+      "value": 0
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/art_sequence_1987_1994":{
+  "name": "art_sequence_1987-1994",
+  "remarks": [
+    "This module will be called every 3-4 months if continuous ART.",
+    "If non-continuous ART, every 4-6 months."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Counter Check"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "ZDV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 199663,
+          "display": "zidovudine 300 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_MonoEra",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "ddI": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 284988,
+          "display": "didanosine 400 MG Delayed Release Oral Capsule"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_MonoEra",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "ddC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313760,
+          "display": "zalcitabine 0.75 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_MonoEra",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 3,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "Date Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Stop ZDV",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "value": 0,
+            "date": {
+              "year": 1991,
+              "month": 10,
+              "day": 9,
+              "hour": 0,
+              "minute": 0,
+              "second": 0,
+              "millisecond": 0
+            }
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Prescription Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "ZDV",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ART_MonoEra",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Counter_Check_2"
+        }
+      ]
+    },
+    "Counter Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set Counter",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ART_MonoEra",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Increment Counter"
+        }
+      ]
+    },
+    "Set Counter": {
+      "type": "SetAttribute",
+      "attribute": "art_1987_counter",
+      "direct_transition": "Prescription Check",
+      "value": 1
+    },
+    "Increment Counter": {
+      "type": "Counter",
+      "attribute": "art_1987_counter",
+      "action": "increment",
+      "direct_transition": "Prescription Check"
+    },
+    "Stop ZDV": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "ART_MonoEra",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "value": 0,
+            "date": {
+              "year": 1994,
+              "month": 6,
+              "day": 24,
+              "hour": 0,
+              "minute": 0,
+              "second": 0,
+              "millisecond": 0
+            }
+          },
+          "distributions": [],
+          "transition": "d4T"
+        },
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "value": 0,
+            "date": {
+              "year": 1992,
+              "month": 6,
+              "day": 19,
+              "hour": 0,
+              "minute": 0,
+              "second": 0,
+              "millisecond": 0
+            }
+          },
+          "distributions": [
+            {
+              "distribution": 0.4,
+              "transition": "ddC"
+            },
+            {
+              "distribution": 0.6,
+              "transition": "ddI"
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "ddI"
+        }
+      ]
+    },
+    "Counter_Check_2": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Date Check",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "art_1987_counter",
+                "operator": "==",
+                "value": 4
+              },
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "art_1987_counter",
+                    "operator": "==",
+                    "value": 8
+                  },
+                  {
+                    "condition_type": "Or",
+                    "conditions": [
+                      {
+                        "condition_type": "Attribute",
+                        "attribute": "art_1987_counter",
+                        "operator": "==",
+                        "value": 12
+                      },
+                      {
+                        "condition_type": "Attribute",
+                        "attribute": "art_1987_counter",
+                        "operator": "==",
+                        "value": 16
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ],
+      "remarks": [
+        "The counter updates every 3-6 months (4.5 months on average), so counter == 4 would be approximately 18 months.",
+        "So, this should update medication approximately every 18 months."
+      ]
+    },
+    "d4T": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313110,
+          "display": "stavudine 40 MG Oral Capsule"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_MonoEra",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/art_sequence_1995_1996":{
+  "name": "art_sequence_1995_1996",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "distributed_transition": [
+        {
+          "transition": "d4T",
+          "distribution": 0.4
+        },
+        {
+          "transition": "ZDV",
+          "distribution": 0.6
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "d4T": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313110,
+          "display": "stavudine 40 MG Oral Capsule"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_DualERA",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Assign Regimen"
+    },
+    "ZDV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 199663,
+          "display": "zidovudine 300 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Assign Regimen",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_DualEra",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "ddC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313760,
+          "display": "zalcitabine 0.75 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_DualEra",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 3,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "ddI": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 284988,
+          "display": "didanosine 400 MG Delayed Release Oral Capsule"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_DualEra",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "3TC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349491,
+          "display": "lamivudine 300 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_DualEra",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "Assign Regimen": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">",
+            "date": {
+              "year": 1995,
+              "month": 11,
+              "day": 17,
+              "hour": 0,
+              "minute": 0,
+              "second": 0,
+              "millisecond": 0
+            }
+          },
+          "distributions": [],
+          "transition": "3TC"
+        },
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 313110,
+                "display": "stavudine 40 MG Oral Capsule"
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "ddI"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "ddC",
+              "distribution": 0.5
+            },
+            {
+              "transition": "ddI",
+              "distribution": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/art_sequence_1997_2002":{
+  "name": "art_sequence_1997_2002",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": "==",
+            "year": 2002,
+            "value": 0
+          },
+          "distributions": [
+            {
+              "distribution": 0.2,
+              "transition": "ddI"
+            },
+            {
+              "distribution": 0.6,
+              "transition": "ZDV"
+            },
+            {
+              "distribution": 0.2,
+              "transition": "d4T"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Attribute",
+                  "attribute": "ckd",
+                  "operator": ">=",
+                  "value": 4
+                }
+              },
+              {
+                "condition_type": "Date",
+                "operator": ">=",
+                "date": {
+                  "year": 1997,
+                  "month": 9,
+                  "day": 26,
+                  "hour": 0,
+                  "minute": 0,
+                  "second": 0,
+                  "millisecond": 0
+                },
+                "value": 0
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "3TC+ZDV"
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.6,
+              "transition": "ZDV"
+            },
+            {
+              "distribution": 0.4,
+              "transition": "d4T"
+            }
+          ]
+        }
+      ]
+    },
+    "d4T": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313110,
+          "display": "stavudine 40 MG Oral Capsule"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "distributed_transition": [
+        {
+          "transition": "3TC",
+          "distribution": 0.5
+        },
+        {
+          "transition": "ddI_2",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "ZDV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 199663,
+          "display": "zidovudine 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": "<",
+            "year": 2000,
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "ddC",
+              "distribution": 0.34
+            },
+            {
+              "transition": "ddI_2",
+              "distribution": 0.33
+            },
+            {
+              "transition": "3TC",
+              "distribution": 0.33
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "distribution": 0.5,
+              "transition": "ddI_2"
+            },
+            {
+              "transition": "3TC",
+              "distribution": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    "ddC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313760,
+          "display": "zalcitabine 0.75 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Drug 3",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 3,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "ddI": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 284988,
+          "display": "didanosine 400 MG Delayed Release Oral Capsule"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": "<",
+            "year": 2000,
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "ddC",
+              "distribution": 0.5
+            },
+            {
+              "transition": "3TC",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "3TC"
+        }
+      ]
+    },
+    "3TC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349491,
+          "display": "lamivudine 300 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Drug 3",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "3TC+ZDV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200082,
+          "display": "lamivudine 150 MG / zidovudine 300 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Drug 3",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "ddI_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 284988,
+          "display": "didanosine 400 MG Delayed Release Oral Capsule"
+        }
+      ],
+      "direct_transition": "Drug 3",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "Drug 3": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Year 2K+",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2001,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Year 2000",
+          "condition": {
+            "condition_type": "Date",
+            "operator": "==",
+            "year": 2000,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Year 98 and 99",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "date": {
+              "year": 1998,
+              "month": 9,
+              "day": 17,
+              "hour": 0,
+              "minute": 0,
+              "second": 0,
+              "millisecond": 0
+            },
+            "value": 0
+          }
+        },
+        {
+          "transition": "Year 1997",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "value": 0,
+            "date": {
+              "year": 1997,
+              "month": 9,
+              "day": 30,
+              "hour": 0,
+              "minute": 0,
+              "second": 0,
+              "millisecond": 0
+            }
+          }
+        },
+        {
+          "transition": "Early 1997"
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "IDV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310988,
+          "display": "indinavir 400 MG Oral Capsule"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 3,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "conditional_transition": [
+        {
+          "transition": "r",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2001,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "SQV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 859863,
+          "display": "saquinavir mesylate 500 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "r",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "r": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 317150,
+          "display": "ritonavir 100 MG Oral Capsule"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "RTV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 317150,
+          "display": "ritonavir 100 MG Oral Capsule"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 6,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "NEL": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 403978,
+          "display": "nelfinavir 625 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "EFV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349477,
+          "display": "efavirenz 600 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "LPV/r": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 597730,
+          "display": "lopinavir 200 MG / ritonavir 50 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyPI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "Year 1997": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "IDV",
+          "distribution": 0.25
+        },
+        {
+          "transition": "SQV",
+          "distribution": 0.25
+        },
+        {
+          "transition": "RTV",
+          "distribution": 0.25
+        },
+        {
+          "transition": "NEL",
+          "distribution": 0.25
+        }
+      ]
+    },
+    "Year 98 and 99": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "IDV",
+          "distribution": 0.2
+        },
+        {
+          "transition": "SQV",
+          "distribution": 0.2
+        },
+        {
+          "transition": "RTV",
+          "distribution": 0.2
+        },
+        {
+          "transition": "NEL",
+          "distribution": 0.2
+        },
+        {
+          "transition": "EFV",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "Year 2000": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "IDV",
+          "distribution": 0.25
+        },
+        {
+          "transition": "SQV",
+          "distribution": 0.25
+        },
+        {
+          "transition": "NEL",
+          "distribution": 0.25
+        },
+        {
+          "transition": "EFV",
+          "distribution": 0.25
+        }
+      ]
+    },
+    "Year 2K+": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "IDV",
+          "distribution": 0.2
+        },
+        {
+          "transition": "SQV",
+          "distribution": 0.2
+        },
+        {
+          "transition": "NEL",
+          "distribution": 0.2
+        },
+        {
+          "transition": "EFV",
+          "distribution": 0.2
+        },
+        {
+          "transition": "LPV/r",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "Early 1997": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "IDV",
+          "distribution": 0.34
+        },
+        {
+          "transition": "SQV",
+          "distribution": 0.33
+        },
+        {
+          "transition": "RTV",
+          "distribution": 0.33
+        }
+      ]
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/art_sequence_2003_2005":{
+  "name": "art_sequence_2003_2005",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "CKD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": ">=",
+            "value": 4
+          }
+        },
+        {
+          "transition": "No CKD"
+        }
+      ]
+    },
+    "ZDV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 199663,
+          "display": "zidovudine 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_3TCZDV_Era",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 3"
+    },
+    "3TC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349491,
+          "display": "lamivudine 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_3TCZDV_Era",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 2"
+    },
+    "3TC+ZDV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200082,
+          "display": "lamivudine 150 MG / zidovudine 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_3TCZDV_Era",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "distributed_transition": [
+        {
+          "transition": "LPV/r",
+          "distribution": 0.5
+        },
+        {
+          "transition": "EFV",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "EFV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349477,
+          "display": "efavirenz 600 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_3TCZDV_Era",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "LPV/r": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 597730,
+          "display": "lopinavir 200 MG / ritonavir 50 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_3TCZDV_Era",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "Drug 3": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 349251,
+                "display": "tenofovir disoproxil fumarate 300 MG Oral Tablet"
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "EFV"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "EFV",
+              "distribution": 0.5
+            },
+            {
+              "transition": "LPV/r",
+              "distribution": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    "TDF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349251,
+          "display": "tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_3TCZDV_Era",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 3"
+    },
+    "Drug 2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "ZDV",
+          "distribution": 0.5
+        },
+        {
+          "transition": "TDF",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "FTC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 403875,
+          "display": "emtricitabine 200 MG Oral Capsule"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_3TCZDV_Era",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 2"
+    },
+    "FTC+TDF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 476556,
+          "display": "emtricitabine 200 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_3TCZDV_Era",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "EFV"
+    },
+    "CKD": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2004,
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "FTC",
+              "distribution": 0.5
+            },
+            {
+              "transition": "3TC",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "3TC"
+        }
+      ]
+    },
+    "No CKD": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "date": {
+              "year": 2004,
+              "month": 8,
+              "day": 2,
+              "hour": 0,
+              "minute": 0,
+              "second": 0,
+              "millisecond": 0
+            },
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "FTC+TDF",
+              "distribution": 0.25
+            },
+            {
+              "transition": "3TC",
+              "distribution": 0.25
+            },
+            {
+              "transition": "FTC",
+              "distribution": 0.25
+            },
+            {
+              "transition": "3TC+ZDV",
+              "distribution": 0.25
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/art_sequence_2006_2014":{
+  "name": "art_sequence_2006_2014",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "CKD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": ">=",
+            "value": 4
+          }
+        },
+        {
+          "transition": "No CKD"
+        }
+      ]
+    },
+    "3TC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349491,
+          "display": "lamivudine 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 2"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "EFV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349477,
+          "display": "efavirenz 600 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "LPV/r": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 597730,
+          "display": "lopinavir 200 MG / ritonavir 50 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "TDF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349251,
+          "display": "tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "distributed_transition": [
+        {
+          "transition": "3TC",
+          "distribution": 0.5
+        },
+        {
+          "transition": "FTC",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Drug 2": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2014,
+            "value": 0
+          },
+          "distributions": [
+            {
+              "distribution": 0.2,
+              "transition": "DTG"
+            },
+            {
+              "transition": "RAL",
+              "distribution": 0.2
+            },
+            {
+              "transition": "EFV",
+              "distribution": 0.2
+            },
+            {
+              "transition": "ATV",
+              "distribution": 0.2
+            },
+            {
+              "transition": "DRV",
+              "distribution": 0.2
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2009,
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "RAL",
+              "distribution": 0.25
+            },
+            {
+              "transition": "EFV",
+              "distribution": 0.25
+            },
+            {
+              "transition": "ATV",
+              "distribution": 0.25
+            },
+            {
+              "transition": "DRV",
+              "distribution": 0.25
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "value": 0,
+            "date": {
+              "year": 2008,
+              "month": 11,
+              "day": 1,
+              "hour": 0,
+              "minute": 0,
+              "second": 0,
+              "millisecond": 0
+            }
+          },
+          "distributions": [
+            {
+              "transition": "EFV",
+              "distribution": 0.2
+            },
+            {
+              "transition": "LPV/r",
+              "distribution": 0.2
+            },
+            {
+              "transition": "FPV",
+              "distribution": 0.2
+            },
+            {
+              "transition": "ATV",
+              "distribution": 0.2
+            },
+            {
+              "transition": "DRV",
+              "distribution": 0.2
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "EFV",
+              "distribution": 0.25
+            },
+            {
+              "transition": "LPV/r",
+              "distribution": 0.25
+            },
+            {
+              "transition": "FPV",
+              "distribution": 0.25
+            },
+            {
+              "transition": "ATV",
+              "distribution": 0.25
+            }
+          ]
+        }
+      ]
+    },
+    "FTC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 403875,
+          "display": "emtricitabine 200 MG Oral Capsule"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 2"
+    },
+    "FTC+TDF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 476556,
+          "display": "emtricitabine 200 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 2"
+    },
+    "CKD": {
+      "type": "Simple",
+      "direct_transition": "TDF"
+    },
+    "No CKD": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "After 2014",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2014,
+            "value": 0
+          }
+        },
+        {
+          "transition": "EFV+FTC+TDF",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "date": {
+              "year": 2006,
+              "month": 7,
+              "day": 12,
+              "hour": 0,
+              "minute": 0,
+              "second": 0,
+              "millisecond": 0
+            },
+            "value": 0
+          }
+        },
+        {
+          "transition": "FTC+TDF"
+        }
+      ]
+    },
+    "FTC+RPV+TDF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1147334,
+          "display": "emtricitabine 200 MG / rilpivirine 25 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Terminal"
+    },
+    "EFV+FTC+TDF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 643066,
+          "display": "efavirenz 600 MG / emtricitabine 200 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Terminal"
+    },
+    "EVG+cobi+TDF+FTC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1306292,
+          "display": "cobicistat 150 MG / elvitegravir 150 MG / emtricitabine 200 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Terminal"
+    },
+    "After 2014": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "FTC+RPV+TDF",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "hiv_cd4",
+                "operator": ">",
+                "value": 200
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hiv_rapid_start",
+                "operator": "!=",
+                "value": true
+              }
+            ]
+          }
+        },
+        {
+          "transition": "EVG+cobi+TDF+FTC"
+        }
+      ]
+    },
+    "RAL": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 744842,
+          "display": "raltegravir 400 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "DTG": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1433873,
+          "display": "dolutegravir 50 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "FPV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 402109,
+          "display": "fosamprenavir 700 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "r",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "r": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 317150,
+          "display": "ritonavir 100 MG Oral Capsule"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "ATV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 664741,
+          "display": "atazanavir 300 MG Oral Capsule"
+        }
+      ],
+      "direct_transition": "r",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "DRV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1359269,
+          "display": "darunavir 800 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "r",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_EarlyINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/art_sequence_2015":{
+  "name": "art_sequence_2015",
+  "remarks": [
+    "A blank module"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "CKD",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": ">=",
+            "value": 4
+          }
+        },
+        {
+          "transition": "No CKD"
+        }
+      ]
+    },
+    "3TC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349491,
+          "display": "lamivudine 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 2"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "TDF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349251,
+          "display": "tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "distributed_transition": [
+        {
+          "transition": "3TC",
+          "distribution": 0.5
+        },
+        {
+          "transition": "FTC",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Drug 2": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2021,
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "DTG",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 2017,
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "DTG",
+              "distribution": 0.5
+            },
+            {
+              "transition": "RAL",
+              "distribution": 0.5
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "DTG",
+              "distribution": 0.34
+            },
+            {
+              "transition": "RAL",
+              "distribution": 0.33
+            },
+            {
+              "transition": "DRV",
+              "distribution": 0.33
+            }
+          ]
+        }
+      ]
+    },
+    "FTC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 403875,
+          "display": "emtricitabine 200 MG Oral Capsule"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 2"
+    },
+    "FTC+TDF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 476556,
+          "display": "emtricitabine 200 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 2"
+    },
+    "CKD": {
+      "type": "Simple",
+      "direct_transition": "TDF"
+    },
+    "No CKD": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Date",
+                "operator": ">=",
+                "date": {
+                  "year": 2019,
+                  "month": 4,
+                  "day": 8,
+                  "hour": 0,
+                  "minute": 0,
+                  "second": 0,
+                  "millisecond": 0
+                },
+                "value": 0
+              },
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "hiv_rapid_start",
+                    "operator": "!=",
+                    "value": true
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "hiv_viral_load",
+                    "operator": "<",
+                    "value": 500000
+                  }
+                ]
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "DTG+3TC",
+              "distribution": 0.1
+            },
+            {
+              "transition": "3TC+TDF",
+              "distribution": 0.1
+            },
+            {
+              "transition": "FTC+TDF",
+              "distribution": 0.1
+            },
+            {
+              "transition": "FTC+TAF",
+              "distribution": 0.1
+            },
+            {
+              "transition": "BIC+TAF+FTC",
+              "distribution": 0.6
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "date": {
+              "year": 2018,
+              "month": 2,
+              "day": 7,
+              "hour": 0,
+              "minute": 0,
+              "second": 0,
+              "millisecond": 0
+            },
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "BIC+TAF+FTC",
+              "distribution": 0.7
+            },
+            {
+              "transition": "FTC+TAF",
+              "distribution": 0.1
+            },
+            {
+              "transition": "FTC+TDF",
+              "distribution": 0.1
+            },
+            {
+              "transition": "3TC+TDF",
+              "distribution": 0.1
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Date",
+                "operator": "<=",
+                "year": 2018,
+                "value": 0
+              },
+              {
+                "condition_type": "Date",
+                "operator": ">=",
+                "year": 2016,
+                "value": 0
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "EVG+cobi+TDF+FTC",
+              "distribution": 0.2
+            },
+            {
+              "transition": "3TC+TDF",
+              "distribution": 0.2
+            },
+            {
+              "transition": "FTC+TDF",
+              "distribution": 0.2
+            },
+            {
+              "transition": "FTC+TAF",
+              "distribution": 0.2
+            },
+            {
+              "transition": "EVG+cobi+FTC+TAF",
+              "distribution": 0.2
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "EVG+cobi+TDF+FTC",
+              "distribution": 0.34
+            },
+            {
+              "transition": "3TC+TDF",
+              "distribution": 0.33
+            },
+            {
+              "transition": "FTC+TDF",
+              "distribution": 0.33
+            }
+          ]
+        }
+      ]
+    },
+    "EVG+cobi+TDF+FTC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1306292,
+          "display": "cobicistat 150 MG / elvitegravir 150 MG / emtricitabine 200 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Terminal"
+    },
+    "RAL": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 744842,
+          "display": "raltegravir 400 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "DTG": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1433873,
+          "display": "dolutegravir 50 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "r": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 317150,
+          "display": "ritonavir 100 MG Oral Capsule"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "DRV": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1359269,
+          "display": "darunavir 800 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "r",
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      }
+    },
+    "3TC+TDF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2003249,
+          "display": "lamivudine 300 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 2"
+    },
+    "FTC+TAF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1747691,
+          "display": "emtricitabine 200 MG / tenofovir alafenamide 25 MG Oral Table"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Drug 2"
+    },
+    "BIC+TAF+FTC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1999667,
+          "display": "bictegravir 50 MG / emtricitabine 200 MG / tenofovir alafenamide 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Terminal"
+    },
+    "EVG+cobi+FTC+TAF": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1721613,
+          "display": "cobicistat 150 MG / elvitegravir 150 MG / emtricitabine 200 MG / tenofovir alafenamide 10 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Terminal"
+    },
+    "DTG+3TC": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2122519,
+          "display": "dolutegravir 50 MG / lamivudine 300 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "assign_to_attribute": "ART_LateINSTI",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "direct_transition": "Terminal"
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/hiv_baseline":{
+  "name": "hiv_baseline",
+  "remarks": [
+    "The HIV sequence module drives the HIV baseline and follow-up visits. ",
+    "The baseline visit is technically a submodule in the HIV sequence.",
+    "This baseline module is for individuals age >= 13."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "History and Physical Exam"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "History and Physical Exam": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 63332003,
+          "display": "History AND physical examination (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Laboratory Test",
+      "reason": "hiv_diagnosis"
+    },
+    "Laboratory Test": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 15220000,
+          "display": "Laboratory test (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 15,
+          "low": 10
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Anemia Check",
+      "reason": "hiv_diagnosis"
+    },
+    "CBC": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 3.4,
+            "high": 10.8
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*6/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 3.77,
+            "high": 5.8
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 11.1,
+            "high": 17.7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "4544-3",
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 34,
+            "high": 51
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 79,
+            "high": 97
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 26.6,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 31.5,
+            "high": 35.7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "788-0",
+              "display": "Erythrocyte distribution width [Ratio] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 12.3,
+            "high": 15.4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        }
+      ],
+      "direct_transition": "CBC_Differential"
+    },
+    "Metabolic Panel": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Comprehensive_Metabolic_Panel_with_Normal_Kidney",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Comprehensive_Metabolic_Panel_with_Kidney_Damage"
+        }
+      ]
+    },
+    "Comprehensive_Metabolic_Panel_with_Normal_Kidney": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "3094-0",
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL",
+          "vital_sign": "Creatinine"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "17861-6",
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2951-2",
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2823-3",
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2075-0",
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2028-9",
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "vital_sign": "EGFR"
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 8.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0.3,
+            "high": 1.2
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 117
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 44
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Urinalysis"
+    },
+    "Comprehensive_Metabolic_Panel_with_Kidney_Damage": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24323-8",
+          "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "3094-0",
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "17861-6",
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2951-2",
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2823-3",
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2075-0",
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2028-9",
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 14
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2885-2",
+              "display": "Protein [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 8.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1751-7",
+              "display": "Albumin [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 4,
+            "high": 5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1975-2",
+              "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 6,
+            "high": 15
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 117
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 44
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "U/L",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "1920-8",
+              "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 40
+          }
+        }
+      ],
+      "direct_transition": "Urinalysis"
+    },
+    "CKD Check": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "is not nil"
+          },
+          "distributions": [],
+          "transition": "Metabolic Panel"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Set CKD",
+              "distribution": 0.0815
+            },
+            {
+              "transition": "Metabolic Panel",
+              "distribution": 0.9185
+            }
+          ]
+        }
+      ]
+    },
+    "Set CKD": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "direct_transition": "Metabolic Panel",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 5,
+          "low": 1
+        }
+      }
+    },
+    "CBC_Differential": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "57023-4",
+          "display": "Auto Differential panel - Blood"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "770-8",
+              "display": "Neutrophils/100 leukocytes in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 10,
+            "high": 45
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "736-9",
+              "display": "Lymphocytes/100 leukocytes in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 25
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5905-5",
+              "display": "Monocytes/100 leukocytes in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 15
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "713-8",
+              "display": "Eosinophils/100 leukocytes in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 3,
+            "high": 6
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "706-2",
+              "display": "Basophils/100 leukocytes in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 2,
+            "high": 4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "751-8",
+              "display": "Neutrophils [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 1.4,
+            "high": 4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "731-0",
+              "display": "Lymphocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 1,
+            "high": 4.8
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "742-7",
+              "display": "Monocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 0.5,
+            "high": 1.4
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "711-2",
+              "display": "Eosinophils [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 0.2,
+            "high": 0.6
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "704-7",
+              "display": "Basophils [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 0.2,
+            "high": 0.4
+          }
+        }
+      ],
+      "remarks": [
+        "Viral infection should show DECREASES in neutro and lymph, and INCREASES in mono, eosino, and baso."
+      ],
+      "direct_transition": "CKD Check"
+    },
+    "CBC_Panel_M_Anemia": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 11,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 6.7,
+            "high": 10
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20570-8",
+              "display": "Hematocrit [Volume Fraction] of Blood"
+            }
+          ],
+          "range": {
+            "low": 20,
+            "high": 30
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "WBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 10.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*6/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "RBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "direct_transition": "CBC_Differential"
+    },
+    "CBC_Panel_F_Anemia": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 11,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "range": {
+            "low": 7,
+            "high": 10.9
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "%",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20570-8",
+              "display": "Hematocrit [Volume Fraction] of Blood"
+            }
+          ],
+          "range": {
+            "low": 21,
+            "high": 32.9
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "WBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.5,
+            "high": 10.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*6/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "RBC Auto (Bld) [#/Vol]"
+            }
+          ],
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "direct_transition": "CBC_Differential"
+    },
+    "Anemia Check": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "anemia",
+            "operator": "is not nil"
+          },
+          "distributions": [],
+          "transition": "Has Anemia"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Anemia",
+              "distribution": 0.25
+            },
+            {
+              "transition": "No Anemia",
+              "distribution": 0.75
+            }
+          ],
+          "condition": {
+            "condition_type": "Active Condition",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": 86406008,
+                "display": "Human immunodeficiency virus infection (disorder)"
+              }
+            ]
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Active Condition",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": 62479008,
+                "display": "Acquired immune deficiency syndrome (disorder)"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Anemia",
+              "distribution": 0.665
+            },
+            {
+              "transition": "No Anemia",
+              "distribution": 0.33499999999999996
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "No Anemia"
+        }
+      ]
+    },
+    "Anemia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "anemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 271737000,
+          "display": "Anemia (disorder)"
+        }
+      ],
+      "direct_transition": "Has Anemia"
+    },
+    "Has Anemia": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CBC_Panel_F_Anemia",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "CBC_Panel_M_Anemia"
+        }
+      ]
+    },
+    "No Anemia": {
+      "type": "Simple",
+      "direct_transition": "CBC"
+    },
+    "Urinalysis": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167248002,
+            "display": "Urine smell ammoniacal (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 300828005,
+            "display": "Translucent (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 371254008,
+            "display": "Brown color (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167290008,
+            "display": "Urine ketone test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 50,
+            "high": 400
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167276005,
+            "display": "Urine protein test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167297006,
+            "display": "Urine blood test = negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Record_LipidPanel"
+    },
+    "Record_LipidPanel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 4,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "57698-3",
+          "display": "Lipid Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Total Cholesterol",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2093-3",
+              "display": "Total Cholesterol"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Triglycerides",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2571-8",
+              "display": "Triglycerides"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "LDL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "18262-6",
+              "display": "Low Density Lipoprotein Cholesterol"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "HDL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2085-9",
+              "display": "High Density Lipoprotein Cholesterol"
+            }
+          ],
+          "unit": "mg/dL"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Urine Pregnancy Test",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Viral Hepatitis Screening"
+        }
+      ]
+    },
+    "Urine Pregnancy Test": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 167252002,
+          "display": "Urine pregnancy test (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 10,
+          "low": 5
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Viral Hepatitis Screening",
+      "reason": "hiv_diagnosis"
+    },
+    "Viral Hepatitis Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 412809002,
+          "display": "Viral hepatitis screening test (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 15
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Hepatitis B Screening",
+      "reason": "hiv_diagnosis"
+    },
+    "Hepatitis B Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 171122006,
+          "display": "Hepatitis B screening (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 15
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "distributed_transition": [
+        {
+          "transition": "Hepatitis B Diagnosis",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Hepatitis C Screening",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "Hepatitis B Diagnosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 61977001,
+          "display": "Chronic type B viral hepatitis (disorder)"
+        }
+      ],
+      "direct_transition": "Hepatitis C Screening"
+    },
+    "Hepatitis C Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 413107006,
+          "display": "Hepatitis C screening (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 15
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "distributed_transition": [
+        {
+          "transition": "Hepatitis C Diagnosis",
+          "distribution": 0.25
+        },
+        {
+          "transition": "Hepatitis A Screening",
+          "distribution": 0.75
+        }
+      ]
+    },
+    "Hepatitis C Diagnosis": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 128302006,
+          "display": "Chronic hepatitis C (disorder)"
+        }
+      ],
+      "direct_transition": "Hepatitis A Screening"
+    },
+    "Hepatitis A Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 313613002,
+          "display": "Hepatitis A antibody test (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 15
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "direct_transition": "Tuberculosis Screening"
+    },
+    "Tuberculosis Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 171126009,
+          "display": "Tuberculosis screening (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 15
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "direct_transition": "STI Screening"
+    },
+    "STI Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 171128005,
+          "display": "Venereal disease screening (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 15
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "direct_transition": "Serologic Test"
+    },
+    "Serologic Test": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 104308009,
+          "display": "Serologic test for Toxoplasma gondii (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 15
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "distributed_transition": [
+        {
+          "transition": "Toxoplasma Positive",
+          "distribution": 0.15
+        },
+        {
+          "transition": "Viral Load Check",
+          "distribution": 0.85
+        }
+      ]
+    },
+    "TG+ Observation": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "22577-1",
+          "display": "Toxoplasma gondii Ab [Presence] in Serum"
+        }
+      ],
+      "direct_transition": "TG+ Condition",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 428915008,
+        "display": "Toxoplasma gondii antibody positive (finding)"
+      }
+    },
+    "Toxoplasma Positive": {
+      "type": "SetAttribute",
+      "attribute": "toxoplasma_positive",
+      "direct_transition": "TG+ Observation",
+      "value": true
+    },
+    "TG+ Condition": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 428915008,
+          "display": "Toxoplasma gondii antibody positive (finding)"
+        }
+      ],
+      "direct_transition": "Viral Load Check"
+    },
+    "CD4 Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/hiv_cd4",
+      "conditional_transition": [
+        {
+          "transition": "Medication Submodule",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_rapid_start",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "PRAPARE"
+        }
+      ]
+    },
+    "HIV Viral Load Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/hiv_viral_load",
+      "direct_transition": "Genotype Determination"
+    },
+    "Genotype Determination": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 446987006,
+          "display": "Determination of susceptibility of Human immunodeficiency virus 1 to panel of antiretroviral drugs using genotypic technique (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "CD4 Submodule",
+      "reason": "hiv_diagnosis"
+    },
+    "Medication Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/art_sequence",
+      "direct_transition": "PRAPARE"
+    },
+    "Education": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 409066002,
+          "display": "Education, guidance and counseling (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 45
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Care Planning",
+      "reason": "hiv_diagnosis"
+    },
+    "Care Planning": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 225297008,
+          "display": "Care planning and problem solving actions (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 45
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "direct_transition": "Care Plan"
+    },
+    "CarePlan Coordination": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 711069006,
+          "display": "Coordination of care plan (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis"
+    },
+    "Care Plan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 736376001,
+          "display": "Infectious disease care plan (record artifact)"
+        }
+      ],
+      "direct_transition": "CarePlan Coordination",
+      "reason": "hiv_diagnosis"
+    },
+    "Viral Load Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "HIV Viral Load Submodule",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 1996,
+            "value": 0
+          }
+        },
+        {
+          "transition": "CD4 Submodule"
+        }
+      ]
+    },
+    "PRAPARE": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/sdoh_hrsn",
+      "direct_transition": "Depression_Screening"
+    },
+    "Depression_Screening": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/depression_screening",
+      "direct_transition": "Anxiety_Screening"
+    },
+    "Anxiety_Screening": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/anxiety_screening",
+      "direct_transition": "Substance_Use_Screening"
+    },
+    "Substance_Use_Screening": {
+      "type": "CallSubmodule",
+      "submodule": "encounter/substance_use_screening",
+      "direct_transition": "Assessment of Social Support"
+    },
+    "Assessment of Social Support": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 711018006,
+          "display": "Assessment of social support (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 15,
+          "low": 10
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Assessment of Disclosure Readiness",
+      "reason": "hiv_diagnosis"
+    },
+    "Assessment of Disclosure Readiness": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 709506004,
+          "display": "Assessment of readiness for disclosure of health status (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 15
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "direct_transition": "Assessment of Self-Management Readiness"
+    },
+    "Assessment of Self-Management Readiness": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 733863009,
+          "display": "Assessment of readiness for self-management (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 25,
+          "low": 20
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "direct_transition": "Education"
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/hiv_cd4":{
+  "name": "hiv_cd4",
+  "remarks": [
+    "Set and update CD4 levels.",
+    "",
+    "The notion of \"CD4 Group\" is an artificial construct to bin patients into different baseline levels.",
+    "",
+    "Group A == <100 CD4 T-Lymphocyte Count, Cell/microL",
+    "Group B == 100-199",
+    "Group C == 200-299",
+    "Group D == 300-399",
+    "Group E == 400-499",
+    "Group F == >= 500"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Check Age"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Check Group": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Check AIDS",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_cd4_group",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Check Treatment"
+        }
+      ]
+    },
+    "Set CD4": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set_Group_A",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_cd4_group",
+            "operator": "==",
+            "value": "A"
+          }
+        },
+        {
+          "transition": "Set_Group_B",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_cd4_group",
+            "operator": "==",
+            "value": "B"
+          }
+        },
+        {
+          "transition": "Set_Group_C",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_cd4_group",
+            "operator": "==",
+            "value": "C"
+          }
+        },
+        {
+          "transition": "Set_Group_D",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_cd4_group",
+            "operator": "==",
+            "value": "D"
+          }
+        },
+        {
+          "transition": "Set_Group_E",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_cd4_group",
+            "operator": "==",
+            "value": "E"
+          }
+        },
+        {
+          "transition": "Set_Group_F"
+        }
+      ]
+    },
+    "Set Group": {
+      "type": "Simple",
+      "lookup_table_transition": {
+        "transitions": [
+          {
+            "transition": "stage_1",
+            "default_probability": 0.27,
+            "lookup_table_name": "hiv_stage.csv"
+          },
+          {
+            "transition": "stage_2",
+            "default_probability": 0.38,
+            "lookup_table_name": "hiv_stage.csv"
+          },
+          {
+            "transition": "stage_3",
+            "default_probability": 0.35,
+            "lookup_table_name": "hiv_stage.csv"
+          }
+        ],
+        "viewTable": false,
+        "lookup_table_name_ModuleBuilder": "hiv_stage.csv",
+        "lookuptable": "time,age,stage_1,stage_2,stage_3\n283996800922-1104537600921,13-24,0.27,0.40,0.33\n283996800922-1104537600921,25-34,0.16,0.39,0.45\n283996800922-1104537600921,35-44,0.13,0.33,0.54\n283996800922-1104537600921,45-54,0.12,0.29,0.59\n283996800922-1104537600921,55-150,0.09,0.22,0.69\n1104537600922-1199145600921,13-24,0.18,0.46,0.36\n1104537600922-1199145600921,25-34,0.14,0.34,0.52\n1104537600922-1199145600921,35-44,0.11,0.27,0.62\n1104537600922-1199145600921,45-54,0.10,0.22,0.68\n1104537600922-1199145600921,55-150,0.07,0.19,0.73\n1199145600922-1293840000921,13-24,0.34,0.49,0.16\n1199145600922-1293840000921,25-34,0.28,0.42,0.31\n1199145600922-1293840000921,35-44,0.24,0.33,0.43\n1199145600922-1293840000921,45-54,0.23,0.33,0.45\n1199145600922-1293840000921,55-150,0.23,0.29,0.48\n1293840000922-1325376000921,13-24,0.36,0.50,0.14\n1293840000922-1325376000921,25-34,0.32,0.42,0.26\n1293840000922-1325376000921,35-44,0.26,0.35,0.39\n1293840000922-1325376000921,45-54,0.24,0.32,0.44\n1293840000922-1325376000921,55-150,0.18,0.29,0.52\n1325376000922-1356998400921,13-24,0.37,0.50,0.13\n1325376000922-1356998400921,25-34,0.33,0.42,0.25\n1325376000922-1356998400921,35-44,0.28,0.36,0.37\n1325376000922-1356998400921,45-54,0.24,0.32,0.44\n1325376000922-1356998400921,55-150,0.21,0.29,0.50\n1356998400922-1388534400921,13-24,0.37,0.50,0.14\n1356998400922-1388534400921,25-34,0.34,0.42,0.23\n1356998400922-1388534400921,35-44,0.28,0.36,0.36\n1356998400922-1388534400921,45-54,0.26,0.32,0.42\n1356998400922-1388534400921,55-150,0.21,0.31,0.47\n1388534400922-1420070400921,13-24,0.37,0.50,0.13\n1388534400922-1420070400921,25-34,0.35,0.42,0.23\n1388534400922-1420070400921,35-44,0.28,0.37,0.36\n1388534400922-1420070400921,45-54,0.25,0.33,0.42\n1388534400922-1420070400921,55-150,0.21,0.30,0.49\n1420070400922-1451606400921,13-24,0.39,0.50,0.11\n1420070400922-1451606400921,25-34,0.35,0.44,0.21\n1420070400922-1451606400921,35-44,0.31,0.35,0.34\n1420070400922-1451606400921,45-54,0.27,0.32,0.41\n1420070400922-1451606400921,55-150,0.24,0.32,0.44\n1451606400922-1483228800921,13-24,0.38,0.49,0.13\n1451606400922-1483228800921,25-34,0.37,0.42,0.22\n1451606400922-1483228800921,35-44,0.30,0.35,0.35\n1451606400922-1483228800921,45-54,0.27,0.33,0.41\n1451606400922-1483228800921,55-150,0.25,0.31,0.44\n1483228800922-1514764800921,13-24,0.39,0.48,0.13\n1483228800922-1514764800921,25-34,0.37,0.42,0.21\n1483228800922-1514764800921,35-44,0.31,0.36,0.32\n1483228800922-1514764800921,45-54,0.26,0.32,0.42\n1483228800922-1514764800921,55-150,0.25,0.32,0.43\n1514764800922-1546300800921,13-24,0.39,0.49,0.12\n1514764800922-1546300800921,25-34,0.37,0.42,0.21\n1514764800922-1546300800921,35-44,0.33,0.36,0.32\n1514764800922-1546300800921,45-54,0.27,0.32,0.41\n1514764800922-1546300800921,55-150,0.26,0.31,0.43\n1546300800922-1577836800921,13-24,0.38,0.50,0.12\n1546300800922-1577836800921,25-34,0.36,0.42,0.21\n1546300800922-1577836800921,35-44,0.34,0.35,0.31\n1546300800922-1577836800921,45-54,0.28,0.33,0.39\n1546300800922-1577836800921,55-150,0.25,0.32,0.43"
+      }
+    },
+    "stage_1": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4_group",
+      "direct_transition": "Baseline",
+      "value": "F"
+    },
+    "stage_2": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Group_C",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Group_D",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Group_E",
+          "distribution": 0.34
+        }
+      ]
+    },
+    "stage_3": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Group_A",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Group_B",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Group_C": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4_group",
+      "direct_transition": "Baseline",
+      "value": "C"
+    },
+    "Group_D": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4_group",
+      "direct_transition": "Baseline",
+      "value": "D"
+    },
+    "Group_E": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4_group",
+      "direct_transition": "Baseline",
+      "value": "E"
+    },
+    "Group_A": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4_group",
+      "value": "A",
+      "direct_transition": "Baseline"
+    },
+    "Group_B": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4_group",
+      "value": "B",
+      "direct_transition": "Baseline"
+    },
+    "Check Age": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Check Group",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 13,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Set_Group_A": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set_Group_A_0",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 1,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_A_6",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 7,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_A_12",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 13,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_A_18",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 19,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_A_24",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 25,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_A_30",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 31,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_A_36",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 37,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_A_42",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 43,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_A_48"
+        }
+      ]
+    },
+    "Set_Group_A_0": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_A_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 40,
+          "standardDeviation": 25
+        }
+      }
+    },
+    "Set_Group_A_6": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_A_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 125,
+          "standardDeviation": 50
+        }
+      }
+    },
+    "Set_Group_A_12": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_A_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 185,
+          "standardDeviation": 75
+        }
+      }
+    },
+    "Set_Group_A_18": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_A_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 220,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_A_24": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_A_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 260,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_A_30": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_A_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 300,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_A_36": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_A_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 335,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_A_42": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_A_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 335,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_A_48": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_A_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 350,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Baseline": {
+      "type": "Simple",
+      "direct_transition": "Check Treatment"
+    },
+    "Set_Group_A_Complete": {
+      "type": "Simple",
+      "direct_transition": "Set CD4 Complete"
+    },
+    "Set_Group_B": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set_Group_B_0",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 1,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_B_6",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 7,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_B_12",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 13,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_B_18",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 19,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_B_24",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 25,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_B_30",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 31,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_B_36",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 37,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_B_42",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 43,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_B_48"
+        }
+      ]
+    },
+    "Set_Group_B_0": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_B_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 140,
+          "standardDeviation": 25
+        }
+      }
+    },
+    "Set_Group_B_6": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_B_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 230,
+          "standardDeviation": 50
+        }
+      }
+    },
+    "Set_Group_B_12": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_B_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 280,
+          "standardDeviation": 75
+        }
+      }
+    },
+    "Set_Group_B_18": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_B_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 330,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_B_24": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_B_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 370,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_B_30": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_B_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 400,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_B_36": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_B_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 415,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_B_42": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_B_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 430,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_B_48": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_B_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 445,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_B_Complete": {
+      "type": "Simple",
+      "direct_transition": "Set CD4 Complete"
+    },
+    "Set_Group_C": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set_Group_C_0",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 1,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_C_6",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 7,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_C_12",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 13,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_C_18",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 19,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_C_24",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 25,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_C_30",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 31,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_C_36",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 37,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_C_42",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 43,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_C_48"
+        }
+      ]
+    },
+    "Set_Group_C_0": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_C_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 255,
+          "standardDeviation": 25
+        }
+      }
+    },
+    "Set_Group_C_6": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_C_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 340,
+          "standardDeviation": 50
+        }
+      }
+    },
+    "Set_Group_C_12": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_C_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 410,
+          "standardDeviation": 75
+        }
+      }
+    },
+    "Set_Group_C_18": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_C_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 420,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_C_24": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_C_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 465,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_C_30": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_C_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 505,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_C_36": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_C_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 505,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_C_42": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_C_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 505,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_C_48": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_C_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 530,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_C_Complete": {
+      "type": "Simple",
+      "direct_transition": "Set CD4 Complete"
+    },
+    "Set_Group_D": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set_Group_D_0",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 1,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_D_6",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 7,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_D_12",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 13,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_D_18",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 19,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_D_24",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 25,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_D_30",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 31,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_D_36",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 37,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_D_42",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 43,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_D_48"
+        }
+      ]
+    },
+    "Set_Group_D_0": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_D_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 350,
+          "standardDeviation": 25
+        }
+      }
+    },
+    "Set_Group_D_6": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_D_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 450,
+          "standardDeviation": 50
+        }
+      }
+    },
+    "Set_Group_D_12": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_D_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 510,
+          "standardDeviation": 75
+        }
+      }
+    },
+    "Set_Group_D_18": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_D_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 540,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_D_24": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_D_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 570,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_D_30": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_D_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 590,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_D_36": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_D_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 595,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_D_42": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_D_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 615,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_D_48": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_D_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 630,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_D_Complete": {
+      "type": "Simple",
+      "direct_transition": "Set CD4 Complete"
+    },
+    "Set_Group_E": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set_Group_E_0",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 1,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_E_6",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 7,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_E_12",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 13,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_E_18",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 19,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_E_24",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 25,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_E_30",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 31,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_E_36",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 37,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_E_42",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 43,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_E_48"
+        }
+      ]
+    },
+    "Set_Group_E_0": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_E_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 470,
+          "standardDeviation": 25
+        }
+      }
+    },
+    "Set_Group_E_6": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_E_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 580,
+          "standardDeviation": 50
+        }
+      }
+    },
+    "Set_Group_E_12": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_E_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 620,
+          "standardDeviation": 75
+        }
+      }
+    },
+    "Set_Group_E_18": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_E_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 630,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_E_24": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_E_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 695,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_E_30": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_E_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 735,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_E_36": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_E_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 700,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_E_42": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_E_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 725,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_E_48": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_E_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 765,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_E_Complete": {
+      "type": "Simple",
+      "direct_transition": "Set CD4 Complete"
+    },
+    "Set_Group_F": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set_Group_F_0",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 1,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_F_6",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 7,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_F_12",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 13,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_F_18",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 19,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_F_24",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 25,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_F_30",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 31,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_F_36",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 37,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_F_42",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Baseline",
+            "within": {
+              "quantity": 43,
+              "unit": "months"
+            }
+          }
+        },
+        {
+          "transition": "Set_Group_F_48"
+        }
+      ]
+    },
+    "Set_Group_F_0": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_F_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 585,
+          "standardDeviation": 50
+        }
+      }
+    },
+    "Set_Group_F_6": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_F_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 735,
+          "standardDeviation": 100
+        }
+      }
+    },
+    "Set_Group_F_12": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_F_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 740,
+          "standardDeviation": 125
+        }
+      }
+    },
+    "Set_Group_F_18": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_F_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 790,
+          "standardDeviation": 150
+        }
+      }
+    },
+    "Set_Group_F_24": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_F_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 850,
+          "standardDeviation": 150
+        }
+      }
+    },
+    "Set_Group_F_30": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_F_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 825,
+          "standardDeviation": 150
+        }
+      }
+    },
+    "Set_Group_F_36": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_F_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 840,
+          "standardDeviation": 150
+        }
+      }
+    },
+    "Set_Group_F_42": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_F_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 870,
+          "standardDeviation": 150
+        }
+      }
+    },
+    "Set_Group_F_48": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set_Group_F_Complete",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "round": true,
+        "parameters": {
+          "mean": 900,
+          "standardDeviation": 150
+        }
+      }
+    },
+    "Set_Group_F_Complete": {
+      "type": "Simple",
+      "direct_transition": "Set CD4 Complete"
+    },
+    "Set CD4 Complete": {
+      "type": "Simple",
+      "direct_transition": "Count CD4"
+    },
+    "Check AIDS": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "stage_3",
+          "condition": {
+            "condition_type": "Active Condition",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": 62479008,
+                "display": "Acquired immune deficiency syndrome (disorder)"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Set Group"
+        }
+      ]
+    },
+    "Count CD4": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 313660005,
+          "display": "Absolute CD4 count procedure (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Record CD4",
+      "reason": "hiv_diagnosis"
+    },
+    "Record CD4": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "/uL",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24467-3",
+          "display": "CD3+CD4+ (T4 helper) cells [#/volume] in Blood"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "attribute": "hiv_cd4"
+    },
+    "Check Treatment": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set CD4",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_continuous_art",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Set CD4",
+          "condition": {
+            "condition_type": "Not",
+            "condition": {
+              "condition_type": "PriorState",
+              "name": "Set CD4"
+            }
+          }
+        },
+        {
+          "transition": "HIV Viral Load Group Check"
+        }
+      ]
+    },
+    "Non_Continuous_ART_Decline": {
+      "type": "Counter",
+      "attribute": "hiv_cd4",
+      "action": "decrement",
+      "amount": 40,
+      "direct_transition": "Sanity Check"
+    },
+    "HIV Viral Load Group Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Non_Continuous_ART_Decline",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "hiv_viral_load_group",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hiv_viral_load",
+                "operator": "is nil"
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Non_Continuous_ART_Decline Group Check"
+        }
+      ]
+    },
+    "Non_Continuous_ART_Decline Group Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Non_Continuous_ART_Decline_A",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "==",
+            "value": "a"
+          }
+        },
+        {
+          "transition": "Non_Continuous_ART_Decline_B",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "==",
+            "value": "b"
+          }
+        },
+        {
+          "transition": "Non_Continuous_ART_Decline_C",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "==",
+            "value": "c"
+          }
+        },
+        {
+          "transition": "Non_Continuous_ART_Decline_D",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "==",
+            "value": "d"
+          }
+        },
+        {
+          "transition": "Non_Continuous_ART_Decline_E_and_F"
+        }
+      ]
+    },
+    "Non_Continuous_ART_Decline_A": {
+      "type": "Counter",
+      "attribute": "hiv_cd4",
+      "action": "decrement",
+      "amount": 36,
+      "direct_transition": "Sanity Check"
+    },
+    "Non_Continuous_ART_Decline_B": {
+      "type": "Counter",
+      "attribute": "hiv_cd4",
+      "action": "decrement",
+      "amount": 45,
+      "direct_transition": "Sanity Check"
+    },
+    "Non_Continuous_ART_Decline_C": {
+      "type": "Counter",
+      "attribute": "hiv_cd4",
+      "action": "decrement",
+      "amount": 55,
+      "direct_transition": "Sanity Check"
+    },
+    "Non_Continuous_ART_Decline_D": {
+      "type": "Counter",
+      "attribute": "hiv_cd4",
+      "action": "decrement",
+      "amount": 65,
+      "direct_transition": "Sanity Check"
+    },
+    "Non_Continuous_ART_Decline_E_and_F": {
+      "type": "Counter",
+      "attribute": "hiv_cd4",
+      "action": "decrement",
+      "amount": 77,
+      "direct_transition": "Sanity Check"
+    },
+    "Set Minimal Values": {
+      "type": "SetAttribute",
+      "attribute": "hiv_cd4",
+      "direct_transition": "Set CD4 Complete",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 49,
+          "low": 0
+        }
+      }
+    },
+    "Sanity Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set Minimal Values",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_cd4",
+            "operator": "<=",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Set CD4 Complete"
+        }
+      ]
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/hiv_oi_prophylaxis":{
+  "name": "HIV OI Prophylaxis",
+  "remarks": [
+    "This module is limited to PCP, Toxoplasma, and MAC Prophylaxis.",
+    "It can be built out and expanded in the future."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "conditional_transition": [
+        {
+          "transition": "Terminal",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "pregnant",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Check Path"
+        }
+      ]
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "MAC PPx": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Azithromycin",
+          "distribution": 0.8
+        },
+        {
+          "transition": "Clarithromycin",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "Stop all HIV Pox Meds": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "hiv_ppx",
+      "conditional_transition": [
+        {
+          "transition": "Stop_all_HIV_Pox_Meds_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_ppx2",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Stop_all_HIV_Pox_Meds_3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_ppx3",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "PCP/Toxo PPx": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Active Allergy",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": 10831,
+                "display": "Sulfamethoxazole / Trimethoprim"
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "Atovaquone"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "TMP-SMX DS",
+              "distribution": 0.9
+            },
+            {
+              "transition": "TMP SMX SS",
+              "distribution": 0.07
+            },
+            {
+              "transition": "Dapsone",
+              "distribution": 0.02
+            },
+            {
+              "transition": "Atovaquone",
+              "distribution": 0.01
+            }
+          ]
+        }
+      ]
+    },
+    "Azithromycin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 204844,
+          "display": "azithromycin 600 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 1,
+          "period": 1,
+          "unit": "weeks"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "assign_to_attribute": "hiv_ppx"
+    },
+    "Clarithromycin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 197517,
+          "display": "clarithromycin 500 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 2,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "assign_to_attribute": "hiv_ppx",
+      "direct_transition": "Terminal"
+    },
+    "TMP-SMX DS": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 198335,
+          "display": "sulfamethoxazole 800 MG / trimethoprim 160 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "assign_to_attribute": "hiv_ppx"
+    },
+    "TMP SMX SS": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 198334,
+          "display": "sulfamethoxazole 400 MG / trimethoprim 80 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "assign_to_attribute": "hiv_ppx"
+    },
+    "Dapsone": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 197558,
+          "display": "dapsone 25 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Pyrimethamin",
+      "reason": "hiv_diagnosis",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "assign_to_attribute": "hiv_ppx"
+    },
+    "Pyrimethamin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 198182,
+          "display": "pyrimethamine 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 2,
+          "frequency": 1,
+          "period": 1,
+          "unit": "weeks"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "assign_to_attribute": "hiv_ppx2",
+      "direct_transition": "Leucovorin"
+    },
+    "Leucovorin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 197862,
+          "display": "leucovorin 25 MG Oral Tablet"
+        }
+      ],
+      "reason": "hiv_diagnosis",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "weeks"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12
+      },
+      "assign_to_attribute": "hiv_ppx3",
+      "direct_transition": "Terminal"
+    },
+    "Atovaquone": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 308429,
+          "display": "atovaquone 150 MG/ML Oral Suspension"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "reason": "hiv_diagnosis",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 1,
+          "unit": "months"
+        },
+        "refills": 12,
+        "instructions": [
+          {
+            "system": "SNOMED-CT",
+            "code": 421399004,
+            "display": "Dilute - dosing instruction imperative (qualifier value)"
+          }
+        ]
+      },
+      "assign_to_attribute": "hiv_ppx"
+    },
+    "Stop_all_HIV_Pox_Meds_3": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "hiv_ppx3",
+      "direct_transition": "Terminal"
+    },
+    "Stop_all_HIV_Pox_Meds_2": {
+      "type": "MedicationEnd",
+      "referenced_by_attribute": "hiv_ppx2",
+      "conditional_transition": [
+        {
+          "transition": "Stop_all_HIV_Pox_Meds_3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_ppx3",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Check Path": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "MAC PPx",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "hiv_continuous_art",
+                "operator": "==",
+                "value": false
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hiv_cd4",
+                "operator": "<",
+                "value": 50
+              }
+            ]
+          }
+        },
+        {
+          "transition": "PCP/Toxo PPx",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_cd4",
+            "operator": "<",
+            "value": 200
+          }
+        },
+        {
+          "transition": "Stop Meds"
+        }
+      ]
+    },
+    "Stop Meds": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Stop all HIV Pox Meds",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_ppx",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Stop_all_HIV_Pox_Meds_2",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_ppx2",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Stop_all_HIV_Pox_Meds_3",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_ppx3",
+            "operator": "is not nil"
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/hiv_screening":{
+  "name": "hiv_screening",
+  "remarks": [
+    "Simple module containing HIV screening procedures."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "HIV Screening"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "HIV Screening": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 71121004,
+          "display": "Human immunodeficiency virus screening (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 10,
+          "low": 5
+        }
+      },
+      "unit": "minutes",
+      "conditional_transition": [
+        {
+          "transition": "HIV Panel Positive",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_infection",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "HIV Panel Negative"
+        }
+      ]
+    },
+    "HIV Panel Positive": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75622-1",
+          "display": "HIV 1 and 2 tests - Meaningful Use set"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "7917-8",
+              "display": "HIV 1 Ab [Presence] in Serum"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 165816005,
+            "display": "Human immunodeficiency virus positive (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Counseling"
+    },
+    "HIV Panel Negative": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "75622-1",
+          "display": "HIV 1 and 2 tests - Meaningful Use set"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "7917-8",
+              "display": "HIV 1 Ab [Presence] in Serum"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 165815009,
+            "display": "Human immunodeficiency virus negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Counseling": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 313077009,
+          "display": "Human immunodeficiency virus counseling (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "HIV Care Referral"
+    },
+    "HIV Care Referral": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 3457005,
+          "display": "Patient referral (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 10,
+          "low": 5
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Terminal"
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/hiv_viral_load":{
+  "name": "hiv_viral_load",
+  "remarks": [
+    "Set and update HIV viral load.",
+    "",
+    "The notion of \"Viral Load Group\" is an artificial construct to bin patients into different baseline levels.",
+    "",
+    "Group A == <= 1500 {copies}/mL",
+    "Group B == 1501-7000",
+    "Group C == 7001-20000",
+    "Group D == 20001-55000",
+    "Group E == 55001-100000",
+    "Group F == > 100000"
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Check Age"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Check Age": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Check Viral Load",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 13,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Check Viral Load": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Set Viral Load Group",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Set Viral Load",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load",
+            "operator": "is nil"
+          }
+        },
+        {
+          "transition": "Suppression Check",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "hiv_continuous_art",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "PriorState",
+                  "name": "Set Viral Load Group",
+                  "within": {
+                    "quantity": 3,
+                    "unit": "months"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Set Viral Load"
+        }
+      ]
+    },
+    "Set Viral Load": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "CD4_Group_A",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "==",
+            "value": "a"
+          }
+        },
+        {
+          "transition": "CD4_Group_B",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "==",
+            "value": "b"
+          }
+        },
+        {
+          "transition": "CD4_Group_C",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "==",
+            "value": "c"
+          }
+        },
+        {
+          "transition": "CD4_Group_D",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "==",
+            "value": "d"
+          }
+        },
+        {
+          "transition": "CD4_Group_E",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "==",
+            "value": "e"
+          }
+        },
+        {
+          "transition": "CD4_Group_F",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load_group",
+            "operator": "==",
+            "value": "f"
+          }
+        }
+      ]
+    },
+    "Measure Viral Load": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 315124004,
+          "display": "Human immunodeficiency virus viral load (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Observe Viral Load",
+      "reason": "hiv_diagnosis"
+    },
+    "Observe Viral Load": {
+      "type": "Observation",
+      "category": "laboratory",
+      "unit": "{copies}/mL",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "20447-9",
+          "display": "HIV 1 RNA [#/volume] (viral load) in Serum or Plasma by NAA with probe detection"
+        }
+      ],
+      "direct_transition": "Terminal",
+      "attribute": "hiv_viral_load"
+    },
+    "Sanity Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Minimal Viral Load",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_load",
+            "operator": "<",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Measure Viral Load"
+        }
+      ]
+    },
+    "Minimal Viral Load": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load",
+      "direct_transition": "Measure Viral Load",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 199,
+          "low": 0
+        }
+      }
+    },
+    "CD4_Group_B": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 7000,
+          "low": 1501
+        }
+      },
+      "direct_transition": "Sanity Check"
+    },
+    "CD4_Group_A": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 1500,
+          "low": 1000
+        }
+      },
+      "direct_transition": "Sanity Check"
+    },
+    "CD4_Group_C": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 20000,
+          "low": 7001
+        }
+      },
+      "direct_transition": "Sanity Check"
+    },
+    "CD4_Group_D": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 55000,
+          "low": 20001
+        }
+      },
+      "direct_transition": "Sanity Check"
+    },
+    "CD4_Group_E": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 100000,
+          "low": 55001
+        }
+      },
+      "direct_transition": "Sanity Check"
+    },
+    "CD4_Group_F": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 10000000,
+          "low": 100001
+        }
+      },
+      "direct_transition": "Sanity Check"
+    },
+    "Set Viral Load Group": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Set_Group_A",
+          "distribution": 0.07
+        },
+        {
+          "transition": "Set_Group_B",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Set_Group_C",
+          "distribution": 0.3
+        },
+        {
+          "transition": "Set_Group_D",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Set_Group_E",
+          "distribution": 0.18
+        },
+        {
+          "transition": "Set_Group_F",
+          "distribution": 0.02
+        }
+      ]
+    },
+    "Set_Group_A": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load_group",
+      "direct_transition": "Set Viral Load",
+      "value": "a"
+    },
+    "Set_Group_B": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load_group",
+      "value": "b",
+      "direct_transition": "Set Viral Load"
+    },
+    "Set_Group_C": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load_group",
+      "value": "c",
+      "direct_transition": "Set Viral Load"
+    },
+    "Set_Group_D": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load_group",
+      "value": "d",
+      "direct_transition": "Set Viral Load"
+    },
+    "Set_Group_E": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load_group",
+      "value": "e",
+      "direct_transition": "Set Viral Load"
+    },
+    "Set_Group_F": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load_group",
+      "value": "f",
+      "direct_transition": "Set Viral Load"
+    },
+    "Suppression Check": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_viral_suppression",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "Suppression"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Suppression",
+              "distribution": 0.9
+            },
+            {
+              "transition": "Suppressed_Viral_Load_B",
+              "distribution": 0.1
+            }
+          ]
+        }
+      ]
+    },
+    "Suppression": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_suppression",
+      "value": true,
+      "distributed_transition": [
+        {
+          "transition": "Undetectable_Viral_Load",
+          "distribution": 0.8
+        },
+        {
+          "transition": "Suppressed_Viral_Load_A",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "Undetectable_Viral_Load": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 49,
+          "low": 0
+        }
+      },
+      "direct_transition": "Sanity Check"
+    },
+    "Suppressed_Viral_Load_B": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 999,
+          "low": 200
+        }
+      },
+      "direct_transition": "Sanity Check"
+    },
+    "Suppressed_Viral_Load_A": {
+      "type": "SetAttribute",
+      "attribute": "hiv_viral_load",
+      "distribution": {
+        "kind": "UNIFORM",
+        "round": true,
+        "parameters": {
+          "high": 199,
+          "low": 50
+        }
+      },
+      "direct_transition": "Sanity Check"
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv/stop_all_art_meds":{
+  "name": "Stop All ART Meds",
+  "remarks": [
+    "Stop all ART medications."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "3TC"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "ZDV": {
+      "type": "MedicationEnd",
+      "direct_transition": "d4T",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 199663,
+          "display": "zidovudine 300 MG Oral Tablet"
+        }
+      ]
+    },
+    "ddI": {
+      "type": "MedicationEnd",
+      "direct_transition": "r",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 284988,
+          "display": "didanosine 400 MG Delayed Release Oral Capsule"
+        }
+      ]
+    },
+    "ddC": {
+      "type": "MedicationEnd",
+      "direct_transition": "ddI",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313760,
+          "display": "zalcitabine 0.75 MG Oral Tablet"
+        }
+      ]
+    },
+    "d4T": {
+      "type": "MedicationEnd",
+      "direct_transition": "ddC",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 313110,
+          "display": "stavudine 40 MG Oral Capsule"
+        }
+      ]
+    },
+    "3TC": {
+      "type": "MedicationEnd",
+      "direct_transition": "3TC+TDF",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349491,
+          "display": "lamivudine 300 MG Oral Tablet"
+        }
+      ]
+    },
+    "3TC+ZDV": {
+      "type": "MedicationEnd",
+      "direct_transition": "ATV",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 200082,
+          "display": "lamivudine 150 MG / zidovudine 300 MG Oral Tablet"
+        }
+      ]
+    },
+    "IDV": {
+      "type": "MedicationEnd",
+      "direct_transition": "LPV/r",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 310988,
+          "display": "indinavir 400 MG Oral Capsule"
+        }
+      ]
+    },
+    "SQV": {
+      "type": "MedicationEnd",
+      "direct_transition": "TDF",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 859863,
+          "display": "saquinavir mesylate 500 MG Oral Tablet"
+        }
+      ]
+    },
+    "r": {
+      "type": "MedicationEnd",
+      "direct_transition": "Terminal",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 317150,
+          "display": "ritonavir 100 MG Oral Capsule"
+        }
+      ]
+    },
+    "RTV": {
+      "type": "MedicationEnd",
+      "direct_transition": "SQV",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 317150,
+          "display": "ritonavir 100 MG Oral Capsule"
+        }
+      ]
+    },
+    "NEL": {
+      "type": "MedicationEnd",
+      "direct_transition": "RAL",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 403978,
+          "display": "nelfinavir 625 MG Oral Tablet"
+        }
+      ]
+    },
+    "EFV": {
+      "type": "MedicationEnd",
+      "direct_transition": "EFV+FTC+TDF",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349477,
+          "display": "efavirenz 600 MG Oral Tablet"
+        }
+      ]
+    },
+    "LPV/r": {
+      "type": "MedicationEnd",
+      "direct_transition": "NEL",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 597730,
+          "display": "lopinavir 200 MG / ritonavir 50 MG Oral Tablet"
+        }
+      ]
+    },
+    "TDF": {
+      "type": "MedicationEnd",
+      "direct_transition": "ZDV",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 349251,
+          "display": "tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ]
+    },
+    "FTC": {
+      "type": "MedicationEnd",
+      "direct_transition": "FTC+RPV+TDF",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 403875,
+          "display": "emtricitabine 200 MG Oral Capsule"
+        }
+      ]
+    },
+    "FTC+TDF": {
+      "type": "MedicationEnd",
+      "direct_transition": "IDV",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 476556,
+          "display": "emtricitabine 200 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ]
+    },
+    "FTC+RPV+TDF": {
+      "type": "MedicationEnd",
+      "direct_transition": "FTC+TAF",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1147334,
+          "display": "emtricitabine 200 MG / rilpivirine 25 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ]
+    },
+    "EFV+FTC+TDF": {
+      "type": "MedicationEnd",
+      "direct_transition": "EVG+cobi+FTC+TAF",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 643066,
+          "display": "efavirenz 600 MG / emtricitabine 200 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ]
+    },
+    "EVG+cobi+TDF+FTC": {
+      "type": "MedicationEnd",
+      "direct_transition": "FPV",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1306292,
+          "display": "cobicistat 150 MG / elvitegravir 150 MG / emtricitabine 200 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ]
+    },
+    "RAL": {
+      "type": "MedicationEnd",
+      "direct_transition": "RTV",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 744842,
+          "display": "raltegravir 400 MG Oral Tablet"
+        }
+      ]
+    },
+    "DTG": {
+      "type": "MedicationEnd",
+      "direct_transition": "DTG+3TC",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1433873,
+          "display": "dolutegravir 50 MG Oral Tablet"
+        }
+      ]
+    },
+    "FPV": {
+      "type": "MedicationEnd",
+      "direct_transition": "FTC",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 402109,
+          "display": "fosamprenavir 700 MG Oral Tablet"
+        }
+      ]
+    },
+    "ATV": {
+      "type": "MedicationEnd",
+      "direct_transition": "BIC+TAF+FTC",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 664741,
+          "display": "atazanavir 300 MG Oral Capsule"
+        }
+      ]
+    },
+    "DRV": {
+      "type": "MedicationEnd",
+      "direct_transition": "DTG",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1359269,
+          "display": "darunavir 800 MG Oral Tablet"
+        }
+      ]
+    },
+    "3TC+TDF": {
+      "type": "MedicationEnd",
+      "direct_transition": "3TC+ZDV",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2003249,
+          "display": "lamivudine 300 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet"
+        }
+      ]
+    },
+    "FTC+TAF": {
+      "type": "MedicationEnd",
+      "direct_transition": "FTC+TDF",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1747691,
+          "display": "emtricitabine 200 MG / tenofovir alafenamide 25 MG Oral Table"
+        }
+      ]
+    },
+    "BIC+TAF+FTC": {
+      "type": "MedicationEnd",
+      "direct_transition": "DRV",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1999667,
+          "display": "bictegravir 50 MG / emtricitabine 200 MG / tenofovir alafenamide 25 MG Oral Tablet"
+        }
+      ]
+    },
+    "EVG+cobi+FTC+TAF": {
+      "type": "MedicationEnd",
+      "direct_transition": "EVG+cobi+TDF+FTC",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1721613,
+          "display": "cobicistat 150 MG / elvitegravir 150 MG / emtricitabine 200 MG / tenofovir alafenamide 10 MG Oral Tablet"
+        }
+      ]
+    },
+    "DTG+3TC": {
+      "type": "MedicationEnd",
+      "direct_transition": "EFV",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 2122519,
+          "display": "dolutegravir 50 MG / lamivudine 300 MG Oral Tablet"
+        }
+      ]
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv_care":{
+  "name": "hiv_care",
+  "remarks": [
+    "Placeholder.",
+    "",
+    "This module supplements the automatic built-in immunization module with additional boosters for at-risk populations.",
+    "",
+    "You can review and examine the built-in immunization schedule here:",
+    "https://github.com/synthetichealth/synthea/blob/master/src/main/resources/immunization_schedule.json",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Wait"
+    },
+    "Wait": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Attribute",
+        "attribute": "hiv_diagnosis",
+        "operator": "is not nil"
+      },
+      "direct_transition": "Check Treatment"
+    },
+    "Baseline Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "hiv_diagnosis",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Set Baseline",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_30_day_linkage",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Record Over Thirty Day Linkage"
+        }
+      ]
+    },
+    "Check Treatment": {
+      "type": "Simple",
+      "lookup_table_transition": {
+        "transitions": [
+          {
+            "transition": "Continuous_ART",
+            "default_probability": 0.645,
+            "lookup_table_name": "hiv_care.csv"
+          },
+          {
+            "transition": "Non_Continuous_ART",
+            "default_probability": 0.355,
+            "lookup_table_name": "hiv_care.csv"
+          }
+        ],
+        "viewTable": false,
+        "lookup_table_name_ModuleBuilder": "hiv_care.csv",
+        "lookuptable": "time,age,Continuous_ART,Non_Continuous_ART\n0-536457600922,0-150,0.0,1.0\n536457600922-1230768000921,13-24,0.234,0.766\n536457600922-1230768000921,25-34,0.284,0.716\n536457600922-1230768000921,35-44,0.351,0.649\n536457600922-1230768000921,45-54,0.392,0.608\n536457600922-1230768000921,55-150,0.411,0.589\n1230768000922-1262304000921,13-24,0.297,0.703\n1230768000922-1262304000921,25-34,0.358,0.642\n1230768000922-1262304000921,35-44,0.423,0.577\n1230768000922-1262304000921,45-54,0.462,0.538\n1230768000922-1262304000921,55-150,0.485,0.515\n1262304000922-1293840000921,13-24,0.337,0.663\n1262304000922-1293840000921,25-34,0.397,0.603\n1262304000922-1293840000921,35-44,0.454,0.546\n1262304000922-1293840000921,45-54,0.497,0.503\n1262304000922-1293840000921,55-150,0.513,0.487\n1293840000922-1325376000921,13-24,0.337,0.663\n1293840000922-1325376000921,25-34,0.397,0.603\n1293840000922-1325376000921,35-44,0.454,0.546\n1293840000922-1325376000921,45-54,0.497,0.503\n1293840000922-1325376000921,55-150,0.513,0.487\n1325376000922-1356998400921,13-24,0.437,0.563\n1325376000922-1356998400921,25-34,0.486,0.514\n1325376000922-1356998400921,35-44,0.529,0.471\n1325376000922-1356998400921,45-54,0.575,0.425\n1325376000922-1356998400921,55-150,0.583,0.417\n1356998400922-1388534400921,13-24,0.481,0.519\n1356998400922-1388534400921,25-34,0.523,0.477\n1356998400922-1388534400921,35-44,0.562,0.438\n1356998400922-1388534400921,45-54,0.604,0.396\n1356998400922-1388534400921,55-150,0.611,0.389\n1388534400922-1420070400921,13-24,0.512,0.488\n1388534400922-1420070400921,25-34,0.542,0.458\n1388534400922-1420070400921,35-44,0.577,0.423\n1388534400922-1420070400921,45-54,0.624,0.376\n1388534400922-1420070400921,55-150,0.628,0.372\n1420070400922-1451606400921,13-24,0.538,0.462\n1420070400922-1451606400921,25-34,0.566,0.434\n1420070400922-1451606400921,35-44,0.591,0.409\n1420070400922-1451606400921,45-54,0.638,0.362\n1420070400922-1451606400921,55-150,0.642,0.358\n1451606400922-1483228800921,13-24,0.538,0.462\n1451606400922-1483228800921,25-34,0.566,0.434\n1451606400922-1483228800921,35-44,0.591,0.409\n1451606400922-1483228800921,45-54,0.638,0.362\n1451606400922-1483228800921,55-150,0.642,0.358\n1483228800922-1514764800921,13-24,0.603,0.397\n1483228800922-1514764800921,25-34,0.608,0.392\n1483228800922-1514764800921,35-44,0.624,0.376\n1483228800922-1514764800921,45-54,0.662,0.338\n1483228800922-1514764800921,55-150,0.67,0.33\n1514764800922-1577836800921,13-24,0.633,0.367\n1514764800922-1577836800921,25-34,0.626,0.374\n1514764800922-1577836800921,35-44,0.633,0.367\n1514764800922-1577836800921,45-54,0.666,0.334\n1514764800922-1577836800921,55-150,0.673,0.327"
+      }
+    },
+    "Set Baseline": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/hiv_baseline",
+      "direct_transition": "End Baseline Encounter"
+    },
+    "End Baseline Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Rapid Start Check"
+    },
+    "Non_Continuous_ART": {
+      "type": "SetAttribute",
+      "attribute": "hiv_continuous_art",
+      "value": false,
+      "direct_transition": "Linkage Check"
+    },
+    "Continuous_ART": {
+      "type": "SetAttribute",
+      "attribute": "hiv_continuous_art",
+      "direct_transition": "Linkage Check",
+      "value": true
+    },
+    "Short Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 4,
+          "low": 3
+        }
+      },
+      "unit": "months",
+      "direct_transition": "Monitoring Encounter"
+    },
+    "Long Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 6,
+          "low": 4
+        }
+      },
+      "unit": "months",
+      "direct_transition": "Monitoring Encounter"
+    },
+    "Treatment Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "hiv_diagnosis",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Exam"
+    },
+    "CD4_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/hiv_cd4",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_rapid_start",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "End Treatment Encounter"
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_continuous_art",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "Medication_Submodule"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Medication_Submodule",
+              "distribution": 0.8
+            },
+            {
+              "transition": "End Treatment Encounter",
+              "distribution": 0.2
+            }
+          ]
+        }
+      ]
+    },
+    "HIV_Viral_Load_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/hiv_viral_load",
+      "direct_transition": "CBC"
+    },
+    "Medication_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/art_sequence",
+      "direct_transition": "End Treatment Encounter"
+    },
+    "End Treatment Encounter": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Short Delay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_continuous_art",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Long Delay"
+        }
+      ]
+    },
+    "Linkage Check": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 13,
+                "unit": "years",
+                "value": 0
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<=",
+                "quantity": 24,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Within 30 Days",
+              "distribution": 0.78
+            },
+            {
+              "transition": "Long Encounter Delay",
+              "distribution": 0.22
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 25,
+                "unit": "years",
+                "value": 0
+              },
+              {
+                "condition_type": "Age",
+                "operator": "<=",
+                "quantity": 34,
+                "unit": "years",
+                "value": 0
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Within 30 Days",
+              "distribution": 0.8
+            },
+            {
+              "transition": "Long Encounter Delay",
+              "distribution": 0.2
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 35,
+            "unit": "years",
+            "value": 0
+          },
+          "distributions": [
+            {
+              "transition": "Within 30 Days",
+              "distribution": 0.83
+            },
+            {
+              "transition": "Long Encounter Delay",
+              "distribution": 0.17
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "Long Encounter Delay"
+        }
+      ]
+    },
+    "Long Encounter Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 90,
+          "low": 32
+        }
+      },
+      "unit": "days",
+      "direct_transition": "Baseline Encounter"
+    },
+    "Short Encounter Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 7,
+          "low": 0
+        }
+      },
+      "unit": "days",
+      "direct_transition": "Baseline Encounter"
+    },
+    "Medium Encounter Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 30,
+          "low": 0
+        }
+      },
+      "unit": "days",
+      "direct_transition": "Baseline Encounter"
+    },
+    "Rapid Start": {
+      "type": "SetAttribute",
+      "attribute": "hiv_rapid_start",
+      "direct_transition": "Short Encounter Delay",
+      "value": true
+    },
+    "Within 30 Days": {
+      "type": "SetAttribute",
+      "attribute": "hiv_30_day_linkage",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Date",
+                "operator": ">=",
+                "year": 2016,
+                "value": 0
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hiv_continuous_art",
+                "operator": "==",
+                "value": true
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "transition": "Rapid Start",
+              "distribution": 0.2
+            },
+            {
+              "transition": "Medium Encounter Delay",
+              "distribution": 0.8
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "Medium Encounter Delay"
+        }
+      ],
+      "value": true
+    },
+    "Rapid Start Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Delay Until Telephone",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_rapid_start",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Wait for Treatment"
+        }
+      ]
+    },
+    "Delay Until Telephone": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 48,
+          "low": 24
+        }
+      },
+      "unit": "hours",
+      "direct_transition": "Telephone Encounter"
+    },
+    "Telephone Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "hiv_diagnosis",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185317003,
+          "display": "Telephone encounter (procedure)"
+        }
+      ],
+      "direct_transition": "Wait for Treatment"
+    },
+    "Wait for Treatment": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 56,
+          "low": 8
+        }
+      },
+      "unit": "days",
+      "direct_transition": "Treatment Encounter"
+    },
+    "Exam": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 67879005,
+          "display": "History and physical examination, limited (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 20,
+          "low": 10
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "conditional_transition": [
+        {
+          "transition": "HIV_Viral_Load_Submodule",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 1996,
+            "value": 0
+          }
+        },
+        {
+          "transition": "CBC"
+        }
+      ]
+    },
+    "CBC": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 9564003,
+          "display": "Complete blood count with white cell differential, automated (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 20,
+          "low": 10
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "CD4_Submodule",
+      "reason": "hiv_diagnosis"
+    },
+    "Monitoring Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "hiv_diagnosis",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "1234",
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Monitoring Exam"
+    },
+    "Monitoring Exam": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 67879005,
+          "display": "History and physical examination, limited (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 20,
+          "low": 10
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "conditional_transition": [
+        {
+          "transition": "Monitoring_HIV_Viral_Load",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 1996,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Monitoring CD4 Check"
+        }
+      ]
+    },
+    "Monitoring_HIV_Viral_Load": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/hiv_viral_load",
+      "direct_transition": "Monitoring CD4 Check"
+    },
+    "Monitoring_CD4_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/hiv_cd4",
+      "direct_transition": "Monitoring Medication"
+    },
+    "Monitoring CBC": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 9564003,
+          "display": "Complete blood count with white cell differential, automated (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 20,
+          "low": 10
+        }
+      },
+      "unit": "minutes",
+      "reason": "hiv_diagnosis",
+      "direct_transition": "Monitoring_CD4_Submodule"
+    },
+    "Monitoring Medication": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/hiv_oi_prophylaxis",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hiv_continuous_art",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [],
+          "transition": "ART Sequence"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "ART Sequence",
+              "distribution": 0.8
+            },
+            {
+              "transition": "Vaccine Check",
+              "distribution": 0.2
+            }
+          ]
+        }
+      ]
+    },
+    "Monitoring Encounter End": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Long Delay",
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Or",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "hiv_continuous_art",
+                    "operator": "is nil"
+                  },
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "hiv_continuous_art",
+                    "operator": "==",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Attribute",
+                    "attribute": "hiv_continuous_art",
+                    "operator": "==",
+                    "value": true
+                  },
+                  {
+                    "condition_type": "And",
+                    "conditions": [
+                      {
+                        "condition_type": "Not",
+                        "condition": {
+                          "condition_type": "PriorState",
+                          "name": "Wait",
+                          "within": {
+                            "quantity": 2,
+                            "unit": "years"
+                          }
+                        }
+                      },
+                      {
+                        "condition_type": "And",
+                        "conditions": [
+                          {
+                            "condition_type": "Attribute",
+                            "attribute": "hiv_viral_suppression",
+                            "operator": "==",
+                            "value": true
+                          },
+                          {
+                            "condition_type": "Attribute",
+                            "attribute": "hiv_cd4",
+                            "operator": ">",
+                            "value": 300
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Short Delay"
+        }
+      ]
+    },
+    "Monitoring CD4 Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Monitoring Medication",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "hiv_continuous_art",
+                "operator": "==",
+                "value": true
+              },
+              {
+                "condition_type": "And",
+                "conditions": [
+                  {
+                    "condition_type": "Not",
+                    "condition": {
+                      "condition_type": "PriorState",
+                      "name": "Wait",
+                      "within": {
+                        "quantity": 2,
+                        "unit": "years"
+                      }
+                    }
+                  },
+                  {
+                    "condition_type": "And",
+                    "conditions": [
+                      {
+                        "condition_type": "Attribute",
+                        "attribute": "hiv_viral_suppression",
+                        "operator": "==",
+                        "value": true
+                      },
+                      {
+                        "condition_type": "And",
+                        "conditions": [
+                          {
+                            "condition_type": "PriorState",
+                            "name": "Monitoring_CD4_Submodule",
+                            "within": {
+                              "quantity": 12,
+                              "unit": "months"
+                            }
+                          },
+                          {
+                            "condition_type": "Attribute",
+                            "attribute": "hiv_cd4",
+                            "operator": ">",
+                            "value": 300
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Monitoring CBC"
+        }
+      ]
+    },
+    "Record Over Thirty Day Linkage": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 373786007,
+          "display": "Reasons for treatment delay (finding)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 0
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Set Baseline",
+      "reason": "hiv_diagnosis"
+    },
+    "Tdap Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "MenACWY Check",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Administer Tdap",
+            "within": {
+              "quantity": 10,
+              "unit": "years"
+            }
+          }
+        },
+        {
+          "transition": "Administer Tdap"
+        }
+      ]
+    },
+    "Administer Tdap": {
+      "type": "Vaccine",
+      "series": 1,
+      "codes": [
+        {
+          "system": "CVX",
+          "code": 115,
+          "display": "tetanus toxoid, reduced diphtheria toxoid, and acellular pertussis vaccine, adsorbed"
+        }
+      ],
+      "direct_transition": "MenACWY Check"
+    },
+    "MenACWY Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "PCV13 Check",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Administer MenACWY",
+            "within": {
+              "quantity": 5,
+              "unit": "years"
+            }
+          }
+        },
+        {
+          "transition": "Administer MenACWY"
+        }
+      ]
+    },
+    "Administer MenACWY": {
+      "type": "Vaccine",
+      "series": 1,
+      "codes": [
+        {
+          "system": "CVX",
+          "code": 114,
+          "display": "meningococcal polysaccharide (groups A, C, Y and W-135) diphtheria toxoid conjugate vaccine (MCV4P)"
+        }
+      ],
+      "direct_transition": "PCV13 Check"
+    },
+    "Administer PPSV23": {
+      "type": "Vaccine",
+      "series": 1,
+      "codes": [
+        {
+          "system": "CVX",
+          "code": 33,
+          "display": "pneumococcal polysaccharide vaccine, 23 valent"
+        }
+      ],
+      "direct_transition": "Zoster Check"
+    },
+    "Zoster Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Monitoring Encounter End",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Administer Zoster"
+          }
+        },
+        {
+          "transition": "Administer Zoster",
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Age",
+                "operator": ">=",
+                "quantity": 18,
+                "unit": "years",
+                "value": 0
+              },
+              {
+                "condition_type": "Date",
+                "operator": ">=",
+                "year": 2017,
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Monitoring Encounter End"
+        }
+      ]
+    },
+    "Administer Zoster": {
+      "type": "Vaccine",
+      "series": 1,
+      "codes": [
+        {
+          "system": "CVX",
+          "code": 187,
+          "display": "zoster vaccine recombinant"
+        }
+      ],
+      "direct_transition": "Monitoring Encounter End"
+    },
+    "Under 65": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Zoster Check",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Administer PCV13",
+            "within": {
+              "quantity": 8,
+              "unit": "weeks"
+            }
+          }
+        },
+        {
+          "transition": "Zoster Check",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Administer PPSV23",
+            "within": {
+              "quantity": 5,
+              "unit": "years"
+            }
+          }
+        },
+        {
+          "transition": "Administer PPSV23"
+        }
+      ]
+    },
+    "65 and Up": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Zoster Check",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Administer PPSV23",
+            "within": {
+              "quantity": 5,
+              "unit": "years"
+            }
+          }
+        },
+        {
+          "transition": "Administer PPSV23"
+        }
+      ]
+    },
+    "PCV13 Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Age Check",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Administer PCV13"
+          }
+        },
+        {
+          "transition": "Administer PCV13"
+        }
+      ]
+    },
+    "Age Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "65 and Up",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">=",
+            "quantity": 65,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Under 65"
+        }
+      ]
+    },
+    "Administer PCV13": {
+      "type": "Vaccine",
+      "series": 1,
+      "codes": [
+        {
+          "system": "CVX",
+          "code": 133,
+          "display": "pneumococcal conjugate vaccine, 13 valent"
+        }
+      ],
+      "direct_transition": "Age Check"
+    },
+    "Vaccine Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Monitoring Encounter End",
+          "condition": {
+            "condition_type": "Date",
+            "operator": "<",
+            "year": 2010,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Tdap Check"
+        }
+      ]
+    },
+    "ART Sequence": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/art_sequence",
+      "direct_transition": "Vaccine Check"
+    }
+  },
+  "gmf_version": 2
+}
+,
+"hiv_diagnosis":{
+  "name": "hiv_diagnosis",
+  "remarks": [
+    "This module only determines diagnosed infections and mortality from HIV. Clinical treatment is in a separate module. Undiagnosed infections are not included."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Wait until 1979"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Mortality Check Later Years": {
+      "type": "Simple",
+      "lookup_table_transition": {
+        "transitions": [
+          {
+            "transition": "Death",
+            "default_probability": 0.0334,
+            "lookup_table_name": "hiv_mortality_later.csv"
+          },
+          {
+            "transition": "Living_with_Diagnosis_Later_Years",
+            "default_probability": 0.9666,
+            "lookup_table_name": "hiv_mortality_later.csv"
+          }
+        ],
+        "viewTable": false,
+        "lookup_table_name_ModuleBuilder": "hiv_mortality_later.csv",
+        "lookuptable": "time,age,gender,Death,Living_with_Diagnosis_Later_Years\n725846400922-757382400921,0-12,M,0.0760,0.9240\n725846400922-757382400921,0-12,F,0.0760,0.9240\n725846400922-757382400921,13-150,M,0.0931,0.9069\n725846400922-757382400921,13-150,F,0.0826,0.9174\n757382400922-788918400921,0-12,M,0.0752,0.9248\n757382400922-788918400921,0-12,F,0.0752,0.9248\n757382400922-788918400921,13-150,M,0.1028,0.8972\n757382400922-788918400921,13-150,F,0.0928,0.9072\n788918400922-820454400921,0-12,M,0.0684,0.9316\n788918400922-820454400921,0-12,F,0.0684,0.9316\n788918400922-820454400921,13-24,M,0.0492,0.9508\n788918400922-820454400921,13-24,F,0.0504,0.9496\n788918400922-820454400921,25-29,M,0.0697,0.9303\n788918400922-820454400921,25-29,F,0.0677,0.9323\n788918400922-820454400921,30-34,M,0.0873,0.9127\n788918400922-820454400921,30-34,F,0.0810,0.9190\n788918400922-820454400921,35-39,M,0.0989,0.9011\n788918400922-820454400921,35-39,F,0.0874,0.9126\n788918400922-820454400921,40-44,M,0.1051,0.8949\n788918400922-820454400921,40-44,F,0.0988,0.9012\n788918400922-820454400921,45-49,M,0.1142,0.8858\n788918400922-820454400921,45-49,F,0.1150,0.8850\n788918400922-820454400921,50-54,M,0.1222,0.8778\n788918400922-820454400921,50-54,F,0.1112,0.8888\n788918400922-820454400921,55-59,M,0.1363,0.8637\n788918400922-820454400921,55-59,F,0.1382,0.8618\n788918400922-820454400921,60-64,M,0.1437,0.8563\n788918400922-820454400921,60-64,F,0.1288,0.8712\n788918400922-820454400921,65-69,M,0.1720,0.8280\n788918400922-820454400921,65-69,F,0.1584,0.8416\n788918400922-820454400921,70-150,M,0.1859,0.8141\n788918400922-820454400921,70-150,F,0.1855,0.8145\n820454400922-852076800921,0-12,M,0.0542,0.9458\n820454400922-852076800921,0-12,F,0.0542,0.9458\n820454400922-852076800921,13-24,M,0.0323,0.9677\n820454400922-852076800921,13-24,F,0.0352,0.9648\n820454400922-852076800921,25-29,M,0.0488,0.9512\n820454400922-852076800921,25-29,F,0.0494,0.9506\n820454400922-852076800921,30-34,M,0.0595,0.9405\n820454400922-852076800921,30-34,F,0.0601,0.9399\n820454400922-852076800921,35-39,M,0.0683,0.9317\n820454400922-852076800921,35-39,F,0.0670,0.9330\n820454400922-852076800921,40-44,M,0.0732,0.9268\n820454400922-852076800921,40-44,F,0.0755,0.9245\n820454400922-852076800921,45-49,M,0.0792,0.9208\n820454400922-852076800921,45-49,F,0.0860,0.9140\n820454400922-852076800921,50-54,M,0.0857,0.9143\n820454400922-852076800921,50-54,F,0.0846,0.9154\n820454400922-852076800921,55-59,M,0.0943,0.9057\n820454400922-852076800921,55-59,F,0.0935,0.9065\n820454400922-852076800921,60-64,M,0.1089,0.8911\n820454400922-852076800921,60-64,F,0.1207,0.8793\n820454400922-852076800921,65-69,M,0.1167,0.8833\n820454400922-852076800921,65-69,F,0.1246,0.8754\n820454400922-852076800921,70-150,M,0.1567,0.8433\n820454400922-852076800921,70-150,F,0.1318,0.8682\n852076800922-883612800921,0-12,M,0.0285,0.9715\n852076800922-883612800921,0-12,F,0.0285,0.9715\n852076800922-883612800921,13-24,M,0.0221,0.9779\n852076800922-883612800921,13-24,F,0.0251,0.9749\n852076800922-883612800921,25-29,M,0.0290,0.9710\n852076800922-883612800921,25-29,F,0.0294,0.9706\n852076800922-883612800921,30-34,M,0.0308,0.9692\n852076800922-883612800921,30-34,F,0.0352,0.9648\n852076800922-883612800921,35-39,M,0.0342,0.9658\n852076800922-883612800921,35-39,F,0.0389,0.9611\n852076800922-883612800921,40-44,M,0.0388,0.9612\n852076800922-883612800921,40-44,F,0.0447,0.9553\n852076800922-883612800921,45-49,M,0.0431,0.9569\n852076800922-883612800921,45-49,F,0.0521,0.9479\n852076800922-883612800921,50-54,M,0.0467,0.9533\n852076800922-883612800921,50-54,F,0.0568,0.9432\n852076800922-883612800921,55-59,M,0.0541,0.9459\n852076800922-883612800921,55-59,F,0.0594,0.9406\n852076800922-883612800921,60-64,M,0.0671,0.9329\n852076800922-883612800921,60-64,F,0.0619,0.9381\n852076800922-883612800921,65-69,M,0.0812,0.9188\n852076800922-883612800921,65-69,F,0.0621,0.9379\n852076800922-883612800921,70-150,M,0.0925,0.9075\n852076800922-883612800921,70-150,F,0.1134,0.8866\n883612800922-915148800921,0-12,M,0.0162,0.9838\n883612800922-915148800921,0-12,F,0.0162,0.9838\n883612800922-915148800921,13-24,M,0.0192,0.9808\n883612800922-915148800921,13-24,F,0.0210,0.9790\n883612800922-915148800921,25-29,M,0.0212,0.9788\n883612800922-915148800921,25-29,F,0.0260,0.9740\n883612800922-915148800921,30-34,M,0.0224,0.9776\n883612800922-915148800921,30-34,F,0.0291,0.9709\n883612800922-915148800921,35-39,M,0.0261,0.9739\n883612800922-915148800921,35-39,F,0.0306,0.9694\n883612800922-915148800921,40-44,M,0.0295,0.9705\n883612800922-915148800921,40-44,F,0.0349,0.9651\n883612800922-915148800921,45-49,M,0.0344,0.9656\n883612800922-915148800921,45-49,F,0.0409,0.9591\n883612800922-915148800921,50-54,M,0.0384,0.9616\n883612800922-915148800921,50-54,F,0.0430,0.9570\n883612800922-915148800921,55-59,M,0.0442,0.9558\n883612800922-915148800921,55-59,F,0.0552,0.9448\n883612800922-915148800921,60-64,M,0.0542,0.9458\n883612800922-915148800921,60-64,F,0.0565,0.9435\n883612800922-915148800921,65-69,M,0.0561,0.9439\n883612800922-915148800921,65-69,F,0.0608,0.9392\n883612800922-915148800921,70-150,M,0.0784,0.9216\n883612800922-915148800921,70-150,F,0.0770,0.9230\n915148800922-946684800921,0-12,M,0.0125,0.9875\n915148800922-946684800921,0-12,F,0.0125,0.9875\n915148800922-946684800921,13-24,M,0.0165,0.9835\n915148800922-946684800921,13-24,F,0.0212,0.9788\n915148800922-946684800921,25-29,M,0.0197,0.9803\n915148800922-946684800921,25-29,F,0.0228,0.9772\n915148800922-946684800921,30-34,M,0.0195,0.9805\n915148800922-946684800921,30-34,F,0.0264,0.9736\n915148800922-946684800921,35-39,M,0.0215,0.9785\n915148800922-946684800921,35-39,F,0.0288,0.9712\n915148800922-946684800921,40-44,M,0.0266,0.9734\n915148800922-946684800921,40-44,F,0.0351,0.9649\n915148800922-946684800921,45-49,M,0.0299,0.9701\n915148800922-946684800921,45-49,F,0.0375,0.9625\n915148800922-946684800921,50-54,M,0.0355,0.9645\n915148800922-946684800921,50-54,F,0.0446,0.9554\n915148800922-946684800921,55-59,M,0.0403,0.9597\n915148800922-946684800921,55-59,F,0.0426,0.9574\n915148800922-946684800921,60-64,M,0.0427,0.9573\n915148800922-946684800921,60-64,F,0.0520,0.9480\n915148800922-946684800921,65-69,M,0.0560,0.9440\n915148800922-946684800921,65-69,F,0.0564,0.9436\n915148800922-946684800921,70-150,M,0.0678,0.9322\n915148800922-946684800921,70-150,F,0.0528,0.9472\n946684800922-978307200921,0-12,M,0.0066,0.9934\n946684800922-978307200921,0-12,F,0.0066,0.9934\n946684800922-978307200921,13-24,M,0.0157,0.9843\n946684800922-978307200921,13-24,F,0.0143,0.9857\n946684800922-978307200921,25-29,M,0.0156,0.9844\n946684800922-978307200921,25-29,F,0.0228,0.9772\n946684800922-978307200921,30-34,M,0.0180,0.9820\n946684800922-978307200921,30-34,F,0.0239,0.9761\n946684800922-978307200921,35-39,M,0.0187,0.9813\n946684800922-978307200921,35-39,F,0.0251,0.9749\n946684800922-978307200921,40-44,M,0.0208,0.9792\n946684800922-978307200921,40-44,F,0.0282,0.9718\n946684800922-978307200921,45-49,M,0.0258,0.9742\n946684800922-978307200921,45-49,F,0.0325,0.9675\n946684800922-978307200921,50-54,M,0.0304,0.9696\n946684800922-978307200921,50-54,F,0.0342,0.9658\n946684800922-978307200921,55-59,M,0.0311,0.9689\n946684800922-978307200921,55-59,F,0.0387,0.9613\n946684800922-978307200921,60-64,M,0.0402,0.9598\n946684800922-978307200921,60-64,F,0.0429,0.9571\n946684800922-978307200921,65-69,M,0.0432,0.9568\n946684800922-978307200921,65-69,F,0.0469,0.9531\n946684800922-978307200921,70-150,M,0.0626,0.9374\n946684800922-978307200921,70-150,F,0.0637,0.9363\n978307200922-1009843200921,0-12,M,0.0081,0.9919\n978307200922-1009843200921,0-12,F,0.0081,0.9919\n978307200922-1009843200921,13-24,M,0.0195,0.9805\n978307200922-1009843200921,13-24,F,0.0269,0.9731\n978307200922-1009843200921,25-34,M,0.0186,0.9814\n978307200922-1009843200921,25-34,F,0.0221,0.9779\n978307200922-1009843200921,35-44,M,0.0213,0.9787\n978307200922-1009843200921,35-44,F,0.0283,0.9717\n978307200922-1009843200921,45-54,M,0.0285,0.9715\n978307200922-1009843200921,45-54,F,0.0334,0.9666\n978307200922-1009843200921,55-150,M,0.0407,0.9593\n978307200922-1009843200921,55-150,F,0.0482,0.9518\n1009843200922-1041379200921,0-12,M,0.0064,0.9936\n1009843200922-1041379200921,0-12,F,0.0064,0.9936\n1009843200922-1041379200921,13-24,M,0.0120,0.9880\n1009843200922-1041379200921,13-24,F,0.0159,0.9841\n1009843200922-1041379200921,25-34,M,0.0172,0.9828\n1009843200922-1041379200921,25-34,F,0.0219,0.9781\n1009843200922-1041379200921,35-44,M,0.0215,0.9785\n1009843200922-1041379200921,35-44,F,0.0279,0.9721\n1009843200922-1041379200921,45-54,M,0.0303,0.9697\n1009843200922-1041379200921,45-54,F,0.0364,0.9636\n1009843200922-1041379200921,55-150,M,0.0426,0.9574\n1009843200922-1041379200921,55-150,F,0.0458,0.9542\n1041379200922-1072915200921,0-12,M,0.0048,0.9952\n1041379200922-1072915200921,0-12,F,0.0048,0.9952\n1041379200922-1072915200921,13-24,M,0.0124,0.9876\n1041379200922-1072915200921,13-24,F,0.0149,0.9851\n1041379200922-1072915200921,25-34,M,0.0164,0.9836\n1041379200922-1072915200921,25-34,F,0.0195,0.9805\n1041379200922-1072915200921,35-44,M,0.0201,0.9799\n1041379200922-1072915200921,35-44,F,0.0263,0.9737\n1041379200922-1072915200921,45-54,M,0.0274,0.9726\n1041379200922-1072915200921,45-54,F,0.0317,0.9683\n1041379200922-1072915200921,55-150,M,0.0413,0.9587\n1041379200922-1072915200921,55-150,F,0.0432,0.9568\n1072915200922-1104537600921,0-12,M,0.0036,0.9964\n1072915200922-1104537600921,0-12,F,0.0036,0.9964\n1072915200922-1104537600921,13-24,M,0.0129,0.9871\n1072915200922-1104537600921,13-24,F,0.0131,0.9869\n1072915200922-1104537600921,25-34,M,0.0147,0.9853\n1072915200922-1104537600921,25-34,F,0.0188,0.9812\n1072915200922-1104537600921,35-44,M,0.0182,0.9818\n1072915200922-1104537600921,35-44,F,0.0242,0.9758\n1072915200922-1104537600921,45-54,M,0.0252,0.9748\n1072915200922-1104537600921,45-54,F,0.0314,0.9686\n1072915200922-1104537600921,55-150,M,0.0368,0.9632\n1072915200922-1104537600921,55-150,F,0.0395,0.9605\n1104537600922-1136073600921,0-12,M,0.0020,0.9980\n1104537600922-1136073600921,0-12,F,0.0020,0.9980\n1104537600922-1136073600921,13-24,M,0.0096,0.9904\n1104537600922-1136073600921,13-24,F,0.0108,0.9892\n1104537600922-1136073600921,25-34,M,0.0141,0.9859\n1104537600922-1136073600921,25-34,F,0.0182,0.9818\n1104537600922-1136073600921,35-44,M,0.0170,0.9830\n1104537600922-1136073600921,35-44,F,0.0216,0.9784\n1104537600922-1136073600921,45-54,M,0.0237,0.9763\n1104537600922-1136073600921,45-54,F,0.0276,0.9724\n1104537600922-1136073600921,55-150,M,0.0348,0.9652\n1104537600922-1136073600921,55-150,F,0.0347,0.9653\n1136073600922-1167609600921,0-12,M,0.0017,0.9983\n1136073600922-1167609600921,0-12,F,0.0017,0.9983\n1136073600922-1167609600921,13-24,M,0.0112,0.9888\n1136073600922-1167609600921,13-24,F,0.0123,0.9877\n1136073600922-1167609600921,25-34,M,0.0134,0.9866\n1136073600922-1167609600921,25-34,F,0.0168,0.9832\n1136073600922-1167609600921,35-44,M,0.0154,0.9846\n1136073600922-1167609600921,35-44,F,0.0209,0.9791\n1136073600922-1167609600921,45-54,M,0.0215,0.9785\n1136073600922-1167609600921,45-54,F,0.0261,0.9739\n1136073600922-1167609600921,55-150,M,0.0318,0.9682\n1136073600922-1167609600921,55-150,F,0.0341,0.9659\n1167609600922-1199145600921,0-12,M,0.0014,0.9986\n1167609600922-1199145600921,0-12,F,0.0014,0.9986\n1167609600922-1199145600921,13-24,M,0.0086,0.9914\n1167609600922-1199145600921,13-24,F,0.0112,0.9888\n1167609600922-1199145600921,25-34,M,0.0122,0.9878\n1167609600922-1199145600921,25-34,F,0.0165,0.9835\n1167609600922-1199145600921,35-44,M,0.0143,0.9857\n1167609600922-1199145600921,35-44,F,0.0189,0.9811\n1167609600922-1199145600921,45-54,M,0.0190,0.9810\n1167609600922-1199145600921,45-54,F,0.0242,0.9758\n1167609600922-1199145600921,55-150,M,0.0286,0.9714\n1167609600922-1199145600921,55-150,F,0.0292,0.9708\n1199145600922-1230768000921,0-12,M,0.0007,0.9993\n1199145600922-1230768000921,0-12,F,0.0007,0.9993\n1199145600922-1230768000921,13-24,M,0.0070,0.9930\n1199145600922-1230768000921,13-24,F,0.0106,0.9894\n1199145600922-1230768000921,25-34,M,0.0114,0.9886\n1199145600922-1230768000921,25-34,F,0.0141,0.9859\n1199145600922-1230768000921,35-44,M,0.0120,0.9880\n1199145600922-1230768000921,35-44,F,0.0164,0.9836\n1199145600922-1230768000921,45-54,M,0.0166,0.9834\n1199145600922-1230768000921,45-54,F,0.0207,0.9793\n1230768000922-1262304000921,0-12,M,0.0007,0.9993\n1230768000922-1262304000921,0-12,F,0.0007,0.9993\n1230768000922-1262304000921,13-24,M,0.0017,0.9983\n1230768000922-1262304000921,13-24,F,0.0019,0.9981\n1230768000922-1262304000921,25-34,M,0.0035,0.9965\n1230768000922-1262304000921,25-34,F,0.0031,0.9969\n1230768000922-1262304000921,35-44,M,0.0052,0.9948\n1230768000922-1262304000921,35-44,F,0.0056,0.9944\n1230768000922-1262304000921,45-54,M,0.0101,0.9899\n1230768000922-1262304000921,45-54,F,0.0129,0.9871\n1230768000922-1262304000921,55-150,M,0.0283,0.9717\n1230768000922-1262304000921,55-150,F,0.0294,0.9706\n1262304000922-1293840000921,0-12,M,0.0027,0.9973\n1262304000922-1293840000921,0-12,F,0.0027,0.9973\n1262304000922-1293840000921,13-24,M,0.0017,0.9983\n1262304000922-1293840000921,13-24,F,0.0025,0.9975\n1262304000922-1293840000921,25-34,M,0.0033,0.9967\n1262304000922-1293840000921,25-34,F,0.0032,0.9968\n1262304000922-1293840000921,35-44,M,0.0043,0.9957\n1262304000922-1293840000921,35-44,F,0.0057,0.9943\n1262304000922-1293840000921,45-54,M,0.0097,0.9903\n1262304000922-1293840000921,45-54,F,0.0111,0.9889\n1262304000922-1293840000921,55-150,M,0.0238,0.9762\n1262304000922-1293840000921,55-150,F,0.0255,0.9745\n1293840000922-1325376000921,0-12,M,0.0004,0.9996\n1293840000922-1325376000921,0-12,F,0.0004,0.9996\n1293840000922-1325376000921,13-24,M,0.0019,0.9981\n1293840000922-1325376000921,13-24,F,0.0012,0.9988\n1293840000922-1325376000921,25-34,M,0.0030,0.9970\n1293840000922-1325376000921,25-34,F,0.0031,0.9969\n1293840000922-1325376000921,35-44,M,0.0044,0.9956\n1293840000922-1325376000921,35-44,F,0.0047,0.9953\n1293840000922-1325376000921,45-54,M,0.0082,0.9918\n1293840000922-1325376000921,45-54,F,0.0101,0.9899\n1293840000922-1325376000921,55-150,M,0.0233,0.9767\n1293840000922-1325376000921,55-150,F,0.0201,0.9799\n1325376000922-1356998400921,0-12,M,0.0011,0.9989\n1325376000922-1356998400921,0-12,F,0.0011,0.9989\n1325376000922-1356998400921,13-24,M,0.0016,0.9984\n1325376000922-1356998400921,13-24,F,0.0011,0.9989\n1325376000922-1356998400921,25-34,M,0.0030,0.9970\n1325376000922-1356998400921,25-34,F,0.0027,0.9973\n1325376000922-1356998400921,35-44,M,0.0042,0.9958\n1325376000922-1356998400921,35-44,F,0.0052,0.9948\n1325376000922-1356998400921,45-54,M,0.0074,0.9926\n1325376000922-1356998400921,45-54,F,0.0107,0.9893\n1325376000922-1356998400921,55-150,M,0.0210,0.9790\n1325376000922-1356998400921,55-150,F,0.0212,0.9788\n1356998400922-1388534400921,0-12,M,0.0000,1.0000\n1356998400922-1388534400921,0-12,F,0.0000,1.0000\n1356998400922-1388534400921,13-24,M,0.0017,0.9983\n1356998400922-1388534400921,13-24,F,0.0007,0.9993\n1356998400922-1388534400921,25-34,M,0.0028,0.9972\n1356998400922-1388534400921,25-34,F,0.0021,0.9979\n1356998400922-1388534400921,35-44,M,0.0040,0.9960\n1356998400922-1388534400921,35-44,F,0.0042,0.9958\n1356998400922-1388534400921,45-54,M,0.0076,0.9924\n1356998400922-1388534400921,45-54,F,0.0088,0.9912\n1356998400922-1388534400921,55-150,M,0.0196,0.9804\n1356998400922-1388534400921,55-150,F,0.0190,0.9810\n1388534400922-1420070400921,0-12,M,0.0004,0.9996\n1388534400922-1420070400921,0-12,F,0.0004,0.9996\n1388534400922-1420070400921,13-24,M,0.0015,0.9985\n1388534400922-1420070400921,13-24,F,0.0021,0.9979\n1388534400922-1420070400921,25-34,M,0.0027,0.9973\n1388534400922-1420070400921,25-34,F,0.0023,0.9977\n1388534400922-1420070400921,35-44,M,0.0041,0.9959\n1388534400922-1420070400921,35-44,F,0.0046,0.9954\n1388534400922-1420070400921,45-54,M,0.0068,0.9932\n1388534400922-1420070400921,45-54,F,0.0088,0.9912\n1388534400922-1420070400921,55-150,M,0.0193,0.9807\n1388534400922-1420070400921,55-150,F,0.0206,0.9794\n1420070400922-1451606400921,0-12,M,0.0009,0.9991\n1420070400922-1451606400921,0-12,F,0.0009,0.9991\n1420070400922-1451606400921,13-24,M,0.0014,0.9986\n1420070400922-1451606400921,13-24,F,0.0009,0.9991\n1420070400922-1451606400921,25-34,M,0.0023,0.9977\n1420070400922-1451606400921,25-34,F,0.0029,0.9971\n1420070400922-1451606400921,35-44,M,0.0041,0.9959\n1420070400922-1451606400921,35-44,F,0.0040,0.9960\n1420070400922-1451606400921,45-54,M,0.0066,0.9934\n1420070400922-1451606400921,45-54,F,0.0073,0.9927\n1420070400922-1451606400921,55-150,M,0.0181,0.9819\n1420070400922-1451606400921,55-150,F,0.0182,0.9818\n1451606400922-1483228800921,0-12,M,0.0009,0.9991\n1451606400922-1483228800921,0-12,F,0.0009,0.9991\n1451606400922-1483228800921,13-24,M,0.0020,0.9980\n1451606400922-1483228800921,13-24,F,0.0021,0.9979\n1451606400922-1483228800921,25-34,M,0.0032,0.9968\n1451606400922-1483228800921,25-34,F,0.0032,0.9968\n1451606400922-1483228800921,35-44,M,0.0043,0.9957\n1451606400922-1483228800921,35-44,F,0.0042,0.9958\n1451606400922-1483228800921,45-54,M,0.0062,0.9938\n1451606400922-1483228800921,45-54,F,0.0083,0.9917\n1451606400922-1483228800921,55-150,M,0.0188,0.9812\n1451606400922-1483228800921,55-150,F,0.0172,0.9828\n1483228800922-1514764800921,0-12,M,0.0010,0.9990\n1483228800922-1514764800921,0-12,F,0.0010,0.9990\n1483228800922-1514764800921,13-24,M,0.0018,0.9982\n1483228800922-1514764800921,13-24,F,0.0016,0.9984\n1483228800922-1514764800921,25-34,M,0.0030,0.9970\n1483228800922-1514764800921,25-34,F,0.0032,0.9968\n1483228800922-1514764800921,35-44,M,0.0041,0.9959\n1483228800922-1514764800921,35-44,F,0.0045,0.9955\n1483228800922-1514764800921,45-54,M,0.0067,0.9933\n1483228800922-1514764800921,45-54,F,0.0078,0.9922\n1483228800922-1514764800921,55-150,M,0.0175,0.9825\n1483228800922-1514764800921,55-150,F,0.0175,0.9825\n1514764800922-1546300800921,0-12,M,0.0005,0.9995\n1514764800922-1546300800921,0-12,F,0.0005,0.9995\n1514764800922-1546300800921,13-24,M,0.0016,0.9984\n1514764800922-1546300800921,13-24,F,0.0015,0.9985\n1514764800922-1546300800921,25-34,M,0.0025,0.9975\n1514764800922-1546300800921,25-34,F,0.0034,0.9966\n1514764800922-1546300800921,35-44,M,0.0041,0.9959\n1514764800922-1546300800921,35-44,F,0.0038,0.9962\n1514764800922-1546300800921,45-54,M,0.0064,0.9936\n1514764800922-1546300800921,45-54,F,0.0076,0.9924\n1514764800922-1546300800921,55-150,M,0.0172,0.9828\n1514764800922-1546300800921,55-150,F,0.0155,0.9845\n1546300800922-1577836800921,13-24,M,0.0017,0.9983\n1546300800922-1577836800921,13-24,F,0.0020,0.9980\n1546300800922-1577836800921,25-34,M,0.0028,0.9972\n1546300800922-1577836800921,25-34,F,0.0033,0.9967\n1546300800922-1577836800921,35-44,M,0.0042,0.9958\n1546300800922-1577836800921,35-44,F,0.0040,0.9960\n1546300800922-1577836800921,45-54,M,0.0058,0.9942\n1546300800922-1577836800921,45-54,F,0.0065,0.9935\n1546300800922-1577836800921,55-150,M,0.0160,0.9840\n1546300800922-1577836800921,55-150,F,0.0143,0.9857"
+      }
+    },
+    "Diagnosis Later Years": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hiv_diagnosis",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 86406008,
+          "display": "Human immunodeficiency virus infection (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis_Encounter_End"
+    },
+    "Living_with_Diagnosis_Later_Years": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "years",
+      "direct_transition": "Mortality Check Later Years"
+    },
+    "Diagnosis Early Years": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hiv_diagnosis",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 62479008,
+          "display": "Acquired immune deficiency syndrome (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis_Encounter_End_Early_Years"
+    },
+    "Mortality Check Early Years": {
+      "type": "Simple",
+      "lookup_table_transition": {
+        "transitions": [
+          {
+            "transition": "Death",
+            "default_probability": 0.0705,
+            "lookup_table_name": "hiv_mortality_early.csv"
+          },
+          {
+            "transition": "Living_with_Diagnosis_Early_Years",
+            "default_probability": 0.9295,
+            "lookup_table_name": "hiv_mortality_early.csv"
+          }
+        ],
+        "viewTable": false,
+        "lookup_table_name_ModuleBuilder": "hiv_mortality_early.csv",
+        "lookuptable": "time,age,gender,Death,Living_with_Diagnosis_Early_Years\n694224000922-725846400921,0-12,M,0.1400,0.8600\n694224000922-725846400921,0-12,F,0.1400,0.8600\n694224000922-725846400921,13-150,M,0.2784,0.7216\n694224000922-725846400921,13-150,F,0.2713,0.7287\n725846400922-757382400921,0-12,M,0.1520,0.8480\n725846400922-757382400921,0-12,F,0.1520,0.8480\n725846400922-757382400921,13-150,M,0.1863,0.8137\n725846400922-757382400921,13-150,F,0.1652,0.8348\n757382400922-788918400921,0-12,M,0.1503,0.8497\n757382400922-788918400921,0-12,F,0.1503,0.8497\n757382400922-788918400921,13-150,M,0.2055,0.7945\n757382400922-788918400921,13-150,F,0.1855,0.8145\n788918400922-820454400921,0-12,M,0.1367,0.8633\n788918400922-820454400921,0-12,F,0.1367,0.8633\n788918400922-820454400921,13-24,M,0.0984,0.9016\n788918400922-820454400921,13-24,F,0.1008,0.8992\n788918400922-820454400921,25-29,M,0.1393,0.8607\n788918400922-820454400921,25-29,F,0.1353,0.8647\n788918400922-820454400921,30-34,M,0.1747,0.8253\n788918400922-820454400921,30-34,F,0.1619,0.8381\n788918400922-820454400921,35-39,M,0.1977,0.8023\n788918400922-820454400921,35-39,F,0.1749,0.8251\n788918400922-820454400921,40-44,M,0.2103,0.7897\n788918400922-820454400921,40-44,F,0.1975,0.8025\n788918400922-820454400921,45-49,M,0.2283,0.7717\n788918400922-820454400921,45-49,F,0.2300,0.7700\n788918400922-820454400921,50-54,M,0.2444,0.7556\n788918400922-820454400921,50-54,F,0.2224,0.7776\n788918400922-820454400921,55-59,M,0.2726,0.7274\n788918400922-820454400921,55-59,F,0.2764,0.7236\n788918400922-820454400921,60-64,M,0.2875,0.7125\n788918400922-820454400921,60-64,F,0.2576,0.7424\n788918400922-820454400921,65-69,M,0.3441,0.6559\n788918400922-820454400921,65-69,F,0.3167,0.6833\n788918400922-820454400921,70-150,M,0.3718,0.6282\n788918400922-820454400921,70-150,F,0.3710,0.6290\n820454400922-852076800921,0-12,M,0.1084,0.8916\n820454400922-852076800921,0-12,F,0.1084,0.8916\n820454400922-852076800921,13-24,M,0.0646,0.9354\n820454400922-852076800921,13-24,F,0.0704,0.9296\n820454400922-852076800921,25-29,M,0.0975,0.9025\n820454400922-852076800921,25-29,F,0.0988,0.9012\n820454400922-852076800921,30-34,M,0.1190,0.8810\n820454400922-852076800921,30-34,F,0.1201,0.8799\n820454400922-852076800921,35-39,M,0.1365,0.8635\n820454400922-852076800921,35-39,F,0.1340,0.8660\n820454400922-852076800921,40-44,M,0.1463,0.8537\n820454400922-852076800921,40-44,F,0.1510,0.8490\n820454400922-852076800921,45-49,M,0.1584,0.8416\n820454400922-852076800921,45-49,F,0.1720,0.8280\n820454400922-852076800921,50-54,M,0.1713,0.8287\n820454400922-852076800921,50-54,F,0.1693,0.8307\n820454400922-852076800921,55-59,M,0.1886,0.8114\n820454400922-852076800921,55-59,F,0.1870,0.8130\n820454400922-852076800921,60-64,M,0.2178,0.7822\n820454400922-852076800921,60-64,F,0.2415,0.7585\n820454400922-852076800921,65-69,M,0.2334,0.7666\n820454400922-852076800921,65-69,F,0.2492,0.7508\n820454400922-852076800921,70-150,M,0.3134,0.6866\n820454400922-852076800921,70-150,F,0.2636,0.7364\n852076800922-883612800921,0-12,M,0.0569,0.9431\n852076800922-883612800921,0-12,F,0.0569,0.9431\n852076800922-883612800921,13-24,M,0.0443,0.9557\n852076800922-883612800921,13-24,F,0.0502,0.9498\n852076800922-883612800921,25-29,M,0.0581,0.9419\n852076800922-883612800921,25-29,F,0.0587,0.9413\n852076800922-883612800921,30-34,M,0.0615,0.9385\n852076800922-883612800921,30-34,F,0.0703,0.9297\n852076800922-883612800921,35-39,M,0.0684,0.9316\n852076800922-883612800921,35-39,F,0.0778,0.9222\n852076800922-883612800921,40-44,M,0.0776,0.9224\n852076800922-883612800921,40-44,F,0.0894,0.9106\n852076800922-883612800921,45-49,M,0.0861,0.9139\n852076800922-883612800921,45-49,F,0.1041,0.8959\n852076800922-883612800921,50-54,M,0.0934,0.9066\n852076800922-883612800921,50-54,F,0.1135,0.8865\n852076800922-883612800921,55-59,M,0.1083,0.8917\n852076800922-883612800921,55-59,F,0.1189,0.8811\n852076800922-883612800921,60-64,M,0.1341,0.8659\n852076800922-883612800921,60-64,F,0.1237,0.8763\n852076800922-883612800921,65-69,M,0.1624,0.8376\n852076800922-883612800921,65-69,F,0.1243,0.8757\n852076800922-883612800921,70-150,M,0.1851,0.8149\n852076800922-883612800921,70-150,F,0.2268,0.7732\n883612800922-915148800921,0-12,M,0.0325,0.9675\n883612800922-915148800921,0-12,F,0.0325,0.9675\n883612800922-915148800921,13-24,M,0.0383,0.9617\n883612800922-915148800921,13-24,F,0.0420,0.9580\n883612800922-915148800921,25-29,M,0.0423,0.9577\n883612800922-915148800921,25-29,F,0.0521,0.9479\n883612800922-915148800921,30-34,M,0.0447,0.9553\n883612800922-915148800921,30-34,F,0.0582,0.9418\n883612800922-915148800921,35-39,M,0.0523,0.9477\n883612800922-915148800921,35-39,F,0.0612,0.9388\n883612800922-915148800921,40-44,M,0.0590,0.9410\n883612800922-915148800921,40-44,F,0.0699,0.9301\n883612800922-915148800921,45-49,M,0.0688,0.9312\n883612800922-915148800921,45-49,F,0.0818,0.9182\n883612800922-915148800921,50-54,M,0.0768,0.9232\n883612800922-915148800921,50-54,F,0.0861,0.9139\n883612800922-915148800921,55-59,M,0.0883,0.9117\n883612800922-915148800921,55-59,F,0.1103,0.8897\n883612800922-915148800921,60-64,M,0.1083,0.8917\n883612800922-915148800921,60-64,F,0.1130,0.8870\n883612800922-915148800921,65-69,M,0.1122,0.8878\n883612800922-915148800921,65-69,F,0.1216,0.8784\n883612800922-915148800921,70-150,M,0.1567,0.8433\n883612800922-915148800921,70-150,F,0.1541,0.8459\n915148800922-946684800921,0-12,M,0.0250,0.9750\n915148800922-946684800921,0-12,F,0.0250,0.9750\n915148800922-946684800921,13-24,M,0.0329,0.9671\n915148800922-946684800921,13-24,F,0.0424,0.9576\n915148800922-946684800921,25-29,M,0.0395,0.9605\n915148800922-946684800921,25-29,F,0.0456,0.9544\n915148800922-946684800921,30-34,M,0.0390,0.9610\n915148800922-946684800921,30-34,F,0.0528,0.9472\n915148800922-946684800921,35-39,M,0.0430,0.9570\n915148800922-946684800921,35-39,F,0.0576,0.9424\n915148800922-946684800921,40-44,M,0.0533,0.9467\n915148800922-946684800921,40-44,F,0.0702,0.9298\n915148800922-946684800921,45-49,M,0.0597,0.9403\n915148800922-946684800921,45-49,F,0.0750,0.9250\n915148800922-946684800921,50-54,M,0.0710,0.9290\n915148800922-946684800921,50-54,F,0.0892,0.9108\n915148800922-946684800921,55-59,M,0.0806,0.9194\n915148800922-946684800921,55-59,F,0.0852,0.9148\n915148800922-946684800921,60-64,M,0.0854,0.9146\n915148800922-946684800921,60-64,F,0.1040,0.8960\n915148800922-946684800921,65-69,M,0.1119,0.8881\n915148800922-946684800921,65-69,F,0.1128,0.8872\n915148800922-946684800921,70-150,M,0.1357,0.8643\n915148800922-946684800921,70-150,F,0.1056,0.8944\n946684800922-978307200921,0-12,M,0.0132,0.9868\n946684800922-978307200921,0-12,F,0.0132,0.9868\n946684800922-978307200921,13-24,M,0.0313,0.9687\n946684800922-978307200921,13-24,F,0.0285,0.9715\n946684800922-978307200921,25-29,M,0.0311,0.9689\n946684800922-978307200921,25-29,F,0.0457,0.9543\n946684800922-978307200921,30-34,M,0.0360,0.9640\n946684800922-978307200921,30-34,F,0.0478,0.9522\n946684800922-978307200921,35-39,M,0.0374,0.9626\n946684800922-978307200921,35-39,F,0.0503,0.9497\n946684800922-978307200921,40-44,M,0.0416,0.9584\n946684800922-978307200921,40-44,F,0.0564,0.9436\n946684800922-978307200921,45-49,M,0.0515,0.9485\n946684800922-978307200921,45-49,F,0.0651,0.9349\n946684800922-978307200921,50-54,M,0.0609,0.9391\n946684800922-978307200921,50-54,F,0.0685,0.9315\n946684800922-978307200921,55-59,M,0.0622,0.9378\n946684800922-978307200921,55-59,F,0.0773,0.9227\n946684800922-978307200921,60-64,M,0.0803,0.9197\n946684800922-978307200921,60-64,F,0.0859,0.9141\n946684800922-978307200921,65-69,M,0.0865,0.9135\n946684800922-978307200921,65-69,F,0.0939,0.9061\n946684800922-978307200921,70-150,M,0.1252,0.8748\n946684800922-978307200921,70-150,F,0.1273,0.8727\n978307200922-1009843200921,0-12,M,0.0162,0.9838\n978307200922-1009843200921,0-12,F,0.0162,0.9838\n978307200922-1009843200921,13-24,M,0.0390,0.9610\n978307200922-1009843200921,13-24,F,0.0537,0.9463\n978307200922-1009843200921,25-34,M,0.0372,0.9628\n978307200922-1009843200921,25-34,F,0.0441,0.9559\n978307200922-1009843200921,35-44,M,0.0427,0.9573\n978307200922-1009843200921,35-44,F,0.0566,0.9434\n978307200922-1009843200921,45-54,M,0.0570,0.9430\n978307200922-1009843200921,45-54,F,0.0668,0.9332\n978307200922-1009843200921,55-150,M,0.0814,0.9186\n978307200922-1009843200921,55-150,F,0.0965,0.9035\n1009843200922-1041379200921,0-12,M,0.0129,0.9871\n1009843200922-1041379200921,0-12,F,0.0129,0.9871\n1009843200922-1041379200921,13-24,M,0.0241,0.9759\n1009843200922-1041379200921,13-24,F,0.0317,0.9683\n1009843200922-1041379200921,25-34,M,0.0344,0.9656\n1009843200922-1041379200921,25-34,F,0.0439,0.9561\n1009843200922-1041379200921,35-44,M,0.0430,0.9570\n1009843200922-1041379200921,35-44,F,0.0559,0.9441\n1009843200922-1041379200921,45-54,M,0.0606,0.9394\n1009843200922-1041379200921,45-54,F,0.0728,0.9272\n1009843200922-1041379200921,55-150,M,0.0852,0.9148\n1009843200922-1041379200921,55-150,F,0.0915,0.9085\n1041379200922-1072915200921,0-12,M,0.0095,0.9905\n1041379200922-1072915200921,0-12,F,0.0095,0.9905\n1041379200922-1072915200921,13-24,M,0.0247,0.9753\n1041379200922-1072915200921,13-24,F,0.0297,0.9703\n1041379200922-1072915200921,25-34,M,0.0328,0.9672\n1041379200922-1072915200921,25-34,F,0.0390,0.9610\n1041379200922-1072915200921,35-44,M,0.0402,0.9598\n1041379200922-1072915200921,35-44,F,0.0526,0.9474\n1041379200922-1072915200921,45-54,M,0.0548,0.9452\n1041379200922-1072915200921,45-54,F,0.0635,0.9365\n1041379200922-1072915200921,55-150,M,0.0827,0.9173\n1041379200922-1072915200921,55-150,F,0.0863,0.9137\n1072915200922-1104537600921,0-12,M,0.0071,0.9929\n1072915200922-1104537600921,0-12,F,0.0071,0.9929\n1072915200922-1104537600921,13-24,M,0.0258,0.9742\n1072915200922-1104537600921,13-24,F,0.0262,0.9738\n1072915200922-1104537600921,25-34,M,0.0294,0.9706\n1072915200922-1104537600921,25-34,F,0.0376,0.9624\n1072915200922-1104537600921,35-44,M,0.0365,0.9635\n1072915200922-1104537600921,35-44,F,0.0485,0.9515\n1072915200922-1104537600921,45-54,M,0.0503,0.9497\n1072915200922-1104537600921,45-54,F,0.0627,0.9373\n1072915200922-1104537600921,55-150,M,0.0736,0.9264\n1072915200922-1104537600921,55-150,F,0.0790,0.9210\n1104537600922-1136073600921,0-12,M,0.0039,0.9961\n1104537600922-1136073600921,0-12,F,0.0039,0.9961\n1104537600922-1136073600921,13-24,M,0.0192,0.9808\n1104537600922-1136073600921,13-24,F,0.0217,0.9783\n1104537600922-1136073600921,25-34,M,0.0283,0.9717\n1104537600922-1136073600921,25-34,F,0.0364,0.9636\n1104537600922-1136073600921,35-44,M,0.0339,0.9661\n1104537600922-1136073600921,35-44,F,0.0431,0.9569\n1104537600922-1136073600921,45-54,M,0.0473,0.9527\n1104537600922-1136073600921,45-54,F,0.0552,0.9448\n1104537600922-1136073600921,55-150,M,0.0696,0.9304\n1104537600922-1136073600921,55-150,F,0.0695,0.9305\n1136073600922-1167609600921,0-12,M,0.0034,0.9966\n1136073600922-1167609600921,0-12,F,0.0034,0.9966\n1136073600922-1167609600921,13-24,M,0.0224,0.9776\n1136073600922-1167609600921,13-24,F,0.0246,0.9754\n1136073600922-1167609600921,25-34,M,0.0268,0.9732\n1136073600922-1167609600921,25-34,F,0.0336,0.9664\n1136073600922-1167609600921,35-44,M,0.0308,0.9692\n1136073600922-1167609600921,35-44,F,0.0417,0.9583\n1136073600922-1167609600921,45-54,M,0.0429,0.9571\n1136073600922-1167609600921,45-54,F,0.0523,0.9477\n1136073600922-1167609600921,55-150,M,0.0637,0.9363\n1136073600922-1167609600921,55-150,F,0.0682,0.9318\n1167609600922-1199145600921,0-12,M,0.0064,0.9936\n1167609600922-1199145600921,0-12,F,0.0064,0.9936\n1167609600922-1199145600921,13-24,M,0.0172,0.9828\n1167609600922-1199145600921,13-24,F,0.0224,0.9776\n1167609600922-1199145600921,25-34,M,0.0245,0.9755\n1167609600922-1199145600921,25-34,F,0.0330,0.9670\n1167609600922-1199145600921,35-44,M,0.0286,0.9714\n1167609600922-1199145600921,35-44,F,0.0378,0.9622\n1167609600922-1199145600921,45-54,M,0.0380,0.9620\n1167609600922-1199145600921,45-54,F,0.0484,0.9516\n1167609600922-1199145600921,55-150,M,0.0572,0.9428\n1167609600922-1199145600921,55-150,F,0.0585,0.9415\n1199145600922-1230768000921,0-12,M,0.0051,0.9949\n1199145600922-1230768000921,0-12,F,0.0051,0.9949\n1199145600922-1230768000921,13-24,M,0.0141,0.9859\n1199145600922-1230768000921,13-24,F,0.0211,0.9789\n1199145600922-1230768000921,25-34,M,0.0227,0.9773\n1199145600922-1230768000921,25-34,F,0.0283,0.9717\n1199145600922-1230768000921,35-44,M,0.0240,0.9760\n1199145600922-1230768000921,35-44,F,0.0328,0.9672\n1199145600922-1230768000921,45-54,M,0.0333,0.9667\n1199145600922-1230768000921,45-54,F,0.0413,0.9587\n1199145600922-1230768000921,55-150,M,0.0558,0.9442\n1199145600922-1230768000921,55-150,F,0.0608,0.9392\n1230768000922-1262304000921,0-12,M,0.0082,0.9918\n1230768000922-1262304000921,0-12,F,0.0082,0.9918\n1230768000922-1262304000921,13-24,M,0.0132,0.9868\n1230768000922-1262304000921,13-24,F,0.0177,0.9823\n1230768000922-1262304000921,25-34,M,0.0215,0.9785\n1230768000922-1262304000921,25-34,F,0.0261,0.9739\n1230768000922-1262304000921,35-44,M,0.0221,0.9779\n1230768000922-1262304000921,35-44,F,0.0293,0.9707\n1230768000922-1262304000921,45-54,M,0.0301,0.9699\n1230768000922-1262304000921,45-54,F,0.0383,0.9617\n1230768000922-1262304000921,55-150,M,0.0527,0.9473\n1230768000922-1262304000921,55-150,F,0.0540,0.9460\n1262304000922-1293840000921,0-12,M,0.0000,1.0000\n1262304000922-1293840000921,0-12,F,0.0000,1.0000\n1262304000922-1293840000921,13-24,M,0.0134,0.9866\n1262304000922-1293840000921,13-24,F,0.0159,0.9841\n1262304000922-1293840000921,25-34,M,0.0178,0.9822\n1262304000922-1293840000921,25-34,F,0.0221,0.9779\n1262304000922-1293840000921,35-44,M,0.0188,0.9812\n1262304000922-1293840000921,35-44,F,0.0247,0.9753\n1262304000922-1293840000921,45-54,M,0.0271,0.9729\n1262304000922-1293840000921,45-54,F,0.0326,0.9674\n1262304000922-1293840000921,55-150,M,0.0474,0.9526\n1262304000922-1293840000921,55-150,F,0.0487,0.9513\n1293840000922-1325376000921,0-12,M,0.0000,1.0000\n1293840000922-1325376000921,0-12,F,0.0000,1.0000\n1293840000922-1325376000921,13-24,M,0.0122,0.9878\n1293840000922-1325376000921,13-24,F,0.0157,0.9843\n1293840000922-1325376000921,25-34,M,0.0156,0.9844\n1293840000922-1325376000921,25-34,F,0.0222,0.9778\n1293840000922-1325376000921,35-44,M,0.0175,0.9825\n1293840000922-1325376000921,35-44,F,0.0237,0.9763\n1293840000922-1325376000921,45-54,M,0.0251,0.9749\n1293840000922-1325376000921,45-54,F,0.0288,0.9712\n1293840000922-1325376000921,55-150,M,0.0439,0.9561\n1293840000922-1325376000921,55-150,F,0.0474,0.9526\n1325376000922-1356998400921,0-12,M,0.0025,0.9975\n1325376000922-1356998400921,0-12,F,0.0025,0.9975\n1325376000922-1356998400921,13-24,M,0.0106,0.9894\n1325376000922-1356998400921,13-24,F,0.0129,0.9871\n1325376000922-1356998400921,25-34,M,0.0167,0.9833\n1325376000922-1356998400921,25-34,F,0.0199,0.9801\n1325376000922-1356998400921,35-44,M,0.0160,0.9840\n1325376000922-1356998400921,35-44,F,0.0224,0.9776\n1325376000922-1356998400921,45-54,M,0.0232,0.9768\n1325376000922-1356998400921,45-54,F,0.0277,0.9723\n1325376000922-1356998400921,55-150,M,0.0414,0.9586\n1325376000922-1356998400921,55-150,F,0.0431,0.9569\n1356998400922-1388534400921,0-12,M,0.0030,0.9970\n1356998400922-1388534400921,0-12,F,0.0030,0.9970\n1356998400922-1388534400921,13-24,M,0.0096,0.9904\n1356998400922-1388534400921,13-24,F,0.0112,0.9888\n1356998400922-1388534400921,25-34,M,0.0154,0.9846\n1356998400922-1388534400921,25-34,F,0.0195,0.9805\n1356998400922-1388534400921,35-44,M,0.0161,0.9839\n1356998400922-1388534400921,35-44,F,0.0192,0.9808\n1356998400922-1388534400921,45-54,M,0.0221,0.9779\n1356998400922-1388534400921,45-54,F,0.0261,0.9739\n1356998400922-1388534400921,55-150,M,0.0391,0.9609\n1356998400922-1388534400921,55-150,F,0.0433,0.9567\n1388534400922-1420070400921,0-12,M,0.0000,1.0000\n1388534400922-1420070400921,0-12,F,0.0000,1.0000\n1388534400922-1420070400921,13-24,M,0.0096,0.9904\n1388534400922-1420070400921,13-24,F,0.0141,0.9859\n1388534400922-1420070400921,25-34,M,0.0144,0.9856\n1388534400922-1420070400921,25-34,F,0.0177,0.9823\n1388534400922-1420070400921,35-44,M,0.0157,0.9843\n1388534400922-1420070400921,35-44,F,0.0206,0.9794\n1388534400922-1420070400921,45-54,M,0.0208,0.9792\n1388534400922-1420070400921,45-54,F,0.0246,0.9754\n1388534400922-1420070400921,55-150,M,0.0391,0.9609\n1388534400922-1420070400921,55-150,F,0.0411,0.9589\n1420070400922-1451606400921,0-12,M,0.0058,0.9942\n1420070400922-1451606400921,0-12,F,0.0058,0.9942\n1420070400922-1451606400921,13-24,M,0.0097,0.9903\n1420070400922-1451606400921,13-24,F,0.0142,0.9858\n1420070400922-1451606400921,25-34,M,0.0143,0.9857\n1420070400922-1451606400921,25-34,F,0.0178,0.9822\n1420070400922-1451606400921,35-44,M,0.0152,0.9848\n1420070400922-1451606400921,35-44,F,0.0188,0.9812\n1420070400922-1451606400921,45-54,M,0.0207,0.9793\n1420070400922-1451606400921,45-54,F,0.0225,0.9775\n1420070400922-1451606400921,55-150,M,0.0369,0.9631\n1420070400922-1451606400921,55-150,F,0.0362,0.9638\n1451606400922-1483228800921,0-12,M,0.0000,1.0000\n1451606400922-1483228800921,0-12,F,0.0000,1.0000\n1451606400922-1483228800921,13-24,M,0.0090,0.9910\n1451606400922-1483228800921,13-24,F,0.0130,0.9870\n1451606400922-1483228800921,25-34,M,0.0144,0.9856\n1451606400922-1483228800921,25-34,F,0.0193,0.9807\n1451606400922-1483228800921,35-44,M,0.0150,0.9850\n1451606400922-1483228800921,35-44,F,0.0188,0.9812\n1451606400922-1483228800921,45-54,M,0.0194,0.9806\n1451606400922-1483228800921,45-54,F,0.0216,0.9784\n1451606400922-1483228800921,55-150,M,0.0369,0.9631\n1451606400922-1483228800921,55-150,F,0.0358,0.9642\n1483228800922-1514764800921,0-12,M,0.0000,1.0000\n1483228800922-1514764800921,0-12,F,0.0000,1.0000\n1483228800922-1514764800921,13-24,M,0.0110,0.9890\n1483228800922-1514764800921,13-24,F,0.0097,0.9903\n1483228800922-1514764800921,25-34,M,0.0132,0.9868\n1483228800922-1514764800921,25-34,F,0.0179,0.9821\n1483228800922-1514764800921,35-44,M,0.0150,0.9850\n1483228800922-1514764800921,35-44,F,0.0160,0.9840\n1483228800922-1514764800921,45-54,M,0.0188,0.9812\n1483228800922-1514764800921,45-54,F,0.0220,0.9780\n1483228800922-1514764800921,55-150,M,0.0352,0.9648\n1483228800922-1514764800921,55-150,F,0.0340,0.9660\n1514764800922-1546300800921,0-12,M,0.0015,0.9985\n1514764800922-1546300800921,0-12,F,0.0015,0.9985\n1514764800922-1546300800921,13-24,M,0.0106,0.9894\n1514764800922-1546300800921,13-24,F,0.0103,0.9897\n1514764800922-1546300800921,25-34,M,0.0143,0.9857\n1514764800922-1546300800921,25-34,F,0.0153,0.9847\n1514764800922-1546300800921,35-44,M,0.0138,0.9862\n1514764800922-1546300800921,35-44,F,0.0180,0.9820\n1514764800922-1546300800921,45-54,M,0.0184,0.9816\n1514764800922-1546300800921,45-54,F,0.0214,0.9786\n1514764800922-1546300800921,55-150,M,0.0327,0.9673\n1514764800922-1546300800921,55-150,F,0.0327,0.9673\n1546300800922-1577836800921,13-24,M,0.0113,0.9887\n1546300800922-1577836800921,13-24,F,0.0096,0.9904\n1546300800922-1577836800921,25-34,M,0.0137,0.9863\n1546300800922-1577836800921,25-34,F,0.0146,0.9854\n1546300800922-1577836800921,35-44,M,0.0134,0.9866\n1546300800922-1577836800921,35-44,F,0.0155,0.9845\n1546300800922-1577836800921,45-54,M,0.0162,0.9838\n1546300800922-1577836800921,45-54,F,0.0178,0.9822\n1546300800922-1577836800921,55-150,M,0.0309,0.9691\n1546300800922-1577836800921,55-150,F,0.0291,0.9709\n"
+      }
+    },
+    "Mortality Check Very Early Years": {
+      "type": "Simple",
+      "lookup_table_transition": {
+        "transitions": [
+          {
+            "transition": "Death_within_six_months",
+            "default_probability": 0.2055,
+            "lookup_table_name": "hiv_mortality_very_early.csv"
+          },
+          {
+            "transition": "Living_with_Diagnosis_Six_Months",
+            "default_probability": 0.7945,
+            "lookup_table_name": "hiv_mortality_very_early.csv"
+          }
+        ],
+        "viewTable": false,
+        "lookup_table_name_ModuleBuilder": "hiv_mortality_very_early.csv",
+        "lookuptable": "time,Death_within_six_months,Living_with_Diagnosis_Six_Months\n283996800922-315532800921,0.25,0.75\n315532800922-347155200921,0.25,0.75\n347155200922-378691200921,0.22,0.78\n378691200922-410227200921,0.22,0.78\n410227200922-441763200921,0.22,0.78\n441763200922-473385600921,0.22,0.78\n473385600922-504921600921,0.22,0.78\n504921600922-536457600921,0.2,0.8\n536457600922-567993600921,0.19,0.81\n567993600922-599616000921,0.179,0.821\n599616000922-631152000921,0.183,0.817\n631152000922-662688000921,0.162,0.838\n662688000922-694224000921,0.158,0.842\n"
+      }
+    },
+    "Mortality Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Mortality Check Early Years",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 1992
+          }
+        },
+        {
+          "transition": "Mortality Check Very Early Years"
+        }
+      ]
+    },
+    "Death": {
+      "type": "Death",
+      "direct_transition": "Terminal",
+      "range": {
+        "low": 0,
+        "high": 364,
+        "unit": "days"
+      },
+      "referenced_by_attribute": "hiv_diagnosis"
+    },
+    "Living_with_Diagnosis_Six_Months": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 6
+        }
+      },
+      "unit": "months",
+      "direct_transition": "Mortality Check"
+    },
+    "Living_with_Diagnosis_Early_Years": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "years",
+      "direct_transition": "Mortality Check"
+    },
+    "Death_within_six_months": {
+      "type": "Death",
+      "exact": {
+        "quantity": 6,
+        "unit": "months"
+      },
+      "direct_transition": "Terminal",
+      "referenced_by_attribute": "hiv_diagnosis"
+    },
+    "Diagnosis_Encounter_Later_Years": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Screening Submodule"
+    },
+    "Diagnosis_Encounter_Early_Years": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Screening_Submodule"
+    },
+    "Diagnosis_Encounter_End": {
+      "type": "EncounterEnd",
+      "direct_transition": "Mortality Check Later Years"
+    },
+    "Diagnosis_Encounter_End_Early_Years": {
+      "type": "EncounterEnd",
+      "direct_transition": "Mortality Check"
+    },
+    "Screening Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/hiv_screening",
+      "direct_transition": "Diagnosis Later Years"
+    },
+    "Screening_Submodule": {
+      "type": "CallSubmodule",
+      "submodule": "hiv/hiv_screening",
+      "direct_transition": "Diagnosis Early Years"
+    },
+    "Diagnosed_Later_Years": {
+      "type": "SetAttribute",
+      "attribute": "hiv_infection",
+      "direct_transition": "Diagnosis_Encounter_Later_Years",
+      "value": true
+    },
+    "Diagnosed_Early_Years": {
+      "type": "SetAttribute",
+      "attribute": "hiv_infection",
+      "direct_transition": "Diagnosis_Encounter_Early_Years",
+      "value": true
+    },
+    "Wait_Until_Next_Diagnosis_Check": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "years",
+      "direct_transition": "Diagnosis Check"
+    },
+    "Diagnosis Check Early Years": {
+      "type": "Simple",
+      "lookup_table_transition": {
+        "transitions": [
+          {
+            "transition": "Diagnosed_Early_Years",
+            "default_probability": 0.0001565,
+            "lookup_table_name": "hiv_diagnosis_early.csv"
+          },
+          {
+            "transition": "Wait_Until_Next_Diagnosis_Check",
+            "default_probability": 0.9998435,
+            "lookup_table_name": "hiv_diagnosis_early.csv"
+          }
+        ],
+        "viewTable": false,
+        "lookup_table_name_ModuleBuilder": "hiv_diagnosis_early.csv",
+        "lookuptable": "time,age,gender,Diagnosed_Early_Years,Wait_Until_Next_Diagnosis_Check\n283996800922-347155200921,0-150,M,0.000000248,0.999999752\n283996800922-347155200921,0-150,F,0.000000000,1.000000000\n347155200922-410227200921,0-24,M,0.000000460,0.999999540\n347155200922-410227200921,0-24,F,0.000000030,0.999999970\n347155200922-410227200921,25-44,M,0.000011230,0.999988770\n347155200922-410227200921,25-44,F,0.000000610,0.999999390\n347155200922-410227200921,45-150,M,0.000001870,0.999998130\n347155200922-410227200921,45-150,F,0.000000090,0.999999910\n410227200922-504921600921,0-12,M,0.000005600,0.999994400\n410227200922-504921600921,0-12,F,0.000004900,0.999995100\n410227200922-504921600921,13-19,M,0.000004600,0.999995400\n410227200922-504921600921,13-19,F,0.000000300,0.999999700\n410227200922-504921600921,20-29,M,0.000153000,0.999847000\n410227200922-504921600921,20-29,F,0.000011000,0.999989000\n410227200922-504921600921,30-39,M,0.000451000,0.999549000\n410227200922-504921600921,30-39,F,0.000031000,0.999969000\n410227200922-504921600921,40-49,M,0.000280000,0.999720000\n410227200922-504921600921,40-49,F,0.000019000,0.999981000\n410227200922-504921600921,50-150,M,0.000054000,0.999946000\n410227200922-504921600921,50-150,F,0.000003000,0.999997000\n504921600922-536457600921,0-12,M,0.000004500,0.999995500\n504921600922-536457600921,0-12,F,0.000004000,0.999996000\n504921600922-536457600921,13-19,M,0.000003700,0.999996300\n504921600922-536457600921,13-19,F,0.000000300,0.999999700\n504921600922-536457600921,20-29,M,0.000125000,0.999875000\n504921600922-536457600921,20-29,F,0.000009600,0.999990400\n504921600922-536457600921,30-39,M,0.000368000,0.999632000\n504921600922-536457600921,30-39,F,0.000028000,0.999972000\n504921600922-536457600921,40-49,M,0.000228000,0.999772000\n504921600922-536457600921,40-49,F,0.000017000,0.999983000\n504921600922-536457600921,50-150,M,0.000044000,0.999956000\n504921600922-536457600921,50-150,F,0.000002700,0.999997300\n536457600922-567993600921,0-12,M,0.000007800,0.999992200\n536457600922-567993600921,0-12,F,0.000007300,0.999992700\n536457600922-567993600921,13-19,M,0.000006000,0.999994000\n536457600922-567993600921,13-19,F,0.000000500,0.999999500\n536457600922-567993600921,20-29,M,0.000201000,0.999799000\n536457600922-567993600921,20-29,F,0.000017000,0.999983000\n536457600922-567993600921,30-39,M,0.000593000,0.999407000\n536457600922-567993600921,30-39,F,0.000050000,0.999950000\n536457600922-567993600921,40-49,M,0.000368000,0.999632000\n536457600922-567993600921,40-49,F,0.000031000,0.999969000\n536457600922-567993600921,50-150,M,0.000071000,0.999929000\n536457600922-567993600921,50-150,F,0.000004900,0.999995100\n567993600922-599616000921,0-12,M,0.000015000,0.999985000\n567993600922-599616000921,0-12,F,0.000012000,0.999988000\n567993600922-599616000921,13-19,M,0.000008800,0.999991200\n567993600922-599616000921,13-19,F,0.000001100,0.999998900\n567993600922-599616000921,20-29,M,0.000295000,0.999705000\n567993600922-599616000921,20-29,F,0.000034000,0.999966000\n567993600922-599616000921,30-39,M,0.000869000,0.999131000\n567993600922-599616000921,30-39,F,0.000098000,0.999902000\n567993600922-599616000921,40-49,M,0.000540000,0.999460000\n567993600922-599616000921,40-49,F,0.000059000,0.999941000\n567993600922-599616000921,50-150,M,0.000103000,0.999897000\n567993600922-599616000921,50-150,F,0.000009500,0.999990500\n599616000922-631152000921,0-12,M,0.000015000,0.999985000\n599616000922-631152000921,0-12,F,0.000014000,0.999986000\n599616000922-631152000921,13-19,M,0.000009600,0.999990400\n599616000922-631152000921,13-19,F,0.000001200,0.999998800\n599616000922-631152000921,20-29,M,0.000322000,0.999678000\n599616000922-631152000921,20-29,F,0.000038000,0.999962000\n599616000922-631152000921,30-39,M,0.000950000,0.999050000\n599616000922-631152000921,30-39,F,0.000109000,0.999891000\n599616000922-631152000921,40-49,M,0.000590000,0.999410000\n599616000922-631152000921,40-49,F,0.000066000,0.999934000\n599616000922-631152000921,50-150,M,0.000113000,0.999887000\n599616000922-631152000921,50-150,F,0.000011000,0.999989000\n631152000922-662688000921,0-12,M,0.000015614,0.999984386\n631152000922-662688000921,0-12,F,0.000015835,0.999984165\n631152000922-662688000921,13-24,M,0.000071865,0.999928135\n631152000922-662688000921,13-24,F,0.000009841,0.999990159\n631152000922-662688000921,25-34,M,0.000698902,0.999301098\n631152000922-662688000921,25-34,F,0.000090595,0.999909405\n631152000922-662688000921,35-44,M,0.000735117,0.999264883\n631152000922-662688000921,35-44,F,0.000093345,0.999906655\n631152000922-662688000921,45-54,M,0.000390251,0.999609749\n631152000922-662688000921,45-54,F,0.000048281,0.999951719\n631152000922-662688000921,55-150,M,0.000094260,0.999905740\n631152000922-662688000921,55-150,F,0.000009247,0.999990753\n662688000922-694224000921,0-12,M,0.000015000,0.999985000\n662688000922-694224000921,0-12,F,0.000013497,0.999986503\n662688000922-694224000921,13-24,M,0.000076000,0.999924000\n662688000922-694224000921,13-24,F,0.000011562,0.999988438\n662688000922-694224000921,25-34,M,0.000726000,0.999274000\n662688000922-694224000921,25-34,F,0.000106657,0.999893343\n662688000922-694224000921,35-44,M,0.000781000,0.999219000\n662688000922-694224000921,35-44,F,0.000106267,0.999893733\n662688000922-694224000921,45-54,M,0.000409000,0.999591000\n662688000922-694224000921,45-54,F,0.000054422,0.999945578\n662688000922-694224000921,55-150,M,0.000098000,0.999902000\n662688000922-694224000921,55-150,F,0.000010759,0.999989241\n694224000922-725846400921,0-12,M,0.000015410,0.999984590\n694224000922-725846400921,0-12,F,0.000016203,0.999983797\n694224000922-725846400921,13-24,M,0.000055079,0.999944921\n694224000922-725846400921,13-24,F,0.000020520,0.999979480\n694224000922-725846400921,25-34,M,0.000755041,0.999244959\n694224000922-725846400921,25-34,F,0.000118072,0.999881928\n694224000922-725846400921,35-44,M,0.000750870,0.999249130\n694224000922-725846400921,35-44,F,0.000114656,0.999885344\n694224000922-725846400921,45-54,M,0.000378879,0.999621121\n694224000922-725846400921,45-54,F,0.000056408,0.999943592\n694224000922-725846400921,55-150,M,0.000099107,0.999900893\n694224000922-725846400921,55-150,F,0.000011711,0.999988289\n725846400922-757382400921,0-12,M,0.000018448,0.999981552\n725846400922-757382400921,0-12,F,0.000021000,0.999979000\n725846400922-757382400921,13-24,M,0.000140875,0.999859125\n725846400922-757382400921,13-24,F,0.000019351,0.999980649\n725846400922-757382400921,25-34,M,0.001629529,0.998370471\n725846400922-757382400921,25-34,F,0.000061553,0.999938447\n725846400922-757382400921,35-44,M,0.001644479,0.998355521\n725846400922-757382400921,35-44,F,0.000310264,0.999689736\n725846400922-757382400921,45-54,M,0.000807996,0.999192004\n725846400922-757382400921,45-54,F,0.000305534,0.999694466\n725846400922-757382400921,55-150,M,0.000211807,0.999788193\n725846400922-757382400921,55-150,F,0.000146334,0.999853666\n757382400922-788918400921,0-12,M,0.000019731,0.999980269\n757382400922-788918400921,0-12,F,0.000021347,0.999978653\n757382400922-788918400921,13-24,M,0.000076000,0.999924000\n757382400922-788918400921,13-24,F,0.000043000,0.999957000\n757382400922-788918400921,25-29,M,0.000696000,0.999304000\n757382400922-788918400921,25-29,F,0.000207000,0.999793000\n757382400922-788918400921,30-34,M,0.001191000,0.998809000\n757382400922-788918400921,30-34,F,0.000268000,0.999732000\n757382400922-788918400921,35-39,M,0.001209000,0.998791000\n757382400922-788918400921,35-39,F,0.000257000,0.999743000\n757382400922-788918400921,40-44,M,0.001069000,0.998931000\n757382400922-788918400921,40-44,F,0.000204000,0.999796000\n757382400922-788918400921,45-49,M,0.000727000,0.999273000\n757382400922-788918400921,45-49,F,0.000121000,0.999879000\n757382400922-788918400921,50-54,M,0.000484000,0.999516000\n757382400922-788918400921,50-54,F,0.000074000,0.999926000\n757382400922-788918400921,55-59,M,0.000307000,0.999693000\n757382400922-788918400921,55-59,F,0.000053000,0.999947000\n757382400922-788918400921,60-64,M,0.000190000,0.999810000\n757382400922-788918400921,60-64,F,0.000030000,0.999970000\n757382400922-788918400921,65-69,M,0.000087000,0.999913000\n757382400922-788918400921,65-69,F,0.000016000,0.999984000\n757382400922-788918400921,70-150,M,0.000029000,0.999971000\n757382400922-788918400921,70-150,F,0.000005000,0.999995000\n788918400922-820454400921,0-12,M,0.000014871,0.999985129\n788918400922-820454400921,0-12,F,0.000016734,0.999983266\n788918400922-820454400921,13-24,M,0.000069000,0.999931000\n788918400922-820454400921,13-24,F,0.000044000,0.999956000\n788918400922-820454400921,25-29,M,0.000635000,0.999365000\n788918400922-820454400921,25-29,F,0.000205000,0.999795000\n788918400922-820454400921,30-34,M,0.001105000,0.998895000\n788918400922-820454400921,30-34,F,0.000271000,0.999729000\n788918400922-820454400921,35-39,M,0.001111000,0.998889000\n788918400922-820454400921,35-39,F,0.000267000,0.999733000\n788918400922-820454400921,40-44,M,0.000987000,0.999013000\n788918400922-820454400921,40-44,F,0.000212000,0.999788000\n788918400922-820454400921,45-49,M,0.000693000,0.999307000\n788918400922-820454400921,45-49,F,0.000119000,0.999881000\n788918400922-820454400921,50-54,M,0.000458000,0.999542000\n788918400922-820454400921,50-54,F,0.000076000,0.999924000\n788918400922-820454400921,55-59,M,0.000292000,0.999708000\n788918400922-820454400921,55-59,F,0.000049000,0.999951000\n788918400922-820454400921,60-64,M,0.000184000,0.999816000\n788918400922-820454400921,60-64,F,0.000030000,0.999970000\n788918400922-820454400921,65-69,M,0.000092000,0.999908000\n788918400922-820454400921,65-69,F,0.000018000,0.999982000\n788918400922-820454400921,70-150,M,0.000026000,0.999974000\n788918400922-820454400921,70-150,F,0.000005000,0.999995000\n820454400922-852076800921,0-12,M,0.000013040,0.999986960\n820454400922-852076800921,0-12,F,0.000013239,0.999986761\n820454400922-852076800921,13-24,M,0.000056000,0.999944000\n820454400922-852076800921,13-24,F,0.000042000,0.999958000\n820454400922-852076800921,25-29,M,0.000497000,0.999503000\n820454400922-852076800921,25-29,F,0.000185000,0.999815000\n820454400922-852076800921,30-34,M,0.000948000,0.999052000\n820454400922-852076800921,30-34,F,0.000261000,0.999739000\n820454400922-852076800921,35-39,M,0.000949000,0.999051000\n820454400922-852076800921,35-39,F,0.000252000,0.999748000\n820454400922-852076800921,40-44,M,0.000828000,0.999172000\n820454400922-852076800921,40-44,F,0.000197000,0.999803000\n820454400922-852076800921,45-49,M,0.000597000,0.999403000\n820454400922-852076800921,45-49,F,0.000124000,0.999876000\n820454400922-852076800921,50-54,M,0.000398000,0.999602000\n820454400922-852076800921,50-54,F,0.000077000,0.999923000\n820454400922-852076800921,55-59,M,0.000259000,0.999741000\n820454400922-852076800921,55-59,F,0.000051000,0.999949000\n820454400922-852076800921,60-64,M,0.000154000,0.999846000\n820454400922-852076800921,60-64,F,0.000029000,0.999971000\n820454400922-852076800921,65-69,M,0.000086000,0.999914000\n820454400922-852076800921,65-69,F,0.000016000,0.999984000\n820454400922-852076800921,70-150,M,0.000029000,0.999971000\n820454400922-852076800921,70-150,F,0.000005000,0.999995000\n852076800922-883612800921,0-12,M,0.000009721,0.999990279\n852076800922-883612800921,0-12,F,0.000008646,0.999991354\n852076800922-883612800921,13-24,M,0.000045000,0.999955000\n852076800922-883612800921,13-24,F,0.000034000,0.999966000\n852076800922-883612800921,25-29,M,0.000386000,0.999614000\n852076800922-883612800921,25-29,F,0.000155000,0.999845000\n852076800922-883612800921,30-34,M,0.000750000,0.999250000\n852076800922-883612800921,30-34,F,0.000219000,0.999781000\n852076800922-883612800921,35-39,M,0.000739000,0.999261000\n852076800922-883612800921,35-39,F,0.000217000,0.999783000\n852076800922-883612800921,40-44,M,0.000645000,0.999355000\n852076800922-883612800921,40-44,F,0.000174000,0.999826000\n852076800922-883612800921,45-49,M,0.000493000,0.999507000\n852076800922-883612800921,45-49,F,0.000115000,0.999885000\n852076800922-883612800921,50-54,M,0.000313000,0.999687000\n852076800922-883612800921,50-54,F,0.000067000,0.999933000\n852076800922-883612800921,55-59,M,0.000217000,0.999783000\n852076800922-883612800921,55-59,F,0.000044000,0.999956000\n852076800922-883612800921,60-64,M,0.000137000,0.999863000\n852076800922-883612800921,60-64,F,0.000031000,0.999969000\n852076800922-883612800921,65-69,M,0.000080000,0.999920000\n852076800922-883612800921,65-69,F,0.000016000,0.999984000\n852076800922-883612800921,70-150,M,0.000024000,0.999976000\n852076800922-883612800921,70-150,F,0.000006000,0.999994000\n883612800922-915148800921,0-12,M,0.000007172,0.999992828\n883612800922-915148800921,0-12,F,0.000007604,0.999992396\n883612800922-915148800921,13-24,M,0.000038000,0.999962000\n883612800922-915148800921,13-24,F,0.000033000,0.999967000\n883612800922-915148800921,25-29,M,0.000309000,0.999691000\n883612800922-915148800921,25-29,F,0.000129000,0.999871000\n883612800922-915148800921,30-34,M,0.000618000,0.999382000\n883612800922-915148800921,30-34,F,0.000190000,0.999810000\n883612800922-915148800921,35-39,M,0.000649000,0.999351000\n883612800922-915148800921,35-39,F,0.000189000,0.999811000\n883612800922-915148800921,40-44,M,0.000537000,0.999463000\n883612800922-915148800921,40-44,F,0.000156000,0.999844000\n883612800922-915148800921,45-49,M,0.000434000,0.999566000\n883612800922-915148800921,45-49,F,0.000103000,0.999897000\n883612800922-915148800921,50-54,M,0.000284000,0.999716000\n883612800922-915148800921,50-54,F,0.000066000,0.999934000\n883612800922-915148800921,55-59,M,0.000185000,0.999815000\n883612800922-915148800921,55-59,F,0.000044000,0.999956000\n883612800922-915148800921,60-64,M,0.000123000,0.999877000\n883612800922-915148800921,60-64,F,0.000028000,0.999972000\n883612800922-915148800921,65-69,M,0.000069000,0.999931000\n883612800922-915148800921,65-69,F,0.000017000,0.999983000\n883612800922-915148800921,70-150,M,0.000024000,0.999976000\n883612800922-915148800921,70-150,F,0.000006000,0.999994000\n915148800922-946684800921,0-12,M,0.000004689,0.999995311\n915148800922-946684800921,0-12,F,0.000005431,0.999994569\n915148800922-946684800921,13-24,M,0.000038000,0.999962000\n915148800922-946684800921,13-24,F,0.000029000,0.999971000\n915148800922-946684800921,25-29,M,0.000282000,0.999718000\n915148800922-946684800921,25-29,F,0.000131000,0.999869000\n915148800922-946684800921,30-34,M,0.000557000,0.999443000\n915148800922-946684800921,30-34,F,0.000179000,0.999821000\n915148800922-946684800921,35-39,M,0.000624000,0.999376000\n915148800922-946684800921,35-39,F,0.000184000,0.999816000\n915148800922-946684800921,40-44,M,0.000528000,0.999472000\n915148800922-946684800921,40-44,F,0.000150000,0.999850000\n915148800922-946684800921,45-49,M,0.000419000,0.999581000\n915148800922-946684800921,45-49,F,0.000107000,0.999893000\n915148800922-946684800921,50-54,M,0.000270000,0.999730000\n915148800922-946684800921,50-54,F,0.000067000,0.999933000\n915148800922-946684800921,55-59,M,0.000180000,0.999820000\n915148800922-946684800921,55-59,F,0.000044000,0.999956000\n915148800922-946684800921,60-64,M,0.000117000,0.999883000\n915148800922-946684800921,60-64,F,0.000028000,0.999972000\n915148800922-946684800921,65-69,M,0.000070000,0.999930000\n915148800922-946684800921,65-69,F,0.000020000,0.999980000\n915148800922-946684800921,70-150,M,0.000024000,0.999976000\n915148800922-946684800921,70-150,F,0.000005000,0.999995000\n946684800922-978307200921,0-12,M,0.000003256,0.999996744\n946684800922-978307200921,0-12,F,0.000004279,0.999995721\n946684800922-978307200921,13-24,M,0.000040000,0.999960000\n946684800922-978307200921,13-24,F,0.000031000,0.999969000\n946684800922-978307200921,25-34,M,0.000340000,0.999660000\n946684800922-978307200921,25-34,F,0.000147000,0.999853000\n946684800922-978307200921,35-44,M,0.000534000,0.999466000\n946684800922-978307200921,35-44,F,0.000171000,0.999829000\n946684800922-978307200921,45-54,M,0.000330000,0.999670000\n946684800922-978307200921,45-54,F,0.000093000,0.999907000\n946684800922-978307200921,55-150,M,0.000087000,0.999913000\n946684800922-978307200921,55-150,F,0.000021000,0.999979000\n978307200922-1009843200921,0-12,M,0.000003476,0.999996524\n978307200922-1009843200921,0-12,F,0.000003213,0.999996787\n978307200922-1009843200921,13-24,M,0.000040000,0.999960000\n978307200922-1009843200921,13-24,F,0.000029000,0.999971000\n978307200922-1009843200921,25-34,M,0.000313000,0.999687000\n978307200922-1009843200921,25-34,F,0.000138000,0.999862000\n978307200922-1009843200921,35-44,M,0.000507000,0.999493000\n978307200922-1009843200921,35-44,F,0.000166000,0.999834000\n978307200922-1009843200921,45-54,M,0.000321000,0.999679000\n978307200922-1009843200921,45-54,F,0.000095000,0.999905000\n978307200922-1009843200921,55-150,M,0.000087000,0.999913000\n978307200922-1009843200921,55-150,F,0.000019000,0.999981000\n1009843200922-1041379200921,0-12,M,0.000001572,0.999998428\n1009843200922-1041379200921,0-12,F,0.000001647,0.999998353\n1009843200922-1041379200921,13-24,M,0.000043000,0.999957000\n1009843200922-1041379200921,13-24,F,0.000030000,0.999970000\n1009843200922-1041379200921,25-34,M,0.000296000,0.999704000\n1009843200922-1041379200921,25-34,F,0.000132000,0.999868000\n1009843200922-1041379200921,35-44,M,0.000508000,0.999492000\n1009843200922-1041379200921,35-44,F,0.000162000,0.999838000\n1009843200922-1041379200921,45-54,M,0.000322000,0.999678000\n1009843200922-1041379200921,45-54,F,0.000099000,0.999901000\n1009843200922-1041379200921,55-150,M,0.000085000,0.999915000\n1009843200922-1041379200921,55-150,F,0.000022000,0.999978000\n1041379200922-1072915200921,0-12,M,0.000001353,0.999998647\n1041379200922-1072915200921,0-12,F,0.000001417,0.999998583\n1041379200922-1072915200921,13-24,M,0.000049000,0.999951000\n1041379200922-1072915200921,13-24,F,0.000029000,0.999971000\n1041379200922-1072915200921,25-34,M,0.000287000,0.999713000\n1041379200922-1072915200921,25-34,F,0.000133000,0.999867000\n1041379200922-1072915200921,35-44,M,0.000507000,0.999493000\n1041379200922-1072915200921,35-44,F,0.000175000,0.999825000\n1041379200922-1072915200921,45-54,M,0.000328000,0.999672000\n1041379200922-1072915200921,45-54,F,0.000102000,0.999898000\n1041379200922-1072915200921,55-150,M,0.000086000,0.999914000\n1041379200922-1072915200921,55-150,F,0.000023000,0.999977000\n1072915200922-1104537600921,0-12,M,0.000001017,0.999998983\n1072915200922-1104537600921,0-12,F,0.000001065,0.999998935\n1072915200922-1104537600921,13-24,M,0.000053000,0.999947000\n1072915200922-1104537600921,13-24,F,0.000027000,0.999973000\n1072915200922-1104537600921,25-34,M,0.000282000,0.999718000\n1072915200922-1104537600921,25-34,F,0.000123000,0.999877000\n1072915200922-1104537600921,35-44,M,0.000478000,0.999522000\n1072915200922-1104537600921,35-44,F,0.000163000,0.999837000\n1072915200922-1104537600921,45-54,M,0.000315000,0.999685000\n1072915200922-1104537600921,45-54,F,0.000104000,0.999896000\n1072915200922-1104537600921,55-150,M,0.000089000,0.999911000\n1072915200922-1104537600921,55-150,F,0.000023000,0.999977000\n1104537600922-1136073600921,0-12,M,0.000001018,0.999998982\n1104537600922-1136073600921,0-12,F,0.000001066,0.999998934\n1104537600922-1136073600921,13-24,M,0.000055000,0.999945000\n1104537600922-1136073600921,13-24,F,0.000027000,0.999973000\n1104537600922-1136073600921,25-34,M,0.000257000,0.999743000\n1104537600922-1136073600921,25-34,F,0.000112000,0.999888000\n1104537600922-1136073600921,35-44,M,0.000440000,0.999560000\n1104537600922-1136073600921,35-44,F,0.000150000,0.999850000\n1104537600922-1136073600921,45-54,M,0.000308000,0.999692000\n1104537600922-1136073600921,45-54,F,0.000101000,0.999899000\n1104537600922-1136073600921,55-150,M,0.000083000,0.999917000\n1104537600922-1136073600921,55-150,F,0.000023000,0.999977000\n1136073600922-1167609600921,0-12,M,0.000000715,0.999999285\n1136073600922-1167609600921,0-12,F,0.000000748,0.999999252\n1136073600922-1167609600921,13-24,M,0.000053000,0.999947000\n1136073600922-1167609600921,13-24,F,0.000024000,0.999976000\n1136073600922-1167609600921,25-34,M,0.000243000,0.999757000\n1136073600922-1167609600921,25-34,F,0.000104000,0.999896000\n1136073600922-1167609600921,35-44,M,0.000416000,0.999584000\n1136073600922-1167609600921,35-44,F,0.000141000,0.999859000\n1136073600922-1167609600921,45-54,M,0.000285000,0.999715000\n1136073600922-1167609600921,45-54,F,0.000100000,0.999900000\n1136073600922-1167609600921,55-150,M,0.000085000,0.999915000\n1136073600922-1167609600921,55-150,F,0.000024000,0.999976000\n1167609600922-1199145600921,0-12,M,0.000000525,0.999999475\n1167609600922-1199145600921,0-12,F,0.000000549,0.999999451\n1167609600922-1199145600921,13-24,M,0.000062000,0.999938000\n1167609600922-1199145600921,13-24,F,0.000024000,0.999976000\n1167609600922-1199145600921,25-34,M,0.000239000,0.999761000\n1167609600922-1199145600921,25-34,F,0.000097000,0.999903000\n1167609600922-1199145600921,35-44,M,0.000379000,0.999621000\n1167609600922-1199145600921,35-44,F,0.000138000,0.999862000\n1167609600922-1199145600921,45-54,M,0.000285000,0.999715000\n1167609600922-1199145600921,45-54,F,0.000098000,0.999902000\n1167609600922-1199145600921,55-150,M,0.000078000,0.999922000\n1167609600922-1199145600921,55-150,F,0.000025000,0.999975000\n1199145600922-1230768000921,0-12,M,0.000000559,0.999999441\n1199145600922-1230768000921,0-12,F,0.000000584,0.999999416\n1199145600922-1230768000921,13-24,M,0.000065000,0.999935000\n1199145600922-1230768000921,13-24,F,0.000022000,0.999978000\n1199145600922-1230768000921,25-34,M,0.000238000,0.999762000\n1199145600922-1230768000921,25-34,F,0.000096000,0.999904000\n1199145600922-1230768000921,35-44,M,0.000360000,0.999640000\n1199145600922-1230768000921,35-44,F,0.000129000,0.999871000\n1199145600922-1230768000921,45-54,M,0.000280000,0.999720000\n1199145600922-1230768000921,45-54,F,0.000095000,0.999905000\n1199145600922-1230768000921,55-150,M,0.000083000,0.999917000\n1199145600922-1230768000921,55-150,F,0.000024000,0.999976000\n1230768000922-1262304000921,0-12,M,0.000000186,0.999999814\n1230768000922-1262304000921,0-12,F,0.000000194,0.999999806\n1230768000922-1262304000921,13-24,M,0.000072000,0.999928000\n1230768000922-1262304000921,13-24,F,0.000022000,0.999978000\n1230768000922-1262304000921,25-34,M,0.000237000,0.999763000\n1230768000922-1262304000921,25-34,F,0.000084000,0.999916000\n1230768000922-1262304000921,35-44,M,0.000323000,0.999677000\n1230768000922-1262304000921,35-44,F,0.000118000,0.999882000\n1230768000922-1262304000921,45-54,M,0.000279000,0.999721000\n1230768000922-1262304000921,45-54,F,0.000091000,0.999909000\n1230768000922-1262304000921,55-150,M,0.000079000,0.999921000\n1230768000922-1262304000921,55-150,F,0.000024000,0.999976000\n1262304000922-1293840000921,0-12,M,0.000000369,0.999999631\n1262304000922-1293840000921,0-12,F,0.000000386,0.999999614\n1262304000922-1293840000921,13-24,M,0.000076000,0.999924000\n1262304000922-1293840000921,13-24,F,0.000019000,0.999981000\n1262304000922-1293840000921,25-34,M,0.000226000,0.999774000\n1262304000922-1293840000921,25-34,F,0.000072000,0.999928000\n1262304000922-1293840000921,35-44,M,0.000285000,0.999715000\n1262304000922-1293840000921,35-44,F,0.000105000,0.999895000\n1262304000922-1293840000921,45-54,M,0.000249000,0.999751000\n1262304000922-1293840000921,45-54,F,0.000081000,0.999919000\n1262304000922-1293840000921,55-150,M,0.000072000,0.999928000\n1262304000922-1293840000921,55-150,F,0.000021000,0.999979000\n1293840000922-1325376000921,0-12,M,0.000000296,0.999999704\n1293840000922-1325376000921,0-12,F,0.000000309,0.999999691\n1293840000922-1325376000921,13-24,M,0.000074000,0.999926000\n1293840000922-1325376000921,13-24,F,0.000019000,0.999981000\n1293840000922-1325376000921,25-34,M,0.000214000,0.999786000\n1293840000922-1325376000921,25-34,F,0.000069000,0.999931000\n1293840000922-1325376000921,35-44,M,0.000253000,0.999747000\n1293840000922-1325376000921,35-44,F,0.000090000,0.999910000\n1293840000922-1325376000921,45-54,M,0.000231000,0.999769000\n1293840000922-1325376000921,45-54,F,0.000076000,0.999924000\n1293840000922-1325376000921,55-150,M,0.000069000,0.999931000\n1293840000922-1325376000921,55-150,F,0.000021000,0.999979000\n1325376000922-1356998400921,0-12,M,0.000000185,0.999999815\n1325376000922-1356998400921,0-12,F,0.000000193,0.999999807\n1325376000922-1356998400921,13-24,M,0.000072000,0.999928000\n1325376000922-1356998400921,13-24,F,0.000014000,0.999986000\n1325376000922-1356998400921,25-34,M,0.000219000,0.999781000\n1325376000922-1356998400921,25-34,F,0.000063000,0.999937000\n1325376000922-1356998400921,35-44,M,0.000228000,0.999772000\n1325376000922-1356998400921,35-44,F,0.000087000,0.999913000\n1325376000922-1356998400921,45-54,M,0.000224000,0.999776000\n1325376000922-1356998400921,45-54,F,0.000073000,0.999927000\n1325376000922-1356998400921,55-150,M,0.000067000,0.999933000\n1325376000922-1356998400921,55-150,F,0.000022000,0.999978000\n1356998400922-1388534400921,0-12,M,0.000000149,0.999999851\n1356998400922-1388534400921,0-12,F,0.000000155,0.999999845\n1356998400922-1388534400921,13-24,M,0.000075000,0.999925000\n1356998400922-1388534400921,13-24,F,0.000017000,0.999983000\n1356998400922-1388534400921,25-34,M,0.000211000,0.999789000\n1356998400922-1388534400921,25-34,F,0.000054000,0.999946000\n1356998400922-1388534400921,35-44,M,0.000214000,0.999786000\n1356998400922-1388534400921,35-44,F,0.000077000,0.999923000\n1356998400922-1388534400921,45-54,M,0.000209000,0.999791000\n1356998400922-1388534400921,45-54,F,0.000070000,0.999930000\n1356998400922-1388534400921,55-150,M,0.000067000,0.999933000\n1356998400922-1388534400921,55-150,F,0.000021000,0.999979000\n1388534400922-1420070400921,0-12,M,0.000001302,0.999998698\n1388534400922-1420070400921,0-12,F,0.000001359,0.999998641\n1388534400922-1420070400921,13-24,M,0.000048000,0.999952000\n1388534400922-1420070400921,13-24,F,0.000011000,0.999989000\n1388534400922-1420070400921,25-34,M,0.000173000,0.999827000\n1388534400922-1420070400921,25-34,F,0.000045000,0.999955000\n1388534400922-1420070400921,35-44,M,0.000174000,0.999826000\n1388534400922-1420070400921,35-44,F,0.000067000,0.999933000\n1388534400922-1420070400921,45-54,M,0.000173000,0.999827000\n1388534400922-1420070400921,45-54,F,0.000057000,0.999943000\n1388534400922-1420070400921,55-150,M,0.000058000,0.999942000\n1388534400922-1420070400921,55-150,F,0.000018000,0.999982000\n1420070400922-1451606400921,0-12,M,0.000000775,0.999999225\n1420070400922-1451606400921,0-12,F,0.000000742,0.999999258\n1420070400922-1451606400921,13-24,M,0.000047000,0.999953000\n1420070400922-1451606400921,13-24,F,0.000010000,0.999990000\n1420070400922-1451606400921,25-34,M,0.000174000,0.999826000\n1420070400922-1451606400921,25-34,F,0.000044000,0.999956000\n1420070400922-1451606400921,35-44,M,0.000161000,0.999839000\n1420070400922-1451606400921,35-44,F,0.000062000,0.999938000\n1420070400922-1451606400921,45-54,M,0.000165000,0.999835000\n1420070400922-1451606400921,45-54,F,0.000055000,0.999945000\n1420070400922-1451606400921,55-150,M,0.000055000,0.999945000\n1420070400922-1451606400921,55-150,F,0.000018000,0.999982000\n1451606400922-1483228800921,0-12,M,0.000000705,0.999999295\n1451606400922-1483228800921,0-12,F,0.000000736,0.999999264\n1451606400922-1483228800921,13-24,M,0.000046000,0.999954000\n1451606400922-1483228800921,13-24,F,0.000011000,0.999989000\n1451606400922-1483228800921,25-34,M,0.000176000,0.999824000\n1451606400922-1483228800921,25-34,F,0.000040000,0.999960000\n1451606400922-1483228800921,35-44,M,0.000159000,0.999841000\n1451606400922-1483228800921,35-44,F,0.000060000,0.999940000\n1451606400922-1483228800921,45-54,M,0.000157000,0.999843000\n1451606400922-1483228800921,45-54,F,0.000049000,0.999951000\n1451606400922-1483228800921,55-150,M,0.000056000,0.999944000\n1451606400922-1483228800921,55-150,F,0.000018000,0.999982000\n1483228800922-1514764800921,0-12,M,0.000000660,0.999999340\n1483228800922-1514764800921,0-12,F,0.000000631,0.999999369\n1483228800922-1514764800921,13-24,M,0.000043000,0.999957000\n1483228800922-1514764800921,13-24,F,0.000009000,0.999991000\n1483228800922-1514764800921,25-34,M,0.000170000,0.999830000\n1483228800922-1514764800921,25-34,F,0.000039000,0.999961000\n1483228800922-1514764800921,35-44,M,0.000147000,0.999853000\n1483228800922-1514764800921,35-44,F,0.000057000,0.999943000\n1483228800922-1514764800921,45-54,M,0.000145000,0.999855000\n1483228800922-1514764800921,45-54,F,0.000051000,0.999949000\n1483228800922-1514764800921,55-150,M,0.000057000,0.999943000\n1483228800922-1514764800921,55-150,F,0.000018000,0.999982000\n1514764800922-1546300800921,0-12,M,0.000000783,0.999999217\n1514764800922-1546300800921,0-12,F,0.000000818,0.999999182\n1514764800922-1546300800921,13-24,M,0.000041000,0.999959000\n1514764800922-1546300800921,13-24,F,0.000008000,0.999992000\n1514764800922-1546300800921,25-34,M,0.000170000,0.999830000\n1514764800922-1546300800921,25-34,F,0.000036000,0.999964000\n1514764800922-1546300800921,35-44,M,0.000144000,0.999856000\n1514764800922-1546300800921,35-44,F,0.000053000,0.999947000\n1514764800922-1546300800921,45-54,M,0.000136000,0.999864000\n1514764800922-1546300800921,45-54,F,0.000051000,0.999949000\n1514764800922-1546300800921,55-150,M,0.000053000,0.999947000\n1514764800922-1546300800921,55-150,F,0.000018000,0.999982000\n1546300800922-1577836800921,0-12,M,0.000000787,0.999999213\n1546300800922-1577836800921,0-12,F,0.000000822,0.999999178\n1546300800922-1577836800921,13-24,M,0.000035000,0.999965000\n1546300800922-1577836800921,13-24,F,0.000007000,0.999993000\n1546300800922-1577836800921,25-34,M,0.000167000,0.999833000\n1546300800922-1577836800921,25-34,F,0.000032000,0.999968000\n1546300800922-1577836800921,35-44,M,0.000139000,0.999861000\n1546300800922-1577836800921,35-44,F,0.000052000,0.999948000\n1546300800922-1577836800921,45-54,M,0.000120000,0.999880000\n1546300800922-1577836800921,45-54,F,0.000043000,0.999957000\n1546300800922-1577836800921,55-150,M,0.000055000,0.999945000\n1546300800922-1577836800921,55-150,F,0.000018000,0.999982000\n"
+      }
+    },
+    "Diagnosis Check Later Years": {
+      "type": "Simple",
+      "lookup_table_transition": {
+        "transitions": [
+          {
+            "transition": "Diagnosed_Later_Years",
+            "default_probability": 0.000097,
+            "lookup_table_name": "hiv_diagnosis_later.csv"
+          },
+          {
+            "transition": "Wait_Until_Next_Diagnosis_Check",
+            "default_probability": 0.999903,
+            "lookup_table_name": "hiv_diagnosis_later.csv"
+          }
+        ],
+        "viewTable": false,
+        "lookup_table_name_ModuleBuilder": "hiv_diagnosis_later.csv",
+        "lookuptable": "time,age,gender,Diagnosed_Later_Years,Wait_Until_Next_Diagnosis_Check\n725846400922-757382400921,0-12,M,0.0000174,0.9999826\n725846400922-757382400921,0-12,F,0.0000143,0.9999857\n725846400922-757382400921,13-24,M,0.0003384,0.9996616\n725846400922-757382400921,13-24,F,0.0001386,0.9998614\n725846400922-757382400921,25-34,M,0.0009872,0.9990128\n725846400922-757382400921,25-34,F,0.0002496,0.9997504\n725846400922-757382400921,35-44,M,0.0005518,0.9994482\n725846400922-757382400921,35-44,F,0.0001134,0.9998866\n725846400922-757382400921,45-54,M,0.0001893,0.9998107\n725846400922-757382400921,45-54,F,0.0000308,0.9999692\n725846400922-757382400921,55-150,M,0.0000344,0.9999656\n725846400922-757382400921,55-150,F,0.0000081,0.9999919\n757382400922-788918400921,0-12,M,0.0000095,0.9999905\n757382400922-788918400921,0-12,F,0.0000099,0.9999901\n757382400922-788918400921,13-24,M,0.0000778,0.9999222\n757382400922-788918400921,13-24,F,0.0000484,0.9999516\n757382400922-788918400921,25-34,M,0.0003110,0.9996890\n757382400922-788918400921,25-34,F,0.0001104,0.9998896\n757382400922-788918400921,35-44,M,0.0001790,0.9998210\n757382400922-788918400921,35-44,F,0.0000534,0.9999466\n757382400922-788918400921,45-54,M,0.0000605,0.9999395\n757382400922-788918400921,45-54,F,0.0000145,0.9999855\n757382400922-788918400921,55-150,M,0.0000112,0.9999888\n757382400922-788918400921,55-150,F,0.0000036,0.9999964\n788918400922-820454400921,0-12,M,0.0000066,0.9999934\n788918400922-820454400921,0-12,F,0.0000069,0.9999931\n788918400922-820454400921,13-24,M,0.0000648,0.9999352\n788918400922-820454400921,13-24,F,0.0000453,0.9999547\n788918400922-820454400921,25-34,M,0.0002470,0.9997530\n788918400922-820454400921,25-34,F,0.0000929,0.9999071\n788918400922-820454400921,35-44,M,0.0001411,0.9998589\n788918400922-820454400921,35-44,F,0.0000448,0.9999552\n788918400922-820454400921,45-54,M,0.0000481,0.9999519\n788918400922-820454400921,45-54,F,0.0000130,0.9999870\n788918400922-820454400921,55-150,M,0.0000092,0.9999908\n788918400922-820454400921,55-150,F,0.0000028,0.9999972\n820454400922-852076800921,0-12,M,0.0000051,0.9999949\n820454400922-852076800921,0-12,F,0.0000053,0.9999947\n820454400922-852076800921,13-24,M,0.0000541,0.9999459\n820454400922-852076800921,13-24,F,0.0000455,0.9999545\n820454400922-852076800921,25-34,M,0.0002205,0.9997795\n820454400922-852076800921,25-34,F,0.0000855,0.9999145\n820454400922-852076800921,35-44,M,0.0001256,0.9998744\n820454400922-852076800921,35-44,F,0.0000418,0.9999582\n820454400922-852076800921,45-54,M,0.0000440,0.9999560\n820454400922-852076800921,45-54,F,0.0000125,0.9999875\n820454400922-852076800921,55-150,M,0.0000086,0.9999914\n820454400922-852076800921,55-150,F,0.0000025,0.9999975\n852076800922-883612800921,0-12,M,0.0000049,0.9999951\n852076800922-883612800921,0-12,F,0.0000051,0.9999949\n852076800922-883612800921,13-24,M,0.0000498,0.9999502\n852076800922-883612800921,13-24,F,0.0000467,0.9999533\n852076800922-883612800921,25-34,M,0.0002305,0.9997695\n852076800922-883612800921,25-34,F,0.0000936,0.9999064\n852076800922-883612800921,35-44,M,0.0001327,0.9998673\n852076800922-883612800921,35-44,F,0.0000474,0.9999526\n852076800922-883612800921,45-54,M,0.0000475,0.9999525\n852076800922-883612800921,45-54,F,0.0000146,0.9999854\n852076800922-883612800921,55-150,M,0.0000096,0.9999904\n852076800922-883612800921,55-150,F,0.0000029,0.9999971\n883612800922-915148800921,0-12,M,0.0000055,0.9999945\n883612800922-915148800921,0-12,F,0.0000064,0.9999936\n883612800922-915148800921,13-24,M,0.0000599,0.9999401\n883612800922-915148800921,13-24,F,0.0000580,0.9999420\n883612800922-915148800921,25-34,M,0.0002989,0.9997011\n883612800922-915148800921,25-34,F,0.0001307,0.9998693\n883612800922-915148800921,35-44,M,0.0001792,0.9998208\n883612800922-915148800921,35-44,F,0.0000679,0.9999321\n883612800922-915148800921,45-54,M,0.0000666,0.9999334\n883612800922-915148800921,45-54,F,0.0000228,0.9999772\n883612800922-915148800921,55-150,M,0.0000142,0.9999858\n883612800922-915148800921,55-150,F,0.0000050,0.9999950\n915148800922-946684800921,0-12,M,0.0000043,0.9999957\n915148800922-946684800921,0-12,F,0.0000046,0.9999954\n915148800922-946684800921,13-24,M,0.0000679,0.9999321\n915148800922-946684800921,13-24,F,0.0000689,0.9999311\n915148800922-946684800921,25-34,M,0.0003196,0.9996804\n915148800922-946684800921,25-34,F,0.0001434,0.9998566\n915148800922-946684800921,35-44,M,0.0001994,0.9998006\n915148800922-946684800921,35-44,F,0.0000765,0.9999235\n915148800922-946684800921,45-54,M,0.0000739,0.9999261\n915148800922-946684800921,45-54,F,0.0000267,0.9999733\n915148800922-946684800921,55-150,M,0.0000163,0.9999837\n915148800922-946684800921,55-150,F,0.0000057,0.9999943\n946684800922-978307200921,0-12,M,0.0000040,0.9999960\n946684800922-978307200921,0-12,F,0.0000046,0.9999954\n946684800922-978307200921,13-24,M,0.0000733,0.9999267\n946684800922-978307200921,13-24,F,0.0000687,0.9999313\n946684800922-978307200921,25-34,M,0.0003184,0.9996816\n946684800922-978307200921,25-34,F,0.0001381,0.9998619\n946684800922-978307200921,35-44,M,0.0002057,0.9997943\n946684800922-978307200921,35-44,F,0.0000764,0.9999236\n946684800922-978307200921,45-54,M,0.0000779,0.9999221\n946684800922-978307200921,45-54,F,0.0000273,0.9999727\n946684800922-978307200921,55-150,M,0.0000175,0.9999825\n946684800922-978307200921,55-150,F,0.0000058,0.9999942\n978307200922-1009843200921,0-12,M,0.0000105,0.9999895\n978307200922-1009843200921,0-12,F,0.0000102,0.9999898\n978307200922-1009843200921,13-24,M,0.0001017,0.9998983\n978307200922-1009843200921,13-24,F,0.0000862,0.9999138\n978307200922-1009843200921,25-34,M,0.0004931,0.9995069\n978307200922-1009843200921,25-34,F,0.0002286,0.9997714\n978307200922-1009843200921,35-44,M,0.0003534,0.9996466\n978307200922-1009843200921,35-44,F,0.0001400,0.9998600\n978307200922-1009843200921,45-54,M,0.0001435,0.9998565\n978307200922-1009843200921,45-54,F,0.0000544,0.9999456\n978307200922-1009843200921,55-150,M,0.0000325,0.9999675\n978307200922-1009843200921,55-150,F,0.0000109,0.9999891\n1009843200922-1041379200921,0-12,M,0.0000079,0.9999921\n1009843200922-1041379200921,0-12,F,0.0000082,0.9999918\n1009843200922-1041379200921,13-24,M,0.0001778,0.9998222\n1009843200922-1041379200921,13-24,F,0.0000720,0.9999280\n1009843200922-1041379200921,25-34,M,0.0003166,0.9996834\n1009843200922-1041379200921,25-34,F,0.0001503,0.9998497\n1009843200922-1041379200921,35-44,M,0.0002852,0.9997148\n1009843200922-1041379200921,35-44,F,0.0001299,0.9998701\n1009843200922-1041379200921,45-54,M,0.0002331,0.9997669\n1009843200922-1041379200921,45-54,F,0.0001166,0.9998834\n1009843200922-1041379200921,55-150,M,0.0000722,0.9999278\n1009843200922-1041379200921,55-150,F,0.0000321,0.9999679\n1041379200922-1072915200921,0-12,M,0.0000086,0.9999914\n1041379200922-1072915200921,0-12,F,0.0000090,0.9999910\n1041379200922-1072915200921,13-24,M,0.0001689,0.9998311\n1041379200922-1072915200921,13-24,F,0.0000640,0.9999360\n1041379200922-1072915200921,25-34,M,0.0003068,0.9996932\n1041379200922-1072915200921,25-34,F,0.0001361,0.9998639\n1041379200922-1072915200921,35-44,M,0.0002784,0.9997216\n1041379200922-1072915200921,35-44,F,0.0001188,0.9998812\n1041379200922-1072915200921,45-54,M,0.0002203,0.9997797\n1041379200922-1072915200921,45-54,F,0.0001034,0.9998966\n1041379200922-1072915200921,55-150,M,0.0000676,0.9999324\n1041379200922-1072915200921,55-150,F,0.0000284,0.9999716\n1072915200922-1104537600921,0-12,M,0.0000077,0.9999923\n1072915200922-1104537600921,0-12,F,0.0000089,0.9999911\n1072915200922-1104537600921,13-24,M,0.0001695,0.9998305\n1072915200922-1104537600921,13-24,F,0.0000624,0.9999376\n1072915200922-1104537600921,25-34,M,0.0003124,0.9996876\n1072915200922-1104537600921,25-34,F,0.0001342,0.9998658\n1072915200922-1104537600921,35-44,M,0.0002856,0.9997144\n1072915200922-1104537600921,35-44,F,0.0001182,0.9998818\n1072915200922-1104537600921,45-54,M,0.0002199,0.9997801\n1072915200922-1104537600921,45-54,F,0.0001001,0.9998999\n1072915200922-1104537600921,55-150,M,0.0000669,0.9999331\n1072915200922-1104537600921,55-150,F,0.0000274,0.9999726\n1104537600922-1136073600921,0-12,M,0.0000079,0.9999921\n1104537600922-1136073600921,0-12,F,0.0000087,0.9999913\n1104537600922-1136073600921,13-24,M,0.0001788,0.9998212\n1104537600922-1136073600921,13-24,F,0.0000651,0.9999349\n1104537600922-1136073600921,25-34,M,0.0003328,0.9996672\n1104537600922-1136073600921,25-34,F,0.0001408,0.9998592\n1104537600922-1136073600921,35-44,M,0.0003169,0.9996831\n1104537600922-1136073600921,35-44,F,0.0001251,0.9998749\n1104537600922-1136073600921,45-54,M,0.0002290,0.9997710\n1104537600922-1136073600921,45-54,F,0.0001031,0.9998969\n1104537600922-1136073600921,55-150,M,0.0000690,0.9999310\n1104537600922-1136073600921,55-150,F,0.0000281,0.9999719\n1136073600922-1167609600921,0-12,M,0.0000100,0.9999900\n1136073600922-1167609600921,0-12,F,0.0000118,0.9999882\n1136073600922-1167609600921,13-24,M,0.0002807,0.9997193\n1136073600922-1167609600921,13-24,F,0.0000825,0.9999175\n1136073600922-1167609600921,25-34,M,0.0005245,0.9994755\n1136073600922-1167609600921,25-34,F,0.0001787,0.9998213\n1136073600922-1167609600921,35-44,M,0.0004860,0.9995140\n1136073600922-1167609600921,35-44,F,0.0001605,0.9998395\n1136073600922-1167609600921,45-54,M,0.0003552,0.9996448\n1136073600922-1167609600921,45-54,F,0.0001290,0.9998710\n1136073600922-1167609600921,55-150,M,0.0001058,0.9998942\n1136073600922-1167609600921,55-150,F,0.0000350,0.9999650\n1167609600922-1199145600921,0-12,M,0.0000117,0.9999883\n1167609600922-1199145600921,0-12,F,0.0000135,0.9999865\n1167609600922-1199145600921,13-24,M,0.0003460,0.9996540\n1167609600922-1199145600921,13-24,F,0.0000883,0.9999117\n1167609600922-1199145600921,25-34,M,0.0006436,0.9993564\n1167609600922-1199145600921,25-34,F,0.0001907,0.9998093\n1167609600922-1199145600921,35-44,M,0.0006075,0.9993925\n1167609600922-1199145600921,35-44,F,0.0001744,0.9998256\n1167609600922-1199145600921,45-54,M,0.0004327,0.9995673\n1167609600922-1199145600921,45-54,F,0.0001367,0.9998633\n1167609600922-1199145600921,55-150,M,0.0001271,0.9998729\n1167609600922-1199145600921,55-150,F,0.0000367,0.9999633\n1199145600922-1230768000921,0-12,M,0.0000034,0.9999966\n1199145600922-1230768000921,0-12,F,0.0000035,0.9999965\n1199145600922-1230768000921,13-24,M,0.0001988,0.9998012\n1199145600922-1230768000921,13-24,F,0.0000214,0.9999786\n1199145600922-1230768000921,25-34,M,0.0002126,0.9997874\n1199145600922-1230768000921,25-34,F,0.0000845,0.9999155\n1199145600922-1230768000921,35-44,M,0.0000927,0.9999073\n1199145600922-1230768000921,35-44,F,0.0001167,0.9998833\n1199145600922-1230768000921,45-54,M,0.0000113,0.9999887\n1199145600922-1230768000921,45-54,F,0.0000908,0.9999092\n1199145600922-1230768000921,55-150,M,0.0000067,0.9999933\n1199145600922-1230768000921,55-150,F,0.0000235,0.9999765\n1230768000922-1262304000921,0-12,M,0.0000017,0.9999983\n1230768000922-1262304000921,0-12,F,0.0000017,0.9999983\n1230768000922-1262304000921,13-24,M,0.0001988,0.9998012\n1230768000922-1262304000921,13-24,F,0.0000214,0.9999786\n1230768000922-1262304000921,25-34,M,0.0002126,0.9997874\n1230768000922-1262304000921,25-34,F,0.0000845,0.9999155\n1230768000922-1262304000921,35-44,M,0.0000927,0.9999073\n1230768000922-1262304000921,35-44,F,0.0001167,0.9998833\n1230768000922-1262304000921,45-54,M,0.0000113,0.9999887\n1230768000922-1262304000921,45-54,F,0.0000908,0.9999092\n1230768000922-1262304000921,55-150,M,0.0000067,0.9999933\n1230768000922-1262304000921,55-150,F,0.0000235,0.9999765\n1262304000922-1293840000921,0-12,M,0.0000019,0.9999981\n1262304000922-1293840000921,0-12,F,0.0000019,0.9999981\n1262304000922-1293840000921,13-24,M,0.0002118,0.9997882\n1262304000922-1293840000921,13-24,F,0.0000395,0.9999605\n1262304000922-1293840000921,25-34,M,0.0002215,0.9997785\n1262304000922-1293840000921,25-34,F,0.0000458,0.9999542\n1262304000922-1293840000921,35-44,M,0.0000924,0.9999076\n1262304000922-1293840000921,35-44,F,0.0000112,0.9999888\n1262304000922-1293840000921,45-54,M,0.0000282,0.9999718\n1262304000922-1293840000921,45-54,F,0.0000090,0.9999910\n1262304000922-1293840000921,55-150,M,0.0000076,0.9999924\n1262304000922-1293840000921,55-150,F,0.0000046,0.9999954\n1293840000922-1325376000921,0-12,M,0.0000017,0.9999983\n1293840000922-1325376000921,0-12,F,0.0000017,0.9999983\n1293840000922-1325376000921,13-24,M,0.0002114,0.9997886\n1293840000922-1325376000921,13-24,F,0.0000373,0.9999627\n1293840000922-1325376000921,25-34,M,0.0002277,0.9997723\n1293840000922-1325376000921,25-34,F,0.0000365,0.9999635\n1293840000922-1325376000921,35-44,M,0.0000930,0.9999070\n1293840000922-1325376000921,35-44,F,0.0000114,0.9999886\n1293840000922-1325376000921,45-54,M,0.0000337,0.9999663\n1293840000922-1325376000921,45-54,F,0.0000090,0.9999910\n1293840000922-1325376000921,55-150,M,0.0000069,0.9999931\n1293840000922-1325376000921,55-150,F,0.0000030,0.9999970\n1325376000922-1356998400921,0-12,M,0.0000022,0.9999978\n1325376000922-1356998400921,0-12,F,0.0000022,0.9999978\n1325376000922-1356998400921,13-24,M,0.0002213,0.9997787\n1325376000922-1356998400921,13-24,F,0.0000334,0.9999666\n1325376000922-1356998400921,25-34,M,0.0002351,0.9997649\n1325376000922-1356998400921,25-34,F,0.0000378,0.9999622\n1325376000922-1356998400921,35-44,M,0.0000966,0.9999034\n1325376000922-1356998400921,35-44,F,0.0000076,0.9999924\n1325376000922-1356998400921,45-54,M,0.0000335,0.9999665\n1325376000922-1356998400921,45-54,F,0.0000056,0.9999944\n1325376000922-1356998400921,55-150,M,0.0000049,0.9999951\n1325376000922-1356998400921,55-150,F,0.0000016,0.9999984\n1356998400922-1388534400921,0-12,M,0.0000017,0.9999983\n1356998400922-1388534400921,0-12,F,0.0000017,0.9999983\n1356998400922-1388534400921,13-24,M,0.0002095,0.9997905\n1356998400922-1388534400921,13-24,F,0.0000269,0.9999731\n1356998400922-1388534400921,25-34,M,0.0002434,0.9997566\n1356998400922-1388534400921,25-34,F,0.0000383,0.9999617\n1356998400922-1388534400921,35-44,M,0.0000893,0.9999107\n1356998400922-1388534400921,35-44,F,0.0000091,0.9999909\n1356998400922-1388534400921,45-54,M,0.0000305,0.9999695\n1356998400922-1388534400921,45-54,F,0.0000054,0.9999946\n1356998400922-1388534400921,55-150,M,0.0000064,0.9999936\n1356998400922-1388534400921,55-150,F,0.0000025,0.9999975\n1388534400922-1420070400921,0-12,M,0.0000011,0.9999989\n1388534400922-1420070400921,0-12,F,0.0000011,0.9999989\n1388534400922-1420070400921,13-24,M,0.0002491,0.9997509\n1388534400922-1420070400921,13-24,F,0.0000348,0.9999652\n1388534400922-1420070400921,25-34,M,0.0003103,0.9996897\n1388534400922-1420070400921,25-34,F,0.0000477,0.9999523\n1388534400922-1420070400921,35-44,M,0.0001295,0.9998705\n1388534400922-1420070400921,35-44,F,0.0000243,0.9999757\n1388534400922-1420070400921,45-54,M,0.0000615,0.9999385\n1388534400922-1420070400921,45-54,F,0.0000096,0.9999904\n1388534400922-1420070400921,55-150,M,0.0000090,0.9999910\n1388534400922-1420070400921,55-150,F,0.0000044,0.9999956\n1420070400922-1451606400921,0-12,M,0.0000010,0.9999990\n1420070400922-1451606400921,0-12,F,0.0000010,0.9999990\n1420070400922-1451606400921,13-24,M,0.0002530,0.9997470\n1420070400922-1451606400921,13-24,F,0.0000325,0.9999675\n1420070400922-1451606400921,25-34,M,0.0003224,0.9996776\n1420070400922-1451606400921,25-34,F,0.0000458,0.9999542\n1420070400922-1451606400921,35-44,M,0.0001301,0.9998699\n1420070400922-1451606400921,35-44,F,0.0000249,0.9999751\n1420070400922-1451606400921,45-54,M,0.0000603,0.9999397\n1420070400922-1451606400921,45-54,F,0.0000140,0.9999860\n1420070400922-1451606400921,55-150,M,0.0000111,0.9999889\n1420070400922-1451606400921,55-150,F,0.0000045,0.9999955\n1451606400922-1483228800921,0-12,M,0.0000008,0.9999992\n1451606400922-1483228800921,0-12,F,0.0000008,0.9999992\n1451606400922-1483228800921,13-24,M,0.0002428,0.9997572\n1451606400922-1483228800921,13-24,F,0.0000289,0.9999711\n1451606400922-1483228800921,25-34,M,0.0003320,0.9996680\n1451606400922-1483228800921,25-34,F,0.0000542,0.9999458\n1451606400922-1483228800921,35-44,M,0.0001255,0.9998745\n1451606400922-1483228800921,35-44,F,0.0000251,0.9999749\n1451606400922-1483228800921,45-54,M,0.0000519,0.9999481\n1451606400922-1483228800921,45-54,F,0.0000203,0.9999797\n1451606400922-1483228800921,55-150,M,0.0000078,0.9999922\n1451606400922-1483228800921,55-150,F,0.0000061,0.9999939\n1483228800922-1514764800921,0-12,M,0.0000007,0.9999993\n1483228800922-1514764800921,0-12,F,0.0000007,0.9999993\n1483228800922-1514764800921,13-24,M,0.0002322,0.9997678\n1483228800922-1514764800921,13-24,F,0.0000318,0.9999682\n1483228800922-1514764800921,25-34,M,0.0003252,0.9996748\n1483228800922-1514764800921,25-34,F,0.0000500,0.9999500\n1483228800922-1514764800921,35-44,M,0.0001269,0.9998731\n1483228800922-1514764800921,35-44,F,0.0000244,0.9999756\n1483228800922-1514764800921,45-54,M,0.0000542,0.9999458\n1483228800922-1514764800921,45-54,F,0.0000151,0.9999849\n1483228800922-1514764800921,55-150,M,0.0000059,0.9999941\n1483228800922-1514764800921,55-150,F,0.0000056,0.9999944\n1514764800922-1546300800921,0-12,M,0.0000004,0.9999996\n1514764800922-1546300800921,0-12,F,0.0000004,0.9999996\n1514764800922-1546300800921,13-24,M,0.0002215,0.9997785\n1514764800922-1546300800921,13-24,F,0.0000307,0.9999693\n1514764800922-1546300800921,25-34,M,0.0003256,0.9996744\n1514764800922-1546300800921,25-34,F,0.0000486,0.9999514\n1514764800922-1546300800921,35-44,M,0.0001226,0.9998774\n1514764800922-1546300800921,35-44,F,0.0000300,0.9999700\n1514764800922-1546300800921,45-54,M,0.0000520,0.9999480\n1514764800922-1546300800921,45-54,F,0.0000148,0.9999852\n1514764800922-1546300800921,55-150,M,0.0000079,0.9999921\n1514764800922-1546300800921,55-150,F,0.0000037,0.9999963\n1546300800922-1577836800921,0-12,M,0.0000003,0.9999997\n1546300800922-1577836800921,0-12,F,0.0000003,0.9999997\n1546300800922-1577836800921,13-24,M,0.0002200,0.9997800\n1546300800922-1577836800921,13-24,F,0.0000304,0.9999696\n1546300800922-1577836800921,25-34,M,0.0003087,0.9996913\n1546300800922-1577836800921,25-34,F,0.0000524,0.9999476\n1546300800922-1577836800921,35-44,M,0.0001222,0.9998778\n1546300800922-1577836800921,35-44,F,0.0000270,0.9999730\n1546300800922-1577836800921,45-54,M,0.0000565,0.9999435\n1546300800922-1577836800921,45-54,F,0.0000174,0.9999826\n1546300800922-1577836800921,55-150,M,0.0000053,0.9999947\n1546300800922-1577836800921,55-150,F,0.0000042,0.9999958\n"
+      }
+    },
+    "Diagnosis Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Diagnosis Check Later Years",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 1993
+          }
+        },
+        {
+          "transition": "Diagnosis Check Early Years",
+          "condition": {
+            "condition_type": "Date",
+            "operator": ">=",
+            "year": 1979,
+            "value": 0
+          }
+        },
+        {
+          "transition": "Wait_Until_Next_Diagnosis_Check"
+        }
+      ]
+    },
+    "Wait until 1979": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Date",
+        "operator": ">=",
+        "year": 1979,
+        "value": 0
+      },
+      "direct_transition": "Diagnosis Check"
+    }
+  },
+  "gmf_version": 2
+}
+,
 "home_health_treatment":{
   "name": "Home Health Treatment",
   "remarks": [
@@ -51406,7 +61493,172 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "Initial impl == direct translation of ruby module"
       ],
+      "direct_transition": "Age_Guard"
+    },
+    "Age_Guard": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Age",
+        "operator": ">=",
+        "quantity": 18,
+        "unit": "years",
+        "value": 0
+      },
+      "direct_transition": "Set_Yearly_Risk"
+    },
+    "Set_Yearly_Risk": {
+      "type": "Simple",
+      "remarks": [
+        "By age 55 years, cumulative incidence of hypertension was 75.5% in black men, 75.7% in black women, 54.5% in white men, and 40.0% in white women -- https://www.ahajournals.org/doi/full/10.1161/JAHA.117.007988",
+        "",
+        "",
+        "Cumulative Incidence  = 1 - e(-IR x D)",
+        "e^(-IRxD) = 1 - CI",
+        "-IR x D = ln(1-CI)",
+        "IR = -ln(1-CI)/D",
+        "",
+        "Assuming 0% at age 18, and per the chart the increase is roughly linear, use the following yearly incidence rates:",
+        "",
+        "",
+        "black men - 3.8%",
+        "black women - 3.8%",
+        "white men - 2.1%",
+        "white women - 1.4%",
+        "others - 2.5% (just a value in the middle, no source)"
+      ],
+      "conditional_transition": [
+        {
+          "transition": "Black",
+          "condition": {
+            "condition_type": "Race",
+            "race": "Black"
+          }
+        },
+        {
+          "transition": "White",
+          "condition": {
+            "condition_type": "Race",
+            "race": "White"
+          }
+        },
+        {
+          "transition": "Others"
+        }
+      ]
+    },
+    "Chance_of_Hypertension": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hypertension",
+            "operator": "==",
+            "value": true
+          },
+          "distributions": [
+            {
+              "transition": "Wellness_Encounter",
+              "distribution": 1
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Onset_Hypertension",
+              "distribution": {
+                "attribute": "risk_of_hypertension",
+                "default": 0.05
+              }
+            },
+            {
+              "transition": "Wait_till_next_year",
+              "distribution": 0.95
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "Use the risk set above, but also check if some other module may have set hypertension == true"
+      ]
+    },
+    "Wait_till_next_year": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "years",
+      "direct_transition": "Chance_of_Hypertension"
+    },
+    "Onset_Hypertension": {
+      "type": "SetAttribute",
+      "attribute": "hypertension",
+      "value": true,
       "direct_transition": "Wellness_Encounter"
+    },
+    "Black": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Black_Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "Black_Male"
+        }
+      ]
+    },
+    "White": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "White_Female",
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          }
+        },
+        {
+          "transition": "White_Male"
+        }
+      ]
+    },
+    "Others": {
+      "type": "SetAttribute",
+      "attribute": "risk_of_hypertension",
+      "direct_transition": "Chance_of_Hypertension",
+      "value": 0.025
+    },
+    "Black_Female": {
+      "type": "SetAttribute",
+      "attribute": "risk_of_hypertension",
+      "direct_transition": "Chance_of_Hypertension",
+      "value": 0.038
+    },
+    "Black_Male": {
+      "type": "SetAttribute",
+      "attribute": "risk_of_hypertension",
+      "direct_transition": "Chance_of_Hypertension",
+      "value": 0.038
+    },
+    "White_Male": {
+      "type": "SetAttribute",
+      "attribute": "risk_of_hypertension",
+      "direct_transition": "Chance_of_Hypertension",
+      "value": 0.021
+    },
+    "White_Female": {
+      "type": "SetAttribute",
+      "attribute": "risk_of_hypertension",
+      "direct_transition": "Chance_of_Hypertension",
+      "value": 0.014
     },
     "Diagnose_Hypertension": {
       "type": "ConditionOnset",
@@ -51424,6 +61676,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "hypertension_dx",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -51488,6 +61741,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "hypertension_dx",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -51500,6 +61754,7 @@ export default {"acute_myeloid_leukemia":{
     "Hypertension_Followup_Encounter_3": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -52226,6 +62481,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "hypothyroidism",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -53057,6 +63313,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "Gunshot_Wound",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -53226,6 +63483,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "concussion_injury",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -56437,8 +66695,8 @@ export default {"acute_myeloid_leukemia":{
             }
           ],
           "range": {
-            "low": 60,
-            "high": 80
+            "low": 6,
+            "high": 8
           }
         },
         {
@@ -56669,8 +66927,8 @@ export default {"acute_myeloid_leukemia":{
             }
           ],
           "range": {
-            "low": 60,
-            "high": 80
+            "low": 6,
+            "high": 8
           }
         },
         {
@@ -58144,6 +68402,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "Lupus",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -61546,1780 +71805,13 @@ export default {"acute_myeloid_leukemia":{
   }
 }
 ,
-"metabolic_syndrome_care":{
-  "name": "Metabolic Syndrome Standards of Care",
+"metabolic_syndrome/amputations":{
+  "name": "amputations",
   "remarks": [],
   "states": {
     "Initial": {
       "type": "Initial",
-      "remarks": [
-        "Initial impl == direct translation of ruby module"
-      ],
-      "direct_transition": "Wellness_Encounter"
-    },
-    "Wellness_Encounter": {
-      "type": "Encounter",
-      "wellness": true,
-      "direct_transition": "Check_Diabetes"
-    },
-    "Check_Diabetes": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Or",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "prediabetes",
-                "operator": "is not nil"
-              }
-            ]
-          },
-          "transition": "Record_HA1C"
-        },
-        {
-          "transition": "Obese_Check"
-        }
-      ]
-    },
-    "Record_HA1C": {
-      "type": "Observation",
-      "vital_sign": "Blood Glucose",
-      "category": "laboratory",
-      "codes": [
-        {
-          "system": "LOINC",
-          "code": "4548-4",
-          "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
-        }
-      ],
-      "unit": "%",
-      "direct_transition": "Blood_Sugar_Check"
-    },
-    "Blood_Sugar_Check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Hyperglycemia",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Glucose",
-            "operator": ">=",
-            "value": 130
-          }
-        },
-        {
-          "transition": "Triglyceride_Check"
-        }
-      ]
-    },
-    "Hyperglycemia": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "hyperglycemia",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 80394007,
-          "display": "Hyperglycemia (disorder)"
-        }
-      ],
-      "direct_transition": "Triglyceride_Check"
-    },
-    "Triglyceride_Check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Hypertriglyceridemia",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "Triglycerides",
-            "operator": ">=",
-            "value": 150
-          }
-        },
-        {
-          "transition": "Metabolic_Check"
-        }
-      ]
-    },
-    "Hypertriglyceridemia": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "hypertriglyceridemia",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 302870006,
-          "display": "Hypertriglyceridemia (disorder)"
-        }
-      ],
-      "direct_transition": "Metabolic_Check"
-    },
-    "Metabolic_Check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Metabolic_Syndrome",
-          "condition": {
-            "condition_type": "At Least",
-            "minimum": 3,
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "obesity",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertension",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hyperglycemia",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "hypertriglyceridemia",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Vital Sign",
-                "vital_sign": "HDL",
-                "operator": "<",
-                "value": 50
-              }
-            ]
-          }
-        },
-        {
-          "transition": "Diagnosis"
-        }
-      ]
-    },
-    "Metabolic_Syndrome": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "metabolic_syndrome",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 237602007,
-          "display": "Metabolic syndrome X (disorder)"
-        }
-      ],
-      "direct_transition": "Diagnosis"
-    },
-    "Diagnosis": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Observation",
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "4548-4",
-                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
-              }
-            ],
-            "operator": "<=",
-            "value": 5.7
-          },
-          "remarks": [
-            "Normal level"
-          ],
-          "transition": "End_Wellness_Encounter"
-        },
-        {
-          "condition": {
-            "condition_type": "Observation",
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "4548-4",
-                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
-              }
-            ],
-            "operator": "<=",
-            "value": 6.5
-          },
-          "remarks": [
-            "Prediabetic level"
-          ],
-          "transition": "Set_Severity_0"
-        },
-        {
-          "condition": {
-            "condition_type": "Observation",
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "4548-4",
-                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
-              }
-            ],
-            "operator": "<=",
-            "value": 7.5
-          },
-          "remarks": [
-            "Diabetic level"
-          ],
-          "transition": "Set_Severity_1"
-        },
-        {
-          "condition": {
-            "condition_type": "Observation",
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "4548-4",
-                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
-              }
-            ],
-            "operator": "<=",
-            "value": 9
-          },
-          "remarks": [
-            "Severe level"
-          ],
-          "transition": "Set_Severity_2"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": ">=",
-                "value": 3
-              },
-              {
-                "condition_type": "PriorState",
-                "name": "Set_Severity_3",
-                "within": {
-                  "quantity": 1,
-                  "unit": "years"
-                }
-              }
-            ]
-          },
-          "remarks": [
-            "in words - if the severity is >= 3 and they have been set severity 3 within a year"
-          ],
-          "transition": "Set_Severity_4"
-        },
-        {
-          "remarks": [
-            "> severe level"
-          ],
-          "transition": "Set_Severity_3"
-        }
-      ]
-    },
-    "Set_Severity_0": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_severity",
-      "value": 0,
-      "remarks": [
-        "setting prediabetes as severity 0 makes some things easier"
-      ],
-      "direct_transition": "Diagnose_Prediabetes"
-    },
-    "Diagnose_Prediabetes": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "15777000",
-          "display": "Prediabetes"
-        }
-      ],
-      "assign_to_attribute": "diabetes_stage",
-      "direct_transition": "Check_CarePlan"
-    },
-    "Set_Severity_1": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_severity",
-      "value": 1,
-      "direct_transition": "Diagnose_Diabetes"
-    },
-    "Set_Severity_2": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_severity",
-      "value": 2,
-      "direct_transition": "Diagnose_Diabetes"
-    },
-    "Set_Severity_3": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_severity",
-      "value": 3,
-      "direct_transition": "Diagnose_Diabetes"
-    },
-    "Set_Severity_4": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_severity",
-      "value": 4,
-      "direct_transition": "Diagnose_Diabetes"
-    },
-    "Diagnose_Diabetes": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "44054006",
-          "display": "Diabetes"
-        }
-      ],
-      "assign_to_attribute": "diabetes_stage",
-      "direct_transition": "Check_CarePlan"
-    },
-    "Check_CarePlan": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active CarePlan",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "698360004",
-                "display": "Diabetes self management plan"
-              }
-            ]
-          },
-          "transition": "Prescribe_Medications"
-        },
-        {
-          "transition": "Diabetic_CarePlan"
-        }
-      ]
-    },
-    "Diabetic_CarePlan": {
-      "type": "CarePlanStart",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "698360004",
-          "display": "Diabetes self management plan"
-        }
-      ],
-      "activities": [
-        {
-          "system": "SNOMED-CT",
-          "code": "160670007",
-          "display": "Diabetic diet"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "229065009",
-          "display": "Exercise therapy"
-        }
-      ],
-      "goals": [
-        {
-          "observation": {
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "4548-4",
-                "display": "Hemoglobin A1c total in Blood"
-              }
-            ],
-            "operator": "<",
-            "value": "7.0"
-          },
-          "addresses": [
-            "diabetes_stage"
-          ]
-        },
-        {
-          "observation": {
-            "codes": [
-              {
-                "system": "LOINC",
-                "code": "2339-0",
-                "display": "Glucose [Mass/volume] in Blood"
-              }
-            ],
-            "operator": "<",
-            "value": "108"
-          },
-          "addresses": [
-            "diabetes_stage"
-          ]
-        },
-        {
-          "text": "Maintain blood pressure below 140/90 mmHg",
-          "addresses": [
-            "diabetes_stage"
-          ]
-        },
-        {
-          "text": "Improve and maintenance of optimal foot health: aim at early detection of peripheral vascular problems and neuropathy presumed due to diabetes; and prevention of diabetic foot ulcer, gangrene",
-          "addresses": [
-            "diabetes_stage"
-          ]
-        },
-        {
-          "text": "Address patient knowledge deficit on diabetic self-care",
-          "addresses": [
-            "diabetes_stage"
-          ]
-        }
-      ],
-      "remarks": [
-        "based on https://github.com/clinical-cloud/sample-careplans"
-      ],
-      "reason": "diabetes_stage",
-      "direct_transition": "Glucose Monitor"
-    },
-    "Prescribe_Medications": {
-      "type": "Simple",
-      "direct_transition": "Glucose Test Strips"
-    },
-    "Monotherapy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": ">=",
-                "value": 2
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Medication",
-                  "codes": [
-                    {
-                      "system": "RxNorm",
-                      "code": "860975",
-                      "display": "24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Prescribe_Metformin"
-        },
-        {
-          "transition": "Bitherapy"
-        }
-      ]
-    },
-    "Prescribe_Metformin": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "860975",
-          "display": "24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet"
-        }
-      ],
-      "reason": "Diagnose_Diabetes",
-      "direct_transition": "Bitherapy",
-      "chronic": true
-    },
-    "Bitherapy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": ">=",
-                "value": 3
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Medication",
-                  "codes": [
-                    {
-                      "system": "RxNorm",
-                      "code": "897122",
-                      "display": "3 ML liraglutide 6 MG/ML Pen Injector"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Prescribe_Liraglutide"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": "<",
-                "value": 3
-              },
-              {
-                "condition_type": "Active Medication",
-                "codes": [
-                  {
-                    "system": "RxNorm",
-                    "code": "897122",
-                    "display": "3 ML liraglutide 6 MG/ML Pen Injector"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Liraglutide"
-        },
-        {
-          "transition": "Tritherapy"
-        }
-      ]
-    },
-    "Prescribe_Liraglutide": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "897122",
-          "display": "3 ML liraglutide 6 MG/ML Pen Injector"
-        }
-      ],
-      "reason": "Diagnose_Diabetes",
-      "direct_transition": "Tritherapy",
-      "chronic": true
-    },
-    "End_Liraglutide": {
-      "type": "MedicationEnd",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "897122",
-          "display": "3 ML liraglutide 6 MG/ML Pen Injector"
-        }
-      ],
-      "direct_transition": "Tritherapy"
-    },
-    "Tritherapy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": ">=",
-                "value": 4
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Medication",
-                  "codes": [
-                    {
-                      "system": "RxNorm",
-                      "code": "1373463",
-                      "display": "canagliflozin 100 MG Oral Tablet"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Prescribe_Canagliflozin"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "diabetes_severity",
-                "operator": "<",
-                "value": 4
-              },
-              {
-                "condition_type": "Active Medication",
-                "codes": [
-                  {
-                    "system": "RxNorm",
-                    "code": "1373463",
-                    "display": "canagliflozin 100 MG Oral Tablet"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Canagliflozin"
-        },
-        {
-          "transition": "Insulin"
-        }
-      ]
-    },
-    "Prescribe_Canagliflozin": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "1373463",
-          "display": "canagliflozin 100 MG Oral Tablet"
-        }
-      ],
-      "reason": "Diagnose_Diabetes",
-      "direct_transition": "Insulin"
-    },
-    "End_Canagliflozin": {
-      "type": "MedicationEnd",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "1373463",
-          "display": "canagliflozin 100 MG Oral Tablet"
-        }
-      ],
-      "direct_transition": "Insulin"
-    },
-    "Insulin": {
-      "type": "Simple",
-      "remarks": [
-        "around a third of patients with type 2 diabetes are on insulin ",
-        "30.8% (17.8% only insulin and 13.0% insulin and other med)",
-        "https://www.cdc.gov/diabetes/statistics/meduse/fig2.htm",
-        "coincidentally around a third of patients have nephropathy",
-        "for simplicity we'll make this a 1-1 relationship so that nephropathy --> insulin"
-      ],
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active Condition",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "127013003",
-                "display": "Diabetic renal disease (disorder)"
-              }
-            ]
-          },
-          "transition": "Prescribe_Insulin"
-        },
-        {
-          "transition": "End_Insulin"
-        }
-      ]
-    },
-    "Prescribe_Insulin": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": "106892",
-                "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
-              }
-            ]
-          },
-          "remarks": [
-            "they have basal so stop it and change towards prandial"
-          ],
-          "transition": "End_Basal_Insulin_Towards_Prandial"
-        },
-        {
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": "865098",
-                "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
-              }
-            ]
-          },
-          "remarks": [
-            "they have prandial so do nothing"
-          ],
-          "transition": "Check_Complications"
-        },
-        {
-          "remarks": [
-            "prescribe basal the first time around"
-          ],
-          "transition": "Prescribe_Basal_Insulin"
-        }
-      ]
-    },
-    "Prescribe_Basal_Insulin": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "106892",
-          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
-        }
-      ],
-      "reason": "Diagnose_Diabetes",
-      "direct_transition": "Check_Complications",
-      "chronic": true
-    },
-    "End_Basal_Insulin_Towards_Prandial": {
-      "type": "MedicationEnd",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "106892",
-          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
-        }
-      ],
-      "direct_transition": "Prescribe_Prandial_Insulin"
-    },
-    "Prescribe_Prandial_Insulin": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "865098",
-          "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
-        }
-      ],
-      "reason": "Diagnose_Diabetes",
-      "direct_transition": "Check_Complications",
-      "chronic": true
-    },
-    "End_Insulin": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": "106892",
-                "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
-              }
-            ]
-          },
-          "transition": "End_Basal_Insulin"
-        },
-        {
-          "condition": {
-            "condition_type": "Active Medication",
-            "codes": [
-              {
-                "system": "RxNorm",
-                "code": "865098",
-                "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
-              }
-            ]
-          },
-          "transition": "End_Prandial_Insulin"
-        },
-        {
-          "transition": "Check_Complications"
-        }
-      ]
-    },
-    "End_Basal_Insulin": {
-      "type": "MedicationEnd",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "106892",
-          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
-        }
-      ],
-      "direct_transition": "Check_Complications"
-    },
-    "End_Prandial_Insulin": {
-      "type": "MedicationEnd",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": "865098",
-          "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
-        }
-      ],
-      "direct_transition": "Check_Complications"
-    },
-    "Check_Complications": {
-      "type": "Simple",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ckd",
-            "operator": "==",
-            "value": 1
-          },
-          "distributions": [
-            {
-              "transition": "Check_Anemia_Exist",
-              "distribution": 0.084
-            },
-            {
-              "transition": "check CKD",
-              "distribution": 0.916
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ckd",
-            "operator": "==",
-            "value": 2
-          },
-          "distributions": [
-            {
-              "transition": "Check_Anemia_Exist",
-              "distribution": 0.121
-            },
-            {
-              "transition": "check CKD",
-              "distribution": 0.879
-            }
-          ]
-        },
-        {
-          "distributions": [
-            {
-              "transition": "Check_Anemia_Exist",
-              "distribution": 0.174
-            },
-            {
-              "transition": "check CKD",
-              "distribution": 0.826
-            }
-          ],
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ckd",
-            "operator": "==",
-            "value": 3
-          }
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ckd",
-            "operator": "==",
-            "value": 4
-          },
-          "distributions": [
-            {
-              "transition": "Check_Anemia_Exist",
-              "distribution": 0.503
-            },
-            {
-              "transition": "check CKD",
-              "distribution": 0.497
-            }
-          ]
-        }
-      ],
-      "remarks": [
-        "The prevalence of anemia increased with stage of CKD, from 8.4% at stage 1 to 53.4% at stage 5 - see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3879360/"
-      ]
-    },
-    "Check_Nephropathy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "nephropathy",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "127013003",
-                      "display": "Diabetic renal disease (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Nephropathy"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "nephropathy",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "127013003",
-                    "display": "Diabetic renal disease (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Nephropathy"
-        },
-        {
-          "transition": "Check_Microalbuminuria"
-        }
-      ]
-    },
-    "Diagnose_Nephropathy": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "127013003",
-          "display": "Diabetic renal disease (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Microalbuminuria"
-    },
-    "End_Nephropathy": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "127013003",
-          "display": "Diabetic renal disease (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Microalbuminuria"
-    },
-    "Check_Microalbuminuria": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "microalbuminuria",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "90781000119102",
-                      "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Microalbuminuria"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "microalbuminuria",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "90781000119102",
-                    "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Microalbuminuria"
-        },
-        {
-          "transition": "Check_Proteinuria"
-        }
-      ]
-    },
-    "Diagnose_Microalbuminuria": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "90781000119102",
-          "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Proteinuria"
-    },
-    "End_Microalbuminuria": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "90781000119102",
-          "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Proteinuria"
-    },
-    "Check_Proteinuria": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "proteinuria",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "157141000119108",
-                      "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Proteinuria"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "proteinuria",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "157141000119108",
-                    "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Proteinuria"
-        },
-        {
-          "transition": "Check_End_Stage_Renal_Disease"
-        }
-      ]
-    },
-    "Diagnose_Proteinuria": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "157141000119108",
-          "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_End_Stage_Renal_Disease"
-    },
-    "End_Proteinuria": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "157141000119108",
-          "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_End_Stage_Renal_Disease"
-    },
-    "Check_End_Stage_Renal_Disease": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "ckd",
-                "operator": "==",
-                "value": 5
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "46177005",
-                      "display": "End stage renal disease (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_End_Stage_Renal_Disease"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "end_stage_renal_disease",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "46177005",
-                    "display": "End stage renal disease (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_End_Stage_Renal_Disease"
-        },
-        {
-          "transition": "Check_Retinopathy"
-        }
-      ]
-    },
-    "Diagnose_End_Stage_Renal_Disease": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "46177005",
-          "display": "End stage renal disease (disorder)"
-        }
-      ],
-      "direct_transition": "Record_MetabolicPanel_5",
-      "assign_to_attribute": "dialysis_reason"
-    },
-    "End_End_Stage_Renal_Disease": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "46177005",
-          "display": "End stage renal disease (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Retinopathy"
-    },
-    "Check_Retinopathy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "retinopathy",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "422034002",
-                      "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Retinopathy"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "retinopathy",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "422034002",
-                    "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Retinopathy"
-        },
-        {
-          "transition": "Check_Nonproliferative_Retinopathy"
-        }
-      ]
-    },
-    "Diagnose_Retinopathy": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "422034002",
-          "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Nonproliferative_Retinopathy"
-    },
-    "End_Retinopathy": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "422034002",
-          "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Nonproliferative_Retinopathy"
-    },
-    "Check_Nonproliferative_Retinopathy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "nonproliferative_retinopathy",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "1551000119108",
-                      "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Nonproliferative_Retinopathy"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "nonproliferative_retinopathy",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "1551000119108",
-                    "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Nonproliferative_Retinopathy"
-        },
-        {
-          "transition": "Check_Proliferative_Retinopathy"
-        }
-      ]
-    },
-    "Diagnose_Nonproliferative_Retinopathy": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1551000119108",
-          "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Proliferative_Retinopathy"
-    },
-    "End_Nonproliferative_Retinopathy": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1551000119108",
-          "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Proliferative_Retinopathy"
-    },
-    "Check_Proliferative_Retinopathy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "proliferative_retinopathy",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "1501000119109",
-                      "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Proliferative_Retinopathy"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "proliferative_retinopathy",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "1501000119109",
-                    "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Proliferative_Retinopathy"
-        },
-        {
-          "transition": "Check_Macular_Edema"
-        }
-      ]
-    },
-    "Diagnose_Proliferative_Retinopathy": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1501000119109",
-          "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Macular_Edema"
-    },
-    "End_Proliferative_Retinopathy": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "1501000119109",
-          "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Macular_Edema"
-    },
-    "Check_Macular_Edema": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "macular_edema",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "97331000119101",
-                      "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Macular_Edema"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "macular_edema",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "97331000119101",
-                    "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Macular_Edema"
-        },
-        {
-          "transition": "Check_Blindness"
-        }
-      ]
-    },
-    "Diagnose_Macular_Edema": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "97331000119101",
-          "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Blindness"
-    },
-    "End_Macular_Edema": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "97331000119101",
-          "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Blindness"
-    },
-    "Check_Blindness": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "blindness",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "60951000119105",
-                      "display": "Blindness due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Blindness"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "blindness",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "60951000119105",
-                    "display": "Blindness due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Blindness"
-        },
-        {
-          "transition": "Check_Neuropathy"
-        }
-      ]
-    },
-    "Diagnose_Blindness": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "60951000119105",
-          "display": "Blindness due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Neuropathy"
-    },
-    "End_Blindness": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "60951000119105",
-          "display": "Blindness due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Check_Neuropathy"
-    },
-    "Check_Neuropathy": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "neuropathy",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Not",
-                "condition": {
-                  "condition_type": "Active Condition",
-                  "codes": [
-                    {
-                      "system": "SNOMED-CT",
-                      "code": "368581000119106",
-                      "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          "transition": "Diagnose_Neuropathy"
-        },
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "neuropathy",
-                "operator": "is nil"
-              },
-              {
-                "condition_type": "Active Condition",
-                "codes": [
-                  {
-                    "system": "SNOMED-CT",
-                    "code": "368581000119106",
-                    "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
-                  }
-                ]
-              }
-            ]
-          },
-          "transition": "End_Neuropathy"
-        },
-        {
-          "transition": "Consider_Procedures"
-        }
-      ]
-    },
-    "Diagnose_Neuropathy": {
-      "type": "ConditionOnset",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "368581000119106",
-          "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Consider_Procedures"
-    },
-    "End_Neuropathy": {
-      "type": "ConditionEnd",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "368581000119106",
-          "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
-        }
-      ],
-      "direct_transition": "Consider_Procedures"
-    },
-    "Consider_Procedures": {
-      "type": "Simple",
-      "direct_transition": "Potential_Amputation"
-    },
-    "Potential_Amputation": {
-      "type": "Simple",
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "PriorState",
-            "name": "Amputation_Necessary",
-            "within": {
-              "quantity": 1,
-              "unit": "years"
-            }
-          },
-          "remarks": [
-            "dialysis means this check is made every few days which can skew results.",
-            "we only want to consider amputation once a year"
-          ],
-          "transition": "No_Amputation_Necessary"
-        },
-        {
-          "condition": {
-            "condition_type": "Active Condition",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": "368581000119106",
-                "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
-              }
-            ]
-          },
-          "distributions": [
-            {
-              "distribution": 0.0025,
-              "transition": "Amputation_Necessary"
-            },
-            {
-              "distribution": 0.9975,
-              "transition": "No_Amputation_Necessary"
-            }
-          ],
-          "remarks": [
-            "In 2010, about 73,000 non-traumatic lower-limb amputations were performed in adults aged 20 years or older with diagnosed diabetes.",
-            "28.9 million adults had diagnosed diabetes. 73,000/ 28,900,000 = 0.0025 or 0.25% per year",
-            "https://www.cdc.gov/diabetes/data/statistics/2014statisticsreport.html"
-          ]
-        },
-        {
-          "transition": "No_Amputation_Necessary"
-        }
-      ]
-    },
-    "Amputation_Necessary": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_amputation_necessary",
-      "value": true,
-      "direct_transition": "Schedule_Followup"
-    },
-    "No_Amputation_Necessary": {
-      "type": "SetAttribute",
-      "attribute": "diabetes_amputation_necessary",
-      "value": false,
-      "direct_transition": "Schedule_Followup"
-    },
-    "Schedule_Followup": {
-      "type": "EncounterEnd",
-      "conditional_transition": [
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "diabetes_amputation_necessary",
-            "operator": "==",
-            "value": true
-          },
-          "transition": "Delay_Before_Amputation"
-        },
-        {
-          "transition": "Living_With_Diabetes"
-        }
-      ]
+      "direct_transition": "Delay_Before_Amputation"
     },
     "Delay_Before_Amputation": {
       "type": "Delay",
@@ -63728,11 +72220,430 @@ export default {"acute_myeloid_leukemia":{
     },
     "End_Amputation_Encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "Living_With_Diabetes"
+      "direct_transition": "Terminal"
     },
-    "Living_With_Diabetes": {
+    "Terminal": {
+      "type": "Terminal"
+    }
+  }
+}
+,
+"metabolic_syndrome/eye_conditions":{
+  "name": "eye conditions",
+  "remarks": [],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Check_Retinopathy"
+    },
+    "Check_Retinopathy": {
       "type": "Simple",
-      "direct_transition": "End_Wellness_Encounter"
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "retinopathy",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Condition",
+                  "codes": [
+                    {
+                      "system": "SNOMED-CT",
+                      "code": "422034002",
+                      "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Diagnose_Retinopathy"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "retinopathy",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "422034002",
+                    "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Retinopathy"
+        },
+        {
+          "transition": "Check_Nonproliferative_Retinopathy"
+        }
+      ]
+    },
+    "Diagnose_Retinopathy": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "422034002",
+          "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Nonproliferative_Retinopathy"
+    },
+    "End_Retinopathy": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "422034002",
+          "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Nonproliferative_Retinopathy"
+    },
+    "Check_Nonproliferative_Retinopathy": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "nonproliferative_retinopathy",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Condition",
+                  "codes": [
+                    {
+                      "system": "SNOMED-CT",
+                      "code": "1551000119108",
+                      "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Diagnose_Nonproliferative_Retinopathy"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "nonproliferative_retinopathy",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "1551000119108",
+                    "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Nonproliferative_Retinopathy"
+        },
+        {
+          "transition": "Check_Proliferative_Retinopathy"
+        }
+      ]
+    },
+    "Diagnose_Nonproliferative_Retinopathy": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "1551000119108",
+          "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Proliferative_Retinopathy"
+    },
+    "End_Nonproliferative_Retinopathy": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "1551000119108",
+          "display": "Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Proliferative_Retinopathy"
+    },
+    "Check_Proliferative_Retinopathy": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "proliferative_retinopathy",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Condition",
+                  "codes": [
+                    {
+                      "system": "SNOMED-CT",
+                      "code": "1501000119109",
+                      "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Diagnose_Proliferative_Retinopathy"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "proliferative_retinopathy",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "1501000119109",
+                    "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Proliferative_Retinopathy"
+        },
+        {
+          "transition": "Check_Macular_Edema"
+        }
+      ]
+    },
+    "Diagnose_Proliferative_Retinopathy": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "1501000119109",
+          "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Macular_Edema"
+    },
+    "End_Proliferative_Retinopathy": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "1501000119109",
+          "display": "Proliferative diabetic retinopathy due to type II diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Macular_Edema"
+    },
+    "Check_Macular_Edema": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "macular_edema",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Condition",
+                  "codes": [
+                    {
+                      "system": "SNOMED-CT",
+                      "code": "97331000119101",
+                      "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Diagnose_Macular_Edema"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "macular_edema",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "97331000119101",
+                    "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Macular_Edema"
+        },
+        {
+          "transition": "Check_Blindness"
+        }
+      ]
+    },
+    "Diagnose_Macular_Edema": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "97331000119101",
+          "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Blindness"
+    },
+    "End_Macular_Edema": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "97331000119101",
+          "display": "Macular edema and retinopathy due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Blindness"
+    },
+    "Check_Blindness": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "blindness",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Condition",
+                  "codes": [
+                    {
+                      "system": "SNOMED-CT",
+                      "code": "60951000119105",
+                      "display": "Blindness due to type 2 diabetes mellitus (disorder)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Diagnose_Blindness"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "blindness",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "60951000119105",
+                    "display": "Blindness due to type 2 diabetes mellitus (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Blindness"
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Diagnose_Blindness": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "60951000119105",
+          "display": "Blindness due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "End_Blindness": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "60951000119105",
+          "display": "Blindness due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    }
+  }
+}
+,
+"metabolic_syndrome/kidney_conditions":{
+  "name": "kidney conditions",
+  "remarks": [],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "check CKD"
     },
     "check CKD": {
       "type": "Simple",
@@ -63809,7 +72720,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Chronic kidney disease stage 3 (disorder)"
         }
       ],
-      "direct_transition": "Record_MetabolicPanel_3"
+      "direct_transition": "Record_MetabolicPanel_3",
+      "assign_to_attribute": "text"
     },
     "CKD4 Diagnosis": {
       "type": "ConditionOnset",
@@ -63822,58 +72734,6 @@ export default {"acute_myeloid_leukemia":{
       ],
       "direct_transition": "Record_MetabolicPanel_4",
       "assign_to_attribute": "dialysis_reason"
-    },
-    "Obese_Check": {
-      "type": "Simple",
-      "conditional_transition": [
-        {
-          "transition": "Severe Obesity",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "BMI",
-            "operator": ">=",
-            "value": 40
-          }
-        },
-        {
-          "transition": "Obesity",
-          "condition": {
-            "condition_type": "Vital Sign",
-            "vital_sign": "BMI",
-            "operator": ">=",
-            "value": 30
-          }
-        },
-        {
-          "transition": "End_Wellness_Encounter"
-        }
-      ]
-    },
-    "Obesity": {
-      "type": "ConditionOnset",
-      "target_encounter": "",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 162864005,
-          "display": "Body mass index 30+ - obesity (finding)"
-        }
-      ],
-      "direct_transition": "End_Wellness_Encounter",
-      "assign_to_attribute": "obesity"
-    },
-    "Severe Obesity": {
-      "type": "ConditionOnset",
-      "assign_to_attribute": "obesity",
-      "target_encounter": "",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 408512008,
-          "display": "Body mass index 40+ - severely obese (finding)"
-        }
-      ],
-      "direct_transition": "End_Wellness_Encounter"
     },
     "Record_MetabolicPanel": {
       "type": "DiagnosticReport",
@@ -64508,7 +73368,7 @@ export default {"acute_myeloid_leukemia":{
           }
         }
       ],
-      "direct_transition": "Check_Retinopathy"
+      "direct_transition": "Terminal"
     },
     "Record_Urinalysis": {
       "type": "DiagnosticReport",
@@ -65626,10 +74486,1416 @@ export default {"acute_myeloid_leukemia":{
       ],
       "direct_transition": "Check_Nephropathy"
     },
+    "Check_Nephropathy": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "nephropathy",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Condition",
+                  "codes": [
+                    {
+                      "system": "SNOMED-CT",
+                      "code": "127013003",
+                      "display": "Diabetic renal disease (disorder)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Diagnose_Nephropathy"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "nephropathy",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "127013003",
+                    "display": "Diabetic renal disease (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Nephropathy"
+        },
+        {
+          "transition": "Check_Microalbuminuria"
+        }
+      ]
+    },
+    "Diagnose_Nephropathy": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "127013003",
+          "display": "Diabetic renal disease (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Microalbuminuria"
+    },
+    "End_Nephropathy": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "127013003",
+          "display": "Diabetic renal disease (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Microalbuminuria"
+    },
+    "Check_Microalbuminuria": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "microalbuminuria",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Condition",
+                  "codes": [
+                    {
+                      "system": "SNOMED-CT",
+                      "code": "90781000119102",
+                      "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Diagnose_Microalbuminuria"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "microalbuminuria",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "90781000119102",
+                    "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Microalbuminuria"
+        },
+        {
+          "transition": "Check_Proteinuria"
+        }
+      ]
+    },
+    "Diagnose_Microalbuminuria": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "90781000119102",
+          "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Proteinuria"
+    },
+    "End_Microalbuminuria": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "90781000119102",
+          "display": "Microalbuminuria due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_Proteinuria"
+    },
+    "Check_Proteinuria": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "proteinuria",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Condition",
+                  "codes": [
+                    {
+                      "system": "SNOMED-CT",
+                      "code": "157141000119108",
+                      "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Diagnose_Proteinuria"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "proteinuria",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "157141000119108",
+                    "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Proteinuria"
+        },
+        {
+          "transition": "Check_End_Stage_Renal_Disease"
+        }
+      ]
+    },
+    "Diagnose_Proteinuria": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "157141000119108",
+          "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_End_Stage_Renal_Disease"
+    },
+    "End_Proteinuria": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "157141000119108",
+          "display": "Proteinuria due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Check_End_Stage_Renal_Disease"
+    },
+    "Check_End_Stage_Renal_Disease": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "ckd",
+                "operator": "==",
+                "value": 5
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Condition",
+                  "codes": [
+                    {
+                      "system": "SNOMED-CT",
+                      "code": "46177005",
+                      "display": "End stage renal disease (disorder)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Diagnose_End_Stage_Renal_Disease"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "end_stage_renal_disease",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "46177005",
+                    "display": "End stage renal disease (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_End_Stage_Renal_Disease"
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Diagnose_End_Stage_Renal_Disease": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "46177005",
+          "display": "End stage renal disease (disorder)"
+        }
+      ],
+      "direct_transition": "Record_MetabolicPanel_5",
+      "assign_to_attribute": "dialysis_reason"
+    },
+    "End_End_Stage_Renal_Disease": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "46177005",
+          "display": "End stage renal disease (disorder)"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    }
+  }
+}
+,
+"metabolic_syndrome/medications":{
+  "name": "medications",
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Monotherapy"
+    },
+    "Monotherapy": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "diabetes_severity",
+                "operator": ">=",
+                "value": 2
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Medication",
+                  "codes": [
+                    {
+                      "system": "RxNorm",
+                      "code": "860975",
+                      "display": "24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Prescribe_Metformin"
+        },
+        {
+          "transition": "Bitherapy"
+        }
+      ]
+    },
+    "Prescribe_Metformin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "860975",
+          "display": "24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet"
+        }
+      ],
+      "reason": "diabetes_stage",
+      "direct_transition": "Bitherapy",
+      "chronic": true
+    },
+    "Bitherapy": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "diabetes_severity",
+                "operator": ">=",
+                "value": 3
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Medication",
+                  "codes": [
+                    {
+                      "system": "RxNorm",
+                      "code": "897122",
+                      "display": "3 ML liraglutide 6 MG/ML Pen Injector"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Prescribe_Liraglutide"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "diabetes_severity",
+                "operator": "<",
+                "value": 3
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": "897122",
+                    "display": "3 ML liraglutide 6 MG/ML Pen Injector"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Liraglutide"
+        },
+        {
+          "transition": "Tritherapy"
+        }
+      ]
+    },
+    "Prescribe_Liraglutide": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "897122",
+          "display": "3 ML liraglutide 6 MG/ML Pen Injector"
+        }
+      ],
+      "reason": "diabetes_stage",
+      "direct_transition": "Tritherapy",
+      "chronic": true
+    },
+    "End_Liraglutide": {
+      "type": "MedicationEnd",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "897122",
+          "display": "3 ML liraglutide 6 MG/ML Pen Injector"
+        }
+      ],
+      "direct_transition": "Tritherapy"
+    },
+    "Tritherapy": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "diabetes_severity",
+                "operator": ">=",
+                "value": 4
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Medication",
+                  "codes": [
+                    {
+                      "system": "RxNorm",
+                      "code": "1373463",
+                      "display": "canagliflozin 100 MG Oral Tablet"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Prescribe_Canagliflozin"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "diabetes_severity",
+                "operator": "<",
+                "value": 4
+              },
+              {
+                "condition_type": "Active Medication",
+                "codes": [
+                  {
+                    "system": "RxNorm",
+                    "code": "1373463",
+                    "display": "canagliflozin 100 MG Oral Tablet"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Canagliflozin"
+        },
+        {
+          "transition": "Insulin"
+        }
+      ]
+    },
+    "Prescribe_Canagliflozin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "1373463",
+          "display": "canagliflozin 100 MG Oral Tablet"
+        }
+      ],
+      "reason": "diabetes_stage",
+      "direct_transition": "Insulin"
+    },
+    "End_Canagliflozin": {
+      "type": "MedicationEnd",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "1373463",
+          "display": "canagliflozin 100 MG Oral Tablet"
+        }
+      ],
+      "direct_transition": "Insulin"
+    },
+    "Insulin": {
+      "type": "Simple",
+      "remarks": [
+        "around a third of patients with type 2 diabetes are on insulin ",
+        "30.8% (17.8% only insulin and 13.0% insulin and other med)",
+        "https://www.cdc.gov/diabetes/statistics/meduse/fig2.htm",
+        "coincidentally around a third of patients have nephropathy",
+        "for simplicity we'll make this a 1-1 relationship so that nephropathy --> insulin"
+      ],
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Active Condition",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": "127013003",
+                "display": "Diabetic renal disease (disorder)"
+              }
+            ]
+          },
+          "transition": "Prescribe_Insulin"
+        },
+        {
+          "transition": "End_Insulin"
+        }
+      ]
+    },
+    "Prescribe_Insulin": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "106892",
+                "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
+              }
+            ]
+          },
+          "remarks": [
+            "they have basal so stop it and change towards prandial"
+          ],
+          "transition": "End_Basal_Insulin_Towards_Prandial"
+        },
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "865098",
+                "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
+              }
+            ]
+          },
+          "remarks": [
+            "they have prandial so do nothing"
+          ],
+          "transition": "Terminal"
+        },
+        {
+          "remarks": [
+            "prescribe basal the first time around"
+          ],
+          "transition": "Prescribe_Basal_Insulin"
+        }
+      ]
+    },
+    "Prescribe_Basal_Insulin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "106892",
+          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
+        }
+      ],
+      "reason": "diabetes_stage",
+      "direct_transition": "Terminal",
+      "chronic": true
+    },
+    "End_Basal_Insulin_Towards_Prandial": {
+      "type": "MedicationEnd",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "106892",
+          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
+        }
+      ],
+      "direct_transition": "Prescribe_Prandial_Insulin"
+    },
+    "Prescribe_Prandial_Insulin": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "865098",
+          "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
+        }
+      ],
+      "reason": "diabetes_stage",
+      "direct_transition": "Terminal",
+      "chronic": true
+    },
+    "End_Insulin": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "106892",
+                "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
+              }
+            ]
+          },
+          "transition": "End_Basal_Insulin"
+        },
+        {
+          "condition": {
+            "condition_type": "Active Medication",
+            "codes": [
+              {
+                "system": "RxNorm",
+                "code": "865098",
+                "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
+              }
+            ]
+          },
+          "transition": "End_Prandial_Insulin"
+        },
+        {
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "End_Basal_Insulin": {
+      "type": "MedicationEnd",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "106892",
+          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "End_Prandial_Insulin": {
+      "type": "MedicationEnd",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": "865098",
+          "display": "Insulin Lispro 100 UNT/ML Injectable Solution [Humalog]"
+        }
+      ],
+      "direct_transition": "Terminal"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    }
+  }
+}
+,
+"metabolic_syndrome_care":{
+  "name": "Metabolic Syndrome Standards of Care",
+  "remarks": [],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "remarks": [
+        "Initial impl == direct translation of ruby module"
+      ],
+      "direct_transition": "Wellness_Encounter"
+    },
+    "Wellness_Encounter": {
+      "type": "Encounter",
+      "wellness": true,
+      "direct_transition": "check CKD"
+    },
+    "Check_Diabetes": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "diabetes",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "prediabetes",
+                "operator": "is not nil"
+              }
+            ]
+          },
+          "transition": "Record_HA1C"
+        },
+        {
+          "transition": "End_Wellness_Encounter"
+        }
+      ]
+    },
+    "Record_HA1C": {
+      "type": "Observation",
+      "vital_sign": "Blood Glucose",
+      "category": "laboratory",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "4548-4",
+          "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+        }
+      ],
+      "unit": "%",
+      "direct_transition": "Blood_Sugar_Check"
+    },
+    "Blood_Sugar_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Hyperglycemia",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Glucose",
+            "operator": ">=",
+            "value": 130
+          }
+        },
+        {
+          "transition": "Triglyceride_Check"
+        }
+      ]
+    },
+    "Hyperglycemia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hyperglycemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 80394007,
+          "display": "Hyperglycemia (disorder)"
+        }
+      ],
+      "direct_transition": "Triglyceride_Check"
+    },
+    "Triglyceride_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Hypertriglyceridemia",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "Triglycerides",
+            "operator": ">=",
+            "value": 150
+          }
+        },
+        {
+          "transition": "Metabolic_Check"
+        }
+      ]
+    },
+    "Hypertriglyceridemia": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "hypertriglyceridemia",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 302870006,
+          "display": "Hypertriglyceridemia (disorder)"
+        }
+      ],
+      "direct_transition": "Metabolic_Check"
+    },
+    "Metabolic_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Metabolic_Syndrome",
+          "condition": {
+            "condition_type": "At Least",
+            "minimum": 3,
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "obesity",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertension",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hyperglycemia",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "hypertriglyceridemia",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Vital Sign",
+                "vital_sign": "HDL",
+                "operator": "<",
+                "value": 50
+              }
+            ]
+          }
+        },
+        {
+          "transition": "Diagnosis"
+        }
+      ]
+    },
+    "Metabolic_Syndrome": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "metabolic_syndrome",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 237602007,
+          "display": "Metabolic syndrome X (disorder)"
+        }
+      ],
+      "direct_transition": "Diagnosis"
+    },
+    "Diagnosis": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "4548-4",
+                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+              }
+            ],
+            "operator": "<=",
+            "value": 5.7
+          },
+          "remarks": [
+            "Normal level"
+          ],
+          "transition": "End_Wellness_Encounter"
+        },
+        {
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "4548-4",
+                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+              }
+            ],
+            "operator": "<=",
+            "value": 6.5
+          },
+          "remarks": [
+            "Prediabetic level"
+          ],
+          "transition": "Set_Severity_0"
+        },
+        {
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "4548-4",
+                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+              }
+            ],
+            "operator": "<=",
+            "value": 7.5
+          },
+          "remarks": [
+            "Diabetic level"
+          ],
+          "transition": "Set_Severity_1"
+        },
+        {
+          "condition": {
+            "condition_type": "Observation",
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "4548-4",
+                "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+              }
+            ],
+            "operator": "<=",
+            "value": 9
+          },
+          "remarks": [
+            "Severe level"
+          ],
+          "transition": "Set_Severity_2"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "diabetes_severity",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "diabetes_severity",
+                "operator": ">=",
+                "value": 3
+              },
+              {
+                "condition_type": "PriorState",
+                "name": "Set_Severity_3",
+                "within": {
+                  "quantity": 1,
+                  "unit": "years"
+                }
+              }
+            ]
+          },
+          "remarks": [
+            "in words - if the severity is >= 3 and they have been set severity 3 within a year"
+          ],
+          "transition": "Set_Severity_4"
+        },
+        {
+          "remarks": [
+            "> severe level"
+          ],
+          "transition": "Set_Severity_3"
+        }
+      ]
+    },
+    "Set_Severity_0": {
+      "type": "SetAttribute",
+      "attribute": "diabetes_severity",
+      "value": 0,
+      "remarks": [
+        "setting prediabetes as severity 0 makes some things easier"
+      ],
+      "direct_transition": "Diagnose_Prediabetes"
+    },
+    "Diagnose_Prediabetes": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "15777000",
+          "display": "Prediabetes"
+        }
+      ],
+      "assign_to_attribute": "diabetes_stage",
+      "direct_transition": "Check_CarePlan"
+    },
+    "Set_Severity_1": {
+      "type": "SetAttribute",
+      "attribute": "diabetes_severity",
+      "value": 1,
+      "direct_transition": "Diagnose_Diabetes"
+    },
+    "Set_Severity_2": {
+      "type": "SetAttribute",
+      "attribute": "diabetes_severity",
+      "value": 2,
+      "direct_transition": "Diagnose_Diabetes"
+    },
+    "Set_Severity_3": {
+      "type": "SetAttribute",
+      "attribute": "diabetes_severity",
+      "value": 3,
+      "direct_transition": "Diagnose_Diabetes"
+    },
+    "Set_Severity_4": {
+      "type": "SetAttribute",
+      "attribute": "diabetes_severity",
+      "value": 4,
+      "direct_transition": "Diagnose_Diabetes"
+    },
+    "Diagnose_Diabetes": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "44054006",
+          "display": "Diabetes"
+        }
+      ],
+      "assign_to_attribute": "diabetes_stage",
+      "direct_transition": "Check_CarePlan"
+    },
+    "Check_CarePlan": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "Active CarePlan",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": "698360004",
+                "display": "Diabetes self management plan"
+              }
+            ]
+          },
+          "transition": "Prescribe_Medications"
+        },
+        {
+          "transition": "Diabetic_CarePlan"
+        }
+      ]
+    },
+    "Diabetic_CarePlan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "698360004",
+          "display": "Diabetes self management plan"
+        }
+      ],
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": "160670007",
+          "display": "Diabetic diet"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "229065009",
+          "display": "Exercise therapy"
+        }
+      ],
+      "goals": [
+        {
+          "observation": {
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "4548-4",
+                "display": "Hemoglobin A1c total in Blood"
+              }
+            ],
+            "operator": "<",
+            "value": "7.0"
+          },
+          "addresses": [
+            "diabetes_stage"
+          ]
+        },
+        {
+          "observation": {
+            "codes": [
+              {
+                "system": "LOINC",
+                "code": "2339-0",
+                "display": "Glucose [Mass/volume] in Blood"
+              }
+            ],
+            "operator": "<",
+            "value": "108"
+          },
+          "addresses": [
+            "diabetes_stage"
+          ]
+        },
+        {
+          "text": "Maintain blood pressure below 140/90 mmHg",
+          "addresses": [
+            "diabetes_stage"
+          ]
+        },
+        {
+          "text": "Improve and maintenance of optimal foot health: aim at early detection of peripheral vascular problems and neuropathy presumed due to diabetes; and prevention of diabetic foot ulcer, gangrene",
+          "addresses": [
+            "diabetes_stage"
+          ]
+        },
+        {
+          "text": "Address patient knowledge deficit on diabetic self-care",
+          "addresses": [
+            "diabetes_stage"
+          ]
+        }
+      ],
+      "remarks": [
+        "based on https://github.com/clinical-cloud/sample-careplans"
+      ],
+      "reason": "diabetes_stage",
+      "direct_transition": "Prescribe_Medications"
+    },
+    "Prescribe_Medications": {
+      "type": "CallSubmodule",
+      "submodule": "metabolic_syndrome/medications",
+      "direct_transition": "Check_Complications"
+    },
+    "Check_Complications": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 1
+          },
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.084
+            },
+            {
+              "transition": "Check_Eye_Conditions",
+              "distribution": 0.916
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 2
+          },
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.121
+            },
+            {
+              "transition": "Check_Eye_Conditions",
+              "distribution": 0.879
+            }
+          ]
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.174
+            },
+            {
+              "transition": "Check_Eye_Conditions",
+              "distribution": 0.826
+            }
+          ],
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 3
+          }
+        },
+        {
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "==",
+            "value": 4
+          },
+          "distributions": [
+            {
+              "transition": "Check_Anemia_Exist",
+              "distribution": 0.503
+            },
+            {
+              "transition": "Check_Eye_Conditions",
+              "distribution": 0.497
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "The prevalence of anemia increased with stage of CKD, from 8.4% at stage 1 to 53.4% at stage 5 - see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3879360/"
+      ]
+    },
+    "check CKD": {
+      "type": "CallSubmodule",
+      "submodule": "metabolic_syndrome/kidney_conditions",
+      "direct_transition": "Check_Diabetes"
+    },
+    "Check_Eye_Conditions": {
+      "type": "CallSubmodule",
+      "submodule": "metabolic_syndrome/eye_conditions",
+      "direct_transition": "Check_Neuropathy"
+    },
+    "Check_Neuropathy": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "neuropathy",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Not",
+                "condition": {
+                  "condition_type": "Active Condition",
+                  "codes": [
+                    {
+                      "system": "SNOMED-CT",
+                      "code": "368581000119106",
+                      "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "transition": "Diagnose_Neuropathy"
+        },
+        {
+          "condition": {
+            "condition_type": "And",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "neuropathy",
+                "operator": "is nil"
+              },
+              {
+                "condition_type": "Active Condition",
+                "codes": [
+                  {
+                    "system": "SNOMED-CT",
+                    "code": "368581000119106",
+                    "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
+                  }
+                ]
+              }
+            ]
+          },
+          "transition": "End_Neuropathy"
+        },
+        {
+          "transition": "Consider_Procedures"
+        }
+      ]
+    },
+    "Diagnose_Neuropathy": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "368581000119106",
+          "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Consider_Procedures"
+    },
+    "End_Neuropathy": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "368581000119106",
+          "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
+        }
+      ],
+      "direct_transition": "Consider_Procedures"
+    },
+    "Consider_Procedures": {
+      "type": "Simple",
+      "direct_transition": "Potential_Amputation"
+    },
+    "Potential_Amputation": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Amputation_Necessary",
+            "within": {
+              "quantity": 1,
+              "unit": "years"
+            }
+          },
+          "remarks": [
+            "dialysis means this check is made every few days which can skew results.",
+            "we only want to consider amputation once a year"
+          ],
+          "transition": "No_Amputation_Necessary"
+        },
+        {
+          "condition": {
+            "condition_type": "Active Condition",
+            "codes": [
+              {
+                "system": "SNOMED-CT",
+                "code": "368581000119106",
+                "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
+              }
+            ]
+          },
+          "distributions": [
+            {
+              "distribution": 0.0025,
+              "transition": "Amputation_Necessary"
+            },
+            {
+              "distribution": 0.9975,
+              "transition": "No_Amputation_Necessary"
+            }
+          ],
+          "remarks": [
+            "In 2010, about 73,000 non-traumatic lower-limb amputations were performed in adults aged 20 years or older with diagnosed diabetes.",
+            "28.9 million adults had diagnosed diabetes. 73,000/ 28,900,000 = 0.0025 or 0.25% per year",
+            "https://www.cdc.gov/diabetes/data/statistics/2014statisticsreport.html"
+          ]
+        },
+        {
+          "transition": "No_Amputation_Necessary"
+        }
+      ]
+    },
+    "Amputation_Necessary": {
+      "type": "SetAttribute",
+      "attribute": "diabetes_amputation_necessary",
+      "value": true,
+      "direct_transition": "Schedule_Followup"
+    },
+    "No_Amputation_Necessary": {
+      "type": "SetAttribute",
+      "attribute": "diabetes_amputation_necessary",
+      "value": false,
+      "direct_transition": "Living_With_Diabetes"
+    },
+    "Schedule_Followup": {
+      "type": "EncounterEnd",
+      "direct_transition": "Amputations"
+    },
+    "Amputations": {
+      "type": "CallSubmodule",
+      "submodule": "metabolic_syndrome/amputations",
+      "direct_transition": "Living_With_Diabetes"
+    },
+    "Living_With_Diabetes": {
+      "type": "Simple",
+      "direct_transition": "End_Wellness_Encounter"
+    },
     "Anemia_Submodule": {
       "type": "CallSubmodule",
       "submodule": "anemia/anemia_sub",
-      "direct_transition": "check CKD"
+      "direct_transition": "Check_Eye_Conditions"
     },
     "Check_Anemia_Exist": {
       "type": "Simple",
@@ -65643,7 +75909,7 @@ export default {"acute_myeloid_leukemia":{
           }
         },
         {
-          "transition": "check CKD"
+          "transition": "Check_Eye_Conditions"
         }
       ],
       "remarks": [
@@ -65655,29 +75921,6 @@ export default {"acute_myeloid_leukemia":{
     "End_Wellness_Encounter": {
       "type": "EncounterEnd",
       "direct_transition": "Wellness_Encounter"
-    },
-    "Glucose Monitor": {
-      "type": "Device",
-      "code": {
-        "system": "SNOMED-CT",
-        "code": 337414009,
-        "display": "Blood glucose meter (physical object)"
-      },
-      "direct_transition": "Prescribe_Medications"
-    },
-    "Glucose Test Strips": {
-      "type": "SupplyList",
-      "supplies": [
-        {
-          "quantity": 50,
-          "code": {
-            "system": "SNOMED-CT",
-            "code": 337388004,
-            "display": "Blood glucose testing strips (physical object)"
-          }
-        }
-      ],
-      "direct_transition": "Monotherapy"
     }
   },
   "gmf_version": 1
@@ -65689,12 +75932,6 @@ export default {"acute_myeloid_leukemia":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "direct_transition": "Initial_Kidney_Health"
-    },
-    "Initial_Kidney_Health": {
-      "type": "SetAttribute",
-      "attribute": "ckd",
-      "value": 0,
       "direct_transition": "Initial_Eye_Health"
     },
     "Initial_Eye_Health": {
@@ -65717,45 +75954,7 @@ export default {"acute_myeloid_leukemia":{
         "quantity": 18,
         "unit": "years"
       },
-      "direct_transition": "Chance_to_Onset_Hypertension"
-    },
-    "Chance_to_Onset_Hypertension": {
-      "type": "Simple",
-      "remarks": [
-        "probability: 0.296 # (1.0==100%) http://www.cdc.gov/MMWr/preview/mmwrhtml/su6203a24.htm#Tab"
-      ],
       "conditional_transition": [
-        {
-          "transition": "Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil"
-          }
-        },
-        {
-          "transition": "Non_Veteran",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
-        }
-      ]
-    },
-    "Onset_Hypertension": {
-      "type": "SetAttribute",
-      "attribute": "hypertension",
-      "value": true,
-      "conditional_transition": [
-        {
-          "transition": "Non_Veteran_Diabetes_Prevalence",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
-        },
         {
           "transition": "Veteran_Diabetes_Prevalence",
           "condition": {
@@ -65763,30 +75962,9 @@ export default {"acute_myeloid_leukemia":{
             "attribute": "veteran",
             "operator": "is not nil"
           }
-        }
-      ]
-    },
-    "No_Hypertension": {
-      "type": "SetAttribute",
-      "attribute": "hypertension",
-      "value": false,
-      "conditional_transition": [
-        {
-          "transition": "Non_Veteran_Diabetes_Prevalence",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is nil"
-          }
         },
         {
-          "transition": "Veteran_Diabetes_Prevalence",
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "veteran",
-            "operator": "is not nil",
-            "value": 0
-          }
+          "transition": "Non_Veteran_Diabetes_Prevalence"
         }
       ]
     },
@@ -65803,28 +75981,22 @@ export default {"acute_myeloid_leukemia":{
       "direct_transition": "Onset_Prediabetes"
     },
     "Eventual_Diabetes": {
-      "type": "Delay",
-      "range": {
-        "low": 0,
-        "high": 30,
-        "unit": "years"
-      },
+      "type": "SetAttribute",
+      "attribute": "time_until_diabetes_onset",
+      "direct_transition": "Already_age_18",
       "remarks": [
         "we assume that diabetes and prediabetes generally onset between the ages of 18-55",
         "this tracks a little lower so that we can diagnose prediabetes early and then diabetes later",
         "there is little info on how many patients with prediabetes progress to diabetes",
         "so we assume that 38% of patients with diabetes had a prediabetes diagnosis"
       ],
-      "distributed_transition": [
-        {
-          "distribution": 0.38,
-          "transition": "Onset_Prediabetes_Towards_Diabetes"
-        },
-        {
-          "distribution": 0.62,
-          "transition": "Delay_before_Diabetes"
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 55,
+          "standardDeviation": 15
         }
-      ]
+      }
     },
     "Onset_Prediabetes": {
       "type": "SetAttribute",
@@ -65839,19 +76011,6 @@ export default {"acute_myeloid_leukemia":{
       "type": "SetAttribute",
       "attribute": "prediabetes",
       "value": true,
-      "direct_transition": "Delay_before_Diabetes"
-    },
-    "Delay_before_Diabetes": {
-      "type": "Delay",
-      "range": {
-        "low": 0,
-        "high": 7,
-        "unit": "years"
-      },
-      "remarks": [
-        "we assume that diabetes and prediabetes generally onset between the ages of 18-55",
-        "at this point we are between 18-48, so we wait 0-7 years"
-      ],
       "direct_transition": "Onset_Diabetes"
     },
     "Onset_Diabetes": {
@@ -65870,7 +76029,7 @@ export default {"acute_myeloid_leukemia":{
             "operator": "==",
             "value": true
           },
-          "transition": "Nephropathy_Progression"
+          "transition": "Retinopathy_Progression"
         },
         {
           "distributions": [
@@ -65895,13 +76054,13 @@ export default {"acute_myeloid_leukemia":{
       "type": "SetAttribute",
       "attribute": "hypertension",
       "value": true,
-      "direct_transition": "Nephropathy_Progression"
+      "direct_transition": "Retinopathy_Progression"
     },
     "No_Hypertension_With_Diabetes": {
       "type": "SetAttribute",
       "attribute": "hypertension",
       "value": false,
-      "direct_transition": "Nephropathy_Progression"
+      "direct_transition": "Retinopathy_Progression"
     },
     "Diabetes_Progression": {
       "type": "Delay",
@@ -65909,186 +76068,7 @@ export default {"acute_myeloid_leukemia":{
         "quantity": 1,
         "unit": "months"
       },
-      "direct_transition": "Nephropathy_Progression"
-    },
-    "Nephropathy_Progression": {
-      "type": "Simple",
-      "remarks": [
-        "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4727808/",
-        "There are 5 defined stages of kidney disease; stage 5 is End-stage where dialysis is necessary",
-        "Prevalence of Nephropathy is 34.5% - http://link.springer.com/chapter/10.1007%2F978-1-4939-0793-9_2",
-        "Prevalence of microalbuminuria is ~ 28.8% - https://www.ncbi.nlm.nih.gov/pubmed/11877563",
-        "Prevalence of End stage renal disease is ~ .78% - ",
-        "https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf"
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "And",
-            "conditions": [
-              {
-                "condition_type": "Attribute",
-                "attribute": "veteran",
-                "operator": "is not nil"
-              },
-              {
-                "condition_type": "Attribute",
-                "attribute": "ckd",
-                "operator": "==",
-                "value": 0
-              }
-            ]
-          },
-          "distributions": [
-            {
-              "distribution": 0.99,
-              "transition": "Retinopathy_Progression"
-            },
-            {
-              "distribution": 0.01,
-              "transition": "Set_CKD_1 Damage"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ckd",
-            "operator": "==",
-            "value": 0
-          },
-          "distributions": [
-            {
-              "distribution": 0.9982,
-              "transition": "Retinopathy_Progression"
-            },
-            {
-              "distribution": 0.0018,
-              "transition": "Set_CKD_1 Damage"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ckd",
-            "operator": "==",
-            "value": 1
-          },
-          "distributions": [
-            {
-              "distribution": 0.9865,
-              "transition": "Set_CKD_1 Damage"
-            },
-            {
-              "distribution": 0.0135,
-              "transition": "Set_CKD_2 Damage"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ckd",
-            "operator": "==",
-            "value": 2
-          },
-          "distributions": [
-            {
-              "distribution": 0.994,
-              "transition": "Set_CKD_2 Damage"
-            },
-            {
-              "distribution": 0.006,
-              "transition": "Set_CKD_3 Damage"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ckd",
-            "operator": "==",
-            "value": 3
-          },
-          "distributions": [
-            {
-              "distribution": 0.9994,
-              "transition": "Set_CKD_3 Damage"
-            },
-            {
-              "distribution": 0.0006,
-              "transition": "Set_CKD_4 Damage"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ckd",
-            "operator": "==",
-            "value": 4
-          },
-          "distributions": [
-            {
-              "distribution": 0.9994,
-              "transition": "Set_CKD_4 Damage"
-            },
-            {
-              "distribution": 0.0006,
-              "transition": "Expected_Lifespan_for_ESRD"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Attribute",
-            "attribute": "ckd",
-            "operator": "==",
-            "value": 5
-          },
-          "distributions": [],
-          "transition": "Expected_Lifespan_for_ESRD"
-        }
-      ]
-    },
-    "Set_Nephropathy": {
-      "type": "SetAttribute",
-      "attribute": "nephropathy",
-      "value": true,
-      "direct_transition": "CKD1_Symptom_1"
-    },
-    "Set_Microalbuminuria": {
-      "type": "SetAttribute",
-      "attribute": "microalbuminuria",
-      "value": true,
-      "direct_transition": "CKD2_Symptom_1"
-    },
-    "Set_Proteinuria": {
-      "type": "SetAttribute",
-      "attribute": "proteinuria",
-      "value": true,
-      "direct_transition": "CKD3_Symptom_1"
-    },
-    "Expected_Lifespan_for_ESRD": {
-      "type": "Death",
-      "range": {
-        "low": 4,
-        "high": 10,
-        "unit": "years"
-      },
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "46177005",
-          "display": "End stage renal disease (disorder)"
-        }
-      ],
-      "remarks": [
-        "Life expectency depends on many factors, but for patients > 40 it's generally less than 10 years with dialysis",
-        "http://link.springer.com/article/10.1007/s00467-016-3383-8 (Table 2"
-      ],
-      "direct_transition": "Set ESRD"
+      "direct_transition": "Retinopathy_Progression"
     },
     "Retinopathy_Progression": {
       "type": "Simple",
@@ -66420,32 +76400,6 @@ export default {"acute_myeloid_leukemia":{
       "type": "Simple",
       "direct_transition": "Diabetes_Progression"
     },
-    "Veteran": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Onset_Hypertension",
-          "distribution": 0.306
-        },
-        {
-          "transition": "No_Hypertension",
-          "distribution": 0.694
-        }
-      ]
-    },
-    "Non_Veteran": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Onset_Hypertension",
-          "distribution": 0.296
-        },
-        {
-          "transition": "No_Hypertension",
-          "distribution": 0.704
-        }
-      ]
-    },
     "Non_Veteran_Diabetes_Prevalence": {
       "type": "Simple",
       "remarks": [
@@ -66469,7 +76423,7 @@ export default {"acute_myeloid_leukemia":{
           },
           "distributions": [
             {
-              "distribution": 0.083,
+              "distribution": 0.25,
               "transition": "Eventual_Diabetes",
               "remarks": [
                 "0.065 * 1.278"
@@ -66483,7 +76437,7 @@ export default {"acute_myeloid_leukemia":{
               ]
             },
             {
-              "distribution": 0.467,
+              "distribution": 0.3,
               "transition": "No_Diabetes"
             }
           ]
@@ -66495,7 +76449,7 @@ export default {"acute_myeloid_leukemia":{
           },
           "distributions": [
             {
-              "distribution": 0.1815,
+              "distribution": 0.25,
               "transition": "Eventual_Diabetes",
               "remarks": [
                 "0.142 * 1.278"
@@ -66509,7 +76463,7 @@ export default {"acute_myeloid_leukemia":{
               ]
             },
             {
-              "distribution": 0.3685,
+              "distribution": 0.3,
               "transition": "No_Diabetes"
             }
           ]
@@ -66521,7 +76475,7 @@ export default {"acute_myeloid_leukemia":{
           },
           "distributions": [
             {
-              "distribution": 0.1636,
+              "distribution": 0.25,
               "transition": "Eventual_Diabetes",
               "remarks": [
                 "0.128 * 1.278"
@@ -66535,7 +76489,7 @@ export default {"acute_myeloid_leukemia":{
               ]
             },
             {
-              "distribution": 0.3864,
+              "distribution": 0.3,
               "transition": "No_Diabetes"
             }
           ]
@@ -66547,7 +76501,7 @@ export default {"acute_myeloid_leukemia":{
           },
           "distributions": [
             {
-              "distribution": 0.2045,
+              "distribution": 0.25,
               "transition": "Eventual_Diabetes",
               "remarks": [
                 "0.16 * 1.278"
@@ -66561,7 +76515,7 @@ export default {"acute_myeloid_leukemia":{
               ]
             },
             {
-              "distribution": 0.3455,
+              "distribution": 0.3,
               "transition": "No_Diabetes"
             }
           ]
@@ -66573,7 +76527,7 @@ export default {"acute_myeloid_leukemia":{
           },
           "distributions": [
             {
-              "distribution": 0.1828,
+              "distribution": 0.25,
               "transition": "Eventual_Diabetes",
               "remarks": [
                 "0.143 * 1.278"
@@ -66587,7 +76541,7 @@ export default {"acute_myeloid_leukemia":{
               ]
             },
             {
-              "distribution": 0.4572,
+              "distribution": 0.39,
               "transition": "No_Diabetes"
             }
           ]
@@ -66598,7 +76552,7 @@ export default {"acute_myeloid_leukemia":{
           ],
           "distributions": [
             {
-              "distribution": 0.1022,
+              "distribution": 0.25,
               "transition": "Eventual_Diabetes",
               "remarks": [
                 "0.08 * 1.278"
@@ -66612,7 +76566,7 @@ export default {"acute_myeloid_leukemia":{
               ]
             },
             {
-              "distribution": 0.4478,
+              "distribution": 0.3,
               "transition": "No_Diabetes"
             }
           ]
@@ -66636,229 +76590,70 @@ export default {"acute_myeloid_leukemia":{
         }
       ]
     },
-    "Set_CKD_1 Damage": {
+    "Onset_Prediabetes_2": {
       "type": "SetAttribute",
-      "attribute": "ckd",
-      "direct_transition": "Set_Nephropathy",
-      "value": 1
-    },
-    "Set_CKD_2 Damage": {
-      "type": "SetAttribute",
-      "attribute": "ckd",
-      "direct_transition": "Set_Microalbuminuria",
-      "value": 2
-    },
-    "Set_CKD_3 Damage": {
-      "type": "SetAttribute",
-      "attribute": "ckd",
-      "value": 3,
-      "direct_transition": "Set_Proteinuria"
-    },
-    "Set_CKD_4 Damage": {
-      "type": "SetAttribute",
-      "attribute": "ckd",
-      "value": 4,
-      "direct_transition": "CKD4_Symptom_1"
-    },
-    "Set_CKD_5 Damage": {
-      "type": "SetAttribute",
-      "attribute": "ckd",
-      "direct_transition": "CKD5_Symptom_1",
-      "value": 5
-    },
-    "CKD1_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "CKD1_Symptom_2"
-    },
-    "CKD2_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "CKD2_Symptom_2"
-    },
-    "CKD2_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "CKD2_Symptom_3"
-    },
-    "CKD2_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "CKD2_Symptom_4"
-    },
-    "CKD2_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 20,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "CKD1_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "CKD1_Symptom_3"
-    },
-    "CKD1_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "CKD1_Symptom_4"
-    },
-    "CKD1_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 1,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "CKD3_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "CKD3_Symptom_2"
-    },
-    "CKD3_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "CKD3_Symptom_3"
-    },
-    "CKD3_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "CKD3_Symptom_4"
-    },
-    "CKD3_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 40,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "CKD5_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "remarks": [
-        "Without intervention, 20-40 percent of patients with type 2 diabetes/microalbuminuria, will evolve to macroalbuminuria.",
-        "Shlipak, Michael. 'Clinical Evidence Handbook: Diabetic Nephropathy: Preventing Progression - American Family Physician'. www.aafp.org."
-      ],
-      "direct_transition": "CKD5_Symptom_2"
-    },
-    "CKD5_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "CKD5_Symptom_3"
-    },
-    "CKD5_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "CKD5_Symptom_4"
-    },
-    "CKD5_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "range": {
-        "low": 50,
-        "high": 100
-      },
-      "direct_transition": "Retinopathy_Progression"
-    },
-    "CKD4_Symptom_1": {
-      "type": "Symptom",
-      "symptom": "Hunger",
-      "cause": "",
-      "direct_transition": "CKD4_Symptom_2",
-      "range": {
-        "low": 45,
-        "high": 2
-      }
-    },
-    "CKD4_Symptom_2": {
-      "type": "Symptom",
-      "symptom": "Fatigue",
-      "cause": "",
-      "direct_transition": "CKD4_Symptom_3",
-      "range": {
-        "low": 45,
-        "high": 100
-      }
-    },
-    "CKD4_Symptom_3": {
-      "type": "Symptom",
-      "symptom": "Frequent Urination",
-      "cause": "",
-      "direct_transition": "CKD4_Symptom_4",
-      "range": {
-        "low": 45,
-        "high": 100
-      }
-    },
-    "CKD4_Symptom_4": {
-      "type": "Symptom",
-      "symptom": "Thirst",
-      "cause": "",
-      "direct_transition": "Retinopathy_Progression",
-      "range": {
-        "low": 45,
-        "high": 100
-      }
-    },
-    "Set ESRD": {
-      "type": "SetAttribute",
-      "attribute": "end_stage_renal_disease",
-      "direct_transition": "Set_CKD_5 Damage",
+      "attribute": "prediabetes",
+      "direct_transition": "Delay_Another_Year",
       "value": true
+    },
+    "Countdown to Diabetes": {
+      "type": "Counter",
+      "attribute": "time_until_diabetes_onset",
+      "action": "decrement",
+      "distributed_transition": [
+        {
+          "transition": "Onset_Prediabetes_2",
+          "distribution": 0.05
+        },
+        {
+          "transition": "Delay_Another_Year",
+          "distribution": 0.95
+        }
+      ]
+    },
+    "Already_age_18": {
+      "type": "Counter",
+      "attribute": "time_until_diabetes_onset",
+      "action": "decrement",
+      "conditional_transition": [
+        {
+          "transition": "Onset_Prediabetes_Towards_Diabetes",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "time_until_diabetes_onset",
+            "operator": "<=",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Countdown to Diabetes"
+        }
+      ],
+      "amount": 18
+    },
+    "Delay_Another_Year": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "years",
+      "conditional_transition": [
+        {
+          "transition": "Onset_Prediabetes_Towards_Diabetes",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "time_until_diabetes_onset",
+            "operator": "<=",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Countdown to Diabetes"
+        }
+      ]
     }
   },
   "gmf_version": 1
@@ -67826,6 +77621,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "osteoarthritis",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -76670,6 +86466,627 @@ export default {"acute_myeloid_leukemia":{
   "gmf_version": 2
 }
 ,
+"sleep_apnea":{
+  "name": "Sleep Apnea",
+  "remarks": [
+    "Basic Sleep Apnea module primarily derived from Harrison's Principles of Internal Medicine (15th edition, 2001) except where otherwise quoted and cited.",
+    "",
+    "\"... the overall prevalence of any OSA ranged from 9% to 38% in the general adult population, from 13% to 33% in men and from 6% to 19% in women, although much higher in the elderly groups.\" - from https://doi.org/10.1016/j.smrv.2016.07.002.",
+    "",
+    "Sleep apnea ... is one of the leading causes of excessive daytime sleepiness.",
+    "...",
+    "...  inevitably results in snoring. In most patients, snoring antedates the development of obstructive events by many years.",
+    "...",
+    "Over 50% of patients with Obstructive Sleep Apnea (OSA) have systemic hypertension.",
+    "...",
+    "the typical patient is a male aged 30 to 60 years who presents with a history of snoring, excessive daytime sleepiness ... and often mild to moderate hypertension.",
+    "...",
+    "The definitive investigation for suspected OSA is polysomnography, a detailed overnight sleep study...",
+    "...",
+    "Because polysomnography is a time-consuming and expensive test, there is considerable interest in the role of simplified, unattended, ambulatory sleep monitoring ... that would allow the patient to be studied at home...",
+    "...",
+    "Studies suggest that overnight oximetry can obviate the need for polysomnography in about one-third of clinic patients referred for consideration ... the remaining two-thirds of patients ... will require polysomnography.",
+    "...",
+    "TREATMENT",
+    "...",
+    "Mild to moderate OSA can often be managed effectively by modest weight reduction, avoidance of alcohol, improvement of nasal patency, and avoidance of sleeping in the supine posture. Intraoral appliances ... are also effective in 55 to 80% of patients.",
+    "...",
+    "Nasal CPAP ... is currently the most successful long-term approach to treatment, being well tolerated and effective In over 80% of patients ... For patients with ischemic heart disease or congestive heart failure who also have OSA, nasal CPAP is the only treatment that has been specifically test. and is considered the treatment of choice."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Wait Until Middle Age"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Wait Until Middle Age": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "years",
+      "direct_transition": "Prevalence"
+    },
+    "Prevalence": {
+      "type": "Simple",
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Sleep Disorder",
+              "distribution": 0.06
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.94
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Sleep Disorder",
+              "distribution": 0.13
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.87
+            }
+          ]
+        },
+        {
+          "distributions": [],
+          "transition": "Terminal"
+        }
+      ]
+    },
+    "Initial Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Sleep Disorder",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom (procedure)"
+        }
+      ],
+      "direct_transition": "Initial Assessment"
+    },
+    "Loud Snoring": {
+      "type": "Symptom",
+      "symptom": "loud snoring",
+      "cause": "",
+      "probability": 1,
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "direct_transition": "Excessive Daytime Sleepiness"
+    },
+    "Excessive Daytime Sleepiness": {
+      "type": "Symptom",
+      "symptom": "excessive daytime sleepiness",
+      "cause": "",
+      "probability": 1,
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "direct_transition": "Initial Encounter"
+    },
+    "Hypertension": {
+      "type": "SetAttribute",
+      "attribute": "hypertension",
+      "direct_transition": "Loud Snoring",
+      "value": true
+    },
+    "Overnight Test": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "Sleep Disorder",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "2nd Assessment"
+    },
+    "2nd Assessment": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 103750000,
+          "display": "Sleep apnea assessment (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Monitoring Equipment",
+      "reason": "Sleep Disorder"
+    },
+    "Sleep Study": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 82808001,
+          "display": "Sleep apnea monitoring with alarm (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 60554003,
+          "display": "Polysomnography (procedure)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 108243003,
+          "display": "Sleep disorder test AND/OR procedure (procedure)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 446573003,
+          "display": "Continuous positive airway pressure titration (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 9,
+          "low": 3
+        }
+      },
+      "unit": "hours",
+      "direct_transition": "End Monitoring Equipment",
+      "reason": "Sleep Disorder"
+    },
+    "Monitoring Equipment": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": 701077002,
+        "display": "Respiratory apnea monitoring system (physical object)"
+      },
+      "direct_transition": "Polysomnography Device"
+    },
+    "End Monitoring Equipment": {
+      "type": "DeviceEnd",
+      "direct_transition": "End Polysomnography Device",
+      "device": "Monitoring Equipment"
+    },
+    "Obstructive Sleep Apnea": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 78275009,
+          "display": "Obstructive sleep apnea syndrome (disorder)"
+        }
+      ],
+      "direct_transition": "Treatment",
+      "assign_to_attribute": "sleep_apnea"
+    },
+    "Sleep Disorder": {
+      "type": "ConditionOnset",
+      "target_encounter": "Initial Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 39898005,
+          "display": "Sleep disorder (disorder)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Hypertension",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Loud Snoring",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Home Sleep Device": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": 720253003,
+        "display": "Home-use sleep apnea recording system (physical object)"
+      },
+      "direct_transition": "Sleep Specialist Encounter End"
+    },
+    "Polysomnography Device": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": 701100002,
+        "display": "Polysomnography analyzer (physical object)"
+      },
+      "direct_transition": "Sleep Study"
+    },
+    "End Polysomnography Device": {
+      "type": "DeviceEnd",
+      "direct_transition": "Obstructive Sleep Apnea",
+      "device": "Polysomnography Device"
+    },
+    "Wait Until Overnight Study": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 21,
+          "low": 1
+        }
+      },
+      "unit": "days",
+      "direct_transition": "Overnight Test"
+    },
+    "Return Home Sleep Device": {
+      "type": "DeviceEnd",
+      "direct_transition": "2nd_Assessment",
+      "device": "Home Sleep Device"
+    },
+    "Sleep Apnea": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 73430006,
+          "display": "Sleep apnea (disorder)"
+        }
+      ],
+      "direct_transition": "Treatment",
+      "assign_to_attribute": "sleep_apnea"
+    },
+    "2nd_Assessment": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 103750000,
+          "display": "Sleep apnea assessment (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "reason": "Sleep Disorder",
+      "direct_transition": "CPAP Titration"
+    },
+    "Treatment": {
+      "type": "Simple",
+      "direct_transition": "Sleep Apnea Care Plan"
+    },
+    "End 2nd Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "Sleep Apnea Care Plan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 734163000,
+          "display": "Care plan (record artifact)"
+        }
+      ],
+      "reason": "sleep_apnea",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 388976009,
+          "display": "Weight reduction regimen (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 419822006,
+          "display": "Warning. Avoid alcoholic drink (qualifier value)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 47545007,
+          "display": "Continuous positive airway pressure ventilation treatment (regime/therapy)"
+        }
+      ],
+      "goals": [
+        {
+          "addresses": [
+            "text"
+          ],
+          "text": "Avoid sleeping in the supine posture"
+        }
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Or",
+            "conditions": [
+              {
+                "condition_type": "Attribute",
+                "attribute": "chf",
+                "operator": "is not nil"
+              },
+              {
+                "condition_type": "Attribute",
+                "attribute": "coronary_heart_disease",
+                "operator": "is not nil"
+              }
+            ]
+          },
+          "distributions": [],
+          "transition": "Home CPAP Unit"
+        },
+        {
+          "distributions": [
+            {
+              "transition": "Home CPAP Unit",
+              "distribution": 0.8
+            },
+            {
+              "transition": "Intraoral Appliance",
+              "distribution": 0.2
+            }
+          ]
+        }
+      ]
+    },
+    "Intraoral Appliance": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": 272265001,
+        "display": "Appliance for sleep apnea (physical object)"
+      },
+      "direct_transition": "End 2nd Encounter"
+    },
+    "Home CPAP Unit": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": 702172008,
+        "display": "Home continuous positive airway pressure unit (physical object)"
+      },
+      "distributed_transition": [
+        {
+          "transition": "Face Mask",
+          "distribution": 0.5
+        },
+        {
+          "transition": "Nasal Mask",
+          "distribution": 0.5
+        }
+      ]
+    },
+    "Initial Assessment": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 103750000,
+          "display": "Sleep apnea assessment (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "reason": "Sleep Disorder",
+      "direct_transition": "Referral to Sleep Specialist"
+    },
+    "Referral to Sleep Specialist": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 698560000,
+          "display": "Referral to sleep apnea clinic (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 5
+        }
+      },
+      "unit": "minutes",
+      "reason": "Sleep Disorder",
+      "direct_transition": "Initial Encounter End"
+    },
+    "Sleep Specialist Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Sleep Disorder",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185345009,
+          "display": "Encounter for symptom (procedure)"
+        }
+      ],
+      "direct_transition": "Specialist Assessment"
+    },
+    "Wait Until Appointment": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 21,
+          "low": 7
+        }
+      },
+      "unit": "days",
+      "direct_transition": "Sleep Specialist Encounter"
+    },
+    "Sleep Specialist Encounter End": {
+      "type": "EncounterEnd",
+      "conditional_transition": [
+        {
+          "transition": "Wait Until Overnight Study",
+          "condition": {
+            "condition_type": "PriorState",
+            "name": "Referral to Overnight"
+          }
+        },
+        {
+          "transition": "Appointment Delay"
+        }
+      ]
+    },
+    "Initial Encounter End": {
+      "type": "EncounterEnd",
+      "direct_transition": "Wait Until Appointment"
+    },
+    "Specialist Assessment": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 103750000,
+          "display": "Sleep apnea assessment (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "reason": "Sleep Disorder",
+      "distributed_transition": [
+        {
+          "transition": "Home Sleep Device",
+          "distribution": 0.33
+        },
+        {
+          "transition": "Referral to Overnight",
+          "distribution": 0.6699999999999999
+        }
+      ]
+    },
+    "Referral to Overnight": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 698560000,
+          "display": "Referral to sleep apnea clinic (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 5
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Sleep Specialist Encounter End",
+      "reason": "Sleep Disorder"
+    },
+    "Appointment Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 14,
+          "low": 7
+        }
+      },
+      "unit": "days",
+      "direct_transition": "Follow Up"
+    },
+    "CPAP Titration": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 446573003,
+          "display": "Continuous positive airway pressure titration (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 9,
+          "low": 3
+        }
+      },
+      "unit": "hours",
+      "direct_transition": "Sleep Apnea"
+    },
+    "Nasal Mask": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": 442398003,
+        "display": "Nasal mask (physical object)"
+      },
+      "direct_transition": "End 2nd Encounter"
+    },
+    "Face Mask": {
+      "type": "Device",
+      "code": {
+        "system": "SNOMED-CT",
+        "code": 704718009,
+        "display": "CPAP/BPAP oral mask (physical object)"
+      },
+      "direct_transition": "End 2nd Encounter"
+    },
+    "Follow Up": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "Sleep Disorder",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185389009,
+          "display": "Follow-up visit (procedure)"
+        }
+      ],
+      "direct_transition": "Return Home Sleep Device"
+    }
+  },
+  "gmf_version": 2
+}
+,
 "snf/skilled_nursing_facility":{
   "name": "Skilled Nursing Facility",
   "remarks": [
@@ -79978,8 +90395,8 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "781831000000109",
-          "display": "Major surgery care management"
+          "code": "737567002",
+          "display": "Major surgery care management (procedure)"
         }
       ],
       "activities": [
@@ -80366,6 +90783,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "uti",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -80531,6 +90949,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "uti",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -81504,6 +91923,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "hyperlipidemia",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -81698,8 +92118,8 @@ export default {"acute_myeloid_leukemia":{
             }
           ],
           "range": {
-            "low": 60,
-            "high": 80
+            "low": 6,
+            "high": 8
           }
         },
         {
@@ -81951,8 +92371,8 @@ export default {"acute_myeloid_leukemia":{
             }
           ],
           "range": {
-            "low": 60,
-            "high": 80
+            "low": 6,
+            "high": 8
           }
         },
         {
@@ -83504,6 +93924,7 @@ export default {"acute_myeloid_leukemia":{
     "Initial_Psychiatric_MDD_Encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -83651,6 +94072,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "mdd_psych",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -83833,6 +94255,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "mdd",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -83855,6 +94278,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "mdd_psych",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -84600,8 +95024,8 @@ export default {"acute_myeloid_leukemia":{
             }
           ],
           "range": {
-            "low": 60,
-            "high": 80
+            "low": 6,
+            "high": 8
           }
         },
         {
@@ -85167,10 +95591,12 @@ export default {"acute_myeloid_leukemia":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "direct_transition": "age guard"
+      "direct_transition": "age guard",
+      "name": "Initial"
     },
     "Terminal": {
-      "type": "Terminal"
+      "type": "Terminal",
+      "name": "Terminal"
     },
     "Female": {
       "type": "Simple",
@@ -85203,7 +95629,8 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "The prevalence data presented here come from the seminal report on VHA health care delivery systems and management processes.  It can be accessed here: https://www.va.gov/opa/choiceact/documents/assessments/integrated_report.pdf",
         ""
-      ]
+      ],
+      "name": "Female"
     },
     "Male": {
       "type": "Simple",
@@ -85235,7 +95662,8 @@ export default {"acute_myeloid_leukemia":{
       ],
       "remarks": [
         "The prevalence data presented here come from the seminal report on VHA health care delivery systems and management processes.  It can be accessed here: https://www.va.gov/opa/choiceact/documents/assessments/integrated_report.pdf"
-      ]
+      ],
+      "name": "Male"
     },
     "Veteran": {
       "type": "Simple",
@@ -85254,11 +95682,13 @@ export default {"acute_myeloid_leukemia":{
             "gender": "M"
           }
         }
-      ]
+      ],
+      "name": "Veteran"
     },
     "Non_Veteran": {
       "type": "Simple",
-      "direct_transition": "Terminal"
+      "direct_transition": "Terminal",
+      "name": "Non_Veteran"
     },
     "Onset_age_30_to_39_Male": {
       "type": "Delay",
@@ -85267,7 +95697,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 9,
         "high": 18,
         "unit": "years"
-      }
+      },
+      "name": "Onset_age_30_to_39_Male"
     },
     "Onset_age_30_to_39_Female": {
       "type": "Delay",
@@ -85276,7 +95707,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 9,
         "high": 18,
         "unit": "years"
-      }
+      },
+      "name": "Onset_age_30_to_39_Female"
     },
     "Onset_age_40_to_49_Male": {
       "type": "Delay",
@@ -85285,7 +95717,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 19,
         "high": 28,
         "unit": "years"
-      }
+      },
+      "name": "Onset_age_40_to_49_Male"
     },
     "Onset_age_40_to_49_Female": {
       "type": "Delay",
@@ -85294,7 +95727,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 19,
         "high": 28,
         "unit": "years"
-      }
+      },
+      "name": "Onset_age_40_to_49_Female"
     },
     "Onset_age_50_to_59_Female": {
       "type": "Delay",
@@ -85303,7 +95737,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 29,
         "high": 38,
         "unit": "years"
-      }
+      },
+      "name": "Onset_age_50_to_59_Female"
     },
     "Onset_age_50_to_59_Male": {
       "type": "Delay",
@@ -85312,7 +95747,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 29,
         "high": 38,
         "unit": "years"
-      }
+      },
+      "name": "Onset_age_50_to_59_Male"
     },
     "PTSD Episode": {
       "type": "ConditionOnset",
@@ -85322,10 +95758,12 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 47505003,
-          "display": "Posttraumatic stress disorder"
+          "display": "Posttraumatic stress disorder",
+          "value_set": ""
         }
       ],
-      "direct_transition": "PTSD_Encounter"
+      "direct_transition": "Wait_For_PHQ",
+      "name": "PTSD Episode"
     },
     "PTSD_Initial_Careplan": {
       "type": "CarePlanStart",
@@ -85333,7 +95771,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 736254008,
-          "display": "Psychiatry care plan"
+          "display": "Psychiatry care plan",
+          "value_set": ""
         }
       ],
       "reason": "ptsd",
@@ -85344,7 +95783,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Initial psychiatric interview with mental status and evaluation"
         }
       ],
-      "direct_transition": "end_PTSD_Encounter"
+      "direct_transition": "end_PTSD_Encounter",
+      "name": "PTSD_Initial_Careplan"
     },
     "Initial_Psychiatric_PTSD_Encounter": {
       "type": "Encounter",
@@ -85353,11 +95793,13 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 79094001,
-          "display": "Initial Psychiatric Interview with mental status evaluation"
+          "display": "Initial Psychiatric Interview with mental status evaluation",
+          "value_set": ""
         }
       ],
       "reason": "ptsd",
-      "direct_transition": "PHQ2_Q9 Assessment"
+      "direct_transition": "PHQ2_Q9 Assessment",
+      "name": "Initial_Psychiatric_PTSD_Encounter"
     },
     "PTSD_Careplan_Psych_and_Rx": {
       "type": "CarePlanStart",
@@ -85365,7 +95807,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 718347000,
-          "display": "Mental health care plan (record artifact)"
+          "display": "Mental health care plan (record artifact)",
+          "value_set": ""
         }
       ],
       "reason": "ptsd",
@@ -85423,7 +95866,8 @@ export default {"acute_myeloid_leukemia":{
             "operator": "is nil"
           }
         }
-      ]
+      ],
+      "name": "PTSD_Careplan_Psych_and_Rx"
     },
     "PTSD_Careplan_Psych": {
       "type": "CarePlanStart",
@@ -85431,7 +95875,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 718347000,
-          "display": "Mental health care plan (record artifact)"
+          "display": "Mental health care plan (record artifact)",
+          "value_set": ""
         }
       ],
       "direct_transition": "end_Psych_encounter",
@@ -85468,12 +95913,14 @@ export default {"acute_myeloid_leukemia":{
           "code": 719858009,
           "display": "Telehealth monitoring (regime/therapy)"
         }
-      ]
+      ],
+      "name": "PTSD_Careplan_Psych"
     },
     "Change_Dx_Not_PTSD": {
       "type": "ConditionEnd",
       "direct_transition": "Pain_Vital_3",
-      "referenced_by_attribute": "ptsd"
+      "referenced_by_attribute": "ptsd",
+      "name": "Change_Dx_Not_PTSD"
     },
     "PTSD_Careplan_Rx_ONLY": {
       "type": "CarePlanStart",
@@ -85481,7 +95928,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 718347000,
-          "display": "Mental health care plan (record artifact)"
+          "display": "Mental health care plan (record artifact)",
+          "value_set": ""
         }
       ],
       "conditional_transition": [
@@ -85504,7 +95952,8 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "reason": "ptsd",
-      "assign_to_attribute": "ptsd_careplan"
+      "assign_to_attribute": "ptsd_careplan",
+      "name": "PTSD_Careplan_Rx_ONLY"
     },
     "PTSD Diagnosis": {
       "type": "ConditionOnset",
@@ -85513,7 +95962,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 47505003,
-          "display": "Posttraumatic stress disorder"
+          "display": "Posttraumatic stress disorder",
+          "value_set": ""
         }
       ],
       "distributed_transition": [
@@ -85545,7 +95995,8 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "estimate of percents of patients falling into larger categories of treatment models (e.g. Rx only, Rx + Psychology or Psych only) provided by Jodie Trafton, PhD.",
         ""
-      ]
+      ],
+      "name": "PTSD Diagnosis"
     },
     "end_PTSD_Encounter": {
       "type": "EncounterEnd",
@@ -85554,7 +96005,8 @@ export default {"acute_myeloid_leukemia":{
         "system": "NUBC",
         "code": "01",
         "display": "Discharged home safe"
-      }
+      },
+      "name": "end_PTSD_Encounter"
     },
     "Evaluation Gate delay": {
       "type": "Delay",
@@ -85562,7 +96014,8 @@ export default {"acute_myeloid_leukemia":{
         "quantity": 1,
         "unit": "weeks"
       },
-      "direct_transition": "PTSD_Re_evaluation Encounter"
+      "direct_transition": "PTSD_Re_evaluation Encounter",
+      "name": "Evaluation Gate delay"
     },
     "PTSD_Re_evaluation Encounter": {
       "type": "Encounter",
@@ -85571,7 +96024,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 47505003,
-          "display": "posttraumatic stress disorder"
+          "display": "posttraumatic stress disorder",
+          "value_set": ""
         }
       ],
       "distributed_transition": [
@@ -85604,7 +96058,8 @@ export default {"acute_myeloid_leukemia":{
           "distribution": 0.15
         }
       ],
-      "reason": "ptsd"
+      "reason": "ptsd",
+      "name": "PTSD_Re_evaluation Encounter"
     },
     "end_Psych_encounter": {
       "type": "EncounterEnd",
@@ -85630,7 +96085,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "therapy delay"
         }
-      ]
+      ],
+      "name": "end_Psych_encounter"
     },
     "PTSD Medication Order": {
       "type": "MedicationOrder",
@@ -85638,7 +96094,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": 312938,
-          "display": "Sertraline 100 MG Oral Tablet"
+          "display": "Sertraline 100 MG Oral Tablet",
+          "value_set": ""
         }
       ],
       "assign_to_attribute": "SSRI",
@@ -85668,13 +96125,15 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "most common Rx ordered tied to mental health conditions like PTSD are SSRIs (per VA CDW data analysis)",
         ""
-      ]
+      ],
+      "name": "PTSD Medication Order"
     },
     "end re_evaluation_medication": {
       "type": "MedicationEnd",
       "direct_transition": "PTSD Medication Order",
       "medication_order": "",
-      "referenced_by_attribute": "SSRI"
+      "referenced_by_attribute": "SSRI",
+      "name": "end re_evaluation_medication"
     },
     "end_PTSD_Re_evaluation_Encounter": {
       "type": "EncounterEnd",
@@ -85690,7 +96149,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "Terminal"
         }
-      ]
+      ],
+      "name": "end_PTSD_Re_evaluation_Encounter"
     },
     "age guard": {
       "type": "Delay",
@@ -85718,7 +96178,8 @@ export default {"acute_myeloid_leukemia":{
             "operator": "is nil"
           }
         }
-      ]
+      ],
+      "name": "age guard"
     },
     "PTSD Chronic Pain Med": {
       "type": "MedicationOrder",
@@ -85726,19 +96187,22 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": 856980,
-          "display": "Acetaminophen/Hydrocodone"
+          "display": "Acetaminophen/Hydrocodone",
+          "value_set": ""
         }
       ],
       "direct_transition": "Pain_Vital",
       "reason": "ptsd",
       "remarks": [
         "per Dr Trafton and other sources"
-      ]
+      ],
+      "name": "PTSD Chronic Pain Med"
     },
     "end_follow_up_careplan": {
       "type": "CarePlanEnd",
       "direct_transition": "Terminal",
-      "referenced_by_attribute": "ptsd_careplan"
+      "referenced_by_attribute": "ptsd_careplan",
+      "name": "end_follow_up_careplan"
     },
     "time gate": {
       "type": "Delay",
@@ -85750,7 +96214,8 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "estimate provided by Jodie Trafton, PhD",
         ""
-      ]
+      ],
+      "name": "time gate"
     },
     "Columbia Suicide Risk Assessment": {
       "type": "Procedure",
@@ -85758,7 +96223,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 225337009,
-          "display": "Suicide risk assessment (procedure)"
+          "display": "Suicide risk assessment (procedure)",
+          "value_set": ""
         }
       ],
       "duration": {
@@ -85780,7 +96246,8 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "per new VA protocol identified by Jodie Trafton, PhD",
         ""
-      ]
+      ],
+      "name": "Columbia Suicide Risk Assessment"
     },
     "PHQ2_Q9 Assessment": {
       "type": "Procedure",
@@ -85788,7 +96255,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 715252007,
-          "display": "Depression screening using Patient Health Questionnaire Nine Item score (procedure)"
+          "display": "Depression screening using Patient Health Questionnaire Nine Item score (procedure)",
+          "value_set": ""
         }
       ],
       "duration": {
@@ -85810,7 +96278,8 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "estimate of 10% of patients who initially screened positive for PTSD to not ultimately screen in by a mental health expert, provided in consultation with Jodie Trafton, PhD",
         ""
-      ]
+      ],
+      "name": "PHQ2_Q9 Assessment"
     },
     "At Risk for suicide": {
       "type": "ConditionOnset",
@@ -85820,10 +96289,12 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 225444004,
-          "display": "At risk for suicide (finding)"
+          "display": "At risk for suicide (finding)",
+          "value_set": ""
         }
       ],
-      "direct_transition": "Inpatient Suicide Assessment"
+      "direct_transition": "Inpatient Suicide Assessment",
+      "name": "At Risk for suicide"
     },
     "Inpatient Suicide Assessment": {
       "type": "Encounter",
@@ -85833,10 +96304,12 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 185347001,
-          "display": "Encounter for problem (procedure)"
+          "display": "Encounter for problem (procedure)",
+          "value_set": ""
         }
       ],
-      "direct_transition": "Inpatient Suicide Risk Assessment"
+      "direct_transition": "Inpatient Suicide Risk Assessment",
+      "name": "Inpatient Suicide Assessment"
     },
     "Inpatient_admission": {
       "type": "Encounter",
@@ -85845,11 +96318,13 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 183801001,
-          "display": "Inpatient stay 3 days"
+          "display": "Inpatient stay 3 days",
+          "value_set": ""
         }
       ],
       "direct_transition": "Pain_Vital_2",
-      "reason": "suicide_risk"
+      "reason": "suicide_risk",
+      "name": "Inpatient_admission"
     },
     "Inpatient Suicide Risk Assessment": {
       "type": "Procedure",
@@ -85857,7 +96332,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 225337009,
-          "display": "Suicide risk assessment (procedure)"
+          "display": "Suicide risk assessment (procedure)",
+          "value_set": ""
         }
       ],
       "duration": {
@@ -85866,11 +96342,13 @@ export default {"acute_myeloid_leukemia":{
         "unit": "minutes"
       },
       "reason": "ptsd",
-      "direct_transition": "emergency_encounter end"
+      "direct_transition": "emergency_encounter end",
+      "name": "Inpatient Suicide Risk Assessment"
     },
     "emergency_encounter end": {
       "type": "EncounterEnd",
-      "direct_transition": "Inpatient_admission"
+      "direct_transition": "Inpatient_admission",
+      "name": "emergency_encounter end"
     },
     "Inpatient Suicide Care Plan": {
       "type": "CarePlanStart",
@@ -85878,7 +96356,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 736353004,
-          "display": "Inpatient care plan (record artifact)"
+          "display": "Inpatient care plan (record artifact)",
+          "value_set": ""
         }
       ],
       "direct_transition": "time delay",
@@ -85894,7 +96373,8 @@ export default {"acute_myeloid_leukemia":{
           "code": 183401008,
           "display": "Anti-suicide psychotherapy (regime/therapy)"
         }
-      ]
+      ],
+      "name": "Inpatient Suicide Care Plan"
     },
     "time delay": {
       "type": "Delay",
@@ -85902,12 +96382,14 @@ export default {"acute_myeloid_leukemia":{
         "quantity": 3,
         "unit": "days"
       },
-      "direct_transition": "Inpatient Suicide Care Plan_2"
+      "direct_transition": "Inpatient Suicide Care Plan_2",
+      "name": "time delay"
     },
     "Inpatient Suicide Care Plan_2": {
       "type": "CarePlanEnd",
       "direct_transition": "PTSD_Re_evaluation Encounter",
-      "careplan": "Inpatient Suicide Care Plan"
+      "careplan": "Inpatient Suicide Care Plan",
+      "name": "Inpatient Suicide Care Plan_2"
     },
     "Onset_age_21_to_29_Male": {
       "type": "Delay",
@@ -85916,7 +96398,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 0,
         "high": 9,
         "unit": "years"
-      }
+      },
+      "name": "Onset_age_21_to_29_Male"
     },
     "Onset_age_60_to_99_Male": {
       "type": "Delay",
@@ -85925,7 +96408,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 39,
         "high": 68,
         "unit": "years"
-      }
+      },
+      "name": "Onset_age_60_to_99_Male"
     },
     "Onset_age_21_to_29_Female": {
       "type": "Delay",
@@ -85934,7 +96418,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 0,
         "high": 9,
         "unit": "years"
-      }
+      },
+      "name": "Onset_age_21_to_29_Female"
     },
     "Onset_age_60_to_99_Female": {
       "type": "Delay",
@@ -85943,7 +96428,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 39,
         "high": 68,
         "unit": "years"
-      }
+      },
+      "name": "Onset_age_60_to_99_Female"
     },
     "PTSD_Encounter": {
       "type": "Encounter",
@@ -85953,27 +96439,31 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 185345009,
-          "display": "Encounter for symptom"
+          "display": "Encounter for symptom",
+          "value_set": ""
         }
       ],
-      "direct_transition": "PC-PTSD Screen"
+      "direct_transition": "PC-PTSD Screen",
+      "name": "PTSD_Encounter"
     },
     "Telehealth_Visit": {
       "type": "Encounter",
-      "encounter_class": "ambulatory",
+      "encounter_class": "virtual",
       "reason": "ptsd",
       "codes": [
         {
           "system": "SNOMED-CT",
           "code": 185317003,
-          "display": "Telephone encounter (procedure)"
+          "display": "Telephone encounter (procedure)",
+          "value_set": ""
         }
       ],
       "direct_transition": "Telehealth_Observations",
       "remarks": [
         "careplan to include regular telephone psychotherapy.  workflow recommendation provided by Brian Marx, PhD, SME for PTSD within VA",
         ""
-      ]
+      ],
+      "name": "Telehealth_Visit"
     },
     "therapy delay": {
       "type": "Delay",
@@ -86002,7 +96492,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "Therapy_Visit"
         }
-      ]
+      ],
+      "name": "therapy delay"
     },
     "Therapy_Visit": {
       "type": "Encounter",
@@ -86012,10 +96503,12 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 185347001,
-          "display": "Encounter for problem (procedure)"
+          "display": "Encounter for problem (procedure)",
+          "value_set": ""
         }
       ],
-      "direct_transition": "Therapy Note"
+      "direct_transition": "Therapy Note",
+      "name": "Therapy_Visit"
     },
     "telehealth delay": {
       "type": "Delay",
@@ -86023,7 +96516,8 @@ export default {"acute_myeloid_leukemia":{
         "quantity": 1,
         "unit": "weeks"
       },
-      "direct_transition": "Telehealth_Visit"
+      "direct_transition": "Telehealth_Visit",
+      "name": "telehealth delay"
     },
     "Telehealth_Observations": {
       "type": "Observation",
@@ -86033,13 +96527,15 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "84215-3",
-          "display": "Mental health Telehealth Note"
+          "display": "Mental health Telehealth Note",
+          "value_set": ""
         }
       ],
       "exact": {
         "quantity": 1
       },
-      "direct_transition": "end telehealth"
+      "direct_transition": "end telehealth",
+      "name": "Telehealth_Observations"
     },
     "Therapy Note": {
       "type": "Observation",
@@ -86049,17 +96545,20 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "75443-2",
-          "display": "Mental health Outpatient Note"
+          "display": "Mental health Outpatient Note",
+          "value_set": ""
         }
       ],
       "exact": {
         "quantity": 1
       },
-      "direct_transition": "end therapy visit"
+      "direct_transition": "end therapy visit",
+      "name": "Therapy Note"
     },
     "end therapy visit": {
       "type": "EncounterEnd",
-      "direct_transition": "telehealth delay"
+      "direct_transition": "telehealth delay",
+      "name": "end therapy visit"
     },
     "end telehealth": {
       "type": "EncounterEnd",
@@ -86078,7 +96577,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "Evaluation Gate delay"
         }
-      ]
+      ],
+      "name": "end telehealth"
     },
     "PHQ2_Q9_Assessment": {
       "type": "Procedure",
@@ -86086,7 +96586,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 715252007,
-          "display": "Depression screening using Patient Health Questionnaire Nine Item score (procedure)"
+          "display": "Depression screening using Patient Health Questionnaire Nine Item score (procedure)",
+          "value_set": ""
         }
       ],
       "duration": {
@@ -86099,7 +96600,8 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "per new VA protocol identified by Jodie Trafton, PhD",
         ""
-      ]
+      ],
+      "name": "PHQ2_Q9_Assessment"
     },
     "Columbia_Suicide_Risk_Assessment": {
       "type": "Procedure",
@@ -86107,7 +96609,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 225337009,
-          "display": "Suicide risk assessment (procedure)"
+          "display": "Suicide risk assessment (procedure)",
+          "value_set": ""
         }
       ],
       "duration": {
@@ -86119,7 +96622,8 @@ export default {"acute_myeloid_leukemia":{
       "direct_transition": "PTSD_Initial_Careplan",
       "remarks": [
         "per new VA protocol identified by Jodie Trafton, PhD"
-      ]
+      ],
+      "name": "Columbia_Suicide_Risk_Assessment"
     },
     "mTBI check": {
       "type": "Simple",
@@ -86156,7 +96660,8 @@ export default {"acute_myeloid_leukemia":{
         "https://www.ncbi.nlm.nih.gov/books/NBK326723/",
         "",
         ""
-      ]
+      ],
+      "name": "mTBI check"
     },
     "Pain_Vital": {
       "type": "Observation",
@@ -86166,7 +96671,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "72514-3",
-          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported",
+          "value_set": ""
         }
       ],
       "range": {
@@ -86174,7 +96680,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 4,
         "high": 8
       },
-      "direct_transition": "end_Psych_encounter"
+      "direct_transition": "end_Psych_encounter",
+      "name": "Pain_Vital"
     },
     "Pain_Vital_2": {
       "type": "Observation",
@@ -86184,7 +96691,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "72514-3",
-          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported",
+          "value_set": ""
         }
       ],
       "range": {
@@ -86192,7 +96700,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 4,
         "high": 8
       },
-      "direct_transition": "Inpatient Suicide Care Plan"
+      "direct_transition": "Inpatient Suicide Care Plan",
+      "name": "Pain_Vital_2"
     },
     "Pain_Vital_3": {
       "type": "Observation",
@@ -86202,7 +96711,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "72514-3",
-          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported",
+          "value_set": ""
         }
       ],
       "range": {
@@ -86210,7 +96720,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 0,
         "high": 3
       },
-      "direct_transition": "end_PTSD_Re_evaluation_Encounter"
+      "direct_transition": "end_PTSD_Re_evaluation_Encounter",
+      "name": "Pain_Vital_3"
     },
     "Pain_Vital_4": {
       "type": "Observation",
@@ -86220,7 +96731,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "72514-3",
-          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+          "display": "Pain severity - 0-10 verbal numeric rating [Score] - Reported",
+          "value_set": ""
         }
       ],
       "range": {
@@ -86228,7 +96740,8 @@ export default {"acute_myeloid_leukemia":{
         "low": 1,
         "high": 4
       },
-      "direct_transition": "end_Psych_encounter"
+      "direct_transition": "end_Psych_encounter",
+      "name": "Pain_Vital_4"
     },
     "PC-PTSD Screen": {
       "type": "Procedure",
@@ -86236,7 +96749,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 385892002,
-          "display": "Mental health screening (procedure)"
+          "display": "Mental health screening (procedure)",
+          "value_set": ""
         }
       ],
       "duration": {
@@ -86247,7 +96761,8 @@ export default {"acute_myeloid_leukemia":{
       "direct_transition": "PHQ2_Q9_Assessment",
       "remarks": [
         "workflow approach provided by Brian "
-      ]
+      ],
+      "name": "PC-PTSD Screen"
     },
     "PTSD_Careplan_Telehealth_Psych_and_Rx": {
       "type": "CarePlanStart",
@@ -86255,7 +96770,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 718347000,
-          "display": "Mental health care plan (record artifact)"
+          "display": "Mental health care plan (record artifact)",
+          "value_set": ""
         }
       ],
       "reason": "ptsd",
@@ -86314,7 +96830,8 @@ export default {"acute_myeloid_leukemia":{
             "value": "Vicodin"
           }
         }
-      ]
+      ],
+      "name": "PTSD_Careplan_Telehealth_Psych_and_Rx"
     },
     "PTSD_Careplan_Telehealth_Psych": {
       "type": "CarePlanStart",
@@ -86322,7 +96839,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 718347000,
-          "display": "Mental health care plan (record artifact)"
+          "display": "Mental health care plan (record artifact)",
+          "value_set": ""
         }
       ],
       "reason": "ptsd",
@@ -86359,7 +96877,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Telehealth monitoring (regime/therapy)"
         }
       ],
-      "direct_transition": "end_Psych_encounter"
+      "direct_transition": "end_Psych_encounter",
+      "name": "PTSD_Careplan_Telehealth_Psych"
     },
     "Therapy_Visit_Telehealth": {
       "type": "Encounter",
@@ -86369,13 +96888,26 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 185347001,
-          "display": "Encounter for problem (procedure)"
+          "display": "Encounter for problem (procedure)",
+          "value_set": ""
         }
       ],
-      "direct_transition": "Therapy Note"
+      "direct_transition": "Therapy Note",
+      "name": "Therapy_Visit_Telehealth"
+    },
+    "Wait_For_PHQ": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Date",
+        "operator": ">=",
+        "year": 1999,
+        "value": 0
+      },
+      "direct_transition": "PTSD_Encounter",
+      "name": "Wait_For_PHQ"
     }
   },
-  "gmf_version": 1
+  "gmf_version": 2
 }
 ,
 "veteran_self_harm":{
@@ -86904,7 +97436,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "VA Hotline Encounter": {
       "type": "Encounter",
-      "encounter_class": "ambulatory",
+      "encounter_class": "virtual",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -87519,6 +98051,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "ambulatory",
       "reason": "obesity",
+      "telemedicine_possibility": "possible",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -87722,9 +98255,59 @@ export default {"acute_myeloid_leukemia":{
           }
         },
         {
+          "transition": "Obese_Check"
+        }
+      ]
+    },
+    "Obese_Check": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Severe Obesity",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "BMI",
+            "operator": ">=",
+            "value": 40
+          }
+        },
+        {
+          "transition": "Obesity",
+          "condition": {
+            "condition_type": "Vital Sign",
+            "vital_sign": "BMI",
+            "operator": ">=",
+            "value": 30
+          }
+        },
+        {
           "transition": "Record_BP"
         }
       ]
+    },
+    "Obesity": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 162864005,
+          "display": "Body mass index 30+ - obesity (finding)"
+        }
+      ],
+      "direct_transition": "Record_BP",
+      "assign_to_attribute": "obesity"
+    },
+    "Severe Obesity": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "obesity",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 408512008,
+          "display": "Body mass index 40+ - severely obese (finding)"
+        }
+      ],
+      "direct_transition": "Record_BP"
     },
     "Record_BP": {
       "type": "MultiObservation",
@@ -88096,7 +98679,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Record_Current_Smoker": {
       "type": "Observation",
-      "category": "survey",
+      "category": "social-history",
       "unit": "",
       "codes": [
         {
@@ -88114,7 +98697,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Record_Former_Smoker": {
       "type": "Observation",
-      "category": "survey",
+      "category": "social-history",
       "unit": "",
       "codes": [
         {
@@ -88132,7 +98715,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Record_Never_Smoker": {
       "type": "Observation",
-      "category": "survey",
+      "category": "social-history",
       "unit": "",
       "codes": [
         {
