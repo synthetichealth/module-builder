@@ -23,17 +23,17 @@ class TelemedicineTransition extends Component<Props> {
       <div>
         <label>
           Ambulatory:
-          <RIESelect className='editable-text' propName='ambulatory' value={{id:this.props.transition.ambulatory, text:this.props.transition.ambulatory}} change={this.props.onChange} options={options} />
+          <RIESelect className='editable-text' propName='ambulatory' value={{id:this.props.transition.ambulatory, text:this.props.transition.ambulatory}} change={this.props.onChange('ambulatory')} options={options} />
         </label>
         <br/>
         <label>
           Emergency:
-          <RIESelect className='editable-text' propName='emergency' value={{id:this.props.transition.emergency, text:this.props.transition.emergency}} change={this.props.onChange} options={options} />
+          <RIESelect className='editable-text' propName='emergency' value={{id:this.props.transition.emergency, text:this.props.transition.emergency}} change={this.props.onChange('emergency')} options={options} />
         </label>
         <br/>
         <label>
           Telemedicine:
-          <RIESelect className='editable-text' propName='telemedicine' value={{id:this.props.transition.telemedicine, text:this.props.transition.telemedicine}} change={this.props.onChange} options={options} />
+          <RIESelect className='editable-text' propName='telemedicine' value={{id:this.props.transition.telemedicine, text:this.props.transition.telemedicine}} change={this.props.onChange('telemedicine')} options={options} />
         </label>
       </div>
 
