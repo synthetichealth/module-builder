@@ -324,6 +324,7 @@ export default (state = initialState, action) => {
         Distributed: 'distributed_transition',
         Direct: 'direct_transition',
         Complex: 'complex_transition',
+        Telemedicine: 'telemedicine_transition',
         Table: 'lookup_table_transition',
       };
 
@@ -349,6 +350,9 @@ export default (state = initialState, action) => {
         case 'conditional_transition':
           transitionTo = _.get(action, 'data.nodeName.transition.transition[0].to', null);
           break;
+        case 'telemedicine_transition':
+          transitionTo = _.get(action, 'data.nodeName.transition.ambulatory', null);
+          break;
         case 'complex_transition':
           transitionTo = _.get(action, 'data.nodeName.transition.transition[0].distributions[0].to', null);
           break;
@@ -369,6 +373,9 @@ export default (state = initialState, action) => {
             break;
           case 'complex_transition':
             newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName][0].distributions[0].transition = transitionTo;
+            break;
+          case 'telemedicine_transition':
+            newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName].ambulatory = transitionTo;
             break;
           case 'lookup_table_transition':
             newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName].transitions[0].transition = transitionTo;

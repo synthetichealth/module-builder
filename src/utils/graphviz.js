@@ -145,6 +145,19 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
         }
       })
       return out_transitions
+    } else if(state.telemedicine_transition !== undefined){
+      let out_transitions = ''
+      if(state.telemedicine_transition.ambulatory !== undefined){
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.ambulatory].name)}" [label = "ambulatory", class = "transition ${className}"];\n`
+      }
+      if(state.telemedicine_transition.emergency !== undefined){
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.emergency].name)}" [label = "emergency", class = "transition ${className}"];\n`
+      }
+      if(state.telemedicine_transition.telemedicine !== undefined){
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.telemedicine].name)}" [label = "telemedicine", class = "transition ${className}"];\n`
+      }
+
+      return out_transitions
     } else if(state.lookup_table_transition !== undefined){
         let out_transitions = ''
         state.lookup_table_transition.transitions.forEach( (t, i) => {

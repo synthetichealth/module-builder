@@ -147,6 +147,7 @@ class StateEditor extends Component<Props> {
       {id:"Distributed" ,text:"Distributed"},
       {id:"Conditional" ,text:"Conditional"},
       {id:"Complex" ,text:"Complex"},
+      {id:"Telemedicine" ,text:"Telemedicine"},
       {id:"Table" ,text:"Table"}
     ]
 

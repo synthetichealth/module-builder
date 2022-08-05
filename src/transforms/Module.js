@@ -45,7 +45,18 @@ export function extractTransition(state: any): ?Transition {
   if(state.lookup_table_transition) {
     return extractTableTransition(state.lookup_table_transition);
   }
+  if(state.telemedicine_transition) {
+    return extractTelemedicineTransition(state.telemedicine_transition)
+  }
   return null;
+}
+
+export function extractTelemedicineTransition(data: any): TelemedicineTransition {
+  return {type: 'Telemedicine', 
+    ambulatory: data.ambulatory,
+    telemedicine: data.telemedicine,
+    emergency: data.emergency
+  }
 }
 
 export function extractDirectTransition(data: any): DirectTransition {
