@@ -280,6 +280,16 @@ const orphanStateWarnings = (module) => {
           }
         }
       });
+    } else if(nextState.type_of_care_transition){
+      ['ambulatory', 'emergency', 'telemedicine'].forEach(careType => {
+        if(!module.states[nextState.type_of_care_transition[careType]]){
+          warnings.push({stateName: nextStateKey, message: 'Transition to state that does not exist: ' + nextState.type_of_care_transition[careType]});
+        } else {
+          if(!visitedStateCheck[nextState.type_of_care_transition[careType]]){
+            visitNext.push(nextState.type_of_care_transition[careType]);
+          }
+        }
+      });
     } else if(nextState.lookup_table_transition){
       nextState.lookup_table_transition.transitions.forEach(transition => {
         if(!module.states[transition.transition]){

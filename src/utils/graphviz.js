@@ -147,16 +147,16 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
         }
       })
       return out_transitions
-    } else if(state.telemedicine_transition !== undefined){
+    } else if(state.type_of_care_transition !== undefined){
       let out_transitions = ''
-      if(state.telemedicine_transition.ambulatory !== undefined){
-        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.ambulatory].name)}" [label = "${typeOfCareTransitionLabel('ambulatory')}", class = "transition ${className}"];\n`
+      if(state.type_of_care_transition.ambulatory !== undefined){
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.type_of_care_transition.ambulatory].name)}" [label = "${typeOfCareTransitionLabel('ambulatory')}", class = "transition ${className}"];\n`
       }
-      if(state.telemedicine_transition.emergency !== undefined){
-        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.emergency].name)}" [label = "${typeOfCareTransitionLabel('emergency')}", class = "transition ${className}"];\n`
+      if(state.type_of_care_transition.emergency !== undefined){
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.type_of_care_transition.emergency].name)}" [label = "${typeOfCareTransitionLabel('emergency')}", class = "transition ${className}"];\n`
       }
-      if(state.telemedicine_transition.telemedicine !== undefined){
-        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.telemedicine].name)}" [label = "${typeOfCareTransitionLabel('telemedicine')}", class = "transition ${className}"];\n`
+      if(state.type_of_care_transition.telemedicine !== undefined){
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.type_of_care_transition.telemedicine].name)}" [label = "${typeOfCareTransitionLabel('telemedicine')}", class = "transition ${className}"];\n`
       }
 
       return out_transitions

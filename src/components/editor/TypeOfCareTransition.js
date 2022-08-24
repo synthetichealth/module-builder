@@ -1,21 +1,21 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber } from 'riek';
+import { RIESelect } from 'riek';
 import _ from 'lodash';
 
 
-import type { TelemedicineTransition as TelemedicineTransitionType } from '../../types/Transition';
+import type { TypeOfCareTransition as TypeOfCareTransitionType } from '../../types/Transition';
 import type { State } from '../../types/State';
 import TelemedicineConfig from '../../data/telemedicine_config';
 import './Transition.css';
 
 type Props = {
   options: State[],
-  transition?: TelemedicineTransitionType,
+  transition?: TypeOfCareTransitionType,
   onChange: any
 }
   
-class TelemedicineTransition extends Component<Props> {
+class TypeOfCareTransition extends Component<Props> {
   render() {
     let options = this.props.options.map((s) => {return {id: s.name, text: s.name}});
     
@@ -132,4 +132,4 @@ class TelemedicineTransition extends Component<Props> {
 }
 
 
-export default TelemedicineTransition;
+export default TypeOfCareTransition;
