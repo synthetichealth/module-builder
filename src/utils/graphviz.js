@@ -4,6 +4,8 @@ import type { State } from './types/State';
 
 import { cleanString } from '../utils/stringUtils';
 
+import TelemedicineConfig from '../data/telemedicine_config';
+
 const STANDARD_COLOR = 'Black';
 /*
 const HIGHLIGHT_COLOR = '#007bff';
@@ -148,13 +150,13 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
     } else if(state.telemedicine_transition !== undefined){
       let out_transitions = ''
       if(state.telemedicine_transition.ambulatory !== undefined){
-        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.ambulatory].name)}" [label = "ambulatory", class = "transition ${className}"];\n`
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.ambulatory].name)}" [label = "${typeOfCareTransitionLabel('ambulatory')}", class = "transition ${className}"];\n`
       }
       if(state.telemedicine_transition.emergency !== undefined){
-        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.emergency].name)}" [label = "emergency", class = "transition ${className}"];\n`
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.emergency].name)}" [label = "${typeOfCareTransitionLabel('emergency')}", class = "transition ${className}"];\n`
       }
       if(state.telemedicine_transition.telemedicine !== undefined){
-        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.telemedicine].name)}" [label = "telemedicine", class = "transition ${className}"];\n`
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.telemedicine_transition.telemedicine].name)}" [label = "${typeOfCareTransitionLabel('telemedicine')}", class = "transition ${className}"];\n`
       }
 
       return out_transitions
@@ -718,6 +720,23 @@ const leaveUndefinedBlank = (value) => {
   } else {
     return ' ' + value;
   }
+}
+
+const typeOfCareTransitionLabel = (careType) => {
+  let telelabel = careType + '\\l';
+  telelabel += 'and\\l'
+  let labelSpace = '    ';
+  if (careType !== 'telemedicine') {
+    telelabel += `    before ${TelemedicineConfig.start_year} with insurance ${TelemedicineConfig.pre_telemedicine.typical_emergency_distribution[careType] * 100}%\\l`;
+    telelabel += `        or without insurance ${TelemedicineConfig.pre_telemedicine.high_emergency_distribution[careType] * 100}%\\l`;
+    telelabel += '    or\\l'
+  } else {
+    labelSpace = '';
+  }
+  telelabel += `${labelSpace}during or after ${TelemedicineConfig.start_year} with insurance ${TelemedicineConfig.during_telemedicine.typical_emergency_distribution[careType] * 100}%\\l`;
+  telelabel += `${labelSpace}    or without insurance ${TelemedicineConfig.during_telemedicine.high_emergency_distribution[careType] * 100}%\\l`;
+  
+  return telelabel;
 }
 
 const escapeId = (name) => {

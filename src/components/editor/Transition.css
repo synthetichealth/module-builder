@@ -8,3 +8,11 @@
   border-radius: 5px;
   margin-right: 10px;
 }
+
+.Transition table {
+  width: 100%;
+}
+
+.small-column {
+  width: 15%;
+}
