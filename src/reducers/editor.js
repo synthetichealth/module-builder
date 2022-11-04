@@ -565,6 +565,28 @@ const fixStateReferences = (module, stateName, newName) => {
           }
         }
       })
+    } else if (state.type_of_care_transition) {
+      if(state.type_of_care_transition.ambulatory === stateName) {
+        if(newName === null){
+          delete state.type_of_care_transition.ambulatory
+        } else {
+          state.type_of_care_transition.ambulatory = newName
+        }
+      }
+      if(state.type_of_care_transition.emergency === stateName) {
+        if(newName === null){
+          delete state.type_of_care_transition.emergency
+        } else {
+          state.type_of_care_transition.emergency = newName
+        }
+      }
+      if(state.type_of_care_transition.telemedicine === stateName) {
+        if(newName === null){
+          delete state.type_of_care_transition.telemedicine
+        } else {
+          state.type_of_care_transition.telemedicine = newName
+        }
+      }
     } else if (state.complex_transition){
       state.complex_transition.forEach( transition => {
         if(transition.transition === stateName){
