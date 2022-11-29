@@ -353,7 +353,7 @@ const stateDescription = (state) =>{
         let v = state['value_code']
         details = `Record value ${v['system']}[${v['code']}]: ${v['display']}\\l`
       } else if (state['distribution'] !== undefined && state['unit'] !== undefined) {
-        details = `Record value ${distributionString(state['distribution'])} ${state['unit']}`
+        details = `Record value ${distributionString(state['distribution'])} ${unit}`
       }
       break;
 

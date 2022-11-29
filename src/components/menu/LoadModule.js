@@ -135,7 +135,7 @@ class LoadModule extends Component {
             { Object.keys(this.props.library).filter(n => (n.indexOf('/') > -1)).map( (key, index) => {
               let module = this.props.library[key]
               return (
-                <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{key.split('/')[0] + ': ' + module.name}</button></li>
+                <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{key.split('/').slice(0,-1).join(': ') + ': ' + module.name}</button></li>
               )
             })}
           </ul>
