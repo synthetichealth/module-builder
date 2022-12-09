@@ -244,6 +244,8 @@ class Distribution extends Component<Distro> {
         return <Gaussian {...this.props} onChange={this.props.onChange} />
       case "UNIFORM":
         return <Uniform {...this.props} onChange={this.props.onChange} />
+      case "EXPONENTIAL":
+        return <Exponential {...this.props} onChange={this.props.onChange} />
     }
   }
 }
@@ -257,6 +259,8 @@ class Exact extends Component<Distro> {
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'UNIFORM'}}); this.props.onChange('parameters')({val: {id: {high: 20, low: 10}}})}}>Change to Range</a>
         <br />
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'GAUSSIAN'}}); this.props.onChange('parameters')({val: {id: {mean: 10, standardDeviation: 1}}})}}>Change to Gaussian</a>
+        <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'EXPONENTIAL'}}); this.props.onChange('parameters')({val: {id: {mean: 10}}})}}>Change to Exponential</a>
         <br />
         {this.props.otherToggles}
       </div>
@@ -279,6 +283,8 @@ class Uniform extends Component<Distro> {
         <br />
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'GAUSSIAN'}}); this.props.onChange('parameters')({val: {id: {mean: 10, standardDeviation: 1}}})}}>Change to Gaussian</a>
         <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'EXPONENTIAL'}}); this.props.onChange('parameters')({val: {id: {mean: 10}}})}}>Change to Exponential</a>
+        <br />
         {this.props.otherToggles}
       </div>
     );
@@ -300,12 +306,34 @@ class Gaussian extends Component<Distro> {
         <br />
         <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'UNIFORM'}}); this.props.onChange('parameters')({val: {id: {high: 20, low: 10}}})}}>Change to Range</a>
         <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'EXPONENTIAL'}}); this.props.onChange('parameters')({val: {id: {mean: 10}}})}}>Change to Exponential</a>
+        <br />
         {this.props.otherToggles}
       </div>
     );
   }
 }
 
+class Exponential extends Component<Distro> {
+  render() {
+    return (
+      <div>
+        Mean: <RIENumber className='editable-text' value={this.props.parameters.mean} propName='mean' change={this.props.onChange('parameters.mean')} />
+        <br />
+        {this.props.round!=null &&
+        <div>Round Result: <RIEToggle value={this.props.round} propName='round' change={this.props.onChange('round')} />
+        <br /></div> }
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'EXACT'}}); this.props.onChange('parameters')({val: {id: {value: 10}}})}}>Change to Exact</a>
+        <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'UNIFORM'}}); this.props.onChange('parameters')({val: {id: {high: 20, low: 10}}})}}>Change to Range</a>
+        <br />
+        <a className='editable-text' onClick={() => {this.props.onChange('kind')({val: {id: 'GAUSSIAN'}}); this.props.onChange('parameters')({val: {id: {mean: 10, standardDeviation: 1}}})}}>Change to Gaussian</a>
+        <br />
+        {this.props.otherToggles}
+      </div>
+    );
+  }
+}
 
 class Delay extends Component<Props> {
 
