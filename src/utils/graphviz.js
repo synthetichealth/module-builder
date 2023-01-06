@@ -259,6 +259,8 @@ const distributionString = (distro) => {
       return `${distro['parameters']['low']} - ${distro['parameters']['high']}`;
     case 'GAUSSIAN':
       return `Mean: ${distro['parameters']['mean']}, SD: ${distro['parameters']['standardDeviation']}`
+    case 'EXPONENTIAL':
+      return `Mean: ${distro['parameters']['mean']}`
   }
   return '';
 }
