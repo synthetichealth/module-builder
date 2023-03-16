@@ -338,6 +338,117 @@ const orphanStateWarnings = (module) => {
 
 }
 
+
+const GROUPED_CONDITION_TYPES = ['And', 'Or', 'At Least', 'At Most', 'Not'];
+
+/**
+ * Look for "And", "At Least", "At Most", "Or" type conditionals
+ * and make sure the numbers make sense.
+ */
+const groupedConditionalWarnings = (module) => {
+  debugger;
+  const warnings = [];
+  Object.keys(module.states).forEach(stateName => {
+    const state = module.states[stateName];
+
+    if (state.type == 'Guard') {
+      if (GROUPED_CONDITION_TYPES.includes(state.allow.condition_type)) {
+        const message = checkGroupedCondition(state.allow);
+        if (message) {
+          warnings.push({stateName, message});
+        }
+      }
+    }
+
+    if (state.conditional_transition) {
+      state.conditional_transition.forEach(transition => {
+        if (transition.condition && GROUPED_CONDITION_TYPES.includes(transition.condition.condition_type)) {
+          const message = checkGroupedCondition(transition.condition);
+          if (message) {
+            warnings.push({stateName, message});
+          }
+        }
+      });
+    } else if (state.complex_transition) {
+      state.complex_transition.forEach(transition => {
+        if (transition.condition && GROUPED_CONDITION_TYPES.includes(transition.condition.condition_type)) {
+          const message = checkGroupedCondition(transition.condition);
+          if (message) {
+            warnings.push({stateName, message});
+          }
+        }
+      });
+    }
+  });
+  return warnings;
+}
+
+const checkGroupedCondition = (condition) => {
+  switch(condition.condition_type) {
+  case 'And':
+    if (condition.conditions.length < 2) {
+      return "'And' condition should have at minimum 2 sub-conditions";
+    } else {
+      for (const subcondition of condition.conditions) {
+        if (GROUPED_CONDITION_TYPES.includes(subcondition.condition_type)) {
+          const message = checkGroupedCondition(subcondition);
+          if (message) {
+            return message;
+          }
+        }
+      } 
+    }
+    break;
+  case 'Or':
+    if (condition.conditions.length < 2) {
+      return "'Or' condition should have at minimum 2 sub-conditions";
+    } else {
+      for (const subcondition of condition.conditions) {
+        if (GROUPED_CONDITION_TYPES.includes(subcondition.condition_type)) {
+          const message = checkGroupedCondition(subcondition);
+          if (message) {
+            return message;
+          }
+        }
+      } 
+    }
+    break;
+  case 'At Least':
+    if (condition.conditions.length <= condition.minimum) {
+      return "'At Least' condition should have more sub-conditions than the selected minimum";
+    } else {
+      for (const subcondition of condition.conditions) {
+        if (GROUPED_CONDITION_TYPES.includes(subcondition.condition_type)) {
+          const message = checkGroupedCondition(subcondition);
+          if (message) {
+            return message;
+          }
+        }
+      } 
+    }
+    break;
+  case 'At Most':
+    if (condition.conditions.length <= condition.maximum) {
+      return "'At Most' condition should have more sub-conditions than the selected maximum";
+    } else {
+      for (const subcondition of condition.conditions) {
+        if (GROUPED_CONDITION_TYPES.includes(subcondition.condition_type)) {
+          const message = checkGroupedCondition(subcondition);
+          if (message) {
+            return message;
+          }
+        }
+      } 
+    }
+    break;
+  case 'Not':
+    if (GROUPED_CONDITION_TYPES.includes(condition.condition.condition_type)) {
+      return checkGroupedCondition(condition.condition);
+    }
+    break;
+  }
+}
+
 const libraryModuleCodes = (modules) => {
     const libraryModuleCodes = {};
 
@@ -403,6 +514,7 @@ export default (state = initialState, action) => {
                            ...placeholderCodeWarnings(action.data.module),
                            ...tableTransitionWarnings(action.data.module),
                            ...gmfVersionWarnings(action.data.module),
+                           ...groupedConditionalWarnings(action.data.module),
                            ...telemedicineWarnings(action.data.module)
                           ];
 
