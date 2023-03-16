@@ -2987,7 +2987,7 @@ class MultiObservation extends Component<Props> {
           {state.observations && state.observations.map((observation, i) => {
             return (
               <div className='section' key={i}>
-                Observation #{i+1} (<a className='editable-text delete-button' onClick={() => this.props.onChange(`observations.[${i}]`)({val: {id: null}})}>remove</a>)
+                Observation #{i+1} (<a className='editable-text delete-button' onClick={() => this.props.onChange('observations')(`[${i}]`)({val: {id: null}})}>remove</a>)
                 <Observation state={observation} onChange={this.props.onChange(`observations.[${i}]`)} />
               </div>
             )
@@ -3018,7 +3018,7 @@ class DiagnosticReport extends Component<Props> {
           {state.observations && state.observations.map((observation, i) => {
             return (
               <div className='section' key={i}>
-                Observation #{i+1} (<a className='editable-text delete-button' onClick={() => this.props.onChange(`observations.[${i}]`)({val: {id: null}})}>remove</a>)
+                Observation #{i+1} (<a className='editable-text delete-button' onClick={() => this.props.onChange('observations')(`[${i}]`)({val: {id: null}})}>remove</a>)
                 <Observation state={observation} onChange={this.props.onChange(`observations.[${i}]`)} />
               </div>
             )
