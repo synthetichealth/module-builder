@@ -3,94 +3,38 @@ export default {"acute_myeloid_leukemia":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "distributed_transition": [
+      "complex_transition": [
         {
-          "transition": "Delay_1",
-          "distribution": 0.098
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "transition": "Cancerous",
+              "distribution": 0.002
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.998
+            }
+          ]
         },
         {
-          "transition": "Delay_2",
-          "distribution": 0.1264
-        },
-        {
-          "transition": "Delay_3",
-          "distribution": 0.1094
-        },
-        {
-          "transition": "Delay_4",
-          "distribution": 0.0645
-        },
-        {
-          "transition": "Delay_5",
-          "distribution": 0.0533
-        },
-        {
-          "transition": "Delay_6",
-          "distribution": 0.0345
-        },
-        {
-          "transition": "Delay_7",
-          "distribution": 0.0362
-        },
-        {
-          "transition": "Delay_8",
-          "distribution": 0.0318
-        },
-        {
-          "transition": "Delay_9",
-          "distribution": 0.0354
-        },
-        {
-          "transition": "Delay_10",
-          "distribution": 0.0346
-        },
-        {
-          "transition": "Delay_11",
-          "distribution": 0.0289
-        },
-        {
-          "transition": "Delay_12",
-          "distribution": 0.0312
-        },
-        {
-          "transition": "Delay_13",
-          "distribution": 0.033
-        },
-        {
-          "transition": "Delay_14",
-          "distribution": 0.03
-        },
-        {
-          "transition": "Delay_15",
-          "distribution": 0.0343
-        },
-        {
-          "transition": "Delay_16",
-          "distribution": 0.0289
-        },
-        {
-          "transition": "Delay_17",
-          "distribution": 0.0323
-        },
-        {
-          "transition": "Delay_18",
-          "distribution": 0.0323
-        },
-        {
-          "transition": "Delay_19",
-          "distribution": 0.0346
-        },
-        {
-          "transition": "Delay_20",
-          "distribution": 0.0315
-        },
-        {
-          "transition": "Delay_21",
-          "distribution": 0.0173
-        },
-        {
-          "transition": "Delay_0",
-          "distribution": 0.04159999999999997
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "transition": "Cancerous",
+              "distribution": 0.003
+            },
+            {
+              "transition": "Terminal",
+              "distribution": 0.997
+            }
+          ]
         }
       ]
     },
@@ -199,7 +143,15 @@ export default {"acute_myeloid_leukemia":{
       ]
     },
     "Check_Bacteremia": {
-      "type": "Simple",
+      "type": "Delay",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 90,
+          "standardDeviation": 30
+        }
+      },
+      "unit": "minutes",
       "complex_transition": [
         {
           "condition": {
@@ -369,8 +321,8 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "duration": {
-        "low": 30,
-        "high": 30,
+        "low": 60,
+        "high": 120,
         "unit": "minutes"
       },
       "reason": "Acute_Myeloid_Leukemia_AML",
@@ -382,12 +334,12 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 305351004,
-          "display": "Admit to intensive care unit (ICU)"
+          "display": "Admission to intensive care unit (procedure)"
         }
       ],
       "duration": {
         "low": 30,
-        "high": 30,
+        "high": 120,
         "unit": "minutes"
       },
       "complex_transition": [
@@ -439,7 +391,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem (procedure)"
         }
       ],
-      "direct_transition": "Chemotherapy"
+      "direct_transition": "Wait for Treatment"
     },
     "Death_Event": {
       "type": "Procedure",
@@ -452,14 +404,22 @@ export default {"acute_myeloid_leukemia":{
       ],
       "duration": {
         "low": 30,
-        "high": 30,
+        "high": 60,
         "unit": "minutes"
       },
       "direct_transition": "Death",
       "reason": "Acute_Myeloid_Leukemia_AML"
     },
     "Determine_Levofloxacin_Prophylaxis": {
-      "type": "Simple",
+      "type": "Delay",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 90,
+          "standardDeviation": 30
+        }
+      },
+      "unit": "minutes",
       "lookup_table_transition": {
         "transitions": [
           {
@@ -497,11 +457,11 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "duration": {
-        "low": 30,
-        "high": 30,
+        "low": 60,
+        "high": 120,
         "unit": "minutes"
       },
-      "direct_transition": "End_Levofloxacin",
+      "direct_transition": "Wait for Discharge",
       "reason": "Acute_Myeloid_Leukemia_AML"
     },
     "Delay_1": {
@@ -789,6 +749,123 @@ export default {"acute_myeloid_leukemia":{
       "type": "ConditionEnd",
       "direct_transition": "End_Non-Febrile_Neutropenia",
       "condition_onset": "Acute_Myeloid_Leukemia_AML"
+    },
+    "Cancerous": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Delay_1",
+          "distribution": 0.098
+        },
+        {
+          "transition": "Delay_2",
+          "distribution": 0.1264
+        },
+        {
+          "transition": "Delay_3",
+          "distribution": 0.1094
+        },
+        {
+          "transition": "Delay_4",
+          "distribution": 0.0645
+        },
+        {
+          "transition": "Delay_5",
+          "distribution": 0.0533
+        },
+        {
+          "transition": "Delay_6",
+          "distribution": 0.0345
+        },
+        {
+          "transition": "Delay_7",
+          "distribution": 0.0362
+        },
+        {
+          "transition": "Delay_8",
+          "distribution": 0.0318
+        },
+        {
+          "transition": "Delay_9",
+          "distribution": 0.0354
+        },
+        {
+          "transition": "Delay_10",
+          "distribution": 0.0346
+        },
+        {
+          "transition": "Delay_11",
+          "distribution": 0.0289
+        },
+        {
+          "transition": "Delay_12",
+          "distribution": 0.0312
+        },
+        {
+          "transition": "Delay_13",
+          "distribution": 0.033
+        },
+        {
+          "transition": "Delay_14",
+          "distribution": 0.03
+        },
+        {
+          "transition": "Delay_15",
+          "distribution": 0.0343
+        },
+        {
+          "transition": "Delay_16",
+          "distribution": 0.0289
+        },
+        {
+          "transition": "Delay_17",
+          "distribution": 0.0323
+        },
+        {
+          "transition": "Delay_18",
+          "distribution": 0.0323
+        },
+        {
+          "transition": "Delay_19",
+          "distribution": 0.0346
+        },
+        {
+          "transition": "Delay_20",
+          "distribution": 0.0315
+        },
+        {
+          "transition": "Delay_21",
+          "distribution": 0.0173
+        },
+        {
+          "transition": "Delay_0",
+          "distribution": 0.04159999999999997
+        }
+      ]
+    },
+    "Wait for Treatment": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 180,
+          "standardDeviation": 60
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Chemotherapy"
+    },
+    "Wait for Discharge": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 180,
+          "standardDeviation": 60
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "End_Levofloxacin"
     }
   },
   "remarks": [
@@ -801,6 +878,7 @@ export default {"acute_myeloid_leukemia":{
     "",
     "Reference: McCormick M, Friehling E, Kalpatthi R, Siripong N, Smith K. Cost‐effectiveness of levofloxacin prophylaxis against bacterial infection in pediatric patients with acute myeloid leukemia. Pediatric Blood & Cancer. 2020 Oct;67(10):e28469",
     "",
+    "Update January 2023 -- inserted delays and changed population who get AML from everyone to 0.2% of the females and 0.3% of males, according to the American Cancer Society, Cancer Facts & Figures, 2022. https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2022/2022-cancer-facts-and-figures.pdf",
     ""
   ],
   "gmf_version": 2
@@ -1226,7 +1304,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6206-7",
-          "display": "Peanut IgE Ab in Serum"
+          "display": "Peanut IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1243,7 +1321,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6206-7",
-          "display": "Peanut IgE Ab in Serum"
+          "display": "Peanut IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1286,7 +1364,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6273-7",
-          "display": "Walnut IgE Ab in Serum"
+          "display": "Walnut IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1303,7 +1381,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6273-7",
-          "display": "Walnut IgE Ab in Serum"
+          "display": "Walnut IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1346,7 +1424,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6082-2",
-          "display": "Codfish IgE Ab in Serum"
+          "display": "Codfish IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1363,7 +1441,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6082-2",
-          "display": "Codfish IgE Ab in Serum"
+          "display": "Codfish IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1408,7 +1486,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6246-3",
-          "display": "Shrimp IgE Ab in Serum"
+          "display": "Shrimp IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1425,7 +1503,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6246-3",
-          "display": "Shrimp IgE Ab in Serum"
+          "display": "Shrimp IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1468,7 +1546,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6276-0",
-          "display": "Wheat IgE Ab in Serum"
+          "display": "Wheat IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1485,7 +1563,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6276-0",
-          "display": "Wheat IgE Ab in Serum"
+          "display": "Wheat IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1528,7 +1606,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6106-9",
-          "display": "Egg white IgE Ab in Serum"
+          "display": "Egg white IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1545,7 +1623,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6106-9",
-          "display": "Egg white IgE Ab in Serum"
+          "display": "Egg white IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1588,7 +1666,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6248-9",
-          "display": "Soybean IgE Ab in Serum"
+          "display": "Soybean IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1605,7 +1683,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6248-9",
-          "display": "Soybean IgE Ab in Serum"
+          "display": "Soybean IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1648,7 +1726,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "7258-7",
-          "display": "Cow milk IgE Ab in Serum"
+          "display": "Cow milk IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1665,7 +1743,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "7258-7",
-          "display": "Cow milk IgE Ab in Serum"
+          "display": "Cow milk IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1708,7 +1786,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6189-5",
-          "display": "White oak IgE Ab in Serum"
+          "display": "White oak IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1725,7 +1803,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6189-5",
-          "display": "White oak IgE Ab in Serum"
+          "display": "White oak IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1768,7 +1846,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6085-5",
-          "display": "Common Ragweed IgE Ab in Serum"
+          "display": "Common Ragweed IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1785,7 +1863,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6085-5",
-          "display": "Common Ragweed IgE Ab in Serum"
+          "display": "Common Ragweed IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1828,7 +1906,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6833-8",
-          "display": "Cat dander IgE Ab in Serum"
+          "display": "Cat dander IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1845,7 +1923,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6833-8",
-          "display": "Cat dander IgE Ab in Serum"
+          "display": "Cat dander IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1888,7 +1966,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6095-4",
-          "display": "American house dust mite IgE Ab in Serum"
+          "display": "American house dust mite IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1905,7 +1983,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6095-4",
-          "display": "American house dust mite IgE Ab in Serum"
+          "display": "American house dust mite IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1948,7 +2026,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6075-6",
-          "display": "Cladosporium herbarum IgE Ab in Serum"
+          "display": "Cladosporium herbarum IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -1965,7 +2043,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6075-6",
-          "display": "Cladosporium herbarum IgE Ab in Serum"
+          "display": "Cladosporium herbarum IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -2008,7 +2086,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6844-5",
-          "display": "Honey bee IgE Ab in Serum"
+          "display": "Honey bee IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -2025,7 +2103,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6844-5",
-          "display": "Honey bee IgE Ab in Serum"
+          "display": "Honey bee IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -2068,7 +2146,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6158-0",
-          "display": "Latex IgE Ab in Serum"
+          "display": "Latex IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -2085,7 +2163,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "6158-0",
-          "display": "Latex IgE Ab in Serum"
+          "display": "Latex IgE Ab [Units/volume] in Serum"
         }
       ],
       "unit": "kU/L",
@@ -4748,7 +4826,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "256355007",
-          "display": "Soya bean (substance)"
+          "display": "Soy bean"
         }
       ],
       "reactions": [
@@ -5039,7 +5117,8 @@ export default {"acute_myeloid_leukemia":{
             "pre-existing immune conditions (like AIDS), and prohibitive cost."
           ]
         }
-      ]
+      ],
+      "reason": "allergy_unspecified"
     },
     "Immunotherapy_Given": {
       "type": "SetAttribute",
@@ -5066,7 +5145,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "182678001",
-          "display": "Hyposensitization to allergens (procedure)"
+          "display": "Allergen immunotherapy (regime/therapy)"
         }
       ],
       "direct_transition": "Benchmark_Allergy_Test"
@@ -5152,7 +5231,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Outpatient procedure"
         }
       ],
-      "direct_transition": "Immunotherapy_Procedure"
+      "direct_transition": "Immunotherapy_Procedure",
+      "reason": "allergy_unspecified"
     },
     "Immunotherapy_Procedure": {
       "type": "Procedure",
@@ -5194,7 +5274,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Allergic disorder follow-up assessment"
         }
       ],
-      "direct_transition": "Immunotherapy_CarePlan_Ends"
+      "direct_transition": "Immunotherapy_CarePlan_Ends",
+      "reason": "allergy_unspecified"
     },
     "Immunotherapy_CarePlan_Ends": {
       "type": "CarePlanEnd",
@@ -5885,7 +5966,7 @@ export default {"acute_myeloid_leukemia":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "direct_transition": "ED_Visit_For_Allergic_Reaction"
+      "direct_transition": "Acute_Allergic_Reaction"
     },
     "ED_Visit_For_Allergic_Reaction": {
       "type": "Encounter",
@@ -5897,7 +5978,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Emergency room admission (procedure)"
         }
       ],
-      "direct_transition": "Acute_Allergic_Reaction"
+      "direct_transition": "Administer_Epinephrine",
+      "reason": "Acute_Allergic_Reaction"
     },
     "Acute_Allergic_Reaction": {
       "type": "ConditionOnset",
@@ -5909,7 +5991,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Acute allergic reaction"
         }
       ],
-      "direct_transition": "Administer_Epinephrine"
+      "direct_transition": "ED_Visit_For_Allergic_Reaction"
     },
     "Administer_Epinephrine": {
       "type": "Procedure",
@@ -5917,7 +5999,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "313191000",
-          "display": "Injection of adrenaline"
+          "display": "Injection of epinephrine (procedure)"
         }
       ],
       "direct_transition": "Observation_Period"
@@ -6047,7 +6129,7 @@ export default {"acute_myeloid_leukemia":{
         "attribute": "visit_allergist",
         "operator": "is not nil"
       },
-      "direct_transition": "Delay_For_Allergist_Initial_Visit"
+      "direct_transition": "Allergy_Unspecified"
     },
     "Delay_For_Allergist_Initial_Visit": {
       "type": "Delay",
@@ -6088,7 +6170,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "General_Allergy_CarePlan"
         }
-      ]
+      ],
+      "reason": "Allergy_Unspecified"
     },
     "Administer_Allergy_Test": {
       "type": "Procedure",
@@ -6222,6 +6305,22 @@ export default {"acute_myeloid_leukemia":{
       ],
       "submodule": "allergies/immunotherapy",
       "direct_transition": "Living_With_Allergies"
+    },
+    "Allergy_Unspecified": {
+      "allergy_type": "allergy",
+      "category": "environment",
+      "type": "AllergyOnset",
+      "target_encounter": "Allergist_Initial_Visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 419199007,
+          "display": "Allergy to substance (finding)"
+        }
+      ],
+      "reactions": [],
+      "direct_transition": "Delay_For_Allergist_Initial_Visit",
+      "assign_to_attribute": "allergy_unspecified"
     }
   },
   "gmf_version": 1
@@ -6235,7 +6334,7 @@ export default {"acute_myeloid_leukemia":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "direct_transition": "Anemia"
+      "direct_transition": "End Any Active Encounter Just In Case"
     },
     "Anemia": {
       "type": "ConditionOnset",
@@ -6292,7 +6391,7 @@ export default {"acute_myeloid_leukemia":{
       ],
       "conditional_transition": [
         {
-          "transition": "End_Initial_Encounter",
+          "transition": "Delay",
           "condition": {
             "condition_type": "And",
             "conditions": [
@@ -6316,7 +6415,7 @@ export default {"acute_myeloid_leukemia":{
           }
         },
         {
-          "transition": "End_Initial_Encounter",
+          "transition": "Delay",
           "condition": {
             "condition_type": "And",
             "conditions": [
@@ -6340,13 +6439,9 @@ export default {"acute_myeloid_leukemia":{
           }
         },
         {
-          "transition": "Administer_Medications_2"
+          "transition": "Administer_Medications"
         }
       ]
-    },
-    "End_Initial_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Delay"
     },
     "Male": {
       "type": "Simple",
@@ -6410,7 +6505,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 60,
         "unit": "minutes"
       },
-      "direct_transition": "End Transfusion_Encounter"
+      "direct_transition": "End Encounter After Transfusion"
     },
     "Peripheral_Blood_Smear": {
       "type": "Procedure",
@@ -6456,7 +6551,7 @@ export default {"acute_myeloid_leukemia":{
           "distribution": 0.1
         },
         {
-          "transition": "End_Consult_Referral to_Experts_Encounter",
+          "transition": "End Encounter After Medication Rx",
           "distribution": 0.8
         }
       ]
@@ -6476,7 +6571,7 @@ export default {"acute_myeloid_leukemia":{
           "distribution": 0.1
         },
         {
-          "transition": "End_Consult_Referral to_Experts_Encounter",
+          "transition": "End Encounter After Medication Rx",
           "distribution": 0.9
         }
       ]
@@ -6487,23 +6582,10 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": 2001499,
-          "display": "Vitamin B 12 5 MG/ML Injectable Solution"
+          "display": "Vitamin B12 5 MG/ML Injectable Solution"
         }
       ],
-      "direct_transition": "End_Consult_Referral to_Experts_Encounter"
-    },
-    "Transfusion_Encounter": {
-      "type": "Encounter",
-      "encounter_class": "inpatient",
-      "reason": "anemia",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": 185347001,
-          "display": "Encounter for problem (procedure)"
-        }
-      ],
-      "direct_transition": "Transfusion"
+      "direct_transition": "End Encounter After Medication Rx"
     },
     "Anemia_Encounter": {
       "type": "Encounter",
@@ -6533,58 +6615,6 @@ export default {"acute_myeloid_leukemia":{
       ],
       "reason": "anemia"
     },
-    "Administer_Medications_2": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Iron_Supplement_2",
-          "distribution": 0.1
-        },
-        {
-          "transition": "Vitamin_B12_Booster",
-          "distribution": 0.1
-        },
-        {
-          "transition": "End_Anemia_Encounter",
-          "distribution": 0.8
-        }
-      ]
-    },
-    "Iron_Supplement_2": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 310325,
-          "display": "ferrous sulfate 325 MG Oral Tablet"
-        }
-      ],
-      "distributed_transition": [
-        {
-          "transition": "Vitamin_B12_Booster",
-          "distribution": 0.1
-        },
-        {
-          "transition": "End_Anemia_Encounter",
-          "distribution": 0.9
-        }
-      ]
-    },
-    "Vitamin_B12_Booster": {
-      "type": "MedicationOrder",
-      "codes": [
-        {
-          "system": "RxNorm",
-          "code": 2001499,
-          "display": "Vitamin B 12 5 MG/ML Injectable Solution"
-        }
-      ],
-      "direct_transition": "End_Anemia_Encounter"
-    },
-    "End_Anemia_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
-    },
     "CBC_Panel_F_Routine": {
       "type": "DiagnosticReport",
       "number_of_observations": 11,
@@ -6592,7 +6622,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "direct_transition": "Peripheral_Blood_Smear",
@@ -6634,7 +6664,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6690-2",
-              "display": "WBC Auto (Bld) [#/Vol]"
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -6649,7 +6679,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "789-8",
-              "display": "RBC Auto (Bld) [#/Vol]"
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -6709,7 +6739,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "21000-5",
-              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
             }
           ],
           "range": {
@@ -6771,7 +6801,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -6812,7 +6842,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6690-2",
-              "display": "WBC Auto (Bld) [#/Vol]"
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -6827,7 +6857,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "789-8",
-              "display": "RBC Auto (Bld) [#/Vol]"
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -6887,7 +6917,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "21000-5",
-              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
             }
           ],
           "range": {
@@ -6950,7 +6980,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -6991,7 +7021,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6690-2",
-              "display": "WBC Auto (Bld) [#/Vol]"
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -7006,7 +7036,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "789-8",
-              "display": "RBC Auto (Bld) [#/Vol]"
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -7066,7 +7096,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "21000-5",
-              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
             }
           ],
           "range": {
@@ -7129,7 +7159,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "direct_transition": "Peripheral_Blood_Smear",
@@ -7171,7 +7201,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6690-2",
-              "display": "WBC Auto (Bld) [#/Vol]"
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -7186,7 +7216,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "789-8",
-              "display": "RBC Auto (Bld) [#/Vol]"
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -7246,7 +7276,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "21000-5",
-              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
             }
           ],
           "range": {
@@ -7301,10 +7331,6 @@ export default {"acute_myeloid_leukemia":{
         }
       ]
     },
-    "End Transfusion_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Delay_One_Day"
-    },
     "Consult_Referral_to_Experts_Encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
@@ -7333,10 +7359,6 @@ export default {"acute_myeloid_leukemia":{
         }
       ]
     },
-    "End_Consult_Referral to_Experts_Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
-    },
     "Collect_Social_and_Nutrition_History": {
       "type": "Simple",
       "remarks": [
@@ -7350,7 +7372,7 @@ export default {"acute_myeloid_leukemia":{
         "quantity": 1,
         "unit": "hours"
       },
-      "direct_transition": "Transfusion_Encounter"
+      "direct_transition": "Transfusion"
     },
     "Blood_Panel_M_Routine": {
       "type": "DiagnosticReport",
@@ -7445,6 +7467,18 @@ export default {"acute_myeloid_leukemia":{
         "unit": "days"
       },
       "direct_transition": "Consult_Referral_to_Experts_Encounter"
+    },
+    "End Any Active Encounter Just In Case": {
+      "type": "EncounterEnd",
+      "direct_transition": "Anemia"
+    },
+    "End Encounter After Transfusion": {
+      "type": "EncounterEnd",
+      "direct_transition": "Delay_One_Day"
+    },
+    "End Encounter After Medication Rx": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   },
   "gmf_version": 1
@@ -8101,7 +8135,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency Room Admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "History_of_Appendectomy",
@@ -8127,8 +8161,8 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "183452005",
-          "display": "Encounter Inpatient"
+          "code": "185347001",
+          "display": "Encounter for problem (procedure)"
         }
       ],
       "direct_transition": "Appendectomy",
@@ -8661,7 +8695,8 @@ export default {"acute_myeloid_leukemia":{
     "Next_Adult_Welness_Encounter": {
       "type": "Encounter",
       "wellness": true,
-      "direct_transition": "Lifelong_Asthma_Begins"
+      "direct_transition": "Lifelong_Asthma_Begins",
+      "reason": "asthma_condition"
     },
     "Lifelong_Asthma_Begins": {
       "type": "ConditionOnset",
@@ -8765,7 +8800,8 @@ export default {"acute_myeloid_leukemia":{
     "Next_Wellness_Encounter": {
       "type": "Encounter",
       "wellness": "true",
-      "direct_transition": "Maintenance_Medication_End"
+      "direct_transition": "Maintenance_Medication_End",
+      "reason": "asthma_condition"
     },
     "Maintenance_Medication_End": {
       "type": "MedicationEnd",
@@ -9096,7 +9132,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Next Wellness Visit": {
       "type": "Encounter",
-      "reason": "",
+      "reason": "Diagnosis",
       "telemedicine_possibility": "none",
       "wellness": true,
       "conditional_transition": [
@@ -9141,8 +9177,8 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 897718,
-          "display": "Verapamil Hydrochloride 40 MG"
+          "code": 897685,
+          "display": "verapamil hydrochloride 80 MG Oral Tablet"
         }
       ],
       "direct_transition": "Warfarin",
@@ -9450,7 +9486,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "228557008",
-          "display": "Cognitive and behavioral therapy"
+          "display": "Cognitive and behavioral therapy (regime/therapy)"
         }
       ],
       "duration": {
@@ -9865,7 +9901,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Start New Cycle": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "reason": "Breast Cancer",
       "codes": [
         {
@@ -10854,7 +10890,7 @@ export default {"acute_myeloid_leukemia":{
     "ER-encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
+      "reason": "breast_cancer_condition",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -11050,7 +11086,7 @@ export default {"acute_myeloid_leukemia":{
         "",
         "Some women might be worried that having a less extensive surgery might raise their risk of the cancer coming back. But the fact is, in most cases, mastectomy does not give you any better chance of long-term survival or a better outcome from treatment. Studies following thousands of women for more than 20 years show that when BCS can be done along with radiation, having a mastectomy instead does not provide any better chance of survival."
       ],
-      "direct_transition": "End Surgery encounter",
+      "direct_transition": "Post_Surgical_Recovery",
       "reason": "breast_cancer_condition"
     },
     "Breast-conserving surgery (BCS)": {
@@ -11086,7 +11122,7 @@ export default {"acute_myeloid_leukemia":{
         "",
         "Some women might be worried that having a less extensive surgery might raise their risk of the cancer coming back. But the fact is, in most cases, mastectomy does not give you any better chance of long-term survival or a better outcome from treatment. Studies following thousands of women for more than 20 years show that when BCS can be done along with radiation, having a mastectomy instead does not provide any better chance of survival."
       ],
-      "direct_transition": "BCS end surgery",
+      "direct_transition": "Post Surgical Recovery",
       "reason": "breast_cancer_condition"
     },
     "External Beam Radiation": {
@@ -11095,7 +11131,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 33195004,
-          "display": "Teleradiotherapy procedure (procedure)"
+          "display": "External beam radiation therapy procedure (procedure)"
         }
       ],
       "duration": {
@@ -11377,7 +11413,15 @@ export default {"acute_myeloid_leukemia":{
       "direct_transition": "Delay After Treatment"
     },
     "Lymph_Node Surgery": {
-      "type": "Simple",
+      "type": "Delay",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 60,
+          "standardDeviation": 90
+        }
+      },
+      "unit": "minutes",
       "distributed_transition": [
         {
           "transition": "Sentinel_Lymph_Node_Biopsy__SLNB_",
@@ -11406,7 +11450,15 @@ export default {"acute_myeloid_leukemia":{
       ]
     },
     "End_Lymph_Node_Surgery": {
-      "type": "Simple",
+      "type": "Delay",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 90,
+          "standardDeviation": 30
+        }
+      },
+      "unit": "minutes",
       "conditional_transition": [
         {
           "transition": "External Beam Radiation",
@@ -11425,7 +11477,7 @@ export default {"acute_myeloid_leukemia":{
     "Surgery encounter": {
       "type": "Encounter",
       "encounter_class": "inpatient",
-      "reason": "",
+      "reason": "breast_cancer_condition",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -11488,7 +11540,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Mastectomy Follow-Up Therapy": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -11665,7 +11717,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "BCS Follow-Up Treatment": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "reason": "breast_cancer_condition",
       "codes": [
         {
@@ -12028,7 +12080,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Next Day Radiation Treatment": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -12095,6 +12147,28 @@ export default {"acute_myeloid_leukemia":{
         "https://www.cooperhealth.org/services/radiation-oncology/questions-you-may-have-about-radiation-therapy"
       ],
       "value": 0
+    },
+    "Post Surgical Recovery": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 2
+        }
+      },
+      "unit": "days",
+      "direct_transition": "BCS end surgery"
+    },
+    "Post_Surgical_Recovery": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 2
+        }
+      },
+      "unit": "days",
+      "direct_transition": "End Surgery encounter"
     }
   },
   "gmf_version": 1
@@ -13121,7 +13195,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Breast Cancer Encounter": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -13129,7 +13203,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for symptom (procedure)"
         }
       ],
-      "direct_transition": "Mammogram"
+      "direct_transition": "Mammogram",
+      "reason": "Breast Cancer"
     },
     "MRI": {
       "type": "Procedure",
@@ -13199,7 +13274,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Stage group.clinical Cancer"
         }
       ],
-      "direct_transition": "Delay for Analysis of Possible Treatments",
+      "direct_transition": "End the Initial Encounter",
       "value_code": {
         "system": "SNOMED-CT",
         "code": 258228008,
@@ -13300,7 +13375,7 @@ export default {"acute_myeloid_leukemia":{
         "code": 258224005,
         "display": "Stage 3 (qualifier value)"
       },
-      "direct_transition": "Delay for Analysis of Possible Treatments"
+      "direct_transition": "End the Initial Encounter"
     },
     "Stage I": {
       "type": "Observation",
@@ -13318,7 +13393,7 @@ export default {"acute_myeloid_leukemia":{
         "code": 258215001,
         "display": "Stage 1 (qualifier value)"
       },
-      "direct_transition": "Delay for Analysis of Possible Treatments"
+      "direct_transition": "End the Initial Encounter"
     },
     "IIIB": {
       "type": "Observation",
@@ -13604,7 +13679,7 @@ export default {"acute_myeloid_leukemia":{
         "code": 258219007,
         "display": "Stage 2 (qualifier value)"
       },
-      "direct_transition": "Delay for Analysis of Possible Treatments"
+      "direct_transition": "End the Initial Encounter"
     },
     "Stage II Treatment": {
       "type": "Simple",
@@ -13751,7 +13826,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Screening surveillance (regime/therapy)"
         }
       ],
-      "encounter_class": "inpatient"
+      "encounter_class": "ambulatory"
     },
     "End Mammogram Followup Visit": {
       "type": "EncounterEnd",
@@ -13819,7 +13894,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Gynecologist Visit": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "reason": "breast_cancer_condition",
       "codes": [
         {
@@ -14049,7 +14124,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Postoperative follow-up visit (procedure)"
         }
       ],
-      "direct_transition": "End Initial Follow-Up Doctor Visit",
+      "direct_transition": "Follow up examination",
       "remarks": [
         "Doctor visits: At first, your follow-up doctor visits will probably be scheduled for every few months. The longer you have been free of cancer, the less often the appointments are needed. After 5 years, they are typically done about once a year.",
         "https://www.cancer.org/cancer/breast-cancer/living-as-a-breast-cancer-survivor/follow-up-care-after-breast-cancer-treatment.html"
@@ -14069,7 +14144,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Regular Mammogram Visit": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -14077,7 +14152,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Periodic reevaluation and management of healthy individual (procedure)"
         }
       ],
-      "direct_transition": "Screening Mammogram"
+      "direct_transition": "Screening Mammogram",
+      "reason": "breast_cancer_screening_due"
     },
     "Breast Cancer Found": {
       "type": "ConditionOnset",
@@ -14151,7 +14227,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Discussion about treatment (procedure)"
         }
       ],
-      "direct_transition": "End Meeting with Oncologist",
+      "direct_transition": "Discussion",
       "remarks": [
         "Treatment Options:",
         "https://www.cancer.net/cancer-types/breast-cancer/types-treatment"
@@ -14277,7 +14353,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Neoadjuvant Chemo Before Surgery": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -14513,7 +14589,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Start New Chemo Cycle": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "reason": "breast_cancer_condition",
       "codes": [
         {
@@ -14583,7 +14659,7 @@ export default {"acute_myeloid_leukemia":{
       },
       "distributed_transition": [
         {
-          "transition": "Regular Mammogram Visit",
+          "transition": "Breast Cancer Screening Due",
           "distribution": 0.48
         },
         {
@@ -14616,7 +14692,7 @@ export default {"acute_myeloid_leukemia":{
       },
       "distributed_transition": [
         {
-          "transition": "Regular Mammogram Visit",
+          "transition": "Breast Cancer Screening Due",
           "distribution": 0.69
         },
         {
@@ -14640,7 +14716,7 @@ export default {"acute_myeloid_leukemia":{
       ],
       "distributed_transition": [
         {
-          "transition": "Regular Mammogram Visit",
+          "transition": "Breast Cancer Screening Due",
           "distribution": 0.63
         },
         {
@@ -14675,7 +14751,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "distributions": [
             {
-              "transition": "Regular Mammogram Visit",
+              "transition": "Breast Cancer Screening Due",
               "distribution": 0.7
             },
             {
@@ -14881,6 +14957,60 @@ export default {"acute_myeloid_leukemia":{
       "attribute": "hospice_reason",
       "direct_transition": "Sit-Down with Oncologist to Discuss Treatment Options",
       "value_attribute": "breast_cancer_condition"
+    },
+    "End the Initial Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Delay for Analysis of Possible Treatments"
+    },
+    "Discussion": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 223487003,
+          "display": "Discussion about options (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 45
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "End Meeting with Oncologist",
+      "reason": "breast_cancer_condition"
+    },
+    "Follow up examination": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 25656009,
+          "display": "Physical examination, complete (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 45,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "reason": "breast_cancer_condition",
+      "direct_transition": "End Initial Follow-Up Doctor Visit"
+    },
+    "Breast Cancer Screening Due": {
+      "type": "SetAttribute",
+      "attribute": "breast_cancer_screening_due",
+      "direct_transition": "Regular Mammogram Visit",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 268547008,
+        "display": "Screening for malignant neoplasm of breast (procedure)"
+      }
     }
   },
   "gmf_version": 1
@@ -15412,7 +15542,8 @@ export default {"acute_myeloid_leukemia":{
     "Next_Well_Visit": {
       "type": "Encounter",
       "wellness": true,
-      "direct_transition": "End_Bronchitis_CarePlan"
+      "direct_transition": "End_Bronchitis_CarePlan",
+      "reason": "Bronchitis_Infection"
     },
     "End_Bronchitis_CarePlan": {
       "type": "CarePlanEnd",
@@ -16134,7 +16265,8 @@ export default {"acute_myeloid_leukemia":{
             "name": "Monitoring"
           }
         }
-      ]
+      ],
+      "reason": "Condition_Onset_Cerebral Palsy"
     },
     "Delay_Surgical Encounter": {
       "type": "Delay",
@@ -16384,7 +16516,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Surgical_Encounter1": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -16737,7 +16869,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 30,
         "unit": "minutes"
       },
-      "direct_transition": "Living_with_CP"
+      "direct_transition": "End_Cerebral_Palsy_Encounter1"
     },
     "Cerebral_Palsy_Pneumonia": {
       "type": "ConditionOnset",
@@ -16949,13 +17081,17 @@ export default {"acute_myeloid_leukemia":{
           "distribution": 0.4
         },
         {
-          "transition": "Terminal",
+          "transition": "End Encounter and Exit",
           "distribution": 0.6000000000000001
         }
       ]
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "End Encounter and Exit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   },
   "remarks": [
@@ -16970,7 +17106,8 @@ export default {"acute_myeloid_leukemia":{
     "Reference: AACPDM Clinical Care Pathway for Sialorrhea in Cerebral Palsy  (September 2017, AACPDM Care Pathways, for review 2020) https://www.aacpdm.org/publications/care-pathways/sialorrhea",
     "",
     ""
-  ]
+  ],
+  "gmf_version": 2
 }
 ,
 "chronic_kidney_disease":{
@@ -16985,7 +17122,20 @@ export default {"acute_myeloid_leukemia":{
       "type": "SetAttribute",
       "attribute": "ckd",
       "value": 0,
-      "direct_transition": "Guard_for_Htn_or_DM"
+      "distributed_transition": [
+        {
+          "transition": "Guard_for_Htn_or_DM",
+          "distribution": 0.998
+        },
+        {
+          "transition": "Nephropathy_Progression",
+          "distribution": 0.001
+        },
+        {
+          "transition": "Renal Dysplasia",
+          "distribution": 0.001
+        }
+      ]
     },
     "Guard_for_Htn_or_DM": {
       "type": "Guard",
@@ -17076,11 +17226,11 @@ export default {"acute_myeloid_leukemia":{
           },
           "distributions": [
             {
-              "distribution": 0.9865,
+              "distribution": 0.98,
               "transition": "Set_CKD_1 Damage"
             },
             {
-              "distribution": 0.0135,
+              "distribution": 0.02,
               "transition": "Set_CKD_2 Damage"
             }
           ]
@@ -17094,11 +17244,11 @@ export default {"acute_myeloid_leukemia":{
           },
           "distributions": [
             {
-              "distribution": 0.994,
+              "distribution": 0.99,
               "transition": "Set_CKD_2 Damage"
             },
             {
-              "distribution": 0.006,
+              "distribution": 0.01,
               "transition": "Set_CKD_3 Damage"
             }
           ]
@@ -17112,11 +17262,11 @@ export default {"acute_myeloid_leukemia":{
           },
           "distributions": [
             {
-              "distribution": 0.9994,
+              "distribution": 0.99,
               "transition": "Set_CKD_3 Damage"
             },
             {
-              "distribution": 0.0006,
+              "distribution": 0.01,
               "transition": "Set_CKD_4 Damage"
             }
           ]
@@ -17130,11 +17280,11 @@ export default {"acute_myeloid_leukemia":{
           },
           "distributions": [
             {
-              "distribution": 0.9994,
+              "distribution": 0.99,
               "transition": "Set_CKD_4 Damage"
             },
             {
-              "distribution": 0.0006,
+              "distribution": 0.01,
               "transition": "Expected_Lifespan_for_ESRD"
             }
           ]
@@ -17180,7 +17330,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "46177005",
-          "display": "End stage renal disease (disorder)"
+          "display": "End-stage renal disease (disorder)"
         }
       ],
       "remarks": [
@@ -17410,6 +17560,17 @@ export default {"acute_myeloid_leukemia":{
         "low": 45,
         "high": 100
       }
+    },
+    "Renal Dysplasia": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 204949001,
+          "display": "Renal dysplasia (disorder)"
+        }
+      ],
+      "direct_transition": "Expected_Lifespan_for_ESRD"
     }
   },
   "gmf_version": 1
@@ -17419,17 +17580,12 @@ export default {"acute_myeloid_leukemia":{
   "name": "Colorectal Cancer",
   "remarks": [
     "Colorectal cancer typically starts as benign polyps on the lining of the colon ",
-    "or rectum that slowly become cancerous over a period of 10-15 years. Annually ",
-    "136,000 new cases are diagnosed and 51,300 people die from colorectal cancer in the U.S.",
-    "The lifetime risk of developing colorectal cancer is 4.7% for men, 4.4% for women.",
+    "or rectum that slowly become cancerous over a period of 10-15 years. Annually 136,000 new cases are diagnosed and 51,300 people die from colorectal cancer in the U.S. The lifetime risk of developing colorectal cancer is 4.7% for men, 4.4% for women.",
     "source: http://www.cancer.org/cancer/colonandrectumcancer/detailedguide/colorectal-cancer-key-statistics",
     "Some things not modeled in this module: ",
     "1. Colorectal cancer in children. Although possible it's highly unlikely. ",
-    "2. Diabetes, obesity, and poor diet as risk factors. I could not find any ",
-    "   conclusive statistics or reports linking these to an increased incidence ",
-    "   of colorectal cancer. ",
-    "3. The progression of cancer from one stage to another. Whatever stage the patient ",
-    "   is initially diagnosed at they remain at."
+    "2. Diabetes, obesity, and poor diet as risk factors. I could not find any conclusive statistics or reports linking these to an increased incidence of colorectal cancer. ",
+    "3. The progression of cancer from one stage to another. Whatever stage the patient is initially diagnosed at they remain at."
   ],
   "states": {
     "Initial": {
@@ -17519,7 +17675,7 @@ export default {"acute_myeloid_leukemia":{
         "quantity": 50,
         "unit": "years"
       },
-      "direct_transition": "Routine_Colonoscopy_Encounter"
+      "direct_transition": "Colon Cancer Screening Reason"
     },
     "Routine_Colonoscopy_Encounter": {
       "type": "Encounter",
@@ -17528,10 +17684,11 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "185349003",
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
-      "direct_transition": "Routine_Colonoscopy_Procedure"
+      "direct_transition": "Routine_Colonoscopy_Procedure",
+      "reason": "colon_cancer_screening"
     },
     "Routine_Colonoscopy_Procedure": {
       "type": "Procedure",
@@ -17682,7 +17839,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "33756-8",
-          "display": "Polyp size greatest dimension by CAP cancer protocols"
+          "display": "Polyp size greatest dimension"
         }
       ],
       "direct_transition": "Fecal_Test"
@@ -17699,7 +17856,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "33756-8",
-          "display": "Polyp size greatest dimension by CAP cancer protocols"
+          "display": "Polyp size greatest dimension"
         }
       ],
       "direct_transition": "Fecal_Test"
@@ -17752,7 +17909,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "57905-2",
-          "display": "Hemoglobin.gastrointestinal [Presence] in Stool by Immunologic method"
+          "display": "Hemoglobin.gastrointestinal.lower [Presence] in Stool by Immunoassay --1st specimen"
         }
       ],
       "direct_transition": "Adenoma_Removal"
@@ -17769,7 +17926,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "57905-2",
-          "display": "Hemoglobin.gastrointestinal [Presence] in Stool by Immunologic method"
+          "display": "Hemoglobin.gastrointestinal.lower [Presence] in Stool by Immunoassay --1st specimen"
         }
       ],
       "direct_transition": "Adenoma_Removal"
@@ -17889,10 +18046,11 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "185349003",
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
-      "direct_transition": "Followup_Colonoscopy_Procedure"
+      "direct_transition": "Followup_Colonoscopy_Procedure",
+      "reason": "colorectal_adenoma"
     },
     "Followup_Colonoscopy_Procedure": {
       "type": "Procedure",
@@ -18135,10 +18293,11 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "185349003",
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
-      "direct_transition": "Diagnostic_Colonoscopy_Procedure"
+      "direct_transition": "Diagnostic_Colonoscopy_Procedure",
+      "reason": "Colorectal_Cancer_Symptom_2"
     },
     "Diagnostic_Colonoscopy_Procedure": {
       "type": "Procedure",
@@ -18627,7 +18786,15 @@ export default {"acute_myeloid_leukemia":{
           "display": "Partial resection of colon"
         }
       ],
-      "direct_transition": "Pain_Vital_3"
+      "direct_transition": "Pain_Vital_3",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "low": 30,
+          "high": 60
+        }
+      },
+      "unit": "minutes"
     },
     "Partial_Colectomy_CarePlan": {
       "type": "CarePlanStart",
@@ -18651,7 +18818,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Administration of intravenous fluids"
         }
       ],
-      "direct_transition": "End_Partial_Colectomy_Encounter"
+      "direct_transition": "Postoperative Care"
     },
     "End_Partial_Colectomy_Encounter": {
       "type": "EncounterEnd",
@@ -18752,7 +18919,15 @@ export default {"acute_myeloid_leukemia":{
           "display": "Construction of diverting colostomy"
         }
       ],
-      "direct_transition": "Pain_Vital_2"
+      "direct_transition": "Pain_Vital_2",
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "low": 30,
+          "high": 60
+        }
+      },
+      "unit": "minutes"
     },
     "Diverting_Colostomy_CarePlan": {
       "type": "CarePlanStart",
@@ -18776,7 +18951,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Administration of intravenous fluids"
         }
       ],
-      "direct_transition": "End_Diverting_Colostomy_Encounter"
+      "direct_transition": "Postoperative_Care"
     },
     "End_Diverting_Colostomy_Encounter": {
       "type": "EncounterEnd",
@@ -18945,7 +19120,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "185349003",
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
       "direct_transition": "End_Colorectal_Cancer_CarePlan"
@@ -19024,7 +19199,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2339-0",
-              "display": "Glucose"
+              "display": "Glucose [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -19036,7 +19211,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "display": "Urea nitrogen [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -19047,7 +19222,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "38483-4",
-              "display": "Creatinine"
+              "display": "Creatinine [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL",
@@ -19063,7 +19238,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "49765-1",
-              "display": "Calcium"
+              "display": "Calcium [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -19075,7 +19250,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2947-0",
-              "display": "Sodium"
+              "display": "Sodium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -19087,7 +19262,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6298-4",
-              "display": "Potassium"
+              "display": "Potassium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -19099,7 +19274,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2069-3",
-              "display": "Chloride"
+              "display": "Chloride [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -19111,7 +19286,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "display": "Carbon dioxide, total [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -19123,7 +19298,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -19246,7 +19421,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -19522,6 +19697,54 @@ export default {"acute_myeloid_leukemia":{
       "attribute": "hospice_reason",
       "direct_transition": "Wait_For_Oncologist_Encounter",
       "value_attribute": "colorectal_cancer"
+    },
+    "Postoperative Care": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 133899007,
+          "display": "Postoperative care (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 5
+        }
+      },
+      "unit": "days",
+      "direct_transition": "End_Partial_Colectomy_Encounter",
+      "reason": "colorectal_cancer"
+    },
+    "Postoperative_Care": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 133899007,
+          "display": "Postoperative care (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 3
+        }
+      },
+      "unit": "days",
+      "reason": "colorectal_cancer",
+      "direct_transition": "End_Diverting_Colostomy_Encounter"
+    },
+    "Colon Cancer Screening Reason": {
+      "type": "SetAttribute",
+      "attribute": "colon_cancer_screening",
+      "direct_transition": "Routine_Colonoscopy_Encounter",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 275978004,
+        "display": "Screening for malignant neoplasm of colon (procedure)"
+      }
     }
   },
   "gmf_version": 1
@@ -19603,12 +19826,12 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 183063000,
-          "display": "low salt diet education"
+          "display": "Low salt diet education"
         },
         {
           "system": "SNOMED-CT",
           "code": 183301007,
-          "display": "physical exercise"
+          "display": "Physical exercises (regime/therapy)"
         }
       ]
     },
@@ -19950,12 +20173,12 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 183063000,
-          "display": "low salt diet education"
+          "display": "Low salt diet education"
         },
         {
           "system": "SNOMED-CT",
           "code": 183301007,
-          "display": "physical exercise"
+          "display": "Physical exercises (regime/therapy)"
         },
         {
           "system": "SNOMED-CT",
@@ -20010,7 +20233,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "55405-5",
-          "display": "Heartfailure Tracking Panel"
+          "display": "Heart failure tracking panel"
         }
       ],
       "observations": [
@@ -20039,7 +20262,14 @@ export default {"acute_myeloid_leukemia":{
       "type": "SetAttribute",
       "attribute": "inpatient-los",
       "direct_transition": "Inpatient CarePlan",
-      "value": 0
+      "value": 0,
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "round": true,
+        "parameters": {
+          "mean": 5.8
+        }
+      }
     },
     "Reset inpatient count": {
       "type": "SetAttribute",
@@ -20067,29 +20297,20 @@ export default {"acute_myeloid_leukemia":{
     "Inpatient Discharge decision": {
       "type": "Counter",
       "attribute": "inpatient-los",
-      "action": "increment",
-      "complex_transition": [
+      "action": "decrement",
+      "conditional_transition": [
         {
+          "transition": "Inpatient daily routine",
           "condition": {
             "condition_type": "Attribute",
             "attribute": "inpatient-los",
-            "operator": ">=",
-            "value": 5
-          },
-          "distributions": [
-            {
-              "transition": "Inpatient Discharge",
-              "distribution": 0.8
-            },
-            {
-              "transition": "Inpatient daily routine",
-              "distribution": 0.19999999999999996
-            }
-          ]
+            "operator": ">",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Inpatient Discharge"
         }
-      ],
-      "remarks": [
-        "Model the ALOS (5.8) through an increased likelihood of a discharge after 5 days."
       ]
     },
     "Inpatient Death decision": {
@@ -20163,7 +20384,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "85354-9",
-          "display": "Blood Pressure"
+          "display": "Blood pressure panel with all children optional"
         }
       ],
       "direct_transition": "End self-measurement",
@@ -20733,7 +20954,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "51990-0",
-          "display": "Basic Metabolic Panel"
+          "display": "Basic metabolic panel - Blood"
         }
       ],
       "observations": [
@@ -20744,7 +20965,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2339-0",
-              "display": "Glucose"
+              "display": "Glucose [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -20756,7 +20977,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "display": "Urea nitrogen [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -20768,7 +20989,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "38483-4",
-              "display": "Creatinine"
+              "display": "Creatinine [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -20780,7 +21001,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "49765-1",
-              "display": "Calcium"
+              "display": "Calcium [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -20792,7 +21013,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2947-0",
-              "display": "Sodium"
+              "display": "Sodium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -20804,7 +21025,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6298-4",
-              "display": "Potassium"
+              "display": "Potassium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -20816,7 +21037,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2069-3",
-              "display": "Chloride"
+              "display": "Chloride [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -20828,7 +21049,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "display": "Carbon dioxide, total [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -21235,7 +21456,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "55405-5",
-          "display": "Heartfailure Tracking Panel"
+          "display": "Heart failure tracking panel"
         }
       ],
       "observations": [
@@ -21452,7 +21673,7 @@ export default {"acute_myeloid_leukemia":{
           "transition": "Terminal"
         },
         {
-          "transition": "Contraceptive_Type_Guard"
+          "transition": "Contraception_Care_Reason"
         }
       ]
     },
@@ -21603,7 +21824,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Patient encounter procedure"
         }
       ],
-      "direct_transition": "IUD_Replacement"
+      "direct_transition": "IUD_Replacement",
+      "reason": "contraception_care_reason"
     },
     "IUD_Replacement": {
       "type": "Procedure",
@@ -21635,7 +21857,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Patient encounter procedure"
         }
       ],
-      "direct_transition": "IUD_Removal"
+      "direct_transition": "IUD_Removal",
+      "reason": "contraception_care_reason"
     },
     "IUD_Removal": {
       "type": "Procedure",
@@ -21743,7 +21966,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Patient encounter procedure"
         }
       ],
-      "direct_transition": "Remove_Implant_Before_Replacement"
+      "direct_transition": "Remove_Implant_Before_Replacement",
+      "reason": "contraception_care_reason"
     },
     "End_Renew_Implant_Encounter": {
       "type": "EncounterEnd",
@@ -21759,7 +21983,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Patient encounter procedure"
         }
       ],
-      "direct_transition": "Remove_Implant"
+      "direct_transition": "Remove_Implant",
+      "reason": "contraception_care_reason"
     },
     "Remove_Implant": {
       "type": "Procedure",
@@ -21868,7 +22093,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Patient encounter procedure"
         }
       ],
-      "direct_transition": "Regular_Contraceptive_Injection"
+      "direct_transition": "Regular_Contraceptive_Injection",
+      "reason": "contraception_care_reason"
     },
     "Regular_Contraceptive_Injection": {
       "type": "Procedure",
@@ -21924,6 +22150,16 @@ export default {"acute_myeloid_leukemia":{
         "unit": "minutes"
       },
       "direct_transition": "Replace_Contraceptive_Implant"
+    },
+    "Contraception_Care_Reason": {
+      "type": "SetAttribute",
+      "attribute": "contraception_care_reason",
+      "direct_transition": "Contraceptive_Type_Guard",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 408969000,
+        "display": "Contraception care management (procedure)"
+      }
     }
   },
   "gmf_version": 1
@@ -21998,7 +22234,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "SetAttribute",
       "attribute": "contraceptive_type",
       "value": "sterilization",
-      "direct_transition": "Consultation_Encounter"
+      "direct_transition": "Sterilization Requested"
     },
     "Consultation_Encounter": {
       "type": "Encounter",
@@ -22010,7 +22246,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Consultation for treatment"
         }
       ],
-      "direct_transition": "End_Consultation"
+      "direct_transition": "Consultation",
+      "reason": "Sterilization Requested"
     },
     "End_Consultation": {
       "type": "EncounterEnd",
@@ -22035,7 +22272,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Admission to surgical department"
         }
       ],
-      "direct_transition": "Tubal_Ligation_Procedure"
+      "direct_transition": "Tubal_Ligation_Procedure",
+      "reason": "Sterilization Requested"
     },
     "Tubal_Ligation_Procedure": {
       "type": "Procedure",
@@ -22051,7 +22289,8 @@ export default {"acute_myeloid_leukemia":{
         "high": 3,
         "unit": "hours"
       },
-      "direct_transition": "Become_Infertile"
+      "direct_transition": "Sterilization Complete",
+      "reason": "Sterilization Requested"
     },
     "Become_Infertile": {
       "type": "SetAttribute",
@@ -22080,7 +22319,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Recommendation to limit sexual activity"
         }
       ],
-      "direct_transition": "End_Surgery_Encounter"
+      "direct_transition": "Postoperative Care",
+      "reason": "History_of_Tubal_Ligation"
     },
     "End_Surgery_Encounter": {
       "type": "EncounterEnd",
@@ -22102,6 +22342,73 @@ export default {"acute_myeloid_leukemia":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Consultation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 268533009,
+          "display": "Sterilization education (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 45
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "End_Consultation"
+    },
+    "Postoperative Care": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 133899007,
+          "display": "Postoperative care (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 5
+        }
+      },
+      "unit": "hours",
+      "direct_transition": "End_Surgery_Encounter",
+      "reason": "History_of_Tubal_Ligation"
+    },
+    "History_of_Tubal_Ligation": {
+      "type": "ConditionOnset",
+      "target_encounter": "Tubal_Ligation_Surgery_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 267020005,
+          "display": "History of tubal ligation (situation)"
+        }
+      ],
+      "direct_transition": "Become_Infertile"
+    },
+    "Sterilization Requested": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 183996000,
+          "display": "Sterilization requested (situation)"
+        }
+      ],
+      "direct_transition": "Consultation_Encounter",
+      "target_encounter": "Consultation_Encounter"
+    },
+    "Sterilization Complete": {
+      "type": "ConditionEnd",
+      "direct_transition": "History_of_Tubal_Ligation",
+      "condition_onset": "Sterilization Requested"
     }
   },
   "gmf_version": 1
@@ -22179,7 +22486,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Consultation for treatment"
         }
       ],
-      "direct_transition": "Prescribe_Implant_Contraceptive"
+      "direct_transition": "Prescribe_Implant_Contraceptive",
+      "reason": "contraception_care_reason"
     },
     "Prescribe_Implant_Contraceptive": {
       "type": "Simple",
@@ -22256,7 +22564,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Levonorgestrel 0.00354 MG/HR Drug Implant"
         }
       ],
-      "direct_transition": "Initial_Implant"
+      "direct_transition": "Initial_Implant",
+      "administration": true
     },
     "Prescribe_Implanon": {
       "type": "MedicationOrder",
@@ -22268,7 +22577,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Etonogestrel 68 MG Drug Implant"
         }
       ],
-      "direct_transition": "Initial_Implant"
+      "direct_transition": "Initial_Implant",
+      "administration": true
     },
     "Prescribe_Nexplanon": {
       "type": "MedicationOrder",
@@ -22280,7 +22590,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Etonogestrel 68 MG Drug Implant"
         }
       ],
-      "direct_transition": "Initial_Implant"
+      "direct_transition": "Initial_Implant",
+      "administration": true
     },
     "Initial_Implant": {
       "type": "Procedure",
@@ -22380,7 +22691,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Consultation for treatment"
         }
       ],
-      "direct_transition": "Prescribe_Injectable_Contraceptive"
+      "direct_transition": "Prescribe_Injectable_Contraceptive",
+      "reason": "contraception_care_reason"
     },
     "Prescribe_Injectable_Contraceptive": {
       "type": "Simple",
@@ -22545,7 +22857,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Consultation for treatment"
         }
       ],
-      "direct_transition": "Prescribe_IUD"
+      "direct_transition": "Prescribe_IUD",
+      "reason": "contraception_care_reason"
     },
     "Prescribe_IUD": {
       "type": "Simple",
@@ -22725,7 +23038,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Mirena 52 MG Intrauterine System"
         }
       ],
-      "direct_transition": "End_Consultation_Encounter"
+      "direct_transition": "End_Consultation_Encounter",
+      "administration": true
     },
     "Prescribe_Liletta": {
       "type": "MedicationOrder",
@@ -22737,7 +23051,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Liletta 52 MG Intrauterine System"
         }
       ],
-      "direct_transition": "End_Consultation_Encounter"
+      "direct_transition": "End_Consultation_Encounter",
+      "administration": true
     },
     "Prescribe_Kyleena": {
       "type": "MedicationOrder",
@@ -22749,7 +23064,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Kyleena 19.5 MG Intrauterine System"
         }
       ],
-      "direct_transition": "End_Consultation_Encounter"
+      "direct_transition": "End_Consultation_Encounter",
+      "administration": true
     },
     "End_Consultation_Encounter": {
       "type": "EncounterEnd",
@@ -22774,7 +23090,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Patient encounter procedure"
         }
       ],
-      "direct_transition": "IUD_Insertion"
+      "direct_transition": "IUD_Insertion",
+      "reason": "contraception_care_reason"
     },
     "IUD_Insertion": {
       "type": "Procedure",
@@ -22811,7 +23128,7 @@ export default {"acute_myeloid_leukemia":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "direct_transition": "Consultation_Encounter"
+      "direct_transition": "Sterilization_Requested"
     },
     "Consultation_Encounter": {
       "type": "Encounter",
@@ -22823,7 +23140,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Consultation for treatment"
         }
       ],
-      "direct_transition": "End_Consultation"
+      "direct_transition": "End_Consultation",
+      "reason": "Sterilization_Requested"
     },
     "End_Consultation": {
       "type": "EncounterEnd",
@@ -22853,7 +23171,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Patient encounter procedure"
         }
       ],
-      "direct_transition": "Vasectomy"
+      "direct_transition": "Vasectomy",
+      "reason": "Sterilization_Requested"
     },
     "Vasectomy": {
       "type": "Procedure",
@@ -22898,7 +23217,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Recommendation to limit sexual activity"
         }
       ],
-      "direct_transition": "End_Vasectomy_Encounter"
+      "direct_transition": "End_Sterilization_Requested"
     },
     "End_Vasectomy_Encounter": {
       "type": "EncounterEnd",
@@ -22920,6 +23239,23 @@ export default {"acute_myeloid_leukemia":{
     },
     "Terminal": {
       "type": "Terminal"
+    },
+    "Sterilization_Requested": {
+      "type": "ConditionOnset",
+      "target_encounter": "Consultation_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 183996000,
+          "display": "Sterilization requested (situation)"
+        }
+      ],
+      "direct_transition": "Consultation_Encounter"
+    },
+    "End_Sterilization_Requested": {
+      "type": "ConditionEnd",
+      "direct_transition": "End_Vasectomy_Encounter",
+      "condition_onset": "Sterilization_Requested"
     }
   },
   "gmf_version": 1
@@ -23005,7 +23341,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Consultation for treatment"
         }
       ],
-      "direct_transition": "Combination_Or_Minipill"
+      "direct_transition": "Combination_Or_Minipill",
+      "reason": "contraception_care_reason"
     },
     "Combination_Or_Minipill": {
       "type": "Simple",
@@ -23321,7 +23658,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": "235389",
-          "display": "Mestranol / Norethynodrel [Enovid]"
+          "display": "Mestranol / Norethynodrel"
         }
       ],
       "direct_transition": "End_Encounter"
@@ -23498,7 +23835,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Consultation for treatment"
         }
       ],
-      "direct_transition": "Prescribe_Xulane"
+      "direct_transition": "Prescribe_Xulane",
+      "reason": "contraception_care_reason"
     },
     "Prescribe_Xulane": {
       "type": "MedicationOrder",
@@ -23584,7 +23922,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Consultation for treatment"
         }
       ],
-      "direct_transition": "Prescribe_Nuvaring"
+      "direct_transition": "Prescribe_Nuvaring",
+      "reason": "contraception_care_reason"
     },
     "Prescribe_Nuvaring": {
       "type": "MedicationOrder",
@@ -23593,7 +23932,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": "1367439",
-          "display": "NuvaRing 0.12/0.015 MG per 24HR 21 Day Vaginal Ring"
+          "display": "NuvaRing 0.12/0.015 MG per 24HR 21 Day Vaginal System"
         }
       ],
       "direct_transition": "End_Consultation_Encounter"
@@ -23707,24 +24046,8 @@ export default {"acute_myeloid_leukemia":{
       "direct_transition": "Terminal"
     },
     "Female_Contraceptive_Use": {
-      "type": "Simple",
-      "remarks": [
-        "======================================================================",
-        " FEMALE CONTRACEPTIVE USE                                             ",
-        "======================================================================",
-        "Female use of contraceptives is recomputed 3 times in a patient's life, ",
-        "once for each major reproductive age bracket: ",
-        "1. Young (teen/20's) contraceptive users, age 14 - 24 ",
-        "2. Mid-age contraceptive users, age 25 - 34 ",
-        "3. Mature contraceptive users, age 35+ (limited by menopause at age 50) ",
-        "Combined with sexual_activity, this yields a full range of contraceptive ",
-        "users and outcomes, from those who never use contraceptives (and who likely ",
-        "have several children as a result), to lifetime contraceptive users with ",
-        "no children.",
-        "Whenever a woman becomes pregnancy her current contraceptive method is stopped. ",
-        "After the pregnancy terminates, she is re-routed here to re-up her contraceptive ",
-        "(or not)."
-      ],
+      "type": "SetAttribute",
+      "attribute": "contraception_care_reason",
       "conditional_transition": [
         {
           "condition": {
@@ -23756,7 +24079,29 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "Terminal"
         }
-      ]
+      ],
+      "remarks": [
+        "======================================================================",
+        " FEMALE CONTRACEPTIVE USE                                             ",
+        "======================================================================",
+        "Female use of contraceptives is recomputed 3 times in a patient's life, ",
+        "once for each major reproductive age bracket: ",
+        "1. Young (teen/20's) contraceptive users, age 14 - 24 ",
+        "2. Mid-age contraceptive users, age 25 - 34 ",
+        "3. Mature contraceptive users, age 35+ (limited by menopause at age 50) ",
+        "Combined with sexual_activity, this yields a full range of contraceptive ",
+        "users and outcomes, from those who never use contraceptives (and who likely ",
+        "have several children as a result), to lifetime contraceptive users with ",
+        "no children.",
+        "Whenever a woman becomes pregnancy her current contraceptive method is stopped. ",
+        "After the pregnancy terminates, she is re-routed here to re-up her contraceptive ",
+        "(or not)."
+      ],
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 389095005,
+        "display": "Contraception care (regime/therapy)"
+      }
     },
     "Young_Contraceptive_Use": {
       "type": "Simple",
@@ -24444,7 +24789,8 @@ export default {"acute_myeloid_leukemia":{
     "DiagnosisEncounter": {
       "type": "Encounter",
       "wellness": true,
-      "direct_transition": "Initial_FEV_Test"
+      "direct_transition": "Initial_FEV_Test",
+      "reason": "copd_variant"
     },
     "Initial_FEV_Test": {
       "type": "Procedure",
@@ -24782,7 +25128,8 @@ export default {"acute_myeloid_leukemia":{
     "COPD_Followup_Encounter": {
       "type": "Encounter",
       "wellness": true,
-      "direct_transition": "Followup_FEV_Test"
+      "direct_transition": "Followup_FEV_Test",
+      "reason": "copd_variant"
     },
     "Followup_FEV_Test": {
       "type": "Procedure",
@@ -25094,7 +25441,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 7,
         "unit": "hours"
       },
-      "direct_transition": "End_Surgery_Encounter"
+      "direct_transition": "Postoperative_Observation"
     },
     "Lung_Volume_Reduction": {
       "type": "Procedure",
@@ -25106,7 +25453,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Lung volume reduction surgery (procedure)"
         }
       ],
-      "direct_transition": "End_Surgery_Encounter"
+      "direct_transition": "Postoperative_Care"
     },
     "End_Surgery_Encounter": {
       "type": "EncounterEnd",
@@ -25391,6 +25738,45 @@ export default {"acute_myeloid_leukemia":{
       "type": "CallSubmodule",
       "submodule": "dme/wheelchair",
       "direct_transition": "End_COPD_Followup_Enc1"
+    },
+    "Postoperative_Care": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 133899007,
+          "display": "Postoperative care (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 10
+        }
+      },
+      "unit": "days",
+      "direct_transition": "End_Surgery_Encounter",
+      "reason": "copd_variant"
+    },
+    "Postoperative_Observation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 225415001,
+          "display": "Close observation (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 36,
+          "low": 24
+        }
+      },
+      "unit": "hours",
+      "direct_transition": "Postoperative_Care",
+      "reason": "colorectal_cancer"
     }
   },
   "gmf_version": 1
@@ -27445,7 +27831,7 @@ export default {"acute_myeloid_leukemia":{
     "Encounter for Test": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
+      "reason": "Suspected COVID",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -27528,7 +27914,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Suspected COVID-19"
         }
       ],
-      "direct_transition": "Apply Face Mask to Patient"
+      "direct_transition": "Encounter for Test"
     },
     "Admission": {
       "type": "CallSubmodule",
@@ -27870,7 +28256,7 @@ export default {"acute_myeloid_leukemia":{
     "Determine Risk": {
       "submodule": "covid19/determine_risk",
       "type": "CallSubmodule",
-      "direct_transition": "Encounter for Test",
+      "direct_transition": "Suspected COVID",
       "remarks": [
         "Assess patient comorbidities and set attribute (covid19_risk):",
         "  - (high) if patient has comorbidity impacting risks",
@@ -28018,7 +28404,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "80381-7",
-          "display": "Influenza virus A and B Ag panel - Nasopharynx by Rapid immunoassay"
+          "display": "Influenza virus A and B Ag panel - Upper respiratory specimen by Rapid immunoassay"
         }
       ],
       "observations": [
@@ -28029,7 +28415,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "80382-5",
-              "display": "Influenza virus A Ag [Presence] in Nasopharynx by Rapid immunoassay"
+              "display": "Influenza virus A Ag [Presence] in Upper respiratory specimen by Rapid immunoassay"
             }
           ],
           "value_code": {
@@ -28045,7 +28431,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "80383-3",
-              "display": "Influenza virus B Ag [Presence] in Nasopharynx by Rapid immunoassay"
+              "display": "Influenza virus B Ag [Presence] in Upper respiratory specimen by Rapid immunoassay"
             }
           ],
           "value_code": {
@@ -28063,7 +28449,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "80381-7",
-          "display": "Influenza virus A and B Ag panel - Nasopharynx by Rapid immunoassay"
+          "display": "Influenza virus A and B Ag panel - Upper respiratory specimen by Rapid immunoassay"
         }
       ],
       "observations": [
@@ -28074,7 +28460,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "80382-5",
-              "display": "Influenza virus A Ag [Presence] in Nasopharynx by Rapid immunoassay"
+              "display": "Influenza virus A Ag [Presence] in Upper respiratory specimen by Rapid immunoassay"
             }
           ],
           "value_code": {
@@ -28090,7 +28476,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "80383-3",
-              "display": "Influenza virus B Ag [Presence] in Nasopharynx by Rapid immunoassay"
+              "display": "Influenza virus B Ag [Presence] in Upper respiratory specimen by Rapid immunoassay"
             }
           ],
           "value_code": {
@@ -28108,7 +28494,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "80381-7",
-          "display": "Influenza virus A and B Ag panel - Nasopharynx by Rapid immunoassay"
+          "display": "Influenza virus A and B Ag panel - Upper respiratory specimen by Rapid immunoassay"
         }
       ],
       "observations": [
@@ -28119,7 +28505,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "80382-5",
-              "display": "Influenza virus A Ag [Presence] in Nasopharynx by Rapid immunoassay"
+              "display": "Influenza virus A Ag [Presence] in Upper respiratory specimen by Rapid immunoassay"
             }
           ],
           "value_code": {
@@ -28135,7 +28521,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "80383-3",
-              "display": "Influenza virus B Ag [Presence] in Nasopharynx by Rapid immunoassay"
+              "display": "Influenza virus B Ag [Presence] in Upper respiratory specimen by Rapid immunoassay"
             }
           ],
           "value_code": {
@@ -28683,7 +29069,7 @@ export default {"acute_myeloid_leukemia":{
     "Record Vitals": {
       "type": "CallSubmodule",
       "submodule": "covid19/measurements_vitals",
-      "direct_transition": "Suspected COVID"
+      "direct_transition": "Apply Face Mask to Patient"
     }
   },
   "gmf_version": 1
@@ -28708,7 +29094,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -29281,7 +29667,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "vital_sign": "EGFR"
@@ -29495,7 +29881,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -29604,7 +29990,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "19994-3",
-          "display": "Oxygen/Inspired gas setting [Volume Fraction] Ventilator"
+          "display": "Oxygen/Total gas setting [Volume Fraction] Ventilator"
         }
       ],
       "direct_transition": "Terminal",
@@ -29906,7 +30292,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "85354-9",
-          "display": "Blood Pressure"
+          "display": "Blood pressure panel with all children optional"
         }
       ],
       "observations": [
@@ -34525,7 +34911,8 @@ export default {"acute_myeloid_leukemia":{
       ],
       "remarks": [
         "https://www.cff.org/What-is-CF/Testing/"
-      ]
+      ],
+      "reason": "Cystic_Fibrosis"
     },
     "Sweat_Test": {
       "type": "Procedure",
@@ -35147,7 +35534,8 @@ export default {"acute_myeloid_leukemia":{
         "http://pediatrics.aappublications.org/content/early/2016/03/22/peds.2015-1784",
         "",
         "Overview of the standard of care per quarter"
-      ]
+      ],
+      "reason": "Cystic_Fibrosis"
     },
     "Chest_XRay": {
       "type": "Procedure",
@@ -36069,7 +36457,7 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": 16602611000119108,
+          "code": "16602611000119108",
           "display": "Awaiting transplantation of lung (situation)"
         }
       ],
@@ -36348,7 +36736,8 @@ export default {"acute_myeloid_leukemia":{
         "This is the enounter where alzheimer's is diagnosed. ",
         "Typical life expectancy after an Alzheimer’s diagnosis is 4-to-8 years. (Alzheimer’s Association)"
       ],
-      "direct_transition": "Diagnosis_MMSE_Score"
+      "direct_transition": "Diagnosis_MMSE_Score",
+      "reason": "Type of Alzheimer's"
     },
     "Diagnosis_MMSE_Score": {
       "type": "Observation",
@@ -36381,7 +36770,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "386257007",
-          "display": "Demential management"
+          "display": "Dementia management"
         }
       ],
       "activities": [
@@ -36800,7 +37189,6 @@ export default {"acute_myeloid_leukemia":{
     },
     "Pneumonia": {
       "type": "ConditionOnset",
-      "target_encounter": "PneumoniaEncounter",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -36811,20 +37199,22 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "Pneumonia is one of the most common causes of death among Alzheimer’s patients"
       ],
-      "direct_transition": "PneumoniaEncounter"
+      "direct_transition": "PneumoniaEncounter",
+      "assign_to_attribute": "hospice_reason",
+      "target_encounter": "PneumoniaEncounter"
     },
     "PneumoniaEncounter": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
-      "reason": "Type of Alzheimer's",
+      "encounter_class": "emergency",
+      "reason": "Pneumonia",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": 305336008,
-          "display": "Admission to hospice (procedure)"
+          "code": 4525004,
+          "display": "Emergency department patient visit (procedure)"
         }
       ],
-      "direct_transition": "PneumoniaDeath"
+      "direct_transition": "Emergency Time"
     },
     "PneumoniaDeath": {
       "type": "Death",
@@ -36834,7 +37224,7 @@ export default {"acute_myeloid_leukemia":{
         "unit": "days"
       },
       "condition_onset": "Pneumonia",
-      "direct_transition": "Terminal"
+      "direct_transition": "Admit to Hospice"
     },
     "Death": {
       "type": "Death",
@@ -36853,6 +37243,32 @@ export default {"acute_myeloid_leukemia":{
       "attribute": "hospice_reason",
       "direct_transition": "NoImpairment",
       "value_attribute": "Type of Alzheimer's"
+    },
+    "Admit to Hospice": {
+      "type": "SetAttribute",
+      "attribute": "hospice",
+      "direct_transition": "Terminal",
+      "value": true
+    },
+    "Emergency Time": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 3
+        }
+      },
+      "unit": "hours",
+      "direct_transition": "End Emergency Visit"
+    },
+    "End Emergency Visit": {
+      "type": "EncounterEnd",
+      "direct_transition": "PneumoniaDeath",
+      "discharge_disposition": {
+        "system": "NUBC",
+        "code": 50,
+        "display": "Discharged/transferred to Hospice - home"
+      }
     }
   },
   "gmf_version": 1
@@ -36879,7 +37295,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66519-0",
-          "display": "Percentage area affected by eczema Head and Neck"
+          "display": "Percentage area affected by eczema Head and Neck [PhenX]"
         }
       ],
       "range": {
@@ -36896,7 +37312,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66529-9",
-          "display": "Percentage area affected by eczema Trunk"
+          "display": "Percentage area affected by eczema Trunk [PhenX]"
         }
       ],
       "range": {
@@ -36913,7 +37329,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66524-0",
-          "display": "Percentage area affected by eczema Upper extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Upper extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -36930,7 +37346,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66534-9",
-          "display": "Percentage area affected by eczema Lower extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Lower extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -36968,7 +37384,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66519-0",
-          "display": "Percentage area affected by eczema Head and Neck"
+          "display": "Percentage area affected by eczema Head and Neck [PhenX]"
         }
       ],
       "range": {
@@ -36985,7 +37401,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66529-9",
-          "display": "Percentage area affected by eczema Trunk"
+          "display": "Percentage area affected by eczema Trunk [PhenX]"
         }
       ],
       "range": {
@@ -37002,7 +37418,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66524-0",
-          "display": "Percentage area affected by eczema Upper extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Upper extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -37019,7 +37435,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66534-9",
-          "display": "Percentage area affected by eczema Lower extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Lower extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -37057,7 +37473,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66519-0",
-          "display": "Percentage area affected by eczema Head and Neck"
+          "display": "Percentage area affected by eczema Head and Neck [PhenX]"
         }
       ],
       "range": {
@@ -37074,7 +37490,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66529-9",
-          "display": "Percentage area affected by eczema Trunk"
+          "display": "Percentage area affected by eczema Trunk [PhenX]"
         }
       ],
       "range": {
@@ -37091,7 +37507,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66524-0",
-          "display": "Percentage area affected by eczema Upper extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Upper extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -37108,7 +37524,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66534-9",
-          "display": "Percentage area affected by eczema Lower extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Lower extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -37146,7 +37562,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66519-0",
-          "display": "Percentage area affected by eczema Head and Neck"
+          "display": "Percentage area affected by eczema Head and Neck [PhenX]"
         }
       ],
       "range": {
@@ -37163,7 +37579,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66529-9",
-          "display": "Percentage area affected by eczema Trunk"
+          "display": "Percentage area affected by eczema Trunk [PhenX]"
         }
       ],
       "range": {
@@ -37180,7 +37596,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66524-0",
-          "display": "Percentage area affected by eczema Upper extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Upper extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -37197,7 +37613,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66534-9",
-          "display": "Percentage area affected by eczema Lower extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Lower extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -37234,7 +37650,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66519-0",
-          "display": "Percentage area affected by eczema Head and Neck"
+          "display": "Percentage area affected by eczema Head and Neck [PhenX]"
         }
       ],
       "exact": {
@@ -37250,7 +37666,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66529-9",
-          "display": "Percentage area affected by eczema Trunk"
+          "display": "Percentage area affected by eczema Trunk [PhenX]"
         }
       ],
       "exact": {
@@ -37266,7 +37682,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66524-0",
-          "display": "Percentage area affected by eczema Upper extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Upper extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -37283,7 +37699,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66534-9",
-          "display": "Percentage area affected by eczema Lower extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Lower extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -37320,7 +37736,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66519-0",
-          "display": "Percentage area affected by eczema Head and Neck"
+          "display": "Percentage area affected by eczema Head and Neck [PhenX]"
         }
       ],
       "exact": {
@@ -37336,7 +37752,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66529-9",
-          "display": "Percentage area affected by eczema Trunk"
+          "display": "Percentage area affected by eczema Trunk [PhenX]"
         }
       ],
       "exact": {
@@ -37352,7 +37768,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66524-0",
-          "display": "Percentage area affected by eczema Upper extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Upper extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -37369,7 +37785,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "66534-9",
-          "display": "Percentage area affected by eczema Lower extremitiy - bilateral"
+          "display": "Percentage area affected by eczema Lower extremity - bilateral [PhenX]"
         }
       ],
       "range": {
@@ -37728,7 +38144,8 @@ export default {"acute_myeloid_leukemia":{
             }
           ]
         }
-      ]
+      ],
+      "reason": "dermatitis"
     },
     "Early_Childhood_AD_Moderate_Observations": {
       "type": "CallSubmodule",
@@ -38094,7 +38511,20 @@ export default {"acute_myeloid_leukemia":{
         "quantity": 3,
         "unit": "days"
       },
-      "direct_transition": "Dialysis_Encounter"
+      "conditional_transition": [
+        {
+          "transition": "CKD guard",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "ckd",
+            "operator": "<",
+            "value": 4
+          }
+        },
+        {
+          "transition": "Dialysis_Encounter"
+        }
+      ]
     },
     "Dialysis_Encounter": {
       "type": "Encounter",
@@ -38135,7 +38565,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "Dialysis weight record"
         }
-      ]
+      ],
+      "reason": "dialysis_reason"
     },
     "end dialysis": {
       "type": "EncounterEnd",
@@ -38268,7 +38699,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2339-0",
-              "display": "Glucose"
+              "display": "Glucose [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -38280,7 +38711,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "display": "Urea nitrogen [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -38291,7 +38722,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "38483-4",
-              "display": "Creatinine"
+              "display": "Creatinine [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL",
@@ -38307,7 +38738,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "49765-1",
-              "display": "Calcium"
+              "display": "Calcium [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -38319,7 +38750,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2947-0",
-              "display": "Sodium"
+              "display": "Sodium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -38331,7 +38762,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6298-4",
-              "display": "Potassium"
+              "display": "Potassium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -38343,7 +38774,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2069-3",
-              "display": "Chloride"
+              "display": "Chloride [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -38355,7 +38786,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "display": "Carbon dioxide, total [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -38367,7 +38798,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -38514,7 +38945,7 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "5767-9",
+              "code": "34533-0",
               "display": "Odor of Urine"
             }
           ],
@@ -38815,7 +39246,8 @@ export default {"acute_myeloid_leukemia":{
         "Recommended starting dose for adult patients is 50 to 100 Units/kg 3 times weekly. Reduce or interrupt the dose if hemoglobin level approaches or exceeds 11 g/dl - Ref: Section -For Adult Patients with CKD on Dialysis (https://www.rxlist.com/epogen-drug.htm#description)"
       ],
       "assign_to_attribute": "anemia_medication",
-      "reason": "anemia"
+      "reason": "anemia",
+      "administration": true
     },
     "Epogen_Administered": {
       "type": "MedicationEnd",
@@ -39158,7 +39590,8 @@ export default {"acute_myeloid_leukemia":{
     "Next_Wellness_Encounter": {
       "type": "Encounter",
       "wellness": true,
-      "direct_transition": "Ear_Infection_End"
+      "direct_transition": "Ear_Infection_End",
+      "reason": "Gets_Ear_Infection"
     },
     "Ear_Infection_End": {
       "type": "ConditionEnd",
@@ -39349,7 +39782,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "80583007",
-          "display": "Severe anxiety (panic) (finding"
+          "display": "Severe anxiety (panic) (finding)"
         }
       ],
       "direct_transition": "GAD-7"
@@ -40199,7 +40632,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -40823,7 +41256,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "vital_sign": "EGFR"
@@ -41037,7 +41470,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -41146,7 +41579,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "19994-3",
-          "display": "Oxygen/Inspired gas setting [Volume Fraction] Ventilator"
+          "display": "Oxygen/Total gas setting [Volume Fraction] Ventilator"
         }
       ],
       "direct_transition": "Anticoagulation Check",
@@ -41310,7 +41743,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "56051-6",
-              "display": "Are you Hispanic or Latino?"
+              "display": "Do you consider yourself Hispanic/Latino?"
             }
           ],
           "attribute": "prapare_a1"
@@ -41322,7 +41755,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "32624-9",
-              "display": "Which race(s) are you?"
+              "display": "Race"
             }
           ],
           "attribute": "prapare_a2"
@@ -41358,7 +41791,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "54899-0",
-              "display": "What language are you most comfortable speaking?"
+              "display": "Preferred language"
             }
           ],
           "attribute": "prapare_a5"
@@ -41370,7 +41803,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "63512-8",
-              "display": "How many family members, including yourself, do you currently live with?"
+              "display": "How many people are living or staying at this address?"
             }
           ],
           "attribute": "household_size"
@@ -41382,7 +41815,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "71802-3",
-              "display": "What is your housing situation today?"
+              "display": "Housing status"
             }
           ],
           "attribute": "prapare_a7"
@@ -41406,7 +41839,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "56799-0",
-              "display": "What address do you live at?"
+              "display": "Address"
             }
           ],
           "attribute": "address"
@@ -41418,7 +41851,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "82589-3",
-              "display": "What is the highest level of school that you have finished?"
+              "display": "Highest level of education"
             }
           ],
           "attribute": "prapare_a10"
@@ -41430,7 +41863,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "67875-5",
-              "display": "What is your current work situation?"
+              "display": "Employment status - current"
             }
           ],
           "attribute": "prapare_a11"
@@ -41442,7 +41875,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "76437-3",
-              "display": "What is your main insurance?"
+              "display": "Primary insurance"
             }
           ],
           "attribute": "prapare_a12"
@@ -41454,7 +41887,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "63586-2",
-              "display": "During the past year, what was the total combined income for you and the family members you live with? This information will help us determine if you are eligible for any benefits."
+              "display": "What was your best estimate of the total income of all family members from all sources, before taxes, in last year?"
             }
           ],
           "attribute": "income"
@@ -41478,7 +41911,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "93030-5",
-              "display": "Has lack of transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living?"
+              "display": "Has lack of transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living"
             }
           ],
           "attribute": "prapare_a15"
@@ -41502,7 +41935,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "93038-8",
-              "display": "Stress is when someone feels tense, nervous, anxious or can't sleep at night because their mind is troubled. How stressed are you?"
+              "display": "Stress level"
             }
           ],
           "attribute": "prapare_a17"
@@ -41550,7 +41983,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "76501-6",
-              "display": "In the past year, have you been afraid of your partner or ex-partner?"
+              "display": "Within the last year, have you been afraid of your partner or ex-partner?"
             }
           ],
           "attribute": "prapare_a21"
@@ -41708,7 +42141,7 @@ export default {"acute_myeloid_leukemia":{
       "value_code": {
         "system": "LOINC",
         "code": "LA46-8",
-        "display": "Other, Please write"
+        "display": "Other"
       },
       "direct_transition": "Q3"
     },
@@ -42216,7 +42649,7 @@ export default {"acute_myeloid_leukemia":{
       "value_code": {
         "system": "LOINC",
         "code": "LA30190-5",
-        "display": "I do not have housing"
+        "display": "I do not have housing (staying with others, in a hotel, in a shelter, living outside on the street, on a beach, in a car, or in a park)"
       }
     },
     "A7_NotHomeless": {
@@ -42508,7 +42941,7 @@ export default {"acute_myeloid_leukemia":{
       "value_code": {
         "system": "LOINC",
         "code": "LA17956-6",
-        "display": "Unemployed (finding)"
+        "display": "Unemployed"
       },
       "direct_transition": "Unemployed"
     },
@@ -42591,7 +43024,7 @@ export default {"acute_myeloid_leukemia":{
       "value_code": {
         "system": "LOINC",
         "code": "LA30137-6",
-        "display": "Otherwise unemployed but not seeking work"
+        "display": "Otherwise unemployed but not seeking work (ex: student, retired, disabled, unpaid primary care giver)"
       },
       "direct_transition": "Employed Not"
     },
@@ -42656,7 +43089,7 @@ export default {"acute_myeloid_leukemia":{
       "attribute": "prapare_a12",
       "value_code": {
         "system": "LOINC",
-        "code": "LA30194-7",
+        "code": "LA17849-3",
         "display": "Medicaid"
       },
       "direct_transition": "Q14"
@@ -42820,7 +43253,7 @@ export default {"acute_myeloid_leukemia":{
       "value_code": {
         "system": "LOINC",
         "code": "LA30127-7",
-        "display": "Childcare"
+        "display": "Child care"
       },
       "direct_transition": "Q15"
     },
@@ -42830,7 +43263,7 @@ export default {"acute_myeloid_leukemia":{
       "value_code": {
         "system": "LOINC",
         "code": "LA30128-5",
-        "display": "Medicine or Any Health Care"
+        "display": "Medicine or Any Health Care (Medical, Dental, Mental Health, Vision)"
       },
       "direct_transition": "Q15"
     },
@@ -42850,7 +43283,7 @@ export default {"acute_myeloid_leukemia":{
       "value_code": {
         "system": "LOINC",
         "code": "LA46-8",
-        "display": "Other, Please write"
+        "display": "Other"
       },
       "direct_transition": "Q15"
     },
@@ -43236,7 +43669,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 266934004,
-          "display": "Transport problems (finding)"
+          "display": "Transport problem (finding)"
         }
       ],
       "direct_transition": "Q16"
@@ -44688,7 +45121,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "39156-5",
-          "display": "Body Mass Index"
+          "display": "Body mass index (BMI) [Ratio]"
         }
       ],
       "unit": "kg/m2",
@@ -44701,7 +45134,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "85354-9",
-          "display": "Blood Pressure"
+          "display": "Blood pressure panel with all children optional"
         }
       ],
       "observations": [
@@ -44915,7 +45348,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency Room Admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "History_of_Seizure"
@@ -44943,7 +45376,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "54550000",
-          "display": "Seizure Count Cerebral Cortex Electroencephalogram (EEG)"
+          "display": "Electroencephalogram (procedure)"
         }
       ],
       "complex_transition": [
@@ -45019,7 +45452,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": "308971",
-          "display": "Carbamazepine[Tegretol]"
+          "display": "carbamazepine 20 MG/ML Oral Suspension [Tegretol]"
         }
       ],
       "assign_to_attribute": "seizure_meds",
@@ -46115,7 +46548,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "End_PCP_Visit_For_Food_Allergy"
         }
-      ]
+      ],
+      "reason": "food_allergy"
     },
     "Food_Allergy_CarePlan": {
       "type": "CarePlanStart",
@@ -46642,8 +47076,8 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": 50849002,
-          "display": "Emergency Room Admission"
+          "code": "50849002",
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "remarks": [
@@ -46876,7 +47310,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 185349003,
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
       "direct_transition": "End_Postoperative_Follow-up",
@@ -46889,7 +47323,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 185349003,
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
       "reason": "Open_Cholecystectomy",
@@ -47004,8 +47438,8 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": 133899007,
-          "display": "Postoperative care"
+          "code": 736372004,
+          "display": "Discharge care plan (record artifact)"
         }
       ],
       "direct_transition": "Prescribe_Opioids",
@@ -47103,7 +47537,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2345-7",
-              "display": "Glucose"
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
             }
           ],
           "vital_sign": "Glucose"
@@ -47115,7 +47549,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "3094-0",
-              "display": "Urea Nitrogen"
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
             }
           ],
           "vital_sign": "Urea Nitrogen"
@@ -47127,7 +47561,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2160-0",
-              "display": "Creatinine"
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
             }
           ],
           "vital_sign": "Creatinine"
@@ -47139,7 +47573,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "17861-6",
-              "display": "Calcium"
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
             }
           ],
           "vital_sign": "Calcium"
@@ -47151,7 +47585,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2951-2",
-              "display": "Sodium"
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
             }
           ],
           "vital_sign": "Sodium"
@@ -47163,7 +47597,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2823-3",
-              "display": "Potassium"
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
             }
           ],
           "vital_sign": "Potassium"
@@ -47175,7 +47609,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2075-0",
-              "display": "Chloride"
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
             }
           ],
           "vital_sign": "Chloride"
@@ -47187,7 +47621,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2028-9",
-              "display": "Carbon Dioxide"
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
             }
           ],
           "vital_sign": "Carbon Dioxide"
@@ -47804,7 +48238,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "183301007",
-          "display": "Physical exercises"
+          "display": "Physical exercises (regime/therapy)"
         },
         {
           "system": "SNOMED-CT",
@@ -48907,7 +49341,7 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 252857,
+          "code": 2563431,
           "display": "aspirin 81 MG Oral Capsule"
         }
       ],
@@ -50747,7 +51181,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem (procedure)"
         }
       ],
-      "direct_transition": "Liaising with referral source"
+      "direct_transition": "Liaising with referral source",
+      "reason": "vhd_diagnosis"
     },
     "Liaising with referral source": {
       "type": "Procedure",
@@ -50759,7 +51194,8 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "unit": "minutes",
-      "direct_transition": "Medical Records Review"
+      "direct_transition": "Medical Records Review",
+      "reason": "vhd_diagnosis"
     },
     "Medical Records Review": {
       "type": "Procedure",
@@ -50771,7 +51207,8 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "unit": "minutes",
-      "direct_transition": "Care Plan Coordination"
+      "direct_transition": "Care Plan Coordination",
+      "reason": "vhd_diagnosis"
     },
     "Care Plan Coordination": {
       "type": "Procedure",
@@ -50783,7 +51220,8 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "unit": "minutes",
-      "direct_transition": "AVRr Care Plan"
+      "direct_transition": "AVRr Care Plan",
+      "reason": "vhd_diagnosis"
     },
     "AVRr Care Plan": {
       "type": "CarePlanStart",
@@ -50812,7 +51250,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Refer for angiogram (procedure)"
         }
       ],
-      "assign_to_attribute": "avrr_careplan"
+      "assign_to_attribute": "avrr_careplan",
+      "reason": "vhd_diagnosis"
     },
     "Priority_1_Next_Encounter": {
       "type": "Delay",
@@ -50866,7 +51305,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Hospital admission (procedure)"
         }
       ],
-      "direct_transition": "AVRr Preop"
+      "direct_transition": "AVRr Preop",
+      "reason": "vhd_diagnosis"
     },
     "Preoperative_Outpatient": {
       "type": "Encounter",
@@ -50878,7 +51318,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Follow-up encounter (procedure)"
         }
       ],
-      "direct_transition": "Set_Immediate_Admission_False"
+      "direct_transition": "Set_Immediate_Admission_False",
+      "reason": "vhd_diagnosis"
     },
     "Set_Immediate_Admission_False": {
       "type": "SetAttribute",
@@ -50910,7 +51351,8 @@ export default {"acute_myeloid_leukemia":{
           "transition": "Treatment Plan",
           "distribution": 0.8
         }
-      ]
+      ],
+      "reason": "vhd_diagnosis"
     },
     "Heart Team Conference": {
       "type": "Procedure",
@@ -50922,7 +51364,8 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "unit": "minutes",
-      "direct_transition": "Treatment Plan"
+      "direct_transition": "Treatment Plan",
+      "reason": "vhd_diagnosis"
     },
     "Treatment Plan": {
       "type": "Procedure",
@@ -50943,7 +51386,8 @@ export default {"acute_myeloid_leukemia":{
           "transition": "Patient referral",
           "distribution": 0.1
         }
-      ]
+      ],
+      "reason": "vhd_diagnosis"
     },
     "Scheduling": {
       "type": "Procedure",
@@ -50968,7 +51412,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "End Preoperative"
         }
-      ]
+      ],
+      "reason": "vhd_diagnosis"
     },
     "Patient referral": {
       "type": "Procedure",
@@ -50989,7 +51434,8 @@ export default {"acute_myeloid_leukemia":{
           "transition": "Palliative Care",
           "distribution": 0.4
         }
-      ]
+      ],
+      "reason": "vhd_diagnosis"
     },
     "End Preoperative": {
       "type": "EncounterEnd",
@@ -51029,7 +51475,7 @@ export default {"acute_myeloid_leukemia":{
     "Valve Surgery": {
       "type": "Encounter",
       "encounter_class": "inpatient",
-      "reason": "",
+      "reason": "vhd_diagnosis",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -51110,7 +51556,8 @@ export default {"acute_myeloid_leukemia":{
           "transition": "End Preoperative Encounter",
           "distribution": 0.6
         }
-      ]
+      ],
+      "reason": "vhd_diagnosis"
     },
     "End_VHD_Referral_Consultation": {
       "type": "EncounterEnd",
@@ -51459,7 +51906,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "History of aortic valve replacement (situation)"
         }
       ],
-      "direct_transition": "Finish_Surgery"
+      "direct_transition": "Finish_Surgery",
+      "assign_to_attribute": "savrr_history"
     },
     "AV Repair History": {
       "type": "ConditionOnset",
@@ -51470,7 +51918,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "History of aortic valve repair (situation)"
         }
       ],
-      "direct_transition": "Finish_Surgery"
+      "direct_transition": "Finish_Surgery",
+      "assign_to_attribute": "savrr_history"
     },
     "Transesophageal Echo​": {
       "type": "ImagingStudy",
@@ -53523,7 +53972,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -53790,7 +54239,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "vital_sign": "EGFR"
@@ -54004,7 +54453,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -54241,7 +54690,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "57698-3",
-          "display": "Lipid Panel"
+          "display": "Lipid panel with direct LDL - Serum or Plasma"
         }
       ],
       "observations": [
@@ -54252,7 +54701,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2093-3",
-              "display": "Total Cholesterol"
+              "display": "Cholesterol [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -54288,7 +54737,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2085-9",
-              "display": "High Density Lipoprotein Cholesterol"
+              "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -54675,11 +55124,6 @@ export default {"acute_myeloid_leukemia":{
           "system": "SNOMED-CT",
           "code": 414088005,
           "display": "Emergency coronary artery bypass graft (procedure)"
-        },
-        {
-          "system": "SNOMED-CT",
-          "code": "1234",
-          "display": "SNOMED Code"
         }
       ],
       "distribution": {
@@ -57245,7 +57689,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "55405-5",
-          "display": "Heartfailure Tracking Panel"
+          "display": "Heart failure tracking panel"
         }
       ],
       "observations": [
@@ -57823,7 +58267,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 33367005,
-          "display": "Coronary angiography (procedure)"
+          "display": "Angiography of coronary artery (procedure)"
         }
       ],
       "duration": {
@@ -58492,7 +58936,7 @@ export default {"acute_myeloid_leukemia":{
       "submodule": "heart/cabg/referral",
       "conditional_transition": [
         {
-          "transition": "Terminal",
+          "transition": "End Last Encounter",
           "condition": {
             "condition_type": "Or",
             "conditions": [
@@ -58528,16 +58972,12 @@ export default {"acute_myeloid_leukemia":{
     "Postop ICU and Ward": {
       "type": "CallSubmodule",
       "submodule": "heart/cabg/postop",
-      "direct_transition": "End Operation Encounter"
+      "direct_transition": "End Last Encounter"
     },
     "Deceased": {
       "type": "Death",
-      "direct_transition": "Terminal",
+      "direct_transition": "End Last Encounter",
       "referenced_by_attribute": "cardiac_surgery_reason"
-    },
-    "End Operation Encounter": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
     },
     "Terminal": {
       "type": "Terminal"
@@ -58546,6 +58986,10 @@ export default {"acute_myeloid_leukemia":{
       "type": "CallSubmodule",
       "submodule": "heart/operative_status",
       "direct_transition": "Set Outcomes"
+    },
+    "End Last Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   },
   "gmf_version": 2
@@ -58571,7 +59015,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -58773,7 +59217,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "57698-3",
-          "display": "Lipid Panel"
+          "display": "Lipid panel with direct LDL - Serum or Plasma"
         }
       ],
       "observations": [
@@ -58784,7 +59228,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2093-3",
-              "display": "Total Cholesterol"
+              "display": "Cholesterol [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -58829,7 +59273,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2085-9",
-              "display": "High Density Lipoprotein Cholesterol"
+              "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -59035,7 +59479,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -59249,7 +59693,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "vital_sign": "EGFR"
@@ -59400,7 +59844,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -59655,7 +60099,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "vital_sign": "EGFR"
@@ -59805,7 +60249,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "57698-3",
-          "display": "Lipid Panel"
+          "display": "Lipid panel with direct LDL - Serum or Plasma"
         }
       ],
       "observations": [
@@ -59816,7 +60260,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2093-3",
-              "display": "Total Cholesterol"
+              "display": "Cholesterol [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -59852,7 +60296,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2085-9",
-              "display": "High Density Lipoprotein Cholesterol"
+              "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -60615,7 +61059,7 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 1656354,
+          "code": 1656356,
           "display": "sacubitril 97 MG / valsartan 103 MG Oral Tablet"
         }
       ],
@@ -60854,7 +61298,7 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 1656354,
+          "code": 1656356,
           "display": "sacubitril 97 MG / valsartan 103 MG Oral Tablet"
         }
       ],
@@ -61289,7 +61733,7 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 1656354,
+          "code": 1656356,
           "display": "sacubitril 97 MG / valsartan 103 MG Oral Tablet"
         }
       ],
@@ -61789,7 +62233,7 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": 1656354,
+          "code": 1656356,
           "display": "sacubitril 97 MG / valsartan 103 MG Oral Tablet"
         }
       ],
@@ -63142,7 +63586,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 33367005,
-          "display": "Coronary angiography (procedure)"
+          "display": "Angiography of coronary artery (procedure)"
         }
       ],
       "unit": "minutes",
@@ -64187,7 +64631,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 33367005,
-          "display": "Coronary angiography (procedure)"
+          "display": "Angiography of coronary artery (procedure)"
         }
       ],
       "unit": "minutes",
@@ -64198,7 +64642,7 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": 25338004,
+          "code": "225338004",
           "display": "Risk assessment (procedure)"
         }
       ],
@@ -64528,7 +64972,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "History of aortic valve replacement (situation)"
         }
       ],
-      "direct_transition": "Finish Surgery"
+      "direct_transition": "Finish Surgery",
+      "assign_to_attribute": "tavr_history"
     },
     "Transfemoral TAVR": {
       "type": "Procedure",
@@ -69853,7 +70298,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -70124,7 +70569,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "vital_sign": "EGFR"
@@ -70338,7 +70783,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -70651,7 +71096,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -70692,7 +71137,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6690-2",
-              "display": "WBC Auto (Bld) [#/Vol]"
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -70707,7 +71152,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "789-8",
-              "display": "RBC Auto (Bld) [#/Vol]"
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -70767,7 +71212,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "21000-5",
-              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
             }
           ],
           "range": {
@@ -70830,7 +71275,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -70871,7 +71316,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6690-2",
-              "display": "WBC Auto (Bld) [#/Vol]"
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -70886,7 +71331,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "789-8",
-              "display": "RBC Auto (Bld) [#/Vol]"
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
             }
           ],
           "range": {
@@ -70946,7 +71391,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "21000-5",
-              "display": "RDW - Erythrocyte distribution width Auto (RBC) [Entitic vol]"
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
             }
           ],
           "range": {
@@ -71126,7 +71571,7 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "5767-9",
+              "code": "34533-0",
               "display": "Odor of Urine"
             }
           ],
@@ -71381,7 +71826,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "57698-3",
-          "display": "Lipid Panel"
+          "display": "Lipid panel with direct LDL - Serum or Plasma"
         }
       ],
       "observations": [
@@ -71392,7 +71837,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2093-3",
-              "display": "Total Cholesterol"
+              "display": "Cholesterol [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -71428,7 +71873,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2085-9",
-              "display": "High Density Lipoprotein Cholesterol"
+              "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -76021,7 +76466,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Human immunodeficiency virus infection (disorder)"
         }
       ],
-      "direct_transition": "Diagnosis_Encounter_End"
+      "direct_transition": "Diagnosis_Encounter_Later_Years",
+      "target_encounter": "Diagnosis_Encounter_Later_Years"
     },
     "Living_with_Diagnosis_Later_Years": {
       "type": "Delay",
@@ -76044,7 +76490,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Acquired immune deficiency syndrome (disorder)"
         }
       ],
-      "direct_transition": "Diagnosis_Encounter_End_Early_Years"
+      "direct_transition": "Diagnosis_Encounter_Early_Years",
+      "target_encounter": "Diagnosis_Encounter_Early_Years"
     },
     "Mortality Check Early Years": {
       "type": "Simple",
@@ -76153,7 +76600,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem (procedure)"
         }
       ],
-      "direct_transition": "Screening Submodule"
+      "direct_transition": "Screening Submodule",
+      "reason": "Diagnosis Later Years"
     },
     "Diagnosis_Encounter_Early_Years": {
       "type": "Encounter",
@@ -76165,7 +76613,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem (procedure)"
         }
       ],
-      "direct_transition": "Screening_Submodule"
+      "direct_transition": "Screening_Submodule",
+      "reason": "Diagnosis Early Years"
     },
     "Diagnosis_Encounter_End": {
       "type": "EncounterEnd",
@@ -76178,23 +76627,23 @@ export default {"acute_myeloid_leukemia":{
     "Screening Submodule": {
       "type": "CallSubmodule",
       "submodule": "hiv/hiv_screening",
-      "direct_transition": "Diagnosis Later Years"
+      "direct_transition": "Diagnosis_Encounter_End"
     },
     "Screening_Submodule": {
       "type": "CallSubmodule",
       "submodule": "hiv/hiv_screening",
-      "direct_transition": "Diagnosis Early Years"
+      "direct_transition": "Diagnosis_Encounter_End_Early_Years"
     },
     "Diagnosed_Later_Years": {
       "type": "SetAttribute",
       "attribute": "hiv_infection",
-      "direct_transition": "Diagnosis_Encounter_Later_Years",
+      "direct_transition": "Diagnosis Later Years",
       "value": true
     },
     "Diagnosed_Early_Years": {
       "type": "SetAttribute",
       "attribute": "hiv_infection",
-      "direct_transition": "Diagnosis_Encounter_Early_Years",
+      "direct_transition": "Diagnosis Early Years",
       "value": true
     },
     "Wait_Until_Next_Diagnosis_Check": {
@@ -76307,7 +76756,8 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "direct_transition": "Referral_Home_Health_Care",
-      "encounter_class": "urgentcare"
+      "encounter_class": "urgentcare",
+      "reason": "Transition_To_Home"
     },
     "Referral_Home_Health_Care": {
       "type": "Procedure",
@@ -76352,7 +76802,8 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "direct_transition": "Initial_Patient_Assessment",
-      "encounter_class": "home"
+      "encounter_class": "home",
+      "reason": "Transition_To_Home"
     },
     "Initial_Patient_Assessment": {
       "type": "Procedure",
@@ -76400,7 +76851,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "End_First_HH_Encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "Follow-up_HH_Encounter"
+      "direct_transition": "Delay"
     },
     "Follow-up_HH_Encounter": {
       "type": "Encounter",
@@ -76412,7 +76863,8 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "direct_transition": "Begin_Visit",
-      "encounter_class": "home"
+      "encounter_class": "home",
+      "reason": "Transition_To_Home"
     },
     "Begin_Visit": {
       "type": "Counter",
@@ -76511,7 +76963,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Patient discharge (procedure)"
         }
       ],
-      "direct_transition": "Last Visit"
+      "direct_transition": "End_Transition_To_Home"
     },
     "Nursing_Care": {
       "type": "Procedure",
@@ -76638,13 +77090,30 @@ export default {"acute_myeloid_leukemia":{
           }
         ]
       },
-      "direct_transition": "Face_to_Face_Encounter"
+      "direct_transition": "Transition_To_Home"
     },
     "Reset Home Health": {
       "type": "SetAttribute",
       "attribute": "home_health",
       "direct_transition": "Wait Until Home Health",
       "value": false
+    },
+    "Transition_To_Home": {
+      "type": "ConditionOnset",
+      "target_encounter": "Face_to_Face_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 1871000124103,
+          "display": "Transition from acute care to home-health care (finding)"
+        }
+      ],
+      "direct_transition": "Face_to_Face_Encounter"
+    },
+    "End_Transition_To_Home": {
+      "type": "ConditionEnd",
+      "direct_transition": "Last Visit",
+      "condition_onset": "Transition_To_Home"
     }
   },
   "gmf_version": 1
@@ -77317,19 +77786,6 @@ export default {"acute_myeloid_leukemia":{
           }
         },
         {
-          "transition": "Heart Disease",
-          "condition": {
-            "condition_type": "Active Condition",
-            "codes": [
-              {
-                "system": "SNOMED-CT",
-                "code": 53741008,
-                "display": "Coronary Heart Disease"
-              }
-            ]
-          }
-        },
-        {
           "transition": "CF",
           "condition": {
             "condition_type": "Attribute",
@@ -77391,7 +77847,7 @@ export default {"acute_myeloid_leukemia":{
     "Alzheimers": {
       "type": "SetAttribute",
       "attribute": "hospice_reason",
-      "direct_transition": "COPD",
+      "direct_transition": "Initiate Hospice",
       "value_attribute": "Type of Alzheimer's"
     },
     "COPD": {
@@ -77405,16 +77861,6 @@ export default {"acute_myeloid_leukemia":{
       "attribute": "hospice_reason",
       "value_attribute": "chf",
       "direct_transition": "Initiate Hospice"
-    },
-    "Heart Disease": {
-      "type": "SetAttribute",
-      "attribute": "hospice_reason",
-      "direct_transition": "Initiate Hospice",
-      "value_code": {
-        "system": "SNOMED",
-        "code": "53741008",
-        "display": "Coronary Heart Disease"
-      }
     },
     "CKD": {
       "type": "SetAttribute",
@@ -77539,7 +77985,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "SetAttribute",
       "attribute": "homeless",
       "value": true,
-      "direct_transition": "Homelessness_Counter"
+      "direct_transition": "Homeless_Condition"
     },
     "Homelessness_Counter": {
       "type": "Counter",
@@ -77656,7 +78102,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Domiciliary or rest home patient evaluation and management"
         }
       ],
-      "direct_transition": "Information_Gathering"
+      "direct_transition": "Information_Gathering",
+      "reason": "Homeless_Condition"
     },
     "Information_Gathering": {
       "type": "Procedure",
@@ -77876,7 +78323,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "46240-8",
-          "display": "History of Hospitalizations+Outpatient visits"
+          "display": "History of Hospitalizations+Outpatient visits Narrative"
         }
       ],
       "range": {
@@ -77894,7 +78341,24 @@ export default {"acute_myeloid_leukemia":{
       "type": "SetAttribute",
       "attribute": "homeless",
       "value": false,
-      "direct_transition": "Potential_Homelessness"
+      "direct_transition": "End_Homeless_Condition"
+    },
+    "Homeless_Condition": {
+      "type": "ConditionOnset",
+      "target_encounter": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 32911000,
+          "display": "Homeless (finding)"
+        }
+      ],
+      "direct_transition": "Homelessness_Counter"
+    },
+    "End_Homeless_Condition": {
+      "type": "ConditionEnd",
+      "direct_transition": "Potential_Homelessness",
+      "condition_onset": "Homeless_Condition"
     }
   },
   "gmf_version": 1
@@ -77923,78 +78387,46 @@ export default {"acute_myeloid_leukemia":{
           "display": "Admission to hospice (procedure)"
         }
       ],
-      "direct_transition": "Determine_LOS",
-      "reason": "hospice_reason"
-    },
-    "Determine_LOS": {
-      "type": "Simple",
-      "distributed_transition": [
+      "reason": "hospice_reason",
+      "conditional_transition": [
         {
-          "distribution": 0.26,
-          "transition": "LOS_1-7_Days"
+          "transition": "Stay Until Death",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "days_until_death",
+            "operator": "<",
+            "value": 30
+          }
         },
         {
-          "distribution": 0.35,
-          "transition": "LOS_8-60_Days"
-        },
-        {
-          "distribution": 0.07,
-          "transition": "LOS_61-90_Days"
-        },
-        {
-          "distribution": 0.11,
-          "transition": "LOS_91-180_Days"
-        },
-        {
-          "distribution": 0.21,
-          "transition": "LOS_181-240_Days"
+          "transition": "Determine_LOS"
         }
       ]
     },
-    "LOS_1-7_Days": {
+    "Determine_LOS": {
       "type": "SetAttribute",
       "attribute": "hospice_days",
-      "direct_transition": "Certification_Procedure",
-      "range": {
-        "high": 7,
-        "low": 1
-      }
-    },
-    "LOS_8-60_Days": {
-      "type": "SetAttribute",
-      "attribute": "hospice_days",
-      "direct_transition": "Certification_Procedure",
-      "range": {
-        "high": 60,
-        "low": 8
-      }
-    },
-    "LOS_61-90_Days": {
-      "type": "SetAttribute",
-      "attribute": "hospice_days",
-      "direct_transition": "Certification_Procedure",
-      "range": {
-        "high": 90,
-        "low": 61
-      }
-    },
-    "LOS_91-180_Days": {
-      "type": "SetAttribute",
-      "attribute": "hospice_days",
-      "direct_transition": "Certification_Procedure",
-      "range": {
-        "high": 180,
-        "low": 91
-      }
-    },
-    "LOS_181-240_Days": {
-      "type": "SetAttribute",
-      "attribute": "hospice_days",
-      "direct_transition": "Certification_Procedure",
-      "range": {
-        "high": 240,
-        "low": 181
-      }
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "round": true,
+        "parameters": {
+          "mean": 22.7
+        }
+      },
+      "conditional_transition": [
+        {
+          "transition": "Max Length of Stay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "hospice_days",
+            "operator": ">",
+            "value": 240
+          }
+        },
+        {
+          "transition": "Certification_Procedure"
+        }
+      ]
     },
     "Certification_Procedure": {
       "type": "Procedure",
@@ -78084,7 +78516,7 @@ export default {"acute_myeloid_leukemia":{
           "condition": {
             "condition_type": "Attribute",
             "attribute": "hospice_days",
-            "operator": "<",
+            "operator": "<=",
             "value": 0
           }
         },
@@ -78257,6 +78689,18 @@ export default {"acute_myeloid_leukemia":{
       "type": "DeviceEnd",
       "device": "Commode",
       "direct_transition": "Alive Check"
+    },
+    "Max Length of Stay": {
+      "type": "SetAttribute",
+      "attribute": "hospice_days",
+      "direct_transition": "Certification_Procedure",
+      "value": 240
+    },
+    "Stay Until Death": {
+      "type": "SetAttribute",
+      "attribute": "hospice_days",
+      "direct_transition": "Certification_Procedure",
+      "value_attribute": "days_until_death"
     }
   },
   "gmf_version": 1
@@ -78307,7 +78751,7 @@ export default {"acute_myeloid_leukemia":{
         "unit": "years",
         "value": 0
       },
-      "direct_transition": "Set_Yearly_Risk"
+      "direct_transition": "Hypertension_Screening_Reason"
     },
     "Set_Yearly_Risk": {
       "type": "Simple",
@@ -78469,7 +78913,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 59621000,
-          "display": "Hypertension"
+          "display": "Essential hypertension (disorder)"
         }
       ],
       "assign_to_attribute": "hypertension_dx",
@@ -78484,7 +78928,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 390906007,
-          "display": "Hypertension follow-up encounter"
+          "display": "Follow-up encounter (procedure)"
         }
       ],
       "direct_transition": "Record_BP"
@@ -78549,7 +78993,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 390906007,
-          "display": "Hypertension follow-up encounter"
+          "display": "Follow-up encounter (procedure)"
         }
       ],
       "direct_transition": "Record_BP_2"
@@ -78562,7 +79006,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 390906007,
-          "display": "Hypertension follow-up encounter"
+          "display": "Follow-up encounter (procedure)"
         }
       ],
       "direct_transition": "Record_BP_3",
@@ -78757,7 +79201,8 @@ export default {"acute_myeloid_leukemia":{
           "transition": "Included"
         }
       ],
-      "wellness": true
+      "wellness": true,
+      "reason": "hypertension_screening_reason"
     },
     "End_Wellness_Encounter": {
       "type": "EncounterEnd",
@@ -78862,7 +79307,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "85354-9",
-          "display": "Blood Pressure"
+          "display": "Blood pressure panel with all children optional"
         }
       ],
       "observations": [
@@ -78913,7 +79358,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "85354-9",
-          "display": "Blood Pressure"
+          "display": "Blood pressure panel with all children optional"
         }
       ],
       "observations": [
@@ -78964,7 +79409,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "85354-9",
-          "display": "Blood Pressure"
+          "display": "Blood pressure panel with all children optional"
         }
       ],
       "observations": [
@@ -79154,6 +79599,16 @@ export default {"acute_myeloid_leukemia":{
     "Drop Outs": {
       "type": "Simple",
       "direct_transition": "Terminal"
+    },
+    "Hypertension_Screening_Reason": {
+      "type": "SetAttribute",
+      "attribute": "hypertension_screening_reason",
+      "direct_transition": "Set_Yearly_Risk",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 171222001,
+        "display": "Hypertension screening (procedure)"
+      }
     }
   },
   "gmf_version": 1
@@ -79780,7 +80235,16 @@ export default {"acute_myeloid_leukemia":{
       ]
     },
     "Spinal_Injury": {
-      "type": "Simple",
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Spinal_Injury",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 262521009,
+          "display": "Traumatic injury of spinal cord and/or vertebral column (disorder)"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Spinal_Injury",
       "remarks": [
         "======================================================================",
         " SPINAL INJURY                                                        ",
@@ -79790,8 +80254,7 @@ export default {"acute_myeloid_leukemia":{
         "16 - 25% of spinal fractures result in neurological damage. This aligns with ",
         "The incidence of spinal cord injury folowing a spinal fracture. For simplicity ",
         "All spinal fractures with spinal cord damage also result in neurological damage."
-      ],
-      "direct_transition": "ED_Visit_For_Spinal_Injury"
+      ]
     },
     "ED_Visit_For_Spinal_Injury": {
       "type": "Encounter",
@@ -79812,7 +80275,8 @@ export default {"acute_myeloid_leukemia":{
           "transition": "No_Spinal_Cord_Damage",
           "distribution": 0.75
         }
-      ]
+      ],
+      "reason": "Spinal_Injury"
     },
     "Spinal_Injury_CarePlan": {
       "type": "CarePlanStart",
@@ -79902,15 +80366,6 @@ export default {"acute_myeloid_leukemia":{
       ],
       "direct_transition": "Spinal_Injury_CarePlan"
     },
-    "Delay_After_Spinal_Surgery": {
-      "type": "Delay",
-      "range": {
-        "low": 1,
-        "high": 3,
-        "unit": "days"
-      },
-      "direct_transition": "Spinal_Injury_Treatment_Encounter"
-    },
     "Spinal_Injury_Treatment_Encounter": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
@@ -79950,7 +80405,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "185349003",
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
       "direct_transition": "End_Spinal_Injury"
@@ -79962,14 +80417,23 @@ export default {"acute_myeloid_leukemia":{
         "cord damage and survived, his/her chronic paralysis will persist for life."
       ],
       "referenced_by_attribute": "spinal_injury",
-      "direct_transition": "End Wheelchair for Spine"
+      "direct_transition": "End_Spinal_Injury_Onset"
     },
     "End_Spinal_Injury_Followup": {
       "type": "EncounterEnd",
       "direct_transition": "Conclude_Injury"
     },
     "Gunshot_Injury": {
-      "type": "Simple",
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Gunshot_Injury",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 283545005,
+          "display": "Gunshot wound (disorder)"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Gunshot_Injury",
       "remarks": [
         "======================================================================",
         " GUNSHOT INJURY                                                       ",
@@ -79979,8 +80443,7 @@ export default {"acute_myeloid_leukemia":{
         "Gunshot deaths:                  31,076  => 29.8%",
         "Non-fatal hospital discharges:   73,505  => 70.2%",
         "Total gunshot injuries:         104,581"
-      ],
-      "direct_transition": "ED_Visit_For_Gunshot_Injury"
+      ]
     },
     "ED_Visit_For_Gunshot_Injury": {
       "type": "Encounter",
@@ -79992,7 +80455,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Emergency room admission (procedure)"
         }
       ],
-      "direct_transition": "Gunshot_Wound"
+      "direct_transition": "Gunshot_Wound",
+      "reason": "Gunshot_Injury"
     },
     "Gunshot_Wound": {
       "type": "ConditionOnset",
@@ -80121,7 +80585,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "185349003",
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
       "direct_transition": "Gunshot_Wound_Ends"
@@ -80129,14 +80593,23 @@ export default {"acute_myeloid_leukemia":{
     "Gunshot_Wound_Ends": {
       "type": "ConditionEnd",
       "condition_onset": "Gunshot_Wound",
-      "direct_transition": "End_Gunshot_Followup"
+      "direct_transition": "End_Gunshot_Injury_Onset"
     },
     "End_Gunshot_Followup": {
       "type": "EncounterEnd",
       "direct_transition": "Conclude_Injury"
     },
     "Concussion_Injury": {
-      "type": "Simple",
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Concussion",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 110030002,
+          "display": "Concussion injury of brain (disorder)"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Concussion",
       "remarks": [
         "======================================================================",
         " CONCUSSION                                                           ",
@@ -80145,8 +80618,7 @@ export default {"acute_myeloid_leukemia":{
         "http://www.cdc.gov/traumaticbraininjury/data/rates.html",
         "https://www.cdc.gov/traumaticbraininjury/pdf/tbi_report_to_congress_epi_and_rehab-a.pdf",
         "http://www.cdc.gov/traumaticbraininjury/pdf/bluebook_factsheet-a.pdf"
-      ],
-      "direct_transition": "ED_Visit_For_Concussion"
+      ]
     },
     "ED_Visit_For_Concussion": {
       "type": "Encounter",
@@ -80171,7 +80643,8 @@ export default {"acute_myeloid_leukemia":{
           "distribution": 0.05,
           "transition": "Severe_Concussion"
         }
-      ]
+      ],
+      "reason": "Concussion_Injury"
     },
     "Mild_Concussion": {
       "type": "ConditionOnset",
@@ -80291,7 +80764,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "185349003",
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
       "direct_transition": "End_Concussion_Injury"
@@ -80299,14 +80772,23 @@ export default {"acute_myeloid_leukemia":{
     "End_Concussion_Injury": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "concussion_injury",
-      "direct_transition": "End_Concussion_Followup"
+      "direct_transition": "End_Concussion_Injury_Onset"
     },
     "End_Concussion_Followup": {
       "type": "EncounterEnd",
       "direct_transition": "Conclude_Injury"
     },
     "Whiplash_Injury": {
-      "type": "Simple",
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Whiplash",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 90460009,
+          "display": "Injury of neck (disorder)"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Whiplash",
       "remarks": [
         "======================================================================",
         " WHIPLASH                                                             ",
@@ -80318,8 +80800,7 @@ export default {"acute_myeloid_leukemia":{
         "treated by an emergency department. If they're ever addressed at all they ",
         "are treated in an ambulatory setting by a PCP. For simplicity however, all ",
         "of the whiplash injuries seen in this module are treated by an ED department."
-      ],
-      "direct_transition": "ED_Visit_For_Whiplash"
+      ]
     },
     "ED_Visit_For_Whiplash": {
       "type": "Encounter",
@@ -80331,7 +80812,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Emergency room admission (procedure)"
         }
       ],
-      "direct_transition": "Whiplash"
+      "direct_transition": "Whiplash",
+      "reason": "Whiplash_Injury"
     },
     "Whiplash": {
       "type": "ConditionOnset",
@@ -80391,18 +80873,26 @@ export default {"acute_myeloid_leukemia":{
     "End_Whiplash_Injury": {
       "type": "ConditionEnd",
       "condition_onset": "Whiplash",
-      "direct_transition": "Conclude_Injury"
+      "direct_transition": "End_Whiplash_Injury_Onset"
     },
     "Broken_Bone_Injury": {
-      "type": "Simple",
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Broken_Bone",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 125605004,
+          "display": "Fracture of bone (disorder)"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Broken_Bone",
       "remarks": [
         "======================================================================",
         " BROKEN BONE                                                          ",
         "======================================================================",
         "Further supported by the following sources: ",
         "Most commonly broken bones: https://askabiologist.asu.edu/how-bone-breaks"
-      ],
-      "direct_transition": "ED_Visit_For_Broken_Bone"
+      ]
     },
     "ED_Visit_For_Broken_Bone": {
       "type": "Encounter",
@@ -80414,7 +80904,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Emergency room admission (procedure)"
         }
       ],
-      "direct_transition": "Broken_Bone"
+      "direct_transition": "Broken_Bone",
+      "reason": "Broken_Bone_Injury"
     },
     "Broken_Bone": {
       "type": "Simple",
@@ -80576,7 +81067,7 @@ export default {"acute_myeloid_leukemia":{
           "body_site": {
             "system": "SNOMED-CT",
             "code": "40983000",
-            "display": "Arm"
+            "display": "Structure of upper extremity between shoulder and elbow (body structure)"
           },
           "modality": {
             "system": "DICOM-DCM",
@@ -80615,7 +81106,7 @@ export default {"acute_myeloid_leukemia":{
       "procedure_code": {
         "system": "SNOMED-CT",
         "code": "60027007",
-        "display": "X-ray or wrist"
+        "display": "Radiography of wrist (procedure)"
       },
       "series": [
         {
@@ -80987,7 +81478,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "38265-5",
-          "display": "DXA [T-score] Bone density"
+          "display": "DXA Radius and Ulna [T-score] Bone density"
         }
       ],
       "remarks": [
@@ -81008,7 +81499,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "38265-5",
-          "display": "DXA [T-score] Bone density"
+          "display": "DXA Radius and Ulna [T-score] Bone density"
         }
       ],
       "range": {
@@ -81078,7 +81569,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "185349003",
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
       "direct_transition": "End DME"
@@ -81112,10 +81603,19 @@ export default {"acute_myeloid_leukemia":{
     },
     "End_Broken_Bone_Followup": {
       "type": "EncounterEnd",
-      "direct_transition": "Conclude_Injury"
+      "direct_transition": "End_Broken_Bone_Onset"
     },
     "Burn_Injury": {
-      "type": "Simple",
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Burn",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 48333001,
+          "display": "Burn injury (morphologic abnormality)"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Burn",
       "remarks": [
         "======================================================================",
         " BURN                                                                 ",
@@ -81125,8 +81625,7 @@ export default {"acute_myeloid_leukemia":{
         "http://www.burnfoundation.org/programs/resource.cfm?c=2&a=6 (1999 incidence)",
         "Since the early 1990's the burn rates in the U.S. have declined almost 50%;",
         "however, the relative proportions of severity has stayed the same."
-      ],
-      "direct_transition": "ED_Visit_For_Burn"
+      ]
     },
     "ED_Visit_For_Burn": {
       "type": "Encounter",
@@ -81138,7 +81637,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Emergency room admission (procedure)"
         }
       ],
-      "direct_transition": "Burn"
+      "direct_transition": "Burn",
+      "reason": "Burn_Injury"
     },
     "Burn": {
       "type": "Simple",
@@ -81177,7 +81677,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "403190006",
-          "display": "First degree burn"
+          "display": "Epidermal burn of skin (disorder)"
         }
       ],
       "direct_transition": "Burn_CarePlan"
@@ -81244,7 +81744,7 @@ export default {"acute_myeloid_leukemia":{
               {
                 "system": "SNOMED-CT",
                 "code": "403190006",
-                "display": "First degree burn"
+                "display": "Epidermal burn of skin (disorder)"
               }
             ]
           },
@@ -81347,7 +81847,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "185349003",
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
       "direct_transition": "End_Burn_Injury"
@@ -81355,14 +81855,23 @@ export default {"acute_myeloid_leukemia":{
     "End_Burn_Injury": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "burn_injury",
-      "direct_transition": "End_Burn_Followup"
+      "direct_transition": "End_Burn_Injury_Onset"
     },
     "End_Burn_Followup": {
       "type": "EncounterEnd",
       "direct_transition": "Conclude_Injury"
     },
     "Laceration_Injury": {
-      "type": "Simple",
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Laceration",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 312608009,
+          "display": "Laceration - injury (disorder)"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Laceration",
       "remarks": [
         "======================================================================",
         " LACERATION                                                           ",
@@ -81371,8 +81880,7 @@ export default {"acute_myeloid_leukemia":{
         "lacerations are equally likely.",
         "TODO: In the future, lacerations that are poorly treated by the patient may ",
         "develop an infection. Could be interesting to add this into the mix."
-      ],
-      "direct_transition": "ED_Visit_For_Laceration"
+      ]
     },
     "ED_Visit_For_Laceration": {
       "type": "Encounter",
@@ -81384,7 +81892,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Emergency room admission (procedure)"
         }
       ],
-      "direct_transition": "Laceration"
+      "direct_transition": "Laceration",
+      "reason": "Laceration_Injury"
     },
     "Laceration": {
       "type": "Simple",
@@ -81571,17 +82080,25 @@ export default {"acute_myeloid_leukemia":{
     "End_Laceration_Injury": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "laceration_injury",
-      "direct_transition": "Conclude_Injury"
+      "direct_transition": "End_Laceration_Injury_Onset"
     },
     "Sprain_Injury": {
-      "type": "Simple",
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Sprain",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 384709000,
+          "display": "Sprain (morphologic abnormality)"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Sprain",
       "remarks": [
         "======================================================================",
         " SPRAIN                                                               ",
         "======================================================================",
         "Arbitrary distribution of sprained ankles and wrists for variety."
-      ],
-      "direct_transition": "ED_Visit_For_Sprain"
+      ]
     },
     "ED_Visit_For_Sprain": {
       "type": "Encounter",
@@ -81602,7 +82119,8 @@ export default {"acute_myeloid_leukemia":{
           "distribution": 0.3,
           "transition": "Sprained_Wrist"
         }
-      ]
+      ],
+      "reason": "Sprain_Injury"
     },
     "Sprained_Ankle": {
       "type": "ConditionOnset",
@@ -81645,7 +82163,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "229586001",
-          "display": "Rest, ice, compression and elevation treatment programme"
+          "display": "Rest, ice, compression and elevation treatment program (regime/therapy)"
         },
         {
           "system": "SNOMED-CT",
@@ -81676,10 +82194,19 @@ export default {"acute_myeloid_leukemia":{
     "End_Sprain_Injury": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "sprain_injury",
-      "direct_transition": "Conclude_Injury"
+      "direct_transition": "End_Sprain_Injury_Onset"
     },
     "Knee_Injury": {
-      "type": "Simple",
+      "type": "ConditionOnset",
+      "target_encounter": "ED_Visit_For_Knee_Injury",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 125601008,
+          "display": "Injury of knee (disorder)"
+        }
+      ],
+      "direct_transition": "ED_Visit_For_Knee_Injury",
       "remarks": [
         "======================================================================",
         " KNEE                                                                 ",
@@ -81694,8 +82221,7 @@ export default {"acute_myeloid_leukemia":{
         "the relative proportions. Only one of the above occurs at any given time.",
         "Sources: ",
         "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3768257/"
-      ],
-      "direct_transition": "ED_Visit_For_Knee_Injury"
+      ]
     },
     "ED_Visit_For_Knee_Injury": {
       "type": "Encounter",
@@ -81724,7 +82250,8 @@ export default {"acute_myeloid_leukemia":{
           "transition": "Torn_Patellar_Tendon",
           "distribution": 0.2564
         }
-      ]
+      ],
+      "reason": "Knee_Injury"
     },
     "Knee_X_Ray": {
       "type": "ImagingStudy",
@@ -81774,7 +82301,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "229586001",
-          "display": "Rest, ice, compression and elevation treatment programme"
+          "display": "Rest, ice, compression and elevation treatment program (regime/therapy)"
         },
         {
           "system": "SNOMED-CT",
@@ -81895,7 +82422,7 @@ export default {"acute_myeloid_leukemia":{
     "Knee_Injury_Prescribe_Opioid": {
       "type": "CallSubmodule",
       "submodule": "medications/moderate_opioid_pain_reliever",
-      "direct_transition": "End_Knee_Injury_Encounter_II"
+      "direct_transition": "Postoperative Care"
     },
     "Knee_Injury_Prescribe_Non_Opioid": {
       "type": "CallSubmodule",
@@ -81918,7 +82445,7 @@ export default {"acute_myeloid_leukemia":{
     "End_Knee_Injury": {
       "type": "ConditionEnd",
       "referenced_by_attribute": "knee_injury",
-      "direct_transition": "Conclude_Injury"
+      "direct_transition": "End_Knee_Injury_Onset"
     },
     "Shoulder_Injury": {
       "type": "Simple",
@@ -81974,7 +82501,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "229586001",
-          "display": "Rest, ice, compression and elevation treatment programme"
+          "display": "Rest, ice, compression and elevation treatment program (regime/therapy)"
         },
         {
           "system": "SNOMED-CT",
@@ -82043,7 +82570,7 @@ export default {"acute_myeloid_leukemia":{
     "Shoulder_Surgery_Prescribe_Non_Opioid": {
       "type": "CallSubmodule",
       "submodule": "medications/otc_pain_reliever",
-      "direct_transition": "End_Shoulder_Surgery_Encounter"
+      "direct_transition": "Postoperative_Care"
     },
     "End_Shoulder_Surgery_Encounter": {
       "type": "EncounterEnd",
@@ -82066,7 +82593,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "185349003",
-          "display": "Encounter for 'check-up'"
+          "display": "Encounter for check up"
         }
       ],
       "direct_transition": "End_Shoulder_Injury"
@@ -82301,9 +82828,2239 @@ export default {"acute_myeloid_leukemia":{
       "type": "CallSubmodule",
       "submodule": "dme/wheelchair_end",
       "direct_transition": "End_Broken_Bone_Injury"
+    },
+    "Postoperative Care": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 133899007,
+          "display": "Postoperative care (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 2
+        }
+      },
+      "unit": "days",
+      "direct_transition": "End_Knee_Injury_Encounter_II",
+      "reason": "knee_injury"
+    },
+    "Postoperative_Care": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 133899007,
+          "display": "Postoperative care (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 2
+        }
+      },
+      "unit": "days",
+      "reason": "Torn_Rotator_Cuff",
+      "direct_transition": "End_Shoulder_Surgery_Encounter"
+    },
+    "Delay_After_Spinal_Surgery": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 2
+        }
+      },
+      "unit": "days",
+      "direct_transition": "Spinal_Injury_Treatment_Encounter"
+    },
+    "End_Whiplash_Injury_Onset": {
+      "type": "ConditionEnd",
+      "direct_transition": "Conclude_Injury",
+      "condition_onset": "Whiplash_Injury"
+    },
+    "End_Spinal_Injury_Onset": {
+      "type": "ConditionEnd",
+      "direct_transition": "End Wheelchair for Spine",
+      "condition_onset": "Spinal_Injury"
+    },
+    "End_Concussion_Injury_Onset": {
+      "type": "ConditionEnd",
+      "direct_transition": "End_Concussion_Followup",
+      "condition_onset": "Concussion_Injury"
+    },
+    "End_Knee_Injury_Onset": {
+      "type": "ConditionEnd",
+      "direct_transition": "Conclude_Injury",
+      "condition_onset": "Knee_Injury"
+    },
+    "End_Broken_Bone_Onset": {
+      "type": "ConditionEnd",
+      "direct_transition": "Conclude_Injury",
+      "condition_onset": "Broken_Bone_Injury"
+    },
+    "End_Burn_Injury_Onset": {
+      "type": "ConditionEnd",
+      "direct_transition": "End_Burn_Followup",
+      "condition_onset": "Burn_Injury"
+    },
+    "End_Laceration_Injury_Onset": {
+      "type": "ConditionEnd",
+      "direct_transition": "Conclude_Injury",
+      "condition_onset": "Laceration_Injury"
+    },
+    "End_Sprain_Injury_Onset": {
+      "type": "ConditionEnd",
+      "direct_transition": "Conclude_Injury",
+      "condition_onset": "Sprain_Injury"
+    },
+    "End_Gunshot_Injury_Onset": {
+      "type": "ConditionEnd",
+      "direct_transition": "End_Gunshot_Followup",
+      "condition_onset": "Gunshot_Injury"
     }
   },
   "gmf_version": 1
+}
+,
+"kidney_transplant":{
+  "name": "Kidney Transplant",
+  "remarks": [
+    "Basic Kidney Transplant module."
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Wait Until Kidney Required"
+    },
+    "Wait Until Kidney Required": {
+      "type": "Guard",
+      "allow": {
+        "condition_type": "Attribute",
+        "attribute": "ckd",
+        "operator": ">=",
+        "value": 4
+      },
+      "direct_transition": "Wait for Consultation"
+    },
+    "Wait Until Kidney Available": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 5,
+          "standardDeviation": 1
+        }
+      },
+      "unit": "years",
+      "direct_transition": "Transplant Encounter"
+    },
+    "Reset Kidney Damage": {
+      "type": "SetAttribute",
+      "attribute": "ckd",
+      "value": 0,
+      "direct_transition": "End_CKD_1"
+    },
+    "Transplant Encounter": {
+      "type": "Encounter",
+      "encounter_class": "inpatient",
+      "reason": "Awaiting Transplant",
+      "telemedicine_possibility": "none",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 305432006,
+          "display": "Admission to surgical transplant department (procedure)"
+        }
+      ],
+      "direct_transition": "Pretransplant_MetabolicPanel"
+    },
+    "End Transplant Encounter": {
+      "type": "EncounterEnd",
+      "direct_transition": "Schedule Five Follow Ups"
+    },
+    "Schedule Follow Up": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "weeks",
+      "direct_transition": "Follow Up Encounter"
+    },
+    "Follow Up Encounter": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "History of Transplant",
+      "telemedicine_possibility": "none",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 439740005,
+          "display": "Postoperative follow-up visit (procedure)"
+        }
+      ],
+      "direct_transition": "Weekly MetabolicPanel"
+    },
+    "End Follow Up": {
+      "type": "EncounterEnd",
+      "direct_transition": "Remaining Followups"
+    },
+    "Schedule Five Follow Ups": {
+      "type": "SetAttribute",
+      "attribute": "remaining_kidney_transplant_followups",
+      "direct_transition": "Schedule Follow Up",
+      "value": 5
+    },
+    "Remaining Followups": {
+      "type": "Counter",
+      "attribute": "remaining_kidney_transplant_followups",
+      "action": "decrement",
+      "conditional_transition": [
+        {
+          "transition": "Schedule Follow Up",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "remaining_kidney_transplant_followups",
+            "operator": ">",
+            "value": 0
+          }
+        },
+        {
+          "transition": "End Rejection"
+        }
+      ]
+    },
+    "End_CKD_1": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 431855005,
+          "display": "Chronic kidney disease stage 1 (disorder)"
+        }
+      ],
+      "direct_transition": "End_CKD_2"
+    },
+    "End_CKD_2": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 431856006,
+          "display": "Chronic kidney disease stage 2 (disorder)"
+        }
+      ],
+      "direct_transition": "End_CKD_3"
+    },
+    "End_CKD_3": {
+      "type": "ConditionEnd",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 433144002,
+          "display": "Chronic kidney disease stage 3 (disorder)"
+        }
+      ],
+      "direct_transition": "End_CKD_4_or_5"
+    },
+    "End_CKD_4_or_5": {
+      "type": "ConditionEnd",
+      "direct_transition": "Begin Post Surgical Stay",
+      "referenced_by_attribute": "dialysis_reason"
+    },
+    "Medication Review": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 473231009,
+          "display": "Renal disorder medication review (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "reason": "History of Transplant",
+      "conditional_transition": [
+        {
+          "transition": "Cancel Low Dose",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "kidney_transplant_rejection",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Administer Immunosuppressive"
+        }
+      ]
+    },
+    "Kidney Transplant": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 70536003,
+          "display": "Transplant of kidney (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 90,
+          "standardDeviation": 20
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "End_Waiting",
+      "reason": "Awaiting Transplant"
+    },
+    "Consultation": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "dialysis_reason",
+      "telemedicine_possibility": "none",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 185347001,
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "direct_transition": "Consultation_MetabolicPanel"
+    },
+    "End Consultation": {
+      "type": "EncounterEnd",
+      "direct_transition": "Wait Until Kidney Available"
+    },
+    "Awaiting Transplant": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 698306007,
+          "display": "Awaiting transplantation of kidney (situation)"
+        }
+      ],
+      "direct_transition": "Referral"
+    },
+    "Wait for Consultation": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 3,
+          "standardDeviation": 1
+        }
+      },
+      "unit": "months",
+      "direct_transition": "Consultation"
+    },
+    "History of Transplant": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 161665007,
+          "display": "History of renal transplant (situation)"
+        }
+      ],
+      "direct_transition": "Post Transplant Care Plan",
+      "assign_to_attribute": "kidney_transplant"
+    },
+    "Administer Immunosuppressive": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 108515,
+          "display": "1 ML tacrolimus 5 MG/ML Injection"
+        }
+      ],
+      "direct_transition": "Followup Care",
+      "reason": "History of Transplant",
+      "administration": true
+    },
+    "Weekly MetabolicPanel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 8,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "51990-0",
+          "display": "Basic Metabolic Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Creatinine",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        }
+      ],
+      "direct_transition": "Weekly_CBC_Panel"
+    },
+    "Weekly_CBC_Panel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 4,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*3/uL",
+          "range": {
+            "low": 3.5,
+            "high": 10.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*6/uL",
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "unit": "g/dL",
+          "range": {
+            "low": 12,
+            "high": 17.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "4544-3",
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ],
+          "unit": "%",
+          "range": {
+            "low": 35,
+            "high": 50
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "direct_transition": "Weekly Urinalysis"
+    },
+    "Weekly Urinalysis": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24356-8",
+          "display": "Urinalysis complete panel - Urine"
+        },
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "unit": "{presence}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "exact": {
+            "quantity": 0
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{presence}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "exact": {
+            "quantity": 0
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{presence}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "exact": {
+            "quantity": 0
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{SG}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.005,
+            "high": 1.025
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "[pH]",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 4.5,
+            "high": 8
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{presence}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "exact": {
+            "quantity": 0
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{presence}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "exact": {
+            "quantity": 0
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{presence}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "exact": {
+            "quantity": 0
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{presence}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "exact": {
+            "quantity": 0
+          }
+        }
+      ],
+      "direct_transition": "Diagnose Rejection if applicable"
+    },
+    "Evaluation": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 428830000,
+          "display": "Pretransplant evaluation of kidney recipient (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "Administer_Immunosuppressive",
+      "reason": "Awaiting Transplant"
+    },
+    "Referral": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 306316000,
+          "display": "Referral to transplant surgeon (procedure)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "End Consultation",
+      "reason": "Awaiting Transplant"
+    },
+    "Consultation_MetabolicPanel": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24321-2",
+          "display": "Basic Metabolic 2000 Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 14
+          }
+        }
+      ],
+      "direct_transition": "Consultation_Urinalysis"
+    },
+    "Consultation_Urinalysis": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167248002,
+            "display": "Urine smell ammoniacal (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 300828005,
+            "display": "Translucent (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 371254008,
+            "display": "Brown color (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167291007,
+            "display": "Urine ketone test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 250,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167277001,
+            "display": "Urine protein test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167297006,
+            "display": "Urine blood test = negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Awaiting Transplant"
+    },
+    "Followup Care": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 711446003,
+          "display": "Transplantation of kidney regime (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "End Follow Up",
+      "reason": "History of Transplant"
+    },
+    "Post Transplant Care Plan": {
+      "type": "CarePlanStart",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 734163000,
+          "display": "Care plan (record artifact)"
+        }
+      ],
+      "direct_transition": "Check for Rejection",
+      "activities": [
+        {
+          "system": "SNOMED-CT",
+          "code": 711446003,
+          "display": "Transplantation of kidney regime (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 226007004,
+          "display": "Post-surgical wound care (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 182809008,
+          "display": "Renal function monitoring (regime/therapy)"
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": 226164007,
+          "display": "Very low sodium diet (finding)"
+        }
+      ],
+      "reason": "History of Transplant"
+    },
+    "Begin Post Surgical Stay": {
+      "type": "SetAttribute",
+      "attribute": "kidney_transplant_los",
+      "direct_transition": "Next Day",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "round": true,
+        "parameters": {
+          "mean": 4
+        }
+      }
+    },
+    "Pretransplant_Urinalysis": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24357-6",
+          "display": "Urinalysis macro (dipstick) panel - Urine"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Appearance of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 7766007,
+            "display": "Cloudy urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5767-9",
+              "display": "Odor of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167248002,
+            "display": "Urine smell ammoniacal (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32167-9",
+              "display": "Clarity of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 300828005,
+            "display": "Translucent (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5778-6",
+              "display": "Color of Urine"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 371254008,
+            "display": "Brown color (qualifier value)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5792-7",
+              "display": "Glucose [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.5,
+            "high": 2.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "25428-4",
+              "display": "Glucose [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167265006,
+            "display": "Urine glucose test = ++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20505-4",
+              "display": "Bilirubin.total [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 0.2,
+            "high": 1.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5770-3",
+              "display": "Bilirubin.total [Presence] in Urine by Test strip"
+            }
+          ],
+          "unit": "{nominal}",
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 275778006,
+            "display": "Finding of bilirubin in urine (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5797-6",
+              "display": "Ketones [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 0,
+            "high": 20
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2514-8",
+              "display": "Ketones [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167291007,
+            "display": "Urine ketone test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5811-5",
+              "display": "Specific gravity of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 1.001,
+            "high": 1.039
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pH",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5803-2",
+              "display": "pH of Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 7
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "mg/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5804-0",
+              "display": "Protein [Mass/volume] in Urine by Test strip"
+            }
+          ],
+          "range": {
+            "low": 250,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20454-5",
+              "display": "Protein [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167277001,
+            "display": "Urine protein test = +++ (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5802-4",
+              "display": "Nitrite [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 314138001,
+            "display": "Urine nitrite negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5794-3",
+              "display": "Hemoglobin [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 167297006,
+            "display": "Urine blood test = negative (finding)"
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "{nominal}",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "5799-2",
+              "display": "Leukocyte esterase [Presence] in Urine by Test strip"
+            }
+          ],
+          "value_code": {
+            "system": "SNOMED-CT",
+            "code": 394717006,
+            "display": "Urine leukocyte test negative (finding)"
+          }
+        }
+      ],
+      "direct_transition": "Evaluation"
+    },
+    "Pretransplant_MetabolicPanel": {
+      "type": "DiagnosticReport",
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "24321-2",
+          "display": "Basic Metabolic 2000 Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL",
+          "range": {
+            "low": 2.5,
+            "high": 3
+          }
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "unit": "mL/min",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "33914-3",
+              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+            }
+          ],
+          "range": {
+            "low": 5,
+            "high": 14
+          }
+        }
+      ],
+      "direct_transition": "Pretransplant_Urinalysis"
+    },
+    "Administer_Immunosuppressive": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 108515,
+          "display": "1 ML tacrolimus 5 MG/ML Injection"
+        }
+      ],
+      "reason": "Awaiting Transplant",
+      "administration": true,
+      "direct_transition": "Kidney"
+    },
+    "Stay?": {
+      "type": "Counter",
+      "attribute": "kidney_transplant_los",
+      "action": "decrement",
+      "conditional_transition": [
+        {
+          "transition": "Next Day",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "kidney_transplant_los",
+            "operator": ">",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Prescribe Immunosuppressant"
+        }
+      ]
+    },
+    "Next Day": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "days",
+      "direct_transition": "Administer_Immunosuppressive_2"
+    },
+    "Administer_Immunosuppressive_2": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 108515,
+          "display": "1 ML tacrolimus 5 MG/ML Injection"
+        }
+      ],
+      "reason": "History of Transplant",
+      "administration": true,
+      "direct_transition": "Daily_MetabolicPanel"
+    },
+    "Daily_MetabolicPanel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 8,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "51990-0",
+          "display": "Basic Metabolic Panel"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "vital_sign": "Glucose",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2339-0",
+              "display": "Glucose"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Urea Nitrogen",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6299-2",
+              "display": "Urea Nitrogen"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Creatinine",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "38483-4",
+              "display": "Creatinine"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Calcium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "49765-1",
+              "display": "Calcium"
+            }
+          ],
+          "unit": "mg/dL"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Sodium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2947-0",
+              "display": "Sodium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Potassium",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6298-4",
+              "display": "Potassium"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Chloride",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "2069-3",
+              "display": "Chloride"
+            }
+          ],
+          "unit": "mmol/L"
+        },
+        {
+          "category": "laboratory",
+          "vital_sign": "Carbon Dioxide",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "20565-8",
+              "display": "Carbon Dioxide"
+            }
+          ],
+          "unit": "mmol/L"
+        }
+      ],
+      "direct_transition": "Daily_CBC_Panel"
+    },
+    "Daily_CBC_Panel": {
+      "type": "DiagnosticReport",
+      "number_of_observations": 4,
+      "codes": [
+        {
+          "system": "LOINC",
+          "code": "58410-2",
+          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+        }
+      ],
+      "observations": [
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "6690-2",
+              "display": "Leukocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*3/uL",
+          "range": {
+            "low": 3.5,
+            "high": 10.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "789-8",
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
+            }
+          ],
+          "unit": "10*6/uL",
+          "range": {
+            "low": 3.9,
+            "high": 5.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "unit": "g/dL",
+          "range": {
+            "low": 12,
+            "high": 17.5
+          }
+        },
+        {
+          "category": "laboratory",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "4544-3",
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ],
+          "unit": "%",
+          "range": {
+            "low": 35,
+            "high": 50
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "787-2",
+              "display": "MCV [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 80,
+            "high": 95
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "pg",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "785-6",
+              "display": "MCH [Entitic mass] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 27,
+            "high": 33
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "g/dL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "786-4",
+              "display": "MCHC [Mass/volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 33,
+            "high": 36
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "21000-5",
+              "display": "Erythrocyte distribution width [Entitic volume] by Automated count"
+            }
+          ],
+          "range": {
+            "low": 39,
+            "high": 46
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "10*3/uL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "777-3",
+              "display": "Platelets [#/volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 450
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32207-3",
+              "display": "Platelet distribution width [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 150,
+            "high": 520
+          }
+        },
+        {
+          "category": "laboratory",
+          "unit": "fL",
+          "codes": [
+            {
+              "system": "LOINC",
+              "code": "32623-1",
+              "display": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+            }
+          ],
+          "range": {
+            "low": 9.4,
+            "high": 12.3
+          }
+        }
+      ],
+      "direct_transition": "Daily Followup Care"
+    },
+    "Daily Followup Care": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 711446003,
+          "display": "Transplantation of kidney regime (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 60,
+          "low": 30
+        }
+      },
+      "unit": "minutes",
+      "reason": "History of Transplant",
+      "direct_transition": "Stay?"
+    },
+    "Prescribe Immunosuppressant": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1664463,
+          "display": "24 HR tacrolimus 1 MG Extended Release Oral Tablet"
+        }
+      ],
+      "reason": "History of Transplant",
+      "administration": false,
+      "direct_transition": "End Transplant Encounter",
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 90,
+          "unit": "days"
+        },
+        "as_needed": true
+      }
+    },
+    "Kidney": {
+      "type": "SupplyList",
+      "supplies": [
+        {
+          "quantity": 1,
+          "code": {
+            "system": "SNOMED-CT",
+            "code": 119219003,
+            "display": "Kidney part (body structure)"
+          }
+        }
+      ],
+      "direct_transition": "Kidney Transplant"
+    },
+    "End_Waiting": {
+      "type": "ConditionEnd",
+      "condition_onset": "Awaiting Transplant",
+      "direct_transition": "History of Transplant"
+    },
+    "Rejection": {
+      "type": "SetAttribute",
+      "attribute": "kidney_transplant_rejection",
+      "direct_transition": "Reset Kidney Damage",
+      "value": true
+    },
+    "Check for Rejection": {
+      "type": "Simple",
+      "distributed_transition": [
+        {
+          "transition": "Rejection",
+          "distribution": 0.1
+        },
+        {
+          "transition": "Reset Kidney Damage",
+          "distribution": 0.9
+        }
+      ]
+    },
+    "Diagnose Rejection if applicable": {
+      "type": "Simple",
+      "conditional_transition": [
+        {
+          "transition": "Transplant Rejection",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "kidney_transplant_rejection",
+            "operator": "==",
+            "value": true
+          }
+        },
+        {
+          "transition": "Medication Review"
+        }
+      ]
+    },
+    "Transplant Rejection": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 213150003,
+          "display": "Kidney transplant failure and rejection (disorder)"
+        }
+      ],
+      "direct_transition": "Medication Review"
+    },
+    "Increase_Immunosuppressant": {
+      "type": "MedicationOrder",
+      "codes": [
+        {
+          "system": "RxNorm",
+          "code": 1431987,
+          "display": "24 HR tacrolimus 5 MG Extended Release Oral Capsule"
+        }
+      ],
+      "reason": "History of Transplant",
+      "administration": false,
+      "chronic": true,
+      "prescription": {
+        "dosage": {
+          "amount": 1,
+          "frequency": 1,
+          "period": 1,
+          "unit": "days"
+        },
+        "duration": {
+          "quantity": 90,
+          "unit": "days"
+        },
+        "as_needed": true
+      },
+      "direct_transition": "Clear Rejection"
+    },
+    "Cancel Low Dose": {
+      "type": "MedicationEnd",
+      "direct_transition": "Increase_Immunosuppressant",
+      "medication_order": "Prescribe Immunosuppressant"
+    },
+    "Clear Rejection": {
+      "type": "SetAttribute",
+      "attribute": "kidney_transplant_rejection",
+      "direct_transition": "Administer Immunosuppressive",
+      "value": false
+    },
+    "End Rejection": {
+      "type": "ConditionEnd",
+      "direct_transition": "End Dysplasia",
+      "condition_onset": "Transplant Rejection"
+    },
+    "End Dysplasia": {
+      "type": "ConditionEnd",
+      "direct_transition": "Wait Until Kidney Required",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 204949001,
+          "display": "Renal dysplasia (disorder)"
+        }
+      ]
+    }
+  },
+  "gmf_version": 2
 }
 ,
 "lung_cancer/lung_cancer_probabilities":{
@@ -82652,7 +85409,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency Room Admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "Pain_Vital"
@@ -83239,9 +85996,6 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "inpatient",
       "reason": "Lung Cancer Condition",
-      "remarks": [
-        "TODO: This inpatient encounter should last 5 days, not the standard 15 minutes."
-      ],
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -83285,7 +86039,7 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1734340",
+          "code": "226719",
           "display": "Etoposide 100 MG Injection"
         }
       ],
@@ -83344,9 +86098,6 @@ export default {"acute_myeloid_leukemia":{
     "NSCLC Treatment Encounter": {
       "type": "Encounter",
       "encounter_class": "inpatient",
-      "remarks": [
-        "TODO: This inpatient encounter should last 5 days, not the standard 15 minutes."
-      ],
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -83354,7 +86105,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem"
         }
       ],
-      "direct_transition": "Record_CMP"
+      "direct_transition": "Record_CMP",
+      "reason": "Lung Cancer Condition"
     },
     "NSCLC Chemotheraphy I": {
       "type": "MedicationOrder",
@@ -83463,7 +86215,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2339-0",
-              "display": "Glucose"
+              "display": "Glucose [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -83475,7 +86227,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "display": "Urea nitrogen [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -83486,7 +86238,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "38483-4",
-              "display": "Creatinine"
+              "display": "Creatinine [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL",
@@ -83502,7 +86254,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "49765-1",
-              "display": "Calcium"
+              "display": "Calcium [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -83514,7 +86266,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2947-0",
-              "display": "Sodium"
+              "display": "Sodium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -83526,7 +86278,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6298-4",
-              "display": "Potassium"
+              "display": "Potassium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -83538,7 +86290,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2069-3",
-              "display": "Chloride"
+              "display": "Chloride [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -83550,7 +86302,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "display": "Carbon dioxide, total [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -83562,7 +86314,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -83695,7 +86447,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2339-0",
-              "display": "Glucose"
+              "display": "Glucose [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -83707,7 +86459,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "display": "Urea nitrogen [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -83718,7 +86470,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "38483-4",
-              "display": "Creatinine"
+              "display": "Creatinine [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL",
@@ -83734,7 +86486,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "49765-1",
-              "display": "Calcium"
+              "display": "Calcium [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -83746,7 +86498,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2947-0",
-              "display": "Sodium"
+              "display": "Sodium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -83758,7 +86510,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6298-4",
-              "display": "Potassium"
+              "display": "Potassium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -83770,7 +86522,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2069-3",
-              "display": "Chloride"
+              "display": "Chloride [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -83782,7 +86534,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "display": "Carbon dioxide, total [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -83794,7 +86546,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -83975,7 +86727,7 @@ export default {"acute_myeloid_leukemia":{
           ]
         }
       ],
-      "direct_transition": "End_SCLC_Treatment_Encounter"
+      "direct_transition": "Delay"
     },
     "Chest_CT": {
       "type": "ImagingStudy",
@@ -84010,7 +86762,7 @@ export default {"acute_myeloid_leukemia":{
           ]
         }
       ],
-      "direct_transition": "End_NSCLC_Treatment_Encounter"
+      "direct_transition": "Delay_2"
     },
     "Record_Urinalysis_3": {
       "type": "DiagnosticReport",
@@ -84043,7 +86795,7 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "5767-9",
+              "code": "34533-0",
               "display": "Odor of Urine"
             }
           ],
@@ -84322,7 +87074,7 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "5767-9",
+              "code": "34533-0",
               "display": "Odor of Urine"
             }
           ],
@@ -84577,7 +87329,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -84747,7 +87499,7 @@ export default {"acute_myeloid_leukemia":{
           }
         }
       ],
-      "direct_transition": "Hearing_Test"
+      "direct_transition": "Set SCLC LOS"
     },
     "Record_CBC_Panel_2": {
       "type": "DiagnosticReport",
@@ -84756,7 +87508,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -84926,7 +87678,7 @@ export default {"acute_myeloid_leukemia":{
           }
         }
       ],
-      "direct_transition": "Hearing Test"
+      "direct_transition": "Set_NSCLC_LOS"
     },
     "Pain_Vital": {
       "type": "Observation",
@@ -84962,7 +87714,16 @@ export default {"acute_myeloid_leukemia":{
         "low": 4,
         "high": 10
       },
-      "direct_transition": "Chest CT"
+      "distributed_transition": [
+        {
+          "transition": "Chest CT",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Delay",
+          "distribution": 0.8
+        }
+      ]
     },
     "Pain_Vital_3": {
       "type": "Observation",
@@ -84980,7 +87741,16 @@ export default {"acute_myeloid_leukemia":{
         "low": 4,
         "high": 10
       },
-      "direct_transition": "Chest_CT"
+      "distributed_transition": [
+        {
+          "transition": "Chest_CT",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Delay_2",
+          "distribution": 0.8
+        }
+      ]
     },
     "Anemia_Submodule": {
       "type": "CallSubmodule",
@@ -85027,6 +87797,104 @@ export default {"acute_myeloid_leukemia":{
       "attribute": "hospice_reason",
       "direct_transition": "Schedule Follow Up III",
       "value_attribute": "Lung Cancer"
+    },
+    "Begin SCLC Day": {
+      "type": "Counter",
+      "attribute": "lung_cancer_los",
+      "action": "decrement",
+      "direct_transition": "Hearing_Test"
+    },
+    "Set SCLC LOS": {
+      "type": "SetAttribute",
+      "attribute": "lung_cancer_los",
+      "direct_transition": "Minimum of 3 days",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "round": true,
+        "parameters": {
+          "mean": 3
+        }
+      }
+    },
+    "Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "days",
+      "conditional_transition": [
+        {
+          "transition": "Begin SCLC Day",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "lung_cancer_los",
+            "operator": ">",
+            "value": 0
+          }
+        },
+        {
+          "transition": "End_SCLC_Treatment_Encounter"
+        }
+      ]
+    },
+    "Set_NSCLC_LOS": {
+      "type": "SetAttribute",
+      "attribute": "lung_cancer_los",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "round": true,
+        "parameters": {
+          "mean": 3
+        }
+      },
+      "direct_transition": "Minimum_of_3_days"
+    },
+    "Delay_2": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "days",
+      "conditional_transition": [
+        {
+          "transition": "Begin_NSCLC_Day",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "lung_cancer_los",
+            "operator": ">",
+            "value": 0
+          }
+        },
+        {
+          "transition": "End_NSCLC_Treatment_Encounter"
+        }
+      ]
+    },
+    "Begin_NSCLC_Day": {
+      "type": "Counter",
+      "attribute": "lung_cancer_los",
+      "action": "decrement",
+      "direct_transition": "Hearing Test"
+    },
+    "Minimum of 3 days": {
+      "type": "Counter",
+      "attribute": "lung_cancer_los",
+      "action": "increment",
+      "direct_transition": "Begin SCLC Day",
+      "amount": 2
+    },
+    "Minimum_of_3_days": {
+      "type": "Counter",
+      "attribute": "lung_cancer_los",
+      "action": "increment",
+      "amount": 2,
+      "direct_transition": "Begin_NSCLC_Day"
     }
   },
   "gmf_version": 1
@@ -85463,7 +88331,7 @@ export default {"acute_myeloid_leukemia":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "direct_transition": "Wellness_Encounter"
+      "direct_transition": "Medication_Review_Due"
     },
     "Wellness_Encounter": {
       "type": "Encounter",
@@ -85477,7 +88345,8 @@ export default {"acute_myeloid_leukemia":{
           "distribution": 0.55,
           "transition": "End_Wellness_Encounter"
         }
-      ]
+      ],
+      "reason": "Medication_Review_Due"
     },
     "Med_Rec": {
       "type": "Procedure",
@@ -85488,11 +88357,28 @@ export default {"acute_myeloid_leukemia":{
           "display": "Medication Reconciliation (procedure)"
         }
       ],
-      "direct_transition": "End_Wellness_Encounter"
+      "direct_transition": "End_Medication_Review_Due"
     },
     "End_Wellness_Encounter": {
       "type": "EncounterEnd",
       "direct_transition": "Initial"
+    },
+    "Medication_Review_Due": {
+      "type": "ConditionOnset",
+      "target_encounter": "Wellness_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 314529007,
+          "display": "Medication review due (situation)"
+        }
+      ],
+      "direct_transition": "Wellness_Encounter"
+    },
+    "End_Medication_Review_Due": {
+      "type": "ConditionEnd",
+      "direct_transition": "End_Wellness_Encounter",
+      "condition_onset": "Medication_Review_Due"
     }
   },
   "gmf_version": 1
@@ -89247,7 +92133,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": "418577003",
-            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed."
+            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed (qualifier value)"
           }
         ]
       },
@@ -89285,7 +92171,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": "418577003",
-            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed."
+            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed (qualifier value)"
           }
         ]
       },
@@ -89340,7 +92226,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": "418577003",
-            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed."
+            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed (qualifier value)"
           },
           {
             "system": "SNOMED-CT",
@@ -89378,7 +92264,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": "418577003",
-            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed."
+            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed (qualifier value)"
           },
           {
             "system": "SNOMED-CT",
@@ -89434,7 +92320,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": "418577003",
-            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed."
+            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed (qualifier value)"
           }
         ]
       },
@@ -89467,7 +92353,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": "418577003",
-            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed."
+            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed (qualifier value)"
           }
         ]
       },
@@ -89518,7 +92404,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": "418577003",
-            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed."
+            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed (qualifier value)"
           }
         ]
       },
@@ -89551,7 +92437,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": "418577003",
-            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed."
+            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed (qualifier value)"
           }
         ]
       },
@@ -89587,7 +92473,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": "418577003",
-            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed."
+            "display": "Take at regular intervals. Complete the prescribed course unless otherwise directed (qualifier value)"
           }
         ]
       },
@@ -94412,8 +97298,7 @@ export default {"acute_myeloid_leukemia":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "direct_transition": "Wellness_Encounter",
-      "name": "Initial"
+      "direct_transition": "Encounter_Reason"
     },
     "Wellness_Encounter": {
       "remarks": [
@@ -94462,7 +97347,7 @@ export default {"acute_myeloid_leukemia":{
           "transition": "End_Not_Referred_Wellness_Encounter"
         }
       ],
-      "name": "Wellness_Encounter"
+      "reason": "mend_encounter_reason"
     },
     "Comprehensive_Multidisciplinary_Intervention_Care_Plan": {
       "type": "CarePlanStart",
@@ -94471,8 +97356,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "718361005",
-          "display": "Weight management program",
-          "value_set": ""
+          "display": "Weight management program"
         }
       ],
       "activities": [
@@ -94487,8 +97371,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Increased physical activity"
         }
       ],
-      "direct_transition": "End_Wellness_Encounter",
-      "name": "Comprehensive_Multidisciplinary_Intervention_Care_Plan"
+      "direct_transition": "End_Wellness_Encounter"
     },
     "End_Wellness_Encounter": {
       "type": "EncounterEnd",
@@ -94501,28 +97384,24 @@ export default {"acute_myeloid_leukemia":{
           "transition": "End_MEND_Program",
           "distribution": 0.584
         }
-      ],
-      "name": "End_Wellness_Encounter"
+      ]
     },
     "Set_MEND_Weeks": {
       "type": "SetAttribute",
       "attribute": "mend_weeks",
       "direct_transition": "Increment_MEND_Week",
-      "value": 0,
-      "name": "Set_MEND_Weeks"
+      "value": 0
     },
     "Increment_MEND_Week": {
       "type": "Counter",
       "attribute": "mend_weeks",
       "action": "increment",
-      "direct_transition": "MEND_Visits",
-      "name": "Increment_MEND_Week"
+      "direct_transition": "MEND_Visits"
     },
     "MEND_Visits": {
       "type": "CallSubmodule",
       "submodule": "weight_loss/mend_week",
-      "direct_transition": "Check_MEND_Weeks",
-      "name": "MEND_Visits"
+      "direct_transition": "Check_MEND_Weeks"
     },
     "Wait_For_Initial_MEND_Week": {
       "type": "Delay",
@@ -94531,18 +97410,15 @@ export default {"acute_myeloid_leukemia":{
         "high": 21,
         "unit": "days"
       },
-      "direct_transition": "Set_MEND_Weeks",
-      "name": "Wait_For_Initial_MEND_Week"
+      "direct_transition": "Set_MEND_Weeks"
     },
     "Not_Referred": {
       "type": "Simple",
-      "direct_transition": "End_Not_Referred_Wellness_Encounter",
-      "name": "Not_Referred"
+      "direct_transition": "End_Not_Referred_Wellness_Encounter"
     },
     "End_Not_Referred_Wellness_Encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "Initial",
-      "name": "End_Not_Referred_Wellness_Encounter"
+      "direct_transition": "Initial"
     },
     "Check_MEND_Weeks": {
       "type": "Simple",
@@ -94559,14 +97435,23 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "Increment_MEND_Week"
         }
-      ],
-      "name": "Check_MEND_Weeks"
+      ]
     },
     "End_MEND_Program": {
-      "type": "Terminal",
-      "name": "End_MEND_Program"
+      "type": "Terminal"
+    },
+    "Encounter_Reason": {
+      "type": "SetAttribute",
+      "attribute": "mend_encounter_reason",
+      "direct_transition": "Wellness_Encounter",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 763288003,
+        "display": "Patient review (procedure)"
+      }
     }
-  }
+  },
+  "gmf_version": 2
 }
 ,
 "metabolic_syndrome/amputations":{
@@ -94595,7 +97480,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem"
         }
       ],
-      "reason": "Diagnose_Neuropathy",
+      "reason": "diabetic_neuropathy",
       "remarks": [
         "lower limb amputation occurs in 0.65% of the diabetic population",
         " with upper limb amputation occurring in an ever fewer 0.034%",
@@ -94675,7 +97560,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 4,
         "unit": "hours"
       },
-      "reason": "Diagnose_Neuropathy",
+      "reason": "diabetic_neuropathy",
       "direct_transition": "History_of_Foot_Amputation"
     },
     "Potential_Amputation_of_Right_Foot": {
@@ -94716,7 +97601,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 4,
         "unit": "hours"
       },
-      "reason": "Diagnose_Neuropathy",
+      "reason": "diabetic_neuropathy",
       "direct_transition": "History_of_Foot_Amputation"
     },
     "Potential_Amputation_of_Left_Leg": {
@@ -94748,7 +97633,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 4,
         "unit": "hours"
       },
-      "reason": "Diagnose_Neuropathy",
+      "reason": "diabetic_neuropathy",
       "direct_transition": "History_of_Lower_Limb_Amputation"
     },
     "Potential_Amputation_of_Right_Leg": {
@@ -94780,7 +97665,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 4,
         "unit": "hours"
       },
-      "reason": "Diagnose_Neuropathy",
+      "reason": "diabetic_neuropathy",
       "direct_transition": "History_of_Lower_Limb_Amputation"
     },
     "History_of_Lower_Limb_Amputation": {
@@ -94792,7 +97677,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "History of lower limb amputation (situation)"
         }
       ],
-      "direct_transition": "Recovery_After_Amputation"
+      "direct_transition": "Recovery_After_Amputation",
+      "assign_to_attribute": "last_amputation"
     },
     "History_of_Foot_Amputation": {
       "type": "ConditionOnset",
@@ -94803,7 +97689,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "History of amputation of foot (situation)"
         }
       ],
-      "direct_transition": "Recovery_After_Amputation"
+      "direct_transition": "Recovery_After_Amputation",
+      "assign_to_attribute": "last_amputation"
     },
     "Potential_Amputation_of_Left_Hand": {
       "type": "Simple",
@@ -94843,7 +97730,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 4,
         "unit": "hours"
       },
-      "reason": "Diagnose_Neuropathy",
+      "reason": "diabetic_neuropathy",
       "direct_transition": "History_of_Hand_Amputation"
     },
     "Potential_Amputation_of_Right_Hand": {
@@ -94884,7 +97771,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 4,
         "unit": "hours"
       },
-      "reason": "Diagnose_Neuropathy",
+      "reason": "diabetic_neuropathy",
       "direct_transition": "History_of_Hand_Amputation"
     },
     "Potential_Amputation_of_Right_Arm": {
@@ -94916,7 +97803,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 4,
         "unit": "hours"
       },
-      "reason": "Diagnose_Neuropathy",
+      "reason": "diabetic_neuropathy",
       "direct_transition": "History_of_Upper_Limb_Amputation"
     },
     "Potential_Amputation_of_Left_Arm": {
@@ -94948,7 +97835,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 4,
         "unit": "hours"
       },
-      "reason": "Diagnose_Neuropathy",
+      "reason": "diabetic_neuropathy",
       "direct_transition": "History_of_Upper_Limb_Amputation"
     },
     "History_of_Upper_Limb_Amputation": {
@@ -94960,7 +97847,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "History of upper limb amputation (situation)"
         }
       ],
-      "direct_transition": "Recovery_After_Amputation"
+      "direct_transition": "Recovery_After_Amputation",
+      "assign_to_attribute": "last_amputation"
     },
     "History_of_Hand_Amputation": {
       "type": "ConditionOnset",
@@ -94971,16 +97859,27 @@ export default {"acute_myeloid_leukemia":{
           "display": "History of disarticulation at wrist (situation)"
         }
       ],
-      "direct_transition": "Recovery_After_Amputation"
+      "direct_transition": "Recovery_After_Amputation",
+      "assign_to_attribute": "last_amputation"
     },
     "Recovery_After_Amputation": {
-      "type": "Delay",
-      "range": {
-        "low": 3,
-        "high": 6,
-        "unit": "weeks"
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 386510005,
+          "display": "Amputation care (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 30
+        }
       },
-      "direct_transition": "End_Amputation_Encounter"
+      "unit": "days",
+      "direct_transition": "End_Amputation_Encounter",
+      "reason": "last_amputation"
     },
     "End_Amputation_Encounter": {
       "type": "EncounterEnd",
@@ -94989,7 +97888,8 @@ export default {"acute_myeloid_leukemia":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 2
 }
 ,
 "metabolic_syndrome/dme_supplies":{
@@ -95134,7 +98034,7 @@ export default {"acute_myeloid_leukemia":{
                     {
                       "system": "SNOMED-CT",
                       "code": "422034002",
-                      "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
+                      "display": "Retinopathy due to type 2 diabetes mellitus (disorder)"
                     }
                   ]
                 }
@@ -95158,7 +98058,7 @@ export default {"acute_myeloid_leukemia":{
                   {
                     "system": "SNOMED-CT",
                     "code": "422034002",
-                    "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
+                    "display": "Retinopathy due to type 2 diabetes mellitus (disorder)"
                   }
                 ]
               }
@@ -95177,7 +98077,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "422034002",
-          "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
+          "display": "Retinopathy due to type 2 diabetes mellitus (disorder)"
         }
       ],
       "direct_transition": "Check_Nonproliferative_Retinopathy"
@@ -95188,7 +98088,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "422034002",
-          "display": "Diabetic retinopathy associated with type II diabetes mellitus (disorder)"
+          "display": "Retinopathy due to type 2 diabetes mellitus (disorder)"
         }
       ],
       "direct_transition": "Check_Nonproliferative_Retinopathy"
@@ -95598,8 +98498,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Chronic kidney disease stage 3 (disorder)"
         }
       ],
-      "direct_transition": "Record_MetabolicPanel_3",
-      "assign_to_attribute": "text"
+      "direct_transition": "Record_MetabolicPanel_3"
     },
     "CKD4 Diagnosis": {
       "type": "ConditionOnset",
@@ -95619,7 +98518,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "24321-2",
-          "display": "Basic Metabolic 2000 Panel"
+          "display": "Basic metabolic 2000 panel - Serum or Plasma"
         }
       ],
       "observations": [
@@ -95629,8 +98528,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2339-0",
-              "display": "Glucose"
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -95641,8 +98540,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "code": "3094-0",
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -95652,8 +98551,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "38483-4",
-              "display": "Creatinine"
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -95668,8 +98567,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "49765-1",
-              "display": "Calcium"
+              "code": "17861-6",
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -95680,8 +98579,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2947-0",
-              "display": "Sodium"
+              "code": "2951-2",
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -95692,8 +98591,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "6298-4",
-              "display": "Potassium"
+              "code": "2823-3",
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -95704,8 +98603,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2069-3",
-              "display": "Chloride"
+              "code": "2075-0",
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -95716,20 +98615,20 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "code": "2028-9",
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
         },
         {
           "category": "laboratory",
-          "unit": "mL/min",
+          "unit": "mL/min/{1.73_m2}",
           "codes": [
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -95746,7 +98645,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "24321-2",
-          "display": "Basic Metabolic 2000 Panel"
+          "display": "Basic metabolic 2000 panel - Serum or Plasma"
         }
       ],
       "observations": [
@@ -95756,8 +98655,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2339-0",
-              "display": "Glucose"
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -95768,8 +98667,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "code": "3094-0",
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -95779,8 +98678,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "38483-4",
-              "display": "Creatinine"
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -95795,8 +98694,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "49765-1",
-              "display": "Calcium"
+              "code": "17861-6",
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -95807,8 +98706,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2947-0",
-              "display": "Sodium"
+              "code": "2951-2",
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -95819,8 +98718,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "6298-4",
-              "display": "Potassium"
+              "code": "2823-3",
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -95831,8 +98730,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2069-3",
-              "display": "Chloride"
+              "code": "2075-0",
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -95843,20 +98742,20 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "code": "2028-9",
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
         },
         {
           "category": "laboratory",
-          "unit": "mL/min",
+          "unit": "mL/min/{1.73_m2}",
           "codes": [
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -95873,7 +98772,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "24321-2",
-          "display": "Basic Metabolic 2000 Panel"
+          "display": "Basic metabolic 2000 panel - Serum or Plasma"
         }
       ],
       "observations": [
@@ -95883,8 +98782,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2339-0",
-              "display": "Glucose"
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -95895,8 +98794,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "code": "3094-0",
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -95906,8 +98805,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "38483-4",
-              "display": "Creatinine"
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -95922,8 +98821,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "49765-1",
-              "display": "Calcium"
+              "code": "17861-6",
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -95934,8 +98833,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2947-0",
-              "display": "Sodium"
+              "code": "2951-2",
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -95946,8 +98845,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "6298-4",
-              "display": "Potassium"
+              "code": "2823-3",
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -95958,8 +98857,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2069-3",
-              "display": "Chloride"
+              "code": "2075-0",
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -95970,20 +98869,20 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "code": "2028-9",
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
         },
         {
           "category": "laboratory",
-          "unit": "mL/min",
+          "unit": "mL/min/{1.73_m2}",
           "codes": [
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -96000,7 +98899,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "24321-2",
-          "display": "Basic Metabolic 2000 Panel"
+          "display": "Basic metabolic 2000 panel - Serum or Plasma"
         }
       ],
       "observations": [
@@ -96010,8 +98909,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2339-0",
-              "display": "Glucose"
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -96022,8 +98921,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "code": "3094-0",
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -96033,8 +98932,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "38483-4",
-              "display": "Creatinine"
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -96049,8 +98948,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "49765-1",
-              "display": "Calcium"
+              "code": "17861-6",
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -96061,8 +98960,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2947-0",
-              "display": "Sodium"
+              "code": "2951-2",
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -96073,8 +98972,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "6298-4",
-              "display": "Potassium"
+              "code": "2823-3",
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -96085,8 +98984,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2069-3",
-              "display": "Chloride"
+              "code": "2075-0",
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -96097,20 +98996,20 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "code": "2028-9",
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
         },
         {
           "category": "laboratory",
-          "unit": "mL/min",
+          "unit": "mL/min/{1.73_m2}",
           "codes": [
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -96127,7 +99026,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "24321-2",
-          "display": "Basic Metabolic 2000 Panel"
+          "display": "Basic metabolic 2000 panel - Serum or Plasma"
         }
       ],
       "observations": [
@@ -96137,8 +99036,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2339-0",
-              "display": "Glucose"
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -96149,8 +99048,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "code": "3094-0",
+              "display": "Urea nitrogen [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -96160,8 +99059,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "38483-4",
-              "display": "Creatinine"
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -96176,8 +99075,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "49765-1",
-              "display": "Calcium"
+              "code": "17861-6",
+              "display": "Calcium [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -96188,8 +99087,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2947-0",
-              "display": "Sodium"
+              "code": "2951-2",
+              "display": "Sodium [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -96200,8 +99099,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "6298-4",
-              "display": "Potassium"
+              "code": "2823-3",
+              "display": "Potassium [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -96212,8 +99111,8 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "2069-3",
-              "display": "Chloride"
+              "code": "2075-0",
+              "display": "Chloride [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
@@ -96224,20 +99123,20 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "code": "2028-9",
+              "display": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
             }
           ],
           "unit": "mmol/L"
         },
         {
           "category": "laboratory",
-          "unit": "mL/min",
+          "unit": "mL/min/{1.73_m2}",
           "codes": [
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -96279,7 +99178,7 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "5767-9",
+              "code": "34533-0",
               "display": "Odor of Urine"
             }
           ],
@@ -96558,7 +99457,7 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "5767-9",
+              "code": "34533-0",
               "display": "Odor of Urine"
             }
           ],
@@ -96837,7 +99736,7 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "5767-9",
+              "code": "34533-0",
               "display": "Odor of Urine"
             }
           ],
@@ -97116,7 +100015,7 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "5767-9",
+              "code": "34533-0",
               "display": "Odor of Urine"
             }
           ],
@@ -97384,7 +100283,7 @@ export default {"acute_myeloid_leukemia":{
                     {
                       "system": "SNOMED-CT",
                       "code": "127013003",
-                      "display": "Diabetic renal disease (disorder)"
+                      "display": "Disorder of kidney due to diabetes mellitus (disorder)"
                     }
                   ]
                 }
@@ -97408,7 +100307,7 @@ export default {"acute_myeloid_leukemia":{
                   {
                     "system": "SNOMED-CT",
                     "code": "127013003",
-                    "display": "Diabetic renal disease (disorder)"
+                    "display": "Disorder of kidney due to diabetes mellitus (disorder)"
                   }
                 ]
               }
@@ -97427,7 +100326,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "127013003",
-          "display": "Diabetic renal disease (disorder)"
+          "display": "Disorder of kidney due to diabetes mellitus (disorder)"
         }
       ],
       "direct_transition": "Check_Microalbuminuria"
@@ -97438,7 +100337,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "127013003",
-          "display": "Diabetic renal disease (disorder)"
+          "display": "Disorder of kidney due to diabetes mellitus (disorder)"
         }
       ],
       "direct_transition": "Check_Microalbuminuria"
@@ -97622,7 +100521,7 @@ export default {"acute_myeloid_leukemia":{
                     {
                       "system": "SNOMED-CT",
                       "code": "46177005",
-                      "display": "End stage renal disease (disorder)"
+                      "display": "End-stage renal disease (disorder)"
                     }
                   ]
                 }
@@ -97637,8 +100536,8 @@ export default {"acute_myeloid_leukemia":{
             "conditions": [
               {
                 "condition_type": "Attribute",
-                "attribute": "end_stage_renal_disease",
-                "operator": "is nil"
+                "attribute": "kidney_transplant",
+                "operator": "is not nil"
               },
               {
                 "condition_type": "Active Condition",
@@ -97646,7 +100545,7 @@ export default {"acute_myeloid_leukemia":{
                   {
                     "system": "SNOMED-CT",
                     "code": "46177005",
-                    "display": "End stage renal disease (disorder)"
+                    "display": "End-stage renal disease (disorder)"
                   }
                 ]
               }
@@ -97665,7 +100564,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "46177005",
-          "display": "End stage renal disease (disorder)"
+          "display": "End-stage renal disease (disorder)"
         }
       ],
       "direct_transition": "Record_MetabolicPanel_5",
@@ -97677,7 +100576,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "46177005",
-          "display": "End stage renal disease (disorder)"
+          "display": "End-stage renal disease (disorder)"
         }
       ],
       "direct_transition": "Terminal"
@@ -97685,7 +100584,8 @@ export default {"acute_myeloid_leukemia":{
     "Terminal": {
       "type": "Terminal"
     }
-  }
+  },
+  "gmf_version": 2
 }
 ,
 "metabolic_syndrome/medications":{
@@ -97925,7 +100825,7 @@ export default {"acute_myeloid_leukemia":{
               {
                 "system": "SNOMED-CT",
                 "code": "127013003",
-                "display": "Diabetic renal disease (disorder)"
+                "display": "Disorder of kidney due to diabetes mellitus (disorder)"
               }
             ]
           },
@@ -97946,7 +100846,7 @@ export default {"acute_myeloid_leukemia":{
               {
                 "system": "RxNorm",
                 "code": "106892",
-                "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
+                "display": "insulin isophane, human 70 UNT/ML / insulin, regular, human 30 UNT/ML Injectable Suspension [Humulin]"
               }
             ]
           },
@@ -97985,7 +100885,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": "106892",
-          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
+          "display": "insulin isophane, human 70 UNT/ML / insulin, regular, human 30 UNT/ML Injectable Suspension [Humulin]"
         }
       ],
       "reason": "diabetes_stage",
@@ -97998,7 +100898,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": "106892",
-          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
+          "display": "insulin isophane, human 70 UNT/ML / insulin, regular, human 30 UNT/ML Injectable Suspension [Humulin]"
         }
       ],
       "direct_transition": "Prescribe_Prandial_Insulin"
@@ -98026,7 +100926,7 @@ export default {"acute_myeloid_leukemia":{
               {
                 "system": "RxNorm",
                 "code": "106892",
-                "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
+                "display": "insulin isophane, human 70 UNT/ML / insulin, regular, human 30 UNT/ML Injectable Suspension [Humulin]"
               }
             ]
           },
@@ -98056,7 +100956,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": "106892",
-          "display": "insulin human, isophane 70 UNT/ML / Regular Insulin, Human 30 UNT/ML Injectable Suspension [Humulin]"
+          "display": "insulin isophane, human 70 UNT/ML / insulin, regular, human 30 UNT/ML Injectable Suspension [Humulin]"
         }
       ],
       "direct_transition": "Terminal"
@@ -98087,12 +100987,13 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "Initial impl == direct translation of ruby module"
       ],
-      "direct_transition": "Wellness_Encounter"
+      "direct_transition": "Metabolic_Syndrome_Review_Reason"
     },
     "Wellness_Encounter": {
       "type": "Encounter",
       "wellness": true,
-      "direct_transition": "check CKD"
+      "direct_transition": "check CKD",
+      "reason": "metabolic_syndrome_review"
     },
     "Check_Diabetes": {
       "type": "Simple",
@@ -98411,7 +101312,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "44054006",
-          "display": "Diabetes"
+          "display": "Diabetes mellitus type 2 (disorder)"
         }
       ],
       "assign_to_attribute": "diabetes_stage",
@@ -98678,7 +101579,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Neuropathy due to type 2 diabetes mellitus (disorder)"
         }
       ],
-      "direct_transition": "Consider_Procedures"
+      "direct_transition": "Consider_Procedures",
+      "assign_to_attribute": "diabetic_neuropathy"
     },
     "End_Neuropathy": {
       "type": "ConditionEnd",
@@ -98813,6 +101715,16 @@ export default {"acute_myeloid_leukemia":{
       "type": "CallSubmodule",
       "submodule": "metabolic_syndrome/dme_supplies",
       "direct_transition": "Check_Complications"
+    },
+    "Metabolic_Syndrome_Review_Reason": {
+      "type": "SetAttribute",
+      "attribute": "metabolic_syndrome_review",
+      "direct_transition": "Wellness_Encounter",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 763288003,
+        "display": "Patient review (procedure)"
+      }
     }
   },
   "gmf_version": 1
@@ -99611,7 +102523,7 @@ export default {"acute_myeloid_leukemia":{
       },
       "distributed_transition": [
         {
-          "transition": "Symptoms",
+          "transition": "MI_Onset",
           "distribution": {
             "attribute": "mi_risk",
             "default": 0
@@ -99620,19 +102532,6 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "Chance_of_MI",
           "distribution": 1
-        }
-      ]
-    },
-    "Symptoms": {
-      "type": "Simple",
-      "distributed_transition": [
-        {
-          "transition": "Emergency_Encounter",
-          "distribution": 0.7999999999999999
-        },
-        {
-          "transition": "Pre-Hospital Death",
-          "distribution": 0.2
         }
       ]
     },
@@ -99693,7 +102592,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Discharge care plan (record artifact)"
         }
       ],
-      "direct_transition": "History of MI"
+      "direct_transition": "End_MI_Onset"
     },
     "Chance_of_Recurrent_MI": {
       "type": "Simple",
@@ -99703,7 +102602,7 @@ export default {"acute_myeloid_leukemia":{
           "distribution": 1
         },
         {
-          "transition": "Symptoms",
+          "transition": "MI_Onset",
           "distribution": 1
         }
       ]
@@ -99732,7 +102631,7 @@ export default {"acute_myeloid_leukemia":{
     "Emergency_Encounter": {
       "type": "Encounter",
       "encounter_class": "emergency",
-      "reason": "",
+      "reason": "MI_Onset",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -99781,7 +102680,7 @@ export default {"acute_myeloid_leukemia":{
     "Reset_CABG_Referral_Flag": {
       "type": "SetAttribute",
       "attribute": "ACS_CABG_referral",
-      "direct_transition": "History of MI",
+      "direct_transition": "End_MI_Onset",
       "remarks": [
         "Reset the referral flag, so that just in case the patient winds up going through this pathway a second time, the attribute will be set as appropriate"
       ]
@@ -99865,6 +102764,32 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "direct_transition": "ACS_Arrival_Meds"
+    },
+    "MI_Onset": {
+      "type": "ConditionOnset",
+      "target_encounter": "Emergency_Encounter",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 22298006,
+          "display": "Myocardial infarction (disorder)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Emergency_Encounter",
+          "distribution": 0.7999999999999999
+        },
+        {
+          "transition": "Pre-Hospital Death",
+          "distribution": 0.2
+        }
+      ]
+    },
+    "End_MI_Onset": {
+      "type": "ConditionEnd",
+      "direct_transition": "History of MI",
+      "condition_onset": "MI_Onset"
     }
   },
   "gmf_version": 2
@@ -100052,13 +102977,13 @@ export default {"acute_myeloid_leukemia":{
     },
     "Enter_Directed_Use_Encounter1": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "emergency",
       "reason": "Enter_Directed_Use_Condition1",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": "183452005",
-          "display": "Encounter Inpatient"
+          "code": 182813001,
+          "display": "Emergency treatment (procedure)"
         }
       ],
       "direct_transition": "Pain_Vital_3"
@@ -100100,13 +103025,13 @@ export default {"acute_myeloid_leukemia":{
     },
     "Enter_Directed_Use_Encounter2": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "emergency",
       "reason": "Enter_Directed_Use_Condition2",
       "codes": [
         {
           "system": "SNOMED-CT",
           "code": "183452005",
-          "display": "Encounter Inpatient"
+          "display": "Emergency hospital admission (procedure)"
         }
       ],
       "direct_transition": "Pain_Vital_2"
@@ -100137,13 +103062,13 @@ export default {"acute_myeloid_leukemia":{
     },
     "Enter_Directed_Use_Encounter3": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "emergency",
       "reason": "Enter_Directed_Use_Condition3",
       "codes": [
         {
           "system": "SNOMED-CT",
-          "code": 183452005,
-          "display": "Encounter Inpatient"
+          "code": 182813001,
+          "display": "Emergency treatment (procedure)"
         }
       ],
       "direct_transition": "Pain_Vital"
@@ -100408,11 +103333,11 @@ export default {"acute_myeloid_leukemia":{
         },
         {
           "distribution": 0.0425,
-          "transition": "Enter_Addiction_Treatment"
+          "transition": "Drug Addiction"
         },
         {
           "distribution": 0.10375,
-          "transition": "Recovery_Management"
+          "transition": "Drug_Addiction"
         }
       ]
     },
@@ -100426,7 +103351,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Drug rehabilitation and detoxification"
         }
       ],
-      "direct_transition": "Pain_Vital_4"
+      "direct_transition": "Pain_Vital_4",
+      "reason": "opioid_drug_addiction"
     },
     "End_Addiction_Treatment_Encounter": {
       "type": "EncounterEnd",
@@ -100455,7 +103381,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Recovery_Management": {
       "type": "Encounter",
-      "encounter_class": "outpatient",
+      "encounter_class": "ambulatory",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -100463,7 +103389,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem (procedure)"
         }
       ],
-      "direct_transition": "End_Recovery_Management_Encounter"
+      "direct_transition": "Recovery Rehab",
+      "reason": "opioid_drug_addiction"
     },
     "End_Recovery_Management_Encounter": {
       "type": "EncounterEnd",
@@ -100509,7 +103436,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency Room Admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "distributed_transition": [
@@ -100547,7 +103474,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency Room Admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "distributed_transition": [
@@ -100585,7 +103512,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency Room Admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "distributed_transition": [
@@ -100600,7 +103527,14 @@ export default {"acute_myeloid_leukemia":{
       ]
     },
     "Addiction_CarePlan_Selector": {
-      "type": "Simple",
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 8
+        }
+      },
+      "unit": "hours",
       "conditional_transition": [
         {
           "condition": {
@@ -100733,7 +103667,64 @@ export default {"acute_myeloid_leukemia":{
         "low": 2,
         "high": 8
       },
+      "direct_transition": "Rehab Treatment"
+    },
+    "Rehab Treatment": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 7
+        }
+      },
+      "unit": "days",
       "direct_transition": "End_Addiction_Treatment_Encounter"
+    },
+    "Recovery Rehab": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 52052004,
+          "display": "Rehabilitation therapy (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "UNIFORM",
+        "parameters": {
+          "high": 90,
+          "low": 60
+        }
+      },
+      "unit": "minutes",
+      "direct_transition": "End_Recovery_Management_Encounter",
+      "reason": "opioid_drug_addiction"
+    },
+    "Drug Addiction": {
+      "type": "ConditionOnset",
+      "target_encounter": "Enter_Addiction_Treatment",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 6525002,
+          "display": "Dependent drug abuse (disorder)"
+        }
+      ],
+      "direct_transition": "Enter_Addiction_Treatment",
+      "assign_to_attribute": "opioid_drug_addiction"
+    },
+    "Drug_Addiction": {
+      "type": "ConditionOnset",
+      "target_encounter": "Recovery_Management",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 6525002,
+          "display": "Dependent drug abuse (disorder)"
+        }
+      ],
+      "direct_transition": "Recovery_Management",
+      "assign_to_attribute": "opioid_drug_addiction"
     }
   },
   "gmf_version": 1
@@ -101366,7 +104357,7 @@ export default {"acute_myeloid_leukemia":{
         "low": 0,
         "high": 10
       },
-      "direct_transition": "Wellness_Encounter"
+      "direct_transition": "Osteoporosis_Encounter_Reason"
     },
     "Wellness_Encounter": {
       "type": "Encounter",
@@ -101388,7 +104379,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "Osteoporosis_Workup"
         }
-      ]
+      ],
+      "reason": "osteoporosis_encounter_reason"
     },
     "Osteoporosis_Workup": {
       "type": "Procedure",
@@ -101408,7 +104400,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "38265-5",
-          "display": "DXA [T-score] Bone density"
+          "display": "DXA Radius and Ulna [T-score] Bone density"
         }
       ],
       "range": {
@@ -101469,6 +104461,16 @@ export default {"acute_myeloid_leukemia":{
     "End_Diagnosis_Encounter": {
       "type": "EncounterEnd",
       "direct_transition": "Terminal"
+    },
+    "Osteoporosis_Encounter_Reason": {
+      "type": "SetAttribute",
+      "attribute": "osteoporosis_encounter_reason",
+      "direct_transition": "Wellness_Encounter",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 313423004,
+        "display": "At risk of osteoporosis (finding)"
+      }
     }
   },
   "gmf_version": 1
@@ -101824,7 +104826,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "44608003",
-          "display": "Blood typing, RH typing"
+          "display": "Blood group typing (procedure)"
         }
       ],
       "direct_transition": "Hemoglobin_Test"
@@ -101836,7 +104838,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "104091002",
-          "display": "Hemoglobin / Hematocrit / Platelet count"
+          "display": "Hemogram, automated, with RBC, WBC, Hgb, Hct, Indices, Platelet count, and manual WBC differential"
         }
       ],
       "direct_transition": "Hep_B_Surface_Antigen"
@@ -101884,7 +104886,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "165829005",
-          "display": "Gonorrhea infection test"
+          "display": "Gonorrhea infection titer test (procedure)"
         }
       ],
       "direct_transition": "Syphilis_Test"
@@ -101896,7 +104898,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "269828009",
-          "display": "Syphilis infection test"
+          "display": "Syphilis infectious titer test (procedure)"
         }
       ],
       "direct_transition": "Urine_Culture"
@@ -101944,7 +104946,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "104375008",
-          "display": "Hepatitis C antibody test"
+          "display": "Hepatitis C antibody, confirmatory test"
         }
       ],
       "direct_transition": "Rubella_Screen"
@@ -101980,7 +104982,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "28163009",
-          "display": "Skin test for tuberculosis"
+          "display": "Skin test for tuberculosis, Tine test (procedure)"
         }
       ],
       "direct_transition": "Urine_Protein_Test"
@@ -102004,7 +105006,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "5880005",
-          "display": "Physical examination of mother"
+          "display": "Physical examination procedure (procedure)"
         }
       ],
       "direct_transition": "End_Prenatal_Initial_Visit"
@@ -102107,7 +105109,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "443529005",
-          "display": "Screening for chromosomal aneuploidy in prenatal amniotic fluid"
+          "display": "Detection of chromosomal aneuploidy in prenatal amniotic fluid specimen using fluorescence in situ hybridization screening technique (procedure)"
         }
       ],
       "direct_transition": "End_Week_12_Visit"
@@ -102171,7 +105173,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "275833003",
-          "display": "Alpha-fetoprotein test"
+          "display": "AFP test - antenatal"
         }
       ],
       "direct_transition": "Week_16_Fundal_Height"
@@ -102355,7 +105357,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "51116004",
-          "display": "RhD passive immunization"
+          "display": "Passive immunization (procedure)"
         }
       ],
       "direct_transition": "Second_Hemoglobin_Test"
@@ -102367,7 +105369,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "104091002",
-          "display": "Hemoglobin / Hematocrit / Platelet count"
+          "display": "Hemogram, automated, with RBC, WBC, Hgb, Hct, Indices, Platelet count, and manual WBC differential"
         }
       ],
       "direct_transition": "Tdap_Vaccine"
@@ -102379,7 +105381,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "399014008",
-          "display": "Vaccination for diphtheria, pertussis, and tetanus"
+          "display": "Administration of diphtheria, pertussis, and tetanus vaccine"
         }
       ],
       "direct_transition": "Glucose_Screen"
@@ -102573,7 +105575,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "118001005",
-          "display": "Streptococcus pneumoniae group B antigen test"
+          "display": "Streptococcus pneumoniae group B antigen assay"
         }
       ],
       "direct_transition": "Week_36_Fundal_Height"
@@ -103138,7 +106140,6 @@ export default {"acute_myeloid_leukemia":{
         " MISCARRIAGES                                                         ",
         "======================================================================"
       ],
-      "target_encounter": "Prenatal_Initial_Visit",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -103158,13 +106159,13 @@ export default {"acute_myeloid_leukemia":{
         },
         {
           "distribution": 0.115,
-          "transition": "End_Initial_Visit_Towards_Ectopic_Pregnancy"
+          "transition": "Ectopic_Pregnancy"
         }
       ]
     },
     "End_Initial_Visit_Towards_Ectopic_Pregnancy": {
       "type": "EncounterEnd",
-      "direct_transition": "Ectopic_Pregnancy"
+      "direct_transition": "Wait_For_Ectopic_Pregnancy_Encounter"
     },
     "Miscarriage_In_Second_Trimester": {
       "type": "ConditionOnset",
@@ -103194,12 +106195,11 @@ export default {"acute_myeloid_leukemia":{
     },
     "Early_Uknown_Complication": {
       "type": "ConditionOnset",
-      "target_encounter": "Prenatal_Initial_Visit",
       "codes": [
         {
           "system": "SNOMED-CT",
           "code": "156073000",
-          "display": "Fetus with unknown complication"
+          "display": "Complete miscarriage (disorder)"
         }
       ],
       "assign_to_attribute": "fatal_pregnancy_complication",
@@ -103207,7 +106207,6 @@ export default {"acute_myeloid_leukemia":{
     },
     "Blighted_Ovum": {
       "type": "ConditionOnset",
-      "target_encounter": "Prenatal_Initial_Visit",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -103217,19 +106216,6 @@ export default {"acute_myeloid_leukemia":{
       ],
       "assign_to_attribute": "fatal_pregnancy_complication",
       "direct_transition": "End_Miscarriage_Encounter"
-    },
-    "Ectopic_Pregnancy": {
-      "type": "ConditionOnset",
-      "target_encounter": "Prenatal_Initial_Visit",
-      "codes": [
-        {
-          "system": "SNOMED-CT",
-          "code": "79586000",
-          "display": "Tubal pregnancy"
-        }
-      ],
-      "assign_to_attribute": "fatal_pregnancy_complication",
-      "direct_transition": "Wait_For_Ectopic_Pregnancy_Encounter"
     },
     "Wait_For_Ectopic_Pregnancy_Encounter": {
       "type": "Delay",
@@ -103243,7 +106229,6 @@ export default {"acute_myeloid_leukemia":{
     "Ectopic_Pregnancy_Encounter": {
       "type": "Encounter",
       "encounter_class": "inpatient",
-      "reason": "Ectopic_Pregnancy",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -103264,11 +106249,11 @@ export default {"acute_myeloid_leukemia":{
           "distribution": 0.5,
           "transition": "Ectopic_Pregnancy_Surgery_Procedure"
         }
-      ]
+      ],
+      "reason": "Ectopic_Pregnancy"
     },
     "Methotrexate_Injection": {
       "type": "Procedure",
-      "reason": "Ectopic_Pregnancy",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -103276,11 +106261,11 @@ export default {"acute_myeloid_leukemia":{
           "display": "Methotrexate injection into tubal pregnancy"
         }
       ],
-      "direct_transition": "End_Miscarriage_Encounter"
+      "direct_transition": "Length of Stay",
+      "reason": "Ectopic_Pregnancy"
     },
     "Ectopic_Pregnancy_Surgery_Procedure": {
       "type": "Procedure",
-      "reason": "Ectopic_Pregnancy",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -103288,7 +106273,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Excision of fallopian tube and surgical removal of ectopic pregnancy"
         }
       ],
-      "direct_transition": "End_Miscarriage_Encounter"
+      "direct_transition": "Length of Stay",
+      "reason": "Ectopic_Pregnancy"
     },
     "Late_Fetal_Chromosomal_Anomaly": {
       "type": "ConditionOnset",
@@ -103379,7 +106365,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "51116004",
-          "display": "RhD passive immunization"
+          "display": "Passive immunization (procedure)"
         }
       ],
       "direct_transition": "Physical_Exam_Post_Miscarriage"
@@ -103391,14 +106377,14 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "5880005",
-          "display": "Physical examination"
+          "display": "Physical examination procedure (procedure)"
         }
       ],
       "direct_transition": "Depression_Screening_Post_Miscarriage"
     },
     "Depression_Screening_Post_Miscarriage": {
       "type": "Procedure",
-      "reason": "Become_Pregnant",
+      "reason": "fatal_pregnancy_complication",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -103514,7 +106500,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "51116004",
-          "display": "RhD passive immunization"
+          "display": "Passive immunization (procedure)"
         }
       ],
       "direct_transition": "Pregnancy_Termination_Care"
@@ -103538,7 +106524,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "5880005",
-          "display": "Physical exam following abortion"
+          "display": "Physical examination procedure (procedure)"
         }
       ],
       "direct_transition": "Depression_Screening_Post_Abortion"
@@ -103685,7 +106671,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "51116004",
-          "display": "RhD passive immunization"
+          "display": "Passive immunization (procedure)"
         }
       ],
       "direct_transition": "Physical_Exam_Post_Birth"
@@ -103697,7 +106683,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "5880005",
-          "display": "Physical examination following birth"
+          "display": "Physical examination procedure (procedure)"
         }
       ],
       "direct_transition": "Depression_Screening_Post_Birth"
@@ -103788,6 +106774,36 @@ export default {"acute_myeloid_leukemia":{
       "attribute": "anemia_pregnancy",
       "value": 0,
       "direct_transition": "Unset_Pregnant_Attribute"
+    },
+    "Length of Stay": {
+      "type": "Procedure",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 133899007,
+          "display": "Postoperative care (regime/therapy)"
+        }
+      ],
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "parameters": {
+          "mean": 2.5
+        }
+      },
+      "unit": "days",
+      "direct_transition": "End_Miscarriage_Encounter"
+    },
+    "Ectopic_Pregnancy": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": "79586000",
+          "display": "Tubal pregnancy"
+        }
+      ],
+      "assign_to_attribute": "fatal_pregnancy_complication",
+      "direct_transition": "End_Initial_Visit_Towards_Ectopic_Pregnancy"
     }
   },
   "gmf_version": 1
@@ -103880,7 +106896,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 228557008,
-          "display": "Cognitive and behavior therapy"
+          "display": "Cognitive and behavioral therapy (regime/therapy)"
         }
       ],
       "distributed_transition": [
@@ -104085,7 +107101,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "75893-8",
-              "display": "What number best describes your pain on average in the past week?"
+              "display": "Pain severity in the past week - 0-10 numeric rating [Reported]"
             }
           ],
           "range": {
@@ -104100,7 +107116,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "91145-3",
-              "display": "What number best describes how, during the past week, pain has interfered with your enjoyment of life?"
+              "display": "What number best describes how pain has interfered with your enjoyment of life during the past week"
             }
           ],
           "range": {
@@ -104115,7 +107131,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "91146-1",
-              "display": "What number best describes how, during the past week, pain has interfered with your general activity?"
+              "display": "What number best describes how pain has interfered with your general activity during the past week"
             }
           ],
           "range": {
@@ -104146,7 +107162,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Chronic low back pain (finding)"
         }
       ],
-      "direct_transition": "Initial_Prescribing_Encounter_for_Chronic_Pain"
+      "direct_transition": "Chronic_Pain_Reason"
     },
     "End_Initial_Chronic_Pain_Encounter": {
       "type": "EncounterEnd",
@@ -104323,7 +107339,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Transformed migraine (disorder)"
         }
       ],
-      "direct_transition": "Initial_Prescribing_Encounter_for_Chronic_Pain",
+      "direct_transition": "Chronic_Pain_Reason",
       "target_encounter": "Initial_Prescribing_Encounter_for_Chronic_Pain"
     },
     "Condition_Migraine_2": {
@@ -104358,7 +107374,8 @@ export default {"acute_myeloid_leukemia":{
           "transition": "PEG_Assessment_Score_2",
           "distribution": 0.5
         }
-      ]
+      ],
+      "reason": "Chronic_Pain_Reason"
     },
     "End_Follow_Up_Encounter_for_Chronic_Pain": {
       "type": "EncounterEnd",
@@ -104408,7 +107425,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": 1831000175103,
-            "display": "Every 12 hours as needed (qualifier value)"
+            "display": "Every twelve hours as required (qualifier value)"
           }
         ],
         "refills": 3
@@ -104467,7 +107484,7 @@ export default {"acute_myeloid_leukemia":{
           {
             "system": "SNOMED-CT",
             "code": 396143001,
-            "display": "Every seventy two hours as needed (qualifier value)"
+            "display": "Every seventy two hours (qualifier value)"
           }
         ],
         "refills": 3
@@ -104645,7 +107662,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Patient encounter procedure (procedure)"
         }
       ],
-      "direct_transition": "CBT_Pain_Observation"
+      "direct_transition": "CBT_Pain_Observation",
+      "reason": "Chronic_Pain_Reason"
     },
     "Enter_Physical_Therapy_1": {
       "type": "Delay",
@@ -104700,7 +107718,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Patient encounter procedure (procedure)"
         }
       ],
-      "direct_transition": "Physical_Therapy_1"
+      "direct_transition": "Physical_Therapy_1",
+      "reason": "Chronic_Pain_Reason"
     },
     "PT_Pain_Observation": {
       "type": "Observation",
@@ -104778,7 +107797,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "75893-8",
-              "display": "What number best describes your pain on average in the past week?"
+              "display": "Pain severity in the past week - 0-10 numeric rating [Reported]"
             }
           ],
           "range": {
@@ -104793,7 +107812,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "91145-3",
-              "display": "What number best describes how, during the past week, pain has interfered with your enjoyment of life?"
+              "display": "What number best describes how pain has interfered with your enjoyment of life during the past week"
             }
           ],
           "range": {
@@ -104808,7 +107827,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "91146-1",
-              "display": "What number best describes how, during the past week, pain has interfered with your general activity?"
+              "display": "What number best describes how pain has interfered with your general activity during the past week"
             }
           ],
           "range": {
@@ -105137,7 +108156,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Pain intensity, Enjoyment of life, General activity (PEG) 3 item pain scale"
         }
       ],
-      "direct_transition": "Addiction",
+      "direct_transition": "End follow up with positive test",
       "observations": [
         {
           "category": "survey",
@@ -105146,7 +108165,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "75893-8",
-              "display": "What number best describes your pain on average in the past week?"
+              "display": "Pain severity in the past week - 0-10 numeric rating [Reported]"
             }
           ],
           "range": {
@@ -105161,7 +108180,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "91145-3",
-              "display": "What number best describes how, during the past week, pain has interfered with your enjoyment of life?"
+              "display": "What number best describes how pain has interfered with your enjoyment of life during the past week"
             }
           ],
           "range": {
@@ -105176,7 +108195,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "91146-1",
-              "display": "What number best describes how, during the past week, pain has interfered with your general activity?"
+              "display": "What number best describes how pain has interfered with your general activity during the past week"
             }
           ],
           "range": {
@@ -105349,7 +108368,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Drugs of abuse 5 panel - Urine by Screen method"
         }
       ],
-      "direct_transition": "Addiction",
+      "direct_transition": "End initial encounter with positive result",
       "value_code": {
         "system": "SNOMED-CT",
         "code": 10828004,
@@ -105366,7 +108385,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem (procedure)"
         }
       ],
-      "direct_transition": "PEG_Assessment_Score_1"
+      "direct_transition": "PEG_Assessment_Score_1",
+      "reason": "Chronic_Pain_Reason"
     },
     "Addiction": {
       "type": "Delay",
@@ -105482,7 +108502,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Chronic neck pain (finding)"
         }
       ],
-      "direct_transition": "Initial_Prescribing_Encounter_for_Chronic_Pain"
+      "direct_transition": "Chronic_Pain_Reason"
     },
     "Condition_Chronic_Neck_Pain_4": {
       "type": "ConditionOnset",
@@ -105505,7 +108525,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Chronic low back pain (finding)"
         }
       ],
-      "direct_transition": "Initial_Prescribing_Encounter_for_Chronic_Pain",
+      "direct_transition": "Chronic_Pain_Reason",
       "target_encounter": "Initial_Prescribing_Encounter_for_Chronic_Pain"
     },
     "Without_Urine_Drug_Testing": {
@@ -106645,7 +109665,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "75893-8",
-              "display": "What number best describes your pain on average in the past week?"
+              "display": "Pain severity in the past week - 0-10 numeric rating [Reported]"
             }
           ],
           "range": {
@@ -106660,7 +109680,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "91145-3",
-              "display": "What number best describes how, during the past week, pain has interfered with your enjoyment of life?"
+              "display": "What number best describes how pain has interfered with your enjoyment of life during the past week"
             }
           ],
           "range": {
@@ -106675,7 +109695,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "91146-1",
-              "display": "What number best describes how, during the past week, pain has interfered with your general activity?"
+              "display": "What number best describes how pain has interfered with your general activity during the past week"
             }
           ],
           "range": {
@@ -106992,8 +110012,29 @@ export default {"acute_myeloid_leukemia":{
       ],
       "reason": "Condition_OUD_2",
       "direct_transition": "End_Encounter_OUD_Treatment_Cont"
+    },
+    "End follow up with positive test": {
+      "type": "EncounterEnd",
+      "direct_transition": "Addiction"
+    },
+    "End initial encounter with positive result": {
+      "type": "EncounterEnd",
+      "direct_transition": "Addiction"
+    },
+    "Chronic_Pain_Reason": {
+      "type": "ConditionOnset",
+      "target_encounter": "Initial_Prescribing_Encounter_for_Chronic_Pain",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 82423001,
+          "display": "Chronic pain (finding)"
+        }
+      ],
+      "direct_transition": "Initial_Prescribing_Encounter_for_Chronic_Pain"
     }
-  }
+  },
+  "gmf_version": 2
 }
 ,
 "rheumatoid_arthritis":{
@@ -107130,7 +110171,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "183301007",
-          "display": "Physical exercises"
+          "display": "Physical exercises (regime/therapy)"
         },
         {
           "system": "SNOMED-CT",
@@ -108051,12 +111092,7 @@ export default {"acute_myeloid_leukemia":{
     "References: ",
     "1. Hotchkiss RS, Karl IE. The Pathophysiology and Treatment of Sepsis. N Engl J Med. 2003 Jan 9;348(2):138–50. ",
     "2. \tSurviving Sepsis Campaign: International Guidelines for Mana... : Critical Care Medicine [Internet]. [cited 2020 Oct 16]. Available from: https://journals.lww.com/ccmjournal/Fulltext/2017/03000/Surviving_Sepsis_Campaign___International.15.aspx",
-    "3. \tDellinger RP, Schorr CA, Levy MM. A Users’ Guide to the 2016 Surviving Sepsis Guidelines. Crit Care Med. 2017 Mar;45(3):381–385. ",
-    "",
-    "",
-    "",
-    "",
-    ""
+    "3. \tDellinger RP, Schorr CA, Levy MM. A Users’ Guide to the 2016 Surviving Sepsis Guidelines. Crit Care Med. 2017 Mar;45(3):381–385. "
   ],
   "states": {
     "Initial": {
@@ -108295,7 +111331,7 @@ export default {"acute_myeloid_leukemia":{
         "quantity": 1,
         "unit": "days"
       },
-      "direct_transition": "Terminal",
+      "direct_transition": "End Encounter by Death",
       "remarks": [
         "Overall mortality of sepsis is 12.5% among patients with sepsis. Ref: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6250243/#:~:text=The%20higher%20prevalence%20of%20sepsis,sepsis%20and%20septic%20shock%2C%20respectively."
       ]
@@ -108337,7 +111373,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "2713-6",
-          "display": "Oxygen Saturation"
+          "display": "Oxygen saturation Calculated from oxygen partial pressure in Blood"
         }
       ],
       "direct_transition": "Lactate_Level1",
@@ -108430,7 +111466,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 305351004,
-          "display": "Admit to ICU (procedure)"
+          "display": "Admission to intensive care unit (procedure)"
         }
       ],
       "duration": {
@@ -108530,7 +111566,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "85354-9",
-          "display": "Blood Pressure"
+          "display": "Blood pressure panel with all children optional"
         }
       ],
       "observations": [
@@ -108631,7 +111667,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "85354-9",
-          "display": "Blood Pressure"
+          "display": "Blood pressure panel with all children optional"
         }
       ],
       "observations": [
@@ -108674,6 +111710,10 @@ export default {"acute_myeloid_leukemia":{
       "direct_transition": "Vancomycin",
       "administration": true,
       "reason": "Sepsis"
+    },
+    "End Encounter by Death": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   },
   "gmf_version": 2
@@ -110336,7 +113376,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Wellness Encounter": {
       "type": "Encounter",
-      "reason": "",
+      "reason": "Sleep Disorder",
       "telemedicine_possibility": "none",
       "wellness": true,
       "direct_transition": "Assessment Check"
@@ -110743,7 +113783,7 @@ export default {"acute_myeloid_leukemia":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "direct_transition": "SNF_Admission"
+      "direct_transition": "Transition_To_SNF_Reason"
     },
     "SNF_Admission": {
       "type": "Encounter",
@@ -110778,61 +113818,33 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "History_Physical_Exam"
         }
-      ]
+      ],
+      "reason": "Transition_To_SNF_Reason"
     },
     "Determine_LOS": {
-      "type": "Simple",
-      "distributed_transition": [
+      "type": "SetAttribute",
+      "attribute": "snf_days",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "round": true,
+        "parameters": {
+          "mean": 18.7
+        }
+      },
+      "conditional_transition": [
         {
-          "distribution": 0.364,
-          "transition": "SNF_1-15_Days"
+          "transition": "Max Length of Stay",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "snf_days",
+            "operator": ">",
+            "value": 100
+          }
         },
         {
-          "distribution": 0.34,
-          "transition": "SNF_16-30_Days"
-        },
-        {
-          "distribution": 0.29,
-          "transition": "SNF_31-99_Days"
-        },
-        {
-          "distribution": 0.006,
-          "transition": "SNF_100_Days"
+          "transition": "History_Physical_Exam"
         }
       ]
-    },
-    "SNF_1-15_Days": {
-      "type": "SetAttribute",
-      "attribute": "snf_days",
-      "range": {
-        "high": 15,
-        "low": 1
-      },
-      "direct_transition": "History_Physical_Exam"
-    },
-    "SNF_16-30_Days": {
-      "type": "SetAttribute",
-      "attribute": "snf_days",
-      "range": {
-        "high": 30,
-        "low": 16
-      },
-      "direct_transition": "History_Physical_Exam"
-    },
-    "SNF_31-99_Days": {
-      "type": "SetAttribute",
-      "attribute": "snf_days",
-      "range": {
-        "high": 99,
-        "low": 31
-      },
-      "direct_transition": "History_Physical_Exam"
-    },
-    "SNF_100_Days": {
-      "type": "SetAttribute",
-      "attribute": "snf_days",
-      "value": 100,
-      "direct_transition": "History_Physical_Exam"
     },
     "History_Physical_Exam": {
       "type": "Procedure",
@@ -110957,7 +113969,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "311555007",
-          "display": "Speech and language therapy regime (regime/therapy"
+          "display": "Speech and language therapy regime (regime/therapy)"
         }
       ],
       "direct_transition": "NTA_Check"
@@ -111061,7 +114073,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "End Encounter": {
       "type": "EncounterEnd",
-      "direct_transition": "Terminal"
+      "direct_transition": "End_Transition_To_SNF_Reason"
     },
     "Facility_Wheelchair": {
       "type": "Device",
@@ -111077,6 +114089,29 @@ export default {"acute_myeloid_leukemia":{
       "type": "DeviceEnd",
       "referenced_by_attribute": "snf_wheelchair",
       "direct_transition": "End Encounter"
+    },
+    "Max Length of Stay": {
+      "type": "SetAttribute",
+      "attribute": "snf_days",
+      "value": 100,
+      "direct_transition": "History_Physical_Exam"
+    },
+    "Transition_To_SNF_Reason": {
+      "type": "ConditionOnset",
+      "target_encounter": "SNF_Admission",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 25675004,
+          "display": "Patient transfer to skilled nursing facility (procedure)"
+        }
+      ],
+      "direct_transition": "SNF_Admission"
+    },
+    "End_Transition_To_SNF_Reason": {
+      "type": "ConditionEnd",
+      "direct_transition": "Terminal",
+      "condition_onset": "Transition_To_SNF_Reason"
     }
   },
   "gmf_version": 1
@@ -112895,7 +115930,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Diagnosis_Encounter": {
       "type": "Encounter",
-      "reason": "",
+      "reason": "IHD_Start",
       "direct_transition": "ECG / Labs",
       "wellness": true
     },
@@ -113021,7 +116056,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 433112001,
-          "display": "Percutaneous mechanical thrombectomy of portal vein using fluoroscopic guidance"
+          "display": "Percutaneous mechanical thrombectomy of portal vein using fluoroscopic guidance with contrast (procedure)"
         }
       ],
       "duration": {
@@ -113056,7 +116091,7 @@ export default {"acute_myeloid_leukemia":{
     "Emergency_Encounter": {
       "type": "Encounter",
       "encounter_class": "emergency",
-      "reason": "",
+      "reason": "Stroke",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -113396,7 +116431,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": 542347,
-          "display": "Isoflurane 999 MG/ML Inhalant Solution"
+          "display": "isoflurane 99.9 % Inhalation Solution"
         }
       ],
       "direct_transition": "Isoflurane_End",
@@ -113443,7 +116478,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": 200243,
-          "display": "sevoflurane 1000 MG/ML Inhalant Solution"
+          "display": "sevoflurane 1000 MG/ML Inhalation Solution"
         }
       ],
       "direct_transition": "Sevoflurane_End",
@@ -114436,7 +117471,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 12,
         "unit": "months"
       },
-      "direct_transition": "Pre_Procedure_Encounter"
+      "direct_transition": "Pre_Procedure_Encounter_Reason"
     },
     "Joint_Replacement_Encounter": {
       "type": "Encounter",
@@ -114470,7 +117505,8 @@ export default {"acute_myeloid_leukemia":{
         {
           "transition": "Terminal"
         }
-      ]
+      ],
+      "reason": "History of Joint Replacement"
     },
     "Knee_Replacement_Procedure": {
       "type": "Procedure",
@@ -114515,7 +117551,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Stretching exercises"
         }
       ],
-      "direct_transition": "Post_Op_Prescribe_Pain_Reliever"
+      "direct_transition": "Post_Op_Prescribe_Pain_Reliever",
+      "reason": "History of Joint Replacement"
     },
     "Post_Op_Prescribe_Pain_Reliever": {
       "type": "CallSubmodule",
@@ -114612,7 +117649,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Delay_After_Assessments": {
       "type": "Delay",
-      "direct_transition": "Joint_Replacement_Encounter",
+      "direct_transition": "History of Joint Replacement",
       "range": {
         "low": 0,
         "high": 90,
@@ -114621,7 +117658,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Delay_After_Assessments_2": {
       "type": "Delay",
-      "direct_transition": "Joint_Replacement_Encounter",
+      "direct_transition": "History of Joint Replacement",
       "range": {
         "low": 0,
         "high": 180,
@@ -114638,7 +117675,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for check up (procedure)"
         }
       ],
-      "direct_transition": "Functional_Status_Assessments"
+      "direct_transition": "Functional_Status_Assessments",
+      "reason": "pre_procedure_encounter_reason"
     },
     "Pre_Procedure_Encounter_End": {
       "type": "EncounterEnd",
@@ -114670,7 +117708,7 @@ export default {"acute_myeloid_leukemia":{
     },
     "Post_Procedure_Encounter": {
       "type": "Encounter",
-      "encounter_class": "inpatient",
+      "encounter_class": "ambulatory",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -114678,7 +117716,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Follow-up visit (procedure)"
         }
       ],
-      "direct_transition": "Functional_Status_Assessments_2"
+      "direct_transition": "Functional_Status_Assessments_2",
+      "reason": "History of Joint Replacement"
     },
     "Delay_For_Post_Assessment_Hip": {
       "type": "Delay",
@@ -114733,6 +117772,28 @@ export default {"acute_myeloid_leukemia":{
       "type": "CallSubmodule",
       "submodule": "dme/wheelchair_end",
       "direct_transition": "End_Post_Op_CarePlan"
+    },
+    "History of Joint Replacement": {
+      "type": "ConditionOnset",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 161679004,
+          "display": "History of artificial joint (situation)"
+        }
+      ],
+      "direct_transition": "Joint_Replacement_Encounter",
+      "target_encounter": "Joint_Replacement_Encounter"
+    },
+    "Pre_Procedure_Encounter_Reason": {
+      "type": "SetAttribute",
+      "attribute": "pre_procedure_encounter_reason",
+      "direct_transition": "Pre_Procedure_Encounter",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 110466009,
+        "display": "Pre-surgery evaluation (procedure)"
+      }
     }
   },
   "gmf_version": 1
@@ -115974,7 +119035,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "57698-3",
-          "display": "Lipid Panel"
+          "display": "Lipid panel with direct LDL - Serum or Plasma"
         }
       ],
       "observations": [
@@ -115985,7 +119046,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2093-3",
-              "display": "Total Cholesterol"
+              "display": "Cholesterol [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -116030,7 +119091,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2085-9",
-              "display": "High Density Lipoprotein Cholesterol"
+              "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -116071,12 +119132,12 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": 183063000,
-          "display": "low salt diet education"
+          "display": "Low salt diet education"
         },
         {
           "system": "SNOMED-CT",
           "code": 183301007,
-          "display": "physical exercise"
+          "display": "Physical exercises (regime/therapy)"
         }
       ]
     },
@@ -116123,7 +119184,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2339-0",
-              "display": "Glucose"
+              "display": "Glucose [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -116135,7 +119196,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "display": "Urea nitrogen [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -116146,7 +119207,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "38483-4",
-              "display": "Creatinine"
+              "display": "Creatinine [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL",
@@ -116162,7 +119223,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "49765-1",
-              "display": "Calcium"
+              "display": "Calcium [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -116174,7 +119235,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2947-0",
-              "display": "Sodium"
+              "display": "Sodium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -116186,7 +119247,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6298-4",
-              "display": "Potassium"
+              "display": "Potassium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -116198,7 +119259,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2069-3",
-              "display": "Chloride"
+              "display": "Chloride [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -116210,7 +119271,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "display": "Carbon dioxide, total [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -116222,7 +119283,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -116376,7 +119437,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2339-0",
-              "display": "Glucose"
+              "display": "Glucose [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -116388,7 +119449,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "display": "Urea nitrogen [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -116399,7 +119460,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "38483-4",
-              "display": "Creatinine"
+              "display": "Creatinine [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL",
@@ -116415,7 +119476,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "49765-1",
-              "display": "Calcium"
+              "display": "Calcium [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -116427,7 +119488,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2947-0",
-              "display": "Sodium"
+              "display": "Sodium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -116439,7 +119500,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6298-4",
-              "display": "Potassium"
+              "display": "Potassium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -116451,7 +119512,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2069-3",
-              "display": "Chloride"
+              "display": "Chloride [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -116463,7 +119524,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "display": "Carbon dioxide, total [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -116475,7 +119536,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -116597,7 +119658,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "57698-3",
-          "display": "Lipid Panel"
+          "display": "Lipid panel with direct LDL - Serum or Plasma"
         }
       ],
       "observations": [
@@ -116607,7 +119668,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2093-3",
-              "display": "Total Cholesterol"
+              "display": "Cholesterol [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -116652,7 +119713,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2085-9",
-              "display": "High Density Lipoprotein Cholesterol"
+              "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL",
@@ -116824,7 +119885,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "SNOMED-CT",
           "code": "50849002",
-          "display": "Emergency Room Admission"
+          "display": "Emergency room admission (procedure)"
         }
       ],
       "direct_transition": "Chest X-Ray"
@@ -117398,9 +120459,6 @@ export default {"acute_myeloid_leukemia":{
       "type": "Encounter",
       "encounter_class": "inpatient",
       "reason": "Lung Cancer Condition",
-      "remarks": [
-        "TODO: This inpatient encounter should last 5 days, not the standard 15 minutes."
-      ],
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -117408,7 +120466,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem"
         }
       ],
-      "direct_transition": "SCLC Chemotheraphy I"
+      "direct_transition": "Set_SCLC_LOS"
     },
     "SCLC Chemotheraphy I": {
       "type": "MedicationOrder",
@@ -117444,7 +120502,7 @@ export default {"acute_myeloid_leukemia":{
       "codes": [
         {
           "system": "RxNorm",
-          "code": "1734340",
+          "code": "226719",
           "display": "Etoposide 100 MG Injection"
         }
       ],
@@ -117475,7 +120533,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 4,
         "unit": "hours"
       },
-      "direct_transition": "End_SCLC_Treatment_Encounter"
+      "direct_transition": "Delay"
     },
     "End_SCLC_Treatment_Encounter": {
       "type": "EncounterEnd",
@@ -117503,9 +120561,6 @@ export default {"acute_myeloid_leukemia":{
     "NSCLC Treatment Encounter": {
       "type": "Encounter",
       "encounter_class": "inpatient",
-      "remarks": [
-        "TODO: This inpatient encounter should last 5 days, not the standard 15 minutes."
-      ],
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -117513,7 +120568,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem"
         }
       ],
-      "direct_transition": "NSCLC Chemotheraphy I",
+      "direct_transition": "Set_NSCLC_LOS",
       "reason": "Lung Cancer Condition"
     },
     "NSCLC Chemotheraphy I": {
@@ -117582,7 +120637,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 4,
         "unit": "hours"
       },
-      "direct_transition": "End_NSCLC_Treatment_Encounter"
+      "direct_transition": "Delay_2"
     },
     "End_NSCLC_Treatment_Encounter": {
       "type": "EncounterEnd",
@@ -117683,6 +120738,104 @@ export default {"acute_myeloid_leukemia":{
           "distribution": 0.7
         }
       ]
+    },
+    "Set_SCLC_LOS": {
+      "type": "SetAttribute",
+      "attribute": "lung_cancer_los",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "round": true,
+        "parameters": {
+          "mean": 3
+        }
+      },
+      "direct_transition": "Minimum_of_3_days"
+    },
+    "Begin_SCLC_Day": {
+      "type": "Counter",
+      "attribute": "lung_cancer_los",
+      "action": "decrement",
+      "direct_transition": "SCLC Chemotheraphy I"
+    },
+    "Delay": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "days",
+      "conditional_transition": [
+        {
+          "transition": "Begin_SCLC_Day",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "lung_cancer_los",
+            "operator": ">",
+            "value": 0
+          }
+        },
+        {
+          "transition": "End_SCLC_Treatment_Encounter"
+        }
+      ]
+    },
+    "Set_NSCLC_LOS": {
+      "type": "SetAttribute",
+      "attribute": "lung_cancer_los",
+      "distribution": {
+        "kind": "EXPONENTIAL",
+        "round": true,
+        "parameters": {
+          "mean": 3
+        }
+      },
+      "direct_transition": "Minimum_of_3_days_2"
+    },
+    "Begin_NSCLC_Day": {
+      "type": "Counter",
+      "attribute": "lung_cancer_los",
+      "action": "decrement",
+      "direct_transition": "NSCLC Chemotheraphy I"
+    },
+    "Delay_2": {
+      "type": "Delay",
+      "distribution": {
+        "kind": "EXACT",
+        "parameters": {
+          "value": 1
+        }
+      },
+      "unit": "days",
+      "conditional_transition": [
+        {
+          "transition": "Begin_NSCLC_Day",
+          "condition": {
+            "condition_type": "Attribute",
+            "attribute": "lung_cancer_los",
+            "operator": ">",
+            "value": 0
+          }
+        },
+        {
+          "transition": "End_NSCLC_Treatment_Encounter"
+        }
+      ]
+    },
+    "Minimum_of_3_days": {
+      "type": "Counter",
+      "attribute": "lung_cancer_los",
+      "action": "increment",
+      "amount": 2,
+      "direct_transition": "Begin_SCLC_Day"
+    },
+    "Minimum_of_3_days_2": {
+      "type": "Counter",
+      "attribute": "lung_cancer_los",
+      "action": "increment",
+      "amount": 2,
+      "direct_transition": "Begin_NSCLC_Day"
     }
   },
   "gmf_version": 1
@@ -118500,13 +121653,14 @@ export default {"acute_myeloid_leukemia":{
     "annual_wellness_visit": {
       "type": "Encounter",
       "direct_transition": "wellness_procedure",
-      "wellness": true
+      "wellness": true,
+      "reason": "wellness_encounter_reason"
     },
     "male_guard": {
       "type": "Simple",
       "conditional_transition": [
         {
-          "transition": "annual_wellness_visit",
+          "transition": "Wellness_Encounter_Reason",
           "condition": {
             "condition_type": "Gender",
             "gender": "M"
@@ -118688,7 +121842,8 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for symptom"
         }
       ],
-      "direct_transition": "biopsy procedure"
+      "direct_transition": "biopsy procedure",
+      "reason": "Suspected_Prostate_Cancer"
     },
     "biopsy procedure": {
       "type": "Procedure",
@@ -118744,7 +121899,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "US Guidance for biopsy of Prostate"
         }
       ],
-      "direct_transition": "biopsy_visit_end",
+      "direct_transition": "End_Suspected_Prostate_Cancer",
       "value_code": {
         "system": "SNOMED-CT",
         "code": 165131004,
@@ -118783,7 +121938,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Neoplasm of prostate"
         }
       ],
-      "direct_transition": "biopsy_visit_end"
+      "direct_transition": "End_Suspected_Prostate_Cancer"
     },
     "Aggressive_Therapy_Careplan": {
       "type": "CarePlanStart",
@@ -118927,7 +122082,7 @@ export default {"acute_myeloid_leukemia":{
       "exact": {
         "quantity": 1
       },
-      "direct_transition": "biopsy_visit"
+      "direct_transition": "Suspected_Prostate_Cancer"
     },
     "Prostate Cancer Symptom 2": {
       "type": "Symptom",
@@ -119038,7 +122193,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2339-0",
-              "display": "Glucose"
+              "display": "Glucose [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -119050,7 +122205,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "display": "Urea nitrogen [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -119061,7 +122216,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "38483-4",
-              "display": "Creatinine"
+              "display": "Creatinine [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL",
@@ -119077,7 +122232,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "49765-1",
-              "display": "Calcium"
+              "display": "Calcium [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -119089,7 +122244,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2947-0",
-              "display": "Sodium"
+              "display": "Sodium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -119101,7 +122256,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6298-4",
-              "display": "Potassium"
+              "display": "Potassium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -119113,7 +122268,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2069-3",
-              "display": "Chloride"
+              "display": "Chloride [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -119125,7 +122280,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "display": "Carbon dioxide, total [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -119137,7 +122292,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "33914-3",
-              "display": "Glomerular filtration rate/1.73 sq M.predicted"
+              "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
             }
           ],
           "range": {
@@ -119284,7 +122439,7 @@ export default {"acute_myeloid_leukemia":{
           "codes": [
             {
               "system": "LOINC",
-              "code": "5767-9",
+              "code": "34533-0",
               "display": "Odor of Urine"
             }
           ],
@@ -119539,7 +122694,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -119710,6 +122865,33 @@ export default {"acute_myeloid_leukemia":{
         }
       ],
       "direct_transition": "Chemotherapy_Hormone Order"
+    },
+    "Suspected_Prostate_Cancer": {
+      "type": "ConditionOnset",
+      "target_encounter": "biopsy_visit",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 315268008,
+          "display": "Suspected prostate cancer (situation)"
+        }
+      ],
+      "direct_transition": "biopsy_visit"
+    },
+    "End_Suspected_Prostate_Cancer": {
+      "type": "ConditionEnd",
+      "direct_transition": "biopsy_visit_end",
+      "condition_onset": "Suspected_Prostate_Cancer"
+    },
+    "Wellness_Encounter_Reason": {
+      "type": "SetAttribute",
+      "attribute": "wellness_encounter_reason",
+      "direct_transition": "annual_wellness_visit",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 410424005,
+        "display": "Wellness surveillance (regime/therapy)"
+      }
     }
   },
   "gmf_version": 1
@@ -121043,49 +124225,6 @@ export default {"acute_myeloid_leukemia":{
       ],
       "direct_transition": "Veteran Guard"
     },
-    "Attempts_Suicide": {
-      "type": "Simple",
-      "remarks": [
-        "It's difficult to find accurate statistics for how many people actually attempt suicide since ",
-        "those who attempt suicide often don't seek medical attention afterwards. Therefore, the attempts ",
-        "modeled in this module are considered severe enough to merit medical attention.",
-        "Males COMPLETE suicide 3.5x as often as females do. Suicides have a 7% completion rate overall."
-      ],
-      "complex_transition": [
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "M"
-          },
-          "distributions": [
-            {
-              "distribution": 0.0546,
-              "transition": "Fatal_Attempt"
-            },
-            {
-              "distribution": 0.9454,
-              "transition": "VA Hotline Call"
-            }
-          ]
-        },
-        {
-          "condition": {
-            "condition_type": "Gender",
-            "gender": "F"
-          },
-          "distributions": [
-            {
-              "distribution": 0.0156,
-              "transition": "Fatal_Attempt"
-            },
-            {
-              "distribution": 0.9844,
-              "transition": "VA Hotline Call"
-            }
-          ]
-        }
-      ]
-    },
     "Attempt_By_Poisoning": {
       "type": "ConditionOnset",
       "target_encounter": "ED_Visit_For_Attempted_Suicide",
@@ -121267,7 +124406,7 @@ export default {"acute_myeloid_leukemia":{
       "distributed_transition": [
         {
           "distribution": 0.753,
-          "transition": "Terminal"
+          "transition": "End_Suicidal_Thoughts"
         },
         {
           "distribution": 0.247,
@@ -121286,7 +124425,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 36,
         "unit": "months"
       },
-      "direct_transition": "Attempts_Suicide"
+      "direct_transition": "Suicidal_Thoughts"
     },
     "Fatal_Attempt": {
       "type": "Simple",
@@ -121416,7 +124555,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 56,
         "unit": "years"
       },
-      "direct_transition": "Attempts_Suicide"
+      "direct_transition": "Suicidal_Thoughts"
     },
     "Delay 35 to 54 years old": {
       "type": "Delay",
@@ -121425,7 +124564,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 36,
         "unit": "years"
       },
-      "direct_transition": "Attempts_Suicide"
+      "direct_transition": "Suicidal_Thoughts"
     },
     "Delay 75 to 110 years old": {
       "type": "Delay",
@@ -121434,7 +124573,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 92,
         "unit": "years"
       },
-      "direct_transition": "Attempts_Suicide"
+      "direct_transition": "Suicidal_Thoughts"
     },
     "Delay 18 to 34 years old": {
       "type": "Delay",
@@ -121443,7 +124582,7 @@ export default {"acute_myeloid_leukemia":{
         "high": 16,
         "unit": "years"
       },
-      "direct_transition": "Attempts_Suicide"
+      "direct_transition": "Suicidal_Thoughts"
     },
     "MH & SUD Comorbidty Check": {
       "type": "CallSubmodule",
@@ -121564,13 +124703,14 @@ export default {"acute_myeloid_leukemia":{
           "display": "Telephone encounter (procedure)"
         }
       ],
-      "direct_transition": "Hotline Mental Health Note"
+      "direct_transition": "Hotline Mental Health Note",
+      "reason": "Suicidal_Thoughts"
     },
     "end telehealth": {
       "type": "EncounterEnd",
       "distributed_transition": [
         {
-          "transition": "Terminal",
+          "transition": "End_Suicidal_Thoughts",
           "distribution": 0.8
         },
         {
@@ -121603,6 +124743,62 @@ export default {"acute_myeloid_leukemia":{
         "operator": "is not nil"
       },
       "direct_transition": "MH & SUD Comorbidty Check"
+    },
+    "End_Suicidal_Thoughts": {
+      "type": "ConditionEnd",
+      "direct_transition": "Terminal",
+      "condition_onset": "Suicidal_Thoughts"
+    },
+    "Suicidal_Thoughts": {
+      "type": "ConditionOnset",
+      "target_encounter": "",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 6471006,
+          "display": "Suicidal thoughts (finding)"
+        }
+      ],
+      "complex_transition": [
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "M"
+          },
+          "distributions": [
+            {
+              "distribution": 0.0546,
+              "transition": "Fatal_Attempt"
+            },
+            {
+              "distribution": 0.9454,
+              "transition": "VA Hotline Call"
+            }
+          ]
+        },
+        {
+          "condition": {
+            "condition_type": "Gender",
+            "gender": "F"
+          },
+          "distributions": [
+            {
+              "distribution": 0.0156,
+              "transition": "Fatal_Attempt"
+            },
+            {
+              "distribution": 0.9844,
+              "transition": "VA Hotline Call"
+            }
+          ]
+        }
+      ],
+      "remarks": [
+        "It's difficult to find accurate statistics for how many people actually attempt suicide since ",
+        "those who attempt suicide often don't seek medical attention afterwards. Therefore, the attempts ",
+        "modeled in this module are considered severe enough to merit medical attention.",
+        "Males COMPLETE suicide 3.5x as often as females do. Suicides have a 7% completion rate overall."
+      ]
     }
   },
   "gmf_version": 1
@@ -121822,7 +125018,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "RxNorm",
           "code": 198031,
-          "display": "24hr nicotine transdermal patch"
+          "display": "nicotine 7 MG/Day 24HR Transdermal System"
         }
       ],
       "direct_transition": "Alcohol Check",
@@ -122248,7 +125444,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Simple",
       "conditional_transition": [
         {
-          "transition": "Terminal",
+          "transition": "End Encounter and Exit",
           "condition": {
             "condition_type": "At Least",
             "minimum": 1,
@@ -122335,7 +125531,7 @@ export default {"acute_myeloid_leukemia":{
       "type": "Simple",
       "conditional_transition": [
         {
-          "transition": "Terminal",
+          "transition": "End Encounter and Exit",
           "condition": {
             "condition_type": "At Least",
             "minimum": 1,
@@ -122796,6 +125992,10 @@ export default {"acute_myeloid_leukemia":{
     "Delay 10 years": {
       "type": "Simple",
       "direct_transition": "AVRr Sequence"
+    },
+    "End Encounter and Exit": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   },
   "gmf_version": 2
@@ -122959,7 +126159,7 @@ export default {"acute_myeloid_leukemia":{
     "Placeholder MVS Treatment": {
       "type": "Encounter",
       "encounter_class": "ambulatory",
-      "reason": "",
+      "reason": "Mitral Valve Stenosis",
       "codes": [
         {
           "system": "SNOMED-CT",
@@ -122967,11 +126167,7 @@ export default {"acute_myeloid_leukemia":{
           "display": "Encounter for problem (procedure)"
         }
       ],
-      "direct_transition": "New_State"
-    },
-    "New_State": {
-      "type": "EncounterEnd",
-      "direct_transition": "Terminal"
+      "direct_transition": "End Placeholder MVS Treatment"
     },
     "Set_Risk_Factors": {
       "type": "CallSubmodule",
@@ -122980,6 +126176,10 @@ export default {"acute_myeloid_leukemia":{
       "remarks": [
         "For this initial impl, risk factors are set to true once. Later versions of this model should move this into Risk Factor Check and update the risk factors yearly"
       ]
+    },
+    "End Placeholder MVS Treatment": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
     }
   },
   "gmf_version": 2
@@ -123532,12 +126732,13 @@ export default {"acute_myeloid_leukemia":{
   "states": {
     "Initial": {
       "type": "Initial",
-      "direct_transition": "Wellness_Encounter"
+      "direct_transition": "Wellness_Encounter_Reason"
     },
     "Wellness_Encounter": {
       "type": "Encounter",
       "wellness": true,
-      "direct_transition": "Record_Height"
+      "direct_transition": "Record_Height",
+      "reason": "wellness_encounter_reason"
     },
     "Record_Height": {
       "type": "Observation",
@@ -123588,7 +126789,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "39156-5",
-          "display": "Body Mass Index"
+          "display": "Body mass index (BMI) [Ratio]"
         }
       ],
       "unit": "kg/m2",
@@ -123675,7 +126876,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "85354-9",
-          "display": "Blood Pressure"
+          "display": "Blood pressure panel with all children optional"
         }
       ],
       "observations": [
@@ -123713,7 +126914,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "51990-0",
-          "display": "Basic Metabolic Panel"
+          "display": "Basic metabolic panel - Blood"
         }
       ],
       "observations": [
@@ -123724,7 +126925,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2339-0",
-              "display": "Glucose"
+              "display": "Glucose [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -123736,7 +126937,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6299-2",
-              "display": "Urea Nitrogen"
+              "display": "Urea nitrogen [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -123748,7 +126949,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "38483-4",
-              "display": "Creatinine"
+              "display": "Creatinine [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -123760,7 +126961,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "49765-1",
-              "display": "Calcium"
+              "display": "Calcium [Mass/volume] in Blood"
             }
           ],
           "unit": "mg/dL"
@@ -123772,7 +126973,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2947-0",
-              "display": "Sodium"
+              "display": "Sodium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -123784,7 +126985,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "6298-4",
-              "display": "Potassium"
+              "display": "Potassium [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -123796,7 +126997,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2069-3",
-              "display": "Chloride"
+              "display": "Chloride [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -123808,7 +127009,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "20565-8",
-              "display": "Carbon Dioxide"
+              "display": "Carbon dioxide, total [Moles/volume] in Blood"
             }
           ],
           "unit": "mmol/L"
@@ -123823,7 +127024,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "57698-3",
-          "display": "Lipid Panel"
+          "display": "Lipid panel with direct LDL - Serum or Plasma"
         }
       ],
       "observations": [
@@ -123834,7 +127035,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2093-3",
-              "display": "Total Cholesterol"
+              "display": "Cholesterol [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -123870,7 +127071,7 @@ export default {"acute_myeloid_leukemia":{
             {
               "system": "LOINC",
               "code": "2085-9",
-              "display": "High Density Lipoprotein Cholesterol"
+              "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
             }
           ],
           "unit": "mg/dL"
@@ -123886,7 +127087,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "14959-1",
-          "display": "Microalbumin Creatinine Ratio"
+          "display": "Microalbumin/Creatinine [Mass Ratio] in Urine"
         }
       ],
       "unit": "mg/g",
@@ -123900,7 +127101,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "33914-3",
-          "display": "Estimated Glomerular Filtration Rate"
+          "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)"
         }
       ],
       "unit": "mL/min/{1.73_m2}",
@@ -123919,7 +127120,7 @@ export default {"acute_myeloid_leukemia":{
                   {
                     "system": "SNOMED-CT",
                     "code": "44054006",
-                    "display": "Diabetes"
+                    "display": "Diabetes mellitus type 2 (disorder)"
                   }
                 ]
               },
@@ -123955,7 +127156,7 @@ export default {"acute_myeloid_leukemia":{
                   {
                     "system": "SNOMED-CT",
                     "code": "44054006",
-                    "display": "Diabetes"
+                    "display": "Diabetes mellitus type 2 (disorder)"
                   }
                 ]
               },
@@ -124000,7 +127201,7 @@ export default {"acute_myeloid_leukemia":{
               {
                 "system": "SNOMED-CT",
                 "code": "44054006",
-                "display": "Diabetes"
+                "display": "Diabetes mellitus type 2 (disorder)"
               }
             ]
           },
@@ -124122,7 +127323,7 @@ export default {"acute_myeloid_leukemia":{
                   {
                     "system": "SNOMED-CT",
                     "code": "44054006",
-                    "display": "Diabetes"
+                    "display": "Diabetes mellitus type 2 (disorder)"
                   }
                 ]
               },
@@ -124152,7 +127353,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "58410-2",
-          "display": "Complete blood count (hemogram) panel - Blood by Automated count"
+          "display": "CBC panel - Blood by Automated count"
         }
       ],
       "observations": [
@@ -124350,7 +127551,7 @@ export default {"acute_myeloid_leukemia":{
         {
           "system": "LOINC",
           "code": "59576-9",
-          "display": "Body mass index (BMI) [Percentile] Per age and gender"
+          "display": "Body mass index (BMI) [Percentile] Per age and sex"
         }
       ],
       "direct_transition": "Record_BP",
@@ -124555,6 +127756,16 @@ export default {"acute_myeloid_leukemia":{
       ],
       "vital_sign": "Head Circumference Percentile",
       "direct_transition": "Record Head Circumference"
+    },
+    "Wellness_Encounter_Reason": {
+      "type": "SetAttribute",
+      "attribute": "wellness_encounter_reason",
+      "direct_transition": "Wellness_Encounter",
+      "value_code": {
+        "system": "SNOMED-CT",
+        "code": 410424005,
+        "display": "Wellness surveillance (regime/therapy)"
+      }
     }
   },
   "gmf_version": 1
