@@ -431,7 +431,6 @@ const StateTemplates = {
 
   ConditionOnset: {
     type: "ConditionOnset",
-    target_encounter: "",
     codes: [{...TypeTemplates.Code.Snomed}]
   },
 
@@ -443,7 +442,6 @@ const StateTemplates = {
     allergy_type: "allergy",
     category: "food",
     type: "AllergyOnset",
-    target_encounter: "",
     codes: [{...TypeTemplates.Code.Snomed}],
     reactions: []
   },

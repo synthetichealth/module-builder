@@ -598,7 +598,7 @@ const fixStateReferences = (module, stateName, newName) => {
     }
     if(state.target_encounter === stateName){
       if(newName === null){
-        state.target_encounter = "" // this is a requried field
+        delete state.target_encounters
       } else {
         state.target_encounter = newName;
       }

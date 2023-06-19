@@ -979,7 +979,8 @@ class ConditionOnset extends Component<Props> {
     let state = ((this.props.state: any): ConditionOnsetState);
     let encounters = this.props.otherStates.filter((s) => {return s.type === "Encounter"});
     let options = encounters.map((e) => {return {id: e.name, text: e.name}});
-    let targetEncounter = <RIESelect className='editable-text' value={{id: state.target_encounter, text: state.target_encounter}} propName={'target_encounter'}  change={this.props.onChange('target_encounter')} options={options} />
+    let initial_value = (state.target_encounter ? {id: state.target_encounter, text: state.target_encounter} : options[0]);
+    let targetEncounter = <RIESelect className='editable-text' value={initial_value} propName={'target_encounter'}  change={this.props.onChange('target_encounter')} options={options} />
     if (state.target_encounter) {
       return (
         <div>
@@ -992,7 +993,7 @@ class ConditionOnset extends Component<Props> {
     } else {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('target_encounter')({val: {id: "text"}})}>Add Target Encounter</a>
+          <a className='editable-text' onClick={() => this.props.onChange('target_encounter')({val: initial_value})}>Add Target Encounter</a>
           <br />
         </div>
       );
@@ -1243,9 +1244,12 @@ class AllergyOnset extends Component<Props> {
     let state = ((this.props.state: any): AllergyOnsetState);
     let encounters = this.props.otherStates.filter((s) => {return s.type === "Encounter"});
     let options = encounters.map((e) => {return {id: e.name, text: e.name}});
+    options.unshift({id: '', text: ''})
+    let initial_value = (state.target_encounter ? {id: state.target_encounter, text: state.target_encounter} : options[0]);
+    let targetEncounter = <RIESelect className='editable-text' value={initial_value} propName={'target_encounter'}  change={this.props.onChange('target_encounter')} options={options} />
     return (
       <div>
-        Target Encounter: <RIESelect className='editable-text' value={{id: state.target_encounter, text: state.target_encounter}} propName={'target_encounter'} change={this.props.onChange('target_encounter')} options={options} />
+        Target Encounter: {targetEncounter}
         <br />
         {this.renderAssignToAttribute()}
         <div className='section'>
