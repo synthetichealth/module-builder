@@ -1108,17 +1108,18 @@ class ConditionEnd extends Component<Props> {
     let state = ((this.props.state: any): ConditionEndState);
     let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
     let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+    let initial_value = (state.condition_onset ? {id: state.condition_onset, text: state.condition_onset} : options[0]);
     if (!state.condition_onset) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: "text"}})}>Add Condition Onset</a>
+          <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: initial_value})}>Add Condition Onset</a>
           <br />
         </div>
       );
     } else {
       return (
         <div>
-          Condition Onset: <RIESelect className='editable-text' value={{id: state.condition_onset, text: state.condition_onset}} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} options={options} />
+          Condition Onset: <RIESelect className='editable-text' value={initial_value} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -1410,17 +1411,18 @@ class AllergyEnd extends Component<Props> {
     let state = ((this.props.state: any): AllergyEndState);
     let allergyOnset = this.props.otherStates.filter((s) => {return s.type === "AllergyOnset"});
     let options = allergyOnset.map((e) => {return {id: e.name, text: e.name}});
+    let initial_value = (state.allergy_onset ? {id: state.allergy_onset, text: state.allergy_onset} : options[0]);
     if (!state.allergy_onset) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('allergy_onset')({val: {id: "text"}})}>Add Allergy Onset</a>
+          <a className='editable-text' onClick={() => this.props.onChange('allergy_onset')({val: initial_value})}>Add Allergy Onset</a>
           <br />
         </div>
       );
     } else {
       return (
         <div>
-          Allergy Onset: <RIESelect className='editable-text' value={{id: state.allergy_onset, text: state.allergy_onset}} propName={'allergy_onset'}  change={this.props.onChange('allergy_onset')} options={options} />
+          Allergy Onset: <RIESelect className='editable-text' value={initial_value} propName={'allergy_onset'}  change={this.props.onChange('allergy_onset')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('allergy_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -1883,17 +1885,18 @@ class MedicationEnd extends Component<Props> {
     let state = ((this.props.state: any): MedicationEndState);
     let medicationOrder = this.props.otherStates.filter((s) => {return s.type === "MedicationOrder"});
     let options = medicationOrder.map((e) => {return {id: e.name, text: e.name}});
+    let initial_value = (state.medication_order ? {id: state.medication_order, text: state.medication_order} : options[0]);
     if (!state.medication_order) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('medication_order')({val: {id: "text"}})}>Add Medication Order</a>
+          <a className='editable-text' onClick={() => this.props.onChange('medication_order')({val: initial_value})}>Add Medication Order</a>
           <br />
         </div>
       );
     } else {
       return (
         <div>
-          Medication Order: <RIESelect className='editable-text' value={{id: state.medication_order, text: state.medication_order}} propName={'medication_order'}  change={this.props.onChange('medication_order')} options={options} />
+          Medication Order: <RIESelect className='editable-text' value={initial_value} propName={'medication_order'}  change={this.props.onChange('medication_order')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('medication_order')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -2260,17 +2263,18 @@ class CarePlanEnd extends Component<Props> {
     let state = ((this.props.state: any): CarePlanEndState);
     let careplans = this.props.otherStates.filter((s) => {return s.type === "CarePlanStart"});
     let options = careplans.map((e) => {return {id: e.name, text: e.name}});
+    let initial_value = (state.careplan ? {id: state.careplan, text: state.careplan} : options[0]);
     if (!state.careplan) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('careplan')({val: {id: "text"}})}>Add Care Plan</a>
+          <a className='editable-text' onClick={() => this.props.onChange('careplan')({val: initial_value})}>Add Care Plan</a>
           <br />
         </div>
       );
     } else {
       return (
         <div>
-          Care Plan: <RIESelect className='editable-text' value={{id: state.careplan, text: state.careplan}} propName={'careplan'}  change={this.props.onChange('careplan')} options={options} />
+          Care Plan: <RIESelect className='editable-text' value={initial_value} propName={'careplan'}  change={this.props.onChange('careplan')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('careplan')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -3381,20 +3385,18 @@ class DeviceEnd extends Component<Props> {
     let state = ((this.props.state: any): DeviceEndState);
     let deviceStates = this.props.otherStates.filter((s) => {return s.type === "Device"});
     let options = deviceStates.map((e) => {return {id: e.name, text: e.name}});
-    if (options.length === 1) {
-      options.unshift({}); // blank to make sure the dropdown works when there's only one choice
-    }
+    let initial_value = (state.device ? {id: state.device, text: state.device} : options[0]);
     if (!state.device) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('device')({val: {id: "text"}})}>Add Device State</a>
+          <a className='editable-text' onClick={() => this.props.onChange('device')({val: initial_value})}>Add Device State</a>
           <br />
         </div>
       );
     } else {
       return (
         <div>
-          Device: <RIESelect className='editable-text' value={{id: state.device, text: state.device}} propName={'device'}  change={this.props.onChange('device')} options={options} />
+          Device: <RIESelect className='editable-text' value={initial_value} propName={'device'}  change={this.props.onChange('device')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('device')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
@@ -3594,17 +3596,18 @@ class Death extends Component<Props> {
     let state = ((this.props.state: any): DeathState);
     let conditionOnset = this.props.otherStates.filter((s) => {return s.type === "ConditionOnset"});
     let options = conditionOnset.map((e) => {return {id: e.name, text: e.name}});
+    let initial_value = (state.condition_onset ? {id: state.condition_onset, text: state.condition_onset} : options[0]);
     if (!state.condition_onset) {
       return (
         <div>
-          <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: "text"}})}>Add Condition Onset</a>
+          <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: initial_value})}>Add Condition Onset</a>
           <br />
         </div>
       );
     } else {
       return (
         <div>
-          Condition Onset: <RIESelect className='editable-text' value={{id: state.condition_onset, text: state.condition_onset}} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} options={options} />
+          Condition Onset: <RIESelect className='editable-text' value={initial_value} propName={'condition_onset'}  change={this.props.onChange('condition_onset')} options={options} />
           <a className='editable-text' onClick={() => this.props.onChange('condition_onset')({val: {id: null}})}>(remove)</a>
           <br/>
         </div>
