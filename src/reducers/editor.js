@@ -598,7 +598,7 @@ const fixStateReferences = (module, stateName, newName) => {
     }
     if(state.target_encounter === stateName){
       if(newName === null){
-        delete state.target_encounters
+        delete state.target_encounter
       } else {
         state.target_encounter = newName;
       }
