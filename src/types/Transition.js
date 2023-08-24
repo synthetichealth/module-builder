@@ -52,4 +52,15 @@ export type TableTransition = {
   ]
 };
 
-export type Transition = DirectTransition | DistributedTransition | ConditionalTransition | ComplexTransition | TableTransition;
+export type TypeOfCareTransition = {
+  type: 'TypeOfCare',
+  transition: [
+    {
+      ambulatory: string,
+      emergency: string,
+      telemedicine: String,
+    }
+  ]
+};
+
+export type Transition = DirectTransition | DistributedTransition | ConditionalTransition | ComplexTransition | TableTransition | TypeOfCareTransition;

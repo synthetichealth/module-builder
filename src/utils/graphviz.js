@@ -4,6 +4,8 @@ import type { State } from './types/State';
 
 import { cleanString } from '../utils/stringUtils';
 
+import TelemedicineConfig from '../data/telemedicine_config';
+
 const STANDARD_COLOR = 'Black';
 /*
 const HIGHLIGHT_COLOR = '#007bff';
@@ -144,6 +146,19 @@ const transitionsAsDOT = (module: Module, selectedState: State, selectedStateTra
           console.log(`NO SUCH NODE TO TRANSITION TO: ${t.transition} FROM ${name}`);
         }
       })
+      return out_transitions
+    } else if(state.type_of_care_transition !== undefined){
+      let out_transitions = ''
+      if(state.type_of_care_transition.ambulatory !== undefined){
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.type_of_care_transition.ambulatory].name)}" [label = "ambulatory", class = "transition ${className}"];\n`
+      }
+      if(state.type_of_care_transition.emergency !== undefined){
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.type_of_care_transition.emergency].name)}" [label = "emergency", class = "transition ${className}"];\n`
+      }
+      if(state.type_of_care_transition.telemedicine !== undefined){
+        out_transitions += `  "${escapedName}" -> "${escapeName(module.states[state.type_of_care_transition.telemedicine].name)}" [label = "telemedicine", class = "transition ${className}"];\n`
+      }
+
       return out_transitions
     } else if(state.lookup_table_transition !== undefined){
         let out_transitions = ''

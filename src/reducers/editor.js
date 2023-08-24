@@ -324,6 +324,7 @@ export default (state = initialState, action) => {
         Distributed: 'distributed_transition',
         Direct: 'direct_transition',
         Complex: 'complex_transition',
+        TypeOfCare: 'type_of_care_transition',
         Table: 'lookup_table_transition',
       };
 
@@ -349,6 +350,9 @@ export default (state = initialState, action) => {
         case 'conditional_transition':
           transitionTo = _.get(action, 'data.nodeName.transition.transition[0].to', null);
           break;
+        case 'type_of_care_transition':
+          transitionTo = _.get(action, 'data.nodeName.transition.ambulatory', null);
+          break;
         case 'complex_transition':
           transitionTo = _.get(action, 'data.nodeName.transition.transition[0].distributions[0].to', null);
           break;
@@ -369,6 +373,9 @@ export default (state = initialState, action) => {
             break;
           case 'complex_transition':
             newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName][0].distributions[0].transition = transitionTo;
+            break;
+          case 'type_of_care_transition':
+            newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName].ambulatory = transitionTo;
             break;
           case 'lookup_table_transition':
             newState.modules[action.data.currentModuleKey].states[action.data.nodeName.name][transitionName].transitions[0].transition = transitionTo;
@@ -558,6 +565,28 @@ const fixStateReferences = (module, stateName, newName) => {
           }
         }
       })
+    } else if (state.type_of_care_transition) {
+      if(state.type_of_care_transition.ambulatory === stateName) {
+        if(newName === null){
+          delete state.type_of_care_transition.ambulatory
+        } else {
+          state.type_of_care_transition.ambulatory = newName
+        }
+      }
+      if(state.type_of_care_transition.emergency === stateName) {
+        if(newName === null){
+          delete state.type_of_care_transition.emergency
+        } else {
+          state.type_of_care_transition.emergency = newName
+        }
+      }
+      if(state.type_of_care_transition.telemedicine === stateName) {
+        if(newName === null){
+          delete state.type_of_care_transition.telemedicine
+        } else {
+          state.type_of_care_transition.telemedicine = newName
+        }
+      }
     } else if (state.complex_transition){
       state.complex_transition.forEach( transition => {
         if(transition.transition === stateName){

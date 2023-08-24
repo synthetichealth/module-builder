@@ -6,6 +6,7 @@ import DirectTransition from './DirectTransition';
 import DistributedTransition from './DistributedTransition';
 import ConditionalTransition from './ConditionalTransition';
 import ComplexTransition from './ComplexTransition';
+import TypeOfCareTransition from './TypeOfCareTransition';
 import TableTransition from './TableTransition';
 
 type Props = {
@@ -26,6 +27,8 @@ class Transition extends Component<Props> {
           return <ConditionalTransition {...this.props} onChange={this.props.onChange('conditional_transition')} />
         case "Complex":
           return <ComplexTransition {...this.props} onChange={this.props.onChange('complex_transition')} />
+        case "TypeOfCare":
+          return <TypeOfCareTransition {...this.props} onChange={this.props.onChange('type_of_care_transition')} />
         case "Table":
           return <TableTransition {...this.props} onChange={this.props.onChange('lookup_table_transition')} />
         case "None":
