@@ -342,7 +342,7 @@ const stateDescription = (state) =>{
         let e = state['exact']
         details = `${s}: ${e['quantity']}`
       } else if (state['distribution'] !== undefined ) {
-        details = `${s}: ${distributionString(state['distribution'])}}`
+        details = `${s}: ${distributionString(state['distribution'])}`
       }
       if (p && p < 1.0 && p > 0) {
         let pct = p*100;
