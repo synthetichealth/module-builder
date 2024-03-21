@@ -31,6 +31,22 @@ export class Code extends Component<Props> {
     }
   }
 
+  checkVersionKey() {
+    if(this.props.code.version) {
+      return (
+        <div>
+        System Version (Optional): <RIEInput className='editable-text' value={this.props.code.version} propName="version" change={this.props.onChange('version')} />
+        </div>
+      );
+    }else {
+      return (
+        <div>
+        System Version (Optional): <RIEInput className='editable-text' value="" propName="version" change={this.props.onChange('version')} />
+        </div>
+      );
+    }
+  }
+
   render() {
     let code = this.props.code;
     let system = this.props.system;
@@ -41,6 +57,7 @@ export class Code extends Component<Props> {
         Code: <RIEInput className='editable-text' value={code.code} propName="code" change={this.props.onChange('code')} />
         <br />
         Display: <RIEInput className='editable-text' value={code.display} propName="display" change={this.props.onChange('display')} />
+        {this.checkVersionKey()}
         {this.checkValueSetKey()}
       </div>
     );
