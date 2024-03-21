@@ -16,6 +16,8 @@ jobs:
           node-version: '20.x'
       - run: npm install --legacy-peer-deps
       - run: npm run build
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3 
