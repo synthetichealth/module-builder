@@ -141,6 +141,23 @@ class LoadModule extends Component {
           </ul>
         )
 
+      case 'templates':
+        return (
+          <ul className='LoadModule-list'>
+            { Object.entries(this.state.templates || {}).map(([key, template]) => {
+              return (
+                <li key={key}>
+                    <button className='btn btn-link' onClick={() => {
+                      this.loadModule(JSON.stringify(template))
+                    }}>
+                      {template.name}
+                    </button>
+                </li>
+              )
+            })}
+          </ul>
+        )
+
       case 'my':
         return (
           <ul className='LoadModule-list'>
@@ -243,6 +260,16 @@ class LoadModule extends Component {
     });
   }
 
+  loadTemplates() {
+    if (!this.state.templates) {
+      import("../../data/templates").then(templates => {
+        this.setState({
+          templates: templates.default,
+        });
+      });
+    }
+  }
+
   updateLocalStorageModules() {
     const existingModules = getLocalStorageModules();
 
@@ -341,16 +368,16 @@ class LoadModule extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.selectedOption === "git" &&
-      prevState.selectedOption !== "git"
-    ) {
+    const changedTo = (option) =>
+      (this.state.selectedOption === option &&
+      prevState.selectedOption !== option);
+
+    if (changedTo("git")) {
       this.fetchBranchList();
-    } else if (
-      this.state.selectedOption === "local-storage" &&
-      prevState.selectedOption !== "local-storage"
-    ) {
+    } else if (changedTo("local-storage")) {
       this.updateLocalStorageModules();
+    } else if (changedTo("templates")) {
+      this.loadTemplates();
     }
   }
 
@@ -391,6 +418,7 @@ class LoadModule extends Component {
                       <ul className='LoadModule-options'>
                          <li className={(this.state.selectedOption === 'core') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('core')}>Core Modules</button></li>
                          <li className={(this.state.selectedOption === 'submodules') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('submodules')}>Submodules</button></li>
+                         <li className={(this.state.selectedOption === 'templates') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('templates')}>Templates</button></li>
                          {Object.keys(this.props.modules).length > 0 ? <li className={(this.state.selectedOption === 'my') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('my')}>My Modules</button></li> : ''}
                          <li className={(this.state.selectedOption === 'json') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('json')}>Paste JSON</button></li>
                          <li className={(this.state.selectedOption === 'git') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('git')}>GitHub Modules</button></li>
