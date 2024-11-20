@@ -531,15 +531,18 @@ class And extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): AndConditional);
+    let onChange = this.props.onChange('conditions');
     return (
       <label> And:
         {conditional.conditions.map((cond, i) => {
           return (
             <div className="section"  key={i}>
-              <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+              <ConditionalEditor {...this.props} conditional={cond} onChange={onChange(`[${i}]`)} />
+              <a className="editable-text delete-button" onClick={() => onChange(`[${i}]`)({val: {id: null}})}>remove</a>
             </div>
           )
         })}
+        <a className='editable-text add-button' onClick={() => onChange(`[${conditional.conditions.length}]`)({val: {id: getTemplate('Type.Condition.Age')}})}>+</a>
       </label>
     );
   }
@@ -550,15 +553,18 @@ class Or extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): OrConditional);
+    let onChange = this.props.onChange('conditions');
     return (
       <label> Or:
         {conditional.conditions.map((cond, i) => {
           return (
-              <div className="section" key={i}>
-                <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
-              </div>
+            <div className="section"  key={i}>
+              <ConditionalEditor {...this.props} conditional={cond} onChange={onChange(`[${i}]`)} />
+              <a className="editable-text delete-button" onClick={() => onChange(`[${i}]`)({val: {id: null}})}>remove</a>
+            </div>
           )
         })}
+        <a className='editable-text add-button' onClick={() => onChange(`[${conditional.conditions.length}]`)({val: {id: getTemplate('Type.Condition.Age')}})}>+</a>
       </label>
     );
   }
@@ -569,16 +575,19 @@ class AtLeast extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): AtLeastConditional);
+    let onChange = this.props.onChange('conditions');
     return (
       <label> At Least
         <RIENumber className='editable-text' value={conditional.minimum||0} propName='minimum' change={this.props.onChange('minimum')} />:
         {conditional.conditions.map((cond, i) => {
           return (
-            <div className="section" key={i}>
-              <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+            <div className="section"  key={i}>
+              <ConditionalEditor {...this.props} conditional={cond} onChange={onChange(`[${i}]`)} />
+              <a className="editable-text delete-button" onClick={() => onChange(`[${i}]`)({val: {id: null}})}>remove</a>
             </div>
           )
         })}
+        <a className='editable-text add-button' onClick={() => onChange(`[${conditional.conditions.length}]`)({val: {id: getTemplate('Type.Condition.Age')}})}>+</a>
       </label>
     );
   }
@@ -589,17 +598,20 @@ class AtMost extends Component<Props> {
 
   render() {
     let conditional = ((this.props.conditional: any): AtMostConditional);
+    let onChange = this.props.onChange('conditions');
     return (
       <label> At Most
         <RIENumber className='editable-text' value={conditional.maximum||0} propName='maximum' change={this.props.onChange('maximum')} />:
 
         {conditional.conditions.map((cond, i) => {
           return (
-            <div className="section" key={i}>
-              <ConditionalEditor {...this.props} conditional={cond} onChange={this.props.onChange(`conditions.${i}`)} />
+            <div className="section"  key={i}>
+              <ConditionalEditor {...this.props} conditional={cond} onChange={onChange(`[${i}]`)} />
+              <a className="editable-text delete-button" onClick={() => onChange(`[${i}]`)({val: {id: null}})}>remove</a>
             </div>
           )
         })}
+        <a className='editable-text add-button' onClick={() => onChange(`[${conditional.conditions.length}]`)({val: {id: getTemplate('Type.Condition.Age')}})}>+</a>
       </label>
     );
   }
