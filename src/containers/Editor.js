@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { push } from 'connected-react-router'
+import React, { Component } from 'react';
+import { push } from '../utils/navigation'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import _ from 'lodash'
@@ -20,7 +20,7 @@ import { findAvailableKey, createSafeKeyFromName } from '../utils/keys';
 import { getTemplate } from '../templates/Templates';
 import { BasicTutorial } from '../templates/Tutorial';
 
-import { RIEInput } from 'riek';
+import { RIEInput } from '../components/inline-edit';
 
 import examplitis from '../data/example_module'
 
@@ -189,14 +189,6 @@ class Editor extends Component {
   }
 
   renderDownloadButton = () => {
-  }
-
-  renderUndoButton = () => {
-    let className = 'button-clear';
-    if(!this.props.undoEnabled){
-      className+=' disabled'
-    }
-    return <button className={className} data-tip='Undo' onClick={() => this.props.undo()}> Undo</button>
   }
   
   renderDeleteButton = () => {

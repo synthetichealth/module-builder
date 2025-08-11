@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber } from 'riek';
+import { RIESelect, RIEInput, RIENumber } from '../inline-edit';
 import _ from 'lodash';
 
 import type { Goal as GoalType } from '../../types/Attributes';

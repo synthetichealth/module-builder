@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { RIEInput, RIETextArea } from 'riek';
+import { RIEInput, RIETextArea } from '../inline-edit';
 
 import './ModuleProperties.css';
 

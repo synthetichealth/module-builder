@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber } from 'riek';
+import { RIESelect, RIEInput, RIENumber } from '../inline-edit';
 import _ from 'lodash';
 import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveAllergyConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
 import type { State } from '../../types/State';
@@ -90,7 +90,7 @@ class ConditionalEditor extends Component<Props> {
     let options = Object.keys(template).sort().map((k) => {return {id: k, text: k}});
     return (
       <div>
-        Condition Type: <RIESelect className='editable-text' propName='condition' value={{id: this.props.conditional.condition_type, text: this.props.conditional.condition_type}} change={(val) => this.props.onChange({condition:{id: template[val.condition.id]}})} options={options} />
+        Condition Type: <RIESelect className='editable-text' propName='condition' value={{id: this.props.conditional.condition_type, text: this.props.conditional.condition_type}} change={(val) => this.props.onChange({condition:{id: template[val.condition]}})} options={options} />
         <br/>
         {this.renderConditionalType()}
       </div>

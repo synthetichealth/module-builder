@@ -1,8 +1,9 @@
 import _ from 'lodash'
 import { getTemplate } from '../templates/Templates'
 import Papa from 'papaparse'
-import { isNumber } from 'util';
-import { stat } from 'fs';
+
+// Simple isNumber implementation to replace Node.js util.isNumber
+const isNumber = (value) => typeof value === 'number' && !isNaN(value);
 
 const initialState = {
   libraryModuleCodes: {}, // list types of nodes

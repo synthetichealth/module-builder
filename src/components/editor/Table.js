@@ -1,27 +1,37 @@
 import React from "react";
-import ReactDataGrid from "react-data-grid";
+import "./Table.css";
     
-    function Table({columnHeaders, rows }) {
-        const columns = [];
-        
-        columnHeaders.forEach(function(item){
-            let str = item.replace(/\s/g, '')
-            let a = {                    
-                key: str,
-                name: str,
-                width: 180,
-            }
-            columns.push(a);
-        })   
-        
-        return (
-        <ReactDataGrid 
-            columns={columns}
-            rowGetter={i => rows[i]}
-            rowsCount={rows.length}
-            minHeight={300}
-            />
-        );
+function Table({columnHeaders, rows}) {
+    if (!columnHeaders || !rows || rows.length === 0) {
+        return <div className="table-container">No data to display</div>;
     }
+
+    return (
+        <div className="table-container">
+            <table className="data-table">
+                <thead>
+                    <tr>
+                        {columnHeaders.map((header, index) => (
+                            <th key={index} className="table-header">
+                                {header}
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows.map((row, rowIndex) => (
+                        <tr key={rowIndex} className="table-row">
+                            {columnHeaders.map((header, colIndex) => (
+                                <td key={colIndex} className="table-cell">
+                                    {row[header] || ''}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+}
 
 export default Table;

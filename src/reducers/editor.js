@@ -438,7 +438,7 @@ export default (state = initialState, action) => {
       return newState;
 
     case 'CHANGE_STATE_TYPE':
-      let newType = action.data.newType.type.id;
+      let newType = action.data.newType.type;
       // This line is weird because we need to add the new fields, overwrite any shared fields, then overwrite the type fields
       // TODO figure out how to remove unused fields
       newState.modules[action.data.targetModuleKey].states[action.data.targetNode.name] =

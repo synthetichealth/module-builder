@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect } from 'riek';
+import { RIESelect } from '../inline-edit';
 
 import type { DirectTransition } from '../../types/Transition';
 import type { State } from '../../types/State';

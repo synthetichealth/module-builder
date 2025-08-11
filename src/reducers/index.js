@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router'
 
 import library from './library';
 import editor from './editor';
 import analysis from './analysis';
+import navigation from './navigation';
 
-export default (history) => combineReducers({
-  router : connectRouter(history),
+export default () => combineReducers({
   library,
   editor,
-  analysis
+  analysis,
+  navigation
 });
