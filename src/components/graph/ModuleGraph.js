@@ -34,16 +34,16 @@ class ModuleGraph extends Component<Props> {
     this.mount.addEventListener('mousedown', this.onMouseDown);
   }
 
-  componentWillReceiveProps(nextProps: Props){
+  componentDidUpdate(prevProps: Props){
 
-    if(nextProps.module.name !== this.props.module.name){
+    if(this.props.module.name !== prevProps.module.name){
       this.panZoomSettings = null
     }
 
-    this.writeSVG(nextProps.module, nextProps.selectedState, nextProps.selectedStateTransition);
+    this.writeSVG(this.props.module, this.props.selectedState, this.props.selectedStateTransition);
 
-    if(nextProps.fullscreen !== this.props.fullscreen){
-      if(nextProps.fullscreen){
+    if(this.props.fullscreen !== prevProps.fullscreen){
+      if(this.props.fullscreen){
         this.svgPanZoom.panBy({x: 250, y: 0});
         this.customPanBy({x: -100, y: 0})
       }else{

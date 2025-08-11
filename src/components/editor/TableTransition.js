@@ -1,13 +1,15 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber, RIETextArea } from 'riek';
+import { RIESelect, RIEInput, RIENumber, RIETextArea } from '../inline-edit';
 import Papa from 'papaparse'
 
 import { getTemplate } from '../../templates/Templates';
 import './Transition.css';
 import Table from './Table'
 import './TableTransition.css';
-import { isNumber } from 'util';
+
+// Simple isNumber implementation to replace Node.js util.isNumber
+const isNumber = (value) => typeof value === 'number' && !isNaN(value);
 
 
 type Props = {

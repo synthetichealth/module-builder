@@ -8,8 +8,9 @@ export const loadLibrary = (modules) => {
       data: modules
     })
 
-    if(getState().router.location.hash.charAt(0) === '#'){
-      dispatch(openModule(getState().router.location.hash.slice(1)));
+    // Get current hash from window.location instead of router state
+    if(window.location.hash.charAt(0) === '#'){
+      dispatch(openModule(window.location.hash.slice(1)));
     }
   }
 }

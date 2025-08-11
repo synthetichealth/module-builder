@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect } from 'riek';
+import { RIESelect } from '../inline-edit';
 import _ from 'lodash';
 
 import type { ConditionalTransition as ConditionalTransitionType } from '../../types/Transition';

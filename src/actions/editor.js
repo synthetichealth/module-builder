@@ -1,5 +1,5 @@
 import {analyze} from  './analysis';
-import { push } from 'connected-react-router'
+import { push } from '../utils/navigation'
 
 const dispatchThenAnalyze = (action) => {
   return (dispatch, getState) => {

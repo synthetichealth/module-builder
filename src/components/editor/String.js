@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { RIEInput } from 'riek';
+import { RIEInput } from '../inline-edit';
 
 type Props = {
   label: string,

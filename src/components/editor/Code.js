@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { RIEInput } from 'riek';
+import { RIEInput } from '../inline-edit';
 import _ from 'lodash';
 
 import type { Code as CodeType } from '../../types/Code';

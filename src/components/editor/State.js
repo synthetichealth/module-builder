@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber, RIEToggle, RIETextArea } from 'riek';
+import { RIESelect, RIEInput, RIENumber, RIEToggle, RIETextArea } from '../inline-edit';
 import _ from 'lodash';
 
 import type {
@@ -154,14 +154,14 @@ class StateEditor extends Component<Props> {
     let remarks = this.props.state.remarks ||"";
     remarks = Array.isArray(remarks)? remarks.join("\n"): remarks;
 
-    const transitionType = (this.props.state.transition||{}).type;
+    const transitionType = (this.props.state.transition||{}).type || 'None';
     return (
         <div className="State">
           <div className='Editor-panel-title'>
             State Editor
           </div>
           <h3><RIEInput className='editable-text' propName={'name'} value={this.props.state.name} change={this.props.renameNode} /></h3>
-          State Type: <RIESelect className='editable-text' value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
+          State Type: <RIESelect className='editable-text' value={{id: this.props.state.type, text: this.props.state.type}} propName='type' change={this.props.changeType} options={typeOptions}/>
           <hr/>
           <RIETextArea className='editable-text' value={remarks} propName="remarks" change={this.updateRemarks} />
           <br/>
@@ -173,7 +173,7 @@ class StateEditor extends Component<Props> {
           <hr />
           <div>
             <div className="Transition-Type">Transition Type:
-              <RIESelect className='editable-text' value={{id: transitionType, text: transitionType}} propName='transition' change={(e) => this.props.addTransition(e.transition.id)} options={transitionOptions}/>
+              <RIESelect className='editable-text' value={{id: transitionType, text: transitionType}} propName='transition' change={(e) => this.props.addTransition(e.transition)} options={transitionOptions}/>
             </div>
           </div>
           <div className="Transition">
@@ -2019,12 +2019,15 @@ class CarePlanStart extends Component<Props> {
     }
   }
 
-  render() {
+  componentDidUpdate(prevProps) {
     // check for undo/redo
-    if (this.props.state.assign_to_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    if (this.props.state.assign_to_attribute != this.state.value && this.state.value == this.state.lastSubmitted && prevProps.state.assign_to_attribute !== this.props.state.assign_to_attribute)
     {
       this.fixTextBox();
     }
+  }
+
+  render() {
     let state = ((this.props.state: any): CarePlanStartState);
     return (
       <div>
@@ -2886,8 +2889,6 @@ class Observation extends Component<Props> {
   }
 
   renderToggles(currentItem) {
-    console.log(currentItem);
-
     let toggles = [];
 
     if (currentItem !== 'exact' && currentItem !== 'distribution') {

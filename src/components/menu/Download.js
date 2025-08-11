@@ -9,6 +9,7 @@ class Download extends Component {
   constructor(props) {
     super(props);
     this.onDownload = this.onDownload.bind(this);
+    this.codeInputRef = React.createRef();
 
     this.state = {
       saveSuccess: false,
@@ -16,7 +17,7 @@ class Download extends Component {
   }
   
   onDownload(){
-    let blob = new Blob([this.refs.codeInput.value], {
+    let blob = new Blob([this.codeInputRef.current.value], {
        type: "text/plain;charset=utf-8"
     });
 
@@ -138,7 +139,7 @@ class Download extends Component {
                 </button>
               </div>
               <div className="modal-body Download-body">
-              <textarea ref="codeInput" disabled value={this.prepareJSON()} />
+              <textarea ref={this.codeInputRef} disabled value={this.prepareJSON()} />
               </div>
               {this.state.saveSuccess && (
                 <div>

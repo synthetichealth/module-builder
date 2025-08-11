@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { RIENumber, RIESelect } from 'riek';
+import { RIENumber, RIESelect } from '../inline-edit';
 import _ from 'lodash';
 
 import type { Code as CodeType } from '../../types/Code';

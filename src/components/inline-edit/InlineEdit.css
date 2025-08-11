@@ -1,0 +1,59 @@
+.inline-editable {
+  border-bottom: 1px dashed #ccc;
+  padding: 2px 4px;
+  min-height: 16px;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.inline-editable:hover {
+  background-color: #f8f9fa;
+  border-bottom-color: #007bff;
+}
+
+.inline-editable:focus {
+  outline: none;
+  border: 1px solid #007bff;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.inline-editable.toggle {
+  border: 1px solid #6c757d;
+  border-radius: 4px;
+  min-width: 50px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.inline-editable.toggle:hover {
+  opacity: 0.8;
+}
+
+/* Input field styling when editing */
+.inline-editable input,
+.inline-editable select,
+.inline-editable textarea {
+  border: 1px solid #007bff;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-family: inherit;
+  font-size: inherit;
+  min-width: 100px;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.inline-editable input:focus,
+.inline-editable select:focus,
+.inline-editable textarea:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.inline-editable textarea {
+  resize: vertical;
+  min-width: 200px;
+}

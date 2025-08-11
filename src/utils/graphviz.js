@@ -590,6 +590,10 @@ const stateDescription = (state) =>{
 }
 
 const logicDetails = logic => {
+  // Safety check for undefined or null logic
+  if (!logic || typeof logic !== 'object') {
+    return '';
+  }
 
   switch(logic['condition_type']){
     case 'And':
