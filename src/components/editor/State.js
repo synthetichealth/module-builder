@@ -2019,12 +2019,15 @@ class CarePlanStart extends Component<Props> {
     }
   }
 
-  render() {
+  componentDidUpdate(prevProps) {
     // check for undo/redo
-    if (this.props.state.assign_to_attribute != this.state.value && this.state.value == this.state.lastSubmitted)
+    if (this.props.state.assign_to_attribute != this.state.value && this.state.value == this.state.lastSubmitted && prevProps.state.assign_to_attribute !== this.props.state.assign_to_attribute)
     {
       this.fixTextBox();
     }
+  }
+
+  render() {
     let state = ((this.props.state: any): CarePlanStartState);
     return (
       <div>

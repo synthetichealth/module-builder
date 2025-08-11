@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import { renderComponent , expect } from '../../helpers/test_helper';
 

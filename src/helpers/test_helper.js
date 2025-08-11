@@ -1,7 +1,7 @@
 import _$ from 'jquery';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-dom/test-utils';
+import { createRoot } from 'react-dom/client';
+import { act } from '@testing-library/react';
 import jsdom from 'jsdom';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
@@ -20,12 +20,17 @@ import reducers from '../reducers';
 
 function renderComponent(ComponentClass, props= {}, state={}) {
   const div = document.createElement('div');
-  return ReactDOM.render(
-    <Provider store={createStore(reducers, state)}>
-      <ComponentClass {...props} />
-    </Provider>
-  , div);
-
+  const root = createRoot(div);
+  
+  act(() => {
+    root.render(
+      <Provider store={createStore(reducers(), state)}>
+        <ComponentClass {...props} />
+      </Provider>
+    );
+  });
+  
+  return div;
 }
 
 // function renderComponent(ComponentClass, props = {}, state = {}) {
