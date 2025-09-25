@@ -2,10 +2,14 @@ var fs = require('fs')
 
 var argv = process.argv.slice(2);
 
-if(argv.length < 2){
+function usage() {
+  console.log('USAGE: npm run build-modules ../synthea/src/main/resources/modules ../synthea/src/main/resources/modules/lookup_tables ../synthea/src/main/resources/templates/modules/\n\n\n')
+}
+
+if(argv.length < 3){
   console.log('\x1b[1m')
   console.log('\n\nPlease specify directory where synthea modules and lookup tables are located.')
-  console.log('USAGE: npm run build-modules ../synthea/src/main/resources/modules ../synthea/src/test/resources/generic/lookup_tables\n\n\n')
+  usage()
   console.log('Please point to the exact top level generic module directory and lookup table directory')
   console.log('\x1b[0m')
   process.exit()
@@ -21,12 +25,17 @@ if(argv[1].endsWith('/')){
   tableDirectory = argv[1].slice(0,-1)
 }
 
+var templatesDirectory = argv[2]
+if(argv[2].endsWith('/')){
+  templatesDirectory = argv[2].slice(0,-1)
+}
+
 try {
   fs.lstatSync(directory).isDirectory()
 } catch(e){
   console.log('\x1b[1m')
   console.log('\n\nNo such directory ' + directory)
-  console.log('EXAMPLE USAGE: npm run build-modules npm run build-modules ../synthea/src/main/resources/modules ../synthea/src/test/resources/generic/lookup_tables\n\n\n')
+  usage()
   console.log('\x1b[0m')
   process.exit()
 }
@@ -36,7 +45,17 @@ try {
 } catch(e){
   console.log('\x1b[1m')
   console.log('\n\nNo such directory ' + tableDirectory)
-  console.log('EXAMPLE USAGE: npm run build-modules npm run build-modules ../synthea/src/main/resources/modules ../synthea/src/test/resources/generic/lookup_tables\n\n\n')
+  usage()
+  console.log('\x1b[0m')
+  process.exit()
+}
+
+try {
+  fs.lstatSync(templatesDirectory).isDirectory()
+} catch(e){
+  console.log('\x1b[1m')
+  console.log('\n\nNo such directory ' + templatesDirectory)
+  usage()
   console.log('\x1b[0m')
   process.exit()
 }
@@ -63,7 +82,7 @@ var files = walkSync(directory,'.json');
 if(files.length == 0){
   console.log('\x1b[1m')
   console.log('\n\nNo json files located at ' + directory)
-  console.log('EXAMPLE USAGE: npm run build-modules npm run build-modules ../synthea/src/main/resources/modules ../synthea/src/test/resources/generic/lookup_tables\n\n\n')
+  usage()
   console.log('\x1b[0m')
   process.exit()
 }
@@ -150,9 +169,23 @@ try {
 
 fs.writeFileSync(outputFile, output)
 
+var templates = walkSync(templatesDirectory, '.json');
+let output = 'export default {';
+
+for(var i = 0; i< templates.length; i++){
+  var contents = fs.readFileSync(templates[i], 'utf8');
+  var filename = templates[i].replace(templatesDirectory + '/','').replace('.json','')
+  templateOutput += '"' + filename + '":' + contents + "\n,\n"
+}
+templateOutput += '};'
+
+let templatesFile = './src/data/templates.js'
+
+fs.writeFileSync(templatesFile, templateOutput)
 
 console.log('\x1b[1m')
 console.log('\n\nCompleted importing ' + count + ' modules from ' + directory + '\n\n')
-console.log('Overwrite ' + outputFile + ' with new data')
+console.log('Overwrite ' + outputFile + ' with new modules')
+console.log('Wrote ' + templatesFile + ' with templates')
 console.log('Run tests before committing (and no other files should have been changed)')
 console.log('\n\n\x1b[0m')
