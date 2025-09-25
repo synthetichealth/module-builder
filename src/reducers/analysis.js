@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { getTemplate } from '../templates/Templates'
 import Papa from 'papaparse'
-import { isNumber } from 'util';
+import { isNumber } from '../utils/stringUtils';
 import { stat } from 'fs';
 
 const initialState = {

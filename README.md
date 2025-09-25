@@ -23,7 +23,7 @@ It is written in Javascript using React and requires [Node.js](https://nodejs.or
 run the following commands to run a local copy of the Module Builder:
 
 ```sh
-npm install
+npm install --legacy-peer-deps
 npm start
 ```
 

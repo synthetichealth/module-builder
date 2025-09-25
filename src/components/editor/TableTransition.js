@@ -7,7 +7,7 @@ import { getTemplate } from '../../templates/Templates';
 import './Transition.css';
 import Table from './Table'
 import './TableTransition.css';
-import { isNumber } from 'util';
+import { isNumber } from '../../utils/stringUtils';
 
 
 type Props = {
@@ -44,7 +44,7 @@ class TableTransition extends Component<Props> {
       buttonText = 'Display Read Only Table';
       if (this.props.transition.lookuptable === ''){
         this.props.onChange(`lookuptable`)({val: 'Enter table'});
-      }else if (isNumber(this.props.transition.lookuptable)){
+      } else if (isNumber(this.props.transition.lookuptable)){
         this.props.transition.lookuptable = this.props.transition.lookuptable.toString();
       }
       displayTable = 

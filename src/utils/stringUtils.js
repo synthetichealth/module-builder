@@ -18,3 +18,7 @@ export function normalizeType(value){
 export function cleanString(value, mapObj){
   return Object.keys(mapObj).reduce( (acc, cur) => acc.split(cur).join(mapObj[cur]), value)
 }
+
+export function isNumber(value){
+  return (typeof value === 'number');
+}
