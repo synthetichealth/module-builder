@@ -163,7 +163,7 @@ class StateEditor extends Component<Props> {
           <h3><RIEInput className='editable-text' propName={'name'} value={this.props.state.name} change={this.props.renameNode} /></h3>
           State Type: <RIESelect className='editable-text' value={{id: this.props.state.type, text: this.props.state.type}} propName='type'change={this.props.changeType} options={typeOptions}/>
           <hr/>
-          <RIETextArea className='editable-text' value={remarks} propName="remarks" change={this.updateRemarks} />
+          <RIETextArea className='editable-text remarks-text' value={remarks} propName="remarks" change={this.updateRemarks} />
           <br/>
           <hr/>
           <div className="State-Editor">
